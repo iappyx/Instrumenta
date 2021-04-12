@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" >
+<ribbon> <tabs> 
+<tab id="IPToolbarV01" label="Instrumenta">
+<group idMso="GroupFont"/> 
+<group id="AlignGroup" label="Align and distribute"> 
+<button id="ObjectsAlignLeftsButton" label="Align left" showLabel="false" imageMso="ObjectsAlignLeft" onAction="ObjectsAlignLefts" />
+<button id="ObjectsAlignRightsButton" label="Align right" showLabel="false" imageMso="ObjectsAlignRight" onAction="ObjectsAlignRights" />
+<button id="ObjectsAlignBottomsButton" label="Align bottom" showLabel="false" imageMso="ObjectsAlignBottom" onAction="ObjectsAlignBottoms" />
+<button id="ObjectsAlignCentersButton" label="Align center" showLabel="false" imageMso="ObjectsAlignCenterHorizontal" onAction="ObjectsAlignCenters" />
+<button id="ObjectsAlignMiddlesButton" label="Align middle" showLabel="false" imageMso="ObjectsAlignMiddleVertical" onAction="ObjectsAlignMiddles" />
+<button id="ObjectsAlignTopsButton" label="Align top" showLabel="false" imageMso="ObjectsAlignTop" onAction="ObjectsAlignTops" />
+<separator id="separator1" />
+<button id="ObjectsDistributeHorizontallyButton" label="Distribute horizontally" showLabel="false" imageMso="AlignDistributeHorizontally" onAction="ObjectsDistributeHorizontally" />
+<button id="ObjectsDistributeVerticallyButton" imageMso="AlignDistributeVertically" label="Distribute vertically" showLabel="false" onAction="ObjectsDistributeVertically" />
+ <separator id="separator2" />
+<button idMso="ObjectBringForward" showLabel="false"/>
+<button idMso="ObjectSendBackward" showLabel="false"/>
+<button idMso="ObjectBringToFront" showLabel="false"/>
+<button idMso="ObjectSendToBack" showLabel="false"/>
+ <separator id="separator3" />
+<button idMso="ObjectFlipHorizontal" showLabel="false"/>
+<button idMso="ObjectFlipVertical" showLabel="false"/>
+<button idMso="ObjectRotateLeft90" showLabel="false"/>
+<button idMso="ObjectRotateRight90" showLabel="false"/>
+ <separator id="separator4" />
+<button idMso="ObjectNudgeDown" showLabel="false"/>
+<button idMso="ObjectNudgeLeft" showLabel="false"/>
+<button idMso="ObjectNudgeRight" showLabel="false"/>
+<button idMso="ObjectNudgeUp" showLabel="false"/>
+</group>
+<group id="SizeGroup" label="Size">
+<button id="ObjectsSameHeightButton" imageMso="RowHeight" label="Set same height" showLabel="false" onAction="ObjectsSameHeight" />
+<button id="ObjectsSameWidthButton" imageMso="ColumnWidth" label="Set same width" showLabel="false" onAction="ObjectsSameWidth" />
+<button id="ObjectsSameHeightAndWidthButton" imageMso="SizeToControlHeightAndWidth" label="Set same height and width" showLabel="false" onAction="ObjectsSameHeightAndWidth" />
+</group>
+<group id="TextGroup" label="Text">
+<button id="RemoveTextButton" label="Remove text" imageMso="OmsDelete" showLabel="false" onAction="ObjectsRemoveText" />
+<button idMso="ClearFormatting" showLabel="false"/>
+<button id="SwapTextButton" label="Swap text" imageMso="PrintPreviewZoomTwoPages" showLabel="false" onAction="ObjectsSwapText" />
+ <separator id="separator5" />
+<toggleButton idMso="AlignCenter" showLabel="false" />
+<toggleButton idMso="AlignJustify" showLabel="false" />
+<toggleButton idMso="AlignLeft" showLabel="false" />
+<toggleButton idMso="AlignRight" showLabel="false" />
+ <separator id="separator6" />
+<gallery idMso="TextAlignGallery" showLabel="false" />
+<button idMso="FontsReplaceFonts" showLabel="false"/>
+<button id="ChangeSpellCheckLanguage" label="Set proofing language on all objects and all slides" imageMso="SetLanguage" showLabel="false" onAction="ShowChangeSpellCheckLanguageForm" />
+</group>
+<group id="TableGroup" label="Table">
+<button idMso="TableInsert" showLabel="false"/>
+<button idMso="TableInsertColumnsLeft" showLabel="false"/>
+<button idMso="TableInsertColumnsRight" showLabel="false"/>
+<button idMso="TableInsertRowsAbove" showLabel="false"/>
+<button idMso="TableInsertRowsBelow" showLabel="false"/>
+<button idMso="TableRowsDistribute" showLabel="false"/>
+<button idMso="TableColumnsDistribute" showLabel="false"/>
+ <separator id="separator7" />
+<toggleButton idMso="BorderBottom"  showLabel="false" />
+<toggleButton idMso="BorderDiagonalDown" showLabel="false" />
+<toggleButton idMso="BorderDiagonalUp" showLabel="false" />
+<toggleButton idMso="BorderInside" showLabel="false" />
+<toggleButton idMso="BorderInsideHorizontal" showLabel="false" />
+<toggleButton idMso="BorderInsideVertical" showLabel="false" />
+<toggleButton idMso="BorderLeft" showLabel="false" />
+<toggleButton idMso="BorderNone" showLabel="false" />
+<toggleButton idMso="BorderOutside" showLabel="false" />
+<toggleButton idMso="BorderRight" showLabel="false" />
+<toggleButton idMso="BordersAll" showLabel="false" />
+<toggleButton idMso="BorderTop" showLabel="false" />
+ <separator id="separator8" />
+<toggleButton idMso="TableCellAlignBottom" showLabel="false" />
+<toggleButton idMso="TableCellAlignCenterVertically" showLabel="false" />
+<toggleButton idMso="TableCellAlignTop" showLabel="false" />
+</group>
+<group id="ExportGroup" label="Export">
+<button id="EmailSelectedSlidesButton" label="E-mail selected slides" imageMso="MailMergeStartEmail" showLabel="false" onAction="EmailSelectedSlides" />
+<button id="EmailSelectedSlidesAsPDFButton" label="E-mail selected slides as PDF" showLabel="false" imageMso="FileEmailAsPdfEmailAttachment" onAction="EmailSelectedSlidesAsPDF" />
+<button idMso="FileSaveAsPdfOrXps" showLabel="false"/>
+</group>
+<group id="StoryLineGroup" label="Storyline">
+<button id="CopyStorylineToClipboardButton" label="Copy storyline to clipboard" showLabel="false" imageMso="GroupCopy" onAction="CopyStorylineToClipboard" />
+<button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
+</group>
+<group id="PasteGroup" label="Paste and insert">
+<button idMso="PasteJpeg" showLabel="false" />
+<button idMso="PastePng" showLabel="false" />
+<button idMso="ScreenClipping" showLabel="false" />
+<button idMso="DateAndTimeInsert" showLabel="false" />
+</group>
+<group id="AllGroup" label="Advanced">
+<button idMso="ReplaceDialog" showLabel="false" />
+<button idMso="AdvancedFileProperties" showLabel="false"/>
+<menu id="menu" label="All built-in commands" imageMso="HappyFace" >
+<toggleButton idMso="AlignCenter"/>
+<toggleButton idMso="AlignJustify"/>
+<toggleButton idMso="AlignJustifyLow"/>
+<toggleButton idMso="AlignJustifyThai"/>
+<toggleButton idMso="AlignJustifyWithMixedLanguages"/>
+<toggleButton idMso="AlignLeft"/>
+<toggleButton idMso="AlignRight"/>
+<toggleButton idMso="AnimationAutoPreview"/>
+<toggleButton idMso="AnimationCustom"/>
+<toggleButton idMso="BlackAndWhiteAutomatic"/>
+<toggleButton idMso="BlackAndWhiteBlack"/>
+<toggleButton idMso="BlackAndWhiteBlackWithGrayscaleFill"/>
+<toggleButton idMso="BlackAndWhiteBlackWithWhiteFill"/>
+<toggleButton idMso="BlackAndWhiteDontShow"/>
+<toggleButton idMso="BlackAndWhiteGrayscale"/>
+<toggleButton idMso="BlackAndWhiteGrayWithWhiteFill"/>
+<toggleButton idMso="BlackAndWhiteInverseGrayscale"/>
+<toggleButton idMso="BlackAndWhiteLightGrayscale"/>
+<toggleButton idMso="BlackAndWhiteWhite"/>
+<toggleButton idMso="Bold"/>
+<toggleButton idMso="BorderBottom"/>
+<toggleButton idMso="BorderDiagonalDown"/>
+<toggleButton idMso="BorderDiagonalUp"/>
+<toggleButton idMso="BorderInside"/>
+<toggleButton idMso="BorderInsideHorizontal"/>
+<toggleButton idMso="BorderInsideVertical"/>
+<toggleButton idMso="BorderLeft"/>
+<toggleButton idMso="BorderNone"/>
+<toggleButton idMso="BorderOutside"/>
+<toggleButton idMso="BorderRight"/>
+<toggleButton idMso="BordersAll"/>
+<toggleButton idMso="BorderTop"/>
+<toggleButton idMso="ClipArtInsert"/>
+<toggleButton idMso="ClosePath"/>
+<toggleButton idMso="CombineCharacters"/>
+<toggleButton idMso="CornerVertex"/>
+<toggleButton idMso="CurrentEraser"/>
+<toggleButton idMso="DiagrammingOnline"/>
+<toggleButton idMso="EquationNormalText"/>
+<toggleButton idMso="FileCreateDocumentWorkspace"/>
+<toggleButton idMso="FileDocumentEncrypt"/>
+<toggleButton idMso="FileDocumentManagementInformation"/>
+<toggleButton idMso="FileMarkAsFinal"/>
+<toggleButton idMso="FilePermissionDoNotDistribute"/>
+<toggleButton idMso="FilePermissionUnrestricted"/>
+<toggleButton idMso="FilePrintPreview"/>
+<toggleButton idMso="FileProperties"/>
+<toggleButton idMso="FileViewDigitalSignatures"/>
+<toggleButton idMso="InkBallpointPen"/>
+<toggleButton idMso="InkEraser"/>
+<toggleButton idMso="InkFeltTipPen"/>
+<toggleButton idMso="InkHighlighter"/>
+<toggleButton idMso="Italic"/>
+<toggleButton idMso="LassoSelect"/>
+<toggleButton idMso="MinimizeRibbon"/>
+<toggleButton idMso="MiniTranslator"/>
+<toggleButton idMso="ObjectEditPoints"/>
+<toggleButton idMso="ObjectsAlignRelativeToContainerSmart"/>
+<toggleButton idMso="ObjectsAlignSelectedSmart"/>
+<toggleButton idMso="ObjectsSelect"/>
+<toggleButton idMso="OpenPath"/>
+<toggleButton idMso="OutlineShowTextFormatting"/>
+<toggleButton idMso="PageOrientationLandscape"/>
+<toggleButton idMso="PageOrientationPortrait"/>
+<toggleButton idMso="ParagraphDistributed"/>
+<toggleButton idMso="PictureBackgroundRemoval"/>
+<toggleButton idMso="PictureBackgroundRemovalMarkBackground"/>
+<toggleButton idMso="PictureBackgroundRemovalMarkDelete"/>
+<toggleButton idMso="PictureBackgroundRemovalMarkForeground"/>
+<toggleButton idMso="PictureCrop"/>
+<toggleButton idMso="PictureSetTransparentColor"/>
+<toggleButton idMso="PlaceholderOrientationHorizontal"/>
+<toggleButton idMso="PlaceholderOrientationVertical"/>
+<toggleButton idMso="PointEraserMedium"/>
+<toggleButton idMso="PointEraserSmall"/>
+<toggleButton idMso="ResearchPane"/>
+<toggleButton idMso="ReviewReviewingPanePowerPoint"/>
+<toggleButton idMso="ReviewShowAllChanges"/>
+<toggleButton idMso="ReviewShowOnlyConflicts"/>
+<toggleButton idMso="ReviewShowOrHideMarkup"/>
+<toggleButton idMso="SelectionPane"/>
+<toggleButton idMso="Shadow"/>
+<toggleButton idMso="ShapeArc"/>
+<toggleButton idMso="ShapeConnectorStyleCurved"/>
+<toggleButton idMso="ShapeConnectorStyleElbow"/>
+<toggleButton idMso="ShapeConnectorStyleStraight"/>
+<toggleButton idMso="ShapeDownArrow"/>
+<toggleButton idMso="ShapeElbowConnector"/>
+<toggleButton idMso="ShapeElbowConnectorArrow"/>
+<toggleButton idMso="ShapeIsoscelesTriangle"/>
+<toggleButton idMso="ShapeLeftBrace"/>
+<toggleButton idMso="ShapeOval"/>
+<toggleButton idMso="ShapeRectangle"/>
+<toggleButton idMso="ShapeRerouteConnectors"/>
+<toggleButton idMso="ShapeRightArrow"/>
+<toggleButton idMso="ShapeRightBrace"/>
+<toggleButton idMso="ShapeRoundedRectangle"/>
+<toggleButton idMso="ShapeRoundedRectangularCallout"/>
+<toggleButton idMso="ShapeStar"/>
+<toggleButton idMso="ShapeStraightConnector"/>
+<toggleButton idMso="ShapeStraightConnectorArrow"/>
+<toggleButton idMso="SlideHide"/>
+<toggleButton idMso="SlideMasterPreserveMaster"/>
+<toggleButton idMso="SlidesPerPage1Slide"/>
+<toggleButton idMso="SlidesPerPage2Slides"/>
+<toggleButton idMso="SlidesPerPage3Slides"/>
+<toggleButton idMso="SlidesPerPage4Slides"/>
+<toggleButton idMso="SlidesPerPage6Slides"/>
+<toggleButton idMso="SlidesPerPage9Slides"/>
+<toggleButton idMso="SlidesPerPageSlideOutline"/>
+<toggleButton idMso="SlidesReuseSlides"/>
+<toggleButton idMso="SmartArtEditIn2D"/>
+<toggleButton idMso="SmartArtRecolorImages"/>
+<toggleButton idMso="SmartArtRightToLeft"/>
+<toggleButton idMso="SmartArtTextPane"/>
+<toggleButton idMso="SmoothVertex"/>
+<toggleButton idMso="SnapToGrid"/>
+<toggleButton idMso="SnapToShapes"/>
+<toggleButton idMso="StraightVertex"/>
+<toggleButton idMso="Strikethrough"/>
+<toggleButton idMso="Subscript"/>
+<toggleButton idMso="Superscript"/>
+<toggleButton idMso="TableCellAlignBottom"/>
+<toggleButton idMso="TableCellAlignCenterVertically"/>
+<toggleButton idMso="TableCellAlignTop"/>
+<toggleButton idMso="TableDrawTable"/>
+<toggleButton idMso="TableEraser"/>
+<toggleButton idMso="TableSetLeftToRight"/>
+<toggleButton idMso="TableSetRightToLeft"/>
+<toggleButton idMso="TableShowGridlines"/>
+<toggleButton idMso="TextBoxInsert"/>
+<toggleButton idMso="TextBoxInsertHorizontal"/>
+<toggleButton idMso="TextBoxInsertVertical"/>
+<toggleButton idMso="TextDirectionLeftToRight"/>
+<toggleButton idMso="TextDirectionRightToLeft"/>
+<toggleButton idMso="TransitionSoundLoopUntilNextSound"/>
+<toggleButton idMso="Underline"/>
+<toggleButton idMso="VideoCrop"/>
+<toggleButton idMso="ViewBackToColorView"/>
+<toggleButton idMso="ViewDirectionLeftToRight"/>
+<toggleButton idMso="ViewDirectionRightToLeft"/>
+<toggleButton idMso="ViewDisplayInColor"/>
+<toggleButton idMso="ViewDisplayInGrayscale"/>
+<toggleButton idMso="ViewDisplayInHighContrast"/>
+<toggleButton idMso="ViewDisplayInPureBlackAndWhite"/>
+<toggleButton idMso="ViewHandoutMasterView"/>
+<toggleButton idMso="ViewNormalViewPowerPoint"/>
+<toggleButton idMso="ViewNotesMasterView"/>
+<toggleButton idMso="ViewNotesPageView"/>
+<toggleButton idMso="ViewOutlineView"/>
+<toggleButton idMso="ViewSlideMasterView"/>
+<toggleButton idMso="ViewSlideSorterView"/>
+<toggleButton idMso="ViewSlideView"/>
+<toggleButton idMso="WindowMoreWindowsDialog"/>
+<button idMso="_3DBevelOptionsDialog"/>
+<button idMso="_3DRotationOptionsDialog"/>
+<button idMso="About"/>
+<button idMso="AccessibilityChecker"/>
+<button idMso="ActionInsert"/>
+<button idMso="ActiveXButton"/>
+<button idMso="ActiveXCheckBox"/>
+<button idMso="ActiveXComboBox"/>
+<button idMso="ActiveXImage"/>
+<button idMso="ActiveXLabel"/>
+<button idMso="ActiveXListBox"/>
+<button idMso="ActiveXRadioButton"/>
+<button idMso="ActiveXScrollBar"/>
+<button idMso="ActiveXSpinButton"/>
+<button idMso="ActiveXTextBox"/>
+<button idMso="ActiveXToggleButton"/>
+<button idMso="AddInManager"/>
+<button idMso="AddNode"/>
+<button idMso="AdvancedFileProperties"/>
+<button idMso="AdvertisePublishAs"/>
+<button idMso="AlignDistributeHorizontally"/>
+<button idMso="AlignDistributeVertically"/>
+<button idMso="AlternativeText"/>
+<button idMso="AnimationCustomActionVerbDialog"/>
+<button idMso="AnimationCustomAddActionVerbDialog"/>
+<button idMso="AnimationCustomAddEmphasisDialog"/>
+<button idMso="AnimationCustomAddEntranceDialog"/>
+<button idMso="AnimationCustomAddExitDialog"/>
+<button idMso="AnimationCustomAddPathDialog"/>
+<button idMso="AnimationCustomEmphasisDialog"/>
+<button idMso="AnimationCustomEntranceDialog"/>
+<button idMso="AnimationCustomExitDialog"/>
+<button idMso="AnimationCustomPathDialog"/>
+<button idMso="AnimationMoveEarlier"/>
+<button idMso="AnimationMoveLater"/>
+<button idMso="AnimationPreview"/>
+<button idMso="ApplicationOptionsDialog"/>
+<button idMso="ArrowsMore"/>
+<button idMso="ArtisticEffectsDialog"/>
+<button idMso="AudioBookmarkAdd"/>
+<button idMso="AudioBookmarkRemove"/>
+<button idMso="AudioInsert"/>
+<button idMso="AudioToolsTrim"/>
+<button idMso="AutoCorrect"/>
+<button idMso="BackgroundRemovalClose"/>
+<button idMso="BarcodeInsert"/>
+<button idMso="BaselineLower"/>
+<button idMso="BaselineRaise"/>
+<button idMso="BookshelfDefine"/>
+<button idMso="BordersShadingDialog"/>
+<button idMso="BrightnessLess"/>
+<button idMso="BrightnessMore"/>
+<button idMso="BroadcastEnd"/>
+<button idMso="BroadcastFromBeginning"/>
+<button idMso="BroadcastFromCurrent"/>
+<button idMso="BroadcastSendInvitation"/>
+<button idMso="BroadcastSlideShow"/>
+<button idMso="BulletsAndNumberingBulletsDialog"/>
+<button idMso="BulletsAndNumberingNumberingDialog"/>
+<button idMso="CDAudioPlayTrack"/>
+<button idMso="ChangeCaseToggle"/>
+<button idMso="CharacterFormattingReset"/>
+<button idMso="Chart3DView"/>
+<button idMso="ChartAddAxis"/>
+<button idMso="ChartChangeType"/>
+<button idMso="ChartDataLabelAdd"/>
+<button idMso="ChartDataLabelDialog"/>
+<button idMso="ChartDataLabelsAdd"/>
+<button idMso="ChartDataTableOptionsDialog"/>
+<button idMso="ChartDelete"/>
+<button idMso="ChartDeleteSeries"/>
+<button idMso="ChartDepthAxisOptionsDialog"/>
+<button idMso="ChartDepthAxisTitleOptionsDialog"/>
+<button idMso="ChartDepthGridlinesOptionsDialog"/>
+<button idMso="ChartEditDataSource"/>
+<button idMso="ChartEditText"/>
+<button idMso="ChartErrorBarsOptionsDialog"/>
+<button idMso="ChartExitEditText"/>
+<button idMso="ChartFloorOptionsDialog"/>
+<button idMso="ChartFormatAxis"/>
+<button idMso="ChartFormatAxisAndSelect"/>
+<button idMso="ChartFormatAxisTitle"/>
+<button idMso="ChartFormatBackWall"/>
+<button idMso="ChartFormatChartArea"/>
+<button idMso="ChartFormatChartTitle"/>
+<button idMso="ChartFormatDataLabel"/>
+<button idMso="ChartFormatDataLabelAndSelect"/>
+<button idMso="ChartFormatDataLabels"/>
+<button idMso="ChartFormatDataLabelsAndSelect"/>
+<button idMso="ChartFormatDataPoint"/>
+<button idMso="ChartFormatDataPointAndSelect"/>
+<button idMso="ChartFormatDataSeries"/>
+<button idMso="ChartFormatDataSeriesAndSelect"/>
+<button idMso="ChartFormatDataTable"/>
+<button idMso="ChartFormatDisplayUnit"/>
+<button idMso="ChartFormatDownBars"/>
+<button idMso="ChartFormatDropLines"/>
+<button idMso="ChartFormatErrorBars"/>
+<button idMso="ChartFormatFloor"/>
+<button idMso="ChartFormatGridlines"/>
+<button idMso="ChartFormatHighLowLine"/>
+<button idMso="ChartFormatLeaderLines"/>
+<button idMso="ChartFormatLegend"/>
+<button idMso="ChartFormatLegendEntry"/>
+<button idMso="ChartFormatMajorGridlinesAndSelect"/>
+<button idMso="ChartFormatMinorGridlinesAndSelect"/>
+<button idMso="ChartFormatPlotArea"/>
+<button idMso="ChartFormatSelection"/>
+<button idMso="ChartFormatSeriesLine"/>
+<button idMso="ChartFormatSideWall"/>
+<button idMso="ChartFormatTrendline"/>
+<button idMso="ChartFormatTrendlineAndSelect"/>
+<button idMso="ChartFormatTrendlineLabel"/>
+<button idMso="ChartFormatUpBars"/>
+<button idMso="ChartFormatWalls"/>
+<button idMso="ChartInsert"/>
+<button idMso="ChartLegendOptionsDialogDialog"/>
+<button idMso="ChartMajorGridlinesAdd"/>
+<button idMso="ChartMinorGridlinesAdd"/>
+<button idMso="ChartPlotAreaOptionsDialog"/>
+<button idMso="ChartPrimaryHorizontalAxisOptionsDialog"/>
+<button idMso="ChartPrimaryHorizontalAxisTitleOptionsDialog"/>
+<button idMso="ChartPrimaryHorizontalGridlinesOptionsDialog"/>
+<button idMso="ChartPrimaryVerticalAxisOptionsDialog"/>
+<button idMso="ChartPrimaryVerticalAxisTitleOptionsDialog"/>
+<button idMso="ChartPrimaryVerticalGridlinesOptionsDialog"/>
+<button idMso="ChartRefresh"/>
+<button idMso="ChartResetToMatchStyle"/>
+<button idMso="ChartSaveTemplates"/>
+<button idMso="ChartSecondaryHorizontalAxisOption"/>
+<button idMso="ChartSecondaryHorizontalAxisTitleOptionsDialog"/>
+<button idMso="ChartSecondaryHorizontalGridlinesOptionsDialog"/>
+<button idMso="ChartSecondaryVerticalAxisOptionsDialog"/>
+<button idMso="ChartSecondaryVerticalAxisTitleOptionsDialog"/>
+<button idMso="ChartSecondaryVerticalGridlinesOptionsDialog"/>
+<button idMso="ChartSeriesTypeChange"/>
+<button idMso="ChartShowData"/>
+<button idMso="ChartShowDataContextualMenu"/>
+<button idMso="ChartSourceDataContextualMenu"/>
+<button idMso="ChartSwitchRowColumn"/>
+<button idMso="ChartTitleOptionsDialog"/>
+<button idMso="ChartTrendlineAdd"/>
+<button idMso="ChartTrendlineOptionsDialog"/>
+<button idMso="ChartUpDownBarsOptionsDialog"/>
+<button idMso="ChartWallOptionsDialog"/>
+<button idMso="CheckForUpdates"/>
+<button idMso="ChineseTranslationDialog"/>
+<button idMso="Clear"/>
+<button idMso="ClearFormatting"/>
+<button idMso="CollapseAll"/>
+<button idMso="ComAddInsDialog"/>
+<button idMso="ContactUs"/>
+<button idMso="ContrastLess"/>
+<button idMso="ContrastMore"/>
+<button idMso="ControlProperties"/>
+<button idMso="ConvertToSmartArtMoreSmartArtGraphicsDialog"/>
+<button idMso="Copy"/>
+<button idMso="CreateHandoutsInWord"/>
+<button idMso="Cut"/>
+<button idMso="DateAndTimeInsert"/>
+<button idMso="DeleteNode"/>
+<button idMso="DeleteSegment"/>
+<button idMso="DeleteSlideContextual"/>
+<button idMso="DocumentPanelTemplate"/>
+<button idMso="DrawingCanvasExpand"/>
+<button idMso="DrawingCanvasFit"/>
+<button idMso="DrawingCanvasResize"/>
+<button idMso="DrawingCanvasScale"/>
+<button idMso="DuplicateSelectedSlides"/>
+<button idMso="EquationInsertNew"/>
+<button idMso="EquationLinearFormat"/>
+<button idMso="EquationProfessional"/>
+<button idMso="ExcelSpreadsheetInsert"/>
+<button idMso="ExchangeFolder"/>
+<button idMso="ExitEditCurve"/>
+<button idMso="ExportToVideo"/>
+<button idMso="FileAddDigitalSignature"/>
+<button idMso="FileCheckIn"/>
+<button idMso="FileCheckOut"/>
+<button idMso="FileCheckOutDiscard"/>
+<button idMso="FileClose"/>
+<button idMso="FileCompatibilityCheckerPowerPoint"/>
+<button idMso="FileDiscardCachedChanges"/>
+<button idMso="FileDocumentInspect"/>
+<button idMso="FileEmailAsPdfEmailAttachment"/>
+<button idMso="FileEmailAsXpsEmailAttachment"/>
+<button idMso="FileExit"/>
+<button idMso="FileInternetFax"/>
+<button idMso="FileLinksToFiles"/>
+<button idMso="FileNew"/>
+<button idMso="FileNewDefault"/>
+<button idMso="FileOpen"/>
+<button idMso="FileOpenRecentFile"/>
+<button idMso="FilePackageForCD"/>
+<button idMso="FilePermissionRestrictAs"/>
+<button idMso="FilePermissionView"/>
+<button idMso="FilePrint"/>
+<button idMso="FilePrintQuick"/>
+<button idMso="FilePublishSlides"/>
+<button idMso="FileSave"/>
+<button idMso="FileSaveACopy"/>
+<button idMso="FileSaveAs"/>
+<button idMso="FileSaveAsOtherFormats"/>
+<button idMso="FileSaveAsPdfOrXps"/>
+<button idMso="FileSaveAsPowerPoint97_2003"/>
+<button idMso="FileSaveAsPowerPointOpenDocumentPresentation"/>
+<button idMso="FileSaveAsPowerPointPpsx"/>
+<button idMso="FileSaveAsPowerPointPptx"/>
+<button idMso="FileSaveToDocumentManagementServer"/>
+<button idMso="FileSendAsAttachment"/>
+<button idMso="FileStartWorkflow"/>
+<button idMso="FileVersionHistory"/>
+<button idMso="FileWorkflowTasks"/>
+<button idMso="FindDialog"/>
+<button idMso="FindNext"/>
+<button idMso="FontColorMoreColorsDialogPowerPoint"/>
+<button idMso="FontDialog"/>
+<button idMso="FontSizeDecrease"/>
+<button idMso="FontSizeIncrease"/>
+<button idMso="FontsReplaceFonts"/>
+<button idMso="GlowColorMoreColorsDialog"/>
+<button idMso="GlowsMoreOptions"/>
+<button idMso="GoToProperty"/>
+<button idMso="GridSettings"/>
+<button idMso="HangulHanjaConversionPowerPoint"/>
+<button idMso="HeaderFooterInsert"/>
+<button idMso="Help"/>
+<button idMso="HyperlinkCopy"/>
+<button idMso="HyperlinkEdit"/>
+<button idMso="HyperlinkInsert"/>
+<button idMso="HyperlinkInsertPowerPoint"/>
+<button idMso="HyperlinkOpen"/>
+<button idMso="HyperlinkRemove"/>
+<button idMso="ImeReconvert"/>
+<button idMso="IndentDecrease"/>
+<button idMso="IndentIncrease"/>
+<button idMso="InkColorMoreColorsDialog"/>
+<button idMso="InkCopyAsText"/>
+<button idMso="InkingStart"/>
+<button idMso="InkToolsClose"/>
+<button idMso="InsertTab"/>
+<button idMso="KeepBackgroundRemoval"/>
+<button idMso="LabelInsert"/>
+<button idMso="LanguagePreferences"/>
+<button idMso="LeaveReader"/>
+<button idMso="LineStylesDialog"/>
+<button idMso="LinkBreak"/>
+<button idMso="LinkChange"/>
+<button idMso="LinksUpdate"/>
+<button idMso="MacroPlay"/>
+<button idMso="MacroSecurity"/>
+<button idMso="MakeSegmentCurved"/>
+<button idMso="MakeSegmentStraight"/>
+<button idMso="MasterViewClose"/>
+<button idMso="MediaPlayPreview"/>
+<button idMso="MediaUpgrade"/>
+<button idMso="MergeCells"/>
+<button idMso="MergeViewClose"/>
+<button idMso="MoreControlsDialog"/>
+<button idMso="MoreTextureOptions"/>
+<button idMso="MovieFromClipOrganizerInsert"/>
+<button idMso="MovieFromFileInsert"/>
+<button idMso="MoviePlay"/>
+<button idMso="NextPane"/>
+<button idMso="NumberInsert"/>
+<button idMso="ObjectAddText"/>
+<button idMso="ObjectBorderOutlineColorMoreColorsDialog"/>
+<button idMso="ObjectBringForward"/>
+<button idMso="ObjectBringToFront"/>
+<button idMso="ObjectEditText"/>
+<button idMso="ObjectFillMoreColorsDialog"/>
+<button idMso="ObjectFlipHorizontal"/>
+<button idMso="ObjectFlipVertical"/>
+<button idMso="ObjectFormatDialog"/>
+<button idMso="ObjectNudgeDown"/>
+<button idMso="ObjectNudgeLeft"/>
+<button idMso="ObjectNudgeRight"/>
+<button idMso="ObjectNudgeUp"/>
+<button idMso="ObjectPictureFill"/>
+<button idMso="ObjectRotateFree"/>
+<button idMso="ObjectRotateLeft90"/>
+<button idMso="ObjectRotateRight90"/>
+<button idMso="ObjectRotationOptionsDialog"/>
+<button idMso="ObjectsAlignBottomSmart"/>
+<button idMso="ObjectsAlignCenterHorizontalSmart"/>
+<button idMso="ObjectsAlignLeftSmart"/>
+<button idMso="ObjectsAlignMiddleVerticalSmart"/>
+<button idMso="ObjectsAlignRightSmart"/>
+<button idMso="ObjectsAlignTopSmart"/>
+<button idMso="ObjectSaveAsPicture"/>
+<button idMso="ObjectSendBackward"/>
+<button idMso="ObjectSendToBack"/>
+<button idMso="ObjectSetShapeDefaults"/>
+<button idMso="ObjectsGroup"/>
+<button idMso="ObjectSizeAndPositionDialog"/>
+<button idMso="ObjectsMultiSelect"/>
+<button idMso="ObjectsRegroup"/>
+<button idMso="ObjectsUngroup"/>
+<button idMso="OleConvert"/>
+<button idMso="OleObjectctInsert"/>
+<button idMso="OutlineCollapse"/>
+<button idMso="OutlineDemote"/>
+<button idMso="OutlineExpand"/>
+<button idMso="OutlineExpandAll"/>
+<button idMso="OutlineMoveDown"/>
+<button idMso="OutlineMoveUp"/>
+<button idMso="OutlinePromote"/>
+<button idMso="OutlineThumbnailsShowHide"/>
+<button idMso="OutlookTaskCreate"/>
+<button idMso="PageNext"/>
+<button idMso="PagePrevious"/>
+<button idMso="ParagraphDialog"/>
+<button idMso="ParagraphMoreColumnsDialog"/>
+<button idMso="Paste"/>
+<button idMso="PasteApplyStyle"/>
+<button idMso="PasteAsEmbedded"/>
+<button idMso="PasteAsHyperlink"/>
+<button idMso="PasteAsPicture"/>
+<button idMso="PasteBitmap"/>
+<button idMso="PasteDestinationTheme"/>
+<button idMso="PasteDuplicate"/>
+<button idMso="PasteExcelChartDestinationTheme"/>
+<button idMso="PasteExcelChartSourceFormatting"/>
+<button idMso="PasteExcelTableDestinationTableStyle"/>
+<button idMso="PasteExcelTableSourceFormatting"/>
+<button idMso="PasteGif"/>
+<button idMso="PasteInk"/>
+<button idMso="PasteJpeg"/>
+<button idMso="PasteLinkedExcelChartDestinationTheme"/>
+<button idMso="PasteLinkedExcelChartSourceFormatting"/>
+<button idMso="PastePng"/>
+<button idMso="PasteSourceFormatting"/>
+<button idMso="PasteSpecialDialog"/>
+<button idMso="PasteTextOnly"/>
+<button idMso="PenAddFavorite"/>
+<button idMso="PhotoAlbumEdit"/>
+<button idMso="PhotoAlbumInsert"/>
+<button idMso="PickUpStyle"/>
+<button idMso="PictureArtisticEffectsReset"/>
+<button idMso="PictureChange"/>
+<button idMso="PictureColorDialog"/>
+<button idMso="PictureColorReset"/>
+<button idMso="PictureCorrectionsDialog"/>
+<button idMso="PictureCorrectionsReset"/>
+<button idMso="PictureCropAspectRatio16To10"/>
+<button idMso="PictureCropAspectRatio16To9"/>
+<button idMso="PictureCropAspectRatio1To1"/>
+<button idMso="PictureCropAspectRatio2To3"/>
+<button idMso="PictureCropAspectRatio3To2"/>
+<button idMso="PictureCropAspectRatio3To4"/>
+<button idMso="PictureCropAspectRatio3To5"/>
+<button idMso="PictureCropAspectRatio4To3"/>
+<button idMso="PictureCropAspectRatio4To5"/>
+<button idMso="PictureCropAspectRatio5To3"/>
+<button idMso="PictureCropAspectRatio5To4"/>
+<button idMso="PictureEdit"/>
+<button idMso="PictureFillCrop"/>
+<button idMso="PictureFitCrop"/>
+<button idMso="PictureInsertFromFile"/>
+<button idMso="PictureInsertFromFilePowerPoint"/>
+<button idMso="PictureRecolorMoreColorsDialog"/>
+<button idMso="PictureReset"/>
+<button idMso="PictureResetAndSize"/>
+<button idMso="PicturesCompress"/>
+<button idMso="PlaybackTipPlay"/>
+<button idMso="PowerPointPageSetup"/>
+<button idMso="PrintPreviewAndPrint"/>
+<button idMso="PrintPreviewClose"/>
+<button idMso="PropertySheet"/>
+<button idMso="QuickAccessToolbarCustomization"/>
+<button idMso="RecordNarration"/>
+<button idMso="RecordNarrationFromCurrentSlide"/>
+<button idMso="RedoOrRepeat"/>
+<button idMso="ReflectionsMoreOptions"/>
+<button idMso="ReopenFromServer"/>
+<button idMso="ReplaceDialog"/>
+<button idMso="ReviewCompareAndMerge"/>
+<button idMso="ReviewDeleteAllMarkupInPresentation"/>
+<button idMso="ReviewDeleteAllMarkupOnSlide"/>
+<button idMso="ReviewDeleteCommentPowerPoint"/>
+<button idMso="ReviewEditComment"/>
+<button idMso="ReviewEndReviewPowerPoint"/>
+<button idMso="ReviewNewComment"/>
+<button idMso="ReviewNextChange"/>
+<button idMso="ReviewNextCommentPowerPoint"/>
+<button idMso="ReviewPresentationRevisionAccept"/>
+<button idMso="ReviewPresentationRevisionReject"/>
+<button idMso="ReviewPreviousChange"/>
+<button idMso="ReviewPreviousCommentPowerPoint"/>
+<button idMso="ReviewRevisionAccept"/>
+<button idMso="ReviewRevisionReject"/>
+<button idMso="ReviewSlideRevisionAccept"/>
+<button idMso="ReviewSlideRevisionReject"/>
+<button idMso="RibbonCustomization"/>
+<button idMso="SaveAndReview"/>
+<button idMso="ScreenClipping"/>
+<button idMso="SectionAdd"/>
+<button idMso="SectionCollapseAll"/>
+<button idMso="SectionExpandAll"/>
+<button idMso="SectionMergeWithPrevious"/>
+<button idMso="SectionRemoveAll"/>
+<button idMso="SectionRename"/>
+<button idMso="SelectAll"/>
+<button idMso="SetLanguage"/>
+<button idMso="ShadowNudgeDownClassic"/>
+<button idMso="ShadowNudgeLeftClassic"/>
+<button idMso="ShadowNudgeRightClassic"/>
+<button idMso="ShadowNudgeUpClassic"/>
+<button idMso="ShadowOnOrOffClassic"/>
+<button idMso="ShadowOptionsDialog"/>
+<button idMso="ShapeConvertToFreeform"/>
+<button idMso="ShapeFillMoreGradientsDialog"/>
+<button idMso="ShapesCombine"/>
+<button idMso="ShapesIntersect"/>
+<button idMso="ShapesMoreShapes"/>
+<button idMso="ShapesSubtract"/>
+<button idMso="ShapesUnion"/>
+<button idMso="SlideBackgroundFormatDialog"/>
+<button idMso="SlideBackgroundReset"/>
+<button idMso="SlideDelete"/>
+<button idMso="SlideMasterChartPlaceholderInsert"/>
+<button idMso="SlideMasterClipArtPlaceholderInsert"/>
+<button idMso="SlideMasterContentPlaceholderInsert"/>
+<button idMso="SlideMasterDiagramPlaceholderInsert"/>
+<button idMso="SlideMasterInsertLayout"/>
+<button idMso="SlideMasterMasterLayout"/>
+<button idMso="SlideMasterMediaPlaceholderInsert"/>
+<button idMso="SlideMasterPicturePlaceholderInsert"/>
+<button idMso="SlideMasterRenameMaster"/>
+<button idMso="SlideMasterTablePlaceholderInsert"/>
+<button idMso="SlideMasterTextPlaceholderInsert"/>
+<button idMso="SlideMasterVerticalContentPlaceholderInsert"/>
+<button idMso="SlideMasterVerticalTextPlaceholderInsert"/>
+<button idMso="SlideNew"/>
+<button idMso="SlideReset"/>
+<button idMso="SlidesFromOutline"/>
+<button idMso="SlideShowClearAllSlidesNarrations"/>
+<button idMso="SlideShowClearAllSlidesTimings"/>
+<button idMso="SlideShowClearCurrentSlideNarration"/>
+<button idMso="SlideShowClearCurrentSlideTiming"/>
+<button idMso="SlideShowCustom"/>
+<button idMso="SlideShowFromBeginning"/>
+<button idMso="SlideShowFromCurrent"/>
+<button idMso="SlideShowInAWindow"/>
+<button idMso="SlideShowNextSlide"/>
+<button idMso="SlideShowPreviousSlide"/>
+<button idMso="SlideShowRehearseTimings"/>
+<button idMso="SlideShowResumeShow"/>
+<button idMso="SlideShowSetUpDialog"/>
+<button idMso="SlideTransitionApplyToAll"/>
+<button idMso="SmartArtAddAssistant"/>
+<button idMso="SmartArtAddBullet"/>
+<button idMso="SmartArtAddShape"/>
+<button idMso="SmartArtAddShapeAbove"/>
+<button idMso="SmartArtAddShapeAfter"/>
+<button idMso="SmartArtAddShapeBefore"/>
+<button idMso="SmartArtAddShapeBelow"/>
+<button idMso="SmartArtChangeLayout"/>
+<button idMso="SmartArtConvedrtToText"/>
+<button idMso="SmartArtConvertToShapes"/>
+<button idMso="SmartArtDemote"/>
+<button idMso="SmartArtInsert"/>
+<button idMso="SmartArtLargerShape"/>
+<button idMso="SmartArtMoreLayoutsDialog"/>
+<button idMso="SmartArtOrganizationChartBoth"/>
+<button idMso="SmartArtOrganizationChartLeftHanging"/>
+<button idMso="SmartArtOrganizationChartRightHanging"/>
+<button idMso="SmartArtOrganizationChartStandard"/>
+<button idMso="SmartArtPromote"/>
+<button idMso="SmartArtReorderDown"/>
+<button idMso="SmartArtReorderUp"/>
+<button idMso="SmartArtResetGraphic"/>
+<button idMso="SmartArtResetShape"/>
+<button idMso="SmartArtSmallerShape"/>
+<button idMso="SmartTagOptions"/>
+<button idMso="SoftEdgesMoreOptions"/>
+<button idMso="SoundInsertFromClipOrganizer"/>
+<button idMso="SoundInsertFromFile"/>
+<button idMso="SoundRecord"/>
+<button idMso="Spelling"/>
+<button idMso="SplitCells"/>
+<button idMso="SymbolInsert"/>
+<button idMso="TableBackgroundPictureFill"/>
+<button idMso="TableBorderColorMoreColorsDialog"/>
+<button idMso="TableCellCustomMarginsDialog"/>
+<button idMso="TableColumnsDistribute"/>
+<button idMso="TableColumnSelect"/>
+<button idMso="TableDelete"/>
+<button idMso="TableDeleteColumns"/>
+<button idMso="TableDeleteRows"/>
+<button idMso="TableFillColorMoreColorsDialog"/>
+<button idMso="TableInsert"/>
+<button idMso="TableInsertColumnsLeft"/>
+<button idMso="TableInsertColumnsRight"/>
+<button idMso="TableInsertDialog"/>
+<button idMso="TableInsertRowsAbove"/>
+<button idMso="TableInsertRowsBelow"/>
+<button idMso="TableRowsDistribute"/>
+<button idMso="TableRowSelect"/>
+<button idMso="TableSelect"/>
+<button idMso="TableStyleClearTable"/>
+<button idMso="TextAlignMoreOptionsDialog"/>
+<button idMso="TextDirectionMoreOptionsDialog"/>
+<button idMso="TextEditModeExit"/>
+<button idMso="TextEffects3DRotationOptionsDialog"/>
+<button idMso="TextEffectsBevelMore3DOptionsDialog"/>
+<button idMso="TextEffectsGlowsMoreOptions"/>
+<button idMso="TextEffectsMoreShadowsDialog"/>
+<button idMso="TextEffectsReflectionsMoreOptions"/>
+<button idMso="TextFillColorMoreColorsDialog"/>
+<button idMso="TextFillMoreGradientsDialog"/>
+<button idMso="TextFillMoreTextures"/>
+<button idMso="TextGlowColorMoreColorsDialog"/>
+<button idMso="TextOutlineColorMoreColorsDialog"/>
+<button idMso="TextOutlineMoreLinesDialog"/>
+<button idMso="TextPictureFill"/>
+<button idMso="ThemeBrowseForThemesPowerPoint"/>
+<button idMso="ThemeColorsCreateNew"/>
+<button idMso="ThemeColorsReset"/>
+<button idMso="ThemeFontsCreateNew"/>
+<button idMso="ThemeSaveCurrentPowerPoint"/>
+<button idMso="ThemeSearchOfficeOnlinePowerPoint"/>
+<button idMso="Thesaurus"/>
+<button idMso="TransitionPreview"/>
+<button idMso="Translate"/>
+<button idMso="TranslateSelected"/>
+<button idMso="TranslateToSimplifiedChinese"/>
+<button idMso="TranslateToTraditionalChinese"/>
+<button idMso="TranslationLanguageOptions"/>
+<button idMso="UpgradePresentation"/>
+<button idMso="VideoBookmarkAdd"/>
+<button idMso="VideoBookmarkRemove"/>
+<button idMso="VideoColorDialog"/>
+<button idMso="VideoCorrectionsDialog"/>
+<button idMso="VideoDesignResetAndSize"/>
+<button idMso="VideoInsert"/>
+<button idMso="VideoInsertFromOnline"/>
+<button idMso="VideoPosterFrameCurrent"/>
+<button idMso="VideoPosterFrameFromFile"/>
+<button idMso="VideoPosterFrameReset"/>
+<button idMso="VideoToolsDesignReset"/>
+<button idMso="VideoToolsTrim"/>
+<button idMso="ViewFullScreenView"/>
+<button idMso="ViewSlideShowReadingView"/>
+<button idMso="ViewSlideShowView"/>
+<button idMso="ViewVisualBasicCode"/>
+<button idMso="VisualBasic"/>
+<button idMso="WebGoBack"/>
+<button idMso="WebGoForward"/>
+<button idMso="WebOptionsDialog"/>
+<button idMso="WebPagePreview"/>
+<button idMso="WindowClose"/>
+<button idMso="WindowFitToPage"/>
+<button idMso="WindowMinimize"/>
+<button idMso="WindowMoveSplit"/>
+<button idMso="WindowNew"/>
+<button idMso="WindowRestore"/>
+<button idMso="WindowsArrangeAll"/>
+<button idMso="WindowsCascade"/>
+<button idMso="WordArtClear"/>
+<button idMso="WordArtFormatDialog"/>
+<button idMso="WordArtVerticalText"/>
+<button idMso="ZoomDialog"/>
+<button idMso="ZoomFitToWindow"/>
+</menu>
+</group>
+</tab> </tabs> </ribbon> </customUI>
