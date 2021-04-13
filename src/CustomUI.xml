@@ -3,7 +3,25 @@
 <ribbon> <tabs> 
 <tab id="IPToolbarV01" label="Instrumenta">
 <group idMso="GroupFont"/> 
-<group id="AlignGroup" label="Align and distribute"> 
+<group id="FormattingGroup" label="Shapes"> 
+<gallery idMso="ShapeFillColorPicker" showLabel="false"/>
+<gallery idMso="ShapeOutlineColorPicker" showLabel="false"/>
+<gallery idMso="ShapesInsertGallery" showLabel="false"/>
+<gallery idMso="ShapeFillTextureGallery" showLabel="false"/>
+<gallery idMso="ShapeStylesGallery" showLabel="false"/>
+<gallery idMso="ShapeChangeShapeGallery" showLabel="false"/>
+<gallery idMso="GradientGallery" showLabel="false"/>
+<button idMso="ObjectPictureFill" showLabel="false"/> 
+</group>
+<group id="PictureGroup" label="Pictures"> 
+<toggleButton idMso="PictureCrop" showLabel="false"/> 
+<button idMso="PictureReset" showLabel="false"/>  
+<button idMso="PictureInsertFromFile" showLabel="false"/>  
+<toggleButton idMso="PictureSetTransparentColor" showLabel="false"/>
+<button idMso="PicturesCompress" showLabel="false"/>
+<gallery idMso="OutlineColorPicker" showLabel="false"/>             
+</group>
+<group id="AlignGroup" label="Align and distribute">
 <button id="ObjectsAlignLeftsButton" label="Align left" showLabel="false" imageMso="ObjectsAlignLeft" onAction="ObjectsAlignLefts" />
 <button id="ObjectsAlignRightsButton" label="Align right" showLabel="false" imageMso="ObjectsAlignRight" onAction="ObjectsAlignRights" />
 <button id="ObjectsAlignBottomsButton" label="Align bottom" showLabel="false" imageMso="ObjectsAlignBottom" onAction="ObjectsAlignBottoms" />
@@ -37,6 +55,7 @@
 <group id="TextGroup" label="Text">
 <button id="RemoveTextButton" label="Remove text" imageMso="OmsDelete" showLabel="false" onAction="ObjectsRemoveText" />
 <button idMso="ClearFormatting" showLabel="false"/>
+<gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false"/>
 <button id="SwapTextButton" label="Swap text" imageMso="PrintPreviewZoomTwoPages" showLabel="false" onAction="ObjectsSwapText" />
  <separator id="separator5" />
 <toggleButton idMso="AlignCenter" showLabel="false" />
