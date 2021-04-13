@@ -5,7 +5,7 @@
       <tab id="IPToolbarV01" label="Instrumenta">
         <group id="FormattingFont" label="Font">
           <box id="FontBox1" boxStyle="horizontal">
-            <comboBox idMso="Font" showLabel="false" sizeString="WWWWWWWWWWWW" />
+            <comboBox idMso="Font" showLabel="false" />
             <comboBox idMso="FontSize" showLabel="false" />
             <button idMso="FontSizeIncrease" showLabel="false" />
             <button idMso="FontSizeDecrease" showLabel="false" />
