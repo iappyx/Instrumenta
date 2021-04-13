@@ -29,7 +29,7 @@ I am happy to receive feature requests and code contributions! Let's make the be
 # How to install Add a PowerPoint add-in
 
 You can save the add-in to your computer and then install the add-in by adding it to the Available Add-Ins list:
-- Download the add-in file ("Instrumenta Powerpoint Toolbar.ppam") and save it in a fixed location 
+- Download the add-in file (https://github.com/iappyx/Instrumenta/raw/main/Instrumenta%20Powerpoint%20Toolbar.ppam) and save it in a fixed location 
 - Open Powerpoint, click the File tab, and then click Options
 - In the Options dialog box, click Add-Ins.
 - In the Manage list at the bottom of the dialog box, click PowerPoint Add-ins, and then click Go.
