@@ -1,4 +1,8 @@
 Attribute VB_Name = "Module1"
+Sub ShowAboutDialog()
+AboutDialog.Show
+End Sub
+
 Sub ObjectsAlignLefts()
 Set myDocument = Application.ActiveWindow
 

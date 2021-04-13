@@ -812,5 +812,6 @@
 <button idMso="ZoomDialog"/>
 <button idMso="ZoomFitToWindow"/>
 </menu>
+    <button id="ShowAboutDialogButton" label="Show about dialog" showLabel="false" imageMso="Help" onAction="ShowAboutDialog" />
 </group>
 </tab> </tabs> </ribbon> </customUI>
