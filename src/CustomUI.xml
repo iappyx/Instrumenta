@@ -65,6 +65,7 @@
           <menu idMso="CombineShapesMenu" showLabel="false" />
           <control idMso="ShapeWidth" showLabel="false" />
           <control idMso="ShapeHeight" showLabel="false" />
+          <control idMso="FormatPainter" showLabel="false" />
         </group>
         <group id="PictureGroup" label="Pictures">
           <toggleButton idMso="PictureCrop" showLabel="false" />
