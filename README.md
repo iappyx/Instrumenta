@@ -15,6 +15,7 @@ Current features include:
 - Remove text from shape
 - Remove formatting
 - Swap text
+- Match rounded corners of shapes
 - Replace fonts
 - Set proofing language for all slides
 - Format table
