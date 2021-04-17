@@ -70,6 +70,7 @@
           <control idMso="ShapeHeight" showLabel="false" />
           <control idMso="FormatPainter" showLabel="false" />
           <button id="ObjectsCopyRoundedCordner" label="Copy rounded corner of first selected shape to all selected shapes" showLabel="false" imageMso="ShapeRoundedRectangle" onAction="ObjectsCopyRoundedCorner" />
+          <toggleButton idMso="ObjectEditPoints" showLabel="false" />          
         </group>
         <group id="PictureGroup" label="Pictures">
           <toggleButton idMso="PictureCrop" showLabel="false" />
@@ -78,31 +79,37 @@
           <toggleButton idMso="PictureSetTransparentColor" showLabel="false" />
           <button idMso="PicturesCompress" showLabel="false" />
         </group>
-        <group id="AlignGroup" label="Align and distribute">
+        <group id="AlignGroup" label="Align, distribute and size">
+          <box id="AlignDistributeBox" boxStyle="horizontal">
           <button id="ObjectsAlignLeftsButton" label="Align left" showLabel="false" imageMso="ObjectsAlignLeft" onAction="ObjectsAlignLefts" />
+          <button id="ObjectsAlignCentersButton" label="Align center" showLabel="false" imageMso="ObjectsAlignCenterHorizontal" onAction="ObjectsAlignCenters" />
           <button id="ObjectsAlignRightsButton" label="Align right" showLabel="false" imageMso="ObjectsAlignRight" onAction="ObjectsAlignRights" />
           <button id="ObjectsAlignBottomsButton" label="Align bottom" showLabel="false" imageMso="ObjectsAlignBottom" onAction="ObjectsAlignBottoms" />
-          <button id="ObjectsAlignCentersButton" label="Align center" showLabel="false" imageMso="ObjectsAlignCenterHorizontal" onAction="ObjectsAlignCenters" />
           <button id="ObjectsAlignMiddlesButton" label="Align middle" showLabel="false" imageMso="ObjectsAlignMiddleVertical" onAction="ObjectsAlignMiddles" />
           <button id="ObjectsAlignTopsButton" label="Align top" showLabel="false" imageMso="ObjectsAlignTop" onAction="ObjectsAlignTops" />
-          <separator id="separator1" />
           <button id="ObjectsDistributeHorizontallyButton" label="Distribute horizontally" showLabel="false" imageMso="AlignDistributeHorizontally" onAction="ObjectsDistributeHorizontally" />
           <button id="ObjectsDistributeVerticallyButton" imageMso="AlignDistributeVertically" label="Distribute vertically" showLabel="false" onAction="ObjectsDistributeVertically" />
-          <separator id="separator2" />
+           </box>
+          <box id="LayersBox" boxStyle="horizontal">
           <button idMso="ObjectBringForward" showLabel="false" />
           <button idMso="ObjectSendBackward" showLabel="false" />
           <button idMso="ObjectBringToFront" showLabel="false" />
           <button idMso="ObjectSendToBack" showLabel="false" />
-          <separator id="separator3" />
           <button idMso="ObjectFlipHorizontal" showLabel="false" />
           <button idMso="ObjectFlipVertical" showLabel="false" />
           <button idMso="ObjectRotateLeft90" showLabel="false" />
           <button idMso="ObjectRotateRight90" showLabel="false" />
-        </group>
-        <group id="SizeGroup" label="Size">
+          </box>
+          <box id="DimensionsBox" boxStyle="horizontal">
+          <button id="ObjectsSwapPosition" imageMso="SmartArtRightToLeft" label="Swap position of two shapes" showLabel="false" onAction="ObjectsSwapPosition" />
           <button id="ObjectsSameHeightButton" imageMso="RowHeight" label="Set same height" showLabel="false" onAction="ObjectsSameHeight" />
           <button id="ObjectsSameWidthButton" imageMso="ColumnWidth" label="Set same width" showLabel="false" onAction="ObjectsSameWidth" />
           <button id="ObjectsSameHeightAndWidthButton" imageMso="SizeToControlHeightAndWidth" label="Set same height and width" showLabel="false" onAction="ObjectsSameHeightAndWidth" />
+          <button id="ObjectsSizeToTallest" imageMso="SizeToTallest" label="Size to tallest" showLabel="false" onAction="ObjectsSizeToTallest" />
+          <button id="ObjectsSizeShortest" imageMso="SizeToShortest" label="Size to shortest" showLabel="false" onAction="ObjectsSizeToShortest" />
+          <button id="ObjectsSizeToWidest" imageMso="SizeToWidest" label="Size to widest" showLabel="false" onAction="ObjectsSizeToWidest" />
+          <button id="ObjectsSizeNarrowest" imageMso="SizeToNarrowest" label="Size to narrowest" showLabel="false" onAction="ObjectsSizeToNarrowest" />          
+          </box>
         </group>
         <group id="TableGroup" label="Table">
           <button idMso="TableInsert" showLabel="false" />
