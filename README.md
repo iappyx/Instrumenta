@@ -9,9 +9,11 @@ I decided to create Instrumenta as a free and open source consulting powerpoint 
 
 # Features
 Current features include:
-- Basic formatting
-- Align and distribute shapes
+- Basic formatting and shortcuts to different frequently used powerpoint functions
+- Align, distribute and size shapes
 - Set same height and/or width for shapes
+- Size shapes to tallest, shortest, widest or narrowest
+- Swap position of two shapes
 - Remove text from shape
 - Remove formatting
 - Swap text
