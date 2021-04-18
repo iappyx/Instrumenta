@@ -230,6 +230,14 @@ PresentationSlide.Comments(1).Delete
 Next
 End Sub
 
+Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
+Dim PresentationSlide As Slide
+
+For Each PresentationSlide In ActivePresentation.Slides
+PresentationSlide.SlideShowTransition.EntryEffect = 0
+Next
+End Sub
+
 
 Sub ObjectsSetRoundedCorner(ShapeRadius As Single)
   Dim SlideShape As PowerPoint.Shape

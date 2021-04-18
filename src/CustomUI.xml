@@ -157,8 +157,9 @@
           <button idMso="AdvancedFileProperties" showLabel="false" />
           <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false">
           <button id="cleaning1" label="Remove animations from all slides" imageMso="Clear" onAction="CleanUpRemoveAnimationsFromAllSlides" />
-          <button id="cleaning2" label="Remove speaker notes from all slides" imageMso="Clear" onAction="CleanUpRemoveSpeakerNotesFromAllSlides" />
-          <button id="cleaning3" label="Remove comments from all slides" imageMso="Clear" onAction="CleanUpRemoveCommentsFromAllSlides" />
+          <button id="cleaning2" label="Remove entry transitions from all slides" imageMso="Clear" onAction="CleanUpRemoveSlideShowTransitionsFromAllSlides" />
+          <button id="cleaning3" label="Remove speaker notes from all slides" imageMso="Clear" onAction="CleanUpRemoveSpeakerNotesFromAllSlides" />
+          <button id="cleaning4" label="Remove comments from all slides" imageMso="Clear" onAction="CleanUpRemoveCommentsFromAllSlides" />
           </menu>
           <menu id="menu" label="All built-in commands" showLabel="false" imageMso="HappyFace">
             <toggleButton idMso="AlignCenter" />
