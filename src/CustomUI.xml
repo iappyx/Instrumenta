@@ -35,9 +35,11 @@
           <buttonGroup id="buttonGroupBulletsAndNumbering">
             <gallery idMso="BulletsGallery" showLabel="false" />
             <gallery idMso="NumberingGallery" showLabel="false" />
-            <gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false" />
+            <button id="BulletsTicks" label="Ticks" showLabel="false" imageMso="AcceptTask" onAction="TextBulletsTicks" />
+            <button id="BulletsCrosses" label="Crosses" showLabel="false" imageMso="WindowClose" onAction="TextBulletsCrosses" />        
           </buttonGroup>
           <buttonGroup id="buttonGroupIndent">
+            <gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false" />
             <button idMso="IndentIncrease" showLabel="false" />
             <button idMso="IndentDecrease" showLabel="false" />
             <gallery idMso="TextAlignGallery" showLabel="false" />
