@@ -3,6 +3,53 @@ Sub ShowAboutDialog()
 AboutDialog.Show
 End Sub
 
+Sub GenerateHarveyBall25()
+GenerateHarveyBallPercent (25)
+End Sub
+
+Sub GenerateHarveyBall33()
+GenerateHarveyBallPercent (33)
+End Sub
+
+Sub GenerateHarveyBall50()
+GenerateHarveyBallPercent (50)
+End Sub
+
+Sub GenerateHarveyBall67()
+GenerateHarveyBallPercent (67)
+End Sub
+
+Sub GenerateHarveyBall75()
+GenerateHarveyBallPercent (75)
+End Sub
+
+Sub GenerateHarveyBall100()
+GenerateHarveyBallPercent (100)
+End Sub
+
+Sub GenerateHarveyBallPercent(FillPercentage As Double)
+Dim HarveyCircle, HarveyFill As Shape
+
+Set HarveyCircle = ActivePresentation.Slides(1).Shapes.AddShape(msoShapeOval, 100, 100, 50, 50)
+Set HarveyFill = ActivePresentation.Slides(1).Shapes.AddShape(msoShapePie, 101, 101, 48, 48)
+    With HarveyFill
+        .Adjustments.Item(2) = -90
+        .Adjustments.Item(1) = ((FillPercentage / 100) * 360) - 90
+        .Line.Visible = False
+        .Fill.ForeColor.RGB = RGB(0, 0, 0)
+    End With
+    With HarveyCircle
+         .Line.Visible = False
+    End With
+    
+If FillPercentage > 0 Then
+HarveyFill.Adjustments(1) = HarveyFill.Adjustments(1) - 0.1
+End If
+
+Call ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array(HarveyCircle.ZOrderPosition, HarveyFill.ZOrderPosition)).MergeShapes(msoMergeCombine)
+
+End Sub
+
 Sub TextBulletsTicks()
 
 With Windows(1).Selection.TextRange.ParagraphFormat.Bullet
