@@ -158,13 +158,21 @@
           <button idMso="ReplaceDialog" showLabel="false" />
           <button idMso="AdvancedFileProperties" showLabel="false" />
           <menu id="HarveyBallsMenu" label="Harvey Balls" imageMso="MagicEightBall" showLabel="false">
+           <button id="HarveyBall10" label="1/10" onAction="GenerateHarveyBall10" />
+          <button id="HarveyBall20" label="2/10" onAction="GenerateHarveyBall20" />
           <button id="HarveyBall25" label="1/4" onAction="GenerateHarveyBall25" />
+          <button id="HarveyBall30" label="3/10" onAction="GenerateHarveyBall30" />
           <button id="HarveyBall33" label="1/3" onAction="GenerateHarveyBall33" />
+          <button id="HarveyBall40" label="4/10" onAction="GenerateHarveyBall40" />
           <button id="HarveyBall50" label="1/2" onAction="GenerateHarveyBall50" />
+          <button id="HarveyBall60" label="6/10" onAction="GenerateHarveyBall60" />
           <button id="HarveyBall67" label="2/3" onAction="GenerateHarveyBall67" />
+          <button id="HarveyBall70" label="7/10" onAction="GenerateHarveyBall70" />          
           <button id="HarveyBall75" label="3/4" onAction="GenerateHarveyBall75" />
-          <button id="HarveyBall100" label="1" onAction="GenerateHarveyBall100" />
-          </menu>
+          <button id="HarveyBall80" label="8/10" onAction="GenerateHarveyBall80" />         
+          <button id="HarveyBall90" label="9/10" onAction="GenerateHarveyBall90" />   
+          <button id="HarveyBall100" label="1" onAction="GenerateHarveyBall100" />      
+         </menu>
           <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false">
           <button id="cleaning1" label="Remove animations from all slides" imageMso="Clear" onAction="CleanUpRemoveAnimationsFromAllSlides" />
           <button id="cleaning2" label="Remove entry transitions from all slides" imageMso="Clear" onAction="CleanUpRemoveSlideShowTransitionsFromAllSlides" />
