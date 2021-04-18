@@ -25,6 +25,7 @@ Current features include:
 - Copy storyline to clipboard
 - Paste storyline in shape
 - Remove animations from all slides
+- Remove slide entry transitions from all slides
 - Remove speaker notes from all slides
 - Remove comments from all slides
 
