@@ -29,7 +29,7 @@ Current features include:
 - Remove speaker notes from all slides
 - Remove comments from all slides
 - Ticks and crosses
-- Harvey Balls (1/4, 1/3, 1/2, 2/3, 3/4, 1)
+- Harvey Balls
 
 All functions supported in Windows. The add in will work in OS X, but some features are currently limited.
 
