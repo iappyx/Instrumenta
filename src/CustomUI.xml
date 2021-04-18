@@ -5,7 +5,7 @@
       <tab id="IPToolbarV01" label="Instrumenta">
         <group id="FormattingFont" label="Font">
           <box id="FontBox1" boxStyle="horizontal">
-            <control idMso="Font" showLabel="false" />
+            <control idMso="Font" showLabel="false"/>
             <comboBox idMso="FontSize" showLabel="false" />
             <button idMso="FontSizeIncrease" showLabel="false" />
             <button idMso="FontSizeDecrease" showLabel="false" />
@@ -155,7 +155,12 @@
         <group id="AllGroup" label="Advanced">
           <button idMso="ReplaceDialog" showLabel="false" />
           <button idMso="AdvancedFileProperties" showLabel="false" />
-          <menu id="menu" label="All built-in commands" imageMso="HappyFace">
+          <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false">
+          <button id="cleaning1" label="Remove animations from all slides" imageMso="Clear" onAction="CleanUpRemoveAnimationsFromAllSlides" />
+          <button id="cleaning2" label="Remove speaker notes from all slides" imageMso="Clear" onAction="CleanUpRemoveSpeakerNotesFromAllSlides" />
+          <button id="cleaning3" label="Remove comments from all slides" imageMso="Clear" onAction="CleanUpRemoveCommentsFromAllSlides" />
+          </menu>
+          <menu id="menu" label="All built-in commands" showLabel="false" imageMso="HappyFace">
             <toggleButton idMso="AlignCenter" />
             <toggleButton idMso="AlignJustify" />
             <toggleButton idMso="AlignJustifyLow" />
