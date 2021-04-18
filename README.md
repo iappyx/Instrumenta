@@ -24,6 +24,9 @@ Current features include:
 - E-mail selected slides (as PDF or PPT)
 - Copy storyline to clipboard
 - Paste storyline in shape
+- Remove animations from all slides
+- Remove speaker notes from all slides
+- Remove comments from all slides
 
 All functions supported in Windows. The add in will work in OS X, but some features are currently limited.
 
