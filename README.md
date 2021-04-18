@@ -28,6 +28,7 @@ Current features include:
 - Remove slide entry transitions from all slides
 - Remove speaker notes from all slides
 - Remove comments from all slides
+- Ticks and crosses
 
 All functions supported in Windows. The add in will work in OS X, but some features are currently limited.
 
