@@ -13,6 +13,7 @@ Current features include:
 - Align, distribute and size shapes
 - Set same height and/or width for shapes
 - Size shapes to tallest, shortest, widest or narrowest
+- Select shape by fill and/or line color
 - Swap position of two shapes
 - Remove text from shape
 - Remove formatting
