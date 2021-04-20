@@ -14,6 +14,7 @@ Current features include:
 - Set same height and/or width for shapes
 - Size shapes to tallest, shortest, widest or narrowest
 - Select shape by fill and/or line color
+- Select shape by width and/or height
 - Swap position of two shapes
 - Remove text from shape
 - Remove formatting
