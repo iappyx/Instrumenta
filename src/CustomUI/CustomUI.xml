@@ -77,6 +77,9 @@
                   <button id="SelectShapesByFillColor" label="Select shapes with same fill color" onAction="ObjectsSelectBySameFillColor" />
                   <button id="SelectShapesByLineColor" label="Select shapes with same line color" onAction="ObjectsSelectBySameLineColor" />
                   <button id="SelectShapesByFillAndLineColor" label="Select shapes with same fill and line color" onAction="ObjectsSelectBySameFillAndLineColor" />
+                  <button id="SelectShapesBySameWidthAndHeight" label="Select shapes with same size" onAction="ObjectsSelectBySameWidthAndHeight" />
+                  <button id="SelectShapesBySameWidth" label="Select shapes with same width" onAction="ObjectsSelectBySameWidth" />
+                  <button id="SelectShapesBySameHeight" label="Select shapes with same height" onAction="ObjectsSelectBySameHeight" />
                </menu>
             </group>
             <group id="PictureGroup" label="Pictures">
