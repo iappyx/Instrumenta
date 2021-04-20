@@ -1,4 +1,154 @@
 Attribute VB_Name = "ModuleObjectsAlignAndDistribute"
+Sub ObjectsRemoveSpacingHorizontal()
+    
+    Set myDocument = Application.ActiveWindow
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByLeftPosition (SlideShape)
+    
+    For ShapeCount = 2 To UBound(SlideShape)
+        SlideShape(ShapeCount).Left = SlideShape(ShapeCount - 1).Left + SlideShape(ShapeCount - 1).Width
+    Next ShapeCount
+End Sub
+
+Sub ObjectsRemoveSpacingVertical()
+    
+    Set myDocument = Application.ActiveWindow
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByTopPosition (SlideShape)
+    
+    For ShapeCount = 2 To UBound(SlideShape)
+        SlideShape(ShapeCount).Top = SlideShape(ShapeCount - 1).Top + SlideShape(ShapeCount - 1).Height
+    Next ShapeCount
+End Sub
+
+Sub ObjectsIncreaseSpacingHorizontal()
+    
+    Set myDocument = Application.ActiveWindow
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByLeftPosition (SlideShape)
+    
+    For ShapeCount = 2 To UBound(SlideShape)
+        SlideShape(ShapeCount).Left = SlideShape(ShapeCount).Left + (ShapeCount - 1) * 0.2
+    Next ShapeCount
+End Sub
+
+Sub ObjectsDecreaseSpacingHorizontal()
+    
+    Set myDocument = Application.ActiveWindow
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByLeftPosition (SlideShape)
+    
+    For ShapeCount = 2 To UBound(SlideShape)
+        SlideShape(ShapeCount).Left = SlideShape(ShapeCount).Left - (ShapeCount - 1) * 0.2
+    Next ShapeCount
+End Sub
+
+Sub ObjectsIncreaseSpacingVertical()
+    
+    Set myDocument = Application.ActiveWindow
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByTopPosition (SlideShape)
+    
+    For ShapeCount = 2 To UBound(SlideShape)
+        SlideShape(ShapeCount).Top = SlideShape(ShapeCount).Top + (ShapeCount - 1) * 0.2
+    Next ShapeCount
+End Sub
+
+Sub ObjectsDecreaseSpacingVertical()
+    
+    Set myDocument = Application.ActiveWindow
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByTopPosition (SlideShape)
+    
+    For ShapeCount = 2 To UBound(SlideShape)
+        SlideShape(ShapeCount).Top = SlideShape(ShapeCount).Top - (ShapeCount - 1) * 0.2
+    Next ShapeCount
+End Sub
+
+Sub ObjectsSortByLeftPosition(Arrayin As Variant)
+    
+    Dim StopLoop    As Boolean
+    Dim ShapeCount  As Long
+    Dim SlideShapes As Shape
+    Do
+        StopLoop = False
+        For ShapeCount = LBound(Arrayin) To UBound(Arrayin) - 1
+            
+            If Arrayin(ShapeCount).Left > Arrayin(ShapeCount + 1).Left Then
+                Set SlideShapes = Arrayin(ShapeCount)
+                Set Arrayin(ShapeCount) = Arrayin(ShapeCount + 1)
+                Set Arrayin(ShapeCount + 1) = SlideShapes
+                StopLoop = True
+            End If
+        Next ShapeCount
+    Loop Until Not StopLoop
+    
+    Set SlideShapes = Nothing
+End Sub
+
+Sub ObjectsSortByTopPosition(Arrayin As Variant)
+    
+    Dim StopLoop    As Boolean
+    Dim ShapeCount  As Long
+    Dim SlideShapes As Shape
+    Do
+        StopLoop = False
+        For ShapeCount = LBound(Arrayin) To UBound(Arrayin) - 1
+            
+            If Arrayin(ShapeCount).Top > Arrayin(ShapeCount + 1).Top Then
+                Set SlideShapes = Arrayin(ShapeCount)
+                Set Arrayin(ShapeCount) = Arrayin(ShapeCount + 1)
+                Set Arrayin(ShapeCount + 1) = SlideShapes
+                StopLoop = True
+            End If
+        Next ShapeCount
+    Loop Until Not StopLoop
+    
+    Set SlideShapes = Nothing
+End Sub
+
 Sub ObjectsAlignLefts()
     Set myDocument = Application.ActiveWindow
     

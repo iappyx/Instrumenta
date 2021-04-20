@@ -31,6 +31,7 @@
                   <toggleButton idMso="AlignCenter" showLabel="false" />
                   <toggleButton idMso="AlignRight" showLabel="false" />
                   <toggleButton idMso="AlignJustify" showLabel="false" />
+                  <toggleButton id="ToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" />
                </buttonGroup>
                <buttonGroup id="buttonGroupBulletsAndNumbering">
                   <gallery idMso="BulletsGallery" showLabel="false" />
@@ -51,7 +52,6 @@
                <button id="ChangeSpellCheckLanguage" label="Set proofing language on all objects and all slides" imageMso="SetLanguage" showLabel="false" onAction="ShowChangeSpellCheckLanguageForm" />
             </group>
             <group id="FormattingGroup" label="Shapes">
-               <separator id="seperatorShapeFills" />
                <gallery idMso="ShapeFillColorPicker" showLabel="false" />
                <gallery idMso="ShapeStylesGallery" showLabel="false" />
                <gallery idMso="ShapeChangeShapeGallery" showLabel="false" />
@@ -81,6 +81,10 @@
                   <button id="SelectShapesBySameWidth" label="Select shapes with same width" onAction="ObjectsSelectBySameWidth" />
                   <button id="SelectShapesBySameHeight" label="Select shapes with same height" onAction="ObjectsSelectBySameHeight" />
                </menu>
+               <separator id="TextMargins" />
+               <button id="RemoveMargins" label="Remove margins" showLabel="false" imageMso="PageMarginsGallery" onAction="ObjectsMarginsToZero" />
+               <button id="IncreaseMargins" label="Increase margins" showLabel="false" imageMso="UpArrow2" onAction="ObjectsMarginsIncrease" />
+               <button id="DecreaseMargins" label="Decrease margins" showLabel="false" imageMso="DownArrow2" onAction="ObjectsMarginsDecrease" />
             </group>
             <group id="PictureGroup" label="Pictures">
                <toggleButton idMso="PictureCrop" showLabel="false" />
@@ -120,6 +124,13 @@
                   <button id="ObjectsSizeToWidest" imageMso="SizeToWidest" label="Size to widest" showLabel="false" onAction="ObjectsSizeToWidest" />
                   <button id="ObjectsSizeNarrowest" imageMso="SizeToNarrowest" label="Size to narrowest" showLabel="false" onAction="ObjectsSizeToNarrowest" />
                </box>
+               <separator id="separatorSpacing" />
+                  <button id="ObjectsRemoveSpaceHorizontal" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingHorizontal" />            
+                  <button id="ObjectsIncreaseSpacingHorizontal" imageMso="HorizontalSpacingIncrease" label="Increase horizontal gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingHorizontal" />
+                  <button id="ObjectsDecreaseSpacingHorizontal" imageMso="HorizontalSpacingDecrease" label="Decrease horizontal gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingHorizontal" />
+                  <button id="ObjectsRemoveSpaceVertical" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingVertical" />   
+                  <button id="ObjectsIncreaseSpacingVertical" imageMso="VerticalSpacingIncrease" label="Increase vertical gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingVertical" />
+                  <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />                                              
             </group>
             <group id="TableGroup" label="Table">
                <button idMso="TableInsert" showLabel="false" />
