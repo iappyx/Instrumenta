@@ -39,6 +39,8 @@ Sub EmailSelectedSlides()
         Next SlideLoop
         PresentationFilename = PresentationFilename & ")"
         
+        PresentationFilename = InputBox("Attachment file name:", "Send as e-mail", PresentationFilename)
+        
         'Remove slides that where not selected for export
         ThisPresentation.SaveCopyAs Environ("TEMP") & "\" & PresentationFilename & ".pptx"
         Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
@@ -112,6 +114,8 @@ Sub EmailSelectedSlidesAsPDF()
             End If
         Next SlideLoop
         PresentationFilename = PresentationFilename & ")"
+        
+        PresentationFilename = InputBox("Attachment file name:", "Send as e-mail", PresentationFilename)
         
         'Remove slides that where not selected for export
         ThisPresentation.SaveCopyAs Environ("TEMP") & "\" & PresentationFilename & ".pptx"
