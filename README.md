@@ -17,6 +17,7 @@ Current features include:
 - Remove, increase or decrease margins
 - Select shapes by fill and/or line color
 - Select shapes by width and/or height
+- Select shapes by type of shape
 - Swap position of two shapes
 - Remove text from shape
 - Remove formatting
