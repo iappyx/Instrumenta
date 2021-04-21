@@ -1,4 +1,33 @@
 Attribute VB_Name = "ModuleObjectsSelectBy"
+Sub ObjectsSelectBySameType()
+    
+    Set myDocument = Application.ActiveWindow
+    Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
+    Dim SelectedShapes() As String
+    Dim ShapeCount  As Long
+    ShapeCount = 1
+    
+    Set SlideShape = ActiveWindow.Selection.ShapeRange(1)
+    
+    ReDim Preserve SelectedShapes(0)
+    SelectedShapes(0) = SlideShape.Name
+    
+    For Each SlideShapeToCheck In myDocument.View.Slide.Shapes
+        
+        If (SlideShapeToCheck.AutoShapeType = SlideShape.AutoShapeType) Then
+            
+            If (SlideShapeToCheck.Name <> SlideShape.Name) Then
+                ReDim Preserve SelectedShapes(ShapeCount + 1)
+                SelectedShapes(ShapeCount) = SlideShapeToCheck.Name
+                ShapeCount = ShapeCount + 1
+            End If
+        End If
+        
+    Next SlideShapeToCheck
+    myDocument.View.Slide.Shapes.Range(SelectedShapes).Select
+    
+End Sub
+
 Sub ObjectsSelectBySameFillAndLineColor()
     
     Set myDocument = Application.ActiveWindow
