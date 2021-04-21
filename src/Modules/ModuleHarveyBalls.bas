@@ -1,9 +1,5 @@
 Attribute VB_Name = "ModuleHarveyBalls"
 Sub GenerateHarveyBallPercent(FillPercentage As Double)
-    #If Mac Then
-        MsgBox "This Function will Not yet work On a Mac"
-    #Else
-    
     Set myDocument = Application.ActiveWindow
 
         Dim HarveyCircle, HarveyFill As Shape
@@ -18,13 +14,13 @@ Sub GenerateHarveyBallPercent(FillPercentage As Double)
         End With
         With HarveyCircle
             .Line.Visible = False
+            .Fill.ForeColor.RGB = RGB(0, 0, 0)
         End With
         
         If FillPercentage > 0 Then
             HarveyFill.Adjustments(1) = HarveyFill.Adjustments(1) - 0.1
         End If
         
-        'Code below does not work on mac - needs fix
-        Call ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array(HarveyCircle.ZOrderPosition, HarveyFill.ZOrderPosition)).MergeShapes(msoMergeCombine)
-    #End If
+        ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array(HarveyCircle.ZOrderPosition, HarveyFill.ZOrderPosition)).Select
+        CommandBars.ExecuteMso ("ShapesCombine")
 End Sub
