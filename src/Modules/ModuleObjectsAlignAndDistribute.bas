@@ -49,7 +49,7 @@ Sub ObjectsIncreaseSpacingHorizontal()
     ObjectsSortByLeftPosition SlideShape
     
     For ShapeCount = 2 To UBound(SlideShape)
-        SlideShape(ShapeCount).Left = SlideShape(ShapeCount).Left + (ShapeCount - 1) * 0.2
+        SlideShape(ShapeCount).Left = SlideShape(ShapeCount).Left + (ShapeCount - 1) * 0.01 * 28.34646
     Next ShapeCount
 End Sub
 
@@ -67,7 +67,7 @@ Sub ObjectsDecreaseSpacingHorizontal()
     ObjectsSortByLeftPosition SlideShape
     
     For ShapeCount = 2 To UBound(SlideShape)
-        SlideShape(ShapeCount).Left = SlideShape(ShapeCount).Left - (ShapeCount - 1) * 0.2
+        SlideShape(ShapeCount).Left = SlideShape(ShapeCount).Left - (ShapeCount - 1) * 0.01 * 28.34646
     Next ShapeCount
 End Sub
 
@@ -85,7 +85,7 @@ Sub ObjectsIncreaseSpacingVertical()
     ObjectsSortByTopPosition SlideShape
     
     For ShapeCount = 2 To UBound(SlideShape)
-        SlideShape(ShapeCount).Top = SlideShape(ShapeCount).Top + (ShapeCount - 1) * 0.2
+        SlideShape(ShapeCount).Top = SlideShape(ShapeCount).Top + (ShapeCount - 1) * 0.01 * 28.34646
     Next ShapeCount
 End Sub
 
@@ -103,7 +103,7 @@ Sub ObjectsDecreaseSpacingVertical()
     ObjectsSortByTopPosition SlideShape
     
     For ShapeCount = 2 To UBound(SlideShape)
-        SlideShape(ShapeCount).Top = SlideShape(ShapeCount).Top - (ShapeCount - 1) * 0.2
+        SlideShape(ShapeCount).Top = SlideShape(ShapeCount).Top - (ShapeCount - 1) * 0.01 * 28.34646
     Next ShapeCount
 End Sub
 
