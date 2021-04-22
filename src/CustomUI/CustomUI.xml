@@ -160,6 +160,10 @@
                <toggleButton idMso="TableCellAlignBottom" showLabel="false" />
                <toggleButton idMso="TableCellAlignCenterVertically" showLabel="false" />
                <toggleButton idMso="TableCellAlignTop" showLabel="false" />
+               <separator id="TableMargins" />
+               <button id="TableRemoveMargins" label="Remove margins of selected table or selected cells" showLabel="false" imageMso="PageMarginsGallery" onAction="TablesMarginsToZero" />
+               <button id="TableIncreaseMargins" label="Increase margins of selected table or selected cells" showLabel="false" imageMso="UpArrow2" onAction="TablesMarginsIncrease" />
+               <button id="TableDecreaseMargins" label="Decrease margins of selected table or selected cells" showLabel="false" imageMso="DownArrow2" onAction="TablesMarginsDecrease" />
             </group>
             <group id="ExportGroup" label="Export">
                <button id="EmailSelectedSlidesButton" label="E-mail selected slides" imageMso="MailMergeStartEmail" showLabel="false" onAction="EmailSelectedSlides" />
