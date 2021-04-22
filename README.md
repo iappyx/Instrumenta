@@ -23,6 +23,7 @@ Current features include:
 - Remove formatting
 - Swap text
 - Match rounded corners of shapes
+- March shapetype and all adjustments of shapes
 - Replace fonts
 - Set proofing language for all slides
 - Format table
