@@ -143,6 +143,7 @@
                <button idMso="TableInsertRowsBelow" showLabel="false" />
                <button idMso="TableRowsDistribute" showLabel="false" />
                <button idMso="TableColumnsDistribute" showLabel="false" />
+               <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" /> 
                <separator id="separator7" />
                <toggleButton idMso="BorderBottom" showLabel="false" />
                <toggleButton idMso="BorderDiagonalDown" showLabel="false" />
