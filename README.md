@@ -22,8 +22,8 @@ Current features include:
 - Remove text from shape
 - Remove formatting
 - Swap text
-- Match rounded corners of shapes
-- March shapetype and all adjustments of shapes
+- Copy rounded corners of shapes to selected shapes
+- Copy shapetype and all adjustments of shapes to selected shapes
 - Replace fonts
 - Set proofing language for all slides
 - Format table
