@@ -14,7 +14,8 @@ Current features include:
 - Set same height and/or width for shapes
 - Size shapes to tallest, shortest, widest or narrowest
 - Remove, increase or decrease horizontal/vertical gap between shapes
-- Remove, increase or decrease margins
+- Remove, increase or decrease margins for shapes
+- Remove, increase or decrease margins for tables or selected cells
 - Select shapes by fill and/or line color
 - Select shapes by width and/or height
 - Select shapes by type of shape
