@@ -72,7 +72,8 @@
                <control idMso="ShapeWidth" showLabel="false" />
                <control idMso="ShapeHeight" showLabel="false" />
                <control idMso="FormatPainter" showLabel="false" />
-               <button id="ObjectsCopyRoundedCordner" label="Copy rounded corner of first selected shape to all selected shapes" showLabel="false" imageMso="ShapeRoundedRectangle" onAction="ObjectsCopyRoundedCorner" />
+               <button id="ObjectsCopyRoundedCorner" label="Copy rounded corner of first selected shape to selected shapes" showLabel="false" imageMso="ShapeRoundedRectangle" onAction="ObjectsCopyRoundedCorner" />
+               <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="GroupShapes" onAction="ObjectsCopyShapeTypeAndAdjustments" />         
                <toggleButton idMso="ObjectEditPoints" showLabel="false" />
                <menu id="SelectShapeByMenu" label="Select shape by attributes" imageMso="SelectionPane" showLabel="false">
                   <button id="SelectShapesByFillColor" label="Select shapes with same fill color" onAction="ObjectsSelectBySameFillColor" />
