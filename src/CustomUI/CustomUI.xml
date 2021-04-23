@@ -133,7 +133,10 @@
                   <button id="ObjectsDecreaseSpacingHorizontal" imageMso="HorizontalSpacingDecrease" label="Decrease horizontal gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingHorizontal" />
                   <button id="ObjectsRemoveSpaceVertical" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingVertical" />   
                   <button id="ObjectsIncreaseSpacingVertical" imageMso="VerticalSpacingIncrease" label="Increase vertical gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingVertical" />
-                  <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />                                              
+                  <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />   
+               <separator id="separatorTableAlign" />
+                  <button id="ObjectsAlignToTableColumn" imageMso="SpeakByColumns" label="Center align shapes to columns of a table" showLabel="false" onAction="ObjectsAlignToTableColumn" />            
+                  <button id="ObjectsAlignToTableRow" imageMso="SpeakByRows" label="Center align shapes to rows of a table" showLabel="false" onAction="ObjectsAlignToTableRow" />                                           
             </group>
             <group id="TableGroup" label="Table">
                <button idMso="TableInsert" showLabel="false" />
