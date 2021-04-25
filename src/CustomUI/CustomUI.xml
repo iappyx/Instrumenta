@@ -47,7 +47,8 @@
                </buttonGroup>
                <separator id="separator6" />
                <button id="RemoveTextButton" label="Remove text" imageMso="OmsDelete" showLabel="false" onAction="ObjectsRemoveText" />
-               <button id="SwapTextButton" label="Swap text" imageMso="PrintPreviewZoomTwoPages" showLabel="false" onAction="ObjectsSwapText" />
+               <button id="SwapTextButton" label="Swap text (no formatting)" imageMso="PrintPreviewZoomTwoPages" showLabel="false" onAction="ObjectsSwapTextNoFormatting" />
+               <button id="SwapTextButton2" label="Swap text (with formatting)" imageMso="Thesaurus" showLabel="false" onAction="ObjectsSwapText" />                             
                <button idMso="FontsReplaceFonts" showLabel="false" />
                <button id="ChangeSpellCheckLanguage" label="Set proofing language on all objects and all slides" imageMso="SetLanguage" showLabel="false" onAction="ShowChangeSpellCheckLanguageForm" />
                <button idMso="PasteTextOnly" showLabel="false" />

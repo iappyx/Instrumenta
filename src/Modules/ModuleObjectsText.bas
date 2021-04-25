@@ -26,13 +26,35 @@ Sub ObjectsRemoveText()
     myDocument.Selection.ShapeRange.TextFrame.TextRange.Text = ""
 End Sub
 
-Sub ObjectsSwapText()
+Sub ObjectsSwapTextNoFormatting()
+
     Dim text1, text2 As String
     Set myDocument = Application.ActiveWindow
     text1 = myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text
     text2 = myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text
     myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text = text2
     myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text = text1
+
+End Sub
+
+Sub ObjectsSwapText()
+
+    Set myDocument = Application.ActiveWindow
+    Dim SlidePlaceHolder As PowerPoint.Shape
+        
+    Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
+    
+    myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Cut
+    SlidePlaceHolder.TextFrame.TextRange.Paste
+    
+    myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Cut
+    myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Paste
+    
+    SlidePlaceHolder.TextFrame.TextRange.Cut
+    myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Paste
+       
+    SlidePlaceHolder.Delete
+
 End Sub
 
 Sub ObjectsMarginsToZero()
