@@ -200,6 +200,19 @@
                   <button id="HarveyBall90" label="9/10" onAction="GenerateHarveyBall90" />
                   <button id="HarveyBall100" label="1" onAction="GenerateHarveyBall100" />
                </menu>
+               <menu id="FivePointStarMenu" label="Star rating" imageMso="StarRatedFull" showLabel="false">
+                  <button id="FivePointStar05" label="0.5 star" onAction="GenerateFivePointStars05" />
+                  <button id="FivePointStar10" label="1 star" onAction="GenerateFivePointStars10" />
+                  <button id="FivePointStar15" label="1.5 star" onAction="GenerateFivePointStars15" />
+                  <button id="FivePointStar20" label="2 star" onAction="GenerateFivePointStars20" />
+                  <button id="FivePointStar25" label="2.5 star" onAction="GenerateFivePointStars25" />
+                  <button id="FivePointStar30" label="3 star" onAction="GenerateFivePointStars30" />
+                  <button id="FivePointStar35" label="3.5 star" onAction="GenerateFivePointStars35" />
+                  <button id="FivePointStar40" label="4 star" onAction="GenerateFivePointStars40" />
+                  <button id="FivePointStar45" label="4.5 star" onAction="GenerateFivePointStars45" />
+                  <button id="FivePointStar50" label="5 star" onAction="GenerateFivePointStars50" />
+               </menu>                  
+               
             </group>
             <group id="AllGroup" label="Advanced">
                <button idMso="ReplaceDialog" showLabel="false" />

@@ -76,3 +76,43 @@ End Sub
 Sub GenerateHarveyBall90()
     GenerateHarveyBallPercent (90)
 End Sub
+
+Sub GenerateFivePointStars05()
+GenerateFivePointStars (0.5)
+End Sub
+
+Sub GenerateFivePointStars10()
+GenerateFivePointStars (1)
+End Sub
+
+Sub GenerateFivePointStars15()
+GenerateFivePointStars (1.5)
+End Sub
+
+Sub GenerateFivePointStars20()
+GenerateFivePointStars (2)
+End Sub
+
+Sub GenerateFivePointStars25()
+GenerateFivePointStars (2.5)
+End Sub
+
+Sub GenerateFivePointStars30()
+GenerateFivePointStars (3)
+End Sub
+
+Sub GenerateFivePointStars35()
+GenerateFivePointStars (3.5)
+End Sub
+
+Sub GenerateFivePointStars40()
+GenerateFivePointStars (4)
+End Sub
+
+Sub GenerateFivePointStars45()
+GenerateFivePointStars (4.5)
+End Sub
+
+Sub GenerateFivePointStars50()
+GenerateFivePointStars (5)
+End Sub
