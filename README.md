@@ -40,6 +40,7 @@ Current features include:
 - Remove comments from all slides
 - Ticks and crosses
 - Harvey Balls
+- Five star ratings
 
 # Platform support
 All functions supported in Windows. 
