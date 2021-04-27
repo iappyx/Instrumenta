@@ -40,6 +40,9 @@ Current features include:
 - Ticks and crosses
 - Harvey Balls
 - Traffic lights (RAG status)
+- Sticky notes
+- Move sticky notes on and off sldie
+- Delete sticky notes
 
 # Platform support
 All functions supported in Windows. 
