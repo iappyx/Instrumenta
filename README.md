@@ -23,8 +23,7 @@ Current features include:
 - Swap position of two shapes
 - Remove text from shape
 - Remove formatting
-- Swap text (incl. formatting)
-- Swap text (excl. formatting)
+- Swap text
 - Convert table to shapes
 - Copy rounded corners of shapes to selected shapes
 - Copy shapetype and all adjustments of shapes to selected shapes
@@ -40,7 +39,6 @@ Current features include:
 - Remove comments from all slides
 - Ticks and crosses
 - Harvey Balls
-- Five star ratings
 
 # Platform support
 All functions supported in Windows. 
@@ -54,9 +52,7 @@ I am happy to receive feature requests and code contributions! Let's make the be
 
 # How to install 
 
-You can save the add-in to your computer and then install the add-in by adding it to the Available Add-Ins list.
-
-On Windows:
+You can save the add-in to your computer and then install the add-in by adding it to the Available Add-Ins list:
 - Download the add-in file (https://github.com/iappyx/Instrumenta/raw/main/Instrumenta%20Powerpoint%20Toolbar.ppam) and save it in a fixed location 
 - Open Powerpoint, click the File tab, and then click Options
 - In the Options dialog box, click Add-Ins.
@@ -64,14 +60,6 @@ On Windows:
 - In the Add-Ins dialog box, click Add New.
 - In the Add New PowerPoint Add-In dialog box, browse for the add-in file, and then click OK.
 - A security notice appears. Click Enable Macros, and then click Close.
-- There now should be an "Instrumenta" page in the Powerpoint ribbon
-
-On Mac:
-- Download the add-in file (https://github.com/iappyx/Instrumenta/raw/main/Instrumenta%20Powerpoint%20Toolbar.ppam) and save it in a fixed location 
-- Open Powerpoint, click Extra, and then click Add-ins
-- Click the + button and locate the add in file
-- Click Ok
-- A security notice may appear. Click Enable Macros, and then click Close.
 - There now should be an "Instrumenta" page in the Powerpoint ribbon
 
 (Instructions based on https://support.microsoft.com/en-us/office/add-or-load-a-powerpoint-add-in-3de8bbc2-2481-457a-8841-7334cd5b455f)

@@ -116,3 +116,17 @@ End Sub
 Sub GenerateFivePointStars50()
 GenerateFivePointStars (5)
 End Sub
+
+
+Sub GenerateRAGStatusRed()
+GenerateRAGStatus ("red")
+End Sub
+
+Sub GenerateRAGStatusAmber()
+GenerateRAGStatus ("amber")
+End Sub
+
+Sub GenerateRAGStatusGreen()
+GenerateRAGStatus ("green")
+End Sub
+
