@@ -39,6 +39,7 @@ Current features include:
 - Remove comments from all slides
 - Ticks and crosses
 - Harvey Balls
+- Traffic lights (RAG status)
 
 # Platform support
 All functions supported in Windows. 
