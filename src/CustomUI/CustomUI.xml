@@ -5,7 +5,7 @@
          <tab id="InstrumentaPowerpointToolbar" label="Instrumenta">
             <group id="FormattingFont" label="Font">
                <box id="FontBox1" boxStyle="horizontal">
-                  <control idMso="Font" showLabel="false" />
+                  <control idMso="Font"/>
                   <comboBox idMso="FontSize" showLabel="false" />
                   <button idMso="FontSizeIncrease" showLabel="false" />
                   <button idMso="FontSizeDecrease" showLabel="false" />
@@ -217,8 +217,14 @@
                   <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" />
                   <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" />
                </menu>                 
-               
-               
+             <splitButton id="NoteSplitButton" size="normal" showLabel="false"> 
+            <button id="NewNoteButton" label="Note" imageMso="NewNote" onAction="GenerateStickyNote" /> 
+            <menu id="NoteMenu" itemSize="normal" > 
+              <button id="NotesMoveOffSlide" label="Move notes off slide" onAction="MoveStickyNotesOffSlide" /> 
+              <button id="NotesMoveOnSlide" label="Move notes on slide" onAction="MoveStickyNotesOnSlide" />
+              <button id="DeleteNotesOnSlide" label="Delete notes on slide" onAction="DeleteStickyNotesOnSlide" /> 
+            </menu> 
+          </splitButton>
             </group>
             <group id="AllGroup" label="Advanced">
                <button idMso="ReplaceDialog" showLabel="false" />
@@ -949,6 +955,7 @@
                   <button idMso="ZoomDialog" />
                   <button idMso="ZoomFitToWindow" />
                </menu>
+                <toggleButton idMso="SelectionPane" showLabel="false" />
                <button id="ShowAboutDialogButton" label="Show about dialog" showLabel="false" imageMso="Help" onAction="ShowAboutDialog" />
             </group>
          </tab>
