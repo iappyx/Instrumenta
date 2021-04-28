@@ -41,7 +41,7 @@ Current features include:
 - Harvey Balls
 - Traffic lights (RAG status)
 - Sticky notes
-- Move sticky notes on and off sldie
+- Move sticky notes on and off slide
 - Delete sticky notes
 
 # Platform support
