@@ -42,7 +42,7 @@ Current features include:
 - Traffic lights (RAG status)
 - Sticky notes
 - Move sticky notes on and off this slide / all slides
-- Remove sticky notes from this slide / on all slides
+- Remove sticky notes from this slide / all slides
 
 # Platform support
 All functions supported in Windows. 
