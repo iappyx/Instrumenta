@@ -81,3 +81,57 @@ Sub DeleteStickyNotesOnSlide()
         
     Next
 End Sub
+
+Sub DeleteStickyNotesOnAllSlides()
+    Dim PresentationSlide As Slide
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+    For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        
+        If InStr(1, PresentationSlide.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
+            PresentationSlide.Shapes(shapeNumber).Delete
+        End If
+        
+    Next
+    
+    Next
+        
+End Sub
+
+
+Sub MoveStickyNotesOnAllSlides()
+    Dim PresentationSlide As Slide
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+    For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        
+        If InStr(1, PresentationSlide.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
+            PresentationSlide.Shapes(shapeNumber).Top = 5
+        End If
+        
+    Next
+    
+    Next
+ 
+End Sub
+
+
+Sub MoveStickyNotesOffAllSlides()
+    Dim PresentationSlide As Slide
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+    For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        
+        If InStr(1, PresentationSlide.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
+            PresentationSlide.Shapes(shapeNumber).Top = -5 - PresentationSlide.Shapes(shapeNumber).Height
+        End If
+        
+    Next
+    
+    Next
+ 
+End Sub
+

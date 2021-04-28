@@ -220,9 +220,13 @@
              <splitButton id="NoteSplitButton" size="normal" showLabel="false"> 
             <button id="NewNoteButton" label="Note" imageMso="NewNote" onAction="GenerateStickyNote" /> 
             <menu id="NoteMenu" itemSize="normal" > 
-              <button id="NotesMoveOffSlide" label="Move notes off slide" onAction="MoveStickyNotesOffSlide" /> 
-              <button id="NotesMoveOnSlide" label="Move notes on slide" onAction="MoveStickyNotesOnSlide" />
-              <button id="DeleteNotesOnSlide" label="Delete notes on slide" onAction="DeleteStickyNotesOnSlide" /> 
+              <button id="NotesMoveOffSlide" label="Move notes off this slide" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffSlide" /> 
+              <button id="NotesMoveOnSlide" label="Move notes on this slide" imageMso="OutlineMoveDown" onAction="MoveStickyNotesOnSlide" />
+              <button id="DeleteNotesOnSlide" label="Delete notes on this slide"  imageMso="Delete" onAction="DeleteStickyNotesOnSlide" />
+              <menuSeparator id="separatorNotesAllSlides" /> 
+              <button id="NotesMoveOffAllSlides" label="Move notes off all slides" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffAllSlides" /> 
+              <button id="NotesMoveOnAllSlides" label="Move notes on all slides" imageMso="OutlineMoveDown" onAction="MoveStickyNotesOnAllSlides" />
+              <button id="DeleteNotesOnAllSlides" label="Delete notes on all slides" imageMso="Delete" onAction="DeleteStickyNotesOnAllSlides" /> 
             </menu> 
           </splitButton>
             </group>
