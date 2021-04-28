@@ -43,6 +43,7 @@ Current features include:
 - Sticky notes
 - Move sticky notes on and off this slide / all slides
 - Remove sticky notes from this slide / all slides
+- Convert comments to sticky notes
 
 # Platform support
 All functions supported in Windows. 
