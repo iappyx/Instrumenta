@@ -1,4 +1,26 @@
 Attribute VB_Name = "ModuleRAGStatus"
+'MIT License
+
+'Copyright (c) 2021 iappyx
+
+'Permission is hereby granted, free of charge, to any person obtaining a copy
+'of this software and associated documentation files (the "Software"), to deal
+'in the Software without restriction, including without limitation the rights
+'to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+'copies of the Software, and to permit persons to whom the Software is
+'furnished to do so, subject to the following conditions:
+
+'The above copyright notice and this permission notice shall be included in all
+'copies or substantial portions of the Software.
+
+'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+'IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+'FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+'AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+'LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+'SOFTWARE.
+
 Sub GenerateRAGStatus(RagStatus As String)
     
     Set myDocument = Application.ActiveWindow
@@ -18,7 +40,7 @@ Sub GenerateRAGStatus(RagStatus As String)
         With GreenStatus
             .Line.Visible = False
             
-            If RagStatus = "green" Then
+            If LCase(RagStatus) = "green" Then
             .Fill.ForeColor.RGB = RGB(0, 176, 80)
             Else
             .Fill.ForeColor.RGB = RGB(59, 56, 56)
@@ -32,7 +54,7 @@ Sub GenerateRAGStatus(RagStatus As String)
         With AmberStatus
             .Line.Visible = False
 
-            If RagStatus = "amber" Then
+            If LCase(RagStatus) = "amber" Then
             .Fill.ForeColor.RGB = RGB(255, 192, 0)
             Else
             .Fill.ForeColor.RGB = RGB(59, 56, 56)
@@ -46,7 +68,7 @@ Sub GenerateRAGStatus(RagStatus As String)
         With RedStatus
             .Line.Visible = False
             
-            If RagStatus = "red" Then
+            If LCase(RagStatus) = "red" Then
             .Fill.ForeColor.RGB = RGB(192, 0, 0)
             Else
             .Fill.ForeColor.RGB = RGB(59, 56, 56)

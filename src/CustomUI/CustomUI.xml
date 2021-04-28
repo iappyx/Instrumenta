@@ -220,7 +220,8 @@
                   <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" />
                   <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" />
                </menu>
-                                
+                </box>
+               <box id="PasteGroupBox3" boxStyle="horizontal">                                
              <splitButton id="NoteSplitButton" size="normal" showLabel="false"> 
             <button id="NewNoteButton" label="Note" imageMso="NewNote" onAction="GenerateStickyNote" /> 
             <menu id="NoteMenu" itemSize="normal" > 
@@ -235,6 +236,15 @@
               <button id="ConvertCommentsToStickyNotes" label="Convert comments on this slide to notes" imageMso="ReviewShowAllComments" onAction="ConvertCommentsToStickyNotes" /> 
             </menu> 
           </splitButton>
+            <splitButton id="StepsCounterSplitButton" size="normal" showLabel="false"> 
+            <button id="NewStepsCounterButton" label="Steps counter" imageMso="_1" onAction="GenerateStepsCounter" /> 
+            <menu id="StepCounterMenu" itemSize="normal" > 
+              <button id="NewCrossSlideStepsCounterButton" label="Add cross-slide steps counter" onAction="GenerateCrossSlideStepsCounter" /> 
+              <menuSeparator id="separatorStepsCounterSelect" />
+              <button id="SelectAllStepsCounter" label="Select all step counters on this slide"  onAction="SelectAllStepsCounter" />
+              <button id="SelectAllCrossSlideStepsCounter" label="Select all cross-slide step counters on this slide"  onAction="SelectAllCrossSlideStepsCounter" />
+            </menu> 
+          </splitButton>            
                </box>   
             </group>
             <group id="AllGroup" label="Advanced">
