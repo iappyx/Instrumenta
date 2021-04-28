@@ -180,10 +180,13 @@
                <button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
             </group>
             <group id="PasteGroup" label="Paste and insert">
+               <box id="PasteGroupBox1" boxStyle="horizontal"> 
                <button idMso="PasteJpeg" showLabel="false" />
                <button idMso="PastePng" showLabel="false" />
                <button idMso="ScreenClipping" showLabel="false" />
                <button idMso="DateAndTimeInsert" showLabel="false" />
+               </box>
+               <box id="PasteGroupBox2" boxStyle="horizontal"> 
                <menu id="HarveyBallsMenu" label="Harvey Balls" imageMso="Drawing1GalleryContrast" showLabel="false">
                   <button id="HarveyBall10" label="1/10" onAction="GenerateHarveyBall10" />
                   <button id="HarveyBall20" label="2/10" onAction="GenerateHarveyBall20" />
@@ -216,7 +219,8 @@
                   <button id="RAGStatusRed" label="Red" onAction="GenerateRAGStatusRed" />
                   <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" />
                   <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" />
-               </menu>                 
+               </menu>
+                                
              <splitButton id="NoteSplitButton" size="normal" showLabel="false"> 
             <button id="NewNoteButton" label="Note" imageMso="NewNote" onAction="GenerateStickyNote" /> 
             <menu id="NoteMenu" itemSize="normal" > 
@@ -227,8 +231,11 @@
               <button id="NotesMoveOffAllSlides" label="Move notes off all slides" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffAllSlides" /> 
               <button id="NotesMoveOnAllSlides" label="Move notes on all slides" imageMso="OutlineMoveDown" onAction="MoveStickyNotesOnAllSlides" />
               <button id="DeleteNotesOnAllSlides" label="Delete notes on all slides" imageMso="Delete" onAction="DeleteStickyNotesOnAllSlides" /> 
+              <menuSeparator id="separatorCommentsConversion" /> 
+              <button id="ConvertCommentsToStickyNotes" label="Convert comments on this slide to notes" imageMso="ReviewShowAllComments" onAction="ConvertCommentsToStickyNotes" /> 
             </menu> 
           </splitButton>
+               </box>   
             </group>
             <group id="AllGroup" label="Advanced">
                <button idMso="ReplaceDialog" showLabel="false" />

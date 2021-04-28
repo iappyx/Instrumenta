@@ -45,7 +45,6 @@ Sub EmailSelectedSlides()
         ThisPresentation.SaveCopyAs Environ("TEMP") & "\" & PresentationFilename & ".pptx"
         Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
         For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
-            Debug.Print TemporaryPresentation.Slides(SlideLoop).Tags("EXPORT")
             If TemporaryPresentation.Slides(SlideLoop).Tags("EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
         TemporaryPresentation.Save
@@ -69,8 +68,18 @@ Sub EmailSelectedSlides()
             .Body = ""
             .Attachments.Add Environ("TEMP") & "\" & PresentationFilename & ".pptx"
             .Display
-            
         End With
+        
+        On Error GoTo 0
+        
+        'Clean temporary slides
+        Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
+        For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
+            TemporaryPresentation.Slides(SlideLoop).Delete
+        Next SlideLoop
+        TemporaryPresentation.Save
+        TemporaryPresentation.Close
+        
     #End If
     
 End Sub
@@ -121,12 +130,11 @@ Sub EmailSelectedSlidesAsPDF()
         ThisPresentation.SaveCopyAs Environ("TEMP") & "\" & PresentationFilename & ".pptx"
         Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
         For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
-            Debug.Print TemporaryPresentation.Slides(SlideLoop).Tags("EXPORT")
             If TemporaryPresentation.Slides(SlideLoop).Tags("EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
-        TemporaryPresentation.Save
         
         ActivePresentation.ExportAsFixedFormat Environ("TEMP") & "\" & PresentationFilename & ".pdf", ppFixedFormatTypePDF, ppFixedFormatIntentPrint
+        
         TemporaryPresentation.Close
         
         On Error Resume Next
@@ -144,8 +152,22 @@ Sub EmailSelectedSlidesAsPDF()
             .Body = ""
             .Attachments.Add Environ("TEMP") & "\" & PresentationFilename & ".pdf"
             .Display
-            
         End With
+        
+        On Error GoTo 0
+        
+        'Clean temporary slides and PDF
+        Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
+        For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
+            TemporaryPresentation.Slides(SlideLoop).Delete
+        Next SlideLoop
+        
+        Dim EmptySlide As Slide
+        Set EmptySlide = TemporaryPresentation.Slides.Add(Index:=1, Layout:=ppLayoutTitle)
+        ActivePresentation.ExportAsFixedFormat Environ("TEMP") & "\" & PresentationFilename & ".pdf", ppFixedFormatTypePDF, ppFixedFormatIntentPrint
+        TemporaryPresentation.Save
+        TemporaryPresentation.Close
+        
     #End If
     
 End Sub
