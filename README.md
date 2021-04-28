@@ -54,6 +54,8 @@ The add in will work in OS X, with some minor issues:
 # Feature requests and contributions
 I am happy to receive feature requests and code contributions! Let's make the best toolbar together. For feature requests please create new issue and label it as an enhancement (https://github.com/iappyx/Instrumenta/issues/new/choose). If you want to contribute, please make sure that the code can be freely used as open source code.
 
+If you like this plugin, please let me and the community know how you are using this in your daily work: https://github.com/iappyx/Instrumenta/discussions/new
+
 # How to install 
 
 You can save the add-in to your computer and then install the add-in by adding it to the Available Add-Ins list:
