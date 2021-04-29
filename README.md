@@ -1,3 +1,5 @@
+
+![Alt text](img/logo-instrumenta-small.png?raw=true "Instrumenta Powerpoint Toolbar")
 # Instrumenta Powerpoint Toolbar
 
 Many strategy consultancy firms have proprietary Powerpoint add-ins that provide access to often used tools and features that help to quickly fine tune a powerpoint presentation. After spending 10 years in strategy consulting and joining 'the industry' myself, I was looking for an alternative for the add-ins I was used to. Although lots of commercial options are available I could not find a free and open source alternative. 
