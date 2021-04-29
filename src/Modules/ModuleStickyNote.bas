@@ -141,8 +141,31 @@ Sub MoveStickyNotesOffSlide()
             myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags.Add "OLDPOSITIONTOP", CStr(myDocument.Selection.SlideRange.Shapes(shapeNumber).Top)
             myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags.Add "OLDPOSITIONLEFT", CStr(myDocument.Selection.SlideRange.Shapes(shapeNumber).Left)
             
-            myDocument.Selection.SlideRange.Shapes(shapeNumber).Top = -5 - myDocument.Selection.SlideRange.Shapes(shapeNumber).Height
-        End If
+            
+            With myDocument.Selection.SlideRange.Shapes(shapeNumber)
+            ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .Left - .Width)
+            ShapeBottom = (Application.ActivePresentation.PageSetup.SlideHeight - .Top - .Height)
+                             
+            If .Left <= ShapeRight And .Left <= .Top And .Left <= ShapeBottom Then
+            
+            .Left = -5 - .Width
+            
+            ElseIf .Top <= ShapeRight And .Top <= ShapeBottom And .Top <= .Left Then
+            
+            .Top = -5 - .Height
+            
+            ElseIf ShapeRight <= ShapeBottom And ShapeRight <= .Left And ShapeRight <= .Top Then
+            
+            .Left = 5 + Application.ActivePresentation.PageSetup.SlideWidth
+            
+            Else
+            
+            .Top = 5 + Application.ActivePresentation.PageSetup.SlideHeight
+            
+            End If
+            
+            End With
+            End If
         
     Next
     
@@ -152,13 +175,13 @@ Sub MoveStickyNotesOnSlide()
     Set myDocument = Application.ActiveWindow
     
     For shapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
-        
+        On Error Resume Next
         If InStr(1, myDocument.Selection.SlideRange.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
             myDocument.Selection.SlideRange.Shapes(shapeNumber).Top = CLng(myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags("OLDPOSITIONTOP"))
             myDocument.Selection.SlideRange.Shapes(shapeNumber).Left = CLng(myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags("OLDPOSITIONLEFT"))
             
         End If
-        
+        On Error GoTo 0
     Next
     
 End Sub
@@ -198,12 +221,12 @@ Sub MoveStickyNotesOnAllSlides()
     For Each PresentationSlide In ActivePresentation.Slides
         
         For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
-            
+            On Error Resume Next
             If InStr(1, PresentationSlide.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
             PresentationSlide.Shapes(shapeNumber).Top = CLng(PresentationSlide.Shapes(shapeNumber).Tags("OLDPOSITIONTOP"))
             PresentationSlide.Shapes(shapeNumber).Left = CLng(PresentationSlide.Shapes(shapeNumber).Tags("OLDPOSITIONLEFT"))
             End If
-            
+            On Error GoTo 0
         Next
         
     Next
@@ -221,8 +244,32 @@ Sub MoveStickyNotesOffAllSlides()
                 
             PresentationSlide.Shapes(shapeNumber).Tags.Add "OLDPOSITIONTOP", CStr(PresentationSlide.Shapes(shapeNumber).Top)
             PresentationSlide.Shapes(shapeNumber).Tags.Add "OLDPOSITIONLEFT", CStr(PresentationSlide.Shapes(shapeNumber).Left)
-                
-                PresentationSlide.Shapes(shapeNumber).Top = -5 - PresentationSlide.Shapes(shapeNumber).Height
+            
+            
+            With PresentationSlide.Shapes(shapeNumber)
+            ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .Left - .Width)
+            ShapeBottom = (Application.ActivePresentation.PageSetup.SlideHeight - .Top - .Height)
+                             
+            If .Left <= ShapeRight And .Left <= .Top And .Left <= ShapeBottom Then
+            
+            .Left = -5 - .Width
+            
+            ElseIf .Top <= ShapeRight And .Top <= ShapeBottom And .Top <= .Left Then
+            
+            .Top = -5 - .Height
+            
+            ElseIf ShapeRight <= ShapeBottom And ShapeRight <= .Left And ShapeRight <= .Top Then
+            
+            .Left = 5 + Application.ActivePresentation.PageSetup.SlideWidth
+            
+            Else
+            
+            .Top = 5 + Application.ActivePresentation.PageSetup.SlideHeight
+            
+            End If
+            
+            End With
+            
             End If
             
         Next
