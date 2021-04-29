@@ -21,9 +21,10 @@ Attribute VB_Name = "ModuleRAGStatus"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
-Sub GenerateRAGStatus(RagStatus As String)
+Sub GenerateRAGStatus(RAGColor As String)
     
     Set myDocument = Application.ActiveWindow
+    Dim RAGStatus As Object
     RandomNumber = Round(Rnd() * 1000000, 0)
     
         Set RAGBackground = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRoundedRectangle, 100, 100, 94, 34)
@@ -40,7 +41,7 @@ Sub GenerateRAGStatus(RagStatus As String)
         With GreenStatus
             .Line.Visible = False
             
-            If LCase(RagStatus) = "green" Then
+            If LCase(RAGColor) = "green" Then
             .Fill.ForeColor.RGB = RGB(0, 176, 80)
             Else
             .Fill.ForeColor.RGB = RGB(59, 56, 56)
@@ -54,7 +55,7 @@ Sub GenerateRAGStatus(RagStatus As String)
         With AmberStatus
             .Line.Visible = False
 
-            If LCase(RagStatus) = "amber" Then
+            If LCase(RAGColor) = "amber" Then
             .Fill.ForeColor.RGB = RGB(255, 192, 0)
             Else
             .Fill.ForeColor.RGB = RGB(59, 56, 56)
@@ -68,7 +69,7 @@ Sub GenerateRAGStatus(RagStatus As String)
         With RedStatus
             .Line.Visible = False
             
-            If LCase(RagStatus) = "red" Then
+            If LCase(RAGColor) = "red" Then
             .Fill.ForeColor.RGB = RGB(192, 0, 0)
             Else
             .Fill.ForeColor.RGB = RGB(59, 56, 56)
@@ -77,7 +78,7 @@ Sub GenerateRAGStatus(RagStatus As String)
             .Name = "RedStatus" + Str(RandomNumber)
         End With
         
-        
-        ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("RAGBackground" + Str(RandomNumber), "GreenStatus" + Str(RandomNumber), "AmberStatus" + Str(RandomNumber), "RedStatus" + Str(RandomNumber))).Group
+        Set RAGStatus = ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("RAGBackground" + Str(RandomNumber), "GreenStatus" + Str(RandomNumber), "AmberStatus" + Str(RandomNumber), "RedStatus" + Str(RandomNumber))).Group
+        RAGStatus.Name = "RAGStatus" + Str(RandomNumber)
     
 End Sub

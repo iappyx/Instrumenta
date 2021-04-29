@@ -26,6 +26,7 @@ Sub GenerateFivePointStars(NumberOfStars As Double)
     Set myDocument = Application.ActiveWindow
     Dim StarsCount  As Double
     Dim StarsArray  As Variant
+    Dim StarRating As Object
     
     RandomNumber = Round(Rnd() * 1000000, 0)
     
@@ -82,6 +83,7 @@ Sub GenerateFivePointStars(NumberOfStars As Double)
         
     Next
     
-    ActiveWindow.Selection.SlideRange(1).Shapes.Range(StarsArray).Group
+    Set StarRating = ActiveWindow.Selection.SlideRange(1).Shapes.Range(StarsArray).Group
+    StarRating.Name = "StarRating" + Str(RandomNumber)
     
 End Sub
