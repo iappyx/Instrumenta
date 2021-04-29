@@ -95,6 +95,8 @@ Sub ConvertCommentsToStickyNotes()
             .Fill.ForeColor.RGB = RGB(255, 192, 0)
             .Fill.Transparency = 0.1
             .Name = "StickyNote" + Str(RandomNumber)
+            .Left = myDocument.Selection.SlideRange.Comments(CommentsCount).Left
+            .Top = myDocument.Selection.SlideRange.Comments(CommentsCount).Top
             
             With .TextFrame
                 .MarginBottom = 2
@@ -135,6 +137,10 @@ Sub MoveStickyNotesOffSlide()
     For shapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
         
         If InStr(1, myDocument.Selection.SlideRange.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
+            
+            myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags.Add "OLDPOSITIONTOP", CStr(myDocument.Selection.SlideRange.Shapes(shapeNumber).Top)
+            myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags.Add "OLDPOSITIONLEFT", CStr(myDocument.Selection.SlideRange.Shapes(shapeNumber).Left)
+            
             myDocument.Selection.SlideRange.Shapes(shapeNumber).Top = -5 - myDocument.Selection.SlideRange.Shapes(shapeNumber).Height
         End If
         
@@ -148,7 +154,9 @@ Sub MoveStickyNotesOnSlide()
     For shapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
         
         If InStr(1, myDocument.Selection.SlideRange.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
-            myDocument.Selection.SlideRange.Shapes(shapeNumber).Top = 5
+            myDocument.Selection.SlideRange.Shapes(shapeNumber).Top = CLng(myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags("OLDPOSITIONTOP"))
+            myDocument.Selection.SlideRange.Shapes(shapeNumber).Left = CLng(myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags("OLDPOSITIONLEFT"))
+            
         End If
         
     Next
@@ -192,7 +200,8 @@ Sub MoveStickyNotesOnAllSlides()
         For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
             
             If InStr(1, PresentationSlide.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
-                PresentationSlide.Shapes(shapeNumber).Top = 5
+            PresentationSlide.Shapes(shapeNumber).Top = CLng(PresentationSlide.Shapes(shapeNumber).Tags("OLDPOSITIONTOP"))
+            PresentationSlide.Shapes(shapeNumber).Left = CLng(PresentationSlide.Shapes(shapeNumber).Tags("OLDPOSITIONLEFT"))
             End If
             
         Next
@@ -209,6 +218,10 @@ Sub MoveStickyNotesOffAllSlides()
         For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
             
             If InStr(1, PresentationSlide.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
+                
+            PresentationSlide.Shapes(shapeNumber).Tags.Add "OLDPOSITIONTOP", CStr(PresentationSlide.Shapes(shapeNumber).Top)
+            PresentationSlide.Shapes(shapeNumber).Tags.Add "OLDPOSITIONLEFT", CStr(PresentationSlide.Shapes(shapeNumber).Left)
+                
                 PresentationSlide.Shapes(shapeNumber).Top = -5 - PresentationSlide.Shapes(shapeNumber).Height
             End If
             
