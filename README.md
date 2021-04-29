@@ -37,6 +37,7 @@ Current features include:
 - Remove slide entry transitions from all slides
 - Remove speaker notes from all slides
 - Remove comments from all slides
+- Remove unused master slides
 - Ticks and crosses
 - Harvey Balls
 - Traffic lights (RAG status)
