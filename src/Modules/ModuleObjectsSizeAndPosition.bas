@@ -97,6 +97,8 @@ End Sub
 
 Sub ObjectsSwapPosition()
     
+    If ActiveWindow.Selection.ShapeRange.Count = 2 Then
+    
     Dim Left1, Left2, Top1, Top2 As Single
     
     Left1 = ActiveWindow.Selection.ShapeRange(1).Left
@@ -108,5 +110,11 @@ Sub ObjectsSwapPosition()
     ActiveWindow.Selection.ShapeRange(2).Left = Left1
     ActiveWindow.Selection.ShapeRange(1).Top = Top2
     ActiveWindow.Selection.ShapeRange(2).Top = Top1
+    
+    Else
+    
+    MsgBox "Select two shapes to swap positions."
+    
+    End If
     
 End Sub

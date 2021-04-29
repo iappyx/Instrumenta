@@ -23,25 +23,58 @@ Attribute VB_Name = "ModuleObjectsText"
 
 Sub ObjectsRemoveText()
     Set myDocument = Application.ActiveWindow
+    
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
+    
     myDocument.Selection.ShapeRange.TextFrame.TextRange.Text = ""
+    
+    Else
+    
+    MsgBox "No text capable shape selected."
+    
+    End If
+    
 End Sub
 
 Sub ObjectsSwapTextNoFormatting()
 
     Dim text1, text2 As String
     Set myDocument = Application.ActiveWindow
+    
+    If myDocument.Selection.ShapeRange.Count = 2 Then
+    
+    If myDocument.Selection.ShapeRange(1).HasTextFrame And myDocument.Selection.ShapeRange(2).HasTextFrame Then
+    
     text1 = myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text
     text2 = myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text
     myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text = text2
     myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text = text1
+    
+    Else
+    
+    MsgBox "Select two shapes that (can) have text."
+    
+    End If
+    
+    
+    Else
+    
+    MsgBox "Select two shapes to swap their text."
+    
+    End If
+    
 
 End Sub
 
 Sub ObjectsSwapText()
 
     Set myDocument = Application.ActiveWindow
+    
+    If myDocument.Selection.ShapeRange.Count = 2 Then
+    
+    If myDocument.Selection.ShapeRange(1).HasTextFrame And myDocument.Selection.ShapeRange(2).HasTextFrame Then
+    
     Dim SlidePlaceHolder As PowerPoint.Shape
-        
     Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
     
     myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Cut
@@ -54,6 +87,19 @@ Sub ObjectsSwapText()
     myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Paste
        
     SlidePlaceHolder.Delete
+    
+    Else
+    
+    MsgBox "Select two shapes that (can) have text."
+    
+    End If
+    
+    
+    Else
+    
+    MsgBox "Select two shapes to swap their text."
+    
+    End If
 
 End Sub
 
@@ -61,7 +107,9 @@ Sub ObjectsMarginsToZero()
     
     Set myDocument = Application.ActiveWindow
     
-    With myDocument.Selection.ShapeRange.TextFrame
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
+    
+        With myDocument.Selection.ShapeRange.TextFrame
         .MarginBottom = 0
         .MarginLeft = 0
         .MarginRight = 0
@@ -69,11 +117,19 @@ Sub ObjectsMarginsToZero()
         
     End With
     
+    Else
+    
+    MsgBox "No text capable shape selected."
+    
+    End If
+    
 End Sub
 
 Sub ObjectsMarginsIncrease()
     
     Set myDocument = Application.ActiveWindow
+    
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
     
     With myDocument.Selection.ShapeRange.TextFrame
         .MarginBottom = .MarginBottom + 0.2
@@ -83,11 +139,19 @@ Sub ObjectsMarginsIncrease()
         
     End With
     
+    Else
+    
+    MsgBox "No text capable shape selected."
+    
+    End If
+    
 End Sub
 
 Sub ObjectsMarginsDecrease()
     
     Set myDocument = Application.ActiveWindow
+    
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
     
     With myDocument.Selection.ShapeRange.TextFrame
         If .MarginBottom >= 0.2 Then
@@ -105,16 +169,30 @@ Sub ObjectsMarginsDecrease()
         
     End With
     
+    Else
+    
+    MsgBox "No text capable shape selected."
+    
+    End If
+    
 End Sub
 
 Sub ObjectsTextWordwrapToggle()
     
     Set myDocument = Application.ActiveWindow
     
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
+     
     If myDocument.Selection.ShapeRange.TextFrame.WordWrap = True Then
         myDocument.Selection.ShapeRange.TextFrame.WordWrap = False
     Else
         myDocument.Selection.ShapeRange.TextFrame.WordWrap = True
+    End If
+    
+    Else
+    
+    MsgBox "No text capable shape selected."
+    
     End If
     
 End Sub

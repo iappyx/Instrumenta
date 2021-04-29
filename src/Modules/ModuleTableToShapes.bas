@@ -24,6 +24,8 @@ Attribute VB_Name = "ModuleTableToShapes"
 Sub ConvertTableToShapes()
     
     Set myDocument = Application.ActiveWindow
+            
+    If myDocument.Selection.ShapeRange.HasTable Then
     
     TableTop = myDocument.Selection.ShapeRange.Top
     TableLeft = myDocument.Selection.ShapeRange.Left
@@ -60,5 +62,10 @@ Sub ConvertTableToShapes()
     
     Application.ActiveWindow.Selection.ShapeRange.Delete
     
+    Else
     
+    MsgBox "No table selected."
+    
+    End If
+       
 End Sub

@@ -26,6 +26,8 @@ Sub TablesMarginsToZero()
     
     Set myDocument = Application.ActiveWindow
     
+    If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
+        
     With Application.ActiveWindow.Selection.ShapeRange.Table
         
         For RowsCount = 1 To .Rows.Count
@@ -49,11 +51,19 @@ Sub TablesMarginsToZero()
         
     End With
     
+    Else
+    
+    MsgBox "No table or cells selected."
+    
+    End If
+    
 End Sub
 
 Sub TablesMarginsIncrease()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
     
     With Application.ActiveWindow.Selection.ShapeRange.Table
         
@@ -78,11 +88,19 @@ Sub TablesMarginsIncrease()
         
     End With
     
+    Else
+    
+    MsgBox "No table or cells selected."
+    
+    End If
+    
 End Sub
 
 Sub TablesMarginsDecrease()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
     
     With Application.ActiveWindow.Selection.ShapeRange.Table
         
@@ -115,4 +133,9 @@ Sub TablesMarginsDecrease()
         
     End With
     
+    Else
+    
+    MsgBox "No table or cells selected."
+    
+    End If
 End Sub
