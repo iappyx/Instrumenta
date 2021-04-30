@@ -24,6 +24,32 @@ Attribute VB_Name = "ModuleFivePointStars"
 Sub GenerateFivePointStars(NumberOfStars As Double)
     
     Set myDocument = Application.ActiveWindow
+    
+    Dim ExistingWidth, ExistingHeight, ExistingTop, ExistingLeft, ExistingRotation As Double
+    Dim ExistingStarRating As Boolean
+    ExistingStarRating = False
+    
+    If myDocument.Selection.Type = ppSelectionShapes Then
+        
+        For Each Shape In ActiveWindow.Selection.ShapeRange
+            
+            If InStr(Shape.Name, "StarRating") = 1 Then
+                
+                ExistingStarRating = True
+                ExistingWidth = Shape.Width
+                ExistingHeight = Shape.Height
+                ExistingTop = Shape.Top
+                ExistingLeft = Shape.Left
+                ExistingRotation = Shape.Rotation
+                Shape.Delete
+                
+            End If
+            
+            Exit For
+        Next Shape
+    End If
+    
+    
     Dim StarsCount  As Double
     Dim StarsArray  As Variant
     Dim StarRating As Object
@@ -85,5 +111,13 @@ Sub GenerateFivePointStars(NumberOfStars As Double)
     
     Set StarRating = ActiveWindow.Selection.SlideRange(1).Shapes.Range(StarsArray).Group
     StarRating.Name = "StarRating" + Str(RandomNumber)
+    
+    If ExistingStarRating = True Then
+        StarRating.Width = ExistingWidth
+        StarRating.Height = ExistingHeight
+        StarRating.Top = ExistingTop
+        StarRating.Left = ExistingLeft
+        StarRating.Rotation = ExistingRotation
+    End If
     
 End Sub

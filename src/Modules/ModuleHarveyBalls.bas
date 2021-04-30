@@ -23,32 +23,69 @@ Attribute VB_Name = "ModuleHarveyBalls"
 
 Sub GenerateHarveyBallPercent(FillPercentage As Double)
     Set myDocument = Application.ActiveWindow
+    
+    Dim ExistingWidth, ExistingHeight, ExistingTop, ExistingLeft, ExistingRotation As Double
+    Dim ExistingHarveyBall As Boolean
+    ExistingHarveyBall = False
+    
+    If myDocument.Selection.Type = ppSelectionShapes Then
+        
+        For Each Shape In ActiveWindow.Selection.ShapeRange
+            
+            If InStr(Shape.Name, "HarveyBall") = 1 Then
+                
+                ExistingHarveyBall = True
+                ExistingWidth = Shape.Width
+                ExistingHeight = Shape.Height
+                ExistingTop = Shape.Top
+                ExistingLeft = Shape.Left
+                ExistingRotation = Shape.Rotation
+                Shape.Delete
+                
+            End If
+            
+            Exit For
+        Next Shape
+    End If
+    
     RandomNumber = Round(Rnd() * 1000000, 0)
-
-        Dim HarveyCircle, HarveyFill As Shape
+    
+    Dim HarveyCircle, HarveyFill As Shape
+    
+    Set HarveyCircle = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 100, 100, 50, 50)
+    Set HarveyFill = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapePie, 101, 101, 48, 48)
+    With HarveyFill
+        .Name = "HarveyFill" + Str(RandomNumber)
+        .Adjustments.Item(2) = -90
+        .Adjustments.Item(1) = ((FillPercentage / 100) * 360) - 90
+        .Line.Visible = False
+        .Fill.ForeColor.RGB = RGB(0, 0, 0)
+    End With
+    With HarveyCircle
+        .Name = "HarveyCircle" + Str(RandomNumber)
+        .Line.Visible = False
+        .Fill.ForeColor.RGB = RGB(0, 0, 0)
+    End With
+    
+    If FillPercentage > 0 Then
+        HarveyFill.Adjustments(1) = HarveyFill.Adjustments(1) - 0.1
+    End If
+    
+    ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("HarveyCircle" + Str(RandomNumber), "HarveyFill" + Str(RandomNumber))).Select
+    CommandBars.ExecuteMso ("ShapesCombine")
+    For Each Shape In ActiveWindow.Selection.ShapeRange
         
-        Set HarveyCircle = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 100, 100, 50, 50)
-        Set HarveyFill = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapePie, 101, 101, 48, 48)
-        With HarveyFill
-            .Name = "HarveyFill" + Str(RandomNumber)
-            .Adjustments.Item(2) = -90
-            .Adjustments.Item(1) = ((FillPercentage / 100) * 360) - 90
-            .Line.Visible = False
-            .Fill.ForeColor.RGB = RGB(0, 0, 0)
-        End With
-        With HarveyCircle
-            .Name = "HarveyCircle" + Str(RandomNumber)
-            .Line.Visible = False
-            .Fill.ForeColor.RGB = RGB(0, 0, 0)
-        End With
+        Shape.Name = "HarveyBall" + Str(RandomNumber)
         
-        If FillPercentage > 0 Then
-            HarveyFill.Adjustments(1) = HarveyFill.Adjustments(1) - 0.1
+        If ExistingHarveyBall = True Then
+            Shape.Width = ExistingWidth
+            Shape.Height = ExistingHeight
+            Shape.Top = ExistingTop
+            Shape.Left = ExistingLeft
+            Shape.Rotation = ExistingRotation
         End If
         
-        ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("HarveyCircle" + Str(RandomNumber), "HarveyFill" + Str(RandomNumber))).Select
-        CommandBars.ExecuteMso ("ShapesCombine")
-        For Each Shape In ActiveWindow.Selection.ShapeRange
-        Shape.Name = "HarveyBall" + Str(RandomNumber)
-        Next
+    Next
+    ActiveWindow.Selection.Unselect
+    
 End Sub

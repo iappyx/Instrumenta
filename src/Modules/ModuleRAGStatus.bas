@@ -24,6 +24,32 @@ Attribute VB_Name = "ModuleRAGStatus"
 Sub GenerateRAGStatus(RAGColor As String)
     
     Set myDocument = Application.ActiveWindow
+    
+    Dim ExistingWidth, ExistingHeight, ExistingTop, ExistingLeft, ExistingRotation As Double
+    Dim ExistingRAGStatus As Boolean
+    ExistingRAGStatus = False
+    
+    If myDocument.Selection.Type = ppSelectionShapes Then
+        
+        For Each Shape In ActiveWindow.Selection.ShapeRange
+            
+            If InStr(Shape.Name, "RAGStatus") = 1 Then
+                
+                ExistingRAGStatus = True
+                ExistingWidth = Shape.Width
+                ExistingHeight = Shape.Height
+                ExistingTop = Shape.Top
+                ExistingLeft = Shape.Left
+                ExistingRotation = Shape.Rotation
+                Shape.Delete
+                
+            End If
+            
+            Exit For
+        Next Shape
+    End If
+    
+    
     Dim RAGStatus As Object
     RandomNumber = Round(Rnd() * 1000000, 0)
     
@@ -80,5 +106,13 @@ Sub GenerateRAGStatus(RAGColor As String)
         
         Set RAGStatus = ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("RAGBackground" + Str(RandomNumber), "GreenStatus" + Str(RandomNumber), "AmberStatus" + Str(RandomNumber), "RedStatus" + Str(RandomNumber))).Group
         RAGStatus.Name = "RAGStatus" + Str(RandomNumber)
+        
+        If ExistingRAGStatus = True Then
+            RAGStatus.Width = ExistingWidth
+            RAGStatus.Height = ExistingHeight
+            RAGStatus.Top = ExistingTop
+            RAGStatus.Left = ExistingLeft
+            RAGStatus.Rotation = ExistingRotation
+        End If
     
 End Sub
