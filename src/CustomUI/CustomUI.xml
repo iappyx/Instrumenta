@@ -96,6 +96,7 @@
                <button idMso="PictureInsertFromFile" showLabel="false" />
                <toggleButton idMso="PictureSetTransparentColor" showLabel="false" />
                <button idMso="PicturesCompress" showLabel="false" />
+               <gallery idMso="PictureShapeGallery" showLabel="false" />
             </group>
             <group id="AlignGroup" label="Align, distribute and size">
                <box id="AlignDistributeBox" boxStyle="horizontal">
@@ -140,27 +141,21 @@
                   <button id="ObjectsAlignToTableRow" imageMso="SpeakByRows" label="Center align shapes to rows of a table" showLabel="false" onAction="ObjectsAlignToTableRow" />                                           
             </group>
             <group id="TableGroup" label="Table">
-               <button idMso="TableInsert" showLabel="false" />
+               <gallery idMso="TableInsertGallery" showLabel="false" />
                <button idMso="TableInsertColumnsLeft" showLabel="false" />
                <button idMso="TableInsertColumnsRight" showLabel="false" />
                <button idMso="TableInsertRowsAbove" showLabel="false" />
                <button idMso="TableInsertRowsBelow" showLabel="false" />
+               <button idMso="TableDeleteColumns" showLabel="false" />
+               <button idMso="TableDeleteRows" showLabel="false" />
                <button idMso="TableRowsDistribute" showLabel="false" />
                <button idMso="TableColumnsDistribute" showLabel="false" />
+               <button idMso="TableStyleClearTable"  showLabel="false"  />
                <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" /> 
                <separator id="separator7" />
-               <toggleButton idMso="BorderBottom" showLabel="false" />
-               <toggleButton idMso="BorderDiagonalDown" showLabel="false" />
-               <toggleButton idMso="BorderDiagonalUp" showLabel="false" />
-               <toggleButton idMso="BorderInside" showLabel="false" />
-               <toggleButton idMso="BorderInsideHorizontal" showLabel="false" />
-               <toggleButton idMso="BorderInsideVertical" showLabel="false" />
-               <toggleButton idMso="BorderLeft" showLabel="false" />
-               <toggleButton idMso="BorderNone" showLabel="false" />
-               <toggleButton idMso="BorderOutside" showLabel="false" />
-               <toggleButton idMso="BorderRight" showLabel="false" />
-               <toggleButton idMso="BordersAll" showLabel="false" />
-               <toggleButton idMso="BorderTop" showLabel="false" />
+               <gallery idMso="ShadingColorPicker" showLabel="false"  />
+               <gallery idMso="TableBorderPenColorPicker" showLabel="false" />
+               <splitButton idMso="TableBordersMenu" showLabel="false"/>
                <separator id="separator8" />
                <toggleButton idMso="TableCellAlignBottom" showLabel="false" />
                <toggleButton idMso="TableCellAlignCenterVertically" showLabel="false" />
