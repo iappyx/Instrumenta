@@ -48,6 +48,7 @@ Current features include:
 - Remove sticky notes from this slide / all slides
 - Convert comments to sticky notes
 - Steps counter (per slide and cross-slides)
+- Agenda pages
 
 # Platform support
 All functions supported in Windows. 
