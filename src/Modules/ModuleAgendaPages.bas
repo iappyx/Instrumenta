@@ -89,7 +89,7 @@ Sub CreateOrUpdateMasterAgenda()
                         .Bold = msoFalse
                         .Size = 16
                         .Italic = msoFalse
-                        .Shadow = msoFalse
+                        'does not work on mac .shadow = msoFalse
                         .Underline = msoFalse
                         .Emboss = msoFalse
                         .Name = "Arial"
@@ -100,7 +100,7 @@ Sub CreateOrUpdateMasterAgenda()
                         .Bold = msoTrue
                         .Size = 16
                         .Italic = msoFalse
-                        .Shadow = msoFalse
+                        'does not work on mac .shadow = msoFalse
                         .Underline = msoFalse
                         .Emboss = msoFalse
                         .Name = "Arial"
@@ -112,7 +112,7 @@ Sub CreateOrUpdateMasterAgenda()
                         .Bold = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Bold
                         .Size = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Size
                         .Italic = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Italic
-                        .Shadow = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Shadow
+                        'does not work on mac .shadow = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Shadow
                         .Underline = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Underline
                         .Emboss = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Emboss
                         .Name = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Name
@@ -123,7 +123,7 @@ Sub CreateOrUpdateMasterAgenda()
                         .Bold = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Bold
                         .Size = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Size
                         .Italic = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Italic
-                        .Shadow = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Shadow
+                        'does not work on mac .shadow = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Shadow
                         .Underline = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Underline
                         .Emboss = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Emboss
                         .Name = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Name
@@ -250,7 +250,7 @@ Sub CreateAgendaPages()
                 .Bold = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Bold
                 .Size = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Size
                 .Italic = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Italic
-                .Shadow = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Shadow
+                'does not work on mac .shadow = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Shadow
                 .Underline = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Underline
                 .Emboss = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Emboss
                 .Name = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Name
@@ -261,7 +261,7 @@ Sub CreateAgendaPages()
                 .Bold = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Bold
                 .Size = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Size
                 .Italic = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Italic
-                .Shadow = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Shadow
+                'does not work on mac .shadow = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Shadow
                 .Underline = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Underline
                 .Emboss = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Emboss
                 .Name = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Name
