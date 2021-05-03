@@ -29,6 +29,7 @@ Current features include:
 - Convert table to shapes
 - Copy rounded corners of shapes to selected shapes
 - Copy shapetype and all adjustments of shapes to selected shapes
+- Clone shapes to right / down
 - Replace fonts
 - Set proofing language for all slides
 - Format table

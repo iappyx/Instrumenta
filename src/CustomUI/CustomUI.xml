@@ -66,6 +66,8 @@
                <gallery idMso="OutlineDashesGallery" showLabel="false" />
                <gallery idMso="OutlineWeightGallery" showLabel="false" />
                <button idMso="EyedropperOutline" showLabel="false" />
+               <button id="CloneSelectionRight" label="Clone selection to right" imageMso="FillRight" onAction="ObjectsCloneRight" showLabel="false" />
+               <button id="CloneSelectionDown" label="Clone selection down" imageMso="FillDown" onAction="ObjectsCloneDown" showLabel="false" />
                <separator id="seperatorShapeOther" />
                <gallery idMso="ShapesInsertGallery" showLabel="false" />
                <toggleButton idMso="TextBoxInsert" showLabel="false" />
