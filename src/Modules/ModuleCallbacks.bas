@@ -21,6 +21,11 @@ Attribute VB_Name = "ModuleCallbacks"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub GenerateHarveyBallCustom()
+    CustomPercentage = CInt(InputBox("Harvey ball percentage:", "Custom HarveyBall", 50))
+    GenerateHarveyBallPercent (CustomPercentage)
+End Sub
+
 Sub GenerateHarveyBall25()
     GenerateHarveyBallPercent (25)
 End Sub
@@ -116,7 +121,6 @@ End Sub
 Sub GenerateFivePointStars50()
 GenerateFivePointStars (5)
 End Sub
-
 
 Sub GenerateRAGStatusRed()
 GenerateRAGStatus ("red")
