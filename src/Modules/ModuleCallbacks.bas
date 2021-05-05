@@ -21,6 +21,49 @@ Attribute VB_Name = "ModuleCallbacks"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+
+Sub GenerateStampConfidential()
+    Dim StampColor As Long
+    StampColor = RGB(192, 0, 0)
+    GenerateStamp "CONFIDENTIAL", StampColor
+End Sub
+
+Sub GenerateStampDoNotDistribute()
+    Dim StampColor As Long
+    StampColor = RGB(192, 0, 0)
+    GenerateStamp "DO NOT DISTRIBUTE", StampColor
+End Sub
+
+Sub GenerateStampDraft()
+    Dim StampColor As Long
+    StampColor = RGB(0, 112, 192)
+    GenerateStamp "DRAFT", StampColor
+End Sub
+
+Sub GenerateStampUpdated()
+    Dim StampColor As Long
+    StampColor = RGB(255, 153, 0)
+    GenerateStamp "UPDATED", StampColor
+End Sub
+
+Sub GenerateStampNew()
+    Dim StampColor As Long
+    StampColor = RGB(0, 176, 80)
+    GenerateStamp "NEW", StampColor
+End Sub
+
+Sub GenerateStampToBeRemoved()
+    Dim StampColor As Long
+    StampColor = RGB(179, 0, 0)
+    GenerateStamp "TO BE REMOVED", StampColor
+End Sub
+
+Sub GenerateStampToAppendix()
+    Dim StampColor As Long
+    StampColor = RGB(127, 127, 127)
+    GenerateStamp "TO APPENDIX", StampColor
+End Sub
+
 Sub GenerateHarveyBallCustom()
     CustomPercentage = CInt(InputBox("Harvey ball percentage:", "Custom HarveyBall", 50))
     GenerateHarveyBallPercent (CustomPercentage)

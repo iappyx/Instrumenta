@@ -21,6 +21,25 @@ Attribute VB_Name = "ModuleCleanUp"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub CleanUpRemoveUnusedMasterSlides()
+    Dim NumberOfDesigns, NumberOfCustomLayouts As Integer
+    
+    On Error Resume Next
+    
+    For NumberOfDesigns = ActivePresentation.Designs.Count To 1 Step -1
+        
+        For NumberOfCustomLayouts = ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts.Count To 1 Step -1
+            ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts(NumberOfCustomLayouts).Delete
+        Next NumberOfCustomLayouts
+        
+        If ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts.Count = 0 Then
+            ActivePresentation.Designs(NumberOfDesigns).Delete
+        End If
+        
+    Next NumberOfDesigns
+    
+End Sub
+
 Sub CleanUpRemoveAnimationsFromAllSlides()
     Dim PresentationSlide As Slide
     Dim AnimationCount As Long
@@ -58,6 +77,7 @@ Sub CleanUpRemoveCommentsFromAllSlides()
     Next
 End Sub
 
+
 Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
     Dim PresentationSlide As Slide
     
@@ -65,3 +85,5 @@ Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
         PresentationSlide.SlideShowTransition.EntryEffect = 0
     Next
 End Sub
+
+

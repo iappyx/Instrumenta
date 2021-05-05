@@ -50,6 +50,7 @@ Current features include:
 - Convert comments to sticky notes
 - Steps counter (per slide and cross-slides)
 - Agenda pages
+- Stamps
 
 # Platform support
 All functions supported in Windows. 

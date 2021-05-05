@@ -240,13 +240,20 @@ End Sub
 Sub ObjectsDistributeHorizontally()
     Set myDocument = Application.ActiveWindow
     
+    If myDocument.Selection.ShapeRange.Count > 2 Then
     myDocument.Selection.ShapeRange.Distribute msoDistributeHorizontally, msoFalse
+    Else
+    MsgBox "Select more shapes to use this command."
+    End If
     
 End Sub
 
 Sub ObjectsDistributeVertically()
     Set myDocument = Application.ActiveWindow
     
+    If myDocument.Selection.ShapeRange.Count > 2 Then
     myDocument.Selection.ShapeRange.Distribute msoDistributeVertically, msoFalse
-    
+    Else
+    MsgBox "Select more shapes to use this command."
+    End If
 End Sub

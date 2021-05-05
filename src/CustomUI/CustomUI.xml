@@ -37,7 +37,7 @@
                   <gallery idMso="BulletsGallery" showLabel="false" />
                   <gallery idMso="NumberingGallery" showLabel="false" />
                   <button id="BulletsTicks" label="Ticks" showLabel="false" imageMso="AcceptTask" onAction="TextBulletsTicks" />
-                  <button id="BulletsCrosses" label="Crosses" showLabel="false" imageMso="WindowClose" onAction="TextBulletsCrosses" />
+                  <button id="BulletsCrosses" label="Crosses" showLabel="false" imageMso="DeclineInvitation" onAction="TextBulletsCrosses" />
                </buttonGroup>
                <buttonGroup id="buttonGroupIndent">
                   <gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false" />
@@ -248,7 +248,15 @@
               <button id="SelectAllCrossSlideStepsCounter" label="Select all cross-slide step counters on this slide"  onAction="SelectAllCrossSlideStepsCounter" />
             </menu> 
           </splitButton> 
-                       
+              <menu id="StampsMenu" label="Stamps" imageMso="NameDefine" showLabel="false">
+	<button id="StampConfidential" label="CONFIDENTIAL" onAction="GenerateStampConfidential" />
+	<button id="StampDoNotDistribute" label="DO NOT DISTRIBUTE" onAction="GenerateStampDoNotDistribute" />
+	<button id="StampDraft" label="DRAFT" onAction="GenerateStampDraft" />
+	<button id="StampUpdated" label="UPDATED" onAction="GenerateStampUpdated" />
+	<button id="StampNew" label="NEW" onAction="GenerateStampNew" />
+	<button id="StampToBeRemoved" label="TO BE REMOVED" onAction="GenerateStampToBeRemoved" />
+	<button id="StampToAppendix" label="TO APPENDIX" onAction="GenerateStampToAppendix" />
+</menu>         
                </box>   
             </group>
             <group id="AllGroup" label="Advanced">
