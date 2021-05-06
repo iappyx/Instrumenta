@@ -13,7 +13,7 @@ I decided to create Instrumenta as a free and open source consulting powerpoint 
 Current features include:
 - Basic formatting and shortcuts to different frequently used powerpoint functions
 - Align, distribute and size shapes
-- Align objects over a table row/column 
+- Align objects over table cells, rows or columns 
 - Set same height and/or width for shapes
 - Size shapes to tallest, shortest, widest or narrowest
 - Remove, increase or decrease horizontal/vertical gap between shapes
