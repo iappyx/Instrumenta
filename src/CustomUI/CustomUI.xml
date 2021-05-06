@@ -140,6 +140,7 @@
                   <button id="ObjectsIncreaseSpacingVertical" imageMso="VerticalSpacingIncrease" label="Increase vertical gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingVertical" />
                   <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />   
                <separator id="separatorTableAlign" />
+                  <button id="ObjectsAlignToTable" imageMso="GroupTableProperties" label="Center align shapes to table cells" showLabel="false" onAction="ObjectsAlignToTable" />
                   <button id="ObjectsAlignToTableColumn" imageMso="SpeakByColumns" label="Center align shapes to columns of a table" showLabel="false" onAction="ObjectsAlignToTableColumn" />            
                   <button id="ObjectsAlignToTableRow" imageMso="SpeakByRows" label="Center align shapes to rows of a table" showLabel="false" onAction="ObjectsAlignToTableRow" />                                           
             </group>
