@@ -58,8 +58,6 @@ Sub GenerateStamp(StampTitleText As String, StampColor As Long)
     
     Set StampText = myDocument.Selection.SlideRange.Shapes.AddTextbox(msoTextOrientationHorizontal, 100, 100, 94, 26)
     
-    Application.ActiveWindow.Selection.SlideRange.Shapes(1).TextFrame.TextRange.ParagraphFormat.Alignment = ppAlignCenter
-    
     With StampText
         .TextFrame.AutoSize = ppAutoSizeNone
         .TextFrame.HorizontalAnchor = msoAnchorCenter
