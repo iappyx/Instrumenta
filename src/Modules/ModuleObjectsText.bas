@@ -21,6 +21,60 @@ Attribute VB_Name = "ModuleObjectsText"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+
+Sub ObjectsTextInsertSpecialCharacter(SpecialCharacter As Long)
+
+If ActiveWindow.Selection.Type = ppSelectionText Then
+
+Application.ActiveWindow.Selection.TextRange.Characters.Text = Chr$(SpecialCharacter)
+
+End If
+
+End Sub
+
+
+Sub ObjectsIncreaseLineSpacing()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
+    
+    With myDocument.Selection.ShapeRange.TextFrame.TextRange.ParagraphFormat
+        .SpaceWithin = .SpaceWithin + 0.1
+    End With
+    
+    Else
+    
+    MsgBox "No text capable shapes selected."
+    
+    End If
+    
+End Sub
+
+Sub ObjectsDecreaseLineSpacing()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
+    
+    With myDocument.Selection.ShapeRange.TextFrame.TextRange.ParagraphFormat
+    
+        If .SpaceWithin <= 0.1 Then
+            .SpaceWithin = 0
+        Else
+            .SpaceWithin = .SpaceWithin - 0.1
+        End If
+        
+    End With
+    
+    Else
+    
+    MsgBox "No text capable shapes selected."
+    
+    End If
+    
+End Sub
+
 Sub ObjectsRemoveText()
     Set myDocument = Application.ActiveWindow
     

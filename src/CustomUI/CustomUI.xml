@@ -38,9 +38,16 @@
                   <gallery idMso="NumberingGallery" showLabel="false" />
                   <button id="BulletsTicks" label="Ticks" showLabel="false" imageMso="AcceptTask" onAction="TextBulletsTicks" />
                   <button id="BulletsCrosses" label="Crosses" showLabel="false" imageMso="DeclineInvitation" onAction="TextBulletsCrosses" />
+                  <menu id="SpecialCharacterMenu" label="Special characters" imageMso="SymbolInsert" showLabel="false">
+                  <button id="TextInsertEuro" label="Euro" onAction="TextInsertEuro" />
+                  <button id="TextInsertCopyright" label="Copyright" onAction="TextInsertCopyright" />
+               </menu>
+               
                </buttonGroup>
                <buttonGroup id="buttonGroupIndent">
                   <gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false" />
+                  <button id="IncreaseLineSpacing" label="Increase line spacing" showLabel="false" imageMso="WordCloseParaAbove" onAction="ObjectsIncreaseLineSpacing" />
+                  <button id="DecreaseLineSpacing" label="Decrease line spacing" showLabel="false" imageMso="WordOpenParaAbove" onAction="ObjectsDecreaseLineSpacing" />
                   <button idMso="IndentIncrease" showLabel="false" />
                   <button idMso="IndentDecrease" showLabel="false" />
                   <gallery idMso="TextAlignGallery" showLabel="false" />

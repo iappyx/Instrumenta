@@ -22,6 +22,14 @@ Attribute VB_Name = "ModuleCallbacks"
 'SOFTWARE.
 
 
+Sub TextInsertEuro()
+    ObjectsTextInsertSpecialCharacter 128
+End Sub
+
+Sub TextInsertCopyright()
+    ObjectsTextInsertSpecialCharacter 169
+End Sub
+
 Sub GenerateStampConfidential()
     Dim StampColor As Long
     StampColor = RGB(192, 0, 0)
