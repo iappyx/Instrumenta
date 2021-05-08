@@ -23,6 +23,7 @@ Current features include:
 - Select shapes by width and/or height
 - Select shapes by type of shape
 - Swap position of two shapes
+- Increase/decrease line spacing
 - Remove text from shape
 - Remove formatting
 - Swap text
@@ -51,6 +52,7 @@ Current features include:
 - Steps counter (per slide and cross-slides)
 - Agenda pages
 - Stamps
+- Insert special characters
 
 # Platform support
 All functions supported in Windows. 
