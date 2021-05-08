@@ -3,7 +3,7 @@
    <ribbon>
       <tabs>
          <tab id="InstrumentaPowerpointToolbar" label="Instrumenta">
-            <group id="FormattingFont" label="Font">
+            <group id="FormattingFont" label="Font" imageMso="GroupTextFormatting">
                <box id="FontBox1" boxStyle="horizontal">
                   <control idMso="Font"/>
                   <comboBox idMso="FontSize" showLabel="false" />
@@ -25,7 +25,7 @@
                   <button idMso="EyedropperFillText" showLabel="false" />
                </box>
             </group>
-            <group id="TextGroup" label="Text">
+            <group id="TextGroup" label="Text" imageMso="MenuView2">
                <buttonGroup id="buttonGroupAlignText">
                   <toggleButton idMso="AlignLeft" showLabel="false" />
                   <toggleButton idMso="AlignCenter" showLabel="false" />
@@ -60,7 +60,7 @@
                <button id="ChangeSpellCheckLanguage" label="Set proofing language on all objects and all slides" imageMso="SetLanguage" showLabel="false" onAction="ShowChangeSpellCheckLanguageForm" />
                <button idMso="PasteTextOnly" showLabel="false" />
             </group>
-            <group id="FormattingGroup" label="Shapes">
+            <group id="FormattingGroup" label="Shapes" imageMso="ShapesMoreShapes">
                <gallery idMso="ShapeFillColorPicker" showLabel="false" />
                <gallery idMso="ShapeStylesGallery" showLabel="false" />
                <gallery idMso="ShapeChangeShapeGallery" showLabel="false" />
@@ -100,7 +100,7 @@
                <button id="IncreaseMargins" label="Increase margins" showLabel="false" imageMso="UpArrow2" onAction="ObjectsMarginsIncrease" />
                <button id="DecreaseMargins" label="Decrease margins" showLabel="false" imageMso="DownArrow2" onAction="ObjectsMarginsDecrease" />
             </group>
-            <group id="PictureGroup" label="Pictures">
+            <group id="PictureGroup" label="Pictures" imageMso="PictureRecolorAutomatic">
                <toggleButton idMso="PictureCrop" showLabel="false" />
                <button idMso="PictureReset" showLabel="false" />
                <button idMso="PictureInsertFromFile" showLabel="false" />
@@ -108,7 +108,7 @@
                <button idMso="PicturesCompress" showLabel="false" />
                <gallery idMso="PictureShapeGallery" showLabel="false" />
             </group>
-            <group id="AlignGroup" label="Align, distribute and size">
+            <group id="AlignGroup" label="Align, distribute and size" imageMso="SizeToGridAccess">
                <box id="AlignDistributeBox" boxStyle="horizontal">
                   <button id="ObjectsAlignLeftsButton" label="Align left" showLabel="false" imageMso="ObjectsAlignLeft" onAction="ObjectsAlignLefts" />
                   <button id="ObjectsAlignCentersButton" label="Align center" showLabel="false" imageMso="ObjectsAlignCenterHorizontal" onAction="ObjectsAlignCenters" />
@@ -151,7 +151,7 @@
                   <button id="ObjectsAlignToTableColumn" imageMso="SpeakByColumns" label="Center align shapes to columns of a table" showLabel="false" onAction="ObjectsAlignToTableColumn" />            
                   <button id="ObjectsAlignToTableRow" imageMso="SpeakByRows" label="Center align shapes to rows of a table" showLabel="false" onAction="ObjectsAlignToTableRow" />                                           
             </group>
-            <group id="TableGroup" label="Table">
+            <group id="TableGroup" label="Table" imageMso="TableInsert">
                <gallery idMso="TableInsertGallery" showLabel="false" />
                <button idMso="TableInsertColumnsLeft" showLabel="false" />
                <button idMso="TableInsertColumnsRight" showLabel="false" />
@@ -177,17 +177,17 @@
                <button id="TableIncreaseMargins" label="Increase margins of selected table or selected cells" showLabel="false" imageMso="UpArrow2" onAction="TablesMarginsIncrease" />
                <button id="TableDecreaseMargins" label="Decrease margins of selected table or selected cells" showLabel="false" imageMso="DownArrow2" onAction="TablesMarginsDecrease" />
             </group>
-            <group id="ExportGroup" label="Export">
+            <group id="ExportGroup" label="Export" imageMso="RightArrow2">
                <button id="EmailSelectedSlidesButton" label="E-mail selected slides" imageMso="MailMergeStartEmail" showLabel="false" onAction="EmailSelectedSlides" />
                <button id="EmailSelectedSlidesAsPDFButton" label="E-mail selected slides as PDF" showLabel="false" imageMso="FileEmailAsPdfEmailAttachment" onAction="EmailSelectedSlidesAsPDF" />
                <button idMso="FileSaveAsPdfOrXps" showLabel="false" />
                <button idMso="ObjectSaveAsPicture" imageMso="PictureReset" showLabel="false" />
             </group>
-            <group id="StoryLineGroup" label="Storyline">
+            <group id="StoryLineGroup" label="Storyline" imageMso="MailMergeStartLetters">
                <button id="CopyStorylineToClipboardButton" label="Copy storyline to clipboard" showLabel="false" imageMso="GroupCopy" onAction="CopyStorylineToClipboard" />
                <button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
             </group>
-            <group id="PasteGroup" label="Paste and insert">
+            <group id="PasteGroup" label="Paste and insert" imageMso="PasteAlternative">
                <box id="PasteGroupBox1" boxStyle="horizontal"> 
                <button idMso="PasteJpeg" showLabel="false" />
                <button idMso="PastePng" showLabel="false" />
@@ -267,7 +267,7 @@
 </menu>         
                </box>   
             </group>
-            <group id="AllGroup" label="Advanced">
+            <group id="AllGroup" label="Advanced" imageMso="AdvancedFileProperties">
                <button idMso="ReplaceDialog" showLabel="false" />
                <button idMso="AdvancedFileProperties" showLabel="false" />
                <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false">
