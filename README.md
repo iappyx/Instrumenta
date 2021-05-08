@@ -53,6 +53,7 @@ Current features include:
 - Agenda pages
 - Stamps
 - Insert special characters
+- Insert process (SmartArt)
 
 # Platform support
 All functions supported in Windows. 

@@ -265,6 +265,7 @@
 	<button id="StampToBeRemoved" label="TO BE REMOVED" onAction="GenerateStampToBeRemoved" />
 	<button id="StampToAppendix" label="TO APPENDIX" onAction="GenerateStampToAppendix" />
 </menu>         
+      <button id="InsertProcessSmartArt" imageMso="OutlineDemoteToBodyText" label="Insert process (SmartArt)" showLabel="false" onAction="InsertProcessSmartArt" /> 
                </box>   
             </group>
             <group id="AllGroup" label="Advanced" imageMso="AdvancedFileProperties">
