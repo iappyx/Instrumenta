@@ -53,6 +53,8 @@ Current features include:
 - Steps counter (per slide and cross-slides)
 - Agenda pages
 - Stamps
+- Move stamps on and off this slide / all slides
+- Remove stamps from this slide / all slides
 - Insert special characters
 - Insert process (SmartArt)
 
