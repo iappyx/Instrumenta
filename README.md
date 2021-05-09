@@ -32,6 +32,9 @@ Current features include:
 - Copy shapetype and all adjustments of shapes to selected shapes
 - Clone shapes to right / down
 - Copy/paste position and dimensions of shapes (across slides)
+- Copy shape to multiple slides (multislide shape)
+- Update position and dimensions of selected multislide shape on all slides
+- Delete selected multislide shape on all slides
 - Replace fonts
 - Set proofing language for all slides
 - Format table
