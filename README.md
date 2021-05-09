@@ -31,6 +31,7 @@ Current features include:
 - Copy rounded corners of shapes to selected shapes
 - Copy shapetype and all adjustments of shapes to selected shapes
 - Clone shapes to right / down
+- Copy/paste position and dimensions of shapes (across slides)
 - Replace fonts
 - Set proofing language for all slides
 - Format table
