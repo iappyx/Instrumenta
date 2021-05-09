@@ -270,6 +270,14 @@
                      <button id="StampNew" label="NEW" onAction="GenerateStampNew" />
                      <button id="StampToBeRemoved" label="TO BE REMOVED" onAction="GenerateStampToBeRemoved" />
                      <button id="StampToAppendix" label="TO APPENDIX" onAction="GenerateStampToAppendix" />
+                     <menuSeparator id="separatorMoveStamps" />
+                     <button id="StampsMoveOffSlide" label="Move Stamps off this slide" imageMso="OutlineMoveUp" onAction="MoveStampsOffSlide" />
+                     <button id="StampsMoveOnSlide" label="Move Stamps on this slide" imageMso="OutlineMoveDown" onAction="MoveStampsOnSlide" />
+                     <button id="DeleteStampsOnSlide" label="Delete Stamps on this slide" imageMso="Delete" onAction="DeleteStampsOnSlide" />
+                     <menuSeparator id="separatorStampsAllSlides" />
+                     <button id="StampsMoveOffAllSlides" label="Move Stamps off all slides" imageMso="OutlineMoveUp" onAction="MoveStampsOffAllSlides" />
+                     <button id="StampsMoveOnAllSlides" label="Move Stamps on all slides" imageMso="OutlineMoveDown" onAction="MoveStampsOnAllSlides" />
+                     <button id="DeleteStampsOnAllSlides" label="Delete Stamps on all slides" imageMso="Delete" onAction="DeleteStampsOnAllSlides" />
                   </menu>
                   <button id="InsertProcessSmartArt" imageMso="OutlineDemoteToBodyText" label="Insert process (SmartArt)" showLabel="false" onAction="InsertProcessSmartArt" />
                </box>
