@@ -85,6 +85,7 @@
                <button id="ObjectsCopyRoundedCorner" label="Copy rounded corner of first selected shape to selected shapes" showLabel="false" imageMso="ShapeRoundedRectangle" onAction="ObjectsCopyRoundedCorner" />
                <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="GroupShapes" onAction="ObjectsCopyShapeTypeAndAdjustments" />
                <toggleButton idMso="ObjectEditPoints" showLabel="false" />
+               <separator id="CopyPositionSeperator" />
                <menu id="SelectShapeByMenu" label="Select shape by attributes" imageMso="SelectionPane" showLabel="false">
                   <button id="SelectShapesByFillColor" label="Select shapes with same fill color" onAction="ObjectsSelectBySameFillColor" />
                   <button id="SelectShapesByLineColor" label="Select shapes with same line color" onAction="ObjectsSelectBySameLineColor" />
@@ -101,6 +102,10 @@
                      <button id="PastePositionAndDimensions" label="Paste position and dimensions" showLabel="false" imageMso="PasteDuplicate" onAction="PastePositionAndDimensions" />
                   </menu>
                </splitButton>
+               <separator id="CopyShapeToSeparator" />
+               <button id="CreateMultiSlideShape" label="Copy shape to multiple slides (multislide shape)" showLabel="false" imageMso="MasterDocumentCreateSubdocument" onAction="ShowFormCopyShapeToMultipleSlides" />
+               <button id="UpdateMultiSlideShape" label="Update position and dimensions of selected multislide shape on all slides" showLabel="false" imageMso="MasterDocumentInsertSubdocument" onAction="UpdateTaggedShapePositionAndDimensions" />
+               <button id="DeleteMultislideShape" label="Delete selected multislide shape on all slides" showLabel="false" imageMso="MasterDocumentUnlinkSubdocument" onAction="DeleteTaggedShapes" />
                <separator id="TextMargins" />
                <button id="RemoveMargins" label="Remove margins" showLabel="false" imageMso="PageMarginsGallery" onAction="ObjectsMarginsToZero" />
                <button id="IncreaseMargins" label="Increase margins" showLabel="false" imageMso="UpArrow2" onAction="ObjectsMarginsIncrease" />
