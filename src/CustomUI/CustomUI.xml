@@ -5,7 +5,7 @@
          <tab id="InstrumentaPowerpointToolbar" label="Instrumenta">
             <group id="FormattingFont" label="Font" imageMso="GroupTextFormatting">
                <box id="FontBox1" boxStyle="horizontal">
-                  <control idMso="Font"/>
+                  <control idMso="Font" />
                   <comboBox idMso="FontSize" showLabel="false" />
                   <button idMso="FontSizeIncrease" showLabel="false" />
                   <button idMso="FontSizeDecrease" showLabel="false" />
@@ -39,10 +39,9 @@
                   <button id="BulletsTicks" label="Ticks" showLabel="false" imageMso="AcceptTask" onAction="TextBulletsTicks" />
                   <button id="BulletsCrosses" label="Crosses" showLabel="false" imageMso="DeclineInvitation" onAction="TextBulletsCrosses" />
                   <menu id="SpecialCharacterMenu" label="Special characters" imageMso="SymbolInsert" showLabel="false">
-                  <button id="TextInsertEuro" label="Euro" onAction="TextInsertEuro" />
-                  <button id="TextInsertCopyright" label="Copyright" onAction="TextInsertCopyright" />
-               </menu>
-               
+                     <button id="TextInsertEuro" label="Euro" onAction="TextInsertEuro" />
+                     <button id="TextInsertCopyright" label="Copyright" onAction="TextInsertCopyright" />
+                  </menu>
                </buttonGroup>
                <buttonGroup id="buttonGroupIndent">
                   <gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false" />
@@ -55,7 +54,7 @@
                <separator id="separator6" />
                <button id="RemoveTextButton" label="Remove text" imageMso="OmsDelete" showLabel="false" onAction="ObjectsRemoveText" />
                <button id="SwapTextButton" label="Swap text (no formatting)" imageMso="PrintPreviewZoomTwoPages" showLabel="false" onAction="ObjectsSwapTextNoFormatting" />
-               <button id="SwapTextButton2" label="Swap text (with formatting)" imageMso="Thesaurus" showLabel="false" onAction="ObjectsSwapText" />                             
+               <button id="SwapTextButton2" label="Swap text (with formatting)" imageMso="Thesaurus" showLabel="false" onAction="ObjectsSwapText" />
                <button idMso="FontsReplaceFonts" showLabel="false" />
                <button id="ChangeSpellCheckLanguage" label="Set proofing language on all objects and all slides" imageMso="SetLanguage" showLabel="false" onAction="ShowChangeSpellCheckLanguageForm" />
                <button idMso="PasteTextOnly" showLabel="false" />
@@ -84,7 +83,7 @@
                <control idMso="ObjectSizeAndPositionDialog" imageMso="PositionFitToWindow" showLabel="false" />
                <control idMso="FormatPainter" showLabel="false" />
                <button id="ObjectsCopyRoundedCorner" label="Copy rounded corner of first selected shape to selected shapes" showLabel="false" imageMso="ShapeRoundedRectangle" onAction="ObjectsCopyRoundedCorner" />
-               <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="GroupShapes" onAction="ObjectsCopyShapeTypeAndAdjustments" />         
+               <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="GroupShapes" onAction="ObjectsCopyShapeTypeAndAdjustments" />
                <toggleButton idMso="ObjectEditPoints" showLabel="false" />
                <menu id="SelectShapeByMenu" label="Select shape by attributes" imageMso="SelectionPane" showLabel="false">
                   <button id="SelectShapesByFillColor" label="Select shapes with same fill color" onAction="ObjectsSelectBySameFillColor" />
@@ -93,8 +92,15 @@
                   <button id="SelectShapesBySameWidthAndHeight" label="Select shapes with same size" onAction="ObjectsSelectBySameWidthAndHeight" />
                   <button id="SelectShapesBySameWidth" label="Select shapes with same width" onAction="ObjectsSelectBySameWidth" />
                   <button id="SelectShapesBySameHeight" label="Select shapes with same height" onAction="ObjectsSelectBySameHeight" />
-                  <button id="SelectShapesBySameType" label="Select shapes with same type" onAction="ObjectsSelectBySameType" />                  
+                  <button id="SelectShapesBySameType" label="Select shapes with same type" onAction="ObjectsSelectBySameType" />
                </menu>
+               <button id="CopyPosition" label="Copy position and dimensions" showLabel="false" imageMso="GroupSizeAndPosition" onAction="CopyPosition" />
+               <splitButton id="PastePositionSplitButton" size="normal" showLabel="false">
+                  <button id="PastePosition" label="Paste position" showLabel="false" imageMso="PasteDuplicate" onAction="PastePosition" />
+                  <menu id="PastePositionMenu" itemSize="normal">
+                     <button id="PastePositionAndDimensions" label="Paste position and dimensions" showLabel="false" imageMso="PasteDuplicate" onAction="PastePositionAndDimensions" />
+                  </menu>
+               </splitButton>
                <separator id="TextMargins" />
                <button id="RemoveMargins" label="Remove margins" showLabel="false" imageMso="PageMarginsGallery" onAction="ObjectsMarginsToZero" />
                <button id="IncreaseMargins" label="Increase margins" showLabel="false" imageMso="UpArrow2" onAction="ObjectsMarginsIncrease" />
@@ -140,16 +146,16 @@
                   <button id="ObjectsSizeNarrowest" imageMso="SizeToNarrowest" label="Size to narrowest" showLabel="false" onAction="ObjectsSizeToNarrowest" />
                </box>
                <separator id="separatorSpacing" />
-                  <button id="ObjectsRemoveSpaceHorizontal" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingHorizontal" />            
-                  <button id="ObjectsIncreaseSpacingHorizontal" imageMso="HorizontalSpacingIncrease" label="Increase horizontal gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingHorizontal" />
-                  <button id="ObjectsDecreaseSpacingHorizontal" imageMso="HorizontalSpacingDecrease" label="Decrease horizontal gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingHorizontal" />
-                  <button id="ObjectsRemoveSpaceVertical" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingVertical" />   
-                  <button id="ObjectsIncreaseSpacingVertical" imageMso="VerticalSpacingIncrease" label="Increase vertical gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingVertical" />
-                  <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />   
+               <button id="ObjectsRemoveSpaceHorizontal" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingHorizontal" />
+               <button id="ObjectsIncreaseSpacingHorizontal" imageMso="HorizontalSpacingIncrease" label="Increase horizontal gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingHorizontal" />
+               <button id="ObjectsDecreaseSpacingHorizontal" imageMso="HorizontalSpacingDecrease" label="Decrease horizontal gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingHorizontal" />
+               <button id="ObjectsRemoveSpaceVertical" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingVertical" />
+               <button id="ObjectsIncreaseSpacingVertical" imageMso="VerticalSpacingIncrease" label="Increase vertical gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingVertical" />
+               <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />
                <separator id="separatorTableAlign" />
-                  <button id="ObjectsAlignToTable" imageMso="GroupTableProperties" label="Center align shapes to table cells" showLabel="false" onAction="ObjectsAlignToTable" />
-                  <button id="ObjectsAlignToTableColumn" imageMso="SpeakByColumns" label="Center align shapes to columns of a table" showLabel="false" onAction="ObjectsAlignToTableColumn" />            
-                  <button id="ObjectsAlignToTableRow" imageMso="SpeakByRows" label="Center align shapes to rows of a table" showLabel="false" onAction="ObjectsAlignToTableRow" />                                           
+               <button id="ObjectsAlignToTable" imageMso="GroupTableProperties" label="Center align shapes to table cells" showLabel="false" onAction="ObjectsAlignToTable" />
+               <button id="ObjectsAlignToTableColumn" imageMso="SpeakByColumns" label="Center align shapes to columns of a table" showLabel="false" onAction="ObjectsAlignToTableColumn" />
+               <button id="ObjectsAlignToTableRow" imageMso="SpeakByRows" label="Center align shapes to rows of a table" showLabel="false" onAction="ObjectsAlignToTableRow" />
             </group>
             <group id="TableGroup" label="Table" imageMso="TableInsert">
                <gallery idMso="TableInsertGallery" showLabel="false" />
@@ -161,13 +167,13 @@
                <button idMso="TableDeleteRows" showLabel="false" />
                <button idMso="TableRowsDistribute" showLabel="false" />
                <button idMso="TableColumnsDistribute" showLabel="false" />
-               <button idMso="TableStyleClearTable"  showLabel="false"  />
-               <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" /> 
+               <button idMso="TableStyleClearTable" showLabel="false" />
+               <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" />
                <separator id="separator7" />
-               <gallery idMso="ShadingColorPicker" showLabel="false"  />
-               <gallery idMso="TableBorderPenColorPicker" showLabel="false"/>
+               <gallery idMso="ShadingColorPicker" showLabel="false" />
+               <gallery idMso="TableBorderPenColorPicker" showLabel="false" />
                <gallery idMso="TableBackgroundGallery" showLabel="false" />
-               <splitButton idMso="TableBordersMenu" showLabel="false"/>
+               <splitButton idMso="TableBordersMenu" showLabel="false" />
                <separator id="separator8" />
                <toggleButton idMso="TableCellAlignBottom" showLabel="false" />
                <toggleButton idMso="TableCellAlignCenterVertically" showLabel="false" />
@@ -188,85 +194,85 @@
                <button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
             </group>
             <group id="PasteGroup" label="Paste and insert" imageMso="PasteAlternative">
-               <box id="PasteGroupBox1" boxStyle="horizontal"> 
-               <button idMso="PasteJpeg" showLabel="false" />
-               <button idMso="PastePng" showLabel="false" />
-               <button idMso="ScreenClipping" showLabel="false" />
-               <button idMso="DateAndTimeInsert" showLabel="false" />
-                <button id="AgendaPages" imageMso="CreateLabels" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" /> 
+               <box id="PasteGroupBox1" boxStyle="horizontal">
+                  <button idMso="PasteJpeg" showLabel="false" />
+                  <button idMso="PastePng" showLabel="false" />
+                  <button idMso="ScreenClipping" showLabel="false" />
+                  <button idMso="DateAndTimeInsert" showLabel="false" />
+                  <button id="AgendaPages" imageMso="CreateLabels" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" />
                </box>
                <box id="PasteGroupBox2" boxStyle="horizontal">
-               <menu id="HarveyBallsMenu" label="Harvey Balls" imageMso="Drawing1GalleryContrast" showLabel="false">
-                  <button id="HarveyBall10" label="10%" onAction="GenerateHarveyBall10" />
-                  <button id="HarveyBall20" label="20%" onAction="GenerateHarveyBall20" />
-                  <button id="HarveyBall25" label="25%" onAction="GenerateHarveyBall25" />
-                  <button id="HarveyBall30" label="30%" onAction="GenerateHarveyBall30" />
-                  <button id="HarveyBall33" label="33%" onAction="GenerateHarveyBall33" />
-                  <button id="HarveyBall40" label="40%" onAction="GenerateHarveyBall40" />
-                  <button id="HarveyBall50" label="50%" onAction="GenerateHarveyBall50" />
-                  <button id="HarveyBall60" label="60%" onAction="GenerateHarveyBall60" />
-                  <button id="HarveyBall67" label="67%" onAction="GenerateHarveyBall67" />
-                  <button id="HarveyBall70" label="70%" onAction="GenerateHarveyBall70" />
-                  <button id="HarveyBall75" label="75%" onAction="GenerateHarveyBall75" />
-                  <button id="HarveyBall80" label="80%" onAction="GenerateHarveyBall80" />
-                  <button id="HarveyBall90" label="90%" onAction="GenerateHarveyBall90" />
-                  <button id="HarveyBall100" label="100%" onAction="GenerateHarveyBall100" />
-                  <menuSeparator id="HarveySeparator" />
-                  <button id="HarveyBallCustom" label="Custom..." onAction="GenerateHarveyBallCustom" />
-               </menu>
-               <menu id="FivePointStarMenu" label="Star rating" imageMso="StarRatedFull" showLabel="false">
-                  <button id="FivePointStar05" label="0.5 star" onAction="GenerateFivePointStars05" />
-                  <button id="FivePointStar10" label="1 star" onAction="GenerateFivePointStars10" />
-                  <button id="FivePointStar15" label="1.5 star" onAction="GenerateFivePointStars15" />
-                  <button id="FivePointStar20" label="2 star" onAction="GenerateFivePointStars20" />
-                  <button id="FivePointStar25" label="2.5 star" onAction="GenerateFivePointStars25" />
-                  <button id="FivePointStar30" label="3 star" onAction="GenerateFivePointStars30" />
-                  <button id="FivePointStar35" label="3.5 star" onAction="GenerateFivePointStars35" />
-                  <button id="FivePointStar40" label="4 star" onAction="GenerateFivePointStars40" />
-                  <button id="FivePointStar45" label="4.5 star" onAction="GenerateFivePointStars45" />
-                  <button id="FivePointStar50" label="5 star" onAction="GenerateFivePointStars50" />
-               </menu>                  
-                <menu id="RAGStatusMenu" label="RAG status" imageMso="AppointmentColorDialog" showLabel="false">
-                  <button id="RAGStatusRed" label="Red" onAction="GenerateRAGStatusRed" />
-                  <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" />
-                  <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" />
-               </menu>
-                </box>
-               <box id="PasteGroupBox3" boxStyle="horizontal">                                
-             <splitButton id="NoteSplitButton" size="normal" showLabel="false"> 
-            <button id="NewNoteButton" label="Note" imageMso="NewNote" onAction="GenerateStickyNote" /> 
-            <menu id="NoteMenu" itemSize="normal" > 
-              <button id="NotesMoveOffSlide" label="Move notes off this slide" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffSlide" /> 
-              <button id="NotesMoveOnSlide" label="Move notes on this slide" imageMso="OutlineMoveDown" onAction="MoveStickyNotesOnSlide" />
-              <button id="DeleteNotesOnSlide" label="Delete notes on this slide"  imageMso="Delete" onAction="DeleteStickyNotesOnSlide" />
-              <menuSeparator id="separatorNotesAllSlides" /> 
-              <button id="NotesMoveOffAllSlides" label="Move notes off all slides" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffAllSlides" /> 
-              <button id="NotesMoveOnAllSlides" label="Move notes on all slides" imageMso="OutlineMoveDown" onAction="MoveStickyNotesOnAllSlides" />
-              <button id="DeleteNotesOnAllSlides" label="Delete notes on all slides" imageMso="Delete" onAction="DeleteStickyNotesOnAllSlides" /> 
-              <menuSeparator id="separatorCommentsConversion" /> 
-              <button id="ConvertCommentsToStickyNotes" label="Convert comments on this slide to notes" imageMso="ReviewShowAllComments" onAction="ConvertCommentsToStickyNotes" /> 
-            </menu> 
-          </splitButton>
-            <splitButton id="StepsCounterSplitButton" size="normal" showLabel="false"> 
-            <button id="NewStepsCounterButton" label="Steps counter" imageMso="_1" onAction="GenerateStepsCounter" /> 
-            <menu id="StepCounterMenu" itemSize="normal" > 
-              <button id="NewCrossSlideStepsCounterButton" label="Add cross-slide steps counter" onAction="GenerateCrossSlideStepsCounter" /> 
-              <menuSeparator id="separatorStepsCounterSelect" />
-              <button id="SelectAllStepsCounter" label="Select all step counters on this slide"  onAction="SelectAllStepsCounter" />
-              <button id="SelectAllCrossSlideStepsCounter" label="Select all cross-slide step counters on this slide"  onAction="SelectAllCrossSlideStepsCounter" />
-            </menu> 
-          </splitButton> 
-              <menu id="StampsMenu" label="Stamps" imageMso="NameDefine" showLabel="false">
-	<button id="StampConfidential" label="CONFIDENTIAL" onAction="GenerateStampConfidential" />
-	<button id="StampDoNotDistribute" label="DO NOT DISTRIBUTE" onAction="GenerateStampDoNotDistribute" />
-	<button id="StampDraft" label="DRAFT" onAction="GenerateStampDraft" />
-	<button id="StampUpdated" label="UPDATED" onAction="GenerateStampUpdated" />
-	<button id="StampNew" label="NEW" onAction="GenerateStampNew" />
-	<button id="StampToBeRemoved" label="TO BE REMOVED" onAction="GenerateStampToBeRemoved" />
-	<button id="StampToAppendix" label="TO APPENDIX" onAction="GenerateStampToAppendix" />
-</menu>         
-      <button id="InsertProcessSmartArt" imageMso="OutlineDemoteToBodyText" label="Insert process (SmartArt)" showLabel="false" onAction="InsertProcessSmartArt" /> 
-               </box>   
+                  <menu id="HarveyBallsMenu" label="Harvey Balls" imageMso="Drawing1GalleryContrast" showLabel="false">
+                     <button id="HarveyBall10" label="10%" onAction="GenerateHarveyBall10" />
+                     <button id="HarveyBall20" label="20%" onAction="GenerateHarveyBall20" />
+                     <button id="HarveyBall25" label="25%" onAction="GenerateHarveyBall25" />
+                     <button id="HarveyBall30" label="30%" onAction="GenerateHarveyBall30" />
+                     <button id="HarveyBall33" label="33%" onAction="GenerateHarveyBall33" />
+                     <button id="HarveyBall40" label="40%" onAction="GenerateHarveyBall40" />
+                     <button id="HarveyBall50" label="50%" onAction="GenerateHarveyBall50" />
+                     <button id="HarveyBall60" label="60%" onAction="GenerateHarveyBall60" />
+                     <button id="HarveyBall67" label="67%" onAction="GenerateHarveyBall67" />
+                     <button id="HarveyBall70" label="70%" onAction="GenerateHarveyBall70" />
+                     <button id="HarveyBall75" label="75%" onAction="GenerateHarveyBall75" />
+                     <button id="HarveyBall80" label="80%" onAction="GenerateHarveyBall80" />
+                     <button id="HarveyBall90" label="90%" onAction="GenerateHarveyBall90" />
+                     <button id="HarveyBall100" label="100%" onAction="GenerateHarveyBall100" />
+                     <menuSeparator id="HarveySeparator" />
+                     <button id="HarveyBallCustom" label="Custom..." onAction="GenerateHarveyBallCustom" />
+                  </menu>
+                  <menu id="FivePointStarMenu" label="Star rating" imageMso="StarRatedFull" showLabel="false">
+                     <button id="FivePointStar05" label="0.5 star" onAction="GenerateFivePointStars05" />
+                     <button id="FivePointStar10" label="1 star" onAction="GenerateFivePointStars10" />
+                     <button id="FivePointStar15" label="1.5 star" onAction="GenerateFivePointStars15" />
+                     <button id="FivePointStar20" label="2 star" onAction="GenerateFivePointStars20" />
+                     <button id="FivePointStar25" label="2.5 star" onAction="GenerateFivePointStars25" />
+                     <button id="FivePointStar30" label="3 star" onAction="GenerateFivePointStars30" />
+                     <button id="FivePointStar35" label="3.5 star" onAction="GenerateFivePointStars35" />
+                     <button id="FivePointStar40" label="4 star" onAction="GenerateFivePointStars40" />
+                     <button id="FivePointStar45" label="4.5 star" onAction="GenerateFivePointStars45" />
+                     <button id="FivePointStar50" label="5 star" onAction="GenerateFivePointStars50" />
+                  </menu>
+                  <menu id="RAGStatusMenu" label="RAG status" imageMso="AppointmentColorDialog" showLabel="false">
+                     <button id="RAGStatusRed" label="Red" onAction="GenerateRAGStatusRed" />
+                     <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" />
+                     <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" />
+                  </menu>
+               </box>
+               <box id="PasteGroupBox3" boxStyle="horizontal">
+                  <splitButton id="NoteSplitButton" size="normal" showLabel="false">
+                     <button id="NewNoteButton" label="Note" imageMso="NewNote" onAction="GenerateStickyNote" />
+                     <menu id="NoteMenu" itemSize="normal">
+                        <button id="NotesMoveOffSlide" label="Move notes off this slide" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffSlide" />
+                        <button id="NotesMoveOnSlide" label="Move notes on this slide" imageMso="OutlineMoveDown" onAction="MoveStickyNotesOnSlide" />
+                        <button id="DeleteNotesOnSlide" label="Delete notes on this slide" imageMso="Delete" onAction="DeleteStickyNotesOnSlide" />
+                        <menuSeparator id="separatorNotesAllSlides" />
+                        <button id="NotesMoveOffAllSlides" label="Move notes off all slides" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffAllSlides" />
+                        <button id="NotesMoveOnAllSlides" label="Move notes on all slides" imageMso="OutlineMoveDown" onAction="MoveStickyNotesOnAllSlides" />
+                        <button id="DeleteNotesOnAllSlides" label="Delete notes on all slides" imageMso="Delete" onAction="DeleteStickyNotesOnAllSlides" />
+                        <menuSeparator id="separatorCommentsConversion" />
+                        <button id="ConvertCommentsToStickyNotes" label="Convert comments on this slide to notes" imageMso="ReviewShowAllComments" onAction="ConvertCommentsToStickyNotes" />
+                     </menu>
+                  </splitButton>
+                  <splitButton id="StepsCounterSplitButton" size="normal" showLabel="false">
+                     <button id="NewStepsCounterButton" label="Steps counter" imageMso="_1" onAction="GenerateStepsCounter" />
+                     <menu id="StepCounterMenu" itemSize="normal">
+                        <button id="NewCrossSlideStepsCounterButton" label="Add cross-slide steps counter" onAction="GenerateCrossSlideStepsCounter" />
+                        <menuSeparator id="separatorStepsCounterSelect" />
+                        <button id="SelectAllStepsCounter" label="Select all step counters on this slide" onAction="SelectAllStepsCounter" />
+                        <button id="SelectAllCrossSlideStepsCounter" label="Select all cross-slide step counters on this slide" onAction="SelectAllCrossSlideStepsCounter" />
+                     </menu>
+                  </splitButton>
+                  <menu id="StampsMenu" label="Stamps" imageMso="NameDefine" showLabel="false">
+                     <button id="StampConfidential" label="CONFIDENTIAL" onAction="GenerateStampConfidential" />
+                     <button id="StampDoNotDistribute" label="DO NOT DISTRIBUTE" onAction="GenerateStampDoNotDistribute" />
+                     <button id="StampDraft" label="DRAFT" onAction="GenerateStampDraft" />
+                     <button id="StampUpdated" label="UPDATED" onAction="GenerateStampUpdated" />
+                     <button id="StampNew" label="NEW" onAction="GenerateStampNew" />
+                     <button id="StampToBeRemoved" label="TO BE REMOVED" onAction="GenerateStampToBeRemoved" />
+                     <button id="StampToAppendix" label="TO APPENDIX" onAction="GenerateStampToAppendix" />
+                  </menu>
+                  <button id="InsertProcessSmartArt" imageMso="OutlineDemoteToBodyText" label="Insert process (SmartArt)" showLabel="false" onAction="InsertProcessSmartArt" />
+               </box>
             </group>
             <group id="AllGroup" label="Advanced" imageMso="AdvancedFileProperties">
                <button idMso="ReplaceDialog" showLabel="false" />
