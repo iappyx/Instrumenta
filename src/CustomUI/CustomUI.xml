@@ -298,6 +298,7 @@
                   <button id="cleaning5" label="Remove unused master slides" imageMso="Clear" onAction="CleanUpRemoveUnusedMasterSlides" />
                </menu>
                <toggleButton idMso="SelectionPane" showLabel="false" />
+                 <button id="ShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="WebControlHidden" onAction="ShowFormManageTags" />             
                <button id="ShowAboutDialogButton" label="Show about dialog" showLabel="false" imageMso="Help" onAction="ShowAboutDialog" />
             </group>
          </tab>
