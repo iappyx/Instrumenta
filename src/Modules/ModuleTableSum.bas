@@ -61,3 +61,44 @@ Sub TableSum()
     End If
 
 End Sub
+
+Sub TableRowSum()
+
+    Set myDocument = Application.ActiveWindow
+    Dim TotalSum As Double
+    TotalSum = 0
+    
+    If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
+        
+    With Application.ActiveWindow.Selection.ShapeRange.Table
+        
+        For RowsCount = 1 To .Rows.Count
+            For ColsCount = 1 To .Columns.Count
+                
+                If .Cell(RowsCount, ColsCount).Selected Then
+                
+                For SumCount = 1 To ColsCount - 1
+                
+                On Error Resume Next
+                TotalSum = TotalSum + CDbl(.Cell(RowsCount, SumCount).Shape.TextFrame.TextRange.Text)
+                On Error GoTo 0
+                
+                Next SumCount
+                    
+                .Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Text = TotalSum
+                
+                TotalSum = 0
+                End If
+                
+            Next ColsCount
+        Next RowsCount
+        
+    End With
+    
+    Else
+    
+    MsgBox "No table or cells selected."
+    
+    End If
+
+End Sub

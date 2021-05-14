@@ -174,7 +174,12 @@
                <button idMso="TableColumnsDistribute" showLabel="false" />
                <button idMso="TableStyleClearTable" showLabel="false" />
                <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" />
-               <button id="TableSumButton" imageMso="AutoSum" label="Sum column (values above selected cell)" showLabel="false" onAction="TableSum" />
+               <splitButton id="TableSumSplitButton" size="normal" showLabel="false">
+               <button id="TableSumButton" imageMso="AutoSum" label="Sum column (values above selected cells)" showLabel="false" onAction="TableSum" />
+                     <menu id="TableSumMenu" itemSize="normal">
+                        <button id="TableRowSumButton" imageMso="AutoSum" label="Sum row (values left from selected cells)" showLabel="false" onAction="TableRowSum" />
+                     </menu>
+                  </splitButton>
                <separator id="separator7" />
                <gallery idMso="ShadingColorPicker" showLabel="false" />
                <gallery idMso="TableBorderPenColorPicker" showLabel="false" />
