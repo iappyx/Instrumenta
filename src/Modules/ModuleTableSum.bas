@@ -45,7 +45,8 @@ Sub TableSum()
                 Next SumCount
                     
                 .Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Text = TotalSum
-                    
+                
+                TotalSum = 0
                 End If
                 
             Next ColsCount
