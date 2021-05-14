@@ -61,6 +61,7 @@ Current features include:
 - Insert special characters
 - Insert process (SmartArt)
 - Manage hidden PowerPoint tags of slides and shapes
+- Sum column in table (all values above selected cell)
 
 # Platform support
 All functions supported in Windows. 
