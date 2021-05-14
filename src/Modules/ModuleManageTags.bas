@@ -49,7 +49,7 @@ Sub ShowFormManageTags()
             Next
             
         Next
-        ManageTagsForm.ShapeLabel.Caption = "Tags For selected shape(s):"
+        ManageTagsForm.ShapeLabel.Caption = "Tags for selected shape(s):"
         ManageTagsForm.Show
         
     ElseIf Application.ActiveWindow.Selection.Type = ppSelectionSlides Then
@@ -70,7 +70,7 @@ Sub ShowFormManageTags()
             
         Next
         
-        ManageTagsForm.ShapeLabel.Caption = "Tags For selected slide(s):"
+        ManageTagsForm.ShapeLabel.Caption = "Tags for selected slide(s):"
         ManageTagsForm.Show
         
     Else
@@ -114,6 +114,8 @@ Sub DeleteAllTags()
     
     If TypeOfTag = "slide" Then
         
+        If MsgBox("This will delete all tags above, are you sure?", vbYesNo) = vbNo Then Exit Sub
+
         For SelectedCount = 0 To ManageTagsForm.TagsListBox.ListCount - 1
             
             Application.ActiveWindow.Selection.SlideRange(CLng(ManageTagsForm.TagsListBox.List(SelectedCount, 0))).Tags.Delete ManageTagsForm.TagsListBox.List(SelectedCount, 2)
@@ -123,6 +125,8 @@ Sub DeleteAllTags()
         ShowFormManageTags
         
     ElseIf TypeOfTag = "shape" Then
+        
+        If MsgBox("This will delete all tags above, are you sure?", vbYesNo) = vbNo Then Exit Sub
         
         For SelectedCount = 0 To ManageTagsForm.TagsListBox.ListCount - 1
             
@@ -147,7 +151,6 @@ Sub AddTag()
         
         ManageTagsForm.AddTagIdTextBox.Value = ""
         ManageTagsForm.AddTagValueTextBox.Value = ""
-        
         ManageTagsForm.Hide
         ShowFormManageTags
         
@@ -161,7 +164,6 @@ Sub AddTag()
         
         ManageTagsForm.AddTagIdTextBox.Value = ""
         ManageTagsForm.AddTagValueTextBox.Value = ""
-        
         ManageTagsForm.Hide
         ShowFormManageTags
         
