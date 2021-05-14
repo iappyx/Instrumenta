@@ -60,6 +60,7 @@ Current features include:
 - Remove stamps from this slide / all slides
 - Insert special characters
 - Insert process (SmartArt)
+- Manage hidden PowerPoint tags of slides and shapes
 
 # Platform support
 All functions supported in Windows. 
