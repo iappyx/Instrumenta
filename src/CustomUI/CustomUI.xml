@@ -15,15 +15,17 @@
                   <toggleButton idMso="Bold" showLabel="false" />
                   <toggleButton idMso="Italic" showLabel="false" />
                   <toggleButton idMso="Underline" showLabel="false" />
-                  <toggleButton idMso="Strikethrough" showLabel="false" />
-                  <toggleButton idMso="Superscript" showLabel="false" />
-                  <toggleButton idMso="Subscript" showLabel="false" />
                   <toggleButton idMso="Shadow" showLabel="false" />
+                  <toggleButton idMso="Strikethrough" showLabel="false" />
                   <gallery idMso="CharacterSpacingGallery" showLabel="false" />
                   <gallery idMso="ChangeCaseGallery" showLabel="false" />
                   <gallery idMso="FontColorPicker" showLabel="false" />
                   <button idMso="EyedropperFillText" showLabel="false" />
                </box>
+               <box id="FontBox3" boxStyle="horizontal">
+                  <toggleButton idMso="Superscript" showLabel="false" />
+                  <toggleButton idMso="Subscript" showLabel="false" />                  
+               </box>        
             </group>
             <group id="TextGroup" label="Text" imageMso="MenuView2">
                <buttonGroup id="buttonGroupAlignText">
@@ -63,10 +65,9 @@
                <gallery idMso="ShapeFillColorPicker" showLabel="false" />
                <gallery idMso="ShapeStylesGallery" showLabel="false" />
                <gallery idMso="ShapeChangeShapeGallery" showLabel="false" />
+               <button idMso="EyedropperFill" showLabel="false" />
                <gallery idMso="GradientGallery" showLabel="false" />
                <button idMso="ObjectPictureFill" showLabel="false" />
-               <gallery idMso="ShapeFillTextureGallery" showLabel="false" />
-               <button idMso="EyedropperFill" showLabel="false" />
                <separator id="seperatorShapeOutline" />
                <gallery idMso="ShapeOutlineColorPicker" showLabel="false" />
                <gallery idMso="OutlineDashesGallery" showLabel="false" />
@@ -166,9 +167,9 @@
                <gallery idMso="TableInsertGallery" showLabel="false" />
                <button idMso="TableInsertColumnsLeft" showLabel="false" />
                <button idMso="TableInsertColumnsRight" showLabel="false" />
+               <button idMso="TableDeleteColumns" showLabel="false" />
                <button idMso="TableInsertRowsAbove" showLabel="false" />
                <button idMso="TableInsertRowsBelow" showLabel="false" />
-               <button idMso="TableDeleteColumns" showLabel="false" />
                <button idMso="TableDeleteRows" showLabel="false" />
                <button idMso="TableRowsDistribute" showLabel="false" />
                <button idMso="TableColumnsDistribute" showLabel="false" />
