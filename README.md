@@ -60,7 +60,10 @@ Current features include:
 - Remove stamps from this slide / all slides
 - Insert special characters
 - Insert process (SmartArt)
-- Manage hidden PowerPoint tags of slides and shapes
+- Add (hidden) tags to slides and shapes
+- Manage (hidden) tags of slides and shapes
+- Select sliderange based on tags
+- Select sliderange based on specific stamps on those slide
 - Sum columns in table (all values above selected cells)
 - Sum rows in table (all values left from selected cells)
 
