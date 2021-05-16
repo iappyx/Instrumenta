@@ -29,16 +29,16 @@ Sub GenerateStepsCounter()
     Dim NumberOfSteps As Long
     
     NumberOfSteps = 0
-    For shapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(shapeNumber).Name, "StepsCounter") = 1 Then
+        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StepsCounter") = 1 Then
             On Error Resume Next
-            If CLng(myDocument.Selection.SlideRange.Shapes(shapeNumber).TextFrame.TextRange.Text) > NumberOfSteps Then
-                NumberOfSteps = CLng(myDocument.Selection.SlideRange.Shapes(shapeNumber).TextFrame.TextRange.Text)
-                myDocument.Selection.SlideRange.Shapes(shapeNumber).PickUp
-                CounterHeight = myDocument.Selection.SlideRange.Shapes(shapeNumber).Height
-                CounterWidth = myDocument.Selection.SlideRange.Shapes(shapeNumber).Width
-                CounterShape = myDocument.Selection.SlideRange.Shapes(shapeNumber).AutoShapeType
+            If CLng(myDocument.Selection.SlideRange.Shapes(ShapeNumber).TextFrame.TextRange.Text) > NumberOfSteps Then
+                NumberOfSteps = CLng(myDocument.Selection.SlideRange.Shapes(ShapeNumber).TextFrame.TextRange.Text)
+                myDocument.Selection.SlideRange.Shapes(ShapeNumber).PickUp
+                CounterHeight = myDocument.Selection.SlideRange.Shapes(ShapeNumber).Height
+                CounterWidth = myDocument.Selection.SlideRange.Shapes(ShapeNumber).Width
+                CounterShape = myDocument.Selection.SlideRange.Shapes(ShapeNumber).AutoShapeType
                 
             End If
             On Error GoTo 0
@@ -53,6 +53,7 @@ Sub GenerateStepsCounter()
         .Fill.ForeColor.RGB = RGB(0, 112, 192)
         .Fill.Transparency = 0.1
         .Name = "StepsCounter" + Str(RandomNumber)
+        .Tags.Add "INSTRUMENTA STEPSCOUNTER", (NumberOfSteps + 1)
         
         With .TextFrame
             .MarginBottom = 0
@@ -120,17 +121,17 @@ Sub GenerateCrossSlideStepsCounter()
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        For ShapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
             
-            If InStr(PresentationSlide.Shapes(shapeNumber).Name, "CrossSlideStepsCounter") = 1 Then
+            If InStr(PresentationSlide.Shapes(ShapeNumber).Name, "CrossSlideStepsCounter") = 1 Then
                 
                 On Error Resume Next
-                If CLng(PresentationSlide.Shapes(shapeNumber).TextFrame.TextRange.Text) > NumberOfSteps Then
-                    NumberOfSteps = CLng(PresentationSlide.Shapes(shapeNumber).TextFrame.TextRange.Text)
-                    PresentationSlide.Shapes(shapeNumber).PickUp
-                    CounterHeight = PresentationSlide.Shapes(shapeNumber).Height
-                    CounterWidth = PresentationSlide.Shapes(shapeNumber).Width
-                    CounterShape = PresentationSlide.Shapes(shapeNumber).AutoShapeType
+                If CLng(PresentationSlide.Shapes(ShapeNumber).TextFrame.TextRange.Text) > NumberOfSteps Then
+                    NumberOfSteps = CLng(PresentationSlide.Shapes(ShapeNumber).TextFrame.TextRange.Text)
+                    PresentationSlide.Shapes(ShapeNumber).PickUp
+                    CounterHeight = PresentationSlide.Shapes(ShapeNumber).Height
+                    CounterWidth = PresentationSlide.Shapes(ShapeNumber).Width
+                    CounterShape = PresentationSlide.Shapes(ShapeNumber).AutoShapeType
                     
                 End If
                 On Error GoTo 0
@@ -148,6 +149,7 @@ Sub GenerateCrossSlideStepsCounter()
         .Fill.ForeColor.RGB = RGB(112, 192, 0)
         .Fill.Transparency = 0.1
         .Name = "CrossSlideStepsCounter" + Str(RandomNumber)
+        .Tags.Add "INSTRUMENTA CROSSSLIDE STEPSCOUNTER", (NumberOfSteps + 1)
         
         With .TextFrame
             .MarginBottom = 0

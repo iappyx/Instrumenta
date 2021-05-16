@@ -39,7 +39,7 @@ Sub EmailSelectedSlides()
         'Delete any previous export tags
         On Error Resume Next
         For Each PresentationSlides In ThisPresentation.Slides
-            PresentationSlides.Tags.Delete ("EXPORT")
+            PresentationSlides.Tags.Delete ("INSTRUMENTA EXPORT")
         Next PresentationSlides
         
         'Strip extension from filename
@@ -54,7 +54,7 @@ Sub EmailSelectedSlides()
         EmailSubject = PresentationFilename
         PresentationFilename = PresentationFilename & " (slide "
         For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.Count
-            ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "EXPORT", "YES"
+            ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
             If SlideLoop <> ActiveWindow.Selection.SlideRange.Count Then
                 PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex & ","
             Else
@@ -69,7 +69,7 @@ Sub EmailSelectedSlides()
         ThisPresentation.SaveCopyAs Environ("TEMP") & "\" & PresentationFilename & ".pptx"
         Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
         For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
-            If TemporaryPresentation.Slides(SlideLoop).Tags("EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
+            If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
         TemporaryPresentation.Save
         TemporaryPresentation.Close
@@ -136,7 +136,7 @@ Sub EmailSelectedSlidesAsPDF()
         EmailSubject = PresentationFilename
         PresentationFilename = PresentationFilename & " (slide "
         For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.Count
-            ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "EXPORT", "YES"
+            ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
             If SlideLoop <> ActiveWindow.Selection.SlideRange.Count Then
                 PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex & ","
             Else

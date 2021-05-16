@@ -34,7 +34,7 @@ Sub CreateOrUpdateMasterAgenda()
         
         'Check if master slide already exists
         For SlideLoop = ActivePresentation.Slides.Count To 1 Step -1
-            If ActivePresentation.Slides(SlideLoop).Tags("MASTERAGENDAPAGE") = "YES" Then
+            If ActivePresentation.Slides(SlideLoop).Tags("INSTRUMENTA MASTER AGENDA PAGE") = "YES" Then
                 
                 hasMasterAgenda = True
                 
@@ -42,7 +42,7 @@ Sub CreateOrUpdateMasterAgenda()
                 
                 For ShapeLoop = 1 To AgendaSlide.Shapes.Count
                     
-                    If AgendaSlide.Shapes(ShapeLoop).Tags("AGENDATEXTBOX") = "YES" Then
+                    If AgendaSlide.Shapes(ShapeLoop).Tags("INSTRUMENTA AGENDA TEXTSHAPE") = "YES" Then
                         
                         Set AgendaShape = AgendaSlide.Shapes(ShapeLoop)
                         Set OldAgendaShape = AgendaShape.Duplicate
@@ -62,12 +62,18 @@ Sub CreateOrUpdateMasterAgenda()
         'If master does not exist, create one
         If hasMasterAgenda = False Then
             
-            Set AgendaSlide = ActivePresentation.Slides.AddSlide(2, ActivePresentation.Slides(1).CustomLayout)
+            If ActivePresentation.Slides.Count = 0 Then
+                Set AgendaSlide = ActivePresentation.Slides.AddSlide(1, ActivePresentation.SlideMaster.CustomLayouts(1))
+            ElseIf ActivePresentation.Slides.Count = 1 Then
+                Set AgendaSlide = ActivePresentation.Slides.AddSlide(2, ActivePresentation.Slides(1).CustomLayout)
+            Else
+                Set AgendaSlide = ActivePresentation.Slides.AddSlide(2, ActivePresentation.Slides(2).CustomLayout)
+            End If
             
             Set AgendaShape = AgendaSlide.Shapes.AddTextbox(msoTextOrientationHorizontal, 100, 100, Application.ActivePresentation.PageSetup.SlideWidth - 200, 50)
             AgendaShape.Name = "AgendaTextBox"
-            AgendaSlide.Tags.Add "MASTERAGENDAPAGE", "YES"
-            AgendaShape.Tags.Add "AGENDATEXTBOX", "YES"
+            AgendaSlide.Tags.Add "INSTRUMENTA MASTER AGENDA PAGE", "YES"
+            AgendaShape.Tags.Add "INSTRUMENTA AGENDA TEXTSHAPE", "YES"
         End If
         
         With ActivePresentation.SectionProperties
@@ -201,7 +207,7 @@ Sub CreateAgendaPages()
     
     For SlideLoop = ActivePresentation.Slides.Count To 1 Step -1
         
-        If ActivePresentation.Slides(SlideLoop).Tags("AGENDAPAGE") = "YES" Then
+        If ActivePresentation.Slides(SlideLoop).Tags("INSTRUMENTA AGENDA PAGE") = "YES" Then
             
             ActivePresentation.Slides(SlideLoop).Delete
             
@@ -211,11 +217,11 @@ Sub CreateAgendaPages()
     
     For SlideLoop = 1 To ActivePresentation.Slides.Count
         
-        If ActivePresentation.Slides(SlideLoop).Tags("MASTERAGENDAPAGE") = "YES" Then
+        If ActivePresentation.Slides(SlideLoop).Tags("INSTRUMENTA MASTER AGENDA PAGE") = "YES" Then
             
             For ShapeLoop = 1 To ActivePresentation.Slides(SlideLoop).Shapes.Count
                 
-                If ActivePresentation.Slides(SlideLoop).Shapes(ShapeLoop).Tags("AGENDATEXTBOX") = "YES" Then
+                If ActivePresentation.Slides(SlideLoop).Shapes(ShapeLoop).Tags("INSTRUMENTA AGENDA TEXTSHAPE") = "YES" Then
                     
                     Set MasterAgendaSlide = ActivePresentation.Slides(SlideLoop)
                     
@@ -233,13 +239,13 @@ Sub CreateAgendaPages()
         
         For NumberOfSections = 2 To ActivePresentation.SectionProperties.Count - 1
             Set NewSlide = MasterAgendaSlide.Duplicate
-            NewSlide.Tags.Add "MASTERAGENDAPAGE", "NO"
-            NewSlide.Tags.Add "AGENDAPAGE", "YES"
+            NewSlide.Tags.Add "INSTRUMENTA MASTER AGENDA PAGE", "NO"
+            NewSlide.Tags.Add "INSTRUMENTA AGENDA PAGE", "YES"
             NewSlide.MoveToSectionStart (NumberOfSections + 1)
             
             For ShapeLoop = 1 To NewSlide.Shapes.Count
                 
-                If NewSlide.Shapes(ShapeLoop).Tags("AGENDATEXTBOX") = "YES" Then
+                If NewSlide.Shapes(ShapeLoop).Tags("INSTRUMENTA AGENDA TEXTSHAPE") = "YES" Then
                     Set AgendaTextBox = NewSlide.Shapes(ShapeLoop)
                 End If
                 

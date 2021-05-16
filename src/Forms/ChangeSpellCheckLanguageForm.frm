@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ChangeSpellCheckLanguageForm 
    Caption         =   "Set proofing language"
-   ClientHeight    =   1638
+   ClientHeight    =   1635
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   4560

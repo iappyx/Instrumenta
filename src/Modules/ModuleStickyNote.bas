@@ -29,9 +29,9 @@ Sub GenerateStickyNote()
     Dim NumberOfStickies As Long
     NumberOfStickies = 0
     
-    For shapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
+        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
             NumberOfStickies = NumberOfStickies + 1
         End If
         
@@ -63,6 +63,8 @@ Sub GenerateStickyNote()
             End With
             
         End With
+        
+        .Tags.Add "INSTRUMENTA STICKYNOTE", NumberOfStickies
     End With
     
 End Sub
@@ -75,9 +77,9 @@ Sub ConvertCommentsToStickyNotes()
     Dim NumberOfStickies As Long
     NumberOfStickies = 0
     
-    For shapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
+        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
             NumberOfStickies = NumberOfStickies + 1
         End If
         
@@ -97,6 +99,7 @@ Sub ConvertCommentsToStickyNotes()
             .Name = "StickyNote" + Str(RandomNumber)
             .Left = myDocument.Selection.SlideRange.Comments(CommentsCount).Left
             .Top = myDocument.Selection.SlideRange.Comments(CommentsCount).Top
+            .Tags.Add "INSTRUMENTA STICKYNOTE", NumberOfStickies
             
             With .TextFrame
                 .MarginBottom = 2
@@ -134,15 +137,15 @@ End Sub
 Sub MoveStickyNotesOffSlide()
     Set myDocument = Application.ActiveWindow
     
-    For shapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
+        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
             
-            myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags.Add "OLDPOSITIONTOP", CStr(myDocument.Selection.SlideRange.Shapes(shapeNumber).Top)
-            myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags.Add "OLDPOSITIONLEFT", CStr(myDocument.Selection.SlideRange.Shapes(shapeNumber).Left)
+            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION TOP", CStr(myDocument.Selection.SlideRange.Shapes(ShapeNumber).Top)
+            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(myDocument.Selection.SlideRange.Shapes(ShapeNumber).Left)
             
             
-            With myDocument.Selection.SlideRange.Shapes(shapeNumber)
+            With myDocument.Selection.SlideRange.Shapes(ShapeNumber)
             ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .Left - .Width)
             ShapeBottom = (Application.ActivePresentation.PageSetup.SlideHeight - .Top - .Height)
                              
@@ -174,11 +177,11 @@ End Sub
 Sub MoveStickyNotesOnSlide()
     Set myDocument = Application.ActiveWindow
     
-    For shapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
         On Error Resume Next
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
-            myDocument.Selection.SlideRange.Shapes(shapeNumber).Top = CLng(myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags("OLDPOSITIONTOP"))
-            myDocument.Selection.SlideRange.Shapes(shapeNumber).Left = CLng(myDocument.Selection.SlideRange.Shapes(shapeNumber).Tags("OLDPOSITIONLEFT"))
+        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Top = CLng(myDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION TOP"))
+            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Left = CLng(myDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
             
         End If
         On Error GoTo 0
@@ -189,10 +192,10 @@ End Sub
 Sub DeleteStickyNotesOnSlide()
     Set myDocument = Application.ActiveWindow
     
-    For shapeNumber = myDocument.Selection.SlideRange.Shapes.Count To 1 Step -1
+    For ShapeNumber = myDocument.Selection.SlideRange.Shapes.Count To 1 Step -1
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
-            myDocument.Selection.SlideRange.Shapes(shapeNumber).Delete
+        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Delete
         End If
         
     Next
@@ -203,10 +206,10 @@ Sub DeleteStickyNotesOnAllSlides()
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        For ShapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
             
-            If InStr(1, PresentationSlide.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
-                PresentationSlide.Shapes(shapeNumber).Delete
+            If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+                PresentationSlide.Shapes(ShapeNumber).Delete
             End If
             
         Next
@@ -220,11 +223,11 @@ Sub MoveStickyNotesOnAllSlides()
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        For ShapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
             On Error Resume Next
-            If InStr(1, PresentationSlide.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
-            PresentationSlide.Shapes(shapeNumber).Top = CLng(PresentationSlide.Shapes(shapeNumber).Tags("OLDPOSITIONTOP"))
-            PresentationSlide.Shapes(shapeNumber).Left = CLng(PresentationSlide.Shapes(shapeNumber).Tags("OLDPOSITIONLEFT"))
+            If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+            PresentationSlide.Shapes(ShapeNumber).Top = CLng(PresentationSlide.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION TOP"))
+            PresentationSlide.Shapes(ShapeNumber).Left = CLng(PresentationSlide.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
             End If
             On Error GoTo 0
         Next
@@ -238,15 +241,15 @@ Sub MoveStickyNotesOffAllSlides()
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        For shapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        For ShapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
             
-            If InStr(1, PresentationSlide.Shapes(shapeNumber).Name, "StickyNote") = 1 Then
+            If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
                 
-            PresentationSlide.Shapes(shapeNumber).Tags.Add "OLDPOSITIONTOP", CStr(PresentationSlide.Shapes(shapeNumber).Top)
-            PresentationSlide.Shapes(shapeNumber).Tags.Add "OLDPOSITIONLEFT", CStr(PresentationSlide.Shapes(shapeNumber).Left)
+            PresentationSlide.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION TOP", CStr(PresentationSlide.Shapes(ShapeNumber).Top)
+            PresentationSlide.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(PresentationSlide.Shapes(ShapeNumber).Left)
             
             
-            With PresentationSlide.Shapes(shapeNumber)
+            With PresentationSlide.Shapes(ShapeNumber)
             ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .Left - .Width)
             ShapeBottom = (Application.ActivePresentation.PageSetup.SlideHeight - .Top - .Height)
                              

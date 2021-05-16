@@ -85,7 +85,10 @@ Sub GenerateHarveyBallPercent(FillPercentage As Double)
             Shape.Rotation = ExistingRotation
         End If
         
+        Shape.Tags.Add "INSTRUMENTA HARVEYBALL", FillPercentage
+        
     Next
     ActiveWindow.Selection.Unselect
     
 End Sub
+

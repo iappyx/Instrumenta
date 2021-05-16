@@ -1,4 +1,4 @@
-Attribute VB_Name = "ModuleProcess"
+Attribute VB_Name = "ModuleFunctions"
 'MIT License
 
 'Copyright (c) 2021 iappyx
@@ -21,23 +21,31 @@ Attribute VB_Name = "ModuleProcess"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
-Sub InsertProcessSmartArt()
-
-Set myDocument = Application.ActiveWindow
-Set ProcessSmartArt = myDocument.Selection.SlideRange.Shapes.AddSmartArt(Application.SmartArtLayouts("urn:microsoft.com/office/officeart/2005/8/layout/hChevron3"), 50, 100, Application.ActivePresentation.PageSetup.SlideWidth - 100, 50)
-
-For NodeCount = 1 To ProcessSmartArt.SmartArt.AllNodes.Count
-
-With ProcessSmartArt.SmartArt.AllNodes(NodeCount).TextFrame2.TextRange
-.Font.Size = 14
-.Font.Bold = msoTrue
-.Text = "Step" & Str(NodeCount)
-End With
-
-Next
-
-End Sub
-   
+Function RemoveDuplicates(InputArray) As Variant
     
+    Dim OutputArray, InputValue, OutputValue As Variant
+    Dim MatchFound  As Boolean
     
+    On Error Resume Next
+    OutputArray = Array("")
+    For Each InputValue In InputArray
+        MatchFound = False
+        
+        If IsEmpty(InputValue) Then GoTo ForceNext
+        For Each OutputValue In OutputArray
+            If OutputValue = InputValue Then
+                MatchFound = True
+                Exit For
+            End If
+        Next OutputValue
+        
+        If MatchFound = False Then
+            ReDim Preserve OutputArray(UBound(OutputArray, 1) + 1)
+            OutputArray(UBound(OutputArray, 1) - 1) = InputValue
+        End If
+        
+ForceNext:
+    Next
+    RemoveDuplicates = OutputArray
     
+End Function

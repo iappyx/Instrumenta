@@ -106,6 +106,7 @@ Sub GenerateRAGStatus(RAGColor As String)
         
         Set RAGStatus = ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("RAGBackground" + Str(RandomNumber), "GreenStatus" + Str(RandomNumber), "AmberStatus" + Str(RandomNumber), "RedStatus" + Str(RandomNumber))).Group
         RAGStatus.Name = "RAGStatus" + Str(RandomNumber)
+        RAGStatus.Tags.Add "INSTRUMENTA RAGSTATUS", RAGColor
         
         If ExistingRAGStatus = True Then
             RAGStatus.Width = ExistingWidth

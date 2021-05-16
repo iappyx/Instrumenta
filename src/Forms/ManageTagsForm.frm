@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ManageTagsForm 
    Caption         =   "Manage tags"
-   ClientHeight    =   6645
+   ClientHeight    =   5130
    ClientLeft      =   90
    ClientTop       =   405
-   ClientWidth     =   9870.001
+   ClientWidth     =   15045
    OleObjectBlob   =   "ManageTagsForm.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -27,4 +27,16 @@ End Sub
 
 Private Sub CommandButton4_Click()
     DeleteAllTags
+End Sub
+
+Private Sub CommandButton5_Click()
+AddSpecialSlideTag "filename"
+ManageTagsForm.Hide
+ShowFormManageTags
+End Sub
+
+Private Sub CommandButton6_Click()
+AddSpecialSlideTag "slidenum"
+ManageTagsForm.Hide
+ShowFormManageTags
 End Sub

@@ -186,7 +186,7 @@ Sub ObjectsMarginsIncrease()
     If myDocument.Selection.ShapeRange.HasTextFrame Then
     
     With myDocument.Selection.ShapeRange.TextFrame
-        .MarginBottom = .MarginBottom + 0.2
+         .MarginBottom = .MarginBottom + 0.2
         .MarginLeft = .MarginLeft + 0.2
         .MarginRight = .MarginRight + 0.2
         .MarginTop = .MarginTop + 0.2

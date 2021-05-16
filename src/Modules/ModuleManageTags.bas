@@ -23,6 +23,171 @@ Attribute VB_Name = "ModuleManageTags"
 
 Global TypeOfTag    As String
 
+Sub ShowFormSelectSlidesByTag()
+    
+    Dim SlideTags() As Variant
+    Dim SlideTagIndex As Integer
+    SlideTagIndex = 0
+    
+    SelectSlidesByTagForm.SlideTagComboBox.Clear
+    SelectSlidesByTagForm.SelectSlidesByTagFrame.Enabled = False
+    
+    With SelectSlidesByTagForm.StampComboBox
+        .Clear
+        .AddItem "CONFIDENTIAL"
+        .AddItem "DO NOT DISTRIBUTE"
+        .AddItem "DRAFT"
+        .AddItem "UPDATED"
+        .AddItem "NEW"
+        .AddItem "TO BE REMOVED"
+        .AddItem "TO APPENDIX"
+        .Value = "TO BE REMOVED"
+    End With
+    
+    Dim PresentationSlide As Slide
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+        For TagCount = 1 To PresentationSlide.Tags.Count
+            
+            ReDim Preserve SlideTags(SlideTagIndex)
+            SlideTags(SlideTagIndex) = PresentationSlide.Tags.Name(TagCount)
+            SlideTagIndex = SlideTagIndex + 1
+            
+        Next TagCount
+        
+    Next
+    
+    SlideTags = RemoveDuplicates(SlideTags)
+    
+    For TagCount = 0 To UBound(SlideTags) - 1
+        SelectSlidesByTagForm.SelectSlidesByTagFrame.Enabled = True
+        SelectSlidesByTagForm.SlideTagComboBox.AddItem SlideTags(TagCount)
+    Next TagCount
+    
+    SelectSlidesByTagForm.Show
+    
+End Sub
+
+Sub PopulateSlideTagValueListbox()
+    Dim SlideTagValues() As Variant
+    Dim SlideTagValueIndex As Integer
+    SlideTagValueIndex = 0
+    
+    SelectSlidesByTagForm.SlideTagValueListbox.Clear
+    
+    Dim PresentationSlide As Slide
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+        For TagCount = 1 To PresentationSlide.Tags.Count
+            
+            If PresentationSlide.Tags.Name(TagCount) = SelectSlidesByTagForm.SlideTagComboBox.Value Then
+                ReDim Preserve SlideTagValues(SlideTagValueIndex)
+                SlideTagValues(SlideTagValueIndex) = PresentationSlide.Tags.Value(TagCount)
+                SlideTagValueIndex = SlideTagValueIndex + 1
+            End If
+            
+        Next TagCount
+        
+    Next
+    
+    SlideTagValues = RemoveDuplicates(SlideTagValues)
+    
+    For TagCount = 0 To UBound(SlideTagValues) - 1
+        SelectSlidesByTagForm.SlideTagValueListbox.AddItem
+        SelectSlidesByTagForm.SlideTagValueListbox.List(TagCount, 0) = SlideTagValues(TagCount)
+    Next TagCount
+    
+End Sub
+
+Sub SelectSlidesByTag()
+    
+    Dim PresentationSlide As Slide
+    Dim SlideSelection() As Variant
+    Dim SlideIndex  As Integer
+    Dim MatchFound  As Boolean
+    
+    SlideIndex = 0
+    
+    For SelectedCount = 0 To SelectSlidesByTagForm.SlideTagValueListbox.ListCount - 1
+        If (SelectSlidesByTagForm.SlideTagValueListbox.Selected(SelectedCount) = True) Then
+            
+            For Each PresentationSlide In ActivePresentation.Slides
+                
+                For TagCount = 1 To PresentationSlide.Tags.Count
+                    
+                    If PresentationSlide.Tags.Name(TagCount) = SelectSlidesByTagForm.SlideTagComboBox.Value And PresentationSlide.Tags.Value(TagCount) = SelectSlidesByTagForm.SlideTagValueListbox.List(SelectedCount, 0) Then
+                        
+                        ReDim Preserve SlideSelection(SlideIndex)
+                        SlideSelection(SlideIndex) = PresentationSlide.SlideIndex
+                        SlideIndex = SlideIndex + 1
+                        Exit For
+                    End If
+                    
+                Next TagCount
+                
+            Next
+            
+        End If
+        
+    Next SelectedCount
+    
+    If SlideIndex > 0 Then
+        SlideSelection = RemoveDuplicates(SlideSelection)
+        Application.ActivePresentation.Slides.Range(SlideSelection).Select
+    End If
+    
+    SelectSlidesByTagForm.Hide
+    MsgBox Str(SlideIndex) & " slides selected with specified tag and value(s)."
+    
+End Sub
+
+Sub SelectSlidesByStamp(StampType As String)
+    
+    Dim PresentationSlide As Slide
+    Dim SlideSelection() As Variant
+    Dim SlideIndex  As Integer
+    Dim MatchFound  As Boolean
+    MatchFound = False
+    
+    SlideIndex = 0
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+        For ShapeCount = 1 To PresentationSlide.Shapes.Count
+            
+            For TagCount = 1 To PresentationSlide.Shapes(ShapeCount).Tags.Count
+                
+                If PresentationSlide.Shapes(ShapeCount).Tags.Name(TagCount) = "INSTRUMENTA STAMP" And PresentationSlide.Shapes(ShapeCount).Tags.Value(TagCount) = StampType Then
+                    
+                    ReDim Preserve SlideSelection(SlideIndex)
+                    SlideSelection(SlideIndex) = PresentationSlide.SlideIndex
+                    SlideIndex = SlideIndex + 1
+                    MatchFound = True
+                    Exit For
+                End If
+                
+            Next TagCount
+            
+            If MatchFound = True Then
+                MatchFound = False
+                Exit For
+            End If
+            
+        Next ShapeCount
+        
+    Next
+    
+    If SlideIndex > 0 Then
+        Application.ActivePresentation.Slides.Range(SlideSelection).Select
+    End If
+    
+    SelectSlidesByTagForm.Hide
+    MsgBox Str(SlideIndex) & " slides selected with stamp " & StampType & "."
+    
+End Sub
+
 Sub ShowFormManageTags()
     Dim TotalCount  As Long
     TotalCount = 0
@@ -34,6 +199,8 @@ Sub ShowFormManageTags()
     If Application.ActiveWindow.Selection.Type = ppSelectionShapes Then
         
         TypeOfTag = "shape"
+        
+        ManageTagsForm.FrameStandardTag.Visible = False
         
         For ShapeCount = 1 To Application.ActiveWindow.Selection.ShapeRange.Count
             
@@ -56,6 +223,8 @@ Sub ShowFormManageTags()
         
         TypeOfTag = "slide"
         
+        ManageTagsForm.FrameStandardTag.Visible = True
+        
         For SlideCount = 1 To Application.ActiveWindow.Selection.SlideRange.Count
             For TagCount = 1 To Application.ActiveWindow.Selection.SlideRange(SlideCount).Tags.Count
                 
@@ -74,7 +243,7 @@ Sub ShowFormManageTags()
         ManageTagsForm.Show
         
     Else
-        MsgBox "No shapes Or slides selected."
+        MsgBox "No shapes or slides selected."
     End If
 End Sub
 
@@ -115,7 +284,7 @@ Sub DeleteAllTags()
     If TypeOfTag = "slide" Then
         
         If MsgBox("This will delete all tags above, are you sure?", vbYesNo) = vbNo Then Exit Sub
-
+        
         For SelectedCount = 0 To ManageTagsForm.TagsListBox.ListCount - 1
             
             Application.ActiveWindow.Selection.SlideRange(CLng(ManageTagsForm.TagsListBox.List(SelectedCount, 0))).Tags.Delete ManageTagsForm.TagsListBox.List(SelectedCount, 2)
@@ -169,4 +338,117 @@ Sub AddTag()
         
     End If
     
+End Sub
+
+Sub AddSpecialSlideTag(SpecialTagType As String)
+    
+    For SlideCount = 1 To Application.ActiveWindow.Selection.SlideRange.Count
+        
+        If SpecialTagType = "filename" Then
+            
+            Application.ActiveWindow.Selection.SlideRange(SlideCount).Tags.Add "INSTRUMENTA ORIGINAL FILENAME", ActivePresentation.Name
+            
+        ElseIf SpecialTagType = "slidenum" Then
+            
+            Application.ActiveWindow.Selection.SlideRange(SlideCount).Tags.Add "INSTRUMENTA ORIGINAL SLIDENUM", Application.ActiveWindow.Selection.SlideRange(SlideCount).SlideNumber
+            
+        End If
+        
+    Next SlideCount
+    
+End Sub
+
+Sub HideTagsOnSlide()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    Dim PresentationSlide As Slide
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+        For ShapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+            
+            If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "Tag") = 1 Then
+                PresentationSlide.Shapes(ShapeNumber).Delete
+            End If
+            
+        Next
+        
+    Next
+    
+End Sub
+
+Sub ShowTagsOnSlide()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    Dim PresentationSlide As Slide
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+        For ShapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+            
+            If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "Tag") = 1 Then
+                PresentationSlide.Shapes(ShapeNumber).Delete
+            End If
+            
+        Next
+        
+        For TagCount = 1 To PresentationSlide.Tags.Count
+            
+            RandomNumber = Round(Rnd() * 1000000, 0)
+            
+            Set TagBackground = PresentationSlide.Shapes.AddShape(msoShapeSnip2SameRectangle, 100, 100, 26, 150)
+            
+            With TagBackground
+                .Line.Visible = False
+                .Fill.ForeColor.RGB = RGB(0, 0, 0)
+                .Name = "TagBackground" + Str(RandomNumber)
+                .Rotation = -90
+            End With
+            
+            Set TagBackgroundInner = PresentationSlide.Shapes.AddShape(msoShapeOval, 43, 100 + 75 - 3, 6, 6)
+            
+            With TagBackgroundInner
+                .Line.Visible = False
+                .Fill.ForeColor.RGB = RGB(255, 255, 255)
+                .Name = "TagBackgroundInner" + Str(RandomNumber)
+            End With
+            
+            Dim TagText As Shape
+            
+            Set TagText = PresentationSlide.Shapes.AddTextbox(msoTextOrientationHorizontal, 53, 100 + 75 - 13, 135, 26)
+            
+            With TagText
+                .TextFrame.AutoSize = ppAutoSizeNone
+                .TextFrame.HorizontalAnchor = msoAnchorCenter
+                .TextFrame.VerticalAnchor = msoAnchorMiddle
+                .TextFrame.TextRange.ParagraphFormat.Alignment = ppAlignCenter
+                .TextFrame.TextRange = PresentationSlide.Tags.Name(TagCount) + vbNewLine + PresentationSlide.Tags.Value(TagCount)
+                .TextFrame.MarginBottom = 0
+                .TextFrame.MarginTop = 0
+                .TextFrame.MarginLeft = 0
+                .TextFrame.MarginRight = 0
+                
+                .TextFrame.TextRange.Font.Bold = msoTrue
+                .TextFrame.TextRange.Font.Name = "Arial"
+                .TextFrame.TextRange.Font.Size = 7
+                .Line.Visible = False
+                .Name = "TagText" + Str(RandomNumber)
+            End With
+            ActiveWindow.View.GotoSlide PresentationSlide.SlideNumber
+            
+            PresentationSlide.Shapes.Range(Array("TagBackground" + Str(RandomNumber), "TagBackgroundInner" + Str(RandomNumber), "TagText" + Str(RandomNumber))).Select
+            CommandBars.ExecuteMso ("ShapesCombine")
+            
+            For Each Shape In ActiveWindow.Selection.ShapeRange
+                
+                Shape.Name = "Tag" + Str(RandomNumber)
+                Shape.Top = -95
+                Shape.Left = 65 + (TagCount - 1) * (Shape.Height + 5)
+            Next
+            
+        Next TagCount
+    Next
+    ActiveWindow.Selection.Unselect
 End Sub

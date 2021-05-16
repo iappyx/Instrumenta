@@ -243,8 +243,8 @@ Sub ShowChangeSpellCheckLanguageForm()
     LanguageNames(216) = "Zulu"
     
     ChangeSpellCheckLanguageForm.ComboBox1.Clear
-    For i = 1 To 216
-        ChangeSpellCheckLanguageForm.ComboBox1.AddItem LanguageNames(i)
+    For I = 1 To 216
+        ChangeSpellCheckLanguageForm.ComboBox1.AddItem LanguageNames(I)
     Next
     
     ChangeSpellCheckLanguageForm.Show

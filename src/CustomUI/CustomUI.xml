@@ -24,8 +24,8 @@
                </box>
                <box id="FontBox3" boxStyle="horizontal">
                   <toggleButton idMso="Superscript" showLabel="false" />
-                  <toggleButton idMso="Subscript" showLabel="false" />                  
-               </box>        
+                  <toggleButton idMso="Subscript" showLabel="false" />
+               </box>
             </group>
             <group id="TextGroup" label="Text" imageMso="MenuView2">
                <buttonGroup id="buttonGroupAlignText">
@@ -176,11 +176,11 @@
                <button idMso="TableStyleClearTable" showLabel="false" />
                <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" />
                <splitButton id="TableSumSplitButton" size="normal" showLabel="false">
-               <button id="TableSumButton" imageMso="AutoSum" label="Sum column (values above selected cells)" showLabel="false" onAction="TableSum" />
-                     <menu id="TableSumMenu" itemSize="normal">
-                        <button id="TableRowSumButton" imageMso="AutoSum" label="Sum row (values left from selected cells)" showLabel="false" onAction="TableRowSum" />
-                     </menu>
-                  </splitButton>
+                  <button id="TableSumButton" imageMso="AutoSum" label="Sum column (values above selected cells)" showLabel="false" onAction="TableSum" />
+                  <menu id="TableSumMenu" itemSize="normal">
+                     <button id="TableRowSumButton" imageMso="AutoSum" label="Sum row (values left from selected cells)" showLabel="false" onAction="TableRowSum" />
+                  </menu>
+               </splitButton>
                <separator id="separator7" />
                <gallery idMso="ShadingColorPicker" showLabel="false" />
                <gallery idMso="TableBorderPenColorPicker" showLabel="false" />
@@ -274,7 +274,7 @@
                         <button id="SelectAllCrossSlideStepsCounter" label="Select all cross-slide step counters on this slide" onAction="SelectAllCrossSlideStepsCounter" />
                      </menu>
                   </splitButton>
-                  <menu id="StampsMenu" label="Stamps" imageMso="NameDefine" showLabel="false">
+                  <menu id="StampsMenu" label="Stamps" imageMso="LabelInsert" showLabel="false">
                      <button id="StampConfidential" label="CONFIDENTIAL" onAction="GenerateStampConfidential" />
                      <button id="StampDoNotDistribute" label="DO NOT DISTRIBUTE" onAction="GenerateStampDoNotDistribute" />
                      <button id="StampDraft" label="DRAFT" onAction="GenerateStampDraft" />
@@ -305,7 +305,16 @@
                   <button id="cleaning5" label="Remove unused master slides" imageMso="Clear" onAction="CleanUpRemoveUnusedMasterSlides" />
                </menu>
                <toggleButton idMso="SelectionPane" showLabel="false" />
-                 <button id="ShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="WebControlHidden" onAction="ShowFormManageTags" />             
+               <splitButton id="TagsSplitButton" size="normal" showLabel="false">
+                     <button id="ShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="NameDefine" onAction="ShowFormManageTags" />
+                     <menu id="TagMenu" itemSize="normal">
+                        <button id="ShowTagsOnSlide" label="Show slidetags on all slides" imageMso="OutlineMoveDown" onAction="ShowTagsOnSlide" />
+                        <button id="HideTagsOnSlide" label="Hide slidetags on all slides" imageMso="Delete" onAction="HideTagsOnSlide" />
+                        <menuSeparator id="separatorSelectSlidesByTag" />
+                     <button id="ShowFormSelectSlidesByTag" label="Select slides by tag(s) or specific stamp" imageMso="SelectAll" onAction="ShowFormSelectSlidesByTag" />
+                     </menu>
+                  </splitButton>
+               
                <button id="ShowAboutDialogButton" label="Show about dialog" showLabel="false" imageMso="Help" onAction="ShowAboutDialog" />
             </group>
          </tab>

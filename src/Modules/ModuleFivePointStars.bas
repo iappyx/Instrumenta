@@ -111,6 +111,7 @@ Sub GenerateFivePointStars(NumberOfStars As Double)
     
     Set StarRating = ActiveWindow.Selection.SlideRange(1).Shapes.Range(StarsArray).Group
     StarRating.Name = "StarRating" + Str(RandomNumber)
+    StarRating.Tags.Add "INSTRUMENTA STARRATING", NumberOfStars
     
     If ExistingStarRating = True Then
         StarRating.Width = ExistingWidth
