@@ -68,11 +68,13 @@ Current features include:
 - Sum rows in table (all values left from selected cells)
 
 # Platform support
-All functions supported in Windows. 
+All functions tested in Windows on the latest Office at that moment in time.
 
 The add in will work in OS X, with some minor issues:
 * Some icons will not show correctly in the ribbon (underlying functionality will work)
 * Export to E-mail (as PPT or PDF) is not yet supported
+
+As stated in the license: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 # Feature requests and contributions
 I am happy to receive feature requests and code contributions! Let's make the best toolbar together. For feature requests please create new issue and label it as an enhancement (https://github.com/iappyx/Instrumenta/issues/new/choose). If you want to contribute, please make sure that the code can be freely used as open source code.
