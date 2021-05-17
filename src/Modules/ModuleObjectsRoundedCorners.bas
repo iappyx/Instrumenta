@@ -30,6 +30,8 @@ Sub ObjectsCopyRoundedCorner()
     Else
     
     Dim ShapeRadius As Single
+    If Application.ActiveWindow.Selection.ShapeRange(1).Adjustments.Count > 0 Then
+    
     ShapeRadius = myDocument.Selection.ShapeRange(1).Adjustments(1) / (1 / (myDocument.Selection.ShapeRange(1).Height + myDocument.Selection.ShapeRange(1).Width))
     
     If myDocument.Selection.ShapeRange(1).Adjustments.Count > 1 Then
@@ -45,6 +47,8 @@ Sub ObjectsCopyRoundedCorner()
             End If
         End With
     Next
+    
+    End If
     
     End If
     
