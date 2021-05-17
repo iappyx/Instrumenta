@@ -23,6 +23,9 @@ Attribute VB_Name = "ModuleObjectsSizeAndPosition"
 
 Sub ObjectsSizeToTallest()
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     Dim Tallest     As Single
     Tallest = myDocument.Selection.ShapeRange(1).Height
     
@@ -36,6 +39,9 @@ End Sub
 
 Sub ObjectsSizeToShortest()
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     Dim Shortest    As Single
     Shortest = myDocument.Selection.ShapeRange(1).Height
     
@@ -49,6 +55,9 @@ End Sub
 
 Sub ObjectsSizeToWidest()
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     Dim Widest      As Single
     Widest = myDocument.Selection.ShapeRange(1).Width
     
@@ -75,6 +84,7 @@ End Sub
 
 Sub ObjectsSameHeight()
     Set myDocument = Application.ActiveWindow
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     myDocument.Selection.ShapeRange.Height = myDocument.Selection.ShapeRange(1).Height
     
@@ -82,6 +92,7 @@ End Sub
 
 Sub ObjectsSameWidth()
     Set myDocument = Application.ActiveWindow
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     myDocument.Selection.ShapeRange.Width = myDocument.Selection.ShapeRange(1).Width
     
@@ -89,6 +100,7 @@ End Sub
 
 Sub ObjectsSameHeightAndWidth()
     Set myDocument = Application.ActiveWindow
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     myDocument.Selection.ShapeRange.Height = myDocument.Selection.ShapeRange(1).Height
     myDocument.Selection.ShapeRange.Width = myDocument.Selection.ShapeRange(1).Width
@@ -96,6 +108,8 @@ Sub ObjectsSameHeightAndWidth()
 End Sub
 
 Sub ObjectsSwapPosition()
+    Set myDocument = Application.ActiveWindow
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If ActiveWindow.Selection.ShapeRange.Count = 2 Then
     

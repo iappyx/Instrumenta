@@ -24,9 +24,11 @@ Attribute VB_Name = "ModuleObjectsClone"
 Sub ObjectsCloneRight()
     
     Set myDocument = Application.ActiveWindow
+    
+    
     Dim OldTop, OldLeft As Double
     
-    If myDocument.Selection.Type = ppSelectionNone Then
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
     ElseIf myDocument.Selection.ShapeRange.Count = 1 Then
@@ -69,7 +71,7 @@ Sub ObjectsCloneDown()
     Set myDocument = Application.ActiveWindow
     Dim OldTop, OldLeft As Double
     
-    If myDocument.Selection.Type = ppSelectionNone Then
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
     ElseIf myDocument.Selection.ShapeRange.Count = 1 Then

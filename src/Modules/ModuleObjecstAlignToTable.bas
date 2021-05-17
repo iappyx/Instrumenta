@@ -25,7 +25,7 @@ Sub ObjectsAlignToTable()
     
     Set myDocument = Application.ActiveWindow
     
-    If myDocument.Selection.Type = ppSelectionNone Then
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
     ElseIf myDocument.Selection.ShapeRange.Count > 1 Then
@@ -133,7 +133,7 @@ Sub ObjectsAlignToTableColumn()
     
     Set myDocument = Application.ActiveWindow
     
-    If myDocument.Selection.Type = ppSelectionNone Then
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
     ElseIf myDocument.Selection.ShapeRange.Count > 1 Then
@@ -234,7 +234,7 @@ Sub ObjectsAlignToTableRow()
     
     Set myDocument = Application.ActiveWindow
     
-    If myDocument.Selection.Type = ppSelectionNone Then
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
     ElseIf myDocument.Selection.ShapeRange.Count > 1 Then

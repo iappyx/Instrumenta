@@ -24,6 +24,9 @@ Attribute VB_Name = "ModuleObjectsAlignAndDistribute"
 Sub ObjectsRemoveSpacingHorizontal()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     Dim ShapeCount  As Long
     Dim SlideShape() As Shape
     ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
@@ -42,6 +45,9 @@ End Sub
 Sub ObjectsRemoveSpacingVertical()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     Dim ShapeCount  As Long
     Dim SlideShape() As Shape
     ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
@@ -60,6 +66,9 @@ End Sub
 Sub ObjectsIncreaseSpacingHorizontal()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     Dim ShapeCount  As Long
     Dim SlideShape() As Shape
     ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
@@ -78,6 +87,9 @@ End Sub
 Sub ObjectsDecreaseSpacingHorizontal()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     Dim ShapeCount  As Long
     Dim SlideShape() As Shape
     ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
@@ -96,6 +108,9 @@ End Sub
 Sub ObjectsIncreaseSpacingVertical()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     Dim ShapeCount  As Long
     Dim SlideShape() As Shape
     ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
@@ -114,6 +129,9 @@ End Sub
 Sub ObjectsDecreaseSpacingVertical()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     Dim ShapeCount  As Long
     Dim SlideShape() As Shape
     ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
@@ -130,6 +148,10 @@ Sub ObjectsDecreaseSpacingVertical()
 End Sub
 
 Sub ObjectsSortByLeftPosition(ArrayToSort As Variant)
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     Dim StopLoop    As Boolean
     Dim ShapeCount  As Long
@@ -151,6 +173,10 @@ Sub ObjectsSortByLeftPosition(ArrayToSort As Variant)
 End Sub
 
 Sub ObjectsSortByTopPosition(ArrayToSort As Variant)
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     Dim StopLoop    As Boolean
     Dim ShapeCount  As Long
@@ -174,6 +200,8 @@ End Sub
 Sub ObjectsAlignLefts()
     Set myDocument = Application.ActiveWindow
     
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     If myDocument.Selection.ShapeRange.Count = 1 Then
         myDocument.Selection.ShapeRange.Align msoAlignLefts, msoTrue
     Else
@@ -184,6 +212,8 @@ End Sub
 
 Sub ObjectsAlignRights()
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If myDocument.Selection.ShapeRange.Count = 1 Then
         myDocument.Selection.ShapeRange.Align msoAlignRights, msoTrue
@@ -196,6 +226,8 @@ End Sub
 Sub ObjectsAlignBottoms()
     Set myDocument = Application.ActiveWindow
     
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     If myDocument.Selection.ShapeRange.Count = 1 Then
         myDocument.Selection.ShapeRange.Align msoAlignBottoms, msoTrue
     Else
@@ -206,6 +238,8 @@ End Sub
 
 Sub ObjectsAlignCenters()
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If myDocument.Selection.ShapeRange.Count = 1 Then
         myDocument.Selection.ShapeRange.Align msoAlignCenters, msoTrue
@@ -218,6 +252,8 @@ End Sub
 Sub ObjectsAlignMiddles()
     Set myDocument = Application.ActiveWindow
     
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     If myDocument.Selection.ShapeRange.Count = 1 Then
         myDocument.Selection.ShapeRange.Align msoAlignMiddles, msoTrue
     Else
@@ -228,6 +264,8 @@ End Sub
 
 Sub ObjectsAlignTops()
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If myDocument.Selection.ShapeRange.Count = 1 Then
         myDocument.Selection.ShapeRange.Align msoAlignTops, msoTrue
@@ -240,6 +278,8 @@ End Sub
 Sub ObjectsDistributeHorizontally()
     Set myDocument = Application.ActiveWindow
     
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
     If myDocument.Selection.ShapeRange.Count > 2 Then
     myDocument.Selection.ShapeRange.Distribute msoDistributeHorizontally, msoFalse
     Else
@@ -250,6 +290,8 @@ End Sub
 
 Sub ObjectsDistributeVertically()
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If myDocument.Selection.ShapeRange.Count > 2 Then
     myDocument.Selection.ShapeRange.Distribute msoDistributeVertically, msoFalse

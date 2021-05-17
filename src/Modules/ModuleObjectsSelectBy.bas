@@ -24,6 +24,11 @@ Attribute VB_Name = "ModuleObjectsSelectBy"
 Sub ObjectsSelectBySameType()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
     Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
     Dim SelectedShapes() As String
     Dim ShapeCount  As Long
@@ -48,11 +53,18 @@ Sub ObjectsSelectBySameType()
     Next SlideShapeToCheck
     myDocument.View.Slide.Shapes.Range(SelectedShapes).Select
     
+    End If
+    
 End Sub
 
 Sub ObjectsSelectBySameFillAndLineColor()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
     Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
     Dim SelectedShapes() As String
     Dim ShapeCount  As Long
@@ -77,11 +89,17 @@ Sub ObjectsSelectBySameFillAndLineColor()
     Next SlideShapeToCheck
     myDocument.View.Slide.Shapes.Range(SelectedShapes).Select
     
+    End If
 End Sub
 
 Sub ObjectsSelectBySameFillColor()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
     Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
     Dim SelectedShapes() As String
     Dim ShapeCount  As Long
@@ -106,11 +124,18 @@ Sub ObjectsSelectBySameFillColor()
     Next SlideShapeToCheck
     myDocument.View.Slide.Shapes.Range(SelectedShapes).Select
     
+    End If
+    
 End Sub
 
 Sub ObjectsSelectBySameLineColor()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
     Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
     Dim SelectedShapes() As String
     Dim ShapeCount  As Long
@@ -135,11 +160,17 @@ Sub ObjectsSelectBySameLineColor()
     Next SlideShapeToCheck
     myDocument.View.Slide.Shapes.Range(SelectedShapes).Select
     
+    End If
 End Sub
 
 Sub ObjectsSelectBySameWidthAndHeight()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
     Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
     Dim SelectedShapes() As String
     Dim ShapeCount  As Long
@@ -164,11 +195,17 @@ Sub ObjectsSelectBySameWidthAndHeight()
     Next SlideShapeToCheck
     myDocument.View.Slide.Shapes.Range(SelectedShapes).Select
     
+    End If
 End Sub
 
 Sub ObjectsSelectBySameWidth()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
     Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
     Dim SelectedShapes() As String
     Dim ShapeCount  As Long
@@ -193,11 +230,17 @@ Sub ObjectsSelectBySameWidth()
     Next SlideShapeToCheck
     myDocument.View.Slide.Shapes.Range(SelectedShapes).Select
     
+    End If
 End Sub
 
 Sub ObjectsSelectBySameHeight()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
     Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
     Dim SelectedShapes() As String
     Dim ShapeCount  As Long
@@ -222,4 +265,5 @@ Sub ObjectsSelectBySameHeight()
     Next SlideShapeToCheck
     myDocument.View.Slide.Shapes.Range(SelectedShapes).Select
     
+    End If
 End Sub

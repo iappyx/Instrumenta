@@ -48,6 +48,11 @@ End Sub
 
 Sub PasteStorylineInSelectedShape()
     
+    Set myDocument = Application.ActiveWindow
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    MsgBox "Please select a shape."
+    Else
+    
     Dim PresentationSlide As PowerPoint.Slide
     Dim SlidePlaceHolder As PowerPoint.Shape
     Dim ClipboardObject As Object
@@ -65,5 +70,7 @@ Sub PasteStorylineInSelectedShape()
     Next PresentationSlide
     
     Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.Text = StorylineText
+    
+    End If
     
 End Sub

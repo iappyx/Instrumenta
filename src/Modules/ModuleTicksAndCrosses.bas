@@ -22,8 +22,11 @@ Attribute VB_Name = "ModuleTicksAndCrosses"
 'SOFTWARE.
 
 Sub TextBulletsTicks()
-    
-    With Windows(1).Selection.TextRange.ParagraphFormat.Bullet
+ 
+    Set myDocument = Application.ActiveWindow
+     
+    On Error Resume Next
+    With myDocument.Selection.TextRange.ParagraphFormat.Bullet
         
         .Character = 252
         .Visible = True
@@ -31,12 +34,16 @@ Sub TextBulletsTicks()
         .Font.Color = RGB(0, 128, 0)
         
     End With
+    On Error GoTo 0
     
 End Sub
 
 Sub TextBulletsCrosses()
     
-    With Windows(1).Selection.TextRange.ParagraphFormat.Bullet
+    Set myDocument = Application.ActiveWindow
+   
+    On Error Resume Next
+    With myDocument.Selection.TextRange.ParagraphFormat.Bullet
         
         .Character = 215
         .Visible = True
@@ -44,5 +51,6 @@ Sub TextBulletsCrosses()
         .Font.Color = RGB(255, 0, 0)
         
     End With
+    On Error GoTo 0
     
 End Sub

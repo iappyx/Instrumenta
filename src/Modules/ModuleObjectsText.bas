@@ -36,6 +36,10 @@ End Sub
 Sub ObjectsIncreaseLineSpacing()
     
     Set myDocument = Application.ActiveWindow
+      
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
     
     If myDocument.Selection.ShapeRange.HasTextFrame Then
     
@@ -49,11 +53,17 @@ Sub ObjectsIncreaseLineSpacing()
     
     End If
     
+    End If
+    
 End Sub
 
 Sub ObjectsDecreaseLineSpacing()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
     
     If myDocument.Selection.ShapeRange.HasTextFrame Then
     
@@ -73,10 +83,16 @@ Sub ObjectsDecreaseLineSpacing()
     
     End If
     
+    End If
+    
 End Sub
 
 Sub ObjectsRemoveText()
     Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
     
     If myDocument.Selection.ShapeRange.HasTextFrame Then
     
@@ -88,12 +104,18 @@ Sub ObjectsRemoveText()
     
     End If
     
+    End If
+    
 End Sub
 
 Sub ObjectsSwapTextNoFormatting()
 
     Dim text1, text2 As String
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
     
     If myDocument.Selection.ShapeRange.Count = 2 Then
     
@@ -117,12 +139,17 @@ Sub ObjectsSwapTextNoFormatting()
     
     End If
     
+    End If
 
 End Sub
 
 Sub ObjectsSwapText()
 
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
     
     If myDocument.Selection.ShapeRange.Count = 2 Then
     
@@ -155,11 +182,17 @@ Sub ObjectsSwapText()
     
     End If
 
+    End If
+    
 End Sub
 
 Sub ObjectsMarginsToZero()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
     
     If myDocument.Selection.ShapeRange.HasTextFrame Then
     
@@ -177,11 +210,17 @@ Sub ObjectsMarginsToZero()
     
     End If
     
+    End If
+    
 End Sub
 
 Sub ObjectsMarginsIncrease()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
     
     If myDocument.Selection.ShapeRange.HasTextFrame Then
     
@@ -199,11 +238,16 @@ Sub ObjectsMarginsIncrease()
     
     End If
     
+    End If
 End Sub
 
 Sub ObjectsMarginsDecrease()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
     
     If myDocument.Selection.ShapeRange.HasTextFrame Then
     
@@ -229,11 +273,16 @@ Sub ObjectsMarginsDecrease()
     
     End If
     
+    End If
 End Sub
 
 Sub ObjectsTextWordwrapToggle()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
     
     If myDocument.Selection.ShapeRange.HasTextFrame Then
      
@@ -249,4 +298,5 @@ Sub ObjectsTextWordwrapToggle()
     
     End If
     
+    End If
 End Sub

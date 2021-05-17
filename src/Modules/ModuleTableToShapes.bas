@@ -25,7 +25,10 @@ Sub ConvertTableToShapes()
     
     Set myDocument = Application.ActiveWindow
             
-    If myDocument.Selection.ShapeRange.HasTable Then
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    MsgBox "Please select a table."
+    
+    ElseIf myDocument.Selection.ShapeRange.HasTable Then
     
     TableTop = myDocument.Selection.ShapeRange.Top
     TableLeft = myDocument.Selection.ShapeRange.Left

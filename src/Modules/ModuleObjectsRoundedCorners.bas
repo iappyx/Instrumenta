@@ -24,6 +24,11 @@ Attribute VB_Name = "ModuleObjectsRoundedCorners"
 Sub ObjectsCopyRoundedCorner()
     Dim SlideShape  As PowerPoint.Shape
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
     Dim ShapeRadius As Single
     ShapeRadius = myDocument.Selection.ShapeRange(1).Adjustments(1) / (1 / (myDocument.Selection.ShapeRange(1).Height + myDocument.Selection.ShapeRange(1).Width))
     
@@ -41,11 +46,18 @@ Sub ObjectsCopyRoundedCorner()
         End With
     Next
     
+    End If
+    
 End Sub
 
 Sub ObjectsCopyShapeTypeAndAdjustments()
     Dim SlideShape  As PowerPoint.Shape
     Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
     Dim AdjustmentsCount As Long
     Dim ShapeCount  As Long
     
@@ -60,5 +72,7 @@ Sub ObjectsCopyShapeTypeAndAdjustments()
         Next AdjustmentsCount
         
     Next ShapeCount
+    
+    End If
     
 End Sub

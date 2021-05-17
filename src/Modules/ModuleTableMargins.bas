@@ -26,6 +26,10 @@ Sub TablesMarginsToZero()
     
     Set myDocument = Application.ActiveWindow
     
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No table or cells selected."
+    Else
+    
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
         
     With Application.ActiveWindow.Selection.ShapeRange.Table
@@ -57,11 +61,17 @@ Sub TablesMarginsToZero()
     
     End If
     
+    End If
+    
 End Sub
 
 Sub TablesMarginsIncrease()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No table or cells selected."
+    Else
     
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
     
@@ -94,11 +104,17 @@ Sub TablesMarginsIncrease()
     
     End If
     
+    End If
+    
 End Sub
 
 Sub TablesMarginsDecrease()
     
     Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No table or cells selected."
+    Else
     
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
     
@@ -136,6 +152,8 @@ Sub TablesMarginsDecrease()
     Else
     
     MsgBox "No table or cells selected."
+    
+    End If
     
     End If
 End Sub

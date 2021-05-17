@@ -27,6 +27,12 @@ Sub TableSum()
     Dim TotalSum As Double
     TotalSum = 0
     
+       
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    MsgBox "No table or cells selected."
+    Else
+    
+        
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
         
     With Application.ActiveWindow.Selection.ShapeRange.Table
@@ -59,6 +65,8 @@ Sub TableSum()
     MsgBox "No table or cells selected."
     
     End If
+    
+    End If
 
 End Sub
 
@@ -67,6 +75,11 @@ Sub TableRowSum()
     Set myDocument = Application.ActiveWindow
     Dim TotalSum As Double
     TotalSum = 0
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    MsgBox "No table or cells selected."
+    Else
+    
     
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
         
@@ -98,6 +111,8 @@ Sub TableRowSum()
     Else
     
     MsgBox "No table or cells selected."
+    
+    End If
     
     End If
 
