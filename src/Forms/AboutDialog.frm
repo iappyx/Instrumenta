@@ -18,3 +18,11 @@ Private Sub Label2_Click()
     URL = "https://github.com/iappyx/Instrumenta"
     ActivePresentation.FollowHyperlink URL
 End Sub
+
+Private Sub Label3_Click()
+
+Dim URL As String
+URL = "https://github.com/iappyx/Instrumenta/blob/main/v/" & InstrumentaVersion & ".md"
+ActivePresentation.FollowHyperlink URL
+
+End Sub

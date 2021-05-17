@@ -21,6 +21,10 @@ Attribute VB_Name = "ModuleAbout"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Public InstrumentaVersion As String
+
 Sub ShowAboutDialog()
+    InstrumentaVersion = "0.8"
+    AboutDialog.Label1.Caption = "Instrumenta Powerpoint Toolbar v" & InstrumentaVersion
     AboutDialog.Show
 End Sub
