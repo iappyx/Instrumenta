@@ -68,7 +68,7 @@ Current features include:
 - Sum rows in table (all values left from selected cells)
 
 # Platform support
-All functions tested in Windows on the latest Office at that moment in time. Error-handling still needs to be improved ;-)
+All functions tested in Windows on the latest Office at that moment in time.
 
 The add in will work in OS X, with some minor issues:
 * Some icons will not show correctly in the ribbon (underlying functionality will work)
