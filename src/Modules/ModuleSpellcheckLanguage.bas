@@ -705,15 +705,21 @@ Sub ChangeSpellCheckLanguage()
     
     ' Updates shapes in master
     For Each SlideShape In ActivePresentation.SlideMaster.Shapes
+        If SlideShape.HasTextFrame Then
         SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        End If
     Next
     
     For Each SlideShape In ActivePresentation.TitleMaster.Shapes
+        If SlideShape.HasTextFrame Then
         SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        End If
     Next
     
     For Each SlideShape In ActivePresentation.NotesMaster.Shapes
+        If SlideShape.HasTextFrame Then
         SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        End If
     Next
     
     ' Update shapes in slides
@@ -737,7 +743,9 @@ Sub ChangeSpellCheckLanguage()
                 'SmartArt
                 If SlideShape.HasSmartArt Then
                     For Each SlideSmartArtNode In SlideShape.SmartArt.AllNodes
+                    If SlideSmartArdNode.HasTextFrame Then
                         SlideSmartArtNode.TextFrame2.TextRange.LanguageID = TargetLanguageID
+                    End If
                     Next
                     
                 End If
@@ -754,6 +762,6 @@ Sub ChangeSpellCheckLanguage()
         
     Next PresentationSlide
     
-    MsgBox "Changed spellcheck language To " + TargetLanguage + " On all slides."
+    MsgBox "Changed spellcheck language to " + TargetLanguage + " on all slides."
     
 End Sub
