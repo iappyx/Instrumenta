@@ -30,6 +30,7 @@ Current features include:
 - Convert table to shapes
 - Copy rounded corners of shapes to selected shapes
 - Copy shapetype and all adjustments of shapes to selected shapes
+- Rectify lines
 - Clone shapes to right / down
 - Copy/paste position and dimensions of shapes (across slides)
 - Copy shape to multiple slides (multislide shape)
