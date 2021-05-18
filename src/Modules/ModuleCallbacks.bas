@@ -23,11 +23,7 @@ Attribute VB_Name = "ModuleCallbacks"
 
 
 Sub TextInsertEuro()
-    #If Mac Then
-        MsgBox "This Function will Not work On a Mac"
-    #Else
-    ObjectsTextInsertSpecialCharacter 128
-    #End If
+    ObjectsTextInsertSpecialCharacter 8364
 End Sub
 
 Sub TextInsertCopyright()

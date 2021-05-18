@@ -21,12 +21,11 @@ Attribute VB_Name = "ModuleObjectsText"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
-
 Sub ObjectsTextInsertSpecialCharacter(SpecialCharacter As Long)
 
 If ActiveWindow.Selection.Type = ppSelectionText Then
 
-Application.ActiveWindow.Selection.TextRange.Characters.Text = Chr$(SpecialCharacter)
+Application.ActiveWindow.Selection.TextRange.InsertSymbol Application.ActiveWindow.Selection.TextRange.Font.Name, SpecialCharacter, MsoTriState.msoTrue
 
 End If
 
