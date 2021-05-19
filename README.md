@@ -11,64 +11,18 @@ As a spare time project in times of COVID-19, I decided to create Instrumenta as
 
 # Features
 Current features include:
-- Basic formatting and shortcuts to different frequently used powerpoint functions
-- Align, distribute and size shapes
-- Align objects over table cells, rows or columns 
-- Set same height and/or width for shapes
-- Size shapes to tallest, shortest, widest or narrowest
-- Remove, increase or decrease horizontal/vertical gap between shapes
-- Remove, increase or decrease margins for shapes
-- Remove, increase or decrease margins for tables or selected cells
-- Select shapes by fill and/or line color
-- Select shapes by width and/or height
-- Select shapes by type of shape
-- Swap position of two shapes
-- Increase/decrease line spacing
-- Remove text from shape
-- Remove formatting
-- Swap text
-- Convert table to shapes
-- Copy rounded corners of shapes to selected shapes
-- Copy shapetype and all adjustments of shapes to selected shapes
-- Rectify lines
-- Clone shapes to right / down
-- Copy/paste position and dimensions of shapes (across slides)
-- Copy shape to multiple slides (multislide shape)
-- Update position and dimensions of selected multislide shape on all slides
-- Delete selected multislide shape on all slides
-- Replace fonts
-- Set proofing language for all slides
-- Format table
-- E-mail selected slides (as PDF or PPT)
-- Copy storyline to clipboard
-- Paste storyline in shape
-- Remove animations from all slides
-- Remove slide entry transitions from all slides
-- Remove speaker notes from all slides
-- Remove comments from all slides
-- Remove unused master slides
-- Ticks and crosses
-- Harvey Balls
-- Traffic lights (RAG status)
-- Sticky notes
-- Move sticky notes on and off this slide / all slides
-- Remove sticky notes from this slide / all slides
-- Convert comments to sticky notes
-- Steps counter (per slide and cross-slides)
-- Agenda pages
-- Stamps
-- Move stamps on and off this slide / all slides
-- Remove stamps from this slide / all slides
-- Insert special characters
-- Insert process (SmartArt)
-- Add (hidden) tags to slides and shapes
-- Manage (hidden) tags of slides and shapes
-- Select sliderange based on tags
-- Select sliderange based on specific stamps on those slide
-- Sum columns in table (all values above selected cells)
-- Sum rows in table (all values left from selected cells)
-- Crop picture to slide
-- Check for new versions of Instrumenta in the About-dialog
+|-| Feature |
+|-|-|
+| Generic | - Basic formatting and shortcuts to different frequently used powerpoint functions |
+| Text | - Increase/decrease line spacing<br>- Remove text from shape<br>- Remove formatting<br>- Swap text<br>- Insert special characters<br>- Ticks and crosses<br>- Replace fonts<br>- Set proofing language for all slides |
+| Shapes | - Select shapes by fill and/or line color<br>- Select shapes by width and/or height<br>- Select shapes by type of shape<br>- Swap position of two shapes<br>- Copy rounded corners of shapes to selected shapes<br>- Copy shapetype and all adjustments of shapes to selected shapes<br>- Rectify lines<br>- Clone shapes to right / down<br>- Copy/paste position and dimensions of shapes (across slides)<br>- Copy shape to multiple slides (multislide shape)<br>- Update position and dimensions of selected multislide shape on all slides<br>- Delete selected multislide shape on all slides |
+| Pictures | - Crop picture to slide |
+| Align, distribute and size | - Align, distribute and size shapes<br>- Align objects over table cells, rows or columns <br>- Set same height and/or width for shapes<br>- Size shapes to tallest, shortest, widest or narrowest<br>- Remove, increase or decrease horizontal/vertical gap between shapes<br>- Remove, increase or decrease margins for shapes<br>- Remove, increase or decrease margins for tables or selected cells |
+| Table | - Format table<br>- Convert table to shapes<br>- Sum columns in table (all values above selected cells)<br>- Sum rows in table (all values left from selected cells) |
+| Export | - E-mail selected slides (as PDF or PPT) |
+| Storyline | - Copy storyline to clipboard<br>- Paste storyline in shape |
+| Paste and insert | - Harvey Balls<br>- Traffic lights (RAG status)<br>- Sticky notes<br>- Move sticky notes on and off this slide / all slides<br>- Remove sticky notes from this slide / all slides<br>- Convert comments to sticky notes<br>- Steps counter (per slide and cross-slides)<br>- Agenda pages<br>- Stamps<br>- Move stamps on and off this slide / all slides<br>- Remove stamps from this slide / all slides<br>- Insert process (SmartArt) |
+| Advanced | - Remove animations from all slides<br>- Remove slide entry transitions from all slides<br>- Remove speaker notes from all slides<br>- Remove comments from all slides<br>- Remove unused master slides- Add (hidden) tags to slides and shapes<br>- Manage (hidden) tags of slides and shapes<br>- Select sliderange based on tags<br>- Select sliderange based on specific stamps on those slide<br>- Check for new versions of Instrumenta in the About-dialog |
 
 # Platform support
 All functions tested in Windows on the latest Office at that moment in time.
