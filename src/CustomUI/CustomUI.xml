@@ -86,6 +86,7 @@
                <button id="ObjectsCopyRoundedCorner" label="Copy rounded corner of first selected shape to selected shapes" showLabel="false" imageMso="ShapeRoundedRectangle" onAction="ObjectsCopyRoundedCorner" />
                <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="GroupShapes" onAction="ObjectsCopyShapeTypeAndAdjustments" />
                <toggleButton idMso="ObjectEditPoints" showLabel="false" />
+               <button id="RectifyLines" label="Rectify lines" showLabel="false" imageMso="ArrowsMore" onAction="RectifyLines" />
                <separator id="CopyPositionSeperator" />
                <menu id="SelectShapeByMenu" label="Select shape by attributes" imageMso="SelectionPane" showLabel="false">
                   <button id="SelectShapesByFillColor" label="Select shapes with same fill color" onAction="ObjectsSelectBySameFillColor" />
@@ -113,12 +114,18 @@
                <button id="DecreaseMargins" label="Decrease margins" showLabel="false" imageMso="DownArrow2" onAction="ObjectsMarginsDecrease" />
             </group>
             <group id="PictureGroup" label="Pictures" imageMso="PictureRecolorAutomatic">
-               <toggleButton idMso="PictureCrop" showLabel="false" />
+               <splitButton id="PictureCropSplitButton" size="normal" showLabel="false">
+                  <toggleButton idMso="PictureCrop" showLabel="false" />
+                  <menu id="PictureCropMenu" itemSize="normal">
+                     <button id="PictureCropToSlide" label="Crop picture to slide" showLabel="false" onAction="PictureCropToSlide" />
+                  </menu>
+               </splitButton>
                <button idMso="PictureReset" showLabel="false" />
                <button idMso="PictureInsertFromFile" showLabel="false" />
                <toggleButton idMso="PictureSetTransparentColor" showLabel="false" />
                <button idMso="PicturesCompress" showLabel="false" />
                <gallery idMso="PictureShapeGallery" showLabel="false" />
+               
             </group>
             <group id="AlignGroup" label="Align, distribute and size" imageMso="SizeToGridAccess">
                <box id="AlignDistributeBox" boxStyle="horizontal">

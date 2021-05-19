@@ -67,6 +67,7 @@ Current features include:
 - Select sliderange based on specific stamps on those slide
 - Sum columns in table (all values above selected cells)
 - Sum rows in table (all values left from selected cells)
+- Crop picture to slide
 - Check for new versions of Instrumenta in the About-dialog
 
 # Platform support
