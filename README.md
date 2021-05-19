@@ -11,7 +11,7 @@ As a spare time project in times of COVID-19, I decided to create Instrumenta as
 
 # Features
 Current features include:
-|-| Feature |
+| Group | Feature |
 |-|-|
 | Generic | - Basic formatting and shortcuts to different frequently used powerpoint functions |
 | Text | - Increase/decrease line spacing<br>- Remove text from shape<br>- Remove formatting<br>- Swap text<br>- Insert special characters<br>- Ticks and crosses<br>- Replace fonts<br>- Set proofing language for all slides |
