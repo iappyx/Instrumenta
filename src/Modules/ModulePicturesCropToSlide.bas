@@ -71,45 +71,10 @@ Sub PictureCropToSlide()
             End With
             
         Case msoAutoShape, msoFreeform
-            
-            Dim CroppedAreaFound As Boolean
-            CroppedAreaFound = False
-            
-            With PictureShape
                 
-                If .Left < 0 Then
-                    Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, .Left - 10 - .Width, -.Height, 0 - .Left + 10 + .Width, .Height + .Height + Application.ActivePresentation.PageSetup.SlideHeight)
-                    CropArea.Select (msoFalse)
-                    CroppedAreaFound = True
-                End If
-                
-                If .Top < 0 Then
-                    Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, -.Width, .Top - 10 - .Width, .Width + .Width + Application.ActivePresentation.PageSetup.SlideWidth, -.Top + 10 + .Width)
-                    CropArea.Select (msoFalse)
-                    CroppedAreaFound = True
-                End If
-                
-                If (.Left + .Width) > Application.ActivePresentation.PageSetup.SlideWidth Then
-                    
-                    Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, Application.ActivePresentation.PageSetup.SlideWidth, -.Height, .Left + .Width - Application.ActivePresentation.PageSetup.SlideWidth + 10 + .Height, .Height + .Height + Application.ActivePresentation.PageSetup.SlideHeight)
-                    CropArea.Select (msoFalse)
-                    CroppedAreaFound = True
-                    
-                End If
-                
-                If (.Top + .Height) > Application.ActivePresentation.PageSetup.SlideHeight Then
-                    
-                    Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, -.Width, Application.ActivePresentation.PageSetup.SlideHeight, .Width + .Width + Application.ActivePresentation.PageSetup.SlideWidth, .Top + .Height - Application.ActivePresentation.PageSetup.SlideHeight + 10 + .Width)
-                    CropArea.Select (msoFalse)
-                    CroppedAreaFound = True
-                    
-                End If
-                
-            End With
-            
-            If CroppedAreaFound = True Then
-                CommandBars.ExecuteMso ("ShapesSubtract")
-            End If
+                Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, 0, 0, Application.ActivePresentation.PageSetup.SlideWidth, Application.ActivePresentation.PageSetup.SlideHeight)
+                CropArea.Select msoFalse
+                CommandBars.ExecuteMso ("ShapesIntersect")
             
         Case Else
             
