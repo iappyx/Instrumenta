@@ -710,6 +710,14 @@ Sub ChangeSpellCheckLanguage()
         End If
     Next
     
+    If ActivePresentation.HasHandoutMaster Then
+    For Each SlideShape In ActivePresentation.HandoutMaster.Shapes
+        If SlideShape.HasTextFrame Then
+        SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        End If
+    Next
+    End If
+           
     If ActivePresentation.HasTitleMaster Then
     For Each SlideShape In ActivePresentation.TitleMaster.Shapes
         If SlideShape.HasTextFrame Then

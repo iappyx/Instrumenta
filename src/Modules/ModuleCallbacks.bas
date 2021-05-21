@@ -22,6 +22,22 @@ Attribute VB_Name = "ModuleCallbacks"
 'SOFTWARE.
 
 
+Sub ConnectRectangleShapesRightToLeft()
+    ConnectRectangleShapes "RightToLeft"
+End Sub
+
+Sub ConnectRectangleShapesLeftToRight()
+    ConnectRectangleShapes "LeftToRight"
+End Sub
+
+Sub ConnectRectangleShapesBottomToTop()
+    ConnectRectangleShapes "BottomToTop"
+End Sub
+
+Sub ConnectRectangleShapesTopToBottom()
+    ConnectRectangleShapes "TopToBottom"
+End Sub
+
 Sub TextInsertEuro()
     ObjectsTextInsertSpecialCharacter 8364
 End Sub
