@@ -21,13 +21,12 @@ Attribute VB_Name = "ModulePicturesCropToSlide"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
-
 Sub PictureCropToSlide()
     
     Set myDocument = Application.ActiveWindow
     
     If Not myDocument.Selection.Type = ppSelectionShapes Then
-        MsgBox "No shape selected."
+        MsgBox "No picture or shape selected."
         
     ElseIf myDocument.Selection.ShapeRange.Count = 1 Then
         
@@ -71,15 +70,56 @@ Sub PictureCropToSlide()
                 
             End With
             
+        Case msoAutoShape, msoFreeform
+            
+            Dim CroppedAreaFound As Boolean
+            CroppedAreaFound = False
+            
+            With PictureShape
+                
+                If .Left < 0 Then
+                    Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, .Left - 10, .Top - 10, 0 - .Left + 10, .Height + 20)
+                    CropArea.Select (msoFalse)
+                    CroppedAreaFound = True
+                End If
+                
+                If .Top < 0 Then
+                    Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, .Left - 10, .Top - 10, .Width + 20, -.Top + 10)
+                    CropArea.Select (msoFalse)
+                    CroppedAreaFound = True
+                End If
+                
+                If (.Left + .Width) > Application.ActivePresentation.PageSetup.SlideWidth Then
+                    
+                    Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, Application.ActivePresentation.PageSetup.SlideWidth, .Top - 10, .Left + .Width - Application.ActivePresentation.PageSetup.SlideWidth + 10, .Height + 20)
+                    CropArea.Select (msoFalse)
+                    CroppedAreaFound = True
+                    
+                End If
+                
+                If (.Top + .Height) > Application.ActivePresentation.PageSetup.SlideHeight Then
+                    
+                    Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, .Left - 10, Application.ActivePresentation.PageSetup.SlideHeight, .Width + 20, .Top + .Height - Application.ActivePresentation.PageSetup.SlideHeight + 10)
+                    CropArea.Select (msoFalse)
+                    CroppedAreaFound = True
+                    
+                End If
+                
+            End With
+            
+            If CroppedAreaFound = True Then
+                CommandBars.ExecuteMso ("ShapesSubtract")
+            End If
+            
         Case Else
             
-            MsgBox "Selected shape is not a picture."
+            MsgBox "Selected shape is not a picture or compatible shape."
             
         End Select
         
     Else
-    
-        MsgBox "Please select one shape."
+        
+        MsgBox "Please select one picture or shape."
         
     End If
     

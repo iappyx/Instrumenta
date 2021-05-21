@@ -117,7 +117,7 @@
                <splitButton id="PictureCropSplitButton" size="normal" showLabel="false">
                   <toggleButton idMso="PictureCrop" showLabel="false" />
                   <menu id="PictureCropMenu" itemSize="normal">
-                     <button id="PictureCropToSlide" label="Crop picture to slide" showLabel="false" onAction="PictureCropToSlide" />
+                     <button id="PictureCropToSlide" label="Crop picture or shape to slide" showLabel="false" onAction="PictureCropToSlide" />
                   </menu>
                </splitButton>
                <button idMso="PictureReset" showLabel="false" />
