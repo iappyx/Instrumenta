@@ -15,7 +15,7 @@ Current features include:
 |-|-|
 | Generic | - Basic formatting and shortcuts to different frequently used powerpoint functions |
 | Text | - Increase/decrease line spacing<br>- Remove text from shape<br>- Remove formatting<br>- Swap text<br>- Insert special characters<br>- Ticks and crosses<br>- Replace fonts<br>- Set proofing language for all slides |
-| Shapes | - Select shapes by fill and/or line color<br>- Select shapes by width and/or height<br>- Select shapes by type of shape<br>- Swap position of two shapes<br>- Copy rounded corners of shapes to selected shapes<br>- Copy shapetype and all adjustments of shapes to selected shapes<br>- Rectify lines<br>- Clone shapes to right/down<br>- Copy/paste position and dimensions of shapes (across slides)<br>- Copy shape to multiple slides (multislide shape)<br>- Update position and dimensions of selected multislide shape on all slides<br>- Delete selected multislide shape on all slides |
+| Shapes | - Select shapes by fill and/or line color<br>- Select shapes by width and/or height<br>- Select shapes by type of shape<br>- Swap position of two shapes<br>- Copy rounded corners of shapes to selected shapes<br>- Copy shapetype and all adjustments of shapes to selected shapes<br>- Rectify lines<br>- Clone shapes to right/down<br>- Copy/paste position and dimensions of shapes (across slides)<br>- Copy shape to multiple slides (multislide shape)<br>- Update position and dimensions of selected multislide shape on all slides<br>- Delete selected multislide shape on all slides<br>- Crop shape to slide  |
 | Pictures | - Crop picture to slide |
 | Align, distribute and size | - Align, distribute and size shapes<br>- Align objects over table cells, rows or columns <br>- Set same height and/or width for shapes<br>- Size shapes to tallest, shortest, widest or narrowest<br>- Remove, increase or decrease horizontal/vertical gap between shapes<br>- Remove, increase or decrease margins for shapes<br>- Remove, increase or decrease margins for tables or selected cells |
 | Table | - Format table<br>- Convert table to shapes<br>- Sum columns in table (all values above selected cells)<br>- Sum rows in table (all values left from selected cells) |
@@ -28,8 +28,8 @@ Current features include:
 All functions tested in Windows on the latest Office at that moment in time.
 
 The add in will work in OS X, with some minor issues:
-* Some icons will not show correctly in the ribbon (underlying functionality will work).
-* Export to E-mail (as PPT or PDF) is not supported due to OS X sandbox. There are potential solution, but those require a lot of manual user configuration and installation of custom scripts. 
+* Some icons will not show correctly in the ribbon (underlying functionality will work). Custom icons for Instrumenta are on the backlog.
+* Export to E-mail (as PPT or PDF) is not supported due to OS X sandbox. There are potential solutions, but those require a lot of manual user configuration and installation of custom scripts. This will not be supported for now.
 
 As stated in the license: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
