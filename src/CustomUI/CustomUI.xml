@@ -43,6 +43,7 @@
                   <menu id="SpecialCharacterMenu" label="Special characters" imageMso="SymbolInsert" showLabel="false">
                      <button id="TextInsertEuro" label="Euro" onAction="TextInsertEuro" />
                      <button id="TextInsertCopyright" label="Copyright" onAction="TextInsertCopyright" />
+                     <button idMso="SymbolInsert" showLabel="false" />
                   </menu>
                </buttonGroup>
                <buttonGroup id="buttonGroupIndent">
@@ -172,9 +173,19 @@
                <button id="ObjectsIncreaseSpacingVertical" imageMso="VerticalSpacingIncrease" label="Increase vertical gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingVertical" />
                <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />
                <separator id="separatorTableAlign" />
+               <splitButton id="TableAlignSplitButton" size="normal" showLabel="false">
                <button id="ObjectsAlignToTable" imageMso="GroupTableProperties" label="Center align shapes to table cells" showLabel="false" onAction="ObjectsAlignToTable" />
-               <button id="ObjectsAlignToTableColumn" imageMso="SpeakByColumns" label="Center align shapes to columns of a table" showLabel="false" onAction="ObjectsAlignToTableColumn" />
+                  <menu id="TableAlignMenu" itemSize="normal">
+                <button id="ObjectsAlignToTableColumn" imageMso="SpeakByColumns" label="Center align shapes to columns of a table" showLabel="false" onAction="ObjectsAlignToTableColumn" />
                <button id="ObjectsAlignToTableRow" imageMso="SpeakByRows" label="Center align shapes to rows of a table" showLabel="false" onAction="ObjectsAlignToTableRow" />
+                  </menu>
+               </splitButton>
+                  <menu id="ObjectsStretchMenu" label="Stretch shapes" imageMso="DrawingCanvasExpand" showLabel="false">
+                    <button id="ObjectsStretchLeft" label="Stretch shapes to left" onAction="ObjectsStretchLeft" />
+                    <button id="ObjectsStretchRight" label="Stretch shapes to right" onAction="ObjectsStretchRight" />
+                    <button id="ObjectsStretchTop" label="Stretch shapes to top" onAction="ObjectsStretchTop" />
+                    <button id="ObjectsStretchBottom" label="Stretch shapes to bottom" onAction="ObjectsStretchBottom" />
+                  </menu>             
             </group>
             <group id="TableGroup" label="Table" imageMso="TableInsert">
                <gallery idMso="TableInsertGallery" showLabel="false" />

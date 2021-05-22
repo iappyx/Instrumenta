@@ -21,6 +21,95 @@ Attribute VB_Name = "ModuleObjectsAlignAndDistribute"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+
+Sub ObjectsStretchTop()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByTopPosition SlideShape
+    
+    For ShapeCount = 2 To UBound(SlideShape)
+        SlideShape(ShapeCount).Height = SlideShape(ShapeCount).Height + (SlideShape(ShapeCount).Top - SlideShape(1).Top)
+        SlideShape(ShapeCount).Top = SlideShape(1).Top
+    Next ShapeCount
+End Sub
+
+Sub ObjectsStretchLeft()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByLeftPosition SlideShape
+    
+    For ShapeCount = 2 To UBound(SlideShape)
+        SlideShape(ShapeCount).Width = SlideShape(ShapeCount).Width + (SlideShape(ShapeCount).Left - SlideShape(1).Left)
+        SlideShape(ShapeCount).Left = SlideShape(1).Left
+    Next ShapeCount
+End Sub
+
+Sub ObjectsStretchBottom()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByBottomPosition SlideShape
+    
+    For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
+        SlideShape(ShapeCount).Height = SlideShape(ShapeCount).Height + ((SlideShape(UBound(SlideShape)).Top + SlideShape(UBound(SlideShape)).Height) - SlideShape(ShapeCount).Top - SlideShape(ShapeCount).Height)
+        
+    Next ShapeCount
+End Sub
+
+Sub ObjectsStretchRight()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    Dim ShapeCount  As Long
+    Dim SlideShape() As Shape
+    ReDim SlideShape(1 To myDocument.Selection.ShapeRange.Count)
+    
+    For ShapeCount = 1 To myDocument.Selection.ShapeRange.Count
+        Set SlideShape(ShapeCount) = myDocument.Selection.ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+    ObjectsSortByRightPosition SlideShape
+    
+    For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
+        SlideShape(ShapeCount).Width = SlideShape(ShapeCount).Width + ((SlideShape(UBound(SlideShape)).Left + SlideShape(UBound(SlideShape)).Width) - SlideShape(ShapeCount).Left - SlideShape(ShapeCount).Width)
+        
+    Next ShapeCount
+End Sub
+
 Sub ObjectsRemoveSpacingHorizontal()
     
     Set myDocument = Application.ActiveWindow
@@ -172,6 +261,31 @@ Sub ObjectsSortByLeftPosition(ArrayToSort As Variant)
     Set SlideShapes = Nothing
 End Sub
 
+Sub ObjectsSortByRightPosition(ArrayToSort As Variant)
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    Dim StopLoop    As Boolean
+    Dim ShapeCount  As Long
+    Dim SlideShapes As Shape
+    Do
+        StopLoop = False
+        For ShapeCount = LBound(ArrayToSort) To UBound(ArrayToSort) - 1
+            
+            If (ArrayToSort(ShapeCount).Left + ArrayToSort(ShapeCount).Width) > (ArrayToSort(ShapeCount + 1).Left + ArrayToSort(ShapeCount + 1).Width) Then
+                Set SlideShapes = ArrayToSort(ShapeCount)
+                Set ArrayToSort(ShapeCount) = ArrayToSort(ShapeCount + 1)
+                Set ArrayToSort(ShapeCount + 1) = SlideShapes
+                StopLoop = True
+            End If
+        Next ShapeCount
+    Loop Until Not StopLoop
+    
+    Set SlideShapes = Nothing
+End Sub
+
 Sub ObjectsSortByTopPosition(ArrayToSort As Variant)
     
     Set myDocument = Application.ActiveWindow
@@ -186,6 +300,31 @@ Sub ObjectsSortByTopPosition(ArrayToSort As Variant)
         For ShapeCount = LBound(ArrayToSort) To UBound(ArrayToSort) - 1
             
             If ArrayToSort(ShapeCount).Top > ArrayToSort(ShapeCount + 1).Top Then
+                Set SlideShapes = ArrayToSort(ShapeCount)
+                Set ArrayToSort(ShapeCount) = ArrayToSort(ShapeCount + 1)
+                Set ArrayToSort(ShapeCount + 1) = SlideShapes
+                StopLoop = True
+            End If
+        Next ShapeCount
+    Loop Until Not StopLoop
+    
+    Set SlideShapes = Nothing
+End Sub
+
+Sub ObjectsSortByBottomPosition(ArrayToSort As Variant)
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    Dim StopLoop    As Boolean
+    Dim ShapeCount  As Long
+    Dim SlideShapes As Shape
+    Do
+        StopLoop = False
+        For ShapeCount = LBound(ArrayToSort) To UBound(ArrayToSort) - 1
+            
+            If (ArrayToSort(ShapeCount).Top + ArrayToSort(ShapeCount).Height) > (ArrayToSort(ShapeCount + 1).Top + ArrayToSort(ShapeCount + 1).Height) Then
                 Set SlideShapes = ArrayToSort(ShapeCount)
                 Set ArrayToSort(ShapeCount) = ArrayToSort(ShapeCount + 1)
                 Set ArrayToSort(ShapeCount + 1) = SlideShapes
