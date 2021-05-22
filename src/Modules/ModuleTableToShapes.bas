@@ -43,15 +43,14 @@ Sub ConvertTableToShapes()
                 .TextFrame.MarginLeft = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.MarginLeft
                 .TextFrame.MarginRight = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.MarginRight
                 .TextFrame.MarginTop = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.MarginTop
-                .TextFrame.TextRange.Text = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Text
+                
+                myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Cut
+                .TextFrame.TextRange.Paste
+                
                 .TextFrame.TextRange.ParagraphFormat.Alignment = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.ParagraphFormat.Alignment
                 .TextFrame.TextRange.ParagraphFormat.BaseLineAlignment = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.ParagraphFormat.BaseLineAlignment
-                .TextFrame.TextRange.Font.Name = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Font.Name
-                .TextFrame.TextRange.Font.Size = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Font.Size
-                .TextFrame.TextRange.Font.Color = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Font.Color
-                .TextFrame.TextRange.ParagraphFormat.Bullet = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.ParagraphFormat.Bullet
-                .Fill.ForeColor = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.Fill.ForeColor
-                .Line.ForeColor = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Borders(ppBorderBottom).ForeColor
+                .Fill.ForeColor.RGB = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.Fill.ForeColor.RGB
+                .Line.ForeColor.RGB = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Borders(ppBorderBottom).ForeColor.RGB
             End With
             
             TableLeft = TableLeft + Application.ActiveWindow.Selection.ShapeRange.Table.Columns(ColsCount).Width

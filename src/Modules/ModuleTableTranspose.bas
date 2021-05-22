@@ -25,7 +25,8 @@ Sub TableTranspose()
     
     Set myDocument = Application.ActiveWindow
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         

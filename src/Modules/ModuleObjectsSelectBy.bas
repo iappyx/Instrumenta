@@ -77,7 +77,7 @@ Sub ObjectsSelectBySameFillAndLineColor()
     
     For Each SlideShapeToCheck In myDocument.View.Slide.Shapes
         
-        If (SlideShapeToCheck.Fill.ForeColor = SlideShape.Fill.ForeColor) And (SlideShapeToCheck.Line.ForeColor = SlideShape.Line.ForeColor) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.Visible = True) And (SlideShapeToCheck.Line.Visible = True) Then
+        If (SlideShapeToCheck.Fill.ForeColor.RGB = SlideShape.Fill.ForeColor.RGB) And (SlideShapeToCheck.Line.ForeColor.RGB = SlideShape.Line.ForeColor.RGB) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.Visible = True) And (SlideShapeToCheck.Line.Visible = True) Then
             
             If (SlideShapeToCheck.Name <> SlideShape.Name) Then
                 ReDim Preserve SelectedShapes(ShapeCount + 1)
@@ -112,7 +112,7 @@ Sub ObjectsSelectBySameFillColor()
     
     For Each SlideShapeToCheck In myDocument.View.Slide.Shapes
         
-        If (SlideShapeToCheck.Fill.ForeColor = SlideShape.Fill.ForeColor) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.Visible = True) Then
+        If (SlideShapeToCheck.Fill.ForeColor.RGB = SlideShape.Fill.ForeColor.RGB) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.Visible = True) Then
             
             If (SlideShapeToCheck.Name <> SlideShape.Name) Then
                 ReDim Preserve SelectedShapes(ShapeCount + 1)
@@ -148,7 +148,7 @@ Sub ObjectsSelectBySameLineColor()
     
     For Each SlideShapeToCheck In myDocument.View.Slide.Shapes
         
-        If (SlideShapeToCheck.Line.ForeColor = SlideShape.Line.ForeColor) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Line.Visible = True) Then
+        If (SlideShapeToCheck.Line.ForeColor.RGB = SlideShape.Line.ForeColor.RGB) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Line.Visible = True) Then
             
             If (SlideShapeToCheck.Name <> SlideShape.Name) Then
                 ReDim Preserve SelectedShapes(ShapeCount + 1)
