@@ -188,6 +188,7 @@
                <button idMso="TableColumnsDistribute" showLabel="false" />
                <button idMso="TableStyleClearTable" showLabel="false" />
                <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" />
+               <button id="TableTranspose" imageMso="PivotTableReport" label="Transpose table" showLabel="false" onAction="TableTranspose" />
                <splitButton id="TableSumSplitButton" size="normal" showLabel="false">
                   <button id="TableSumButton" imageMso="AutoSum" label="Sum column (values above selected cells)" showLabel="false" onAction="TableSum" />
                   <menu id="TableSumMenu" itemSize="normal">

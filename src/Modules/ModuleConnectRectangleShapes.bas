@@ -27,6 +27,9 @@ Sub ConnectRectangleShapes(ShapeDirection As String)
     
     If ActiveWindow.Selection.ShapeRange.Count = 2 Then
     
+    Dim Left1, Right1, Top1, Bottom1, Left2, Right2, Top2, Bottom2 As Double
+    
+    
     Left1 = ActiveWindow.Selection.ShapeRange(1).Left
     Right1 = Left1 + ActiveWindow.Selection.ShapeRange(1).Width
     Top1 = ActiveWindow.Selection.ShapeRange(1).Top
@@ -47,6 +50,7 @@ Sub ConnectRectangleShapes(ShapeDirection As String)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Bottom2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Top2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Top1
+            '.ConvertToShape
             .ConvertToShape.Line.Visible = msoFalse
         End With
         
@@ -56,6 +60,7 @@ Sub ConnectRectangleShapes(ShapeDirection As String)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Bottom1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Top1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Top2
+            '.ConvertToShape
             .ConvertToShape.Line.Visible = msoFalse
         End With
         
@@ -65,6 +70,7 @@ Sub ConnectRectangleShapes(ShapeDirection As String)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Top2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Top2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Bottom1
+            '.ConvertToShape
             .ConvertToShape.Line.Visible = msoFalse
         End With
         
@@ -74,6 +80,7 @@ Sub ConnectRectangleShapes(ShapeDirection As String)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Top1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Top1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Bottom2
+            '.ConvertToShape
             .ConvertToShape.Line.Visible = msoFalse
         End With
         
