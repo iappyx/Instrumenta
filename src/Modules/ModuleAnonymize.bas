@@ -52,7 +52,7 @@ Sub AnonymizeShapeWithLoremIpsum(SlideShape)
             
             For Each Paragraph In SlideShape.TextFrame2.TextRange.Paragraphs
                 If Paragraph.Length > 1 Then
-                Paragraph.text = Left(GetLoremIpsum(Paragraph.words.Count), Paragraph.Length)
+                Paragraph.text = GetLoremIpsum(Paragraph.words.Count, Paragraph.Length)
                 End If
             Next
             
@@ -64,7 +64,7 @@ Sub AnonymizeShapeWithLoremIpsum(SlideShape)
                     
                     For Each Paragraph In SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame2.TextRange.Paragraphs
                         If Paragraph.Length > 1 Then
-                        Paragraph.text = Left(GetLoremIpsum(Paragraph.words.Count), Paragraph.Length)
+                        Paragraph.text = GetLoremIpsum(Paragraph.words.Count, Paragraph.Length)
                         End If
                     Next
                     
@@ -78,7 +78,7 @@ Sub AnonymizeShapeWithLoremIpsum(SlideShape)
                 
                 For Each Paragraph In SlideShape.SmartArt.AllNodes(SlideShapeSmartArtNode).TextFrame2.TextRange.Paragraphs
                     If Paragraph.Length > 1 Then
-                    Paragraph.text = Left(GetLoremIpsum(Paragraph.words.Count), Paragraph.Length)
+                    Paragraph.text = GetLoremIpsum(Paragraph.words.Count, Paragraph.Length)
                     End If
                 Next
                 
@@ -90,7 +90,12 @@ Sub AnonymizeShapeWithLoremIpsum(SlideShape)
     
 End Sub
 
-Public Function GetLoremIpsum(NumberOfWords As Long) As String
+Public Function GetLoremIpsum(NumberOfWords As Long, MaxLength As Long) As String
+    
+    If (NumberOfWords <= 0) Then
+        GetLoremIpsum = ""
+        Exit Function
+    End If
     
     Dim LoremIpsumWords() As String
     Dim LoremResult As String
@@ -108,18 +113,23 @@ Public Function GetLoremIpsum(NumberOfWords As Long) As String
     LoremIpsum = LoremIpsum + "Integer viverra pulvinar augue. Nulla et erat sed ante suscipit vulputate. Proin a iaculis nisl. Pellentesque convallis lorem sit amet euismod tincidunt. Pellentesque nisl mauris, dignissim sed imperdiet vel, tristique a orci. Integer ut scelerisque quam. Sed scelerisque lectus ut convallis malesuada. Morbi vehicula hendrerit magna in placerat."
     LoremIpsum = LoremIpsum + "Integer non interdum sapien. Praesent dictum risus erat, non iaculis dolor bibendum accumsan. Fusce fermentum ultricies ultrices. Ut condimentum elit vitae scelerisque euismod. Suspendisse massa ante, interdum in nisl quis, blandit."
     LoremIpsum = LoremIpsum + LoremIpsum + LoremIpsum + LoremIpsum + LoremIpsum
-
-    If (NumberOfWords <= 0) Then
-        GetLoremIpsum = ""
+    
+    LoremIpsumWords = Split(LoremIpsum, " ")
+    
+    If (NumberOfWords > UBound(LoremIpsumWords)) Then
+        GetLoremIpsum = LoremIpsum
         Exit Function
     End If
     
-    LoremIpsumWords = Split(LoremIpsum, " ")
     LoremResult = LoremIpsumWords(0)
     WordCount = 1
     
     Do While (WordCount < NumberOfWords)
-        LoremResult = LoremResult & " " & LoremIpsumWords(WordCount)
+    
+        If (Len(LoremResult & " " & LoremIpsumWords(WordCount)) <= MaxLength) Or NumberOfWords <= 2 Then
+            LoremResult = LoremResult & " " & LoremIpsumWords(WordCount)
+        End If
+        
         WordCount = WordCount + 1
     Loop
     
