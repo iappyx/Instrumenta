@@ -22,7 +22,7 @@ Current features include:
 | Export | - E-mail selected slides (as PDF or PPT) |
 | Storyline | - Copy storyline to clipboard<br>- Paste storyline in shape |
 | Paste and insert | - Harvey Balls<br>- Traffic lights (RAG status)<br>- Sticky notes<br>- Move sticky notes on and off this slide/all slides<br>- Remove sticky notes from this slide/all slides<br>- Convert comments to sticky notes<br>- Steps counter (per slide and cross-slides)<br>- Agenda pages<br>- Stamps<br>- Move stamps on and off this slide/all slides<br>- Remove stamps from this slide/all slides<br>- Insert process (SmartArt) |
-| Advanced | - Remove animations from all slides<br>- Remove slide entry transitions from all slides<br>- Remove speaker notes from all slides<br>- Remove comments from all slides<br>- Remove unused master slides<br>- Anonymize slides with Lorem Ipsum<br>- Add (hidden) tags to slides and shapes<br>- Manage (hidden) tags of slides and shapes<br>- Select sliderange based on tags<br>- Select sliderange based on specific stamps on those slide<br>- Check for new versions of Instrumenta in the About-dialog |
+| Advanced | - Remove animations from all slides<br>- Remove slide entry transitions from all slides<br>- Remove speaker notes from all slides<br>- Remove comments from all slides<br>- Remove unused master slides<br>- Convert slides to pictures (readonly)<br>- Anonymize slides with Lorem Ipsum<br>- Add (hidden) tags to slides and shapes<br>- Manage (hidden) tags of slides and shapes<br>- Select sliderange based on tags<br>- Select sliderange based on specific stamps on those slide<br>- Check for new versions of Instrumenta in the About-dialog |
 
 # Platform support
 All functions tested in Windows on the latest Office at that moment in time.

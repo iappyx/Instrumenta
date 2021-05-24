@@ -328,7 +328,9 @@
                   <button id="cleaning3" label="Remove speaker notes from all slides" imageMso="Clear" onAction="CleanUpRemoveSpeakerNotesFromAllSlides" />
                   <button id="cleaning4" label="Remove comments from all slides" imageMso="Clear" onAction="CleanUpRemoveCommentsFromAllSlides" />
                   <button id="cleaning5" label="Remove unused master slides" imageMso="Clear" onAction="CleanUpRemoveUnusedMasterSlides" />
-                  <button id="cleaning6" label="Anonymize slides with Lorem Ipsum" imageMso="Clear" onAction="AnonymizeWithLoremIpsum" />
+                  <menuSeparator id="separatorConvertAnonymize" />
+                  <button id="cleaning6" label="Convert slides to pictures (readonly)" imageMso="Clear" onAction="ConvertSlidesToPictures" />
+                  <button id="cleaning7" label="Anonymize slides with Lorem Ipsum" imageMso="Clear" onAction="AnonymizeWithLoremIpsum" />
                </menu>
                <toggleButton idMso="SelectionPane" showLabel="false" />
                <splitButton id="TagsSplitButton" size="normal" showLabel="false">
