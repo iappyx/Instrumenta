@@ -243,8 +243,8 @@ Sub ShowChangeSpellCheckLanguageForm()
     LanguageNames(216) = "Zulu"
     
     ChangeSpellCheckLanguageForm.ComboBox1.Clear
-    For I = 1 To 216
-        ChangeSpellCheckLanguageForm.ComboBox1.AddItem LanguageNames(I)
+    For i = 1 To 216
+        ChangeSpellCheckLanguageForm.ComboBox1.AddItem LanguageNames(i)
     Next
     
     ChangeSpellCheckLanguageForm.Show
@@ -689,7 +689,6 @@ Sub ChangeSpellCheckLanguage()
     LanguageIDs(215) = msoLanguageIDYoruba
     LanguageIDs(216) = msoLanguageIDZulu
     
-    'Hide form
     ChangeSpellCheckLanguageForm.Hide
     
     Dim TargetLanguageID As String
@@ -703,12 +702,6 @@ Sub ChangeSpellCheckLanguage()
     Dim SlideSmartArtNode As SmartArtNode
     Dim GroupCount  As Integer
     
-    ' Updates shapes in master
-    For Each SlideShape In ActivePresentation.SlideMaster.Shapes
-        If SlideShape.HasTextFrame Then
-        SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
-        End If
-    Next
     
     If ActivePresentation.HasHandoutMaster Then
     For Each SlideShape In ActivePresentation.HandoutMaster.Shapes
@@ -734,46 +727,58 @@ Sub ChangeSpellCheckLanguage()
     Next
     End If
     
-    ' Update shapes in slides
     For Each PresentationSlide In ActivePresentation.Slides
-        
         For Each SlideShape In PresentationSlide.Shapes
+            ChangeShapeSpellCheckLanguage SlideShape, TargetLanguageID
+        Next SlideShape
+    Next PresentationSlide
+    
+    For Each SlideShape In ActivePresentation.SlideMaster.Shapes
+        ChangeShapeSpellCheckLanguage SlideShape, TargetLanguageID
+    Next
+    
+    MsgBox "Changed spellcheck language to " + TargetLanguage + " on all slides."
+    
+End Sub
+
+Sub ChangeShapeSpellCheckLanguage(SlideShape, TargetLanguageID)
+    
+    If SlideShape.Type = msoGroup Then
+        
+        Set SlideShapeGroup = SlideShape.GroupItems
+        
+        For Each SlideShapeChild In SlideShapeGroup
+            ChangeShapeSpellCheckLanguage SlideShapeChild, TargetLanguageID
+        Next
+        
+    Else
+        
+        If SlideShape.HasTextFrame Then
             
-            'Normal shapes
-            If SlideShape.HasTextFrame Then
-                SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
-            End If
-            
-            'Tables
-            If SlideShape.HasTable Then
-                For TableRow = 1 To SlideShape.Table.Rows.Count
+            SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+                       
+        End If
+        
+        If SlideShape.HasTable Then
+            For TableRow = 1 To SlideShape.Table.Rows.Count
                     For TableColumn = 1 To SlideShape.Table.Columns.Count
                         SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame2.TextRange.LanguageID = TargetLanguageID
                     Next
-                Next
-                
-                'SmartArt
-                If SlideShape.HasSmartArt Then
-                    For Each SlideSmartArtNode In SlideShape.SmartArt.AllNodes
-                    If SlideSmartArdNode.HasTextFrame Then
-                        SlideSmartArtNode.TextFrame2.TextRange.LanguageID = TargetLanguageID
-                    End If
-                    Next
-                    
-                End If
-                
-                'Groups - Note: need to find a better way to find out if it's a group.
-                On Error Resume Next
-                For GroupCount = 0 To SlideShape.GroupItems.Count - 1
-                    SlideShape.GroupItems(GroupCount).TextFrame2.TextRange.LanguageID = TargetLanguageID
-                Next
-                
-            End If
-            
-        Next SlideShape
+            Next
+        End If
         
-    Next PresentationSlide
-    
-    MsgBox "Changed spellcheck language to " + TargetLanguage + " on all slides."
+        If SlideShape.HasSmartArt Then
+            
+            For SlideShapeSmartArtNode = 1 To SlideShape.SmartArt.AllNodes.Count
+                
+                For Each SlideSmartArtNode In SlideShape.SmartArt.AllNodes
+                    SlideSmartArtNode.TextFrame2.TextRange.LanguageID = TargetLanguageID
+                 Next
+                            
+            Next
+            
+        End If
+        
+    End If
     
 End Sub
