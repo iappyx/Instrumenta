@@ -23,7 +23,7 @@ Attribute VB_Name = "ModuleExport"
 
 Sub EmailSelectedSlides()
     #If Mac Then
-        MsgBox "This Function will Not work On a Mac"
+        MsgBox "This Function will not work on a Mac"
     #Else
     
         If ActiveWindow.Selection.Type = ppSelectionSlides Then
@@ -114,7 +114,7 @@ End Sub
 
 Sub EmailSelectedSlidesAsPDF()
     #If Mac Then
-        MsgBox "This Function will Not work On a Mac"
+        MsgBox "This Function will not work on a Mac"
     #Else
         
         If ActiveWindow.Selection.Type = ppSelectionSlides Then
