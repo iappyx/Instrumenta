@@ -225,16 +225,17 @@
                <button id="EmailSelectedSlidesAsPDFButton" label="E-mail selected slides as PDF" showLabel="false" imageMso="FileEmailAsPdfEmailAttachment" onAction="EmailSelectedSlidesAsPDF" />
                <button idMso="FileSaveAsPdfOrXps" showLabel="false" />
                <button idMso="ObjectSaveAsPicture" imageMso="PictureReset" showLabel="false" />
-            </group>
-            <group id="StoryLineGroup" label="Storyline" imageMso="MailMergeStartLetters">
                 <menu id="CopyStorylineMenu" label="Copy storyline/slide note" imageMso="GroupCopy" showLabel="false">
-                     <button id="CopySlideNotesToWord" label="Export slide notes to Word" onAction="CopySlideNotesToWord" />
-                     <button id="CopySlideNotesToClipboard" label="Copy slide notes to clipboard" onAction="CopySlideNotesToClipboardOnly" />
-                     <button id="CopyStorylineToWord" label="Export storyline to Word" onAction="CopyStorylineToWord" />
-                     <button id="CopyStorylineToClipboard" label="Copy storyline to clipboard" onAction="CopyStorylineToClipBoardOnly" />
+                     <button idMso="CreateHandoutsInWord" />
+                     <menuSeparator id="separatorExport1" />
+                     <button id="CopySlideNotesToWord" label="Export slide notes to Word" imageMso="MergeToWord" onAction="CopySlideNotesToWord" />
+                     <button id="CopySlideNotesToClipboard" label="Copy slide notes to clipboard" imageMso="GroupClipboard" onAction="CopySlideNotesToClipboardOnly" />
+                     <menuSeparator id="separatorExport2" />
+                     <button id="CopyStorylineToWord" label="Export storyline to Word" imageMso="MergeToWord" onAction="CopyStorylineToWord" />
+                     <button id="CopyStorylineToClipboard" label="Copy storyline to clipboard" imageMso="GroupClipboard" onAction="CopyStorylineToClipBoardOnly" />
+                     <button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
                 </menu> 
-               <button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
-            </group>
+              </group>
             <group id="PasteGroup" label="Paste and insert" imageMso="PasteAlternative">
                <box id="PasteGroupBox1" boxStyle="horizontal">
                   <button idMso="PasteJpeg" showLabel="false" />
