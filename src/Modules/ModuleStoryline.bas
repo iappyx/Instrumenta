@@ -21,9 +21,67 @@ Attribute VB_Name = "ModuleStoryline"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
-Sub CopyStorylineToClipboard()
+
+Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     
-    Dim SlideLoop   As Long
+    Dim PresentationSlide As PowerPoint.Slide
+    Dim SlidePlaceHolder As PowerPoint.Shape
+    Dim ClipboardObject As Object
+    Dim StorylineText As String
+    
+    Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
+    Dim PlaceHolderTextRange As TextRange
+    Set PlaceHolderTextRange = SlidePlaceHolder.TextFrame.TextRange
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+        If PresentationSlide.NotesPage.Shapes.Placeholders(2).TextFrame.HasText Then
+            
+            PresentationSlide.NotesPage.Shapes.Placeholders(2).TextFrame.TextRange.Copy
+            
+            PlaceHolderTextRange.Characters(0).InsertAfter Chr(13) & Chr(13) & "[Slide " & Str(PresentationSlide.SlideNumber) & "]" & Chr(13)
+            PlaceHolderTextRange.Characters(0).Paste
+            
+        End If
+        
+    Next PresentationSlide
+    
+    SlidePlaceHolder.TextFrame.TextRange.Copy
+    SlidePlaceHolder.Delete
+    
+    If ExportToWord = True Then
+    
+        #If Mac Then
+        MsgBox "This Function will not work on a Mac. Slide notes are copied to clipboard."
+        #Else
+    
+            Dim WordApplication, WordDocument As Object
+            
+            On Error Resume Next
+            Set WordApplication = GetObject(Class:="Word.Application")
+            Err.Clear
+            
+            If WordApplication Is Nothing Then Set WordApplication = CreateObject(Class:="Word.Application")
+            On Error GoTo 0
+            
+            WordApplication.Visible = True
+            Set WordDocument = WordApplication.Documents.Add
+            
+            With WordApplication
+                .Selection.PasteAndFormat wdPasteDefault
+            End With
+    
+        #End If
+    
+    Else
+        MsgBox "Slide notes copied to clipboard."
+    End If
+    
+End Sub
+
+
+Sub CopyStorylineToClipboard(ExportToWord As Boolean)
+    
     Dim PresentationSlide As PowerPoint.Slide
     Dim SlidePlaceHolder As PowerPoint.Shape
     Dim ClipboardObject As Object
@@ -33,16 +91,51 @@ Sub CopyStorylineToClipboard()
         For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
             
             If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
-                StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.Text & Chr(13)
+                StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.text & Chr(13)
                 Exit For
             End If
         Next SlidePlaceHolder
     Next PresentationSlide
     
     Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
-    SlidePlaceHolder.TextFrame.TextRange.Text = StorylineText
+    SlidePlaceHolder.TextFrame.TextRange.text = StorylineText
     SlidePlaceHolder.TextFrame.TextRange.Copy
     SlidePlaceHolder.Delete
+    
+    If Not StorylineText = "" Then
+    If ExportToWord = True Then
+    
+        #If Mac Then
+        MsgBox "This Function will not work on a Mac. Storyline is copied to clipboard."
+        #Else
+    
+            Dim WordApplication, WordDocument As Object
+            
+            On Error Resume Next
+            Set WordApplication = GetObject(Class:="Word.Application")
+            Err.Clear
+            
+            If WordApplication Is Nothing Then Set WordApplication = CreateObject(Class:="Word.Application")
+            On Error GoTo 0
+            
+            WordApplication.Visible = True
+            Set WordDocument = WordApplication.Documents.Add
+            
+            With WordApplication
+                
+                    .Selection.PasteAndFormat wdPasteDefault
+        
+            End With
+    
+        #End If
+    
+    Else
+        MsgBox "Storyline copied to clipboard."
+    End If
+    
+    Else
+        MsgBox "Storyline is empty"
+    End If
     
 End Sub
 
@@ -62,14 +155,14 @@ Sub PasteStorylineInSelectedShape()
         For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
             
             If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
-                StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.Text & Chr(13)
+                StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.text & Chr(13)
                 
                 Exit For
             End If
         Next SlidePlaceHolder
     Next PresentationSlide
     
-    Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.Text = StorylineText
+    Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.text = StorylineText
     
     End If
     

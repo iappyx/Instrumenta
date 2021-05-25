@@ -227,7 +227,12 @@
                <button idMso="ObjectSaveAsPicture" imageMso="PictureReset" showLabel="false" />
             </group>
             <group id="StoryLineGroup" label="Storyline" imageMso="MailMergeStartLetters">
-               <button id="CopyStorylineToClipboardButton" label="Copy storyline to clipboard" showLabel="false" imageMso="GroupCopy" onAction="CopyStorylineToClipboard" />
+                <menu id="CopyStorylineMenu" label="Copy storyline/slide note" imageMso="GroupCopy" showLabel="false">
+                     <button id="CopySlideNotesToWord" label="Export slide notes to Word" onAction="CopySlideNotesToWord" />
+                     <button id="CopySlideNotesToClipboard" label="Copy slide notes to clipboard" onAction="CopySlideNotesToClipboardOnly" />
+                     <button id="CopyStorylineToWord" label="Export storyline to Word" onAction="CopyStorylineToWord" />
+                     <button id="CopyStorylineToClipboard" label="Copy storyline to clipboard" onAction="CopyStorylineToClipBoardOnly" />
+                </menu> 
                <button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
             </group>
             <group id="PasteGroup" label="Paste and insert" imageMso="PasteAlternative">

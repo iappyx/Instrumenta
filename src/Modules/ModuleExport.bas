@@ -73,10 +73,7 @@ Sub EmailSelectedSlides()
         Next SlideLoop
         TemporaryPresentation.Save
         TemporaryPresentation.Close
-        
-        Dim objOL   As Object
-        Set objOL = CreateObject("Outlook.Application")
-        
+               
         On Error Resume Next
         Set OutlookApplication = GetObject(Class:="Outlook.Application")
         Err.Clear

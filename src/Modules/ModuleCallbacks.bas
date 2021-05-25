@@ -22,6 +22,22 @@ Attribute VB_Name = "ModuleCallbacks"
 'SOFTWARE.
 
 
+Sub CopySlideNotesToWord()
+CopySlideNotesToClipboard True
+End Sub
+
+Sub CopySlideNotesToClipboardOnly()
+CopySlideNotesToClipboard False
+End Sub
+
+Sub CopyStorylineToWord()
+CopyStorylineToClipboard True
+End Sub
+
+Sub CopyStorylineToClipBoardOnly()
+CopyStorylineToClipboard False
+End Sub
+
 Sub ConnectRectangleShapesRightToLeft()
     ConnectRectangleShapes "RightToLeft"
 End Sub
