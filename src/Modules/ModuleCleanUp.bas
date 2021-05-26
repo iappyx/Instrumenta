@@ -44,11 +44,18 @@ Sub CleanUpRemoveAnimationsFromAllSlides()
     Dim PresentationSlide As Slide
     Dim AnimationCount As Long
     
+    ProgressForm.Show
+    
     For Each PresentationSlide In ActivePresentation.Slides
+    
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+    
         For AnimationCount = PresentationSlide.TimeLine.MainSequence.Count To 1 Step -1
             PresentationSlide.TimeLine.MainSequence.Item(AnimationCount).Delete
         Next AnimationCount
     Next PresentationSlide
+    
+    ProgressForm.Hide
     
 End Sub
 
@@ -56,34 +63,55 @@ Sub CleanUpRemoveSpeakerNotesFromAllSlides()
     Dim PresentationSlide As Slide
     Dim SlideShape  As PowerPoint.Shape
     
+    ProgressForm.Show
+    
     For Each PresentationSlide In ActivePresentation.Slides
+    
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+    
         For Each SlideShape In PresentationSlide.NotesPage.Shapes
             If SlideShape.TextFrame.HasText Then
                 SlideShape.TextFrame.TextRange = ""
             End If
         Next
     Next
+    
+    ProgressForm.Hide
+    
 End Sub
 
 Sub CleanUpRemoveCommentsFromAllSlides()
     Dim PresentationSlide As Slide
     Dim CommentsCount As Long
     
+    ProgressForm.Show
+    
     For Each PresentationSlide In ActivePresentation.Slides
-        
+      
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+      
         For CommentsCount = PresentationSlide.Comments.Count To 1 Step -1
             PresentationSlide.Comments(1).Delete
         Next
     Next
+    
+    ProgressForm.Hide
+    
 End Sub
 
 
 Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
     Dim PresentationSlide As Slide
     
+    ProgressForm.Show
+    
     For Each PresentationSlide In ActivePresentation.Slides
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
         PresentationSlide.SlideShowTransition.EntryEffect = 0
     Next
+    
+    ProgressForm.Hide
+    
 End Sub
 
 

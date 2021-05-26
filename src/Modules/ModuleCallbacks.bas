@@ -21,21 +21,20 @@ Attribute VB_Name = "ModuleCallbacks"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
-
 Sub CopySlideNotesToWord()
-CopySlideNotesToClipboard True
+    CopySlideNotesToClipboard True
 End Sub
 
 Sub CopySlideNotesToClipboardOnly()
-CopySlideNotesToClipboard False
+    CopySlideNotesToClipboard False
 End Sub
 
 Sub CopyStorylineToWord()
-CopyStorylineToClipboard True
+    CopyStorylineToClipboard True
 End Sub
 
 Sub CopyStorylineToClipBoardOnly()
-CopyStorylineToClipboard False
+    CopyStorylineToClipboard False
 End Sub
 
 Sub ConnectRectangleShapesRightToLeft()
@@ -166,54 +165,53 @@ Sub GenerateHarveyBall90()
 End Sub
 
 Sub GenerateFivePointStars05()
-GenerateFivePointStars (0.5)
+    GenerateFivePointStars (0.5)
 End Sub
 
 Sub GenerateFivePointStars10()
-GenerateFivePointStars (1)
+    GenerateFivePointStars (1)
 End Sub
 
 Sub GenerateFivePointStars15()
-GenerateFivePointStars (1.5)
+    GenerateFivePointStars (1.5)
 End Sub
 
 Sub GenerateFivePointStars20()
-GenerateFivePointStars (2)
+    GenerateFivePointStars (2)
 End Sub
 
 Sub GenerateFivePointStars25()
-GenerateFivePointStars (2.5)
+    GenerateFivePointStars (2.5)
 End Sub
 
 Sub GenerateFivePointStars30()
-GenerateFivePointStars (3)
+    GenerateFivePointStars (3)
 End Sub
 
 Sub GenerateFivePointStars35()
-GenerateFivePointStars (3.5)
+    GenerateFivePointStars (3.5)
 End Sub
 
 Sub GenerateFivePointStars40()
-GenerateFivePointStars (4)
+    GenerateFivePointStars (4)
 End Sub
 
 Sub GenerateFivePointStars45()
-GenerateFivePointStars (4.5)
+    GenerateFivePointStars (4.5)
 End Sub
 
 Sub GenerateFivePointStars50()
-GenerateFivePointStars (5)
+    GenerateFivePointStars (5)
 End Sub
 
 Sub GenerateRAGStatusRed()
-GenerateRAGStatus ("red")
+    GenerateRAGStatus ("red")
 End Sub
 
 Sub GenerateRAGStatusAmber()
-GenerateRAGStatus ("amber")
+    GenerateRAGStatus ("amber")
 End Sub
 
 Sub GenerateRAGStatusGreen()
-GenerateRAGStatus ("green")
+    GenerateRAGStatus ("green")
 End Sub
-

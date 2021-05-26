@@ -26,7 +26,12 @@ Sub ConvertSlidesToPictures()
     #If Mac Then
         MsgBox "This Function will not work on a Mac"
     #Else
+    
+        ProgressForm.Show
+        
         For Each PresentationSlide In ActivePresentation.Slides
+        
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
             
             PresentationSlide.Copy
             PresentationSlide.Shapes.Range.Delete
@@ -43,6 +48,8 @@ Sub ConvertSlidesToPictures()
             Set ImageShape2 = PresentationSlide.Shapes.PasteSpecial(ppPasteJPG)
             
         Next PresentationSlide
+        
+        ProgressForm.Hide
     
     #End If
 End Sub

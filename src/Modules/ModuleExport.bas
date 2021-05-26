@@ -53,7 +53,13 @@ Sub EmailSelectedSlides()
         'Set filename and e-mailsubject
         EmailSubject = PresentationFilename
         PresentationFilename = PresentationFilename & " (slide "
+        
+        ProgressForm.Show
+        
         For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.Count
+        
+        SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.Count * 100)
+        
             ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
             If SlideLoop <> ActiveWindow.Selection.SlideRange.Count Then
                 PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex & ","
@@ -61,6 +67,9 @@ Sub EmailSelectedSlides()
                 PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex
             End If
         Next SlideLoop
+        
+        ProgressForm.Hide
+        
         PresentationFilename = PresentationFilename & ")"
         
         PresentationFilename = InputBox("Attachment file name:", "Send as e-mail", PresentationFilename)
@@ -132,7 +141,13 @@ Sub EmailSelectedSlidesAsPDF()
         'Set filename and e-mailsubject
         EmailSubject = PresentationFilename
         PresentationFilename = PresentationFilename & " (slide "
+        
+        ProgressForm.Show
+        
         For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.Count
+        
+        SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.Count * 100)
+        
             ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
             If SlideLoop <> ActiveWindow.Selection.SlideRange.Count Then
                 PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex & ","
@@ -140,6 +155,9 @@ Sub EmailSelectedSlidesAsPDF()
                 PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex
             End If
         Next SlideLoop
+        
+        ProgressForm.Hide
+        
         PresentationFilename = PresentationFilename & ")"
         
         PresentationFilename = InputBox("Attachment file name:", "Send as e-mail", PresentationFilename)

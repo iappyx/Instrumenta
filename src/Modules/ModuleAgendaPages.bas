@@ -81,9 +81,9 @@ Sub CreateOrUpdateMasterAgenda()
             For NumberOfSections = 2 To .Count
                 
                 If NumberOfSections = 2 Then
-                    AgendaShape.TextFrame.TextRange.Text = .Name(NumberOfSections)
+                    AgendaShape.TextFrame.TextRange.text = .Name(NumberOfSections)
                 Else
-                    AgendaShape.TextFrame.TextRange.Text = AgendaShape.TextFrame.TextRange.Text & vbNewLine & .Name(NumberOfSections)
+                    AgendaShape.TextFrame.TextRange.text = AgendaShape.TextFrame.TextRange.text & vbNewLine & .Name(NumberOfSections)
                 End If
                 
             Next
@@ -95,7 +95,6 @@ Sub CreateOrUpdateMasterAgenda()
                         .Bold = msoFalse
                         .Size = 16
                         .Italic = msoFalse
-                        'does not work on mac .shadow = msoFalse
                         .Underline = msoFalse
                         .Emboss = msoFalse
                         .Name = "Arial"
@@ -106,7 +105,6 @@ Sub CreateOrUpdateMasterAgenda()
                         .Bold = msoTrue
                         .Size = 16
                         .Italic = msoFalse
-                        'does not work on mac .shadow = msoFalse
                         .Underline = msoFalse
                         .Emboss = msoFalse
                         .Name = "Arial"
@@ -118,7 +116,6 @@ Sub CreateOrUpdateMasterAgenda()
                         .Bold = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Bold
                         .Size = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Size
                         .Italic = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Italic
-                        'does not work on mac .shadow = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Shadow
                         .Underline = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Underline
                         .Emboss = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Emboss
                         .Name = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Name
@@ -129,7 +126,6 @@ Sub CreateOrUpdateMasterAgenda()
                         .Bold = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Bold
                         .Size = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Size
                         .Italic = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Italic
-                        'does not work on mac .shadow = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Shadow
                         .Underline = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Underline
                         .Emboss = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Emboss
                         .Name = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Name
@@ -256,7 +252,6 @@ Sub CreateAgendaPages()
                 .Bold = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Bold
                 .Size = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Size
                 .Italic = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Italic
-                'does not work on mac .shadow = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Shadow
                 .Underline = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Underline
                 .Emboss = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Emboss
                 .Name = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Name
@@ -267,7 +262,6 @@ Sub CreateAgendaPages()
                 .Bold = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Bold
                 .Size = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Size
                 .Italic = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Italic
-                'does not work on mac .shadow = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Shadow
                 .Underline = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Underline
                 .Emboss = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Emboss
                 .Name = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Name

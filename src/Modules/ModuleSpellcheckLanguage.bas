@@ -727,11 +727,18 @@ Sub ChangeSpellCheckLanguage()
     Next
     End If
     
+    ProgressForm.Show
+    
     For Each PresentationSlide In ActivePresentation.Slides
+    
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+    
         For Each SlideShape In PresentationSlide.Shapes
             ChangeShapeSpellCheckLanguage SlideShape, TargetLanguageID
         Next SlideShape
     Next PresentationSlide
+    
+    ProgressForm.Hide
     
     For Each SlideShape In ActivePresentation.SlideMaster.Shapes
         ChangeShapeSpellCheckLanguage SlideShape, TargetLanguageID

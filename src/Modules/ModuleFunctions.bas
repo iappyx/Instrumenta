@@ -49,3 +49,11 @@ ForceNext:
     RemoveDuplicates = OutputArray
     
 End Function
+
+Sub SetProgress(PercentageCompleted As Single)
+
+    ProgressForm.ProgressBar.Width = PercentageCompleted * 2
+    ProgressForm.ProgressLabel.Caption = Round(PercentageCompleted, 0) & "% completed"
+    DoEvents
+    
+End Sub

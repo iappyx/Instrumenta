@@ -21,10 +21,13 @@ Attribute VB_Name = "ModuleAnonymize"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
-
 Sub AnonymizeWithLoremIpsum()
     
+    ProgressForm.Show
+    
     For Each PresentationSlide In ActivePresentation.Slides
+    
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
         
         For Each SlideShape In PresentationSlide.Shapes
             
@@ -33,6 +36,9 @@ Sub AnonymizeWithLoremIpsum()
         Next SlideShape
         
     Next PresentationSlide
+    
+    ProgressForm.Hide
+    
     
 End Sub
 

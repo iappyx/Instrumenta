@@ -33,7 +33,11 @@ Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     Dim PlaceHolderTextRange As TextRange
     Set PlaceHolderTextRange = SlidePlaceHolder.TextFrame.TextRange
     
+    ProgressForm.Show
+    
     For Each PresentationSlide In ActivePresentation.Slides
+    
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
         
         If PresentationSlide.NotesPage.Shapes.Placeholders(2).TextFrame.HasText Then
             
@@ -46,6 +50,8 @@ Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
         
     Next PresentationSlide
     
+    ProgressForm.Hide
+
     SlidePlaceHolder.TextFrame.TextRange.Copy
     SlidePlaceHolder.Delete
     
@@ -87,7 +93,12 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     Dim ClipboardObject As Object
     Dim StorylineText As String
     
+    ProgressForm.Show
+    
     For Each PresentationSlide In ActivePresentation.Slides
+    
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+     
         For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
             
             If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
@@ -96,6 +107,8 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
             End If
         Next SlidePlaceHolder
     Next PresentationSlide
+    
+    ProgressForm.Hide
     
     Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
     SlidePlaceHolder.TextFrame.TextRange.text = StorylineText
@@ -151,7 +164,12 @@ Sub PasteStorylineInSelectedShape()
     Dim ClipboardObject As Object
     Dim StorylineText As String
     
+    ProgressForm.Show
+    
     For Each PresentationSlide In ActivePresentation.Slides
+    
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+    
         For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
             
             If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
@@ -161,6 +179,8 @@ Sub PasteStorylineInSelectedShape()
             End If
         Next SlidePlaceHolder
     Next PresentationSlide
+    
+    ProgressForm.Hide
     
     Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.text = StorylineText
     
