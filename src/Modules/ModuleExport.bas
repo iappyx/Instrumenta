@@ -77,9 +77,15 @@ Sub EmailSelectedSlides()
         'Remove slides that where not selected for export
         ThisPresentation.SaveCopyAs Environ("TEMP") & "\" & PresentationFilename & ".pptx"
         Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
+        
+        ProgressForm.Show
+        NumberOfSlides = TemporaryPresentation.Slides.Count
         For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
+            SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
             If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
+        ProgressForm.Hide
+        
         TemporaryPresentation.Save
         TemporaryPresentation.Close
                
@@ -104,9 +110,15 @@ Sub EmailSelectedSlides()
         
         'Clean temporary slides
         Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
+        
+        ProgressForm.Show
+        NumberOfSlides = TemporaryPresentation.Slides.Count
         For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
+            SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
             TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
+        ProgressForm.Hide
+                
         TemporaryPresentation.Save
         TemporaryPresentation.Close
         

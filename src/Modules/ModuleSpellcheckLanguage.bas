@@ -703,6 +703,19 @@ Sub ChangeSpellCheckLanguage()
     Dim GroupCount  As Integer
     
     
+    #If Mac Then
+    'Mac does not (yet) support property .HasHandoutMaster
+        
+    On Error Resume Next
+    For Each SlideShape In ActivePresentation.HandoutMaster.Shapes
+        If SlideShape.HasTextFrame Then
+        SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        End If
+    Next
+    On Error GoTo 0
+
+    #Else
+    
     If ActivePresentation.HasHandoutMaster Then
     For Each SlideShape In ActivePresentation.HandoutMaster.Shapes
         If SlideShape.HasTextFrame Then
@@ -710,7 +723,9 @@ Sub ChangeSpellCheckLanguage()
         End If
     Next
     End If
-           
+    
+    #End If
+               
     If ActivePresentation.HasTitleMaster Then
     For Each SlideShape In ActivePresentation.TitleMaster.Shapes
         If SlideShape.HasTextFrame Then
@@ -719,6 +734,19 @@ Sub ChangeSpellCheckLanguage()
     Next
     End If
     
+    #If Mac Then
+    'Mac does not (yet) support property .HasNotesMaster
+        
+    On Error Resume Next
+    For Each SlideShape In ActivePresentation.NotesMaster.Shapes
+        If SlideShape.HasTextFrame Then
+        SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        End If
+    Next
+    On Error GoTo 0
+        
+    #Else
+    
     If ActivePresentation.HasNotesMaster Then
     For Each SlideShape In ActivePresentation.NotesMaster.Shapes
         If SlideShape.HasTextFrame Then
@@ -726,6 +754,8 @@ Sub ChangeSpellCheckLanguage()
         End If
     Next
     End If
+    
+    #End If
     
     ProgressForm.Show
     

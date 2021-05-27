@@ -23,10 +23,7 @@ Attribute VB_Name = "ModuleSlidesConvertToPictures"
 
 
 Sub ConvertSlidesToPictures()
-    #If Mac Then
-        MsgBox "This Function will not work on a Mac"
-    #Else
-    
+
         ProgressForm.Show
         
         For Each PresentationSlide In ActivePresentation.Slides
@@ -36,7 +33,11 @@ Sub ConvertSlidesToPictures()
             PresentationSlide.Copy
             PresentationSlide.Shapes.Range.Delete
             
-            Set ImageShape = PresentationSlide.Shapes.PasteSpecial(ppPasteEnhancedMetafile)
+            #If Mac Then
+                Set ImageShape = PresentationSlide.Shapes.Paste
+            #Else
+                Set ImageShape = PresentationSlide.Shapes.PasteSpecial(ppPasteEnhancedMetafile)
+            #End If
             
             ImageShape.Top = 0
             ImageShape.Left = 0
@@ -45,11 +46,15 @@ Sub ConvertSlidesToPictures()
             
             ImageShape.Copy
             ImageShape.Delete
-            Set ImageShape2 = PresentationSlide.Shapes.PasteSpecial(ppPasteJPG)
+            
+            #If Mac Then
+                Set ImageShape2 = PresentationSlide.Shapes.Paste
+            #Else
+                Set ImageShape2 = PresentationSlide.Shapes.PasteSpecial(ppPasteJPG)
+            #End If
             
         Next PresentationSlide
         
         ProgressForm.Hide
     
-    #End If
 End Sub

@@ -24,10 +24,15 @@ Attribute VB_Name = "ModuleCleanUp"
 Sub CleanUpRemoveUnusedMasterSlides()
     Dim NumberOfDesigns, NumberOfCustomLayouts As Integer
     
+    ProgressForm.Show
+    
     On Error Resume Next
     
+    DesignsCount = ActivePresentation.Designs.Count
+        
     For NumberOfDesigns = ActivePresentation.Designs.Count To 1 Step -1
         
+        SetProgress ((DesignsCount - NumberOfDesigns) / DesignsCount * 100)
         For NumberOfCustomLayouts = ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts.Count To 1 Step -1
             ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts(NumberOfCustomLayouts).Delete
         Next NumberOfCustomLayouts
@@ -38,6 +43,10 @@ Sub CleanUpRemoveUnusedMasterSlides()
         
     Next NumberOfDesigns
     
+    On Error GoTo 0
+        
+    ProgressForm.Hide
+        
 End Sub
 
 Sub CleanUpRemoveAnimationsFromAllSlides()

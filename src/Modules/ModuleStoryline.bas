@@ -21,7 +21,6 @@ Attribute VB_Name = "ModuleStoryline"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
-
 Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     
     Dim PresentationSlide As PowerPoint.Slide
@@ -36,8 +35,8 @@ Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     ProgressForm.Show
     
     For Each PresentationSlide In ActivePresentation.Slides
-    
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
         
         If PresentationSlide.NotesPage.Shapes.Placeholders(2).TextFrame.HasText Then
             
@@ -51,40 +50,47 @@ Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     Next PresentationSlide
     
     ProgressForm.Hide
-
-    SlidePlaceHolder.TextFrame.TextRange.Copy
-    SlidePlaceHolder.Delete
     
-    If ExportToWord = True Then
-    
-        #If Mac Then
-        MsgBox "This Function will not work on a Mac. Slide notes are copied to clipboard."
-        #Else
-    
-            Dim WordApplication, WordDocument As Object
+    If Not SlidePlaceHolder.TextFrame.TextRange.text = "" Then
+        
+        SlidePlaceHolder.TextFrame.TextRange.Copy
+        
+        If ExportToWord = True Then
             
-            On Error Resume Next
-            Set WordApplication = GetObject(Class:="Word.Application")
-            Err.Clear
+            #If Mac Then
+                MsgBox "This function will not work on a Mac. Slide notes are copied to clipboard."
+            #Else
+                
+                Dim WordApplication, WordDocument As Object
+                
+                On Error Resume Next
+                Set WordApplication = GetObject(Class:="Word.Application")
+                Err.Clear
+                
+                If WordApplication Is Nothing Then Set WordApplication = CreateObject(Class:="Word.Application")
+                On Error GoTo 0
+                
+                WordApplication.Visible = True
+                Set WordDocument = WordApplication.Documents.Add
+                
+                With WordApplication
+                    .Selection.PasteAndFormat wdPasteDefault
+                End With
+                
+            #End If
+            SlidePlaceHolder.Delete
             
-            If WordApplication Is Nothing Then Set WordApplication = CreateObject(Class:="Word.Application")
-            On Error GoTo 0
-            
-            WordApplication.Visible = True
-            Set WordDocument = WordApplication.Documents.Add
-            
-            With WordApplication
-                .Selection.PasteAndFormat wdPasteDefault
-            End With
-    
-        #End If
-    
+        Else
+            SlidePlaceHolder.Delete
+            MsgBox "Slide notes copied to clipboard."
+        End If
+        
     Else
-        MsgBox "Slide notes copied to clipboard."
+        SlidePlaceHolder.Delete
+        MsgBox "Slide notes are empty."
     End If
     
 End Sub
-
 
 Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     
@@ -96,9 +102,9 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     ProgressForm.Show
     
     For Each PresentationSlide In ActivePresentation.Slides
-    
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
-     
+        
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        
         For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
             
             If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
@@ -116,38 +122,38 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     SlidePlaceHolder.Delete
     
     If Not StorylineText = "" Then
-    If ExportToWord = True Then
-    
-        #If Mac Then
-        MsgBox "This Function will not work on a Mac. Storyline is copied to clipboard."
-        #Else
-    
-            Dim WordApplication, WordDocument As Object
+        If ExportToWord = True Then
             
-            On Error Resume Next
-            Set WordApplication = GetObject(Class:="Word.Application")
-            Err.Clear
-            
-            If WordApplication Is Nothing Then Set WordApplication = CreateObject(Class:="Word.Application")
-            On Error GoTo 0
-            
-            WordApplication.Visible = True
-            Set WordDocument = WordApplication.Documents.Add
-            
-            With WordApplication
+            #If Mac Then
+                MsgBox "This function will not work on a Mac. Storyline is copied to clipboard."
+            #Else
                 
+                Dim WordApplication, WordDocument As Object
+                
+                On Error Resume Next
+                Set WordApplication = GetObject(Class:="Word.Application")
+                Err.Clear
+                
+                If WordApplication Is Nothing Then Set WordApplication = CreateObject(Class:="Word.Application")
+                On Error GoTo 0
+                
+                WordApplication.Visible = True
+                Set WordDocument = WordApplication.Documents.Add
+                
+                With WordApplication
+                    
                     .Selection.PasteAndFormat wdPasteDefault
+                    
+                End With
+                
+            #End If
+            
+        Else
+            MsgBox "Storyline copied to clipboard."
+        End If
         
-            End With
-    
-        #End If
-    
     Else
-        MsgBox "Storyline copied to clipboard."
-    End If
-    
-    Else
-        MsgBox "Storyline is empty"
+        MsgBox "Storyline is empty."
     End If
     
 End Sub
@@ -156,34 +162,33 @@ Sub PasteStorylineInSelectedShape()
     
     Set myDocument = Application.ActiveWindow
     If Not myDocument.Selection.Type = ppSelectionShapes Then
-    MsgBox "Please select a shape."
+        MsgBox "Please select a shape."
     Else
-    
-    Dim PresentationSlide As PowerPoint.Slide
-    Dim SlidePlaceHolder As PowerPoint.Shape
-    Dim ClipboardObject As Object
-    Dim StorylineText As String
-    
-    ProgressForm.Show
-    
-    For Each PresentationSlide In ActivePresentation.Slides
-    
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
-    
-        For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
+        
+        Dim PresentationSlide As PowerPoint.Slide
+        Dim SlidePlaceHolder As PowerPoint.Shape
+        Dim ClipboardObject As Object
+        Dim StorylineText As String
+        
+        ProgressForm.Show
+        
+        For Each PresentationSlide In ActivePresentation.Slides
             
-            If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
-                StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.text & Chr(13)
+            SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+            
+            For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
                 
-                Exit For
-            End If
-        Next SlidePlaceHolder
-    Next PresentationSlide
-    
-    ProgressForm.Hide
-    
-    Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.text = StorylineText
-    
+                If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
+                    StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.text & Chr(13)
+                    Exit For
+                End If
+            Next SlidePlaceHolder
+        Next PresentationSlide
+        
+        ProgressForm.Hide
+        
+        Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.text = StorylineText
+        
     End If
     
 End Sub
