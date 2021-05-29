@@ -226,7 +226,7 @@
                <splitButton id="TableRowGapsSplitButton" size="normal" showLabel="false">
                   <button id="TableRowGapsEven" imageMso="SpeakByColumns" label="Add row gaps" showLabel="false" onAction="TableRowGapsEven" />
                   <menu id="TableRowGapsMenu" itemSize="normal">
-                     <button id="TableRowGapsOdd" imageMso="SpeakByColumns" label="Add row gaps (including left and right sides)" showLabel="false" onAction="TableRowGapsOdd" />
+                     <button id="TableRowGapsOdd" imageMso="SpeakByColumns" label="Add row gaps (including top and bottom sides)" showLabel="false" onAction="TableRowGapsOdd" />
                      <button id="TableRowRemoveGaps" imageMso="Delete" label="Remove row gaps" showLabel="false" onAction="TableRowRemoveGaps" />
                   </menu>
                </splitButton>
