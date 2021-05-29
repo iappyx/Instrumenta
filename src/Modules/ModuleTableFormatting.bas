@@ -92,15 +92,15 @@ Sub TableRemoveBackgrounds()
             
             With Application.ActiveWindow.Selection.ShapeRange.Table
 
-                Application.ActiveWindow.Selection.ShapeRange.Fill.Solid
-                Application.ActiveWindow.Selection.ShapeRange.Fill.ForeColor.RGB = RGB(0, 0, 0)
-                Application.ActiveWindow.Selection.ShapeRange.Fill.Visible = msoFalse
-                Application.ActiveWindow.Selection.ShapeRange.Fill.Transparency = 1#
                 .HorizBanding = False
                 .VertBanding = False
                 
+                Application.ActiveWindow.Selection.ShapeRange.Fill.Solid
+                Application.ActiveWindow.Selection.ShapeRange.Fill.ForeColor.RGB = RGB(255, 255, 255)
+                Application.ActiveWindow.Selection.ShapeRange.Fill.Visible = msoFalse
+                
                 .Background.Fill.Solid
-                .Background.Fill.ForeColor.RGB = RGB(0, 0, 0)
+                .Background.Fill.ForeColor.RGB = RGB(255, 255, 255)
                 .Background.Fill.Visible = msoFalse
                 .Background.Fill.Transparency = 1#
                 
@@ -109,9 +109,8 @@ Sub TableRemoveBackgrounds()
                     For ColumnCount = 1 To .Columns.Count
                         
                         .Cell(RowCount, ColumnCount).Shape.Fill.Solid
-                        .Cell(RowCount, ColumnCount).Shape.Fill.ForeColor.RGB = RGB(0, 0, 0)
+                        .Cell(RowCount, ColumnCount).Shape.Fill.ForeColor.RGB = RGB(255, 255, 255)
                         .Cell(RowCount, ColumnCount).Shape.Fill.Visible = msoFalse
-                        .Cell(RowCount, ColumnCount).Shape.Fill.Transparency = 1#
                     Next
                     
                 Next

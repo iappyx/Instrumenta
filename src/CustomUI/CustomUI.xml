@@ -194,8 +194,18 @@
                <button idMso="TableInsertRowsAbove" showLabel="false" />
                <button idMso="TableInsertRowsBelow" showLabel="false" />
                <button idMso="TableDeleteRows" showLabel="false" />
+               <splitButton id="TableRowsDistributeSplitButton" size="normal" showLabel="false">
                <button idMso="TableRowsDistribute" showLabel="false" />
+               <menu id="TableRowsDistributeMenu" itemSize="normal">
+                     <button id="TableDistributeRowsWithGaps" label="Distribute rows ignoring row gaps" showLabel="false" onAction="TableDistributeRowsWithGaps" />
+                  </menu>
+               </splitButton>
+               <splitButton id="TableColumnsDistributeSplitButton" size="normal" showLabel="false">
                <button idMso="TableColumnsDistribute" showLabel="false" />
+               <menu id="TableColumnsDistributeMenu" itemSize="normal">
+                     <button id="TableDistributeColumnsWithGaps" label="Distribute columns ignoring column gaps" showLabel="false" onAction="TableDistributeColumnsWithGaps" />
+                  </menu>
+               </splitButton>
                <splitButton id="TableQuickFormatSplitButton" size="normal" showLabel="false">
                   <button id="TableQuickFormat" imageMso="TableAutoFormat" label="Quick format table" showLabel="false" onAction="TableQuickFormat" />
                   <menu id="TableFormatMenu" itemSize="normal">

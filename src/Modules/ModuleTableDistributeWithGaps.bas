@@ -1,4 +1,4 @@
-Attribute VB_Name = "ModuleTableSum"
+Attribute VB_Name = "ModuleTableDistributeWithGaps"
 'MIT License
 
 'Copyright (c) 2021 iappyx
@@ -21,15 +21,16 @@ Attribute VB_Name = "ModuleTableSum"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
-Sub TableSum()
+Sub TableDistributeColumnsWithGaps()
 
     Set myDocument = Application.ActiveWindow
-    Dim TotalSum As Double
-    TotalSum = 0
-    
-       
+    Dim TotalWidth As Double
+    Dim NumberOfColumnsToDistribute As Long
+    TotalWidth = 0
+    NumberOfColumnsToDistribute = 0
+     
     If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
-    MsgBox "No table or cells selected."
+        MsgBox "No table or cells selected."
     Else
     
         
@@ -39,31 +40,47 @@ Sub TableSum()
         
         TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA COLUMNGAPS")
         
-        For RowsCount = 1 To .Rows.Count
-            For ColsCount = 1 To .Columns.Count
+        For ColsCount = 1 To .Columns.Count
+        
+            For RowsCount = 1 To .Rows.Count
                 
                 If .Cell(RowsCount, ColsCount).Selected Then
                     
                 If Not ((ColsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not ColsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
-                    For SumCount = 1 To RowsCount - 1
+                TotalWidth = TotalWidth + .Columns(ColsCount).Width
+                NumberOfColumnsToDistribute = NumberOfColumnsToDistribute + 1
+                Exit For
                     
-                    On Error Resume Next
-                    TotalSum = TotalSum + CDbl(.Cell(SumCount, ColsCount).Shape.TextFrame.TextRange.Text)
-                    On Error GoTo 0
+                End If
                     
-                    Next SumCount
-                        
-                    .Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Text = TotalSum
-                    
-                    End If
-                    
-                    TotalSum = 0
                 
                 End If
                 
-            Next ColsCount
-        Next RowsCount
+            Next RowsCount
+        Next ColsCount
+        
+        
+        If NumberOfColumnsToDistribute > 0 Then
+        For ColsCount = 1 To .Columns.Count
+        
+            For RowsCount = 1 To .Rows.Count
+                
+                If .Cell(RowsCount, ColsCount).Selected Then
+                    
+                If Not ((ColsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not ColsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
+                
+                .Columns(ColsCount).Width = TotalWidth / NumberOfColumnsToDistribute
+                Exit For
+                    
+                End If
+                    
+                
+                End If
+                
+            Next RowsCount
+        Next ColsCount
+        End If
         
     End With
     
@@ -77,48 +94,67 @@ Sub TableSum()
 
 End Sub
 
-Sub TableRowSum()
+Sub TableDistributeRowsWithGaps()
 
     Set myDocument = Application.ActiveWindow
-    Dim TotalSum As Double
-    TotalSum = 0
-    
+    Dim TotalHeight As Double
+    Dim NumberOfRowsToDistribute As Long
+    TotalHeight = 0
+    NumberOfRowsToDistribute = 0
+     
     If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
-    MsgBox "No table or cells selected."
+        MsgBox "No table or cells selected."
     Else
     
-    
-    If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
         
-    TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA ROWGAPS")
+    If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
         
     With Application.ActiveWindow.Selection.ShapeRange.Table
         
+        TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA ROWGAPS")
+        
         For RowsCount = 1 To .Rows.Count
+           
             For ColsCount = 1 To .Columns.Count
                 
                 If .Cell(RowsCount, ColsCount).Selected Then
-                
+                    
                 If Not ((RowsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
-                    For SumCount = 1 To ColsCount - 1
+                TotalHeight = TotalHeight + .Rows(RowsCount).Height
+                NumberOfRowsToDistribute = NumberOfRowsToDistribute + 1
+                Exit For
                     
-                    On Error Resume Next
-                    TotalSum = TotalSum + CDbl(.Cell(RowsCount, SumCount).Shape.TextFrame.TextRange.Text)
-                    On Error GoTo 0
+                End If
                     
-                    Next SumCount
-                        
-                    .Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Text = TotalSum
-                    
-                    End If
-                    
-                    TotalSum = 0
                 
                 End If
                 
             Next ColsCount
         Next RowsCount
+        
+        
+        If NumberOfRowsToDistribute > 0 Then
+        
+        For RowsCount = 1 To .Rows.Count
+        
+            For ColsCount = 1 To .Columns.Count
+                
+                If .Cell(RowsCount, ColsCount).Selected Then
+                    
+                If Not ((RowsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
+                
+                .Rows(RowsCount).Height = TotalHeight / NumberOfRowsToDistribute
+                Exit For
+                    
+                End If
+                    
+                
+                End If
+                
+            Next ColsCount
+        Next RowsCount
+        End If
         
     End With
     
