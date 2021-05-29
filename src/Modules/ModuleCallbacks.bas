@@ -21,6 +21,22 @@ Attribute VB_Name = "ModuleCallbacks"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub TableColumnGapsEven()
+    TableColumnGaps "even", 5
+End Sub
+
+Sub TableColumnGapsOdd()
+    TableColumnGaps "odd", 5
+End Sub
+
+Sub TableRowGapsEven()
+    TableRowGaps "even", 5
+End Sub
+
+Sub TableRowGapsOdd()
+    TableRowGaps "odd", 5
+End Sub
+
 Sub CopySlideNotesToWord()
     CopySlideNotesToClipboard True
 End Sub

@@ -19,12 +19,12 @@
                   <toggleButton idMso="Strikethrough" showLabel="false" />
                   <gallery idMso="CharacterSpacingGallery" showLabel="false" />
                   <gallery idMso="ChangeCaseGallery" showLabel="false" />
-                  <gallery idMso="FontColorPicker" showLabel="false" />
-                  <button idMso="EyedropperFillText" showLabel="false" />
                </box>
                <box id="FontBox3" boxStyle="horizontal">
                   <toggleButton idMso="Superscript" showLabel="false" />
                   <toggleButton idMso="Subscript" showLabel="false" />
+                  <gallery idMso="FontColorPicker" showLabel="false" />
+                  <button idMso="EyedropperFillText" showLabel="false" />
                </box>
             </group>
             <group id="TextGroup" label="Text" imageMso="MenuView2">
@@ -93,7 +93,7 @@
                   <button id="ConnectRectangleShapesLeftToRight" label="Shape 1 left side to shape 2 right side" onAction="ConnectRectangleShapesLeftToRight" />
                   <button id="ConnectRectangleShapesBottomToTop" label="Shape 1 bottom side to shape 2 top side" onAction="ConnectRectangleShapesBottomToTop" />
                   <button id="ConnectRectangleShapesTopToBottom" label="Shape 1 top side to shape 2 bottom side" onAction="ConnectRectangleShapesTopToBottom" />
-</menu>
+               </menu>
                <separator id="CopyPositionSeperator" />
                <menu id="SelectShapeByMenu" label="Select shape by attributes" imageMso="SelectionPane" showLabel="false">
                   <button id="SelectShapesByFillColor" label="Select shapes with same fill color" onAction="ObjectsSelectBySameFillColor" />
@@ -132,7 +132,6 @@
                <toggleButton idMso="PictureSetTransparentColor" showLabel="false" />
                <button idMso="PicturesCompress" showLabel="false" />
                <gallery idMso="PictureShapeGallery" showLabel="false" />
-               
             </group>
             <group id="AlignGroup" label="Align, distribute and size" imageMso="SizeToGridAccess">
                <box id="AlignDistributeBox" boxStyle="horizontal">
@@ -174,18 +173,18 @@
                <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />
                <separator id="separatorTableAlign" />
                <splitButton id="TableAlignSplitButton" size="normal" showLabel="false">
-               <button id="ObjectsAlignToTable" imageMso="GroupTableProperties" label="Center align shapes to table cells" showLabel="false" onAction="ObjectsAlignToTable" />
+                  <button id="ObjectsAlignToTable" imageMso="GroupTableProperties" label="Center align shapes to table cells" showLabel="false" onAction="ObjectsAlignToTable" />
                   <menu id="TableAlignMenu" itemSize="normal">
-                <button id="ObjectsAlignToTableColumn" imageMso="SpeakByColumns" label="Center align shapes to columns of a table" showLabel="false" onAction="ObjectsAlignToTableColumn" />
-               <button id="ObjectsAlignToTableRow" imageMso="SpeakByRows" label="Center align shapes to rows of a table" showLabel="false" onAction="ObjectsAlignToTableRow" />
+                     <button id="ObjectsAlignToTableColumn" label="Center align shapes to columns of a table" showLabel="false" onAction="ObjectsAlignToTableColumn" />
+                     <button id="ObjectsAlignToTableRow" label="Center align shapes to rows of a table" showLabel="false" onAction="ObjectsAlignToTableRow" />
                   </menu>
                </splitButton>
-                  <menu id="ObjectsStretchMenu" label="Stretch shapes" imageMso="DrawingCanvasExpand" showLabel="false">
-                    <button id="ObjectsStretchLeft" label="Stretch shapes to left" onAction="ObjectsStretchLeft" />
-                    <button id="ObjectsStretchRight" label="Stretch shapes to right" onAction="ObjectsStretchRight" />
-                    <button id="ObjectsStretchTop" label="Stretch shapes to top" onAction="ObjectsStretchTop" />
-                    <button id="ObjectsStretchBottom" label="Stretch shapes to bottom" onAction="ObjectsStretchBottom" />
-                  </menu>             
+               <menu id="ObjectsStretchMenu" label="Stretch shapes" imageMso="DrawingCanvasExpand" showLabel="false">
+                  <button id="ObjectsStretchLeft" label="Stretch shapes to left" onAction="ObjectsStretchLeft" />
+                  <button id="ObjectsStretchRight" label="Stretch shapes to right" onAction="ObjectsStretchRight" />
+                  <button id="ObjectsStretchTop" label="Stretch shapes to top" onAction="ObjectsStretchTop" />
+                  <button id="ObjectsStretchBottom" label="Stretch shapes to bottom" onAction="ObjectsStretchBottom" />
+               </menu>
             </group>
             <group id="TableGroup" label="Table" imageMso="TableInsert">
                <gallery idMso="TableInsertGallery" showLabel="false" />
@@ -197,7 +196,14 @@
                <button idMso="TableDeleteRows" showLabel="false" />
                <button idMso="TableRowsDistribute" showLabel="false" />
                <button idMso="TableColumnsDistribute" showLabel="false" />
-               <button idMso="TableStyleClearTable" showLabel="false" />
+               <splitButton id="TableQuickFormatSplitButton" size="normal" showLabel="false">
+                  <button id="TableQuickFormat" imageMso="TableAutoFormat" label="Quick format table" showLabel="false" onAction="TableQuickFormat" />
+                  <menu id="TableFormatMenu" itemSize="normal">
+                     <button idMso="TableStyleClearTable" showLabel="false" />
+                     <button id="TableRemoveBackgrounds" label="Remove cell fills" showLabel="false" onAction="TableRemoveBackgrounds" />
+                     <button id="TableRemoveBorders" label="Remove all borders" showLabel="false" onAction="TableRemoveBorders" />
+                  </menu>
+               </splitButton>
                <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" />
                <button id="TableTranspose" imageMso="PivotTableReport" label="Transpose table" showLabel="false" onAction="TableTranspose" />
                <splitButton id="TableSumSplitButton" size="normal" showLabel="false">
@@ -207,9 +213,28 @@
                   </menu>
                </splitButton>
                <separator id="separator7" />
+               <splitButton id="TableColumnGapsSplitButton" size="normal" showLabel="false">
+                  <button id="TableColumnGapsEven" imageMso="SpeakByRows" label="Add column gaps" showLabel="false" onAction="TableColumnGapsEven" />
+                  <menu id="TableColumnGapsMenu" itemSize="normal">
+                     <button id="TableColumnGapsOdd" imageMso="SpeakByRows" label="Add column gaps (including left and right sides)" showLabel="false" onAction="TableColumnGapsOdd" />
+                     <button id="TableColumnRemoveGaps" imageMso="Delete" label="Remove column gaps" showLabel="false" onAction="TableColumnRemoveGaps" />
+                  </menu>
+               </splitButton>
+               <button id="TableColumnIncreaseGaps" label="Increase column gaps" showLabel="false" imageMso="UpArrow2" onAction="TableColumnIncreaseGaps" />
+               <button id="TableColumnDecreaseGaps" label="Decrease column gaps" showLabel="false" imageMso="DownArrow2" onAction="TableColumnDecreaseGaps" />
+               <separator id="separator7a" />
+               <splitButton id="TableRowGapsSplitButton" size="normal" showLabel="false">
+                  <button id="TableRowGapsEven" imageMso="SpeakByColumns" label="Add row gaps" showLabel="false" onAction="TableRowGapsEven" />
+                  <menu id="TableRowGapsMenu" itemSize="normal">
+                     <button id="TableRowGapsOdd" imageMso="SpeakByColumns" label="Add row gaps (including left and right sides)" showLabel="false" onAction="TableRowGapsOdd" />
+                     <button id="TableRowRemoveGaps" imageMso="Delete" label="Remove row gaps" showLabel="false" onAction="TableRowRemoveGaps" />
+                  </menu>
+               </splitButton>
+               <button id="TableRowIncreaseGaps" label="Increase row gaps" showLabel="false" imageMso="UpArrow2" onAction="TableRowIncreaseGaps" />
+               <button id="TableRowDecreaseGaps" label="Decrease row gaps" showLabel="false" imageMso="DownArrow2" onAction="TableRowDecreaseGaps" />
+               <separator id="separator7b" />
                <gallery idMso="ShadingColorPicker" showLabel="false" />
                <gallery idMso="TableBorderPenColorPicker" showLabel="false" />
-               <gallery idMso="TableBackgroundGallery" showLabel="false" />
                <splitButton idMso="TableBordersMenu" showLabel="false" />
                <separator id="separator8" />
                <toggleButton idMso="TableCellAlignBottom" showLabel="false" />
@@ -225,17 +250,17 @@
                <button id="EmailSelectedSlidesAsPDFButton" label="E-mail selected slides as PDF" showLabel="false" imageMso="FileEmailAsPdfEmailAttachment" onAction="EmailSelectedSlidesAsPDF" />
                <button idMso="FileSaveAsPdfOrXps" showLabel="false" />
                <button idMso="ObjectSaveAsPicture" imageMso="PictureReset" showLabel="false" />
-                <menu id="CopyStorylineMenu" label="Copy storyline/slide note" imageMso="GroupCopy" showLabel="false">
-                     <button idMso="CreateHandoutsInWord" />
-                     <menuSeparator id="separatorExport1" />
-                     <button id="CopySlideNotesToWord" label="Export slide notes to Word" imageMso="MergeToWord" onAction="CopySlideNotesToWord" />
-                     <button id="CopySlideNotesToClipboard" label="Copy slide notes to clipboard" imageMso="GroupClipboard" onAction="CopySlideNotesToClipboardOnly" />
-                     <menuSeparator id="separatorExport2" />
-                     <button id="CopyStorylineToWord" label="Export storyline to Word" imageMso="MergeToWord" onAction="CopyStorylineToWord" />
-                     <button id="CopyStorylineToClipboard" label="Copy storyline to clipboard" imageMso="GroupClipboard" onAction="CopyStorylineToClipBoardOnly" />
-                     <button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
-                </menu> 
-              </group>
+               <menu id="CopyStorylineMenu" label="Copy storyline/slide note" imageMso="GroupCopy" showLabel="false">
+                  <button idMso="CreateHandoutsInWord" />
+                  <menuSeparator id="separatorExport1" />
+                  <button id="CopySlideNotesToWord" label="Export slide notes to Word" imageMso="MergeToWord" onAction="CopySlideNotesToWord" />
+                  <button id="CopySlideNotesToClipboard" label="Copy slide notes to clipboard" imageMso="GroupClipboard" onAction="CopySlideNotesToClipboardOnly" />
+                  <menuSeparator id="separatorExport2" />
+                  <button id="CopyStorylineToWord" label="Export storyline to Word" imageMso="MergeToWord" onAction="CopyStorylineToWord" />
+                  <button id="CopyStorylineToClipboard" label="Copy storyline to clipboard" imageMso="GroupClipboard" onAction="CopyStorylineToClipBoardOnly" />
+                  <button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
+               </menu>
+            </group>
             <group id="PasteGroup" label="Paste and insert" imageMso="PasteAlternative">
                <box id="PasteGroupBox1" boxStyle="horizontal">
                   <button idMso="PasteJpeg" showLabel="false" />
@@ -340,15 +365,14 @@
                </menu>
                <toggleButton idMso="SelectionPane" showLabel="false" />
                <splitButton id="TagsSplitButton" size="normal" showLabel="false">
-                     <button id="ShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="NameDefine" onAction="ShowFormManageTags" />
-                     <menu id="TagMenu" itemSize="normal">
-                        <button id="ShowTagsOnSlide" label="Show slidetags on all slides" imageMso="OutlineMoveDown" onAction="ShowTagsOnSlide" />
-                        <button id="HideTagsOnSlide" label="Hide slidetags on all slides" imageMso="Delete" onAction="HideTagsOnSlide" />
-                        <menuSeparator id="separatorSelectSlidesByTag" />
+                  <button id="ShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="NameDefine" onAction="ShowFormManageTags" />
+                  <menu id="TagMenu" itemSize="normal">
+                     <button id="ShowTagsOnSlide" label="Show slidetags on all slides" imageMso="OutlineMoveDown" onAction="ShowTagsOnSlide" />
+                     <button id="HideTagsOnSlide" label="Hide slidetags on all slides" imageMso="Delete" onAction="HideTagsOnSlide" />
+                     <menuSeparator id="separatorSelectSlidesByTag" />
                      <button id="ShowFormSelectSlidesByTag" label="Select slides by tag(s) or specific stamp" imageMso="SelectAll" onAction="ShowFormSelectSlidesByTag" />
-                     </menu>
-                  </splitButton>
-               
+                  </menu>
+               </splitButton>
                <button id="ShowAboutDialogButton" label="Show about dialog" showLabel="false" imageMso="Help" onAction="ShowAboutDialog" />
             </group>
          </tab>
