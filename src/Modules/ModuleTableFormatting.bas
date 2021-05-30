@@ -102,9 +102,12 @@ Sub TableRemoveBackgrounds()
                 .Background.Fill.Solid
                 .Background.Fill.ForeColor.RGB = RGB(255, 255, 255)
                 .Background.Fill.Visible = msoFalse
-                .Background.Fill.Transparency = 1#
+                
+                ProgressForm.Show
                 
                 For RowCount = 1 To .Rows.Count
+                    
+                SetProgress (RowCount / .Rows.Count * 100)
                     
                     For ColumnCount = 1 To .Columns.Count
                         
@@ -114,6 +117,8 @@ Sub TableRemoveBackgrounds()
                     Next
                     
                 Next
+                
+                ProgressForm.hide
                 
             End With
             
@@ -139,10 +144,18 @@ Sub TableRemoveBorders()
             
             With Application.ActiveWindow.Selection.ShapeRange.Table
             
+                ProgressForm.Show
                 
                 For RowCount = 1 To .Rows.Count
                     
+                SetProgress (RowCount / .Rows.Count * 100)
+                    
                     For ColumnCount = 1 To .Columns.Count
+                        
+                        .Cell(RowCount, ColumnCount).Borders(ppBorderLeft).ForeColor.RGB = RGB(255, 255, 255)
+                        .Cell(RowCount, ColumnCount).Borders(ppBorderRight).ForeColor.RGB = RGB(255, 255, 255)
+                        .Cell(RowCount, ColumnCount).Borders(ppBorderTop).ForeColor.RGB = RGB(255, 255, 255)
+                        .Cell(RowCount, ColumnCount).Borders(ppBorderBottom).ForeColor.RGB = RGB(255, 255, 255)
                         
                         .Cell(RowCount, ColumnCount).Borders(ppBorderLeft).Weight = 0
                         .Cell(RowCount, ColumnCount).Borders(ppBorderRight).Weight = 0
@@ -156,6 +169,8 @@ Sub TableRemoveBorders()
                     Next
                     
                 Next
+                
+                ProgressForm.hide
                 
             End With
             

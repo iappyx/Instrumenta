@@ -33,8 +33,18 @@ Sub ConvertTableToShapes()
     TableTop = myDocument.Selection.ShapeRange.Top
     TableLeft = myDocument.Selection.ShapeRange.Left
     
+    TypeOfColumnGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA COLUMNGAPS")
+    TypeOfRowGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA ROWGAPS")
+    
+    ProgressForm.Show
+    
     For RowsCount = 1 To myDocument.Selection.ShapeRange.Table.Rows.Count
+    
+    SetProgress (RowsCount / myDocument.Selection.ShapeRange.Table.Rows.Count * 100)
+    
         For ColsCount = 1 To myDocument.Selection.ShapeRange.Table.Columns.Count
+            
+            If Not ((ColsCount Mod 2 = 0 And TypeOfColumnGaps = "even") Or (Not ColsCount Mod 2 = 0 And TypeOfColumnGaps = "odd") Or (RowsCount Mod 2 = 0 And TypeOfRowGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfRowGaps = "odd")) Then
             
             Set NewShape = myDocument.Selection.SlideRange.Shapes.AddShape(Type:=msoShapeRectangle, Left:=TableLeft, Top:=TableTop, Width:=myDocument.Selection.ShapeRange.Table.Columns(ColsCount).Width, Height:=myDocument.Selection.ShapeRange.Table.Rows(RowsCount).Height)
             
@@ -44,8 +54,10 @@ Sub ConvertTableToShapes()
                 .TextFrame.MarginRight = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.MarginRight
                 .TextFrame.MarginTop = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.MarginTop
                 
-                myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Cut
-                .TextFrame.TextRange.Paste
+                If Not myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Text = "" Then
+                    myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Cut
+                    .TextFrame.TextRange.Paste
+                End If
                 
                 .TextFrame.TextRange.ParagraphFormat.Alignment = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.ParagraphFormat.Alignment
                 .TextFrame.TextRange.ParagraphFormat.BaseLineAlignment = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.ParagraphFormat.BaseLineAlignment
@@ -53,14 +65,19 @@ Sub ConvertTableToShapes()
                 .Line.ForeColor.RGB = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Borders(ppBorderBottom).ForeColor.RGB
             End With
             
+            End If
+            
             TableLeft = TableLeft + Application.ActiveWindow.Selection.ShapeRange.Table.Columns(ColsCount).Width
             
         Next ColsCount
+        
         
         TableLeft = Application.ActiveWindow.Selection.ShapeRange.Left
         TableTop = TableTop + Application.ActiveWindow.Selection.ShapeRange.Table.Rows(RowsCount).Height
         
     Next RowsCount
+    
+    ProgressForm.Hide
     
     Application.ActiveWindow.Selection.ShapeRange.Delete
     
