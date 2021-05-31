@@ -63,21 +63,21 @@
                <button idMso="PasteTextOnly" showLabel="false" />
             </group>
             <group id="FormattingGroup" label="Shapes" imageMso="ShapesMoreShapes">
-               <gallery idMso="ShapeFillColorPicker" showLabel="false" />
-               <gallery idMso="ShapeStylesGallery" showLabel="false" />
-               <gallery idMso="ShapeChangeShapeGallery" showLabel="false" />
+               <gallery idMso="ShapeFillColorPicker" showLabel="false" label="&#x200B;" />
+               <gallery idMso="ShapeStylesGallery" showLabel="false" label="&#x200B;" />
+               <gallery idMso="ShapeChangeShapeGallery" showLabel="false" label="&#x200B;" />
                <button idMso="EyedropperFill" showLabel="false" />
-               <gallery idMso="GradientGallery" showLabel="false" />
+               <gallery idMso="GradientGallery" showLabel="false" label="&#x200B;" />
                <button idMso="ObjectPictureFill" showLabel="false" />
                <separator id="seperatorShapeOutline" />
-               <gallery idMso="ShapeOutlineColorPicker" showLabel="false" />
-               <gallery idMso="OutlineDashesGallery" showLabel="false" />
-               <gallery idMso="OutlineWeightGallery" showLabel="false" />
+               <gallery idMso="ShapeOutlineColorPicker" showLabel="false" label="&#x200B;" />
+               <gallery idMso="OutlineDashesGallery" showLabel="false" label="&#x200B;" />
+               <gallery idMso="OutlineWeightGallery" showLabel="false" label="&#x200B;" />
                <button idMso="EyedropperOutline" showLabel="false" />
                <button id="CloneSelectionRight" label="Clone selection to right" imageMso="FillRight" onAction="ObjectsCloneRight" showLabel="false" />
                <button id="CloneSelectionDown" label="Clone selection down" imageMso="FillDown" onAction="ObjectsCloneDown" showLabel="false" />
                <separator id="seperatorShapeOther" />
-               <gallery idMso="ShapesInsertGallery" showLabel="false" />
+               <gallery idMso="ShapesInsertGallery" showLabel="false" label="&#x200B;" />
                <toggleButton idMso="TextBoxInsert" showLabel="false" />
                <menu idMso="CombineShapesMenu" showLabel="false" />
                <control idMso="ShapeWidth" showLabel="false" />
@@ -131,7 +131,7 @@
                <button idMso="PictureInsertFromFile" showLabel="false" />
                <toggleButton idMso="PictureSetTransparentColor" showLabel="false" />
                <button idMso="PicturesCompress" showLabel="false" />
-               <gallery idMso="PictureShapeGallery" showLabel="false" />
+               <gallery idMso="PictureShapeGallery" showLabel="false" label="&#x200B;" />
             </group>
             <group id="AlignGroup" label="Align, distribute and size" imageMso="SizeToGridAccess">
                <box id="AlignDistributeBox" boxStyle="horizontal">
@@ -187,7 +187,7 @@
                </menu>
             </group>
             <group id="TableGroup" label="Table" imageMso="TableInsert">
-               <gallery idMso="TableInsertGallery" showLabel="false" />
+               <gallery idMso="TableInsertGallery" showLabel="false" label="&#x200B;" />
                <button idMso="TableInsertColumnsLeft" showLabel="false" />
                <button idMso="TableInsertColumnsRight" showLabel="false" />
                <button idMso="TableDeleteColumns" showLabel="false" />
@@ -243,8 +243,8 @@
                <button id="TableRowIncreaseGaps" label="Increase row gaps" showLabel="false" imageMso="UpArrow2" onAction="TableRowIncreaseGaps" />
                <button id="TableRowDecreaseGaps" label="Decrease row gaps" showLabel="false" imageMso="DownArrow2" onAction="TableRowDecreaseGaps" />
                <separator id="separator7b" />
-               <gallery idMso="ShadingColorPicker" showLabel="false" />
-               <gallery idMso="TableBorderPenColorPicker" showLabel="false" />
+               <gallery idMso="ShadingColorPicker" showLabel="false" label="&#x200B;" />
+               <gallery idMso="TableBorderPenColorPicker" showLabel="false" label="&#x200B;" />
                <splitButton idMso="TableBordersMenu" showLabel="false" />
                <separator id="separator8" />
                <toggleButton idMso="TableCellAlignBottom" showLabel="false" />
