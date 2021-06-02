@@ -383,7 +383,13 @@
                      <button id="ShowFormSelectSlidesByTag" label="Select slides by tag(s) or specific stamp" imageMso="SelectAll" onAction="ShowFormSelectSlidesByTag" />
                   </menu>
                </splitButton>
-               <button id="ShowAboutDialogButton" label="Show about dialog" showLabel="false" imageMso="Help" onAction="ShowAboutDialog" />
+               <splitButton id="MailMergeSplitButton" size="normal" showLabel="false">
+                  <button id="ExcelMailMerge" label="Mail merge this slide based on Excel-file" showLabel="false" imageMso="MailMergeDocument" onAction="ExcelMailMerge" />
+                  <menu id="MailMergeMenu" itemSize="normal">
+                     <button id="InsertMergeField" label="Insert merge field" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="InsertMergeField" />
+                  </menu>
+               </splitButton>
+               <button id="ShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" />
             </group>
          </tab>
       </tabs>
