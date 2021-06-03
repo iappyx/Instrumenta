@@ -57,3 +57,21 @@ Sub SetProgress(PercentageCompleted As Single)
     DoEvents
     
 End Sub
+
+Function MacFileDialog(filepath As String) As String
+  MacFileDialogMacScript = "set applescript's text item delimiters to "","" " & vbNewLine & "try " & vbNewLine & "set selectedFile to (choose file " & _
+    "with prompt ""Please select a file"" default location alias """ & filepath & """ multiple selections allowed false) as string" & vbNewLine & "set applescript's text item delimiters to """" " & vbNewLine & _
+    "on error errStr number errorNumber" & vbNewLine & "return errorNumber " & vbNewLine & "end try " & vbNewLine & "return selectedFile"
+  MacFileDialog = MacScript(MacFileDialogMacScript)
+  
+  If MacFileDialog = "-128" Then
+  MacFileDialog = ""
+  Else
+      If CInt(Split(Application.Version, ".")(0)) >= 15 Then
+    MacFileDialog = Replace(MacFileDialog, ":", "/")
+    MacFileDialog = Replace(MacFileDialog, "Macintosh HD", "", Count:=1)
+        End If
+  End If
+  
+End Function
+

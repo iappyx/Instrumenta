@@ -23,7 +23,6 @@ Attribute VB_Name = "ModuleMailMerge"
 
 Public CancelTriggered As Boolean
 
-
 Sub InsertMergeField()
 
 If ActiveWindow.Selection.Type = ppSelectionText Then
@@ -36,11 +35,8 @@ End Sub
 
 Sub ImportHeadersFromExcel()
 
-    #If Mac Then
-        MsgBox "This Function will not work on a Mac"
-    #Else
-    
-    If ActiveWindow.Selection.Type = ppSelectionText Then
+   
+   If ActiveWindow.Selection.Type = ppSelectionText Then
     
     Dim ExcelFile   As String
     Dim SlideShape  As Shape
@@ -51,7 +47,17 @@ Sub ImportHeadersFromExcel()
     'Dim ExcelApplication As Excel.Application
     'Dim ExcelSourceWorkbook As Workbook
     
-    With Application.FileDialog(msoFileDialogFilePicker)
+    #If Mac Then
+    
+    ExcelFile = MacFileDialog("/")
+    
+    If ExcelFile = "" Then
+        MsgBox "No file selected."
+        Exit Sub
+    End If
+    
+    #Else
+        With Application.FileDialog(msoFileDialogFilePicker)
         .AllowMultiSelect = False
         .Filters.Add "Excel Files", "*.xlsx; *.xlsm; *.xls; *.xlsb", 1
         .Show
@@ -64,6 +70,8 @@ Sub ImportHeadersFromExcel()
         End If
         
     End With
+    #End If
+    
     
     On Error Resume Next
     Set ExcelApplication = GetObject(Class:="Excel.Application")
@@ -74,7 +82,11 @@ Sub ImportHeadersFromExcel()
     'Early binding equivalent for reference:
     'Set ExcelApplication = New Excel.Application
     
+    #If Mac Then
+    Set ExcelSourceWorkbook = ExcelApplication.Application.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+    #Else
     Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+    #End If
     Set ExcelSourceSheet = ExcelSourceWorkbook.Sheets(1)
     
     On Error GoTo HandleError
@@ -113,16 +125,12 @@ HandleError:
     ExcelSourceWorkbook.Close
     MsgBox "Cannot load data. Does the first sheet in the Excel-file contain data with headers?"
     
-    #End If
 
 End Sub
 
 Sub ExcelMailMerge()
     
-    #If Mac Then
-        MsgBox "This Function will not work on a Mac"
-    #Else
-    
+   
     If ActiveWindow.Selection.Type = ppSelectionSlides Then
     
     Dim ExcelFile   As String
@@ -130,11 +138,24 @@ Sub ExcelMailMerge()
     
     Dim ExcelApplication, ExcelSourceSheet, ExcelSourceWorkbook As Object
     
+    MailMergeSlideNum = ActiveWindow.Selection.SlideRange(1).SlideNumber
+    
+    
     'Early binding equivalent for reference:
     'Dim ExcelApplication As Excel.Application
     'Dim ExcelSourceWorkbook As Workbook
     
-    With Application.FileDialog(msoFileDialogFilePicker)
+    #If Mac Then
+    
+    ExcelFile = MacFileDialog("/")
+    
+    If ExcelFile = "" Then
+        MsgBox "No file selected."
+        Exit Sub
+    End If
+    
+    #Else
+        With Application.FileDialog(msoFileDialogFilePicker)
         .AllowMultiSelect = False
         .Filters.Add "Excel Files", "*.xlsx; *.xlsm; *.xls; *.xlsb", 1
         .Show
@@ -147,6 +168,7 @@ Sub ExcelMailMerge()
         End If
         
     End With
+    #End If
     
     On Error Resume Next
     Set ExcelApplication = GetObject(Class:="Excel.Application")
@@ -157,7 +179,11 @@ Sub ExcelMailMerge()
     'Early binding equivalent for reference:
     'Set ExcelApplication = New Excel.Application
     
+    #If Mac Then
+    Set ExcelSourceWorkbook = ExcelApplication.Application.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+    #Else
     Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+    #End If
     Set ExcelSourceSheet = ExcelSourceWorkbook.Sheets(1)
     
     On Error GoTo HandleError
@@ -228,8 +254,12 @@ Sub ExcelMailMerge()
         TempMergeTexts(j - 1) = MergeTexts(i, j)
     Next j
     
-           
-    Set MailMergeSlide = ActiveWindow.Selection.SlideRange(1).Duplicate
+    
+    #If Mac Then
+        DoEvents 'Mac needs a short delay on my machine
+    #End If
+    
+    Set MailMergeSlide = ActivePresentation.Slides(MailMergeSlideNum).Duplicate
         
     For Each SlideShape In MailMergeSlide.Shapes
         ReplaceMergeFields SlideShape, TempMergeFields, TempMergeTexts
@@ -250,9 +280,7 @@ Sub ExcelMailMerge()
 HandleError:
     ExcelSourceWorkbook.Close
     MsgBox "Cannot load data. Does the first sheet in the Excel-file contain data with headers?"
-    
-    #End If
-    
+
 End Sub
 
 'Sub ManualMailMerge()
@@ -368,3 +396,6 @@ Sub ReplaceMergeFields(SlideShape, MergeFields As Variant, MergeTexts As Variant
     End If
     
 End Sub
+
+
+
