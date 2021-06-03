@@ -21,6 +21,9 @@ Attribute VB_Name = "ModuleMailMerge"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Public CancelTriggered As Boolean
+
+
 Sub InsertMergeField()
 
 If ActiveWindow.Selection.Type = ppSelectionText Then
@@ -33,6 +36,9 @@ End Sub
 
 Sub ExcelMailMerge()
     
+    #If Mac Then
+        MsgBox "This Function will not work on a Mac"
+    #Else
     
     If ActiveWindow.Selection.Type = ppSelectionSlides Then
     
@@ -71,8 +77,10 @@ Sub ExcelMailMerge()
     Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
     Set ExcelSourceSheet = ExcelSourceWorkbook.Sheets(1)
     
-    Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", SearchOrder:=1, SearchDirection:=2).Row, ExcelSourceSheet.Cells.Find(What:="*", SearchOrder:=2, SearchDirection:=2).Column)
-    Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", After:=LastCell, SearchOrder:=1, SearchDirection:=1).Row, ExcelSourceSheet.Cells.Find(What:="*", After:=LastCell, SearchOrder:=2, SearchDirection:=1).Column)
+    On Error GoTo HandleError
+    Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=1, SearchDirection:=2).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=2, SearchDirection:=2).Column)
+    Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=1, SearchDirection:=1).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=2, SearchDirection:=1).Column)
+    On Error GoTo 0
     
     'Early binding equivalent for reference:
     'Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row, ExcelSourceSheet.Cells.Find(What:="*", SearchOrder:=xlByColumns, SearchDirection:=xlPrevious).Column)
@@ -83,7 +91,25 @@ Sub ExcelMailMerge()
     MergeFields = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.Row, LastCell.Column).Address).Value
     MergeTexts = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.Row + 1, FirstCell.Column).Address & ":" & ExcelSourceSheet.Cells(LastCell.Row, LastCell.Column).Address).Value
     
+    
+    PreviewMailMerge.MailMergeHeadersListBox.Clear
+    PreviewMailMerge.MailMergeHeadersListBox.ColumnCount = UBound(MergeFields, 2)
+    PreviewMailMerge.MailMergeHeadersListBox.List = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.Row, LastCell.Column).Address).Value
+    
+    PreviewMailMerge.MailMergeListBox.Clear
+    PreviewMailMerge.MailMergeListBox.ColumnCount = UBound(MergeFields, 2)
+    PreviewMailMerge.MailMergeListBox.List = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.Row + 1, FirstCell.Column).Address & ":" & LastCell.Address).Value
+    
+    PreviewMailMerge.ExampleLabel.Caption = "Data taken from the first sheet of the Excel-file. Current selected slide will be duplicated" & Str(UBound(MergeTexts, 1)) & " times and all mail merge fields placed between {{ }} will be replaced with the data above." & vbNewLine & vbNewLine & "Example: {{" & MergeFields(1, 1) & "}}" & " will be replaced with " & MergeTexts(1, 1) & " on the first slide."
+    
+    
     ExcelSourceWorkbook.Close
+    
+    CancelTriggered = False
+    
+    PreviewMailMerge.Show
+    
+    If CancelTriggered = True Then Exit Sub
     
     Dim TempMergeFields As Variant
     Dim TempMergeTexts As Variant
@@ -128,13 +154,21 @@ Sub ExcelMailMerge()
         
     Next i
     
-    ProgressForm.hide
+    ProgressForm.Hide
     
     Else
     
     MsgBox "No slide selected." & vbNewLine & vbNewLine & "Please select a slide that contains the merge fields as {{fieldname}} in shapes, tables and SmartArt."
     
     End If
+    
+    Exit Sub
+    
+HandleError:
+    ExcelSourceWorkbook.Close
+    MsgBox "Cannot load data. Does the first sheet in the Excel-file contain data with headers?"
+    
+    #End If
     
 End Sub
 
