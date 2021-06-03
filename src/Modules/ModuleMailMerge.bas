@@ -34,6 +34,89 @@ End If
 
 End Sub
 
+Sub ImportHeadersFromExcel()
+
+    #If Mac Then
+        MsgBox "This Function will not work on a Mac"
+    #Else
+    
+    If ActiveWindow.Selection.Type = ppSelectionText Then
+    
+    Dim ExcelFile   As String
+    Dim SlideShape  As Shape
+    
+    Dim ExcelApplication, ExcelSourceSheet, ExcelSourceWorkbook As Object
+    
+    'Early binding equivalent for reference:
+    'Dim ExcelApplication As Excel.Application
+    'Dim ExcelSourceWorkbook As Workbook
+    
+    With Application.FileDialog(msoFileDialogFilePicker)
+        .AllowMultiSelect = False
+        .Filters.Add "Excel Files", "*.xlsx; *.xlsm; *.xls; *.xlsb", 1
+        .Show
+        
+        If .SelectedItems.Count = 0 Then
+            MsgBox "No file selected."
+            Exit Sub
+        Else
+            ExcelFile = .SelectedItems.Item(1)
+        End If
+        
+    End With
+    
+    On Error Resume Next
+    Set ExcelApplication = GetObject(Class:="Excel.Application")
+    Err.Clear
+    If ExcelApplication Is Nothing Then Set ExcelApplication = CreateObject(Class:="Excel.Application")
+    On Error GoTo 0
+    
+    'Early binding equivalent for reference:
+    'Set ExcelApplication = New Excel.Application
+    
+    Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+    Set ExcelSourceSheet = ExcelSourceWorkbook.Sheets(1)
+    
+    On Error GoTo HandleError
+    Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=1, SearchDirection:=2).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=2, SearchDirection:=2).Column)
+    Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=1, SearchDirection:=1).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=2, SearchDirection:=1).Column)
+    On Error GoTo 0
+    
+    'Early binding equivalent for reference:
+    'Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row, ExcelSourceSheet.Cells.Find(What:="*", SearchOrder:=xlByColumns, SearchDirection:=xlPrevious).Column)
+    'Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", After:=LastCell, SearchOrder:=xlByRows, SearchDirection:=xlNext).Row, ExcelSourceSheet.Cells.Find(What:="*", After:=LastCell, SearchOrder:=xlByColumns, SearchDirection:=xlNext).Column)
+    
+    Dim MergeFields() As Variant
+    MergeFields = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.Row, LastCell.Column).Address).Value
+    ExcelSourceWorkbook.Close
+
+        
+    For i = LBound(MergeFields, 1) To UBound(MergeFields, 1)
+    
+    SetProgress (i / UBound(MergeFields, 1) * 100)
+    
+        For j = LBound(MergeFields, 2) To UBound(MergeFields, 2)
+            Application.ActiveWindow.Selection.TextRange.InsertAfter (" {{" & MergeFields(i, j) & "}}")
+        Next j
+    Next i
+
+    Else
+            
+    MsgBox "Please select a shape or table where you want to paste the merge fields."
+            
+    End If
+
+    
+    Exit Sub
+    
+HandleError:
+    ExcelSourceWorkbook.Close
+    MsgBox "Cannot load data. Does the first sheet in the Excel-file contain data with headers?"
+    
+    #End If
+
+End Sub
+
 Sub ExcelMailMerge()
     
     #If Mac Then

@@ -386,7 +386,8 @@
                <splitButton id="MailMergeSplitButton" size="normal" showLabel="false">
                   <button id="ExcelMailMerge" label="Mail merge this slide based on Excel-file" showLabel="false" imageMso="MailMergeDocument" onAction="ExcelMailMerge" />
                   <menu id="MailMergeMenu" itemSize="normal">
-                     <button id="InsertMergeField" label="Insert merge field" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="InsertMergeField" />
+                     <button id="InsertMergeField" label="Insert empty merge field" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="InsertMergeField" />
+                     <button id="ImportHeadersFromExcel" label="Insert merge fields from Excel-file" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="ImportHeadersFromExcel" />
                   </menu>
                </splitButton>
                <button id="ShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" />
