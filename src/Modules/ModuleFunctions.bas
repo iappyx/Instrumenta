@@ -75,3 +75,11 @@ Function MacFileDialog(filepath As String) As String
   
 End Function
 
+'This does not work well in all cases
+'Function MacSendMailViaOutlook(subject As String, filepath As String)
+'MacSendMailViaOutlookMacScript = "tell application ""Microsoft Outlook""" & vbNewLine & "set NewMail to (make new outgoing message with properties {subject:""" & subject & """})" & vbNewLine & _
+'"tell NewMail" & vbNewLine & "set AttachmentPath to POSIX file """ & filepath & """" & vbNewLine & "make new attachment with properties {file:AttachmentPath as alias}" & vbNewLine & "Delay 0.5" & vbNewLine & _
+'"end tell" & vbNewLine & "open NewMail" & vbNewLine & "Activate NewMail" & vbNewLine & "end tell" & vbNewLine & "return ""Done"""
+'MacSendMailViaOutlook = MacScript(MacSendMailViaOutlookMacScript)
+'End Function
+

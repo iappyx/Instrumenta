@@ -22,12 +22,14 @@ Attribute VB_Name = "ModuleExport"
 'SOFTWARE.
 
 Sub EmailSelectedSlides()
-    #If Mac Then
-        MsgBox "This Function will not work on a Mac"
-    #Else
     
         If ActiveWindow.Selection.Type = ppSelectionSlides Then
+        
+        
+        #If Not Mac Then
         Dim OutlookApplication, OutlookMessage As Object
+        #End If
+        
         Dim TemporaryPresentation, ThisPresentation As Presentation
         Dim PresentationFilename, EmailSubject As String
         Dim SlideLoop As Long
@@ -41,6 +43,7 @@ Sub EmailSelectedSlides()
         For Each PresentationSlides In ThisPresentation.Slides
             PresentationSlides.Tags.Delete ("INSTRUMENTA EXPORT")
         Next PresentationSlides
+        On Error GoTo 0
         
         'Strip extension from filename
         DotPosition = InStrRev(ThisPresentation.Name, ".")
@@ -74,9 +77,19 @@ Sub EmailSelectedSlides()
         
         PresentationFilename = InputBox("Attachment file name:", "Send as e-mail", PresentationFilename)
         
-        'Remove slides that where not selected for export
+        
+        #If Mac Then
+        
+        If PresentationFilename & ".pptx" = ThisPresentation.Name Then
+        PresentationFilename = PresentationFilename & "_1"
+        End If
+        
+        ThisPresentation.SaveCopyAs ActivePresentation.Path & "/" & PresentationFilename & ".pptx"
+        Set TemporaryPresentation = Presentations.Open(ActivePresentation.Path & "/" & PresentationFilename & ".pptx")
+        #Else
         ThisPresentation.SaveCopyAs Environ("TEMP") & "\" & PresentationFilename & ".pptx"
         Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
+        #End If
         
         ProgressForm.Show
         NumberOfSlides = TemporaryPresentation.Slides.Count
@@ -89,6 +102,19 @@ Sub EmailSelectedSlides()
         TemporaryPresentation.Save
         TemporaryPresentation.Close
                
+        #If Mac Then
+        'This does not work anymore
+        'OutlookMessageMac = MacSendMailViaOutlook(EmailSubject, ActivePresentation.Path & "/" & PresentationFilename & ".pptx")
+
+        Dim ParamString As String
+        Dim OutlookMessageMac As String
+
+        ParamString = EmailSubject & ";" & ActivePresentation.Path & "/" & PresentationFilename & ".pptx"
+        OutlookMessageMac = AppleScriptTask("InstrumentaAppleScriptPlugin.applescript", "SendFileWithOutlook", CStr(ParamString))
+
+        Kill (ActivePresentation.Path & "/" & PresentationFilename & ".pptx")
+        #Else
+               
         On Error Resume Next
         Set OutlookApplication = GetObject(Class:="Outlook.Application")
         Err.Clear
@@ -100,44 +126,34 @@ Sub EmailSelectedSlides()
         With OutlookMessage
             .To = ""
             .CC = ""
-            .Subject = EmailSubject
+            .subject = EmailSubject
             .Body = ""
             .Attachments.Add Environ("TEMP") & "\" & PresentationFilename & ".pptx"
             .Display
         End With
+         On Error GoTo 0
         
-        On Error GoTo 0
+        'Delete temporary slides
+        Kill (Environ("TEMP") & "\" & PresentationFilename & ".pptx")
         
-        'Clean temporary slides
-        Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
-        
-        ProgressForm.Show
-        NumberOfSlides = TemporaryPresentation.Slides.Count
-        For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
-            SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
-            TemporaryPresentation.Slides(SlideLoop).Delete
-        Next SlideLoop
-        ProgressForm.Hide
-                
-        TemporaryPresentation.Save
-        TemporaryPresentation.Close
+        #End If
         
         Else
         MsgBox "No slides selected."
         End If
-        
-    #End If
     
 End Sub
 
 Sub EmailSelectedSlidesAsPDF()
-    #If Mac Then
-        MsgBox "This Function will not work on a Mac"
-    #Else
         
         If ActiveWindow.Selection.Type = ppSelectionSlides Then
         
+        Set ThisPresentation = ActivePresentation
+        
+        #If Not Mac Then
         Dim OutlookApplication, OutlookMessage As Object
+        #End If
+             
         Dim PresentationFilename, EmailSubject As String
         Dim SlideLoop As Long
         Dim DotPosition As Integer
@@ -149,6 +165,12 @@ Sub EmailSelectedSlidesAsPDF()
         Else
             PresentationFilename = ActivePresentation.Name
         End If
+        
+        On Error Resume Next
+        For Each PresentationSlides In ThisPresentation.Slides
+            PresentationSlides.Tags.Delete ("INSTRUMENTA EXPORT")
+        Next PresentationSlides
+        On Error GoTo 0
         
         'Set filename and e-mailsubject
         EmailSubject = PresentationFilename
@@ -174,6 +196,38 @@ Sub EmailSelectedSlidesAsPDF()
         
         PresentationFilename = InputBox("Attachment file name:", "Send as e-mail", PresentationFilename)
       
+      
+              #If Mac Then
+        'This does not work anymore
+        'OutlookMessageMac = MacSendMailViaOutlook(EmailSubject, ActivePresentation.Path & "/" & PresentationFilename & ".pptx")
+    
+        
+        ThisPresentation.SaveCopyAs ActivePresentation.Path & "/" & PresentationFilename & "_temp.pptx"
+        Set TemporaryPresentation = Presentations.Open(ActivePresentation.Path & "/" & PresentationFilename & "_temp.pptx")
+        
+        ProgressForm.Show
+        NumberOfSlides = TemporaryPresentation.Slides.Count
+        For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
+            SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
+            If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
+        Next SlideLoop
+        ProgressForm.Hide
+        
+        TemporaryPresentation.Save
+        TemporaryPresentation.SaveCopyAs ActivePresentation.Path & "/" & PresentationFilename & ".pdf", ppSaveAsPDF
+        TemporaryPresentation.Close
+        Kill (ActivePresentation.Path & "/" & PresentationFilename & "_temp.pptx")
+
+        Dim ParamString As String
+        Dim OutlookMessageMac As String
+
+        ParamString = EmailSubject & ";" & ActivePresentation.Path & "/" & PresentationFilename & ".pdf"
+        OutlookMessageMac = AppleScriptTask("InstrumentaAppleScriptPlugin.applescript", "SendFileWithOutlook", CStr(ParamString))
+
+        Kill (ActivePresentation.Path & "/" & PresentationFilename & ".pdf")
+        
+        #Else
+        
         ActivePresentation.ExportAsFixedFormat Environ("TEMP") & "\" & PresentationFilename & ".pdf", ppFixedFormatTypePDF, ppFixedFormatIntentPrint, msoFalse, , , , , ppPrintSelection
 
         On Error Resume Next
@@ -187,7 +241,7 @@ Sub EmailSelectedSlidesAsPDF()
         With OutlookMessage
             .To = ""
             .CC = ""
-            .Subject = EmailSubject
+            .subject = EmailSubject
             .Body = ""
             .Attachments.Add Environ("TEMP") & "\" & PresentationFilename & ".pdf"
             .Display
@@ -196,16 +250,16 @@ Sub EmailSelectedSlidesAsPDF()
         On Error GoTo 0
         
         'Clean temporary PDF
-        Dim FrontSlide As PrintRange
-        ActivePresentation.PrintOptions.Ranges.ClearAll
-        Set FrontSlide = ActivePresentation.PrintOptions.Ranges.Add(1, 1)
+        Kill (Environ("TEMP") & "\" & PresentationFilename & ".pdf")
         
-        ActivePresentation.ExportAsFixedFormat Environ("TEMP") & "\" & PresentationFilename & ".pdf", ppFixedFormatTypePDF, ppFixedFormatIntentPrint, msoFalse, , , , FrontSlide, ppPrintSlideRange
+        #End If
 
         Else
         MsgBox "No slides selected."
         End If
         
-    #End If
+
     
 End Sub
+
+
