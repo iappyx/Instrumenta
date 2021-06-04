@@ -62,6 +62,6 @@ You can save the add-in to your Mac and then install the add-in by adding it to 
 
 Additional optional steps to enable export to e-mail:
 - Download the AppleScript file (https://github.com/iappyx/Instrumenta/raw/main/InstrumentaAppleScriptPlugin.applescript) 
-- Copy the AppleScropt file to *~/Library/Application Scripts/com.microsoft.Powerpoint/*
-- *Please note that this is the library folder of the current user. If the folder does not exist, create it.*
+- Copy the AppleScript file to *~/Library/Application Scripts/com.microsoft.Powerpoint/*
+- Please note that this is in the library folder of the *current user*. If the folder does not exist, create it.
 - In some cases a reboot of your Mac might be required
