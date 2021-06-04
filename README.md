@@ -50,7 +50,7 @@ You can save the add-in to your computer and then install the add-in by adding i
 - There now should be an "Instrumenta" page in the Powerpoint ribbon
 
 Additional steps for Mac, to enable export to e-mail:
-- Download this AppleScript (https://github.com/iappyx/Instrumenta/raw/main/InstrumentaAppleScriptPlugin.applescript) 
+- Download the AppleScript file (https://github.com/iappyx/Instrumenta/raw/main/InstrumentaAppleScriptPlugin.applescript) 
 - Copy it to *~/Library/Application Scripts/com.microsoft.Powerpoint/* Please note that this is the library folder of the current user. If the folder does not exist, create it.
 - Reboot your Mac
 
