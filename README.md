@@ -49,6 +49,6 @@ You can save the add-in to your computer and then install the add-in by adding i
 - In the Add New PowerPoint Add-In dialog box, browse for the add-in file, and then click OK.
 - A security notice appears. Click Enable Macros, and then click Close.
 - There now should be an "Instrumenta" page in the Powerpoint ribbon
-- If on Mac, to enabel export to e-mail, also download this AppleScript (https://github.com/iappyx/Instrumenta/raw/main/InstrumentaAppleScriptPlugin.applescript) and copy it to ~/Library/Application Scripts/com.microsoft.Powerpoint/  
+- On a Mac, to enable export to e-mail, also download this AppleScript (https://github.com/iappyx/Instrumenta/raw/main/InstrumentaAppleScriptPlugin.applescript) and copy it to your users' Library-folder on *~/Library/Application Scripts/com.microsoft.Powerpoint/*
 
 (Instructions based on https://support.microsoft.com/en-us/office/add-or-load-a-powerpoint-add-in-3de8bbc2-2481-457a-8841-7334cd5b455f)
