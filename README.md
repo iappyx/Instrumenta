@@ -39,7 +39,8 @@ If you like this plugin, please let me and the community know how you are using 
 
 # How to install 
 
-You can save the add-in to your computer and then install the add-in by adding it to the Available Add-Ins list:
+## Windows
+You can save the add-in to your PC and then install the add-in by adding it to the Available Add-Ins list:
 - Download the add-in file (https://github.com/iappyx/Instrumenta/raw/main/Instrumenta%20Powerpoint%20Toolbar.ppam) and save it in a fixed location
 - Open Powerpoint, click the File tab, and then click Options
 - In the Options dialog box, click Add-Ins.
@@ -49,9 +50,17 @@ You can save the add-in to your computer and then install the add-in by adding i
 - A security notice appears. Click Enable Macros, and then click Close.
 - There now should be an "Instrumenta" page in the Powerpoint ribbon
 
-Additional steps for Mac, to enable export to e-mail:
+(Instructions based on https://support.microsoft.com/en-us/office/add-or-load-a-powerpoint-add-in-3de8bbc2-2481-457a-8841-7334cd5b455f)
+
+## Mac
+You can save the add-in to your Mac and then install the add-in by adding it to the Add-Ins list:
+- Download the add-in file (https://github.com/iappyx/Instrumenta/raw/main/Instrumenta%20Powerpoint%20Toolbar.ppam) and save it in a fixed location
+- Open Powerpoint, click Tools in the application menu, and then click Add-ins...
+- In the Add-Ins dialog box, click the + button, browse for the add-in file, and then click Open.
+- Click Ok to close the Add-ins dialog box
+- There now should be an "Instrumenta" page in the Powerpoint ribbon
+
+Additional optional steps to enable export to e-mail:
 - Download the AppleScript file (https://github.com/iappyx/Instrumenta/raw/main/InstrumentaAppleScriptPlugin.applescript) 
 - Copy it to *~/Library/Application Scripts/com.microsoft.Powerpoint/* Please note that this is the library folder of the current user. If the folder does not exist, create it.
-- Reboot your Mac
-
-(Instructions based on https://support.microsoft.com/en-us/office/add-or-load-a-powerpoint-add-in-3de8bbc2-2481-457a-8841-7334cd5b455f)
+- In some cases a reboot of your Mac might be required
