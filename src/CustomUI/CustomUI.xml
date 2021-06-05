@@ -23,7 +23,7 @@
                <box id="FontBox3" boxStyle="horizontal">
                   <toggleButton idMso="Superscript" showLabel="false" />
                   <toggleButton idMso="Subscript" showLabel="false" />
-                  <gallery idMso="FontColorPicker" showLabel="false" />
+                  <control idMso="FontColorPicker" showLabel="false" />
                   <button idMso="EyedropperFillText" showLabel="false" />
                </box>
             </group>
@@ -63,14 +63,14 @@
                <button idMso="PasteTextOnly" showLabel="false" />
             </group>
             <group id="FormattingGroup" label="Shapes" imageMso="ShapesMoreShapes">
-               <gallery idMso="ShapeFillColorPicker" showLabel="false" label="&#x200B;" />
+               <control idMso="ShapeFillColorPicker" showLabel="false" label="&#x200B;" />
                <gallery idMso="ShapeStylesGallery" showLabel="false" label="&#x200B;" />
                <gallery idMso="ShapeChangeShapeGallery" showLabel="false" label="&#x200B;" />
                <button idMso="EyedropperFill" showLabel="false" />
                <gallery idMso="GradientGallery" showLabel="false" label="&#x200B;" />
                <button idMso="ObjectPictureFill" showLabel="false" />
                <separator id="seperatorShapeOutline" />
-               <gallery idMso="ShapeOutlineColorPicker" showLabel="false" label="&#x200B;" />
+               <control idMso="ShapeOutlineColorPicker" showLabel="false" label="&#x200B;" />
                <gallery idMso="OutlineDashesGallery" showLabel="false" label="&#x200B;" />
                <gallery idMso="OutlineWeightGallery" showLabel="false" label="&#x200B;" />
                <button idMso="EyedropperOutline" showLabel="false" />
@@ -243,7 +243,7 @@
                <button id="TableRowIncreaseGaps" label="Increase row gaps" showLabel="false" imageMso="UpArrow2" onAction="TableRowIncreaseGaps" />
                <button id="TableRowDecreaseGaps" label="Decrease row gaps" showLabel="false" imageMso="DownArrow2" onAction="TableRowDecreaseGaps" />
                <separator id="separator7b" />
-               <gallery idMso="ShadingColorPicker" showLabel="false" label="&#x200B;" />
+               <control idMso="ShadingColorPicker" showLabel="false" label="&#x200B;" />
                <gallery idMso="TableBorderPenColorPicker" showLabel="false" label="&#x200B;" />
                <splitButton idMso="TableBordersMenu" showLabel="false" />
                <separator id="separator8" />
