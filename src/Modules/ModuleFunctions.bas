@@ -75,6 +75,30 @@ Function MacFileDialog(filepath As String) As String
   
 End Function
 
+
+Function CheckIfAppleScriptPluginIsInstalled() As Double
+
+#If Mac Then
+
+Dim AppleScriptPluginVersion As String
+
+On Error GoTo NotInstalled
+AppleScriptPluginVersion = AppleScriptTask("InstrumentaAppleScriptPlugin.applescript", "CheckIfAppleScriptPluginIsInstalled", "")
+CheckIfAppleScriptPluginIsInstalled = CDbl(AppleScriptPluginVersion)
+On Error Resume Next
+Exit Function
+
+#Else
+CheckIfAppleScriptPluginIsInstalled = 0
+Exit Function
+#End If
+
+NotInstalled:
+On Error Resume Next
+CheckIfAppleScriptPluginIsInstalled = 0
+
+End Function
+
 'This does not work well in all cases
 'Function MacSendMailViaOutlook(subject As String, filepath As String)
 'MacSendMailViaOutlookMacScript = "tell application ""Microsoft Outlook""" & vbNewLine & "set NewMail to (make new outgoing message with properties {subject:""" & subject & """})" & vbNewLine & _

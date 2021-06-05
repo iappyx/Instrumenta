@@ -51,14 +51,21 @@ Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     
     ProgressForm.Hide
     
-    If Not SlidePlaceHolder.TextFrame.TextRange.text = "" Then
+    If Not SlidePlaceHolder.TextFrame.TextRange.Text = "" Then
         
         SlidePlaceHolder.TextFrame.TextRange.Copy
         
         If ExportToWord = True Then
             
             #If Mac Then
-                MsgBox "This function will not work on a Mac. Slide notes are copied to clipboard."
+                
+                If CheckIfAppleScriptPluginIsInstalled > 0 Then
+                    Dim PasteIntoWord As String
+                    PasteIntoWord = AppleScriptTask("InstrumentaAppleScriptPlugin.applescript", "PasteTextIntoWord", "")
+                Else
+                    MsgBox "Cannot launch Word, optional Instrumenta AppleScript not found. Slide notes are copied to clipboard."
+                End If
+                
             #Else
                 
                 Dim WordApplication, WordDocument As Object
@@ -108,7 +115,7 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
         For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
             
             If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
-                StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.text & Chr(13)
+                StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.Text & Chr(13)
                 Exit For
             End If
         Next SlidePlaceHolder
@@ -117,7 +124,7 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     ProgressForm.Hide
     
     Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
-    SlidePlaceHolder.TextFrame.TextRange.text = StorylineText
+    SlidePlaceHolder.TextFrame.TextRange.Text = StorylineText
     SlidePlaceHolder.TextFrame.TextRange.Copy
     SlidePlaceHolder.Delete
     
@@ -125,7 +132,14 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
         If ExportToWord = True Then
             
             #If Mac Then
-                MsgBox "This function will not work on a Mac. Storyline is copied to clipboard."
+            
+                If CheckIfAppleScriptPluginIsInstalled > 0 Then
+                    Dim PasteIntoWord As String
+                    PasteIntoWord = AppleScriptTask("InstrumentaAppleScriptPlugin.applescript", "PasteTextIntoWord", "")
+                Else
+                    MsgBox "Cannot launch Word, optional Instrumenta AppleScript not found. Storyline is copied to clipboard."
+                End If
+            
             #Else
                 
                 Dim WordApplication, WordDocument As Object
@@ -179,7 +193,7 @@ Sub PasteStorylineInSelectedShape()
             For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
                 
                 If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
-                    StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.text & Chr(13)
+                    StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.Text & Chr(13)
                     Exit For
                 End If
             Next SlidePlaceHolder
@@ -187,7 +201,7 @@ Sub PasteStorylineInSelectedShape()
         
         ProgressForm.Hide
         
-        Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.text = StorylineText
+        Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.Text = StorylineText
         
     End If
     

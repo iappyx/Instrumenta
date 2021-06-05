@@ -30,6 +30,13 @@ Sub EmailSelectedSlides()
         Dim OutlookApplication, OutlookMessage As Object
         #End If
         
+        #If Mac Then
+        If Not CheckIfAppleScriptPluginIsInstalled > 0 Then
+            MsgBox "Optional Instrumenta AppleScript not found. This function is not supported without it."
+            Exit Sub
+        End If
+        #End If
+        
         Dim TemporaryPresentation, ThisPresentation As Presentation
         Dim PresentationFilename, EmailSubject As String
         Dim SlideLoop As Long
@@ -152,6 +159,13 @@ Sub EmailSelectedSlidesAsPDF()
         
         #If Not Mac Then
         Dim OutlookApplication, OutlookMessage As Object
+        #End If
+        
+        #If Mac Then
+        If Not CheckIfAppleScriptPluginIsInstalled > 0 Then
+            MsgBox "Optional Instrumenta AppleScript not found. This function is not supported without it."
+            Exit Sub
+        End If
         #End If
              
         Dim PresentationFilename, EmailSubject As String

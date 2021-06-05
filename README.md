@@ -19,7 +19,7 @@ Current features include:
 | Pictures | - Crop picture to slide |
 | Align, distribute and size | - Align, distribute and size shapes<br>- Align objects over table cells, rows or columns <br>- Set same height and/or width for shapes<br>- Size shapes to tallest, shortest, widest or narrowest<br>- Remove, increase or decrease horizontal/vertical gap between shapes<br>- Remove, increase or decrease margins for shapes<br>- Remove, increase or decrease margins for tables or selected cells <br>- Stretch objects to top, left, right or bottom |
 | Table | - Format table<br>- Quick format table (preset)<br>- Add, delete, increase or decrease column/row gaps <br>- Distribute columns/rows while ignoring column/row gaps <br>- Convert table to shapes<br>- Transpose table<br>- Sum columns in table (all values above selected cells)<br>- Sum rows in table (all values left from selected cells) |
-| Export | - E-mail selected slides (as PDF or PPT)<br>- Copy storyline to clipboard<br>- Export storyline to Word *not supported on Mac*<br>- Paste storyline in shape<br>- Copy slide notes to clipboard<br>- Export slide notes to Word *not supported on Mac*|
+| Export | - E-mail selected slides (as PDF or PPT)<br>- Copy storyline to clipboard<br>- Export storyline to Word<br>- Paste storyline in shape<br>- Copy slide notes to clipboard<br>- Export slide notes to Word|
 | Paste and insert | - Harvey Balls<br>- Traffic lights (RAG status)<br>- Sticky notes<br>- Move sticky notes on and off this slide/all slides<br>- Remove sticky notes from this slide/all slides<br>- Convert comments to sticky notes<br>- Steps counter (per slide and cross-slides)<br>- Agenda pages<br>- Stamps<br>- Move stamps on and off this slide/all slides<br>- Remove stamps from this slide/all slides<br>- Insert process (SmartArt) |
 | Advanced | - Mail merge slide based on Excel-file<br>- Remove animations from all slides<br>- Remove slide entry transitions from all slides<br>- Remove speaker notes from all slides<br>- Remove comments from all slides<br>- Remove unused master slides<br>- Convert slides to pictures (readonly)<br>- Anonymize slides with Lorem Ipsum<br>- Add (hidden) tags to slides and shapes<br>- Manage (hidden) tags of slides and shapes<br>- Select sliderange based on tags<br>- Select sliderange based on specific stamps on those slide<br>- Check for new versions of Instrumenta in the About-dialog |
 
@@ -28,7 +28,7 @@ All functions tested in Windows on the latest Office at that moment in time.
 
 The add in will work in OS X, with some minor issues:
 * Some icons will not show correctly in the ribbon (underlying functionality will work). Custom icons for Instrumenta are on the backlog.
-* Export to E-mail (as PPT or PDF) is supported but requires installation of an AppleScript-file due to OS X sandbox. See installation instructions below.
+* *Export to E-mail (as PPT or PDF)*, *Export storyline to Word* and *Export slide notes to Word* are supported but require installation of an AppleScript-file due to OS X sandbox. See installation instructions below.
 
 As stated in the license: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -60,7 +60,7 @@ You can save the add-in to your Mac and then install the add-in by adding it to 
 - Click Ok to close the Add-ins dialog box
 - There now should be an "Instrumenta" page in the Powerpoint ribbon
 
-Additional optional steps to enable export to e-mail:
+Additional optional steps to enable export to Outlook and Word:
 - Download the AppleScript file (https://github.com/iappyx/Instrumenta/raw/main/InstrumentaAppleScriptPlugin.applescript) 
 - Copy the AppleScript file to *~/Library/Application Scripts/com.microsoft.Powerpoint/*
 - Please note that this is in the library folder of the *current user*. If the folder does not exist, create it.
