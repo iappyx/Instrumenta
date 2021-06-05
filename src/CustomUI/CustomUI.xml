@@ -48,8 +48,8 @@
                </buttonGroup>
                <buttonGroup id="buttonGroupIndent">
                   <gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false" />
-                  <button id="IncreaseLineSpacing" label="Increase line spacing" showLabel="false" imageMso="WordCloseParaAbove" onAction="ObjectsIncreaseLineSpacing" />
-                  <button id="DecreaseLineSpacing" label="Decrease line spacing" showLabel="false" imageMso="WordOpenParaAbove" onAction="ObjectsDecreaseLineSpacing" />
+                  <button id="IncreaseLineSpacing" label="Increase line spacing" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="ObjectsIncreaseLineSpacing" />
+                  <button id="DecreaseLineSpacing" label="Decrease line spacing" showLabel="false" imageMso="ParagraphSpacingDecrease" onAction="ObjectsDecreaseLineSpacing" />
                   <button idMso="IndentIncrease" showLabel="false" />
                   <button idMso="IndentDecrease" showLabel="false" />
                   <gallery idMso="TextAlignGallery" showLabel="false" />
@@ -85,10 +85,10 @@
                <control idMso="ObjectSizeAndPositionDialog" imageMso="PositionFitToWindow" showLabel="false" />
                <control idMso="FormatPainter" showLabel="false" />
                <button id="ObjectsCopyRoundedCorner" label="Copy rounded corner of first selected shape to selected shapes" showLabel="false" imageMso="ShapeRoundedRectangle" onAction="ObjectsCopyRoundedCorner" />
-               <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="GroupShapes" onAction="ObjectsCopyShapeTypeAndAdjustments" />
+               <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="ShapeName" onAction="ObjectsCopyShapeTypeAndAdjustments" />
                <toggleButton idMso="ObjectEditPoints" showLabel="false" />
                <button id="RectifyLines" label="Rectify lines" showLabel="false" imageMso="ArrowsMore" onAction="RectifyLines" />
-               <menu id="ConnectRectanglesMenu" label="Connect sides of 2 rectangles" imageMso="ViewDisplayInColor" showLabel="false">
+               <menu id="ConnectRectanglesMenu" label="Connect sides of 2 rectangles" imageMso="AutoConnect" showLabel="false">
                   <button id="ConnectRectangleShapesRightToLeft" label="Shape 1 right side to shape 2 left side" onAction="ConnectRectangleShapesRightToLeft" />
                   <button id="ConnectRectangleShapesLeftToRight" label="Shape 1 left side to shape 2 right side" onAction="ConnectRectangleShapesLeftToRight" />
                   <button id="ConnectRectangleShapesBottomToTop" label="Shape 1 bottom side to shape 2 top side" onAction="ConnectRectangleShapesBottomToTop" />
@@ -155,7 +155,7 @@
                   <button idMso="ObjectRotateRight90" showLabel="false" />
                </box>
                <box id="DimensionsBox" boxStyle="horizontal">
-                  <button id="ObjectsSwapPosition" imageMso="SmartArtRightToLeft" label="Swap position of two shapes" showLabel="false" onAction="ObjectsSwapPosition" />
+                  <button id="ObjectsSwapPosition" imageMso="MailMergeMatchFields" label="Swap position of two shapes" showLabel="false" onAction="ObjectsSwapPosition" />
                   <button id="ObjectsSameHeightButton" imageMso="RowHeight" label="Set same height" showLabel="false" onAction="ObjectsSameHeight" />
                   <button id="ObjectsSameWidthButton" imageMso="ColumnWidth" label="Set same width" showLabel="false" onAction="ObjectsSameWidth" />
                   <button id="ObjectsSameHeightAndWidthButton" imageMso="SizeToControlHeightAndWidth" label="Set same height and width" showLabel="false" onAction="ObjectsSameHeightAndWidth" />
@@ -186,7 +186,7 @@
                   <button id="ObjectsStretchBottom" label="Stretch shapes to bottom" onAction="ObjectsStretchBottom" />
                </menu>
             </group>
-            <group id="TableGroup" label="Table" imageMso="TableInsert">
+            <group id="TableGroup" label="Tables" imageMso="TableInsert">
                <gallery idMso="TableInsertGallery" showLabel="false" label="&#x200B;" />
                <button idMso="TableInsertColumnsLeft" showLabel="false" />
                <button idMso="TableInsertColumnsRight" showLabel="false" />
@@ -256,11 +256,11 @@
                <button id="TableDecreaseMargins" label="Decrease margins of selected table or selected cells" showLabel="false" imageMso="DownArrow2" onAction="TablesMarginsDecrease" />
             </group>
             <group id="ExportGroup" label="Export" imageMso="RightArrow2">
-               <button id="EmailSelectedSlidesButton" label="E-mail selected slides" imageMso="MailMergeStartEmail" showLabel="false" onAction="EmailSelectedSlides" />
+               <button id="EmailSelectedSlidesButton" label="E-mail selected slides" imageMso="FileSendAsAttachment" showLabel="false" onAction="EmailSelectedSlides" />
                <button id="EmailSelectedSlidesAsPDFButton" label="E-mail selected slides as PDF" showLabel="false" imageMso="FileEmailAsPdfEmailAttachment" onAction="EmailSelectedSlidesAsPDF" />
                <button idMso="FileSaveAsPdfOrXps" showLabel="false" />
                <button idMso="ObjectSaveAsPicture" imageMso="PictureReset" showLabel="false" />
-               <menu id="CopyStorylineMenu" label="Copy storyline/slide note" imageMso="GroupCopy" showLabel="false">
+               <menu id="CopyStorylineMenu" label="Copy storyline/slide note" imageMso="SpeakerNotes" showLabel="false">
                   <button idMso="CreateHandoutsInWord" />
                   <menuSeparator id="separatorExport1" />
                   <button id="CopySlideNotesToWord" label="Export slide notes to Word" imageMso="MergeToWord" onAction="CopySlideNotesToWord" />
@@ -314,9 +314,9 @@
                      <button id="AverageFivePointStars" label="Average based on selected star ratings" onAction="AverageFivePointStars" />
                   </menu>
                   <menu id="RAGStatusMenu" label="RAG status" imageMso="AppointmentColorDialog" showLabel="false">
-                     <button id="RAGStatusRed" label="Red" onAction="GenerateRAGStatusRed" />
-                     <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" />
-                     <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" />
+                     <button id="RAGStatusRed" label="Red" onAction="GenerateRAGStatusRed" imageMso="NotebookColor7"/>
+                     <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" imageMso="NotebookColor2"/>
+                     <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" imageMso="NotebookColor3"/>
                       <menuSeparator id="RAGStatusSeparator" />
                      <button id="AverageRAGStatus" label="Average based on selected RAG status-shapes" onAction="AverageRAGStatus" />
                   </menu>
@@ -345,7 +345,7 @@
                         <button id="SelectAllCrossSlideStepsCounter" label="Select all cross-slide step counters on this slide" onAction="SelectAllCrossSlideStepsCounter" />
                      </menu>
                   </splitButton>
-                  <menu id="StampsMenu" label="Stamps" imageMso="LabelInsert" showLabel="false">
+                  <menu id="StampsMenu" label="Stamps" imageMso="StampTool" showLabel="false">
                      <button id="StampConfidential" label="CONFIDENTIAL" onAction="GenerateStampConfidential" />
                      <button id="StampDoNotDistribute" label="DO NOT DISTRIBUTE" onAction="GenerateStampDoNotDistribute" />
                      <button id="StampDraft" label="DRAFT" onAction="GenerateStampDraft" />
