@@ -21,6 +21,41 @@ Attribute VB_Name = "ModuleFivePointStars"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub AverageFivePointStars()
+
+    Set myDocument = Application.ActiveWindow
+    Dim FivePointStarCount As Integer
+    Dim FivePointStarSum As Double
+    
+    FivePointStarSum = 0
+    FivePointStarCount = 0
+          
+    If myDocument.Selection.Type = ppSelectionShapes Then
+        
+        For Each Shape In ActiveWindow.Selection.ShapeRange
+            
+            If (InStr(Shape.Name, "StarRating") = 1) And (Not Shape.Tags("INSTRUMENTA STARRATING") = "") Then
+                
+                FivePointStarCount = FivePointStarCount + 1
+                FivePointStarSum = FivePointStarSum + CDbl(Shape.Tags("INSTRUMENTA STARRATING"))
+                
+            End If
+            
+        Next Shape
+    End If
+    
+    If FivePointStarCount > 0 Then
+    
+    ActiveWindow.Selection.Unselect
+    GenerateFivePointStars Round((FivePointStarSum / FivePointStarCount) / 0.5, 0) * 0.5
+    
+    Else
+    MsgBox "No star rating shape selected."
+    End If
+
+End Sub
+
+
 Sub GenerateFivePointStars(NumberOfStars As Double)
     
     Set myDocument = Application.ActiveWindow

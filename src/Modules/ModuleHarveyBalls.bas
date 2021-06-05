@@ -21,6 +21,40 @@ Attribute VB_Name = "ModuleHarveyBalls"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub AverageHarveyBall()
+
+    Set myDocument = Application.ActiveWindow
+    Dim HarveyCount As Integer
+    Dim HarveySum As Double
+    
+    HarveySum = 0
+    HarveyCount = 0
+          
+    If myDocument.Selection.Type = ppSelectionShapes Then
+        
+        For Each Shape In ActiveWindow.Selection.ShapeRange
+            
+            If (InStr(Shape.Name, "HarveyBall") = 1) And (Not Shape.Tags("INSTRUMENTA HARVEYBALL") = "") Then
+                
+                HarveyCount = HarveyCount + 1
+                HarveySum = HarveySum + CDbl(Shape.Tags("INSTRUMENTA HARVEYBALL"))
+                
+            End If
+            
+        Next Shape
+    End If
+    
+    If HarveyCount > 0 Then
+    
+    ActiveWindow.Selection.Unselect
+    GenerateHarveyBallPercent Round(HarveySum / HarveyCount)
+    
+    Else
+    MsgBox "No Harveyball-shapes selected."
+    End If
+
+End Sub
+
 Sub GenerateHarveyBallPercent(FillPercentage As Double)
     Set myDocument = Application.ActiveWindow
     

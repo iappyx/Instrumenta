@@ -21,6 +21,60 @@ Attribute VB_Name = "ModuleRAGStatus"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub AverageRAGStatus()
+
+    Set myDocument = Application.ActiveWindow
+    Dim RAGStatusCount As Integer
+    Dim RAGStatusSum As Double
+    
+    RAGStatusSum = 0
+    RAGStatusCount = 0
+          
+    If myDocument.Selection.Type = ppSelectionShapes Then
+        
+        For Each Shape In ActiveWindow.Selection.ShapeRange
+            
+            If (InStr(Shape.Name, "RAGStatus") = 1) And (Not Shape.Tags("INSTRUMENTA RAGSTATUS") = "") Then
+                
+                RAGStatusCount = RAGStatusCount + 1
+                
+                If Shape.Tags("INSTRUMENTA RAGSTATUS") = "green" Then
+                    RAGStatusSum = RAGStatusSum + 3
+                ElseIf Shape.Tags("INSTRUMENTA RAGSTATUS") = "amber" Then
+                    RAGStatusSum = RAGStatusSum + 6
+                ElseIf Shape.Tags("INSTRUMENTA RAGSTATUS") = "red" Then
+                    RAGStatusSum = RAGStatusSum + 9
+                End If
+                
+            End If
+            
+        Next Shape
+    End If
+    
+    If RAGStatusCount > 0 Then
+    
+    ActiveWindow.Selection.Unselect
+    
+    If Round((RAGStatusSum / RAGStatusCount) / 3, 0) * 3 = 3 Then
+    
+    GenerateRAGStatus "green"
+    
+    ElseIf Round((RAGStatusSum / RAGStatusCount) / 3, 0) * 3 = 6 Then
+    
+    GenerateRAGStatus "amber"
+    
+    ElseIf Round((RAGStatusSum / RAGStatusCount) / 3, 0) * 3 = 9 Then
+    
+    GenerateRAGStatus "red"
+    
+    End If
+    
+    Else
+    MsgBox "No RAG status shape selected."
+    End If
+
+End Sub
+
 Sub GenerateRAGStatus(RAGColor As String)
     
     Set myDocument = Application.ActiveWindow

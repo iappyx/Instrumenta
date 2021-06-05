@@ -297,6 +297,7 @@
                      <button id="HarveyBall100" label="100%" onAction="GenerateHarveyBall100" />
                      <menuSeparator id="HarveySeparator" />
                      <button id="HarveyBallCustom" label="Custom..." onAction="GenerateHarveyBallCustom" />
+                     <button id="AverageHarveyBall" label="Average based on selected Harvey Balls" onAction="AverageHarveyBall" />
                   </menu>
                   <menu id="FivePointStarMenu" label="Star rating" imageMso="StarRatedFull" showLabel="false">
                      <button id="FivePointStar05" label="0.5 star" onAction="GenerateFivePointStars05" />
@@ -309,11 +310,15 @@
                      <button id="FivePointStar40" label="4 star" onAction="GenerateFivePointStars40" />
                      <button id="FivePointStar45" label="4.5 star" onAction="GenerateFivePointStars45" />
                      <button id="FivePointStar50" label="5 star" onAction="GenerateFivePointStars50" />
+                     <menuSeparator id="FivePointStarSeparator" />
+                     <button id="AverageFivePointStars" label="Average based on selected star ratings" onAction="AverageFivePointStars" />
                   </menu>
                   <menu id="RAGStatusMenu" label="RAG status" imageMso="AppointmentColorDialog" showLabel="false">
                      <button id="RAGStatusRed" label="Red" onAction="GenerateRAGStatusRed" />
                      <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" />
                      <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" />
+                      <menuSeparator id="RAGStatusSeparator" />
+                     <button id="AverageRAGStatus" label="Average based on selected RAG status-shapes" onAction="AverageRAGStatus" />
                   </menu>
                </box>
                <box id="PasteGroupBox3" boxStyle="horizontal">
