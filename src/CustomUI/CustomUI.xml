@@ -23,6 +23,7 @@
                <box id="FontBox3" boxStyle="horizontal">
                   <toggleButton idMso="Superscript" showLabel="false" />
                   <toggleButton idMso="Subscript" showLabel="false" />
+                  <control idMso="TextHighlightColorPickerLicensed" showLabel="false" />
                   <control idMso="FontColorPicker" showLabel="false" />
                   <button idMso="EyedropperFillText" showLabel="false" />
                </box>
@@ -33,11 +34,12 @@
                   <toggleButton idMso="AlignCenter" showLabel="false" />
                   <toggleButton idMso="AlignRight" showLabel="false" />
                   <toggleButton idMso="AlignJustify" showLabel="false" />
+                  <gallery idMso="TableColumnsGallery" showLabel="false" />
                   <toggleButton id="ToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" />
                </buttonGroup>
                <buttonGroup id="buttonGroupBulletsAndNumbering">
-                  <gallery idMso="BulletsGallery" showLabel="false" />
-                  <gallery idMso="NumberingGallery" showLabel="false" />
+                  <control idMso="BulletsGallery" showLabel="false" />
+                  <control idMso="NumberingGallery" showLabel="false" />
                   <button id="BulletsTicks" label="Ticks" showLabel="false" imageMso="AcceptTask" onAction="TextBulletsTicks" />
                   <button id="BulletsCrosses" label="Crosses" showLabel="false" imageMso="DeclineInvitation" onAction="TextBulletsCrosses" />
                   <menu id="SpecialCharacterMenu" label="Special characters" imageMso="SymbolInsert" showLabel="false">
@@ -245,7 +247,7 @@
                <separator id="separator7b" />
                <control idMso="ShadingColorPicker" showLabel="false" label="&#x200B;" />
                <gallery idMso="TableBorderPenColorPicker" showLabel="false" label="&#x200B;" />
-               <splitButton idMso="TableBordersMenu" showLabel="false" />
+               <control idMso="TableBordersMenu" showLabel="false" />
                <separator id="separator8" />
                <toggleButton idMso="TableCellAlignBottom" showLabel="false" />
                <toggleButton idMso="TableCellAlignCenterVertically" showLabel="false" />
