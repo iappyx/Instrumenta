@@ -65,3 +65,5 @@ Additional optional steps to enable export to Outlook and Word:
 - Copy the AppleScript file to *~/Library/Application Scripts/com.microsoft.Powerpoint/*
 - Please note that this is in the library folder of the *current user*. If the folder does not exist, create it.
 - In some cases a reboot of your Mac might be required
+
+The AppleScript file will not change that often, only in case of major changes to the export features, or new features that require the use of AppleScript. In that case Instrumenta can detect if the latest version of the file is installed and will inform you when using a feature that requires an updated version.
