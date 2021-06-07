@@ -218,6 +218,12 @@
                </splitButton>
                <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" />
                <button id="TableTranspose" imageMso="PivotTableReport" label="Transpose table" showLabel="false" onAction="TableTranspose" />
+               <splitButton id="TableSplitSplitButton" size="normal" showLabel="false">
+                  <button id="SplitTableByRowButton" imageMso="SplitTable" label="Split table by row" showLabel="false" onAction="SplitTableByRow" />
+                  <menu id="TableSplitMenu" itemSize="normal">
+                     <button id="SplitTableByColumnButton" label="Split table by column" showLabel="false" onAction="SplitTableByColumn" />
+                  </menu>
+               </splitButton>
                <splitButton id="TableSumSplitButton" size="normal" showLabel="false">
                   <button id="TableSumButton" imageMso="AutoSum" label="Sum column (values above selected cells)" showLabel="false" onAction="TableSum" />
                   <menu id="TableSumMenu" itemSize="normal">
@@ -320,8 +326,14 @@
                      <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" imageMso="NotebookColor2"/>
                      <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" imageMso="NotebookColor3"/>
                       <menuSeparator id="RAGStatusSeparator" />
-                     <button id="AverageRAGStatus" label="Average based on selected RAG status-shapes" onAction="AverageRAGStatus" />
+                     <button id="AverageRAGStatus" label="Average based on selected RAG status-shapes" onAction="AverageRA GStatus" />
                   </menu>
+                  <splitButton id="CaptionSplitButton" size="normal" showLabel="false">
+                     <button id="NewCaptionButton" label="Insert caption for selected shape" imageMso="CaptionInsert" onAction="InsertCaption" />
+                     <menu id="CaptionMenu" itemSize="normal">
+                        <button id="ReNumberCaptionButton" label="Renumber all captions" imageMso="ListSetNumberingValue" onAction="ReNumberCaptions" />                        
+                     </menu>
+                  </splitButton>
                </box>
                <box id="PasteGroupBox3" boxStyle="horizontal">
                   <splitButton id="NoteSplitButton" size="normal" showLabel="false">
@@ -378,7 +390,8 @@
                   <button id="cleaning5" label="Remove unused master slides" imageMso="Clear" onAction="CleanUpRemoveUnusedMasterSlides" />
                   <menuSeparator id="separatorConvertAnonymize" />
                   <button id="cleaning6" label="Convert slides to pictures (readonly)" imageMso="Clear" onAction="ConvertSlidesToPictures" />
-                  <button id="cleaning7" label="Anonymize slides with Lorem Ipsum" imageMso="Clear" onAction="AnonymizeWithLoremIpsum" />
+                  <button id="cleaning7" label="Watermark and then convert slides to pictures (readonly)" imageMso="WatermarkCustomDialog" onAction="InsertWatermarkAndConvertSlidesToPictures" />
+                  <button id="cleaning8" label="Anonymize slides with Lorem Ipsum" imageMso="Clear" onAction="AnonymizeWithLoremIpsum" />
                </menu>
                <toggleButton idMso="SelectionPane" showLabel="false" />
                <splitButton id="TagsSplitButton" size="normal" showLabel="false">

@@ -81,9 +81,9 @@ Sub CreateOrUpdateMasterAgenda()
             For NumberOfSections = 2 To .Count
                 
                 If NumberOfSections = 2 Then
-                    AgendaShape.TextFrame.TextRange.text = .Name(NumberOfSections)
+                    AgendaShape.TextFrame.TextRange.Text = .Name(NumberOfSections)
                 Else
-                    AgendaShape.TextFrame.TextRange.text = AgendaShape.TextFrame.TextRange.text & vbNewLine & .Name(NumberOfSections)
+                    AgendaShape.TextFrame.TextRange.Text = AgendaShape.TextFrame.TextRange.Text & vbNewLine & .Name(NumberOfSections)
                 End If
                 
             Next
