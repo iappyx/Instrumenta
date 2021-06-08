@@ -38,6 +38,7 @@ I am happy to receive feature requests and code contributions! Let's make the be
 If you like this plugin, please let me and the community know how you are using this in your daily work: https://github.com/iappyx/Instrumenta/discussions/5
 
 # How to install 
+Instrumenta is a Visual Basic for Applications (VBA) Add-in that can be installed within Powerpoint, requiring no administrative rights on most enterprise systems.
 
 ## Windows
 You can save the add-in to your PC and then install the add-in by adding it to the Available Add-Ins list:
