@@ -22,12 +22,15 @@ Attribute VB_Name = "ModuleMailMerge"
 'SOFTWARE.
 
 Public CancelTriggered As Boolean
+Public ManualHeaders() As Variant
+Public ManualTexts() As Variant
+
 
 Sub InsertMergeField()
 
 If ActiveWindow.Selection.Type = ppSelectionText Then
 
-Application.ActiveWindow.Selection.TextRange.InsertAfter ("{{field name}}")
+Application.ActiveWindow.Selection.TextRange.InsertAfter ("{{fieldName}}")
 
 End If
 
@@ -283,26 +286,6 @@ HandleError:
 
 End Sub
 
-'Sub ManualMailMerge()
-      
-    'Dim SlideShape  As Shape
-    
-    'ProgressForm.Show
-    
-    'For Each PresentationSlide In ActivePresentation.Slides
-        
-    '    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
-        
-    '    For Each SlideShape In PresentationSlide.Shapes
-    '        ReplaceMergeFields SlideShape, MergeFields, MergeTexts
-    '    Next SlideShape
-        
-    'Next PresentationSlide
-    
-    'ProgressForm.hide
-    
-'End Sub
-
 Sub ReplaceMergeFields(SlideShape, MergeFields As Variant, MergeTexts As Variant)
     
     'Dim ShapeTextRange As TextRange
@@ -397,5 +380,199 @@ Sub ReplaceMergeFields(SlideShape, MergeFields As Variant, MergeTexts As Variant
     
 End Sub
 
+Sub ManualMailMerge()
+
+    Dim SlideShape  As Shape
+    
+    ProgressForm.Show
+    
+    ReDim ManualHeaders(0)
+     
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        
+        For Each SlideShape In PresentationSlide.Shapes
+            FindMergeFields SlideShape
+        Next SlideShape
+        
+    Next PresentationSlide
+   
+    ProgressForm.Hide
+    
+    
+    ManualHeaders = RemoveDuplicates(ManualHeaders)
+    PreviewManualMailMerge.MailMergeListBox.Clear
+    PreviewManualMailMerge.MailMergeListBox.ColumnCount = 2
+    PreviewManualMailMerge.ReplaceTextTextBox.Text = ""
+    PreviewManualMailMerge.ReplaceTextFrame.Caption = ""
+    
+    
+    For HeaderCount = 0 To UBound(ManualHeaders) - 1
+      PreviewManualMailMerge.MailMergeListBox.AddItem
+      PreviewManualMailMerge.MailMergeListBox.List(HeaderCount, 0) = "{{" & ManualHeaders(HeaderCount) & "}}"
+      PreviewManualMailMerge.MailMergeListBox.List(HeaderCount, 1) = ""
+    Next HeaderCount
+    
+    CancelTriggered = False
+    
+    PreviewManualMailMerge.Show
+    
+    If CancelTriggered = True Then Exit Sub
+    
+    ReDim ManualTexts(UBound(ManualHeaders))
+    
+    For ManualTextCount = 0 To UBound(ManualHeaders) - 1
+        ManualHeaders(ManualTextCount) = PreviewManualMailMerge.MailMergeListBox.List(ManualTextCount, 0)
+        ManualTexts(ManualTextCount) = PreviewManualMailMerge.MailMergeListBox.List(ManualTextCount, 1)
+    Next ManualTextCount
+    
+    ProgressForm.Show
+       
+    For Each PresentationSlide In ActivePresentation.Slides
+        
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        
+        For Each SlideShape In PresentationSlide.Shapes
+            ReplaceMergeFields SlideShape, ManualHeaders, ManualTexts
+        Next SlideShape
+        
+    Next PresentationSlide
+   
+    ProgressForm.Hide
+
+End Sub
+
+Sub FindMergeFields(SlideShape)
+    If SlideShape.Type = msoGroup Then
+        
+        Set SlideShapeGroup = SlideShape.GroupItems
+        
+        For Each SlideShapeChild In SlideShapeGroup
+            FindMergeFields SlideShapeChild
+        Next
+        
+    Else
+        
+        If SlideShape.HasTextFrame Then
+            
+            If Not SlideShape.TextFrame.TextRange = "" Then
+                                   
+                Set ShapeTextRange = SlideShape.TextFrame.TextRange
+
+                  ''start
+                
+                  If ShapeTextRange.Words.Count > 2 Then
+                      For WordCount = 2 To ShapeTextRange.Words.Count - 1
+                      
+                        If ShapeTextRange.Words(WordCount - 1) = "{{" And Left(ShapeTextRange.Words(WordCount + 1), 2) = "}}" Then
+                        
+                        If IsEmpty(ManualHeaders) Then
+                            ReDim Preserve ManualHeaders(0)
+                            ManualHeaders(0) = ShapeTextRange.Words(WordCount)
+                        Else
+
+                            ReDim Preserve ManualHeaders(UBound(ManualHeaders) + 1)
+                            
+                            ManualHeaders(UBound(ManualHeaders)) = ShapeTextRange.Words(WordCount)
+                        End If
+                        
+                        End If
+                      
+                      Next WordCount
+                      
+                  End If
+                  
+                  ''stop
+        
+            End If
+            
+        End If
+        
+        If SlideShape.HasTable Then
+            For TableRow = 1 To SlideShape.Table.Rows.Count
+                For TableColumn = 1 To SlideShape.Table.Columns.Count
+                    
+                    If Not SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame.TextRange = "" Then
+                            
+                        Set ShapeTextRange = SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame.TextRange
+                        
+                      ''start
+                    
+                      If ShapeTextRange.Words.Count > 2 Then
+                      For WordCount = 2 To ShapeTextRange.Words.Count - 1
+                      
+                        If ShapeTextRange.Words(WordCount - 1) = "{{" And Left(ShapeTextRange.Words(WordCount + 1), 2) = "}}" Then
+                        
+                        If IsEmpty(ManualHeaders) Then
+                            ReDim Preserve ManualHeaders(0)
+                            ManualHeaders(0) = ShapeTextRange.Words(WordCount)
+                        Else
+
+                            ReDim Preserve ManualHeaders(UBound(ManualHeaders) + 1)
+                            
+                            ManualHeaders(UBound(ManualHeaders)) = ShapeTextRange.Words(WordCount)
+                        End If
+                        
+                        End If
+                      
+                      Next WordCount
+                          
+                      End If
+                      
+                      ''stop
+                        
+                    End If
+                    
+                Next
+            Next
+        End If
+        
+        If SlideShape.HasSmartArt Then
+            
+            For SlideShapeSmartArtNode = 1 To SlideShape.SmartArt.AllNodes.Count
+                
+                For Each SlideSmartArtNode In SlideShape.SmartArt.AllNodes
+                    
+                    If Not SlideSmartArtNode.TextFrame2.TextRange = "" Then
+                            
+                        Set ShapeTextRange = SlideSmartArtNode.TextFrame2.TextRange
+
+                      ''start
+                    
+                      If ShapeTextRange.Words.Count > 2 Then
+                      For WordCount = 2 To ShapeTextRange.Words.Count - 1
+                      
+                        If ShapeTextRange.Words(WordCount - 1) = "{{" And Left(ShapeTextRange.Words(WordCount + 1), 2) = "}}" Then
+                        
+                        If IsEmpty(ManualHeaders) Then
+                            ReDim Preserve ManualHeaders(0)
+                            ManualHeaders(0) = ShapeTextRange.Words(WordCount)
+                        Else
+
+                            ReDim Preserve ManualHeaders(UBound(ManualHeaders) + 1)
+                            
+                            ManualHeaders(UBound(ManualHeaders)) = ShapeTextRange.Words(WordCount)
+                        End If
+                        
+                        End If
+                      
+                      Next WordCount
+                          
+                      End If
+                      
+                      ''stop
+   
+                    End If
+                    
+                Next
+                
+            Next
+            
+        End If
+        
+    End If
+    
+End Sub
 
 

@@ -408,6 +408,8 @@
                   <menu id="MailMergeMenu" itemSize="normal">
                      <button id="InsertMergeField" label="Insert empty merge field" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="InsertMergeField" />
                      <button id="ImportHeadersFromExcel" label="Insert merge fields from Excel-file" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="ImportHeadersFromExcel" />
+                     <menuSeparator id="separatorManualMailMerge" />
+                     <button id="ManualMailMerge" label="Manually replace all merge fields on all slides" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="ManualMailMerge" />
                   </menu>
                </splitButton>
                <button id="ShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" />
