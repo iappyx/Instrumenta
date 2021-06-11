@@ -24,17 +24,17 @@ Attribute VB_Name = "ModuleFunctions"
 #If Mac Then
 
 #Else
-Private Declare PtrSafe Function WindowsColorDialog Lib "comdlg32.dll" Alias "ChooseColorA" (pcc As CHOOSECOLOR_TYPE) As Long
+Private Declare PtrSafe Function WindowsColorDialog Lib "comdlg32.dll" Alias "ChooseColorA" (pcc As CHOOSECOLOR_TYPE) As LongPtr
     
     Private Type CHOOSECOLOR_TYPE
-        lStructSize As LongLong
-        hwndOwner   As LongLong
-        hInstance   As LongLong
-        rgbResult   As LongLong
-        lpCustColors As LongLong
-        flags       As LongLong
-        lCustData   As LongLong
-        lpfnHook    As LongLong
+        lStructSize As LongPtr
+        hwndOwner   As LongPtr
+        hInstance   As LongPtr
+        rgbResult   As LongPtr
+        lpCustColors As LongPtr
+        flags       As LongPtr
+        lCustData   As LongPtr
+        lpfnHook    As LongPtr
         lpTemplateName As String
     End Type
     
