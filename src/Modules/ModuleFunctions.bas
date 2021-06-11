@@ -21,6 +21,34 @@ Attribute VB_Name = "ModuleFunctions"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+#If Mac Then
+
+#Else
+Private Declare PtrSafe Function WindowsColorDialog Lib "comdlg32.dll" Alias "ChooseColorA" (pcc As CHOOSECOLOR_TYPE) As Long
+    
+    Private Type CHOOSECOLOR_TYPE
+        lStructSize As LongLong
+        hwndOwner   As LongLong
+        hInstance   As LongLong
+        rgbResult   As LongLong
+        lpCustColors As LongLong
+        flags       As LongLong
+        lCustData   As LongLong
+        lpfnHook    As LongLong
+        lpTemplateName As String
+    End Type
+    
+    Private Const CC_ANYCOLOR = &H100
+    Private Const CC_ENABLEHOOK = &H10
+    Private Const CC_ENABLETEMPLATE = &H20
+    Private Const CC_ENABLETEMPLATEHANDLE = &H40
+    Private Const CC_FULLOPEN = &H2
+    Private Const CC_PREVENTFULLOPEN = &H4
+    Private Const CC_RGBINIT = &H1
+    Private Const CC_SHOWHELP = &H8
+    Private Const CC_SOLIDCOLOR = &H80
+#End If
+
 Function RemoveDuplicates(InputArray) As Variant
     
     Dim OutputArray, InputValue, OutputValue As Variant
@@ -106,4 +134,80 @@ End Function
 '"end tell" & vbNewLine & "open NewMail" & vbNewLine & "Activate NewMail" & vbNewLine & "end tell" & vbNewLine & "return ""Done"""
 'MacSendMailViaOutlook = MacScript(MacSendMailViaOutlookMacScript)
 'End Function
+
+
+#If Mac Then
+    
+Function ColorDialog(StandardColor As Variant) As Variant
+    Dim ReturnColorString As String
+    Dim ReturnColor As Variant
+    
+    ReturnColorString = MacScript("try" & vbNewLine & "set the ColorPicked To (choose color default color {0, 65535, 0})" & vbNewLine & _
+                        "on error" & vbNewLine & "set the ColorReturned To -128" & vbNewLine & "return ColorReturned" & vbNewLine & "end try" & vbNewLine & _
+                        "set the ColorReturned To my ColorToRGB(ColorPicked)" & vbNewLine & "return ColorReturned" & vbNewLine & _
+                        "on ColorToRGB({r, g, b})" & vbNewLine & "set r To (r ^ 0.5) div 1" & vbNewLine & "set g To (g ^ 0.5) div 1" & vbNewLine & "set b To (b ^ 0.5) div 1" & _
+                        vbNewLine & "return r & "","" & g & "","" & b As string" & vbNewLine & "end ColorToRGB")
+    
+    ReturnColor = Split(ReturnColorString, ",")
+    
+    If ReturnColor(0) = "-128" Then
+        ColorDialog = StandardColor
+    Else
+        ColorDialog = RGB(CInt(ReturnColor(0)), CInt(ReturnColor(1)), CInt(ReturnColor(2)))
+    End If
+
+End Function
+
+#Else
+    
+Function ColorDialog(StandardColor As Variant) As Variant
+    
+    Dim ChooseColorType As CHOOSECOLOR_TYPE
+    Dim ReturnColor As Variant
+    
+    Static PredefinedColors(16)  As Long
+    PredefinedColors(0) = StandardColor
+    
+    If ActivePresentation.ExtraColors.Count > 0 Then
+        For ExtraColorCount = 1 To ActivePresentation.ExtraColors.Count
+            PredefinedColors(ExtraColorCount) = ActivePresentation.ExtraColors(ExtraColorCount)
+        Next
+    End If
+    
+    If ActivePresentation.ExtraColors.Count > 0 Then
+        For ExtraColorCount = 1 To ActivePresentation.ExtraColors.Count
+            PredefinedColors(ExtraColorCount) = ActivePresentation.ExtraColors(ExtraColorCount)
+        Next
+    End If
+    
+    If ActivePresentation.ColorSchemes.Count > 0 Then
+    
+        PredefinedColors(11) = ActivePresentation.ColorSchemes(1).Colors(ppAccent1).RGB
+        PredefinedColors(12) = ActivePresentation.ColorSchemes(1).Colors(ppAccent2).RGB
+        PredefinedColors(13) = ActivePresentation.ColorSchemes(1).Colors(ppAccent3).RGB
+        PredefinedColors(14) = ActivePresentation.ColorSchemes(1).Colors(ppForeground).RGB
+        PredefinedColors(15) = ActivePresentation.ColorSchemes(1).Colors(ppBackground).RGB
+    
+    End If
+    
+    
+    With ChooseColorType
+        .lStructSize = Len(ChooseColorType)
+        .flags = CC_RGBINIT Or CC_ANYCOLOR Or CC_FULLOPEN Or CC_PREVENTFULLOPEN
+        .rgbResult = StandardColor
+        .lpCustColors = VarPtr(PredefinedColors(0))
+    End With
+    
+    ReturnColor = WindowsColorDialog(ChooseColorType)
+    
+    If Not ReturnColor = 0 Then
+        ColorDialog = ChooseColorType.rgbResult
+    Else
+        ColorDialog = StandardColor
+    End If
+    
+End Function
+
+#End If
+
 

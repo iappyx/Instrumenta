@@ -64,6 +64,8 @@ Dim Watermark As Shape
 Const PI = 3.14159265358979
    
    WatermarkText = InputBox("Please input watermark text", "Watermark", "CONFIDENTIAL")
+   PredefinedColor = RGB(204, 0, 0)
+   WatermarkTextColor = ColorDialog(PredefinedColor)
    
    ProgressForm.Show
    
@@ -81,7 +83,8 @@ Const PI = 3.14159265358979
         Watermark.Left = (Application.ActivePresentation.PageSetup.SlideWidth - Watermark.Width) / 2
         Watermark.Top = (Application.ActivePresentation.PageSetup.SlideHeight - Watermark.Height) / 2
         
-        Watermark.TextFrame2.TextRange.Characters.Font.Fill.ForeColor.RGB = RGB(204, 0, 0)
+        
+        Watermark.TextFrame2.TextRange.Characters.Font.Fill.ForeColor.RGB = WatermarkTextColor
         Watermark.TextFrame2.TextRange.Characters.Font.Fill.Transparency = 0.9
         
     End With
