@@ -166,30 +166,19 @@ Function ColorDialog(StandardColor As Variant) As Variant
     Dim ReturnColor As Variant
     
     Static PredefinedColors(16)  As Long
-    PredefinedColors(0) = StandardColor
-    
+         
     If ActivePresentation.ExtraColors.Count > 0 Then
         For ExtraColorCount = 1 To ActivePresentation.ExtraColors.Count
-            PredefinedColors(ExtraColorCount) = ActivePresentation.ExtraColors(ExtraColorCount)
+            PredefinedColors(ExtraColorCount - 1) = ActivePresentation.ExtraColors(ExtraColorCount)
         Next
     End If
-    
-    If ActivePresentation.ExtraColors.Count > 0 Then
-        For ExtraColorCount = 1 To ActivePresentation.ExtraColors.Count
-            PredefinedColors(ExtraColorCount) = ActivePresentation.ExtraColors(ExtraColorCount)
-        Next
-    End If
-    
-    If ActivePresentation.ColorSchemes.Count > 0 Then
-    
-        PredefinedColors(11) = ActivePresentation.ColorSchemes(1).Colors(ppAccent1).RGB
-        PredefinedColors(12) = ActivePresentation.ColorSchemes(1).Colors(ppAccent2).RGB
-        PredefinedColors(13) = ActivePresentation.ColorSchemes(1).Colors(ppAccent3).RGB
-        PredefinedColors(14) = ActivePresentation.ColorSchemes(1).Colors(ppForeground).RGB
-        PredefinedColors(15) = ActivePresentation.ColorSchemes(1).Colors(ppBackground).RGB
-    
-    End If
-    
+      
+        PredefinedColors(10) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent1).RGB
+        PredefinedColors(11) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent2).RGB
+        PredefinedColors(12) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent3).RGB
+        PredefinedColors(13) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent4).RGB
+        PredefinedColors(14) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent5).RGB
+        PredefinedColors(15) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent6).RGB
     
     With ChooseColorType
         .lStructSize = Len(ChooseColorType)

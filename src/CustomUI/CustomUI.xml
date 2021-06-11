@@ -403,15 +403,15 @@
                      <button id="ShowFormSelectSlidesByTag" label="Select slides by tag(s) or specific stamp" imageMso="SelectAll" onAction="ShowFormSelectSlidesByTag" />
                   </menu>
                </splitButton>
-               <splitButton id="MailMergeSplitButton" size="normal" showLabel="false">
-                  <button id="ExcelMailMerge" label="Mail merge this slide based on Excel-file" showLabel="false" imageMso="MailMergeDocument" onAction="ExcelMailMerge" />
-                  <menu id="MailMergeMenu" itemSize="normal">
+                  <menu id="MailMergeMenu" itemSize="normal" showLabel="false" imageMso="MailMergeDocument">
+                      <button id="ExcelMailMerge" label="Mail merge this slide based on Excel-file (duplicate slide within this presentation)" showLabel="false" imageMso="MailMergeDocument" onAction="ExcelMailMerge" />
+                       <button id="ExcelFullFileMailMerge" label="Mail merge full presentation based on Excel-file (duplicate presentation file)" showLabel="false" imageMso="MailMergeDocument" onAction="ExcelFullFileMailMerge" />
+                       <menuSeparator id="separatorInsertMergeFielde" />
                      <button id="InsertMergeField" label="Insert empty merge field" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="InsertMergeField" />
                      <button id="ImportHeadersFromExcel" label="Insert merge fields from Excel-file" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="ImportHeadersFromExcel" />
                      <menuSeparator id="separatorManualMailMerge" />
                      <button id="ManualMailMerge" label="Manually replace all merge fields on all slides" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="ManualMailMerge" />
                   </menu>
-               </splitButton>
                <button id="ShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" />
             </group>
          </tab>
