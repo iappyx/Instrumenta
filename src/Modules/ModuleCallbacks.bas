@@ -21,6 +21,124 @@ Attribute VB_Name = "ModuleCallbacks"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+
+Public InstrumentaRibbon As IRibbonUI
+ 
+Sub InstrumentaInitialize(Ribbon As IRibbonUI)
+    Set InstrumentaRibbon = Ribbon
+    InitializeEmojis
+    InitializeEmojiNames
+    InstrumentaRibbon.Invalidate
+End Sub
+
+Sub EmojiGallery_GetItemCount(control As IRibbonControl, ByRef returnedVal)
+    
+    Select Case control.id
+     Case "EmojiGallery1"
+        returnedVal = 111
+     Case "EmojiGallery2"
+        returnedVal = 49
+     Case "EmojiGallery3"
+        returnedVal = 104
+     Case "EmojiGallery4"
+        returnedVal = 48
+     Case "EmojiGallery5"
+        returnedVal = 182
+     Case "EmojiGallery6"
+        returnedVal = 122
+     Case "EmojiGallery7"
+        returnedVal = 80
+     Case "EmojiGallery8"
+        returnedVal = 117
+     Case "EmojiGallery9"
+        returnedVal = 196
+     Case "EmojiGallery10"
+        returnedVal = 175
+    End Select
+    
+End Sub
+
+Sub EmojiGallery_GetItemID(control As IRibbonControl, index As Integer, ByRef returnedVal)
+    
+    Select Case control.id
+     Case "EmojiGallery1"
+        returnedVal = "Emoji" & index
+     Case "EmojiGallery2"
+        returnedVal = "Emoji" & index + 111
+     Case "EmojiGallery3"
+        returnedVal = "Emoji" & index + 111 + 49
+     Case "EmojiGallery4"
+        returnedVal = "Emoji" & index + 111 + 49 + 104
+     Case "EmojiGallery5"
+        returnedVal = "Emoji" & index + 111 + 49 + 104 + 48
+     Case "EmojiGallery6"
+        returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182
+     Case "EmojiGallery7"
+        returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182 + 122
+     Case "EmojiGallery8"
+        returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182 + 122 + 80
+     Case "EmojiGallery9"
+        returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117
+     Case "EmojiGallery10"
+        returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196
+    End Select
+    
+End Sub
+
+Sub EmojiGallery_GetItemLabel(control As IRibbonControl, index As Integer, ByRef returnedVal)
+
+    Select Case control.id
+     Case "EmojiGallery1"
+        returnedVal = AllEmojis(index + 1)
+     Case "EmojiGallery2"
+        returnedVal = AllEmojis(index + 1 + 111)
+     Case "EmojiGallery3"
+        returnedVal = AllEmojis(index + 1 + 111 + 49)
+     Case "EmojiGallery4"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104)
+     Case "EmojiGallery5"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48)
+     Case "EmojiGallery6"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182)
+     Case "EmojiGallery7"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122)
+     Case "EmojiGallery8"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80)
+     Case "EmojiGallery9"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117)
+     Case "EmojiGallery10"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196)
+    End Select
+
+End Sub
+
+Sub EmojiGallery_OnAction(control As IRibbonControl, id As String, index As Integer)
+    
+    Select Case control.id
+     Case "EmojiGallery1"
+        GenerateEmoji (index + 1)
+     Case "EmojiGallery2"
+        GenerateEmoji (index + 1 + 111)
+     Case "EmojiGallery3"
+        GenerateEmoji (index + 1 + 111 + 49)
+     Case "EmojiGallery4"
+        GenerateEmoji (index + 1 + 111 + 49 + 104)
+     Case "EmojiGallery5"
+        GenerateEmoji (index + 1 + 111 + 49 + 104 + 48)
+     Case "EmojiGallery6"
+        GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182)
+     Case "EmojiGallery7"
+        GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182 + 122)
+     Case "EmojiGallery8"
+        GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80)
+     Case "EmojiGallery9"
+        GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117)
+     Case "EmojiGallery10"
+        GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196)
+    End Select
+    
+End Sub
+
 Sub TableColumnGapsEven()
     TableColumnGaps "even", 5
 End Sub

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="InstrumentaInitialize">
    <ribbon>
       <tabs>
          <tab id="InstrumentaPowerpointToolbar" label="Instrumenta">
@@ -286,6 +286,18 @@
                   <button idMso="ScreenClipping" showLabel="false" />
                   <button idMso="DateAndTimeInsert" showLabel="false" />
                   <button id="AgendaPages" imageMso="CreateLabels" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" />
+                  <menu id="EmojiMenu" label="Emoji" imageMso="HappyFace" showLabel="false">
+                    <gallery id="EmojiGallery1" label="Smileys" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
+                    <gallery id="EmojiGallery2" label="Gestures and body parts" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
+                    <gallery id="EmojiGallery3" label="People and fantasy" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
+                    <gallery id="EmojiGallery4" label="Clothing and accessories" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
+                    <gallery id="EmojiGallery5" label="Animals and nature" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
+                    <gallery id="EmojiGallery6" label="Food and drink" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
+                    <gallery id="EmojiGallery7" label="Activity and sports" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
+                    <gallery id="EmojiGallery8" label="Travel and places" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
+                    <gallery id="EmojiGallery9" label="Objects" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
+                    <gallery id="EmojiGallery10" label="Symbols" showLabel="false" columns="3" showItemImage="false" showItemLabel="true" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" />                                         
+                  </menu>
                </box>
                <box id="PasteGroupBox2" boxStyle="horizontal">
                   <menu id="HarveyBallsMenu" label="Harvey Balls" imageMso="Drawing1GalleryContrast" showLabel="false">
