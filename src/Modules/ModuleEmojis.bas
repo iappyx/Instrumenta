@@ -528,6 +528,9 @@ EmojiCharacters(497) = (ChrW(55356) & ChrW(57168))
 EmojiCharacters(498) = (ChrW(55356) & ChrW(57162))
 EmojiCharacters(499) = (ChrW(55356) & ChrW(57163))
 EmojiCharacters(500) = (ChrW(55356) & ChrW(57164))
+End Sub
+
+Sub InitializeEmojis2()
 EmojiCharacters(501) = (ChrW(55356) & ChrW(57161))
 EmojiCharacters(502) = (ChrW(55356) & ChrW(57159))
 EmojiCharacters(503) = (ChrW(55356) & ChrW(57171))

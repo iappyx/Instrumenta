@@ -27,6 +27,7 @@ Public InstrumentaRibbon As IRibbonUI
 Sub InstrumentaInitialize(Ribbon As IRibbonUI)
     Set InstrumentaRibbon = Ribbon
     InitializeEmojis
+    InitializeEmojis2 'for 32-bit compatibility split between 2
     InitializeEmojiNames
     InstrumentaRibbon.Invalidate
 End Sub
@@ -35,7 +36,7 @@ Sub EmojiGallery_GetItemImage(control As IRibbonControl, index As Integer, ByRef
 
 #If Mac Then
 'Even though there is no picture needed, you have to set it for Mac compatibility
-returnedVal = "HappyFace"
+returnedVal = "AppointmentColor4"
 #End If
 
 
@@ -45,7 +46,7 @@ Sub EmojiGallery_GetItemWidth(control As IRibbonControl, ByRef returnedVal)
 
 #If Mac Then
 'Even though there is no picture needed, you have to set it for Mac compatibility
-returnedVal = 10
+returnedVal = 25
 #End If
 
 
@@ -55,7 +56,7 @@ Sub EmojiGallery_GetItemHeight(control As IRibbonControl, ByRef returnedVal)
 
 #If Mac Then
 'Even though there is no picture needed, you have to set it for Mac compatibility
-returnedVal = 10
+returnedVal = 25
 #End If
 
 
