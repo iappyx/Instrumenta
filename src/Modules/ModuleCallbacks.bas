@@ -144,6 +144,35 @@ Sub EmojiGallery_GetItemLabel(control As IRibbonControl, index As Integer, ByRef
 
 End Sub
 
+
+Sub EmojiGallery_GetItemScreentip(control As IRibbonControl, index As Integer, ByRef returnedVal)
+
+    Select Case control.id
+     Case "EmojiGallery1"
+        returnedVal = AllEmojis(index + 1) & " " & StrConv(EmojiNames(index + 1), vbProperCase)
+     Case "EmojiGallery2"
+        returnedVal = AllEmojis(index + 1 + 111) & " " & StrConv(EmojiNames(index + 1 + 111), vbProperCase)
+     Case "EmojiGallery3"
+        returnedVal = AllEmojis(index + 1 + 111 + 49) & " " & StrConv(EmojiNames(index + 1 + 111 + 49), vbProperCase)
+     Case "EmojiGallery4"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104), vbProperCase)
+     Case "EmojiGallery5"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48), vbProperCase)
+     Case "EmojiGallery6"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182), vbProperCase)
+     Case "EmojiGallery7"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182 + 122), vbProperCase)
+     Case "EmojiGallery8"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80), vbProperCase)
+     Case "EmojiGallery9"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117), vbProperCase)
+     Case "EmojiGallery10"
+        returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196), vbProperCase)
+    End Select
+
+End Sub
+
+
 Sub EmojiGallery_OnAction(control As IRibbonControl, id As String, index As Integer)
     
     Select Case control.id
