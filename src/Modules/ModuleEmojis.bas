@@ -2403,17 +2403,8 @@ End Sub
 
 Function AllEmojis(index As Integer) As String
 
-    #If Mac Then
-   
-        AllEmojis = EmojiNames(index)
-   
-    #Else
-    
-        'AllEmojis = EmojiCharacters(index) & " (" & EmojiNames(index) & ")"
         AllEmojis = EmojiCharacters(index)
         
-    #End If
-
 End Function
 
 Sub GenerateEmoji(index As Integer)

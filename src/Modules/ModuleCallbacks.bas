@@ -31,6 +31,37 @@ Sub InstrumentaInitialize(Ribbon As IRibbonUI)
     InstrumentaRibbon.Invalidate
 End Sub
 
+Sub EmojiGallery_GetItemImage(control As IRibbonControl, index As Integer, ByRef returnedVal)
+
+#If Mac Then
+'Even though there is no picture needed, you have to set it for Mac compatibility
+returnedVal = "HappyFace"
+#End If
+
+
+End Sub
+
+Sub EmojiGallery_GetItemWidth(control As IRibbonControl, ByRef returnedVal)
+
+#If Mac Then
+'Even though there is no picture needed, you have to set it for Mac compatibility
+returnedVal = 10
+#End If
+
+
+End Sub
+
+Sub EmojiGallery_GetItemHeight(control As IRibbonControl, ByRef returnedVal)
+
+#If Mac Then
+'Even though there is no picture needed, you have to set it for Mac compatibility
+returnedVal = 10
+#End If
+
+
+End Sub
+
+
 Sub EmojiGallery_GetItemCount(control As IRibbonControl, ByRef returnedVal)
     
     Select Case control.id
