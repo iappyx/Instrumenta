@@ -2413,6 +2413,14 @@ End Function
 Sub GenerateEmoji(index As Integer)
 
     If ActiveWindow.Selection.Type = ppSelectionText Then
+    
+        #If Mac Then
+        If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
+            MsgBox ("Emoji in tables are disable on Mac, as it causes a crash. Please place Emoji's in regular shapes. You can then copy paste into a table.")
+            Exit Sub
+        End If
+        #End If
+    
         Application.ActiveWindow.Selection.TextRange.Characters.Text = EmojiCharacters(index)
     End If
     
