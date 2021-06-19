@@ -84,13 +84,13 @@
                <menu idMso="CombineShapesMenu" showLabel="false" />
                <control idMso="ShapeWidth" showLabel="false" />
                <control idMso="ShapeHeight" showLabel="false" />
-               <control idMso="ObjectSizeAndPositionDialog" imageMso="PositionFitToWindow" showLabel="false" />
+               <control idMso="ObjectSizeAndPositionDialog" showLabel="false" />
                <control idMso="FormatPainter" showLabel="false" />
                <button id="ObjectsCopyRoundedCorner" label="Copy rounded corner of first selected shape to selected shapes" showLabel="false" imageMso="ShapeRoundedRectangle" onAction="ObjectsCopyRoundedCorner" />
-               <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="ShapeName" onAction="ObjectsCopyShapeTypeAndAdjustments" />
+               <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="OutlineTasksShowAll" onAction="ObjectsCopyShapeTypeAndAdjustments" />
                <toggleButton idMso="ObjectEditPoints" showLabel="false" />
                <button id="RectifyLines" label="Rectify lines" showLabel="false" imageMso="ArrowsMore" onAction="RectifyLines" />
-               <menu id="ConnectRectanglesMenu" label="Connect sides of 2 rectangles" imageMso="AutoConnect" showLabel="false">
+               <menu id="ConnectRectanglesMenu" label="Connect sides of 2 rectangles" imageMso="ZoomFitToWindow" showLabel="false">
                   <button id="ConnectRectangleShapesRightToLeft" label="Shape 1 right side to shape 2 left side" onAction="ConnectRectangleShapesRightToLeft" />
                   <button id="ConnectRectangleShapesLeftToRight" label="Shape 1 left side to shape 2 right side" onAction="ConnectRectangleShapesLeftToRight" />
                   <button id="ConnectRectangleShapesBottomToTop" label="Shape 1 bottom side to shape 2 top side" onAction="ConnectRectangleShapesBottomToTop" />
@@ -157,14 +157,14 @@
                   <button idMso="ObjectRotateRight90" showLabel="false" />
                </box>
                <box id="DimensionsBox" boxStyle="horizontal">
-                  <button id="ObjectsSwapPosition" imageMso="MailMergeMatchFields" label="Swap position of two shapes" showLabel="false" onAction="ObjectsSwapPosition" />
+                  <button id="ObjectsSwapPosition" imageMso="CircularReferences" label="Swap position of two shapes" showLabel="false" onAction="ObjectsSwapPosition" />
                   <button id="ObjectsSameHeightButton" imageMso="RowHeight" label="Set same height" showLabel="false" onAction="ObjectsSameHeight" />
                   <button id="ObjectsSameWidthButton" imageMso="ColumnWidth" label="Set same width" showLabel="false" onAction="ObjectsSameWidth" />
                   <button id="ObjectsSameHeightAndWidthButton" imageMso="SizeToControlHeightAndWidth" label="Set same height and width" showLabel="false" onAction="ObjectsSameHeightAndWidth" />
-                  <button id="ObjectsSizeToTallest" imageMso="SizeToTallest" label="Size to tallest" showLabel="false" onAction="ObjectsSizeToTallest" />
-                  <button id="ObjectsSizeShortest" imageMso="SizeToShortest" label="Size to shortest" showLabel="false" onAction="ObjectsSizeToShortest" />
-                  <button id="ObjectsSizeToWidest" imageMso="SizeToWidest" label="Size to widest" showLabel="false" onAction="ObjectsSizeToWidest" />
-                  <button id="ObjectsSizeNarrowest" imageMso="SizeToNarrowest" label="Size to narrowest" showLabel="false" onAction="ObjectsSizeToNarrowest" />
+                  <button id="ObjectsSizeToTallest" getImage="RibbonObjectGetImage" label="Size to tallest" showLabel="false" onAction="ObjectsSizeToTallest" />
+                  <button id="ObjectsSizeShortest" getImage="RibbonObjectGetImage" label="Size to shortest" showLabel="false" onAction="ObjectsSizeToShortest" />
+                  <button id="ObjectsSizeToWidest" getImage="RibbonObjectGetImage" label="Size to widest" showLabel="false" onAction="ObjectsSizeToWidest" />
+                  <button id="ObjectsSizeNarrowest" getImage="RibbonObjectGetImage" label="Size to narrowest" showLabel="false" onAction="ObjectsSizeToNarrowest" />
                </box>
                <separator id="separatorSpacing" />
                <button id="ObjectsRemoveSpaceHorizontal" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingHorizontal" />
@@ -217,7 +217,7 @@
                   </menu>
                </splitButton>
                <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" />
-               <button id="TableTranspose" imageMso="PivotTableReport" label="Transpose table" showLabel="false" onAction="TableTranspose" />
+               <button id="TableTranspose" imageMso="ChartSwitchRowColumn" label="Transpose table" showLabel="false" onAction="TableTranspose" />
                <splitButton id="TableSplitSplitButton" size="normal" showLabel="false">
                   <button id="SplitTableByRowButton" imageMso="SplitTable" label="Split table by row" showLabel="false" onAction="SplitTableByRow" />
                   <menu id="TableSplitMenu" itemSize="normal">
@@ -285,7 +285,7 @@
                   <button idMso="PastePng" showLabel="false" />
                   <button idMso="ScreenClipping" showLabel="false" />
                   <button idMso="DateAndTimeInsert" showLabel="false" />
-                  <button id="AgendaPages" imageMso="MeetingsToolAppointmentAgenda" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" />
+                  <button id="AgendaPages" imageMso="GroupTableOfContents" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" />
                   <menu id="EmojiMenu" label="Emoji" imageMso="HappyFace" showLabel="false">
                     <gallery id="EmojiGallery1" label="Smileys" showLabel="false" columns="10" showItemImage="true" showItemLabel="true" getItemWidth="EmojiGallery_GetItemWidth" getItemHeight="EmojiGallery_GetItemHeight" getItemScreentip="EmojiGallery_GetItemScreentip" getItemImage="EmojiGallery_GetItemImage" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
                     <gallery id="EmojiGallery2" label="Gestures and body parts" showLabel="false" columns="10" showItemImage="true" showItemLabel="true" getItemWidth="EmojiGallery_GetItemWidth" getItemHeight="EmojiGallery_GetItemHeight" getItemScreentip="EmojiGallery_GetItemScreentip" getItemImage="EmojiGallery_GetItemImage" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
@@ -363,7 +363,7 @@
                      </menu>
                   </splitButton>
                   <splitButton id="StepsCounterSplitButton" size="normal" showLabel="false">
-                     <button id="NewStepsCounterButton" label="Steps counter" imageMso="_1" onAction="GenerateStepsCounter" />
+                     <button id="NewStepsCounterButton" label="Steps counter" imageMso="NumberStyleGallery" onAction="GenerateStepsCounter" />
                      <menu id="StepCounterMenu" itemSize="normal">
                         <button id="NewCrossSlideStepsCounterButton" label="Add cross-slide steps counter" onAction="GenerateCrossSlideStepsCounter" />
                         <menuSeparator id="separatorStepsCounterSelect" />
@@ -371,7 +371,7 @@
                         <button id="SelectAllCrossSlideStepsCounter" label="Select all cross-slide step counters on this slide" onAction="SelectAllCrossSlideStepsCounter" />
                      </menu>
                   </splitButton>
-                  <menu id="StampsMenu" label="Stamps" imageMso="StampTool" showLabel="false">
+                  <menu id="StampsMenu" label="Stamps" showLabel="false" getImage="RibbonObjectGetImage">
                      <button id="StampConfidential" label="CONFIDENTIAL" onAction="GenerateStampConfidential" />
                      <button id="StampDoNotDistribute" label="DO NOT DISTRIBUTE" onAction="GenerateStampDoNotDistribute" />
                      <button id="StampDraft" label="DRAFT" onAction="GenerateStampDraft" />
@@ -393,7 +393,7 @@
             </group>
             <group id="AllGroup" label="Advanced" imageMso="AdvancedFileProperties">
                <button idMso="ReplaceDialog" showLabel="false" />
-               <button idMso="AdvancedFileProperties" showLabel="false" />
+               <button idMso="AdvancedFileProperties" imageMso="ChooseForm" showLabel="false" />
                <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false">
                   <button id="cleaning1" label="Remove animations from all slides" imageMso="Clear" onAction="CleanUpRemoveAnimationsFromAllSlides" />
                   <button id="cleaning2" label="Remove entry transitions from all slides" imageMso="Clear" onAction="CleanUpRemoveSlideShowTransitionsFromAllSlides" />
@@ -419,10 +419,10 @@
                       <button id="ExcelMailMerge" label="Mail merge this slide based on Excel-file (duplicate slide within this presentation)" showLabel="false" imageMso="MailMergeDocument" onAction="ExcelMailMerge" />
                        <button id="ExcelFullFileMailMerge" label="Mail merge full presentation based on Excel-file (duplicate presentation file)" showLabel="false" imageMso="MailMergeDocument" onAction="ExcelFullFileMailMerge" />
                        <menuSeparator id="separatorInsertMergeFielde" />
-                     <button id="InsertMergeField" label="Insert empty merge field" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="InsertMergeField" />
-                     <button id="ImportHeadersFromExcel" label="Insert merge fields from Excel-file" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="ImportHeadersFromExcel" />
+                     <button id="InsertMergeField" label="Insert empty merge field" showLabel="false" imageMso="FieldCodes" onAction="InsertMergeField" />
+                     <button id="ImportHeadersFromExcel" label="Insert merge fields from Excel-file" showLabel="false" imageMso="FieldCodes" onAction="ImportHeadersFromExcel" />
                      <menuSeparator id="separatorManualMailMerge" />
-                     <button id="ManualMailMerge" label="Manually replace all merge fields on all slides" showLabel="false" imageMso="MailMergeGreetingLineInsert" onAction="ManualMailMerge" />
+                     <button id="ManualMailMerge" label="Manually replace all merge fields on all slides" showLabel="false" imageMso="MailMergeDocument" onAction="ManualMailMerge" />
                   </menu>
                <button id="ShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" />
             </group>

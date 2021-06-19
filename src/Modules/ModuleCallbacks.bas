@@ -49,6 +49,16 @@ Sub RibbonObjectGetImage(control As IRibbonControl, ByRef returnedVal)
     Select Case control.id
         Case "FivePointStarMenu"
             returnedVal = "ShapeStar"
+        Case "StampsMenu"
+            returnedVal = "CustomHeaderGallery"
+        Case "ObjectsSizeToTallest"
+            returnedVal = "ObjectNudgeDown"
+        Case "ObjectsSizeShortest"
+            returnedVal = "ObjectNudgeUp"
+        Case "ObjectsSizeToWidest"
+            returnedVal = "ObjectNudgeRight"
+        Case "ObjectsSizeNarrowest"
+            returnedVal = "ObjectNudgeLeft"
     End Select
     
 #Else
@@ -56,6 +66,16 @@ Sub RibbonObjectGetImage(control As IRibbonControl, ByRef returnedVal)
     Select Case control.id
         Case "FivePointStarMenu"
             returnedVal = "StarRatedFull"
+        Case "StampsMenu"
+            returnedVal = "StampTool"
+        Case "ObjectsSizeToTallest"
+            returnedVal = "SizeToTallest"
+        Case "ObjectsSizeShortest"
+            returnedVal = "SizeToShortest"
+        Case "ObjectsSizeToWidest"
+            returnedVal = "SizeToWidest"
+        Case "ObjectsSizeNarrowest"
+            returnedVal = "SizeToNarrowest"
     End Select
 
 #End If
