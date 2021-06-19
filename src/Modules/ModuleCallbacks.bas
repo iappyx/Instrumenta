@@ -39,8 +39,30 @@ Sub EmojiGallery_GetItemImage(control As IRibbonControl, index As Integer, ByRef
 returnedVal = "AppointmentColor4"
 #End If
 
+End Sub
+
+Sub RibbonObjectGetImage(control As IRibbonControl, ByRef returnedVal)
+
+
+#If Mac Then
+    
+    Select Case control.id
+        Case "FivePointStarMenu"
+            returnedVal = "ShapeStar"
+    End Select
+    
+#Else
+    
+    Select Case control.id
+        Case "FivePointStarMenu"
+            returnedVal = "StarRatedFull"
+    End Select
+
+#End If
 
 End Sub
+
+
 
 Sub EmojiGallery_GetItemWidth(control As IRibbonControl, ByRef returnedVal)
 

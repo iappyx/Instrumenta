@@ -2416,7 +2416,7 @@ Sub GenerateEmoji(index As Integer)
     
         #If Mac Then
         If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
-            MsgBox ("Emoji in tables are disable on Mac, as it causes a crash. Please place Emoji's in regular shapes. You can then copy paste into a table.")
+            MsgBox ("Emojis in tables are disabled on Mac, as it causes a crash. Please place Emojis in regular shapes. You can then copy paste into a table.")
             Exit Sub
         End If
         #End If

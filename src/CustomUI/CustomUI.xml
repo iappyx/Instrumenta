@@ -57,7 +57,7 @@
                   <gallery idMso="TextAlignGallery" showLabel="false" />
                </buttonGroup>
                <separator id="separator6" />
-               <button id="RemoveTextButton" label="Remove text" imageMso="OmsDelete" showLabel="false" onAction="ObjectsRemoveText" />
+               <button id="RemoveTextButton" label="Remove text" imageMso="ReviewDeleteMarkup" showLabel="false" onAction="ObjectsRemoveText" />
                <button id="SwapTextButton" label="Swap text (no formatting)" imageMso="Copy" showLabel="false" onAction="ObjectsSwapTextNoFormatting" />
                <button id="SwapTextButton2" label="Swap text (with formatting)" imageMso="GroupCompare" showLabel="false" onAction="ObjectsSwapText" />
                <button idMso="FontsReplaceFonts" showLabel="false" />
@@ -285,7 +285,7 @@
                   <button idMso="PastePng" showLabel="false" />
                   <button idMso="ScreenClipping" showLabel="false" />
                   <button idMso="DateAndTimeInsert" showLabel="false" />
-                  <button id="AgendaPages" imageMso="CreateLabels" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" />
+                  <button id="AgendaPages" imageMso="MeetingsToolAppointmentAgenda" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" />
                   <menu id="EmojiMenu" label="Emoji" imageMso="HappyFace" showLabel="false">
                     <gallery id="EmojiGallery1" label="Smileys" showLabel="false" columns="10" showItemImage="true" showItemLabel="true" getItemWidth="EmojiGallery_GetItemWidth" getItemHeight="EmojiGallery_GetItemHeight" getItemScreentip="EmojiGallery_GetItemScreentip" getItemImage="EmojiGallery_GetItemImage" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
                     <gallery id="EmojiGallery2" label="Gestures and body parts" showLabel="false" columns="10" showItemImage="true" showItemLabel="true" getItemWidth="EmojiGallery_GetItemWidth" getItemHeight="EmojiGallery_GetItemHeight" getItemScreentip="EmojiGallery_GetItemScreentip" getItemImage="EmojiGallery_GetItemImage" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
@@ -319,7 +319,7 @@
                      <button id="HarveyBallCustom" label="Custom..." onAction="GenerateHarveyBallCustom" />
                      <button id="AverageHarveyBall" label="Average based on selected Harvey Balls" onAction="AverageHarveyBall" />
                   </menu>
-                  <menu id="FivePointStarMenu" label="Star rating" imageMso="StarRatedFull" showLabel="false">
+                  <menu id="FivePointStarMenu" label="Star rating" showLabel="false" getImage="RibbonObjectGetImage">
                      <button id="FivePointStar05" label="0.5 star" onAction="GenerateFivePointStars05" />
                      <button id="FivePointStar10" label="1 star" onAction="GenerateFivePointStars10" />
                      <button id="FivePointStar15" label="1.5 star" onAction="GenerateFivePointStars15" />
