@@ -68,3 +68,9 @@ Additional optional steps to enable export to Outlook and Word:
 - In some cases a reboot of your Mac might be required
 
 The AppleScript file will not change that often, only in case of major changes to the export features, or new features that require the use of AppleScript. In that case Instrumenta can detect if the latest version of the file is installed and will inform you when using a feature that requires an updated version.
+
+## Upgrade
+To upgrade make sure Powerpoint is closed and overwrite the add-in file with the new version. 
+
+### Upgrading from version < 1.0 to version 1.0 or higher
+Please know that all versions before the first major release (v1.0) have a different filename. If you are upgrading to v1.0 please remove the old add-in first in the Add-ins dialog box in Powerpoint and then install the new version as mentioned above.
