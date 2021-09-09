@@ -38,6 +38,20 @@ on SendFileWithOutlook(parameters)
 	return "Done"
 end SendFileWithOutlook
 
+on SendFileWithMail(parameters)
+	set {emailSubject, emailAttachment} to SplitParameterString(parameters, ";")
+	tell application "Mail"
+		set newEmail to (make new outgoing message with properties {subject:emailSubject, visible:true})
+		tell newEmail
+			set emailAttachmentPOSIX to POSIX file emailAttachment
+			make new attachment with properties {file name:emailAttachmentPOSIX as alias}
+			delay 0.5
+		end tell
+		activate newEmail
+	end tell
+	return "Done"
+end SendFileWithMail
+
 on PasteTextIntoWord()
 	tell application "Microsoft Word"
 		activate
@@ -58,5 +72,5 @@ on SplitParameterString(parameters, fieldSeparator)
 end SplitParameterString
 
 on CheckIfAppleScriptPluginIsInstalled()
-	return "0.99"
+	return "1.0"
 end CheckIfAppleScriptPluginIsInstalled

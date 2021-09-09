@@ -280,3 +280,73 @@ Sub MoveStickyNotesOffAllSlides()
     Next
     
 End Sub
+
+Sub ConvertAllCommentsToStickyNotes()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    For Each PresentationSlide In ActivePresentation.Slides
+    
+    RandomNumber = Round(Rnd() * 1000000, 0)
+    
+    Dim NumberOfStickies As Long
+    NumberOfStickies = 0
+    
+    For ShapeNumber = 1 To PresentationSlide.Shapes.Count
+        
+        If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+            NumberOfStickies = NumberOfStickies + 1
+        End If
+        
+    Next
+    
+    Dim CommentsCount As Long
+    Dim RepliesCount As Long
+    
+    For CommentsCount = PresentationSlide.Comments.Count To 1 Step -1
+        
+        Set StickyNote = PresentationSlide.Shapes.AddShape(msoShapeRectangle, Application.ActivePresentation.PageSetup.SlideWidth - (105 * (NumberOfStickies + 1)), 5, 100, 100)
+        
+        With StickyNote
+            .Line.Visible = False
+            .Fill.ForeColor.RGB = RGB(255, 192, 0)
+            .Fill.Transparency = 0.1
+            .Name = "StickyNote" + Str(RandomNumber)
+            .Left = PresentationSlide.Comments(CommentsCount).Left
+            .Top = PresentationSlide.Comments(CommentsCount).Top
+            .Tags.Add "INSTRUMENTA STICKYNOTE", NumberOfStickies
+            
+            With .TextFrame
+                .MarginBottom = 2
+                .MarginLeft = 2
+                .MarginRight = 2
+                .MarginTop = 2
+                .VerticalAnchor = msoAnchorTop
+                .AutoSize = ppAutoSizeShapeToFitText
+                
+                With .TextRange
+                    .Paragraphs.ParagraphFormat.Alignment = ppAlignLeft
+                    .Text = PresentationSlide.Comments(CommentsCount).Author & " (" & PresentationSlide.Comments(CommentsCount).AuthorInitials & "):" & vbNewLine & PresentationSlide.Comments(CommentsCount).Text
+                    With .Font
+                        .Size = 10
+                        .Color.RGB = RGB(0, 0, 0)
+                    End With
+                    
+                    For RepliesCount = PresentationSlide.Comments(CommentsCount).Replies.Count To 1 Step -1
+                        
+                        .Text = .Text & vbNewLine & vbNewLine & PresentationSlide.Comments(CommentsCount).Replies(RepliesCount).Author & " (" & PresentationSlide.Comments(CommentsCount).Replies(RepliesCount).AuthorInitials & "):" & vbNewLine & PresentationSlide.Comments(CommentsCount).Replies(RepliesCount).Text
+                        
+                    Next
+                    
+                End With
+                
+            End With
+        End With
+        
+        PresentationSlide.Comments(CommentsCount).Delete
+        NumberOfStickies = NumberOfStickies + 1
+    Next
+    
+    Next
+    
+End Sub

@@ -354,12 +354,12 @@
                         <button id="NotesMoveOffSlide" label="Move notes off this slide" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffSlide" />
                         <button id="NotesMoveOnSlide" label="Move notes on this slide" imageMso="OutlineMoveDown" onAction="MoveStickyNotesOnSlide" />
                         <button id="DeleteNotesOnSlide" label="Delete notes on this slide" imageMso="Delete" onAction="DeleteStickyNotesOnSlide" />
+                        <button id="ConvertCommentsToStickyNotes" label="Convert comments on this slide to notes" imageMso="ReviewShowAllComments" onAction="ConvertCommentsToStickyNotes" />
                         <menuSeparator id="separatorNotesAllSlides" />
                         <button id="NotesMoveOffAllSlides" label="Move notes off all slides" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffAllSlides" />
                         <button id="NotesMoveOnAllSlides" label="Move notes on all slides" imageMso="OutlineMoveDown" onAction="MoveStickyNotesOnAllSlides" />
                         <button id="DeleteNotesOnAllSlides" label="Delete notes on all slides" imageMso="Delete" onAction="DeleteStickyNotesOnAllSlides" />
-                        <menuSeparator id="separatorCommentsConversion" />
-                        <button id="ConvertCommentsToStickyNotes" label="Convert comments on this slide to notes" imageMso="ReviewShowAllComments" onAction="ConvertCommentsToStickyNotes" />
+                        <button id="ConvertAllCommentsToStickyNotes" label="Convert comments on all slides to notes" imageMso="ReviewShowAllComments" onAction="ConvertAllCommentsToStickyNotes" />
                      </menu>
                   </splitButton>
                   <splitButton id="StepsCounterSplitButton" size="normal" showLabel="false">
