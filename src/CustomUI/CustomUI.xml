@@ -35,6 +35,14 @@
                   <toggleButton idMso="AlignRight" showLabel="false" />
                   <toggleButton idMso="AlignJustify" showLabel="false" />
                   <gallery idMso="TableColumnsGallery" showLabel="false" />
+                  <splitButton id="ObjectsAutoSizeSplitButton" showLabel="false">
+                  <button id="ObjectsToggleAutoSize" label="Toggle autofit" showLabel="false" imageMso="AutoFormat" onAction="ObjectsToggleAutoSize" />
+                  <menu id="ObjectsAutoSizeMenu" itemSize="normal">
+                     <button id="ObjectsAutoSizeNone" label="Do not Autofit" showLabel="false" onAction="ObjectsAutoSizeNone" />
+                     <button id="ObjectsAutoSizeTextToFitShape" label="Resize text on overflow" showLabel="false" onAction="ObjectsAutoSizeTextToFitShape" />
+                     <button id="ObjectsAutoSizeShapeToFitText" label="Resize shape to fit text" showLabel="false" onAction="ObjectsAutoSizeShapeToFitText" />                  
+                  </menu>
+               </splitButton>
                   <toggleButton id="ToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" />
                </buttonGroup>
                <buttonGroup id="buttonGroupBulletsAndNumbering">
