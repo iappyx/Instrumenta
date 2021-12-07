@@ -21,6 +21,7 @@ Attribute VB_Name = "ModuleObjectsText"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+
 Sub ObjectsTextInsertSpecialCharacter(SpecialCharacter As Long)
 
 If ActiveWindow.Selection.Type = ppSelectionText Then
@@ -290,6 +291,108 @@ Sub ObjectsTextWordwrapToggle()
     Else
         myDocument.Selection.ShapeRange.TextFrame.WordWrap = True
     End If
+    
+    Else
+    
+    MsgBox "No text capable shape selected."
+    
+    End If
+    
+    End If
+End Sub
+
+Sub ObjectsAutoSizeTextToFitShape()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
+    
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
+    
+    With myDocument.Selection.ShapeRange.TextFrame2
+        .AutoSize = 2
+    End With
+    
+    Else
+    
+    MsgBox "No text capable shape selected."
+    
+    End If
+    
+    End If
+End Sub
+
+
+Sub ObjectsAutoSizeShapeToFitText()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
+    
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
+    
+    With myDocument.Selection.ShapeRange.TextFrame2
+        .AutoSize = 1
+    End With
+    
+    Else
+    
+    MsgBox "No text capable shape selected."
+    
+    End If
+    
+    End If
+End Sub
+
+Sub ObjectsAutoSizeNone()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
+    
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
+    
+    With myDocument.Selection.ShapeRange.TextFrame2
+        .AutoSize = 0
+    End With
+    
+    Else
+    
+    MsgBox "No text capable shape selected."
+    
+    End If
+    
+    End If
+End Sub
+
+Sub ObjectsToggleAutoSize()
+    
+    Set myDocument = Application.ActiveWindow
+    
+    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
+    
+    If myDocument.Selection.ShapeRange.HasTextFrame Then
+    
+    With myDocument.Selection.ShapeRange.TextFrame2
+        If .AutoSize = 0 Then
+            .AutoSize = 1
+        ElseIf .AutoSize = 1 Then
+            .AutoSize = 2
+        ElseIf .AutoSize = 2 Then
+            .AutoSize = 0
+        ElseIf .AutoSize = -2 Then
+            .AutoSize = 0
+        End If
+        
+    End With
     
     Else
     
