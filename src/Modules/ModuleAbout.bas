@@ -24,7 +24,7 @@ Attribute VB_Name = "ModuleAbout"
 Public InstrumentaVersion As String
 
 Sub ShowAboutDialog()
-    InstrumentaVersion = "1.03"
+    InstrumentaVersion = "1.04"
     AboutDialog.Label1.Caption = "Instrumenta Powerpoint Toolbar v" & InstrumentaVersion
     AboutDialog.Show
 End Sub
