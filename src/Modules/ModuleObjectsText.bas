@@ -39,15 +39,19 @@ Sub ObjectsIncreaseLineSpacing()
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.ShapeRange.HasTextFrame Then
+        If myDocument.Selection.HasChildShapeRange Then
             
-            With myDocument.Selection.ShapeRange.TextFrame.TextRange.ParagraphFormat
-                .SpaceWithin = .SpaceWithin + 0.1
-            End With
+            For i = 1 To myDocument.Selection.ChildShapeRange.Count
+                ObjectsLineSpacingLoop myDocument.Selection.ChildShapeRange(i), 0.1
+            Next i
             
         Else
             
-            MsgBox "No Text capable shapes selected."
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                
+                ObjectsLineSpacingLoop myDocument.Selection.ShapeRange(i), 0.1
+                
+            Next i
             
         End If
         
@@ -63,21 +67,57 @@ Sub ObjectsDecreaseLineSpacing()
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.ShapeRange.HasTextFrame Then
+        If myDocument.Selection.HasChildShapeRange Then
             
-            With myDocument.Selection.ShapeRange.TextFrame.TextRange.ParagraphFormat
-                
-                If .SpaceWithin <= 0.1 Then
-                    .SpaceWithin = 0
-                Else
-                    .SpaceWithin = .SpaceWithin - 0.1
-                End If
-                
-            End With
+            For i = 1 To myDocument.Selection.ChildShapeRange.Count
+                ObjectsLineSpacingLoop myDocument.Selection.ChildShapeRange(i), -0.1
+            Next i
             
         Else
             
-            MsgBox "No Text capable shapes selected."
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                
+                ObjectsLineSpacingLoop myDocument.Selection.ShapeRange(i), -0.1
+                
+            Next i
+            
+        End If
+        
+    End If
+    
+End Sub
+
+Sub ObjectsLineSpacingLoop(SlideShape, LineSpacingChange)
+    
+    If SlideShape.Type = msoGroup Then
+        
+        Set SlideShapeGroup = SlideShape.GroupItems
+        
+        For Each SlideShapeChild In SlideShapeGroup
+            ObjectsLineSpacingLoop SlideShapeChild, LineSpacingChange
+        Next
+        
+    Else
+        
+        If SlideShape.HasTextFrame Then
+            
+            With SlideShape.TextFrame.TextRange.ParagraphFormat
+                
+                If LineSpacingChange < 0 Then
+                    
+                    If .SpaceWithin <= -LineSpacingChange Then
+                        .SpaceWithin = 0
+                    Else
+                        .SpaceWithin = .SpaceWithin + LineSpacingChange
+                    End If
+                    
+                ElseIf LineSpacingChange > 0 Then
+                    
+                    .SpaceWithin = .SpaceWithin + LineSpacingChange
+                    
+                End If
+                
+            End With
             
         End If
         
@@ -100,7 +140,9 @@ Sub ObjectsRemoveText()
             
         Else
             
-            ObjectsRemoveTextLoop myDocument.Selection.ShapeRange
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                ObjectsRemoveTextLoop myDocument.Selection.ShapeRange(i)
+            Next i
             
         End If
         
@@ -154,9 +196,33 @@ Sub ObjectsSwapTextNoFormatting()
                 
             End If
             
+        ElseIf myDocument.Selection.HasChildShapeRange Then
+            
+            
+            If myDocument.Selection.ChildShapeRange.Count = 2 Then
+                
+                If myDocument.Selection.ChildShapeRange(1).HasTextFrame And myDocument.Selection.ChildShapeRange(2).HasTextFrame Then
+                
+                    text1 = myDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Text
+                    text2 = myDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Text
+                    myDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Text = text2
+                    myDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Text = text1
+                
+                Else
+            
+                    MsgBox "Select two shapes that (can) have text."
+            
+                End If
+                
+            Else
+                
+                MsgBox "Select two shapes to swap their text."
+            
+            End If
+
         Else
             
-            MsgBox "Select two shapes To swap their text."
+            MsgBox "Select two shapes to swap their text."
             
         End If
         
@@ -196,6 +262,39 @@ Sub ObjectsSwapText()
                 
             End If
             
+        ElseIf myDocument.Selection.HasChildShapeRange Then
+            
+            
+            If myDocument.Selection.ChildShapeRange.Count = 2 Then
+                
+                If myDocument.Selection.ChildShapeRange(1).HasTextFrame And myDocument.Selection.ChildShapeRange(2).HasTextFrame Then
+                               
+                Dim SlidePlaceHolderChildShapeRange As PowerPoint.Shape
+                Set SlidePlaceHolderChildShapeRange = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
+                
+                myDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Cut
+                SlidePlaceHolderChildShapeRange.TextFrame.TextRange.Paste
+                
+                myDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Cut
+                myDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Paste
+                
+                SlidePlaceHolderChildShapeRange.TextFrame.TextRange.Cut
+                myDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Paste
+                
+                SlidePlaceHolderChildShapeRange.Delete
+                
+                Else
+            
+                    MsgBox "Select two shapes that (can) have text."
+            
+                End If
+                
+            Else
+                
+                MsgBox "Select two shapes to swap their text."
+            
+            End If
+
         Else
             
             MsgBox "Select two shapes To swap their text."
@@ -214,19 +313,17 @@ Sub ObjectsMarginsToZero()
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.ShapeRange.HasTextFrame Then
+        If myDocument.Selection.HasChildShapeRange Then
             
-            With myDocument.Selection.ShapeRange.TextFrame
-                .MarginBottom = 0
-                .MarginLeft = 0
-                .MarginRight = 0
-                .MarginTop = 0
-                
-            End With
+            For i = 1 To myDocument.Selection.ChildShapeRange.Count
+                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), 0
+            Next i
             
         Else
             
-            MsgBox "No Text capable shape selected."
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), 0
+            Next i
             
         End If
         
@@ -242,19 +339,17 @@ Sub ObjectsMarginsIncrease()
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.ShapeRange.HasTextFrame Then
+        If myDocument.Selection.HasChildShapeRange Then
             
-            With myDocument.Selection.ShapeRange.TextFrame
-                .MarginBottom = .MarginBottom + 0.2
-                .MarginLeft = .MarginLeft + 0.2
-                .MarginRight = .MarginRight + 0.2
-                .MarginTop = .MarginTop + 0.2
-                
-            End With
+            For i = 1 To myDocument.Selection.ChildShapeRange.Count
+                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), 0.2
+            Next i
             
         Else
             
-            MsgBox "No Text capable shape selected."
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), 0.2
+            Next i
             
         End If
         
@@ -269,31 +364,75 @@ Sub ObjectsMarginsDecrease()
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.ShapeRange.HasTextFrame Then
+        If myDocument.Selection.HasChildShapeRange Then
             
-            With myDocument.Selection.ShapeRange.TextFrame
-                If .MarginBottom >= 0.2 Then
-                    .MarginBottom = .MarginBottom - 0.2
-                End If
-                If .MarginLeft >= 0.2 Then
-                    .MarginLeft = .MarginLeft - 0.2
-                End If
-                If .MarginRight >= 0.2 Then
-                    .MarginRight = .MarginRight - 0.2
-                End If
-                If .MarginTop >= 0.2 Then
-                    .MarginTop = .MarginTop - 0.2
-                End If
-                
-            End With
+            For i = 1 To myDocument.Selection.ChildShapeRange.Count
+                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), -0.2
+            Next i
             
         Else
-            
-            MsgBox "No Text capable shape selected."
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), -0.2
+            Next i
             
         End If
         
     End If
+End Sub
+
+Sub ObjectsMarginsLoop(SlideShape, MarginsChange)
+    
+    If SlideShape.Type = msoGroup Then
+        
+        Set SlideShapeGroup = SlideShape.GroupItems
+        
+        For Each SlideShapeChild In SlideShapeGroup
+            ObjectsMarginsLoop SlideShapeChild, MarginsChange
+        Next
+        
+    Else
+        
+        If SlideShape.HasTextFrame Then
+            
+            With SlideShape.TextFrame
+                
+                If MarginsChange < 0 Then
+                    
+                    If .MarginBottom >= -MarginsChange Then
+                        .MarginBottom = .MarginBottom + MarginsChange
+                    End If
+                    If .MarginLeft >= -MarginsChange Then
+                        .MarginLeft = .MarginLeft + MarginsChange
+                    End If
+                    If .MarginRight >= -MarginsChange Then
+                        .MarginRight = .MarginRight + MarginsChange
+                    End If
+                    If .MarginTop >= -MarginsChange Then
+                        .MarginTop = .MarginTop + MarginsChange
+                    End If
+                    
+                ElseIf MarginsChange > 0 Then
+                    
+                    .MarginBottom = .MarginBottom + MarginsChange
+                    .MarginLeft = .MarginLeft + MarginsChange
+                    .MarginRight = .MarginRight + MarginsChange
+                    .MarginTop = .MarginTop + MarginsChange
+                    
+                ElseIf MarginsChange = 0 Then
+                    
+                    .MarginBottom = 0
+                    .MarginLeft = 0
+                    .MarginRight = 0
+                    .MarginTop = 0
+                    
+                End If
+                
+            End With
+            
+        End If
+        
+    End If
+    
 End Sub
 
 Sub ObjectsTextWordwrapToggle()
@@ -312,7 +451,9 @@ Sub ObjectsTextWordwrapToggle()
             
         Else
             
-            ObjectsTextWordwrapToggleLoop myDocument.Selection.ShapeRange
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                ObjectsTextWordwrapToggleLoop myDocument.Selection.ShapeRange(i)
+            Next i
             
         End If
         
@@ -360,7 +501,9 @@ Sub ObjectsAutoSizeTextToFitShape()
             
         Else
             
-            ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange, 2
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange(i), 2
+            Next i
             
         End If
         
@@ -382,7 +525,9 @@ Sub ObjectsAutoSizeShapeToFitText()
             
         Else
             
-            ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange, 1
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange(i), 1
+            Next i
             
         End If
         
@@ -405,7 +550,9 @@ Sub ObjectsAutoSizeNone()
             
         Else
             
-            ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange, 0
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange(i), 0
+            Next i
             
         End If
         
@@ -428,7 +575,9 @@ Sub ObjectsToggleAutoSize()
             
         Else
             
-            ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange, 5
+            For i = 1 To myDocument.Selection.ShapeRange.Count
+                ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange(i), 5
+            Next i
             
         End If
         
