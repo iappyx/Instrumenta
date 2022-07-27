@@ -42,7 +42,7 @@ Instrumenta is a Visual Basic for Applications (VBA) add-in that can be installe
 
 ## Windows
 You can save the add-in to your PC and then install the add-in by adding it to the Available Add-Ins list:
-- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.1/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
+- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.2/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
 - Open Powerpoint, click the File tab, and then click Options
 - In the Options dialog box, click Add-Ins.
 - In the Manage list at the bottom of the dialog box, click PowerPoint Add-ins, and then click Go.
@@ -55,14 +55,14 @@ You can save the add-in to your PC and then install the add-in by adding it to t
 
 ## Mac
 You can save the add-in to your Mac and then install the add-in by adding it to the Add-Ins list:
-- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.1/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
+- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.2/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
 - Open Powerpoint, click Tools in the application menu, and then click Add-ins...
 - In the Add-Ins dialog box, click the + button, browse for the add-in file, and then click Open.
 - Click Ok to close the Add-ins dialog box
 - There now should be an "Instrumenta" page in the Powerpoint ribbon
 
 Additional optional steps to enable export to Outlook and Word:
-- Download the AppleScript file (https://github.com/iappyx/Instrumenta/releases/download/1.1/InstrumentaAppleScriptPlugin.applescript) 
+- Download the AppleScript file (https://github.com/iappyx/Instrumenta/releases/download/1.2/InstrumentaAppleScriptPlugin.applescript) 
 - Copy the AppleScript file to *~/Library/Application Scripts/com.microsoft.Powerpoint/*
 - Please note that this is in the library folder of the *current user*. If the folder does not exist, create it.
 - In some cases a reboot of your Mac might be required
