@@ -3,10 +3,10 @@
    <ribbon>
       <tabs>
          <tab id="InstrumentaPowerpointToolbar" label="Instrumenta">
-            <group id="FormattingFont" label="Font" imageMso="GroupTextFormatting">
+            <group id="FormattingFont" label="Font" tag="PR" getVisible="InstrumentaGetVisible">
                <box id="FontBox1" boxStyle="horizontal">
                   <control idMso="Font" />
-                  <comboBox idMso="FontSize" showLabel="false" />
+                  <comboBox idMso="FontSize" showLabel="false"/>
                   <button idMso="FontSizeIncrease" showLabel="false" />
                   <button idMso="FontSizeDecrease" showLabel="false" />
                   <button idMso="ClearFormatting" showLabel="false" />
@@ -28,16 +28,16 @@
                   <button idMso="EyedropperFillText" showLabel="false" />
                </box>
             </group>
-            <group id="TextGroup" label="Text" imageMso="MenuView2">
+            <group id="TextGroup" label="Text" imageMso="MenuView2" tag="PR" getVisible="InstrumentaGetVisible">
                <buttonGroup id="buttonGroupAlignText">
                   <toggleButton idMso="AlignLeft" showLabel="false" />
                   <toggleButton idMso="AlignCenter" showLabel="false" />
                   <toggleButton idMso="AlignRight" showLabel="false" />
                   <toggleButton idMso="AlignJustify" showLabel="false" />
                   <gallery idMso="TableColumnsGallery" showLabel="false" />
-                  <splitButton id="ObjectsAutoSizeSplitButton" showLabel="false">
-                  <button id="ObjectsToggleAutoSize" label="Toggle autofit" showLabel="false" imageMso="AutoFormat" onAction="ObjectsToggleAutoSize" />
-                  <menu id="ObjectsAutoSizeMenu" itemSize="normal">
+                  <splitButton id="ObjectsAutoSizeSplitButton" showLabel="false" >
+                  <button id="ObjectsToggleAutoSize" label="Toggle autofit" showLabel="false" imageMso="AutoFormat" onAction="ObjectsToggleAutoSize"/>
+                  <menu id="ObjectsAutoSizeMenu" itemSize="normal" >
                      <button id="ObjectsAutoSizeNone" label="Do not Autofit" showLabel="false" onAction="ObjectsAutoSizeNone" />
                      <button id="ObjectsAutoSizeTextToFitShape" label="Resize text on overflow" showLabel="false" onAction="ObjectsAutoSizeTextToFitShape" />
                      <button id="ObjectsAutoSizeShapeToFitText" label="Resize shape to fit text" showLabel="false" onAction="ObjectsAutoSizeShapeToFitText" />                  
@@ -50,7 +50,7 @@
                   <control idMso="NumberingGallery" showLabel="false" />
                   <button id="BulletsTicks" label="Ticks" showLabel="false" imageMso="AcceptTask" onAction="TextBulletsTicks" />
                   <button id="BulletsCrosses" label="Crosses" showLabel="false" imageMso="DeclineInvitation" onAction="TextBulletsCrosses" />
-                  <menu id="SpecialCharacterMenu" label="Special characters" imageMso="SymbolInsert" showLabel="false">
+                  <menu id="SpecialCharacterMenu" label="Special characters" imageMso="SymbolInsert" showLabel="false" >
                      <button id="TextInsertEuro" label="Euro" onAction="TextInsertEuro" />
                      <button id="TextInsertCopyright" label="Copyright" onAction="TextInsertCopyright" />
                      <button idMso="SymbolInsert" showLabel="false" />
@@ -72,7 +72,7 @@
                <button id="ChangeSpellCheckLanguage" label="Set proofing language on all objects and all slides" imageMso="SetLanguage" showLabel="false" onAction="ShowChangeSpellCheckLanguageForm" />
                <button idMso="PasteTextOnly" showLabel="false" />
             </group>
-            <group id="FormattingGroup" label="Shapes" imageMso="ShapesMoreShapes">
+            <group id="FormattingGroup" label="Shapes" imageMso="ShapesMoreShapes" tag="P" getVisible="InstrumentaGetVisible">
                <control idMso="ShapeFillColorPicker" showLabel="false" label="&#x200B;" />
                <gallery idMso="ShapeStylesGallery" showLabel="false" label="&#x200B;" />
                <gallery idMso="ShapeChangeShapeGallery" showLabel="false" label="&#x200B;" />
@@ -98,14 +98,14 @@
                <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="OutlineTasksShowAll" onAction="ObjectsCopyShapeTypeAndAdjustments" />
                <toggleButton idMso="ObjectEditPoints" showLabel="false" />
                <button id="RectifyLines" label="Rectify lines" showLabel="false" imageMso="ArrowsMore" onAction="RectifyLines" />
-               <menu id="ConnectRectanglesMenu" label="Connect sides of 2 rectangles" imageMso="ZoomFitToWindow" showLabel="false">
+               <menu id="ConnectRectanglesMenu" label="Connect sides of 2 rectangles" imageMso="ZoomFitToWindow" showLabel="false" >
                   <button id="ConnectRectangleShapesRightToLeft" label="Shape 1 right side to shape 2 left side" onAction="ConnectRectangleShapesRightToLeft" />
                   <button id="ConnectRectangleShapesLeftToRight" label="Shape 1 left side to shape 2 right side" onAction="ConnectRectangleShapesLeftToRight" />
                   <button id="ConnectRectangleShapesBottomToTop" label="Shape 1 bottom side to shape 2 top side" onAction="ConnectRectangleShapesBottomToTop" />
                   <button id="ConnectRectangleShapesTopToBottom" label="Shape 1 top side to shape 2 bottom side" onAction="ConnectRectangleShapesTopToBottom" />
                </menu>
                <separator id="CopyPositionSeperator" />
-               <menu id="SelectShapeByMenu" label="Select shape by attributes" imageMso="SelectionPane" showLabel="false">
+               <menu id="SelectShapeByMenu" label="Select shape by attributes" imageMso="SelectionPane" showLabel="false" >
                   <button id="SelectShapesByFillColor" label="Select shapes with same fill color" onAction="ObjectsSelectBySameFillColor" />
                   <button id="SelectShapesByLineColor" label="Select shapes with same line color" onAction="ObjectsSelectBySameLineColor" />
                   <button id="SelectShapesByFillAndLineColor" label="Select shapes with same fill and line color" onAction="ObjectsSelectBySameFillAndLineColor" />
@@ -115,7 +115,7 @@
                   <button id="SelectShapesBySameType" label="Select shapes with same type" onAction="ObjectsSelectBySameType" />
                </menu>
                <button id="CopyPosition" label="Copy position and dimensions" showLabel="false" imageMso="GroupSizeAndPosition" onAction="CopyPosition" />
-               <splitButton id="PastePositionSplitButton" size="normal" showLabel="false">
+               <splitButton id="PastePositionSplitButton" size="normal" showLabel="false" >
                   <button id="PastePosition" label="Paste position" showLabel="false" imageMso="PasteDuplicate" onAction="PastePosition" />
                   <menu id="PastePositionMenu" itemSize="normal">
                      <button id="PastePositionAndDimensions" label="Paste position and dimensions" showLabel="false" imageMso="PasteDuplicate" onAction="PastePositionAndDimensions" />
@@ -130,8 +130,8 @@
                <button id="IncreaseMargins" label="Increase margins" showLabel="false" imageMso="UpArrow2" onAction="ObjectsMarginsIncrease" />
                <button id="DecreaseMargins" label="Decrease margins" showLabel="false" imageMso="DownArrow2" onAction="ObjectsMarginsDecrease" />
             </group>
-            <group id="PictureGroup" label="Pictures" imageMso="PictureRecolorAutomatic">
-               <splitButton id="PictureCropSplitButton" size="normal" showLabel="false">
+            <group id="PictureGroup" label="Pictures" imageMso="PictureRecolorAutomatic" tag="P" getVisible="InstrumentaGetVisible">
+               <splitButton id="PictureCropSplitButton" size="normal" showLabel="false" >
                   <toggleButton idMso="PictureCrop" showLabel="false" />
                   <menu id="PictureCropMenu" itemSize="normal">
                      <button id="PictureCropToSlide" label="Crop picture or shape to slide" showLabel="false" onAction="PictureCropToSlide" />
@@ -143,7 +143,7 @@
                <button idMso="PicturesCompress" showLabel="false" />
                <gallery idMso="PictureShapeGallery" showLabel="false" label="&#x200B;" />
             </group>
-            <group id="AlignGroup" label="Align, distribute and size" imageMso="SizeToGridAccess">
+            <group id="AlignGroup" label="Align, distribute and size" imageMso="SizeToGridAccess" tag="P" getVisible="InstrumentaGetVisible">
                <box id="AlignDistributeBox" boxStyle="horizontal">
                   <button id="ObjectsAlignLeftsButton" label="Align left" showLabel="false" imageMso="ObjectsAlignLeft" onAction="ObjectsAlignLefts" />
                   <button id="ObjectsAlignCentersButton" label="Align center" showLabel="false" imageMso="ObjectsAlignCenterHorizontal" onAction="ObjectsAlignCenters" />
@@ -196,7 +196,7 @@
                   <button id="ObjectsStretchBottom" label="Stretch shapes to bottom" onAction="ObjectsStretchBottom" />
                </menu>
             </group>
-            <group id="TableGroup" label="Tables" imageMso="TableInsert">
+            <group id="TableGroup" label="Tables" imageMso="TableInsert" tag="P" getVisible="InstrumentaGetVisible">
                <gallery idMso="TableInsertGallery" showLabel="false" label="&#x200B;" />
                <button idMso="TableInsertColumnsLeft" showLabel="false" />
                <button idMso="TableInsertColumnsRight" showLabel="false" />
@@ -271,12 +271,12 @@
                <button id="TableIncreaseMargins" label="Increase margins of selected table or selected cells" showLabel="false" imageMso="UpArrow2" onAction="TablesMarginsIncrease" />
                <button id="TableDecreaseMargins" label="Decrease margins of selected table or selected cells" showLabel="false" imageMso="DownArrow2" onAction="TablesMarginsDecrease" />
             </group>
-            <group id="ExportGroup" label="Export" imageMso="RightArrow2">
+            <group id="ExportGroup" label="Export" imageMso="RightArrow2" tag="PR" getVisible="InstrumentaGetVisible">
                <button id="EmailSelectedSlidesButton" label="E-mail selected slides" imageMso="FileSendAsAttachment" showLabel="false" onAction="EmailSelectedSlides" />
                <button id="EmailSelectedSlidesAsPDFButton" label="E-mail selected slides as PDF" showLabel="false" imageMso="FileEmailAsPdfEmailAttachment" onAction="EmailSelectedSlidesAsPDF" />
                <button idMso="FileSaveAsPdfOrXps" showLabel="false" />
                <button idMso="ObjectSaveAsPicture" imageMso="PictureReset" showLabel="false" />
-               <menu id="CopyStorylineMenu" label="Copy storyline/slide note" imageMso="SpeakerNotes" showLabel="false">
+               <menu id="CopyStorylineMenu" label="Copy storyline/slide note" imageMso="SpeakerNotes" showLabel="false" >
                   <button idMso="CreateHandoutsInWord" />
                   <menuSeparator id="separatorExport1" />
                   <button id="CopySlideNotesToWord" label="Export slide notes to Word" imageMso="MergeToWord" onAction="CopySlideNotesToWord" />
@@ -287,14 +287,14 @@
                   <button id="PasteStorylineInSelectedShapeButton" label="Paste storyline in shape" showLabel="false" imageMso="TextFromFileInsert" onAction="PasteStorylineInSelectedShape" />
                </menu>
             </group>
-            <group id="PasteGroup" label="Paste and insert" imageMso="PasteAlternative">
+            <group id="PasteGroup" label="Paste and insert" imageMso="PasteAlternative" tag="PR" getVisible="InstrumentaGetVisible">
                <box id="PasteGroupBox1" boxStyle="horizontal">
-                  <button idMso="PasteJpeg" showLabel="false" />
-                  <button idMso="PastePng" showLabel="false" />
-                  <button idMso="ScreenClipping" showLabel="false" />
-                  <button idMso="DateAndTimeInsert" showLabel="false" />
-                  <button id="AgendaPages" imageMso="GroupTableOfContents" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" />
-                  <menu id="EmojiMenu" label="Emoji" imageMso="HappyFace" showLabel="false">
+                  <button idMso="PasteJpeg" showLabel="false"/>
+                  <button idMso="PastePng" showLabel="false"/>
+                  <button idMso="ScreenClipping" showLabel="false"/>
+                  <button idMso="DateAndTimeInsert" showLabel="false"/>
+                  <button id="AgendaPages" imageMso="GroupTableOfContents" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" tag="P" getVisible="InstrumentaGetVisible"/>
+                  <menu id="EmojiMenu" label="Emoji" imageMso="HappyFace" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                     <gallery id="EmojiGallery1" label="Smileys" showLabel="false" columns="10" showItemImage="true" showItemLabel="true" getItemWidth="EmojiGallery_GetItemWidth" getItemHeight="EmojiGallery_GetItemHeight" getItemScreentip="EmojiGallery_GetItemScreentip" getItemImage="EmojiGallery_GetItemImage" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
                     <gallery id="EmojiGallery2" label="Gestures and body parts" showLabel="false" columns="10" showItemImage="true" showItemLabel="true" getItemWidth="EmojiGallery_GetItemWidth" getItemHeight="EmojiGallery_GetItemHeight" getItemScreentip="EmojiGallery_GetItemScreentip" getItemImage="EmojiGallery_GetItemImage" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
                     <gallery id="EmojiGallery3" label="People and fantasy" showLabel="false" columns="10" showItemImage="true" showItemLabel="true" getItemWidth="EmojiGallery_GetItemWidth" getItemHeight="EmojiGallery_GetItemHeight" getItemScreentip="EmojiGallery_GetItemScreentip" getItemImage="EmojiGallery_GetItemImage" getItemCount="EmojiGallery_GetItemCount" getItemID="EmojiGallery_GetItemID" getItemLabel="EmojiGallery_GetItemLabel" onAction="EmojiGallery_OnAction" /> 
@@ -308,7 +308,7 @@
                   </menu>
                </box>
                <box id="PasteGroupBox2" boxStyle="horizontal">
-                  <menu id="HarveyBallsMenu" label="Harvey Balls" imageMso="Drawing1GalleryContrast" showLabel="false">
+                  <menu id="HarveyBallsMenu" label="Harvey Balls" imageMso="Drawing1GalleryContrast" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                      <button id="HarveyBall10" label="10%" onAction="GenerateHarveyBall10" />
                      <button id="HarveyBall20" label="20%" onAction="GenerateHarveyBall20" />
                      <button id="HarveyBall25" label="25%" onAction="GenerateHarveyBall25" />
@@ -327,7 +327,7 @@
                      <button id="HarveyBallCustom" label="Custom..." onAction="GenerateHarveyBallCustom" />
                      <button id="AverageHarveyBall" label="Average based on selected Harvey Balls" onAction="AverageHarveyBall" />
                   </menu>
-                  <menu id="FivePointStarMenu" label="Star rating" showLabel="false" getImage="RibbonObjectGetImage">
+                  <menu id="FivePointStarMenu" label="Star rating" showLabel="false" getImage="RibbonObjectGetImage" tag="P" getVisible="InstrumentaGetVisible">
                      <button id="FivePointStar05" label="0.5 star" onAction="GenerateFivePointStars05" />
                      <button id="FivePointStar10" label="1 star" onAction="GenerateFivePointStars10" />
                      <button id="FivePointStar15" label="1.5 star" onAction="GenerateFivePointStars15" />
@@ -341,14 +341,14 @@
                      <menuSeparator id="FivePointStarSeparator" />
                      <button id="AverageFivePointStars" label="Average based on selected star ratings" onAction="AverageFivePointStars" />
                   </menu>
-                  <menu id="RAGStatusMenu" label="RAG status" imageMso="AppointmentColorDialog" showLabel="false">
+                  <menu id="RAGStatusMenu" label="RAG status" imageMso="AppointmentColorDialog" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                      <button id="RAGStatusRed" label="Red" onAction="GenerateRAGStatusRed" imageMso="NotebookColor7"/>
                      <button id="RAGStatusAmber" label="Amber" onAction="GenerateRAGStatusAmber" imageMso="NotebookColor2"/>
                      <button id="RAGStatusGreen" label="Green" onAction="GenerateRAGStatusGreen" imageMso="NotebookColor3"/>
                       <menuSeparator id="RAGStatusSeparator" />
                      <button id="AverageRAGStatus" label="Average based on selected RAG status-shapes" onAction="AverageRAGStatus" />
                   </menu>
-                  <splitButton id="CaptionSplitButton" size="normal" showLabel="false">
+                  <splitButton id="CaptionSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                      <button id="NewCaptionButton" label="Insert caption for selected shape" imageMso="CaptionInsert" onAction="InsertCaption" />
                      <menu id="CaptionMenu" itemSize="normal">
                         <button id="ReNumberCaptionButton" label="Renumber all captions" imageMso="ListSetNumberingValue" onAction="ReNumberCaptions" />                        
@@ -356,7 +356,7 @@
                   </splitButton>
                </box>
                <box id="PasteGroupBox3" boxStyle="horizontal">
-                  <splitButton id="NoteSplitButton" size="normal" showLabel="false">
+                  <splitButton id="NoteSplitButton" size="normal" showLabel="false" >
                      <button id="NewNoteButton" label="Note" imageMso="NewNote" onAction="GenerateStickyNote" />
                      <menu id="NoteMenu" itemSize="normal">
                         <button id="NotesMoveOffSlide" label="Move notes off this slide" imageMso="OutlineMoveUp" onAction="MoveStickyNotesOffSlide" />
@@ -370,7 +370,7 @@
                         <button id="ConvertAllCommentsToStickyNotes" label="Convert comments on all slides to notes" imageMso="ReviewShowAllComments" onAction="ConvertAllCommentsToStickyNotes" />
                      </menu>
                   </splitButton>
-                  <splitButton id="StepsCounterSplitButton" size="normal" showLabel="false">
+                  <splitButton id="StepsCounterSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                      <button id="NewStepsCounterButton" label="Steps counter" imageMso="NumberStyleGallery" onAction="GenerateStepsCounter" />
                      <menu id="StepCounterMenu" itemSize="normal">
                         <button id="NewCrossSlideStepsCounterButton" label="Add cross-slide steps counter" onAction="GenerateCrossSlideStepsCounter" />
@@ -379,7 +379,7 @@
                         <button id="SelectAllCrossSlideStepsCounter" label="Select all cross-slide step counters on this slide" onAction="SelectAllCrossSlideStepsCounter" />
                      </menu>
                   </splitButton>
-                  <menu id="StampsMenu" label="Stamps" showLabel="false" getImage="RibbonObjectGetImage">
+                  <menu id="StampsMenu" label="Stamps" showLabel="false" getImage="RibbonObjectGetImage" >
                      <button id="StampConfidential" label="CONFIDENTIAL" onAction="GenerateStampConfidential" />
                      <button id="StampDoNotDistribute" label="DO NOT DISTRIBUTE" onAction="GenerateStampDoNotDistribute" />
                      <button id="StampDraft" label="DRAFT" onAction="GenerateStampDraft" />
@@ -396,13 +396,13 @@
                      <button id="StampsMoveOnAllSlides" label="Move Stamps on all slides" imageMso="OutlineMoveDown" onAction="MoveStampsOnAllSlides" />
                      <button id="DeleteStampsOnAllSlides" label="Delete Stamps on all slides" imageMso="Delete" onAction="DeleteStampsOnAllSlides" />
                   </menu>
-                  <button id="InsertProcessSmartArt" imageMso="OutlineDemoteToBodyText" label="Insert process (SmartArt)" showLabel="false" onAction="InsertProcessSmartArt" />
+                  <button id="InsertProcessSmartArt" imageMso="OutlineDemoteToBodyText" label="Insert process (SmartArt)" showLabel="false" onAction="InsertProcessSmartArt" tag="P" getVisible="InstrumentaGetVisible"/>
                </box>
             </group>
-            <group id="AllGroup" label="Advanced" imageMso="AdvancedFileProperties">
+            <group id="AllGroup" label="Advanced" imageMso="AdvancedFileProperties" tag="PR" getVisible="InstrumentaGetVisible">
                <button idMso="ReplaceDialog" showLabel="false" />
                <button idMso="AdvancedFileProperties" imageMso="ChooseForm" showLabel="false" />
-               <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false">
+               <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false" >
                   <button id="cleaning1" label="Remove animations from all slides" imageMso="Clear" onAction="CleanUpRemoveAnimationsFromAllSlides" />
                   <button id="cleaning2" label="Remove entry transitions from all slides" imageMso="Clear" onAction="CleanUpRemoveSlideShowTransitionsFromAllSlides" />
                   <button id="cleaning3" label="Remove speaker notes from all slides" imageMso="Clear" onAction="CleanUpRemoveSpeakerNotesFromAllSlides" />
@@ -414,7 +414,7 @@
                   <button id="cleaning8" label="Anonymize slides with Lorem Ipsum" imageMso="Clear" onAction="AnonymizeWithLoremIpsum" />
                </menu>
                <toggleButton idMso="SelectionPane" showLabel="false" />
-               <splitButton id="TagsSplitButton" size="normal" showLabel="false">
+               <splitButton id="TagsSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                   <button id="ShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="NameDefine" onAction="ShowFormManageTags" />
                   <menu id="TagMenu" itemSize="normal">
                      <button id="ShowTagsOnSlide" label="Show slidetags on all slides" imageMso="OutlineMoveDown" onAction="ShowTagsOnSlide" />
@@ -423,7 +423,7 @@
                      <button id="ShowFormSelectSlidesByTag" label="Select slides by tag(s) or specific stamp" imageMso="SelectAll" onAction="ShowFormSelectSlidesByTag" />
                   </menu>
                </splitButton>
-                  <menu id="MailMergeMenu" itemSize="normal" showLabel="false" imageMso="MailMergeDocument">
+                  <menu id="MailMergeMenu" itemSize="normal" showLabel="false" imageMso="MailMergeDocument" tag="P" getVisible="InstrumentaGetVisible">
                       <button id="ExcelMailMerge" label="Mail merge this slide based on Excel-file (duplicate slide within this presentation)" showLabel="false" imageMso="MailMergeDocument" onAction="ExcelMailMerge" />
                        <button id="ExcelFullFileMailMerge" label="Mail merge full presentation based on Excel-file (duplicate presentation file)" showLabel="false" imageMso="MailMergeDocument" onAction="ExcelFullFileMailMerge" />
                        <menuSeparator id="separatorInsertMergeFielde" />
@@ -432,6 +432,7 @@
                      <menuSeparator id="separatorManualMailMerge" />
                      <button id="ManualMailMerge" label="Manually replace all merge fields on all slides" showLabel="false" imageMso="MailMergeDocument" onAction="ManualMailMerge" />
                   </menu>
+               <button id="ShowSettingsDialogButton" label="Instrumenta settings" imageMso="FormatCellsDialog" showLabel="false" onAction="ShowSettings" />
                <button id="ShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" />
             </group>
          </tab>

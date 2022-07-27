@@ -23,14 +23,50 @@ Attribute VB_Name = "ModuleCallbacks"
 
 
 Public InstrumentaRibbon As IRibbonUI
+Public InstrumentaVisible As String
+
+
  
 Sub InstrumentaInitialize(Ribbon As IRibbonUI)
+    InstrumentaVisible = "InstrumentaVisible"
     Set InstrumentaRibbon = Ribbon
     InitializeEmojis
     InitializeEmojis2 'for 32-bit compatibility split between 2
     InitializeEmojiNames
     InstrumentaRibbon.Invalidate
+    'InstrumentaRibbon.ActivateTab "InstrumentaPowerpointToolbar"
+    
+    'set Pro or Review mode
+    If GetSetting("Instrumenta", "General", "OperatingMode", "pro") = "review" Then
+     Call InstrumentaRefresh(UpdateTag:="*R*")
+    End If
+    
 End Sub
+
+Sub InstrumentaRefresh(UpdateTag As String)
+
+    InstrumentaVisible = UpdateTag
+    If Not InstrumentaRibbon Is Nothing Then
+    
+    InstrumentaRibbon.Invalidate
+       
+    End If
+
+End Sub
+
+
+Sub InstrumentaGetVisible(control As IRibbonControl, ByRef visible)
+    If InstrumentaVisible = "InstrumentaVisible" Then
+        visible = True
+    Else
+        If control.Tag Like InstrumentaVisible Then
+            visible = True
+        Else
+            visible = False
+        End If
+    End If
+End Sub
+
 
 Sub EmojiGallery_GetItemImage(control As IRibbonControl, index As Integer, ByRef returnedVal)
 
@@ -240,6 +276,10 @@ Sub EmojiGallery_OnAction(control As IRibbonControl, id As String, index As Inte
         GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196)
     End Select
     
+End Sub
+
+Sub ShowSettings()
+    SettingsForm.Show
 End Sub
 
 Sub TableColumnGapsEven()
