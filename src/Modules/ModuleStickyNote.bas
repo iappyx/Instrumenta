@@ -55,7 +55,7 @@ Sub GenerateStickyNote()
             
             With .TextRange
                 .Paragraphs.ParagraphFormat.Alignment = ppAlignLeft
-                .Text = "Note"
+                .Text = GetSetting("Instrumenta", "StickyNotes", "StickyNotesDefaultText", "Note")
                 With .Font
                     .Size = 10
                     .Color.RGB = RGB(0, 0, 0)

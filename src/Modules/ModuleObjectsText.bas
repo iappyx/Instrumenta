@@ -339,16 +339,20 @@ Sub ObjectsMarginsIncrease()
         MsgBox "No shapes selected."
     Else
         
+    Dim ShapeMarginSetting As Double
+    ShapeMarginSetting = CDbl(GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0.2"))
+        
+        
         If myDocument.Selection.HasChildShapeRange Then
             
             For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), 0.2
+                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), ShapeMarginSetting
             Next i
             
         Else
             
             For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), 0.2
+                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), ShapeMarginSetting
             Next i
             
         End If
@@ -364,15 +368,18 @@ Sub ObjectsMarginsDecrease()
         MsgBox "No shapes selected."
     Else
         
+    Dim ShapeMarginSetting As Double
+    ShapeMarginSetting = CDbl(GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0.2"))
+        
         If myDocument.Selection.HasChildShapeRange Then
             
             For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), -0.2
+                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), -ShapeMarginSetting
             Next i
             
         Else
             For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), -0.2
+                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), -ShapeMarginSetting
             Next i
             
         End If

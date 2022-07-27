@@ -75,6 +75,9 @@ Sub TablesMarginsIncrease()
     
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
     
+    Dim TableMarginSetting As Double
+    TableMarginSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0.2"))
+    
     With Application.ActiveWindow.Selection.ShapeRange.Table
         
         For RowsCount = 1 To .Rows.Count
@@ -84,10 +87,10 @@ Sub TablesMarginsIncrease()
                     
                     With .Cell(RowsCount, ColsCount).Shape.TextFrame
                         
-                        .MarginBottom = .MarginBottom + 0.2
-                        .MarginLeft = .MarginLeft + 0.2
-                        .MarginRight = .MarginRight + 0.2
-                        .MarginTop = .MarginTop + 0.2
+                        .MarginBottom = .MarginBottom + TableMarginSetting
+                        .MarginLeft = .MarginLeft + TableMarginSetting
+                        .MarginRight = .MarginRight + TableMarginSetting
+                        .MarginTop = .MarginTop + TableMarginSetting
                         
                     End With
                     
@@ -118,6 +121,9 @@ Sub TablesMarginsDecrease()
     
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
     
+    Dim TableMarginSetting As Double
+    TableMarginSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0.2"))
+    
     With Application.ActiveWindow.Selection.ShapeRange.Table
         
         For RowsCount = 1 To .Rows.Count
@@ -127,17 +133,17 @@ Sub TablesMarginsDecrease()
                     
                     With .Cell(RowsCount, ColsCount).Shape.TextFrame
                         
-                        If .MarginBottom >= 0.2 Then
-                            .MarginBottom = .MarginBottom - 0.2
+                        If .MarginBottom >= TableMarginSetting Then
+                            .MarginBottom = .MarginBottom - TableMarginSetting
                         End If
-                        If .MarginLeft >= 0.2 Then
-                            .MarginLeft = .MarginLeft - 0.2
+                        If .MarginLeft >= TableMarginSetting Then
+                            .MarginLeft = .MarginLeft - TableMarginSetting
                         End If
-                        If .MarginRight >= 0.2 Then
-                            .MarginRight = .MarginRight - 0.2
+                        If .MarginRight >= TableMarginSetting Then
+                            .MarginRight = .MarginRight - TableMarginSetting
                         End If
-                        If .MarginTop >= 0.2 Then
-                            .MarginTop = .MarginTop - 0.2
+                        If .MarginTop >= TableMarginSetting Then
+                            .MarginTop = .MarginTop - TableMarginSetting
                         End If
                         
                     End With
