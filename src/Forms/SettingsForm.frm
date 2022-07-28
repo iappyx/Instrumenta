@@ -37,10 +37,10 @@ Attribute VB_Exposed = False
 
 Private Sub UserForm_Activate()
 
-    ShapeStepSizeMargin = GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0.2")
-    TableStepSizeMargin = GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0.2")
-    TableStepSizeColumnGaps = GetSetting("Instrumenta", "Tables", "TableStepSizeColumnGaps", "1.0")
-    TableStepSizeRowGaps = GetSetting("Instrumenta", "Tables", "TableStepSizeRowGaps", "1.0")
+    ShapeStepSizeMargin = GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0" + GetDecimalSeperator() + "2")
+    TableStepSizeMargin = GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0" + GetDecimalSeperator() + "2")
+    TableStepSizeColumnGaps = GetSetting("Instrumenta", "Tables", "TableStepSizeColumnGaps", "1" + GetDecimalSeperator() + "0")
+    TableStepSizeRowGaps = GetSetting("Instrumenta", "Tables", "TableStepSizeRowGaps", "1" + GetDecimalSeperator() + "0")
     StickyNotesDefaultText = GetSetting("Instrumenta", "StickyNotes", "StickyNotesDefaultText", "Note")
     
     If GetSetting("Instrumenta", "General", "OperatingMode", "pro") = "pro" Then
@@ -63,26 +63,26 @@ End Sub
 
 Private Sub SaveSettingsButton_Click()
 
-    If ShapeStepSizeMargin = "" Or ShapeStepSizeMargin Like "*[!0-9.]*" Then
-        MsgBox ("Please enter data in the following format ###.#")
+    If ShapeStepSizeMargin = "" Or ShapeStepSizeMargin Like "*[!0-9" + GetDecimalSeperator() + "]*" Then
+        MsgBox ("Please enter data in the following format #" + GetDecimalSeperator() + "#")
         ShapeStepSizeMargin.SetFocus
         Exit Sub
     End If
     
-        If TableStepSizeMargin = "" Or TableStepSizeMargin Like "*[!0-9.]*" Then
-        MsgBox ("Please enter data in the following format ###.#")
+        If TableStepSizeMargin = "" Or TableStepSizeMargin Like "*[!0-9" + GetDecimalSeperator() + "]*" Then
+        MsgBox ("Please enter data in the following format #" + GetDecimalSeperator() + "#")
         TableStepSizeMargin.SetFocus
         Exit Sub
     End If
     
-        If TableStepSizeColumnGaps = "" Or TableStepSizeColumnGaps Like "*[!0-9.]*" Then
-        MsgBox ("Please enter data in the following format ###.#")
+        If TableStepSizeColumnGaps = "" Or TableStepSizeColumnGaps Like "*[!0-9" + GetDecimalSeperator() + "]*" Then
+        MsgBox ("Please enter data in the following format #" + GetDecimalSeperator() + "#")
         TableStepSizeColumnGaps.SetFocus
         Exit Sub
     End If
     
-        If TableStepSizeRowGaps = "" Or TableStepSizeRowGaps Like "*[!0-9.]*" Then
-        MsgBox ("Please enter data in the following format ###.#")
+        If TableStepSizeRowGaps = "" Or TableStepSizeRowGaps Like "*[!0-9" + GetDecimalSeperator() + "]*" Then
+        MsgBox ("Please enter data in the following format #" + GetDecimalSeperator() + "#")
         TableStepSizeRowGaps.SetFocus
         Exit Sub
     End If
@@ -109,6 +109,8 @@ Private Sub ShapeStepSizeMargin_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger
     
     If KeyAscii = 46 Then
         KeyAscii = 46
+    ElseIf KeyAscii = 44 Then
+        KeyAscii = 44
     ElseIf KeyAscii < 48 Or KeyAscii > 57 Then
         KeyAscii = 0
     End If
@@ -118,6 +120,8 @@ End Sub
 Private Sub TableStepSizeMargin_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     If KeyAscii = 46 Then
         KeyAscii = 46
+    ElseIf KeyAscii = 44 Then
+        KeyAscii = 44
     ElseIf KeyAscii < 48 Or KeyAscii > 57 Then
         KeyAscii = 0
     End If
@@ -127,6 +131,8 @@ End Sub
 Private Sub TableStepSizeColumnGaps_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     If KeyAscii = 46 Then
         KeyAscii = 46
+    ElseIf KeyAscii = 44 Then
+        KeyAscii = 44
     ElseIf KeyAscii < 48 Or KeyAscii > 57 Then
         KeyAscii = 0
     End If
@@ -136,6 +142,8 @@ End Sub
 Private Sub TableStepSizeRowGaps_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     If KeyAscii = 46 Then
         KeyAscii = 46
+    ElseIf KeyAscii = 44 Then
+        KeyAscii = 44
     ElseIf KeyAscii < 48 Or KeyAscii > 57 Then
         KeyAscii = 0
     End If

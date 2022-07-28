@@ -340,7 +340,7 @@ Sub ObjectsMarginsIncrease()
     Else
         
     Dim ShapeMarginSetting As Double
-    ShapeMarginSetting = CDbl(GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0.2"))
+    ShapeMarginSetting = CDbl(GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0" + GetDecimalSeperator() + "2"))
         
         
         If myDocument.Selection.HasChildShapeRange Then
@@ -369,7 +369,7 @@ Sub ObjectsMarginsDecrease()
     Else
         
     Dim ShapeMarginSetting As Double
-    ShapeMarginSetting = CDbl(GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0.2"))
+    ShapeMarginSetting = CDbl(GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0" + GetDecimalSeperator() + "2"))
         
         If myDocument.Selection.HasChildShapeRange Then
             

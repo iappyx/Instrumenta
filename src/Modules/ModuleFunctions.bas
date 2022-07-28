@@ -49,6 +49,13 @@ Private Declare PtrSafe Function WindowsColorDialog Lib "comdlg32.dll" Alias "Ch
     Private Const CC_SOLIDCOLOR = &H80
 #End If
 
+
+Function GetDecimalSeperator() As String
+
+    GetDecimalSeperator = Mid(CStr(1 / 2), 2, 1)
+
+End Function
+
 Function RemoveDuplicates(InputArray) As Variant
     
     Dim OutputArray, InputValue, OutputValue As Variant
@@ -127,15 +134,6 @@ CheckIfAppleScriptPluginIsInstalled = 0
 
 End Function
 
-'This does not work well in all cases
-'Function MacSendMailViaOutlook(subject As String, filepath As String)
-'MacSendMailViaOutlookMacScript = "tell application ""Microsoft Outlook""" & vbNewLine & "set NewMail to (make new outgoing message with properties {subject:""" & subject & """})" & vbNewLine & _
-'"tell NewMail" & vbNewLine & "set AttachmentPath to POSIX file """ & filepath & """" & vbNewLine & "make new attachment with properties {file:AttachmentPath as alias}" & vbNewLine & "Delay 0.5" & vbNewLine & _
-'"end tell" & vbNewLine & "open NewMail" & vbNewLine & "Activate NewMail" & vbNewLine & "end tell" & vbNewLine & "return ""Done"""
-'MacSendMailViaOutlook = MacScript(MacSendMailViaOutlookMacScript)
-'End Function
-
-
 #If Mac Then
     
 Function ColorDialog(StandardColor As Variant) As Variant
@@ -172,13 +170,15 @@ Function ColorDialog(StandardColor As Variant) As Variant
             PredefinedColors(ExtraColorCount - 1) = ActivePresentation.ExtraColors(ExtraColorCount)
         Next
     End If
-      
-        PredefinedColors(10) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent1).RGB
-        PredefinedColors(11) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent2).RGB
-        PredefinedColors(12) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent3).RGB
-        PredefinedColors(13) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent4).RGB
-        PredefinedColors(14) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent5).RGB
-        PredefinedColors(15) = ActivePresentation.SlideMaster.Theme.ThemeColorScheme(msoThemeAccent6).RGB
+    
+    With ActivePresentation.SlideMaster.Theme
+        PredefinedColors(10) = .ThemeColorScheme(msoThemeAccent1).RGB
+        PredefinedColors(11) = .ThemeColorScheme(msoThemeAccent2).RGB
+        PredefinedColors(12) = .ThemeColorScheme(msoThemeAccent3).RGB
+        PredefinedColors(13) = .ThemeColorScheme(msoThemeAccent4).RGB
+        PredefinedColors(14) = .ThemeColorScheme(msoThemeAccent5).RGB
+        PredefinedColors(15) = .ThemeColorScheme(msoThemeAccent6).RGB
+    End With
     
     With ChooseColorType
         .lStructSize = Len(ChooseColorType)
@@ -198,5 +198,4 @@ Function ColorDialog(StandardColor As Variant) As Variant
 End Function
 
 #End If
-
 
