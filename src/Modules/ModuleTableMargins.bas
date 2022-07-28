@@ -76,7 +76,7 @@ Sub TablesMarginsIncrease()
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
     
     Dim TableMarginSetting As Double
-    TableMarginSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0.2"))
+    TableMarginSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0" + GetDecimalSeperator() + "2"))
     
     With Application.ActiveWindow.Selection.ShapeRange.Table
         
@@ -122,7 +122,7 @@ Sub TablesMarginsDecrease()
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
     
     Dim TableMarginSetting As Double
-    TableMarginSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0.2"))
+    TableMarginSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0" + GetDecimalSeperator() + "2"))
     
     With Application.ActiveWindow.Selection.ShapeRange.Table
         

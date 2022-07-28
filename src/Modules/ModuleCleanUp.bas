@@ -29,7 +29,7 @@ Sub CleanUpRemoveUnusedMasterSlides()
     On Error Resume Next
     
     DesignsCount = ActivePresentation.Designs.Count
-        
+    
     For NumberOfDesigns = ActivePresentation.Designs.Count To 1 Step -1
         
         SetProgress ((DesignsCount - NumberOfDesigns) / DesignsCount * 100)
@@ -44,9 +44,9 @@ Sub CleanUpRemoveUnusedMasterSlides()
     Next NumberOfDesigns
     
     On Error GoTo 0
-        
+    
     ProgressForm.Hide
-        
+    
 End Sub
 
 Sub CleanUpRemoveAnimationsFromAllSlides()
@@ -56,9 +56,9 @@ Sub CleanUpRemoveAnimationsFromAllSlides()
     ProgressForm.Show
     
     For Each PresentationSlide In ActivePresentation.Slides
-    
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
-    
+        
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        
         For AnimationCount = PresentationSlide.TimeLine.MainSequence.Count To 1 Step -1
             PresentationSlide.TimeLine.MainSequence.Item(AnimationCount).Delete
         Next AnimationCount
@@ -75,9 +75,9 @@ Sub CleanUpRemoveSpeakerNotesFromAllSlides()
     ProgressForm.Show
     
     For Each PresentationSlide In ActivePresentation.Slides
-    
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
-    
+        
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        
         For Each SlideShape In PresentationSlide.NotesPage.Shapes
             If SlideShape.TextFrame.HasText Then
                 SlideShape.TextFrame.TextRange = ""
@@ -96,9 +96,9 @@ Sub CleanUpRemoveCommentsFromAllSlides()
     ProgressForm.Show
     
     For Each PresentationSlide In ActivePresentation.Slides
-      
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
-      
+        
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        
         For CommentsCount = PresentationSlide.Comments.Count To 1 Step -1
             PresentationSlide.Comments(1).Delete
         Next
@@ -107,7 +107,6 @@ Sub CleanUpRemoveCommentsFromAllSlides()
     ProgressForm.Hide
     
 End Sub
-
 
 Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
     Dim PresentationSlide As Slide
@@ -123,4 +122,24 @@ Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
     
 End Sub
 
-
+Sub CleanUpRemoveHiddenSlides()
+    
+    ProgressForm.Show
+    
+    NumberOfSlides = ActivePresentation.Slides.Count
+    
+    For SlideLoop = ActivePresentation.Slides.Count To 1 Step -1
+        
+        SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
+        
+        If ActivePresentation.Slides(SlideLoop).SlideShowTransition.Hidden = msoTrue Then
+            
+            ActivePresentation.Slides(SlideLoop).Delete
+            
+        End If
+        
+    Next
+    
+    ProgressForm.Hide
+    
+End Sub
