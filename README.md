@@ -21,7 +21,7 @@ Current features include:
 | Table | - Format table<br>- Quick format table (preset)<br>- Add, delete, increase or decrease column/row gaps <br>- Distribute columns/rows while ignoring column/row gaps <br>- Convert table to shapes<br>- Transpose table<br>- Split table by row / column<br>- Sum columns in table (all values above selected cells)<br>- Sum rows in table (all values left from selected cells) |
 | Export | - E-mail selected slides (as PDF or PPT)<br>- Copy storyline to clipboard<br>- Export storyline to Word<br>- Paste storyline in shape<br>- Copy slide notes to clipboard<br>- Export slide notes to Word|
 | Paste and insert | - Harvey Balls<br>- Traffic lights (RAG status)<br>- Star rating (0-5)<br>- Average Harvey Balls, Traffic lights and star ratings based on selected<br>- Numbered captions to shapes (including tables and images)<br>- Renumber captions across slides<br>- Sticky notes<br>- Move sticky notes on and off this slide/all slides<br>- Remove sticky notes from this slide/all slides<br>- Convert comments to sticky notes<br>- Steps counter (per slide and cross-slides)<br>- Agenda pages<br>- Stamps<br>- Move stamps on and off this slide/all slides<br>- Remove stamps from this slide/all slides<br>- Insert process (SmartArt) <br>- Insert Emoji|
-| Advanced | - Mail merge a specific slide based on Excel-file<br>- Mail merge full presentation based on Excel-file (creating seperate presentations)<br>- Manually replace all merge fields on all slides (can be used for templates)<br>- Remove animations from all slides<br>- Remove slide entry transitions from all slides<br>- Remove speaker notes from all slides<br>- Remove comments from all slides<br>- Remove unused master slides<br>- Convert slides to pictures (readonly)<br>- Watermark and convert slides to pictures (readonly)<br>- Anonymize slides with Lorem Ipsum<br>- Add (hidden) tags to slides and shapes<br>- Manage (hidden) tags of slides and shapes<br>- Select sliderange based on tags<br>- Select sliderange based on specific stamps on those slide<br>- Check for new versions of Instrumenta in the About-dialog <br>- Change Instrumenta settings |
+| Advanced | - Mail merge a specific slide based on Excel-file<br>- Mail merge full presentation based on Excel-file (creating seperate presentations)<br>- Manually replace all merge fields on all slides (can be used for templates)<br>- Remove hidden slides<br>- Remove animations from all slides<br>- Remove slide entry transitions from all slides<br>- Remove speaker notes from all slides<br>- Remove comments from all slides<br>- Remove unused master slides<br>- Convert slides to pictures (readonly)<br>- Watermark and convert slides to pictures (readonly)<br>- Anonymize slides with Lorem Ipsum<br>- Add (hidden) tags to slides and shapes<br>- Manage (hidden) tags of slides and shapes<br>- Select sliderange based on tags<br>- Select sliderange based on specific stamps on those slide<br>- Check for new versions of Instrumenta in the About-dialog <br>- Change Instrumenta settings |
 
 # Platform support
 All functions tested in Windows on the latest Office at that moment in time.
@@ -42,7 +42,7 @@ Instrumenta is a Visual Basic for Applications (VBA) add-in that can be installe
 
 ## Windows
 You can save the add-in to your PC and then install the add-in by adding it to the Available Add-Ins list:
-- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.2/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
+- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.21/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
 - Open Powerpoint, click the File tab, and then click Options
 - In the Options dialog box, click Add-Ins.
 - In the Manage list at the bottom of the dialog box, click PowerPoint Add-ins, and then click Go.
@@ -55,14 +55,14 @@ You can save the add-in to your PC and then install the add-in by adding it to t
 
 ## Mac
 You can save the add-in to your Mac and then install the add-in by adding it to the Add-Ins list:
-- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.2/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
+- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.21/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
 - Open Powerpoint, click Tools in the application menu, and then click Add-ins...
 - In the Add-Ins dialog box, click the + button, browse for the add-in file, and then click Open.
 - Click Ok to close the Add-ins dialog box
 - There now should be an "Instrumenta" page in the Powerpoint ribbon
 
 Additional optional steps to enable export to Outlook and Word:
-- Download the AppleScript file (https://github.com/iappyx/Instrumenta/releases/download/1.2/InstrumentaAppleScriptPlugin.applescript) 
+- Download the AppleScript file (https://github.com/iappyx/Instrumenta/releases/download/1.21/InstrumentaAppleScriptPlugin.applescript) 
 - Copy the AppleScript file to *~/Library/Application Scripts/com.microsoft.Powerpoint/*
 - Please note that this is in the library folder of the *current user*. If the folder does not exist, create it.
 - In some cases a reboot of your Mac might be required
