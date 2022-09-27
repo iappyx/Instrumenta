@@ -50,7 +50,8 @@ You can save the add-in to your PC and then install the add-in by adding it to t
 - In the Manage list at the bottom of the dialog box, click PowerPoint Add-ins, and then click Go.
 - In the Add-Ins dialog box, click Add New.
 - In the Add New PowerPoint Add-In dialog box, browse for the add-in file, and then click OK.
-- A security notice appears. Click Enable Macros, and then click Close. If you cannot enable Macros in this dialog, please refer to [these](https://support.microsoft.com/en-gb/topic/a-potentially-dangerous-macro-has-been-blocked-0952faa0-37e7-4316-b61d-5b5ed6024216) instructions from Microsoft to unblock Instrumenta: (1) Open Windows File Explorer and go to the folder where you saved the file; (2) Right-click the file and choose Properties from the context menu; (3) At the bottom of the General tab, select the Unblock checkbox and select OK.
+- A security notice appears. Click Enable Macros, and then click Close. 
+  - Note: If you cannot enable Macros in this dialog, please refer to [these](https://support.microsoft.com/en-gb/topic/a-potentially-dangerous-macro-has-been-blocked-0952faa0-37e7-4316-b61d-5b5ed6024216) instructions from Microsoft to unblock Instrumenta: (1) Open Windows File Explorer and go to the folder where you saved the file; (2) Right-click the file and choose Properties from the context menu; (3) At the bottom of the General tab, select the Unblock checkbox and select OK.
 - There now should be an "Instrumenta" page in the Powerpoint ribbon
 
 (Instructions based on https://support.microsoft.com/en-us/office/add-or-load-a-powerpoint-add-in-3de8bbc2-2481-457a-8841-7334cd5b455f)
