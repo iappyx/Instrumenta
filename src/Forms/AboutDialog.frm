@@ -37,14 +37,36 @@ Attribute VB_Exposed = False
 
 Private Sub Label2_Click()
     Dim URL As String
+    Dim tempPresentation As Presentation
+        
     URL = "https://github.com/iappyx/Instrumenta"
-    ActivePresentation.FollowHyperlink URL
+    
+    If Presentations.Count = 0 Then
+        Set tempPresentation = Presentations.Add
+        tempPresentation.FollowHyperlink URL
+        tempPresentation.Close
+    Else
+        ActivePresentation.FollowHyperlink URL
+    End If
+    
+    
 End Sub
 
 Private Sub Label3_Click()
 
-Dim URL As String
-URL = "https://github.com/iappyx/Instrumenta/blob/main/v/" & InstrumentaVersion & ".md"
-ActivePresentation.FollowHyperlink URL
+    Dim URL As String
+    Dim tempPresentation As Presentation
+
+
+    URL = "https://github.com/iappyx/Instrumenta/blob/main/v/" & InstrumentaVersion & ".md"
+
+    If Presentations.Count = 0 Then
+        Set tempPresentation = Presentations.Add
+        tempPresentation.FollowHyperlink URL
+        tempPresentation.Close
+    Else
+        ActivePresentation.FollowHyperlink URL
+    End If
+
 
 End Sub

@@ -43,7 +43,6 @@
                      <button id="ObjectsAutoSizeShapeToFitText" label="Resize shape to fit text" showLabel="false" onAction="ObjectsAutoSizeShapeToFitText" />                  
                   </menu>
                </splitButton>
-                  <toggleButton id="ToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" />
                </buttonGroup>
                <buttonGroup id="buttonGroupBulletsAndNumbering">
                   <control idMso="BulletsGallery" showLabel="false" />
@@ -65,6 +64,9 @@
                   <gallery idMso="TextAlignGallery" showLabel="false" />
                </buttonGroup>
                <separator id="separator6" />
+               <toggleButton id="ToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" />
+               <button id="ObjectsTextSplitByParagraphButton" label="Split (by paragraphs) into multiple shapes" imageMso="PageBreakInsertOrRemove" showLabel="false" onAction="ObjectsTextSplitByParagraph" />
+               <button id="ObjectsTextMergeButton" label="Merge text of all shapes in first selected shape" imageMso="SourceControlAddObjects" showLabel="false" onAction="ObjectsTextMerge" />             
                <button id="RemoveTextButton" label="Remove text" imageMso="ReviewDeleteMarkup" showLabel="false" onAction="ObjectsRemoveText" />
                <button id="SwapTextButton" label="Swap text (no formatting)" imageMso="Copy" showLabel="false" onAction="ObjectsSwapTextNoFormatting" />
                <button id="SwapTextButton2" label="Swap text (with formatting)" imageMso="GroupCompare" showLabel="false" onAction="ObjectsSwapText" />
@@ -103,7 +105,15 @@
                   <button id="ConnectRectangleShapesLeftToRight" label="Shape 1 left side to shape 2 right side" onAction="ConnectRectangleShapesLeftToRight" />
                   <button id="ConnectRectangleShapesBottomToTop" label="Shape 1 bottom side to shape 2 top side" onAction="ConnectRectangleShapesBottomToTop" />
                   <button id="ConnectRectangleShapesTopToBottom" label="Shape 1 top side to shape 2 bottom side" onAction="ConnectRectangleShapesTopToBottom" />
-               </menu>
+               </menu>            
+                     <splitButton id="LockSplitButton" size="normal" showLabel="false" >
+                     <button id="LockToggleSelectedShapesButton" label="Toggle lock or unlock position of selected shapes" showLabel="false" imageMso="Lock" onAction="LockToggleSelectedShapes" />
+                     <menu id="LockMenu" itemSize="normal">
+                        <button id="LockToggleAllShapesOnAllSlidesButton" label="Toggle lock or unlock position all shapes on all slides" showLabel="false" imageMso="Lock" onAction="LockToggleAllShapesOnAllSlides" />
+                        <button id="LockAllShapesOnAllSlidesButton" label="Lock position of all shapes on all slides" showLabel="false" imageMso="Lock" onAction="LockAllShapesOnAllSlides" />
+                        <button id="UnLockAllShapesOnAllSlides" label="Unlock position of all shapes on all slides" showLabel="false" imageMso="Lock" onAction="UnLockAllShapesOnAllSlides" />
+                        </menu>
+                      </splitButton>
                <separator id="CopyPositionSeperator" />
                <menu id="SelectShapeByMenu" label="Select shape by attributes" imageMso="SelectionPane" showLabel="false" >
                   <button id="SelectShapesByFillColor" label="Select shapes with same fill color" onAction="ObjectsSelectBySameFillColor" />

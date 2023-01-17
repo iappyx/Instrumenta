@@ -21,6 +21,100 @@ Attribute VB_Name = "ModuleObjectsText"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub ObjectsTextSplitByParagraph()
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+        
+    ElseIf MyDocument.Selection.ShapeRange.Count > 1 Then
+        
+        MsgBox "Please Select one shape to split."
+        
+    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+        
+        Dim SlideShape As Shape
+        Dim ShapeHeight As Integer
+        
+        Set SlideShape = MyDocument.Selection.ShapeRange(1)
+        
+        If SlideShape.HasTextFrame Then
+        
+        ShapeHeight = SlideShape.Height / SlideShape.TextFrame.TextRange.Paragraphs.Count
+        
+        For i = SlideShape.TextFrame.TextRange.Paragraphs.Count To 1 Step -1
+            Set DuplicateShape = SlideShape.Duplicate
+            DuplicateShape.TextFrame.TextRange.Text = SlideShape.TextFrame.TextRange.Paragraphs(i).Text
+            
+            DuplicateShape.Top = SlideShape.Top + ShapeHeight * (i - 1)
+            DuplicateShape.Height = ShapeHeight
+            DuplicateShape.Left = SlideShape.Left
+            
+        Next i
+        
+        SlideShape.Delete
+        
+        Else
+        
+            MsgBox "The selected shape has no textframe."
+        
+        End If
+        
+        
+    End If
+    
+End Sub
+
+
+Sub ObjectsTextMerge()
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+        
+    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+        MsgBox "Please select more than one shape."
+        
+    ElseIf MyDocument.Selection.ShapeRange.Count > 1 Then
+        
+        Dim SlideShape As Shape
+        Dim SlideShapeRange As ShapeRange
+        Set SlideShapeRange = MyDocument.Selection.ShapeRange
+        Set SlideShape = SlideShapeRange(1)
+        
+        If SlideShape.HasTextFrame Then
+            
+            SlideShapeRange(1).TextFrame.TextRange.InsertAfter vbCr
+            
+            For i = 2 To MyDocument.Selection.ShapeRange.Count
+                Set MergeShape = SlideShapeRange(i)
+                
+                If MergeShape.HasTextFrame Then
+                    MergeShape.TextFrame.TextRange.Copy
+                    SlideShapeRange(1).TextFrame.TextRange.InsertAfter(MergeShape.TextFrame.TextRange).PasteSpecial ppPasteDefault
+                End If
+            Next i
+            
+            For i = MyDocument.Selection.ShapeRange.Count To 2 Step -1
+                
+                If SlideShapeRange(i).HasTextFrame Then
+                    SlideShapeRange(i).Delete
+                End If
+                
+            Next i
+            
+        Else
+            MsgBox "The first selected shape has no textframe."
+            
+        End If
+        
+    End If
+    
+End Sub
+
+
 Sub ObjectsTextInsertSpecialCharacter(SpecialCharacter As Long)
     
     If ActiveWindow.Selection.Type = ppSelectionText Then
@@ -33,23 +127,23 @@ End Sub
 
 Sub ObjectsIncreaseLineSpacing()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsLineSpacingLoop myDocument.Selection.ChildShapeRange(i), 0.1
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsLineSpacingLoop MyDocument.Selection.ChildShapeRange(i), 0.1
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
                 
-                ObjectsLineSpacingLoop myDocument.Selection.ShapeRange(i), 0.1
+                ObjectsLineSpacingLoop MyDocument.Selection.ShapeRange(i), 0.1
                 
             Next i
             
@@ -61,23 +155,23 @@ End Sub
 
 Sub ObjectsDecreaseLineSpacing()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsLineSpacingLoop myDocument.Selection.ChildShapeRange(i), -0.1
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsLineSpacingLoop MyDocument.Selection.ChildShapeRange(i), -0.1
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
                 
-                ObjectsLineSpacingLoop myDocument.Selection.ShapeRange(i), -0.1
+                ObjectsLineSpacingLoop MyDocument.Selection.ShapeRange(i), -0.1
                 
             Next i
             
@@ -126,22 +220,22 @@ Sub ObjectsLineSpacingLoop(SlideShape, LineSpacingChange)
 End Sub
 
 Sub ObjectsRemoveText()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsRemoveTextLoop myDocument.Selection.ChildShapeRange(i)
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsRemoveTextLoop MyDocument.Selection.ChildShapeRange(i)
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsRemoveTextLoop myDocument.Selection.ShapeRange(i)
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsRemoveTextLoop MyDocument.Selection.ShapeRange(i)
             Next i
             
         End If
@@ -175,20 +269,20 @@ End Sub
 Sub ObjectsSwapTextNoFormatting()
     
     Dim text1, text2 As String
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.ShapeRange.Count = 2 Then
+        If MyDocument.Selection.ShapeRange.Count = 2 Then
             
-            If myDocument.Selection.ShapeRange(1).HasTextFrame And myDocument.Selection.ShapeRange(2).HasTextFrame Then
+            If MyDocument.Selection.ShapeRange(1).HasTextFrame And MyDocument.Selection.ShapeRange(2).HasTextFrame Then
                 
-                text1 = myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text
-                text2 = myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text
-                myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text = text2
-                myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text = text1
+                text1 = MyDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text
+                text2 = MyDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text
+                MyDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text = text2
+                MyDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text = text1
                 
             Else
                 
@@ -196,17 +290,17 @@ Sub ObjectsSwapTextNoFormatting()
                 
             End If
             
-        ElseIf myDocument.Selection.HasChildShapeRange Then
+        ElseIf MyDocument.Selection.HasChildShapeRange Then
             
             
-            If myDocument.Selection.ChildShapeRange.Count = 2 Then
+            If MyDocument.Selection.ChildShapeRange.Count = 2 Then
                 
-                If myDocument.Selection.ChildShapeRange(1).HasTextFrame And myDocument.Selection.ChildShapeRange(2).HasTextFrame Then
+                If MyDocument.Selection.ChildShapeRange(1).HasTextFrame And MyDocument.Selection.ChildShapeRange(2).HasTextFrame Then
                 
-                    text1 = myDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Text
-                    text2 = myDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Text
-                    myDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Text = text2
-                    myDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Text = text1
+                    text1 = MyDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Text
+                    text2 = MyDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Text
+                    MyDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Text = text2
+                    MyDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Text = text1
                 
                 Else
             
@@ -232,27 +326,27 @@ End Sub
 
 Sub ObjectsSwapText()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.ShapeRange.Count = 2 Then
+        If MyDocument.Selection.ShapeRange.Count = 2 Then
             
-            If myDocument.Selection.ShapeRange(1).HasTextFrame And myDocument.Selection.ShapeRange(2).HasTextFrame Then
+            If MyDocument.Selection.ShapeRange(1).HasTextFrame And MyDocument.Selection.ShapeRange(2).HasTextFrame Then
                 
                 Dim SlidePlaceHolder As PowerPoint.Shape
                 Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
                 
-                myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Cut
+                MyDocument.Selection.ShapeRange(1).TextFrame.TextRange.Cut
                 SlidePlaceHolder.TextFrame.TextRange.Paste
                 
-                myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Cut
-                myDocument.Selection.ShapeRange(1).TextFrame.TextRange.Paste
+                MyDocument.Selection.ShapeRange(2).TextFrame.TextRange.Cut
+                MyDocument.Selection.ShapeRange(1).TextFrame.TextRange.Paste
                 
                 SlidePlaceHolder.TextFrame.TextRange.Cut
-                myDocument.Selection.ShapeRange(2).TextFrame.TextRange.Paste
+                MyDocument.Selection.ShapeRange(2).TextFrame.TextRange.Paste
                 
                 SlidePlaceHolder.Delete
                 
@@ -262,24 +356,24 @@ Sub ObjectsSwapText()
                 
             End If
             
-        ElseIf myDocument.Selection.HasChildShapeRange Then
+        ElseIf MyDocument.Selection.HasChildShapeRange Then
             
             
-            If myDocument.Selection.ChildShapeRange.Count = 2 Then
+            If MyDocument.Selection.ChildShapeRange.Count = 2 Then
                 
-                If myDocument.Selection.ChildShapeRange(1).HasTextFrame And myDocument.Selection.ChildShapeRange(2).HasTextFrame Then
+                If MyDocument.Selection.ChildShapeRange(1).HasTextFrame And MyDocument.Selection.ChildShapeRange(2).HasTextFrame Then
                                
                 Dim SlidePlaceHolderChildShapeRange As PowerPoint.Shape
                 Set SlidePlaceHolderChildShapeRange = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
                 
-                myDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Cut
+                MyDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Cut
                 SlidePlaceHolderChildShapeRange.TextFrame.TextRange.Paste
                 
-                myDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Cut
-                myDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Paste
+                MyDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Cut
+                MyDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Paste
                 
                 SlidePlaceHolderChildShapeRange.TextFrame.TextRange.Cut
-                myDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Paste
+                MyDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Paste
                 
                 SlidePlaceHolderChildShapeRange.Delete
                 
@@ -307,22 +401,22 @@ End Sub
 
 Sub ObjectsMarginsToZero()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), 0
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsMarginsLoop MyDocument.Selection.ChildShapeRange(i), 0
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), 0
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsMarginsLoop MyDocument.Selection.ShapeRange(i), 0
             Next i
             
         End If
@@ -333,9 +427,9 @@ End Sub
 
 Sub ObjectsMarginsIncrease()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
@@ -343,16 +437,16 @@ Sub ObjectsMarginsIncrease()
     ShapeMarginSetting = CDbl(GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0" + GetDecimalSeperator() + "2"))
         
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), ShapeMarginSetting
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsMarginsLoop MyDocument.Selection.ChildShapeRange(i), ShapeMarginSetting
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), ShapeMarginSetting
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsMarginsLoop MyDocument.Selection.ShapeRange(i), ShapeMarginSetting
             Next i
             
         End If
@@ -362,24 +456,24 @@ End Sub
 
 Sub ObjectsMarginsDecrease()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
     Dim ShapeMarginSetting As Double
     ShapeMarginSetting = CDbl(GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0" + GetDecimalSeperator() + "2"))
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ChildShapeRange(i), -ShapeMarginSetting
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsMarginsLoop MyDocument.Selection.ChildShapeRange(i), -ShapeMarginSetting
             Next i
             
         Else
-            For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsMarginsLoop myDocument.Selection.ShapeRange(i), -ShapeMarginSetting
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsMarginsLoop MyDocument.Selection.ShapeRange(i), -ShapeMarginSetting
             Next i
             
         End If
@@ -444,22 +538,22 @@ End Sub
 
 Sub ObjectsTextWordwrapToggle()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsTextWordwrapToggleLoop myDocument.Selection.ChildShapeRange(i)
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsTextWordwrapToggleLoop MyDocument.Selection.ChildShapeRange(i)
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsTextWordwrapToggleLoop myDocument.Selection.ShapeRange(i)
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsTextWordwrapToggleLoop MyDocument.Selection.ShapeRange(i)
             Next i
             
         End If
@@ -494,22 +588,22 @@ Sub ObjectsTextWordwrapToggleLoop(SlideShape)
 End Sub
 
 Sub ObjectsAutoSizeTextToFitShape()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsToggleAutoSizeLoop myDocument.Selection.ChildShapeRange(i), 2
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsToggleAutoSizeLoop MyDocument.Selection.ChildShapeRange(i), 2
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange(i), 2
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsToggleAutoSizeLoop MyDocument.Selection.ShapeRange(i), 2
             Next i
             
         End If
@@ -518,22 +612,22 @@ Sub ObjectsAutoSizeTextToFitShape()
 End Sub
 
 Sub ObjectsAutoSizeShapeToFitText()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsToggleAutoSizeLoop myDocument.Selection.ChildShapeRange(i), 1
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsToggleAutoSizeLoop MyDocument.Selection.ChildShapeRange(i), 1
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange(i), 1
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsToggleAutoSizeLoop MyDocument.Selection.ShapeRange(i), 1
             Next i
             
         End If
@@ -543,22 +637,22 @@ End Sub
 
 Sub ObjectsAutoSizeNone()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsToggleAutoSizeLoop myDocument.Selection.ChildShapeRange(i), 0
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsToggleAutoSizeLoop MyDocument.Selection.ChildShapeRange(i), 0
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange(i), 0
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsToggleAutoSizeLoop MyDocument.Selection.ShapeRange(i), 0
             Next i
             
         End If
@@ -568,22 +662,22 @@ End Sub
 
 Sub ObjectsToggleAutoSize()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No shapes selected."
     Else
         
-        If myDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To myDocument.Selection.ChildShapeRange.Count
-                ObjectsToggleAutoSizeLoop myDocument.Selection.ChildShapeRange(i), 5
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsToggleAutoSizeLoop MyDocument.Selection.ChildShapeRange(i), 5
             Next i
             
         Else
             
-            For i = 1 To myDocument.Selection.ShapeRange.Count
-                ObjectsToggleAutoSizeLoop myDocument.Selection.ShapeRange(i), 5
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsToggleAutoSizeLoop MyDocument.Selection.ShapeRange(i), 5
             Next i
             
         End If
