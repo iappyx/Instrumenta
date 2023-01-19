@@ -282,6 +282,7 @@
                <button id="TableDecreaseMargins" label="Decrease margins of selected table or selected cells" showLabel="false" imageMso="DownArrow2" onAction="TablesMarginsDecrease" />
             </group>
             <group id="ExportGroup" label="Export" imageMso="RightArrow2" tag="PR" getVisible="InstrumentaGetVisible">
+                <button id="SaveSelectedSlidesButton" label="Save selected slides" imageMso="FileSaveAs" showLabel="false" onAction="SaveSelectedSlides" />
                <button id="EmailSelectedSlidesButton" label="E-mail selected slides" imageMso="FileSendAsAttachment" showLabel="false" onAction="EmailSelectedSlides" />
                <button id="EmailSelectedSlidesAsPDFButton" label="E-mail selected slides as PDF" showLabel="false" imageMso="FileEmailAsPdfEmailAttachment" onAction="EmailSelectedSlidesAsPDF" />
                <button idMso="FileSaveAsPdfOrXps" showLabel="false" />

@@ -43,13 +43,24 @@ Sub ObjectsTextSplitByParagraph()
         
         ShapeHeight = SlideShape.Height / SlideShape.TextFrame.TextRange.Paragraphs.Count
         
-        For i = SlideShape.TextFrame.TextRange.Paragraphs.Count To 1 Step -1
+        For i = SlideShape.TextFrame2.TextRange.Paragraphs.Count To 1 Step -1
+            
+
             Set DuplicateShape = SlideShape.Duplicate
-            DuplicateShape.TextFrame.TextRange.Text = SlideShape.TextFrame.TextRange.Paragraphs(i).Text
+            
+            
+            SlideShape.TextFrame2.TextRange.Paragraphs(i).Copy
+            DuplicateShape.TextFrame2.TextRange.Paste
             
             DuplicateShape.Top = SlideShape.Top + ShapeHeight * (i - 1)
             DuplicateShape.Height = ShapeHeight
             DuplicateShape.Left = SlideShape.Left
+            
+            If DuplicateShape.TextFrame2.TextRange.Text = "" Then
+            
+            DuplicateShape.Delete
+            
+            End If
             
         Next i
         
@@ -81,6 +92,7 @@ Sub ObjectsTextMerge()
         
         Dim SlideShape As Shape
         Dim SlideShapeRange As ShapeRange
+
         Set SlideShapeRange = MyDocument.Selection.ShapeRange
         Set SlideShape = SlideShapeRange(1)
         
@@ -90,11 +102,13 @@ Sub ObjectsTextMerge()
             
             For i = 2 To MyDocument.Selection.ShapeRange.Count
                 Set MergeShape = SlideShapeRange(i)
-                
+                               
                 If MergeShape.HasTextFrame Then
-                    MergeShape.TextFrame.TextRange.Copy
-                    SlideShapeRange(1).TextFrame.TextRange.InsertAfter(MergeShape.TextFrame.TextRange).PasteSpecial ppPasteDefault
+                    MergeShape.TextFrame2.TextRange.Copy
+                    SlideShapeRange(1).TextFrame2.TextRange.InsertAfter(MergeShape.TextFrame2.TextRange).Paste
+                    SlideShapeRange(1).Height = SlideShapeRange(1).Height + MergeShape.Height
                 End If
+                
             Next i
             
             For i = MyDocument.Selection.ShapeRange.Count To 2 Step -1

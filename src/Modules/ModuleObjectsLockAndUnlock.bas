@@ -22,6 +22,14 @@ Attribute VB_Name = "ModuleObjectsLockAndUnlock"
 'SOFTWARE.
 
 Sub LockToggleSelectedShapes()
+    
+    #If Mac Then
+    
+    MsgBox "Locking or unlocking objects is not (yet) supported on Mac"
+    
+    #Else
+    
+    
     Dim SlideShape As Shape
     
     For Each SlideShape In ActiveWindow.Selection.ShapeRange
@@ -34,10 +42,18 @@ Sub LockToggleSelectedShapes()
         
     Next SlideShape
     
+    #End If
+    
 End Sub
 
 
 Sub LockToggleAllShapesOnAllSlides()
+    
+    #If Mac Then
+    
+    MsgBox "Locking or unlocking objects is not (yet) supported on Mac"
+    
+    #Else
     
     ProgressForm.Show
     
@@ -59,10 +75,17 @@ Sub LockToggleAllShapesOnAllSlides()
     
     ProgressForm.Hide
     
+    #End If
     
 End Sub
 
 Sub LockAllShapesOnAllSlides()
+
+    #If Mac Then
+    
+    MsgBox "Locking or unlocking objects is not (yet) supported on Mac"
+    
+    #Else
     
     ProgressForm.Show
     
@@ -80,11 +103,18 @@ Sub LockAllShapesOnAllSlides()
     
     ProgressForm.Hide
     
+    #End If
     
 End Sub
 
 Sub UnLockAllShapesOnAllSlides()
     
+    #If Mac Then
+    
+    MsgBox "Locking or unlocking objects is not (yet) supported on Mac"
+    
+    #Else
+        
     ProgressForm.Show
     
     For Each PresentationSlide In ActivePresentation.Slides
@@ -101,5 +131,6 @@ Sub UnLockAllShapesOnAllSlides()
     
     ProgressForm.Hide
     
+    #End If
     
 End Sub

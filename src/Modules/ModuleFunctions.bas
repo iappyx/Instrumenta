@@ -49,7 +49,6 @@ Private Declare PtrSafe Function WindowsColorDialog Lib "comdlg32.dll" Alias "Ch
     Private Const CC_SOLIDCOLOR = &H80
 #End If
 
-
 Function GetDecimalSeperator() As String
 
     GetDecimalSeperator = Mid(CStr(1 / 2), 2, 1)
@@ -107,6 +106,16 @@ Function MacFileDialog(filepath As String) As String
     MacFileDialog = Replace(MacFileDialog, "Macintosh HD", "", Count:=1)
         End If
   End If
+  
+End Function
+
+Function MacSaveAsDialog(fileName) As String
+  MacFileDialogMacScript = "set theFile to choose file name with prompt ""Save As"" default name """ & fileName & """ default location (path to desktop folder)" & vbNewLine & "return POSIX path of theFile"
+  MacSaveAsDialog = MacScript(MacFileDialogMacScript)
+  
+    If MacSaveAsDialog = "-128" Then
+        MacSaveAsDialog = ""
+    End If
   
 End Function
 

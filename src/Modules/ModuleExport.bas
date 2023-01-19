@@ -21,6 +21,103 @@ Attribute VB_Name = "ModuleExport"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub SaveSelectedSlides()
+    
+        If ActiveWindow.Selection.Type = ppSelectionSlides Then
+        
+        Dim TemporaryPresentation, ThisPresentation As Presentation
+        Dim PresentationFilename As String
+        Dim SlideLoop As Long
+        Dim PresentationSlides As Slide
+        Dim DotPosition As Integer
+        
+        Set ThisPresentation = ActivePresentation
+        
+        'Delete any previous export tags
+        On Error Resume Next
+        For Each PresentationSlides In ThisPresentation.Slides
+            PresentationSlides.Tags.Delete ("INSTRUMENTA EXPORT")
+        Next PresentationSlides
+        On Error GoTo 0
+        
+        'Strip extension from filename
+        DotPosition = InStrRev(ThisPresentation.Name, ".")
+        If DotPosition > 0 Then
+            PresentationFilename = Left(ThisPresentation.Name, DotPosition - 1)
+        Else
+            PresentationFilename = ThisPresentation.Name
+        End If
+        
+        'Set filename and e-mailsubject
+        PresentationFilename = PresentationFilename & " (slide "
+        
+        ProgressForm.Show
+        
+        For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.Count
+        
+        SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.Count * 100)
+        
+            ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
+            If SlideLoop <> ActiveWindow.Selection.SlideRange.Count Then
+                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex & ","
+            Else
+                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex
+            End If
+        Next SlideLoop
+        
+        ProgressForm.Hide
+        
+        PresentationFilename = PresentationFilename & ")"
+        Dim exportFilePath As String
+        
+                
+        #If Mac Then
+        
+        exportFilePath = MacSaveAsDialog(PresentationFilename & ".pptx")
+        
+        #Else
+        
+        Dim exportFileDialog As FileDialog
+        Set exportFileDialog = Application.FileDialog(msoFileDialogSaveAs)
+      
+        If exportFileDialog.Show = -1 Then
+        exportFileDialog.InitialFileName = PresentationFilename & ".pptx"
+        exportFilePath = exportFileDialog.SelectedItems(1)
+        End If
+        
+        #End If
+        
+        'Force pptx
+        
+        DotPosition = InStrRev(exportFilePath, ".")
+        If DotPosition > 0 Then
+            exportFilePath = Left(exportFilePath, DotPosition - 1) & ".pptx"
+        Else
+            exportFilePath = exportFilePath & ".pptx"
+        End If
+        
+        
+        ThisPresentation.SaveCopyAs exportFilePath, ppSaveAsOpenXMLPresentation
+        Set TemporaryPresentation = Presentations.Open(exportFilePath)
+        
+        ProgressForm.Show
+        NumberOfSlides = TemporaryPresentation.Slides.Count
+        For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
+            SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
+            If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
+        Next SlideLoop
+        ProgressForm.Hide
+        
+        TemporaryPresentation.Save
+        TemporaryPresentation.Close
+
+        
+        Else
+        MsgBox "No slides selected."
+        End If
+    
+End Sub
+
 Sub EmailSelectedSlides()
     
         If ActiveWindow.Selection.Type = ppSelectionSlides Then
