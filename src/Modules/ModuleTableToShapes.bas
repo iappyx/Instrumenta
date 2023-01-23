@@ -21,48 +21,242 @@ Attribute VB_Name = "ModuleTableToShapes"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub ConvertShapesToTable()
+    Dim ConvertTable         As Table
+    Dim numRows     As Integer
+    Dim numCols     As Integer
+    Dim minLeft     As Double
+    Dim minTop      As Double
+    Dim maxRight    As Double
+    Dim maxBottom   As Double
+    Dim cellShapes()    As shape
+    Dim i As Long, j As Long
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+    
+    If MyDocument.Selection.ShapeRange.Count > 0 Then
+        ReDim cellShapes(1 To MyDocument.Selection.ShapeRange.Count)
+        For i = 1 To MyDocument.Selection.ShapeRange.Count
+            Set cellShapes(i) = MyDocument.Selection.ShapeRange(i)
+        Next i
+        minLeft = 99999
+        minTop = 99999
+        maxRight = 0
+        maxBottom = 0
+        
+        For i = 1 To UBound(cellShapes) - 1
+            For j = i + 1 To UBound(cellShapes)
+                If cellShapes(i).Top * 1000000 + cellShapes(i).Left > cellShapes(j).Top * 1000000 + cellShapes(j).Left Then
+                    Set temp = cellShapes(i)
+                    Set cellShapes(i) = cellShapes(j)
+                    Set cellShapes(j) = temp
+                End If
+            Next j
+        Next i
+        
+        For i = 1 To UBound(cellShapes)
+            If cellShapes(i).Left < minLeft Then minLeft = cellShapes(i).Left
+            If cellShapes(i).Top < minTop Then minTop = cellShapes(i).Top
+            If cellShapes(i).Left + cellShapes(i).Width > maxRight Then maxRight = cellShapes(i).Left + cellShapes(i).Width
+            If cellShapes(i).Top + cellShapes(i).Height > maxBottom Then maxBottom = cellShapes(i).Top + cellShapes(i).Height
+        Next i
+        
+        'numCols based on user input, pre-calculated default setting
+        numCols = Int(InputBox("Please specify the number of columns", "Number of columns", Int((maxRight - minLeft) / cellShapes(1).Width)))
+        
+        numRows = UBound(cellShapes) / numCols
+        
+        If (UBound(cellShapes) Mod numRows) > 0 Then
+        numRows = numRows + 1
+        End If
+        
+        For rowLoop = 1 To numRows
+            
+            If rowLoop * numCols > UBound(cellShapes) Then
+                maxLoop = UBound(cellShapes)
+            Else
+                maxLoop = rowLoop * numCols
+            End If
+            
+            For i = 1 + (rowLoop - 1) * (numCols) To maxLoop
+                
+                For j = i + 1 To maxLoop
+                    
+                    If (cellShapes(i).Left > cellShapes(j).Left) Then
+                        Set temp = cellShapes(i)
+                        Set cellShapes(i) = cellShapes(j)
+                        Set cellShapes(j) = temp
+                    End If
+                Next j
+            Next i
+            
+        Next rowLoop
+        
+        h = 1
+        
+        Set ConvertTable = ActiveWindow.Selection.SlideRange(1).shapes.AddTable(numRows, numCols, minLeft, minTop).Table
+        
+        For i = 1 To UBound(cellShapes)
+            
+            j = ((i - 1) Mod numCols) + 1
+            
+               
+                Set Newcell = ConvertTable.Cell(h, j)
+                
+                With Newcell.shape
+                     .TextFrame.MarginBottom = cellShapes(i).TextFrame.MarginBottom
+                    .TextFrame.MarginLeft = cellShapes(i).TextFrame.MarginLeft
+                    .TextFrame.MarginRight = cellShapes(i).TextFrame.MarginRight
+                    .TextFrame.MarginTop = cellShapes(i).TextFrame.MarginTop
+                    
+                    If cellShapes(i).TextFrame.HasText Then
+                        cellShapes(i).TextFrame.textRange.Copy
+                        .TextFrame.textRange.Paste
+                    End If
+                    
+                    .TextFrame.textRange.ParagraphFormat.Alignment = cellShapes(i).TextFrame.textRange.ParagraphFormat.Alignment
+                    .TextFrame.textRange.ParagraphFormat.BaseLineAlignment = cellShapes(i).TextFrame.textRange.ParagraphFormat.BaseLineAlignment
+                    .Fill.ForeColor.RGB = cellShapes(i).Fill.ForeColor.RGB
+                    
+                End With
+                
+                With Newcell
+                    
+                    If h = 1 Then
+                        
+                        If cellShapes(i).Line.Weight > -1 Then
+                            .Borders(ppBorderBottom).ForeColor.RGB = cellShapes(i).Line.ForeColor.RGB
+                            .Borders(ppBorderTop).ForeColor.RGB = cellShapes(i).Line.ForeColor.RGB
+                            .Borders(ppBorderLeft).ForeColor.RGB = cellShapes(i).Line.ForeColor.RGB
+                            .Borders(ppBorderRight).ForeColor.RGB = cellShapes(i).Line.ForeColor.RGB
+                            
+                            .Borders(ppBorderBottom).Weight = cellShapes(i).Line.Weight
+                            .Borders(ppBorderTop).Weight = cellShapes(i).Line.Weight
+                            .Borders(ppBorderLeft).Weight = cellShapes(i).Line.Weight
+                            .Borders(ppBorderRight).Weight = cellShapes(i).Line.Weight
+                            
+                            If cellShapes(i).Line.DashStyle > -1 Then
+                                .Borders(ppBorderBottom).DashStyle = cellShapes(i).Line.DashStyle
+                                .Borders(ppBorderTop).DashStyle = cellShapes(i).Line.DashStyle
+                                .Borders(ppBorderLeft).DashStyle = cellShapes(i).Line.DashStyle
+                                .Borders(ppBorderRight).DashStyle = cellShapes(i).Line.DashStyle
+                            End If
+                            
+                        Else
+                            .Borders(ppBorderBottom).ForeColor.RGB = RGB(255, 255, 255)
+                            
+                            .Borders(ppBorderTop).ForeColor.RGB = RGB(255, 255, 255)
+                            
+                            If i = 1 Then
+                                .Borders(ppBorderLeft).ForeColor.RGB = RGB(255, 255, 255)
+                            End If
+                            
+                            .Borders(ppBorderRight).ForeColor.RGB = RGB(255, 255, 255)
+                            
+                            .Borders(ppBorderBottom).Weight = 0
+                            .Borders(ppBorderTop).Weight = 0
+                            If i = 1 Then
+                                .Borders(ppBorderLeft).Weight = 0
+                            End If
+                            .Borders(ppBorderRight).Weight = 0
+                        End If
+                        
+                    Else
+                        
+                        If cellShapes(i).Line.Weight > -1 Then
+                            .Borders(ppBorderBottom).ForeColor.RGB = cellShapes(i).Line.ForeColor.RGB
+                            .Borders(ppBorderTop).ForeColor.RGB = cellShapes(i).Line.ForeColor.RGB
+                            .Borders(ppBorderLeft).ForeColor.RGB = cellShapes(i).Line.ForeColor.RGB
+                            .Borders(ppBorderRight).ForeColor.RGB = cellShapes(i).Line.ForeColor.RGB
+                            
+                            .Borders(ppBorderBottom).Weight = cellShapes(i).Line.Weight
+                            .Borders(ppBorderTop).Weight = cellShapes(i).Line.Weight
+                            .Borders(ppBorderLeft).Weight = cellShapes(i).Line.Weight
+                            .Borders(ppBorderRight).Weight = cellShapes(i).Line.Weight
+                            
+                            If cellShapes(i).Line.DashStyle > -1 Then
+                                .Borders(ppBorderBottom).DashStyle = cellShapes(i).Line.DashStyle
+                                .Borders(ppBorderTop).DashStyle = cellShapes(i).Line.DashStyle
+                                .Borders(ppBorderLeft).DashStyle = cellShapes(i).Line.DashStyle
+                                .Borders(ppBorderRight).DashStyle = cellShapes(i).Line.DashStyle
+                            End If
+                            
+                        Else
+                            
+                            .Borders(ppBorderBottom).Transparency = 0
+                            .Borders(ppBorderRight).Transparency = 0
+                            .Borders(ppBorderBottom).Weight = 0
+                            .Borders(ppBorderRight).Weight = 0
+                            
+                        End If
+                        
+                    End If
+                    
+                End With
+                
+           
+            If (j + 1) > numCols And Not i = UBound(cellShapes) Then
+                h = h + 1
+            End If
+        
+        cellShapes(i).Delete
+        
+        Next i
+    Else
+        MsgBox "No shapes selected."
+    End If
+    
+    End If
+End Sub
+
+
+
 Sub ConvertTableToShapes()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
             
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
     MsgBox "Please select a table."
     
-    ElseIf myDocument.Selection.ShapeRange.HasTable Then
+    ElseIf MyDocument.Selection.ShapeRange.HasTable Then
     
-    TableTop = myDocument.Selection.ShapeRange.Top
-    TableLeft = myDocument.Selection.ShapeRange.Left
+    TableTop = MyDocument.Selection.ShapeRange.Top
+    TableLeft = MyDocument.Selection.ShapeRange.Left
     
     TypeOfColumnGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA COLUMNGAPS")
     TypeOfRowGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA ROWGAPS")
     
     ProgressForm.Show
     
-    For RowsCount = 1 To myDocument.Selection.ShapeRange.Table.Rows.Count
+    For RowsCount = 1 To MyDocument.Selection.ShapeRange.Table.Rows.Count
     
-    SetProgress (RowsCount / myDocument.Selection.ShapeRange.Table.Rows.Count * 100)
+    SetProgress (RowsCount / MyDocument.Selection.ShapeRange.Table.Rows.Count * 100)
     
-        For ColsCount = 1 To myDocument.Selection.ShapeRange.Table.Columns.Count
+        For ColsCount = 1 To MyDocument.Selection.ShapeRange.Table.Columns.Count
             
             If Not ((ColsCount Mod 2 = 0 And TypeOfColumnGaps = "even") Or (Not ColsCount Mod 2 = 0 And TypeOfColumnGaps = "odd") Or (RowsCount Mod 2 = 0 And TypeOfRowGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfRowGaps = "odd")) Then
             
-            Set NewShape = myDocument.Selection.SlideRange.Shapes.AddShape(Type:=msoShapeRectangle, Left:=TableLeft, Top:=TableTop, Width:=myDocument.Selection.ShapeRange.Table.Columns(ColsCount).Width, Height:=myDocument.Selection.ShapeRange.Table.Rows(RowsCount).Height)
+            Set NewShape = MyDocument.Selection.SlideRange.shapes.AddShape(Type:=msoShapeRectangle, Left:=TableLeft, Top:=TableTop, Width:=MyDocument.Selection.ShapeRange.Table.Columns(ColsCount).Width, Height:=MyDocument.Selection.ShapeRange.Table.Rows(RowsCount).Height)
             
             With NewShape
-                .TextFrame.MarginBottom = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.MarginBottom
-                .TextFrame.MarginLeft = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.MarginLeft
-                .TextFrame.MarginRight = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.MarginRight
-                .TextFrame.MarginTop = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.MarginTop
+                .TextFrame.MarginBottom = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.MarginBottom
+                .TextFrame.MarginLeft = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.MarginLeft
+                .TextFrame.MarginRight = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.MarginRight
+                .TextFrame.MarginTop = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.MarginTop
                 
-                If Not myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Text = "" Then
-                    myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Cut
-                    .TextFrame.TextRange.Paste
+                If Not MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.textRange.Text = "" Then
+                    MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.textRange.Cut
+                    .TextFrame.textRange.Paste
                 End If
                 
-                .TextFrame.TextRange.ParagraphFormat.Alignment = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.ParagraphFormat.Alignment
-                .TextFrame.TextRange.ParagraphFormat.BaseLineAlignment = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.ParagraphFormat.BaseLineAlignment
-                .Fill.ForeColor.RGB = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Shape.Fill.ForeColor.RGB
-                .Line.ForeColor.RGB = myDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Borders(ppBorderBottom).ForeColor.RGB
+                .TextFrame.textRange.ParagraphFormat.Alignment = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.textRange.ParagraphFormat.Alignment
+                .TextFrame.textRange.ParagraphFormat.BaseLineAlignment = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.textRange.ParagraphFormat.BaseLineAlignment
+                .Fill.ForeColor.RGB = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.Fill.ForeColor.RGB
+                .Line.ForeColor.RGB = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Borders(ppBorderBottom).ForeColor.RGB
             End With
             
             End If

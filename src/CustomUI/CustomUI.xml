@@ -12,7 +12,12 @@
                   <button idMso="ClearFormatting" showLabel="false" />
                </box>
                <box id="FontBox2" boxStyle="horizontal">
+                  <splitButton id="BoldSplitButton" showLabel="false" >
                   <toggleButton idMso="Bold" showLabel="false" />
+                  <menu id="BoldColorMenu" itemSize="normal" >
+                     <button id="BoldColorButton" label="Color bold text in selected shapes and tables, using first found bold text color" showLabel="false" onAction="ObjectsTextColorBold" />                  
+                  </menu>
+               </splitButton>
                   <toggleButton idMso="Italic" showLabel="false" />
                   <toggleButton idMso="Underline" showLabel="false" />
                   <toggleButton idMso="Shadow" showLabel="false" />
@@ -235,6 +240,7 @@
                   </menu>
                </splitButton>
                <button id="TableConvertTableToShapes" imageMso="ConvertTableToText" label="Convert table to shapes" showLabel="false" onAction="ConvertTableToShapes" />
+               <button id="TableConvertShapesToTable" imageMso="ConvertTextToTable" label="Convert shapes to table" showLabel="false" onAction="ConvertShapesToTable" />
                <button id="TableTranspose" imageMso="ChartSwitchRowColumn" label="Transpose table" showLabel="false" onAction="TableTranspose" />
                <splitButton id="TableSplitSplitButton" size="normal" showLabel="false">
                   <button id="SplitTableByRowButton" imageMso="SplitTable" label="Split table by row" showLabel="false" onAction="SplitTableByRow" />
