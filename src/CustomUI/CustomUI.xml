@@ -15,13 +15,19 @@
                   <splitButton id="BoldSplitButton" showLabel="false" >
                   <toggleButton idMso="Bold" showLabel="false" />
                   <menu id="BoldColorMenu" itemSize="normal" >
-                     <button id="BoldColorButton" label="Color bold text in selected shapes and tables, using first found bold text color" showLabel="false" onAction="ObjectsTextColorBold" />                  
+                     <button id="BoldColorButton" label="Color bold text (automatically)" imageMso="TransitionTimeAutomaticallyAfter" showLabel="false" onAction="ColorBoldTextColorAutomatically" />
+                     <button id="BoldColorPickerButton" label="Color bold text (color picker)" imageMso="ShapeFillColorPicker" showLabel="false" onAction="ColorBoldTextColorPicker" />                       
                   </menu>
                </splitButton>
                   <toggleButton idMso="Italic" showLabel="false" />
                   <toggleButton idMso="Underline" showLabel="false" />
-                  <toggleButton idMso="Shadow" showLabel="false" />
+                  <toggleButton idMso="Shadow" showLabel="false" />                 
+               <splitButton id="StrikethroughSplitButton" showLabel="false" >
                   <toggleButton idMso="Strikethrough" showLabel="false" />
+                  <menu id="StrikethroughMenu" itemSize="normal" >
+                     <button id="ObjectsTextDeleteStrikethroughButton" label="Delete strikethrough text" imageMso="Delete" showLabel="false" onAction="ObjectsTextDeleteStrikethrough" />       
+                  </menu>
+               </splitButton>
                   <gallery idMso="CharacterSpacingGallery" showLabel="false" />
                   <gallery idMso="ChangeCaseGallery" showLabel="false" />
                </box>
@@ -110,7 +116,8 @@
                   <button id="ConnectRectangleShapesLeftToRight" label="Shape 1 left side to shape 2 right side" onAction="ConnectRectangleShapesLeftToRight" />
                   <button id="ConnectRectangleShapesBottomToTop" label="Shape 1 bottom side to shape 2 top side" onAction="ConnectRectangleShapesBottomToTop" />
                   <button id="ConnectRectangleShapesTopToBottom" label="Shape 1 top side to shape 2 bottom side" onAction="ConnectRectangleShapesTopToBottom" />
-               </menu>            
+               </menu>    
+               <separator id="CopyPositionSeperator" />        
                      <splitButton id="LockSplitButton" size="normal" showLabel="false" >
                      <button id="LockToggleSelectedShapesButton" label="Toggle lock or unlock position of selected shapes" showLabel="false" imageMso="Lock" onAction="LockToggleSelectedShapes" />
                      <menu id="LockMenu" itemSize="normal">
@@ -119,7 +126,8 @@
                         <button id="UnLockAllShapesOnAllSlides" label="Unlock position of all shapes on all slides" showLabel="false" imageMso="Lock" onAction="UnLockAllShapesOnAllSlides" />
                         </menu>
                       </splitButton>
-               <separator id="CopyPositionSeperator" />
+                <button id="GroupShapesByColumnsButton" label="Group shapes by columns" showLabel="false" imageMso="ControlLayoutTabular" onAction="GroupShapesByColumns" />
+                <button id="GroupShapesByRowsButton" label="Group shapes by rows" showLabel="false" imageMso="ControlLayoutStacked" onAction="GroupShapesByRows" />
                <menu id="SelectShapeByMenu" label="Select shape by attributes" imageMso="SelectionPane" showLabel="false" >
                   <button id="SelectShapesByFillColor" label="Select shapes with same fill color" onAction="ObjectsSelectBySameFillColor" />
                   <button id="SelectShapesByLineColor" label="Select shapes with same line color" onAction="ObjectsSelectBySameLineColor" />
@@ -197,6 +205,7 @@
                <button id="ObjectsIncreaseSpacingVertical" imageMso="VerticalSpacingIncrease" label="Increase vertical gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingVertical" />
                <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />
                <separator id="separatorTableAlign" />
+               <button id="ObjectsArrangeShapesButton" imageMso="SlidesPerPage9Slides" label="Arrange shapes" showLabel="false" onAction="ArrangeShapes" />
                <splitButton id="TableAlignSplitButton" size="normal" showLabel="false">
                   <button id="ObjectsAlignToTable" imageMso="GroupTableProperties" label="Center align shapes to table cells" showLabel="false" onAction="ObjectsAlignToTable" />
                   <menu id="TableAlignMenu" itemSize="normal">

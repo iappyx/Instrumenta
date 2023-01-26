@@ -43,7 +43,7 @@ Sub SaveSelectedSlides()
         'Strip extension from filename
         DotPosition = InStrRev(ThisPresentation.Name, ".")
         If DotPosition > 0 Then
-            PresentationFilename = Left(ThisPresentation.Name, DotPosition - 1)
+            PresentationFilename = left(ThisPresentation.Name, DotPosition - 1)
         Else
             PresentationFilename = ThisPresentation.Name
         End If
@@ -91,7 +91,7 @@ Sub SaveSelectedSlides()
         
         DotPosition = InStrRev(exportFilePath, ".")
         If DotPosition > 0 Then
-            exportFilePath = Left(exportFilePath, DotPosition - 1) & ".pptx"
+            exportFilePath = left(exportFilePath, DotPosition - 1) & ".pptx"
         Else
             exportFilePath = exportFilePath & ".pptx"
         End If
@@ -152,7 +152,7 @@ Sub EmailSelectedSlides()
         'Strip extension from filename
         DotPosition = InStrRev(ThisPresentation.Name, ".")
         If DotPosition > 0 Then
-            PresentationFilename = Left(ThisPresentation.Name, DotPosition - 1)
+            PresentationFilename = left(ThisPresentation.Name, DotPosition - 1)
         Else
             PresentationFilename = ThisPresentation.Name
         End If
@@ -272,7 +272,7 @@ Sub EmailSelectedSlidesAsPDF()
         DotPosition = InStrRev(ActivePresentation.Name, ".")
         
         If DotPosition > 0 Then
-            PresentationFilename = Left(ActivePresentation.Name, DotPosition - 1)
+            PresentationFilename = left(ActivePresentation.Name, DotPosition - 1)
         Else
             PresentationFilename = ActivePresentation.Name
         End If

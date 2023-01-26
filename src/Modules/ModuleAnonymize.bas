@@ -58,7 +58,7 @@ Sub AnonymizeShapeWithLoremIpsum(SlideShape)
             
             For Each Paragraph In SlideShape.TextFrame2.TextRange.Paragraphs
                 If Paragraph.Length > 1 Then
-                Paragraph.text = GetLoremIpsum(Paragraph.words.Count, Paragraph.Length)
+                Paragraph.Text = GetLoremIpsum(Paragraph.Words.Count, Paragraph.Length)
                 End If
             Next
             
@@ -68,9 +68,9 @@ Sub AnonymizeShapeWithLoremIpsum(SlideShape)
             For TableRow = 1 To SlideShape.Table.Rows.Count
                 For TableColumn = 1 To SlideShape.Table.Columns.Count
                     
-                    For Each Paragraph In SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame2.TextRange.Paragraphs
+                    For Each Paragraph In SlideShape.Table.Cell(TableRow, TableColumn).shape.TextFrame2.TextRange.Paragraphs
                         If Paragraph.Length > 1 Then
-                        Paragraph.text = GetLoremIpsum(Paragraph.words.Count, Paragraph.Length)
+                        Paragraph.Text = GetLoremIpsum(Paragraph.Words.Count, Paragraph.Length)
                         End If
                     Next
                     
@@ -84,7 +84,7 @@ Sub AnonymizeShapeWithLoremIpsum(SlideShape)
                 
                 For Each Paragraph In SlideShape.SmartArt.AllNodes(SlideShapeSmartArtNode).TextFrame2.TextRange.Paragraphs
                     If Paragraph.Length > 1 Then
-                    Paragraph.text = GetLoremIpsum(Paragraph.words.Count, Paragraph.Length)
+                    Paragraph.Text = GetLoremIpsum(Paragraph.Words.Count, Paragraph.Length)
                     End If
                 Next
                 

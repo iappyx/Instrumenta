@@ -23,22 +23,22 @@ Attribute VB_Name = "ModuleStepsCounter"
 
 Sub GenerateStepsCounter()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfSteps As Long
     
     NumberOfSteps = 0
-    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.Shapes.Count
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StepsCounter") = 1 Then
+        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StepsCounter") = 1 Then
             On Error Resume Next
-            If CLng(myDocument.Selection.SlideRange.Shapes(ShapeNumber).TextFrame.TextRange.Text) > NumberOfSteps Then
-                NumberOfSteps = CLng(myDocument.Selection.SlideRange.Shapes(ShapeNumber).TextFrame.TextRange.Text)
-                myDocument.Selection.SlideRange.Shapes(ShapeNumber).PickUp
-                CounterHeight = myDocument.Selection.SlideRange.Shapes(ShapeNumber).Height
-                CounterWidth = myDocument.Selection.SlideRange.Shapes(ShapeNumber).Width
-                CounterShape = myDocument.Selection.SlideRange.Shapes(ShapeNumber).AutoShapeType
+            If CLng(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).TextFrame.TextRange.Text) > NumberOfSteps Then
+                NumberOfSteps = CLng(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).TextFrame.TextRange.Text)
+                MyDocument.Selection.SlideRange.Shapes(ShapeNumber).PickUp
+                CounterHeight = MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Height
+                CounterWidth = MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Width
+                CounterShape = MyDocument.Selection.SlideRange.Shapes(ShapeNumber).AutoShapeType
                 
             End If
             On Error GoTo 0
@@ -46,10 +46,10 @@ Sub GenerateStepsCounter()
         
     Next
     
-    Set StepsCounter = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, Application.ActivePresentation.PageSetup.SlideWidth - (22 * (NumberOfSteps + 1)), 5, 20, 20)
+    Set StepsCounter = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, Application.ActivePresentation.PageSetup.SlideWidth - (22 * (NumberOfSteps + 1)), 5, 20, 20)
     
     With StepsCounter
-        .Line.Visible = False
+        .Line.visible = False
         .Fill.ForeColor.RGB = RGB(0, 112, 192)
         .Fill.Transparency = 0.1
         .Name = "StepsCounter" + Str(RandomNumber)
@@ -85,13 +85,13 @@ End Sub
 
 Sub SelectAllStepsCounter()
     
-    Set myDocument = Application.ActiveWindow
-    Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
+    Set MyDocument = Application.ActiveWindow
+    Dim SlideShape, SlideShapeToCheck As PowerPoint.shape
     Dim SelectedShapes() As String
     Dim ShapeCount  As Long
     ShapeCount = 0
     
-    For Each SlideShapeToCheck In myDocument.View.Slide.Shapes
+    For Each SlideShapeToCheck In MyDocument.View.Slide.Shapes
         
         If InStr(SlideShapeToCheck.Name, "StepsCounter") = 1 Then
             
@@ -110,7 +110,7 @@ End Sub
 
 Sub GenerateCrossSlideStepsCounter()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfSteps As Long
@@ -142,10 +142,10 @@ Sub GenerateCrossSlideStepsCounter()
         
     Next
     
-    Set StepsCounter = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, Application.ActivePresentation.PageSetup.SlideWidth - (22 * (NumberOfSteps + 1)), 5, 20, 20)
+    Set StepsCounter = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, Application.ActivePresentation.PageSetup.SlideWidth - (22 * (NumberOfSteps + 1)), 5, 20, 20)
     
     With StepsCounter
-        .Line.Visible = False
+        .Line.visible = False
         .Fill.ForeColor.RGB = RGB(112, 192, 0)
         .Fill.Transparency = 0.1
         .Name = "CrossSlideStepsCounter" + Str(RandomNumber)
@@ -181,13 +181,13 @@ End Sub
 
 Sub SelectAllCrossSlideStepsCounter()
     
-    Set myDocument = Application.ActiveWindow
-    Dim SlideShape, SlideShapeToCheck As PowerPoint.Shape
+    Set MyDocument = Application.ActiveWindow
+    Dim SlideShape, SlideShapeToCheck As PowerPoint.shape
     Dim SelectedShapes() As String
     Dim ShapeCount  As Long
     ShapeCount = 0
     
-    For Each SlideShapeToCheck In myDocument.View.Slide.Shapes
+    For Each SlideShapeToCheck In MyDocument.View.Slide.Shapes
         
         If InStr(SlideShapeToCheck.Name, "CrossSlideStepsCounter") = 1 Then
             

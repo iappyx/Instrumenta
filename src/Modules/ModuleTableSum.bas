@@ -23,12 +23,12 @@ Attribute VB_Name = "ModuleTableSum"
 
 Sub TableSum()
 
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim TotalSum As Double
     TotalSum = 0
     
        
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
     MsgBox "No table or cells selected."
     Else
     
@@ -49,12 +49,12 @@ Sub TableSum()
                     For SumCount = 1 To RowsCount - 1
                     
                     On Error Resume Next
-                    TotalSum = TotalSum + CDbl(.Cell(SumCount, ColsCount).Shape.TextFrame.TextRange.Text)
+                    TotalSum = TotalSum + CDbl(.Cell(SumCount, ColsCount).shape.TextFrame.TextRange.Text)
                     On Error GoTo 0
                     
                     Next SumCount
                         
-                    .Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Text = TotalSum
+                    .Cell(RowsCount, ColsCount).shape.TextFrame.TextRange.Text = TotalSum
                     
                     End If
                     
@@ -79,11 +79,11 @@ End Sub
 
 Sub TableRowSum()
 
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim TotalSum As Double
     TotalSum = 0
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
     MsgBox "No table or cells selected."
     Else
     
@@ -104,12 +104,12 @@ Sub TableRowSum()
                     For SumCount = 1 To ColsCount - 1
                     
                     On Error Resume Next
-                    TotalSum = TotalSum + CDbl(.Cell(RowsCount, SumCount).Shape.TextFrame.TextRange.Text)
+                    TotalSum = TotalSum + CDbl(.Cell(RowsCount, SumCount).shape.TextFrame.TextRange.Text)
                     On Error GoTo 0
                     
                     Next SumCount
                         
-                    .Cell(RowsCount, ColsCount).Shape.TextFrame.TextRange.Text = TotalSum
+                    .Cell(RowsCount, ColsCount).shape.TextFrame.TextRange.Text = TotalSum
                     
                     End If
                     

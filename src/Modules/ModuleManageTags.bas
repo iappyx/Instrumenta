@@ -200,7 +200,7 @@ Sub ShowFormManageTags()
         
         TypeOfTag = "shape"
         
-        ManageTagsForm.FrameStandardTag.Visible = False
+        ManageTagsForm.FrameStandardTag.visible = False
         
         For ShapeCount = 1 To Application.ActiveWindow.Selection.ShapeRange.Count
             
@@ -223,7 +223,7 @@ Sub ShowFormManageTags()
         
         TypeOfTag = "slide"
         
-        ManageTagsForm.FrameStandardTag.Visible = True
+        ManageTagsForm.FrameStandardTag.visible = True
         
         For SlideCount = 1 To Application.ActiveWindow.Selection.SlideRange.Count
             For TagCount = 1 To Application.ActiveWindow.Selection.SlideRange(SlideCount).Tags.Count
@@ -360,7 +360,7 @@ End Sub
 
 Sub HideTagsOnSlide()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
     Dim PresentationSlide As Slide
     
@@ -380,7 +380,7 @@ End Sub
 
 Sub ShowTagsOnSlide()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
     Dim PresentationSlide As Slide
     
@@ -401,7 +401,7 @@ Sub ShowTagsOnSlide()
             Set TagBackground = PresentationSlide.Shapes.AddShape(msoShapeSnip2SameRectangle, 100, 100, 26, 150)
             
             With TagBackground
-                .Line.Visible = False
+                .Line.visible = False
                 .Fill.ForeColor.RGB = RGB(0, 0, 0)
                 .Name = "TagBackground" + Str(RandomNumber)
                 .Rotation = -90
@@ -410,12 +410,12 @@ Sub ShowTagsOnSlide()
             Set TagBackgroundInner = PresentationSlide.Shapes.AddShape(msoShapeOval, 43, 100 + 75 - 3, 6, 6)
             
             With TagBackgroundInner
-                .Line.Visible = False
+                .Line.visible = False
                 .Fill.ForeColor.RGB = RGB(255, 255, 255)
                 .Name = "TagBackgroundInner" + Str(RandomNumber)
             End With
             
-            Dim TagText As Shape
+            Dim TagText As shape
             
             Set TagText = PresentationSlide.Shapes.AddTextbox(msoTextOrientationHorizontal, 53, 100 + 75 - 13, 135, 26)
             
@@ -433,7 +433,7 @@ Sub ShowTagsOnSlide()
                 .TextFrame.TextRange.Font.Bold = msoTrue
                 .TextFrame.TextRange.Font.Name = "Arial"
                 .TextFrame.TextRange.Font.Size = 7
-                .Line.Visible = False
+                .Line.visible = False
                 .Name = "TagText" + Str(RandomNumber)
             End With
             ActiveWindow.View.GotoSlide PresentationSlide.SlideNumber
@@ -441,11 +441,11 @@ Sub ShowTagsOnSlide()
             PresentationSlide.Shapes.Range(Array("TagBackground" + Str(RandomNumber), "TagBackgroundInner" + Str(RandomNumber), "TagText" + Str(RandomNumber))).Select
             CommandBars.ExecuteMso ("ShapesCombine")
             
-            For Each Shape In ActiveWindow.Selection.ShapeRange
+            For Each shape In ActiveWindow.Selection.ShapeRange
                 
-                Shape.Name = "Tag" + Str(RandomNumber)
-                Shape.Top = -95
-                Shape.Left = 65 + (TagCount - 1) * (Shape.Height + 5)
+                shape.Name = "Tag" + Str(RandomNumber)
+                shape.Top = -95
+                shape.left = 65 + (TagCount - 1) * (shape.Height + 5)
             Next
             
         Next TagCount

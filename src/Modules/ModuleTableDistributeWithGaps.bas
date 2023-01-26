@@ -23,13 +23,13 @@ Attribute VB_Name = "ModuleTableDistributeWithGaps"
 
 Sub TableDistributeColumnsWithGaps()
 
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim TotalWidth As Double
     Dim NumberOfColumnsToDistribute As Long
     TotalWidth = 0
     NumberOfColumnsToDistribute = 0
      
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table or cells selected."
     Else
     
@@ -96,13 +96,13 @@ End Sub
 
 Sub TableDistributeRowsWithGaps()
 
-    Set myDocument = Application.ActiveWindow
-    Dim TotalHeight As Double
+    Set MyDocument = Application.ActiveWindow
+    Dim totalHeight As Double
     Dim NumberOfRowsToDistribute As Long
-    TotalHeight = 0
+    totalHeight = 0
     NumberOfRowsToDistribute = 0
      
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table or cells selected."
     Else
     
@@ -121,7 +121,7 @@ Sub TableDistributeRowsWithGaps()
                     
                 If Not ((RowsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
-                TotalHeight = TotalHeight + .Rows(RowsCount).Height
+                totalHeight = totalHeight + .Rows(RowsCount).Height
                 NumberOfRowsToDistribute = NumberOfRowsToDistribute + 1
                 Exit For
                     
@@ -144,7 +144,7 @@ Sub TableDistributeRowsWithGaps()
                     
                 If Not ((RowsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
-                .Rows(RowsCount).Height = TotalHeight / NumberOfRowsToDistribute
+                .Rows(RowsCount).Height = totalHeight / NumberOfRowsToDistribute
                 Exit For
                     
                 End If

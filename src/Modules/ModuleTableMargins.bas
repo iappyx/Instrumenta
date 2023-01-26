@@ -24,9 +24,9 @@ Attribute VB_Name = "ModuleTableMargins"
 
 Sub TablesMarginsToZero()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table or cells selected."
     Else
     
@@ -39,7 +39,7 @@ Sub TablesMarginsToZero()
                 
                 If .Cell(RowsCount, ColsCount).Selected Then
                     
-                    With .Cell(RowsCount, ColsCount).Shape.TextFrame
+                    With .Cell(RowsCount, ColsCount).shape.TextFrame
                         
                         .MarginBottom = 0
                         .MarginLeft = 0
@@ -67,9 +67,9 @@ End Sub
 
 Sub TablesMarginsIncrease()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table or cells selected."
     Else
     
@@ -85,7 +85,7 @@ Sub TablesMarginsIncrease()
                 
                 If .Cell(RowsCount, ColsCount).Selected Then
                     
-                    With .Cell(RowsCount, ColsCount).Shape.TextFrame
+                    With .Cell(RowsCount, ColsCount).shape.TextFrame
                         
                         .MarginBottom = .MarginBottom + TableMarginSetting
                         .MarginLeft = .MarginLeft + TableMarginSetting
@@ -113,9 +113,9 @@ End Sub
 
 Sub TablesMarginsDecrease()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table or cells selected."
     Else
     
@@ -131,7 +131,7 @@ Sub TablesMarginsDecrease()
                 
                 If .Cell(RowsCount, ColsCount).Selected Then
                     
-                    With .Cell(RowsCount, ColsCount).Shape.TextFrame
+                    With .Cell(RowsCount, ColsCount).shape.TextFrame
                         
                         If .MarginBottom >= TableMarginSetting Then
                             .MarginBottom = .MarginBottom - TableMarginSetting

@@ -23,25 +23,25 @@ Attribute VB_Name = "ModuleHarveyBalls"
 
 Sub AverageHarveyBall()
 
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim HarveyCount As Integer
     Dim HarveySum As Double
     
     HarveySum = 0
     HarveyCount = 0
           
-    If myDocument.Selection.Type = ppSelectionShapes Then
+    If MyDocument.Selection.Type = ppSelectionShapes Then
         
-        For Each Shape In ActiveWindow.Selection.ShapeRange
+        For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If (InStr(Shape.Name, "HarveyBall") = 1) And (Not Shape.Tags("INSTRUMENTA HARVEYBALL") = "") Then
+            If (InStr(shape.Name, "HarveyBall") = 1) And (Not shape.Tags("INSTRUMENTA HARVEYBALL") = "") Then
                 
                 HarveyCount = HarveyCount + 1
-                HarveySum = HarveySum + CDbl(Shape.Tags("INSTRUMENTA HARVEYBALL"))
+                HarveySum = HarveySum + CDbl(shape.Tags("INSTRUMENTA HARVEYBALL"))
                 
             End If
             
-        Next Shape
+        Next shape
     End If
     
     If HarveyCount > 0 Then
@@ -56,48 +56,48 @@ Sub AverageHarveyBall()
 End Sub
 
 Sub GenerateHarveyBallPercent(FillPercentage As Double)
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
     Dim ExistingWidth, ExistingHeight, ExistingTop, ExistingLeft, ExistingRotation As Double
     Dim ExistingHarveyBall As Boolean
     ExistingHarveyBall = False
     
-    If myDocument.Selection.Type = ppSelectionShapes Then
+    If MyDocument.Selection.Type = ppSelectionShapes Then
         
-        For Each Shape In ActiveWindow.Selection.ShapeRange
+        For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If InStr(Shape.Name, "HarveyBall") = 1 Then
+            If InStr(shape.Name, "HarveyBall") = 1 Then
                 
                 ExistingHarveyBall = True
-                ExistingWidth = Shape.Width
-                ExistingHeight = Shape.Height
-                ExistingTop = Shape.Top
-                ExistingLeft = Shape.Left
-                ExistingRotation = Shape.Rotation
-                Shape.Delete
+                ExistingWidth = shape.Width
+                ExistingHeight = shape.Height
+                ExistingTop = shape.Top
+                ExistingLeft = shape.left
+                ExistingRotation = shape.Rotation
+                shape.Delete
                 
             End If
             
             Exit For
-        Next Shape
+        Next shape
     End If
     
     RandomNumber = Round(Rnd() * 1000000, 0)
     
-    Dim HarveyCircle, HarveyFill As Shape
+    Dim HarveyCircle, HarveyFill As shape
     
-    Set HarveyCircle = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 100, 100, 50, 50)
-    Set HarveyFill = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapePie, 101, 101, 48, 48)
+    Set HarveyCircle = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 100, 100, 50, 50)
+    Set HarveyFill = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapePie, 101, 101, 48, 48)
     With HarveyFill
         .Name = "HarveyFill" + Str(RandomNumber)
         .Adjustments.Item(2) = -90
         .Adjustments.Item(1) = ((FillPercentage / 100) * 360) - 90
-        .Line.Visible = False
+        .Line.visible = False
         .Fill.ForeColor.RGB = RGB(0, 0, 0)
     End With
     With HarveyCircle
         .Name = "HarveyCircle" + Str(RandomNumber)
-        .Line.Visible = False
+        .Line.visible = False
         .Fill.ForeColor.RGB = RGB(0, 0, 0)
     End With
     
@@ -107,19 +107,19 @@ Sub GenerateHarveyBallPercent(FillPercentage As Double)
     
     ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("HarveyCircle" + Str(RandomNumber), "HarveyFill" + Str(RandomNumber))).Select
     CommandBars.ExecuteMso ("ShapesCombine")
-    For Each Shape In ActiveWindow.Selection.ShapeRange
+    For Each shape In ActiveWindow.Selection.ShapeRange
         
-        Shape.Name = "HarveyBall" + Str(RandomNumber)
+        shape.Name = "HarveyBall" + Str(RandomNumber)
         
         If ExistingHarveyBall = True Then
-            Shape.Width = ExistingWidth
-            Shape.Height = ExistingHeight
-            Shape.Top = ExistingTop
-            Shape.Left = ExistingLeft
-            Shape.Rotation = ExistingRotation
+            shape.Width = ExistingWidth
+            shape.Height = ExistingHeight
+            shape.Top = ExistingTop
+            shape.left = ExistingLeft
+            shape.Rotation = ExistingRotation
         End If
         
-        Shape.Tags.Add "INSTRUMENTA HARVEYBALL", FillPercentage
+        shape.Tags.Add "INSTRUMENTA HARVEYBALL", FillPercentage
         
     Next
     ActiveWindow.Selection.Unselect

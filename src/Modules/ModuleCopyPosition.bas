@@ -26,31 +26,31 @@ Public PositionCopied As Boolean
 
 Sub CopyPosition()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
     Else
     
-    TopToCopy = myDocument.Selection.ShapeRange(1).Top
-    LeftToCopy = myDocument.Selection.ShapeRange(1).Left
-    WidthToCopy = myDocument.Selection.ShapeRange(1).Width
-    HeightToCopy = myDocument.Selection.ShapeRange(1).Height
+    TopToCopy = MyDocument.Selection.ShapeRange(1).Top
+    LeftToCopy = MyDocument.Selection.ShapeRange(1).left
+    WidthToCopy = MyDocument.Selection.ShapeRange(1).Width
+    HeightToCopy = MyDocument.Selection.ShapeRange(1).Height
     PositionCopied = True
     
     End If
 End Sub
 
 Sub PastePosition()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
     Else
     
     If PositionCopied = True Then
-        myDocument.Selection.ShapeRange(1).Top = TopToCopy
-        myDocument.Selection.ShapeRange(1).Left = LeftToCopy
+        MyDocument.Selection.ShapeRange(1).Top = TopToCopy
+        MyDocument.Selection.ShapeRange(1).left = LeftToCopy
     Else
         MsgBox "No dimensions available. First copy position / dimension of a shape."
     End If
@@ -60,17 +60,17 @@ End Sub
 
 Sub PastePositionAndDimensions()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
     Else
     
     If PositionCopied = True Then
-        myDocument.Selection.ShapeRange(1).Top = TopToCopy
-        myDocument.Selection.ShapeRange(1).Left = LeftToCopy
-        myDocument.Selection.ShapeRange(1).Width = WidthToCopy
-        myDocument.Selection.ShapeRange(1).Height = HeightToCopy
+        MyDocument.Selection.ShapeRange(1).Top = TopToCopy
+        MyDocument.Selection.ShapeRange(1).left = LeftToCopy
+        MyDocument.Selection.ShapeRange(1).Width = WidthToCopy
+        MyDocument.Selection.ShapeRange(1).Height = HeightToCopy
     Else
         MsgBox "No dimensions available. First copy position / dimension of a shape."
     End If

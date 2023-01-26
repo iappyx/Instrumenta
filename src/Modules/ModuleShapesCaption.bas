@@ -25,9 +25,9 @@ Public NumberOfTableCaptions, NumberOfShapeCaptions As Long
 
 Sub InsertCaption()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
     Else
         
@@ -53,14 +53,14 @@ Sub InsertCaption()
         
         ProgressForm.Hide
         
-        Dim Caption As Shape
-        Dim CaptionNumber As Shape
+        Dim Caption As shape
+        Dim CaptionNumber As shape
         
         For Each SlideShape In ActiveWindow.Selection.ShapeRange
             With SlideShape
                 
-                Set Caption = Application.ActiveWindow.View.Slide.Shapes.AddTextbox(Orientation:=msoTextOrientationHorizontal, Left:=0, Top:=0, Width:=400, Height:=100)
-                Set CaptionNumber = Application.ActiveWindow.View.Slide.Shapes.AddTextbox(Orientation:=msoTextOrientationHorizontal, Left:=0, Top:=0, Width:=400, Height:=100)
+                Set Caption = Application.ActiveWindow.View.Slide.Shapes.AddTextbox(Orientation:=msoTextOrientationHorizontal, left:=0, Top:=0, Width:=400, Height:=100)
+                Set CaptionNumber = Application.ActiveWindow.View.Slide.Shapes.AddTextbox(Orientation:=msoTextOrientationHorizontal, left:=0, Top:=0, Width:=400, Height:=100)
                 
                 If .HasTable Then
                     CaptionNumber.Tags.Add "INSTRUMENTA TABLE CAPTION", Str(NumberOfTableCaptions)
@@ -89,9 +89,9 @@ Sub InsertCaption()
                 CaptionNumber.TextFrame.WordWrap = msoFalse
                 CaptionNumber.TextFrame.AutoSize = ppAutoSizeShapeToFitText
                 Caption.Width = SlideShape.Width - CaptionNumber.Width
-                CaptionNumber.Left = SlideShape.Left
+                CaptionNumber.left = SlideShape.left
                 CaptionNumber.Top = SlideShape.Top + SlideShape.Height + 5
-                Caption.Left = SlideShape.Left + CaptionNumber.Width
+                Caption.left = SlideShape.left + CaptionNumber.Width
                 Caption.Top = CaptionNumber.Top
                 
                 Caption.Name = "Caption" + Str(RandomNumber)

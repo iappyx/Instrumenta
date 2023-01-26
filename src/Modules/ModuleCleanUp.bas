@@ -70,7 +70,7 @@ End Sub
 
 Sub CleanUpRemoveSpeakerNotesFromAllSlides()
     Dim PresentationSlide As Slide
-    Dim SlideShape  As PowerPoint.Shape
+    Dim SlideShape  As PowerPoint.shape
     
     ProgressForm.Show
     

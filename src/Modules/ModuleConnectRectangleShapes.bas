@@ -30,58 +30,58 @@ Sub ConnectRectangleShapes(ShapeDirection As String)
     Dim Left1, Right1, Top1, Bottom1, Left2, Right2, Top2, Bottom2 As Double
     
     
-    Left1 = ActiveWindow.Selection.ShapeRange(1).Left
+    Left1 = ActiveWindow.Selection.ShapeRange(1).left
     Right1 = Left1 + ActiveWindow.Selection.ShapeRange(1).Width
     Top1 = ActiveWindow.Selection.ShapeRange(1).Top
     Bottom1 = Top1 + ActiveWindow.Selection.ShapeRange(1).Height
     
-    Left2 = ActiveWindow.Selection.ShapeRange(2).Left
+    Left2 = ActiveWindow.Selection.ShapeRange(2).left
     Right2 = Left2 + ActiveWindow.Selection.ShapeRange(2).Width
     Top2 = ActiveWindow.Selection.ShapeRange(2).Top
     Bottom2 = Top2 + ActiveWindow.Selection.ShapeRange(2).Height
     
-    Set myDocument = Application.ActiveWindow.Selection.SlideRange
+    Set MyDocument = Application.ActiveWindow.Selection.SlideRange
     
     Select Case ShapeDirection
     
     Case "RightToLeft"
-        With myDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Right1, Y1:=Top1)
+        With MyDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Right1, Y1:=Top1)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Bottom1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Bottom2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Top2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Top1
             '.ConvertToShape
-            .ConvertToShape.Line.Visible = msoFalse
+            .ConvertToShape.Line.visible = msoFalse
         End With
         
     Case "LeftToRight"
-        With myDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Right2, Y1:=Top2)
+        With MyDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Right2, Y1:=Top2)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Bottom2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Bottom1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Top1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Top2
             '.ConvertToShape
-            .ConvertToShape.Line.Visible = msoFalse
+            .ConvertToShape.Line.visible = msoFalse
         End With
         
      Case "BottomToTop"
-        With myDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Left1, Y1:=Bottom1)
+        With MyDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Left1, Y1:=Bottom1)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Bottom1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Top2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Top2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Bottom1
             '.ConvertToShape
-            .ConvertToShape.Line.Visible = msoFalse
+            .ConvertToShape.Line.visible = msoFalse
         End With
         
      Case "TopToBottom"
-        With myDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Left2, Y1:=Bottom2)
+        With MyDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Left2, Y1:=Bottom2)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Bottom2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Top1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Top1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Bottom2
             '.ConvertToShape
-            .ConvertToShape.Line.Visible = msoFalse
+            .ConvertToShape.Line.visible = msoFalse
         End With
         
         

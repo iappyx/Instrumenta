@@ -30,7 +30,7 @@ Sub LockToggleSelectedShapes()
     #Else
     
     
-    Dim SlideShape As Shape
+    Dim SlideShape As shape
     
     For Each SlideShape In ActiveWindow.Selection.ShapeRange
         

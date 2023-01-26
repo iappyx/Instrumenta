@@ -23,12 +23,12 @@ Attribute VB_Name = "ModuleRectifyLines"
 
 Sub RectifyLines()
     
-    Dim LineShape   As Shape
-    Set myDocument = Application.ActiveWindow
+    Dim LineShape   As shape
+    Set MyDocument = Application.ActiveWindow
     
-    If myDocument.Selection.Type = ppSelectionShapes Then
+    If MyDocument.Selection.Type = ppSelectionShapes Then
     
-    For Each LineShape In myDocument.Selection.ShapeRange
+    For Each LineShape In MyDocument.Selection.ShapeRange
         
         With LineShape
             

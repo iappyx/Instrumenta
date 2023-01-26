@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} AboutDialog 
    Caption         =   "About"
-   ClientHeight    =   4110
-   ClientLeft      =   240
-   ClientTop       =   930
-   ClientWidth     =   7680
+   ClientHeight    =   4109
+   ClientLeft      =   238
+   ClientTop       =   931
+   ClientWidth     =   7679
    OleObjectBlob   =   "AboutDialog.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

@@ -50,7 +50,7 @@ Sub ConvertShapesToTable()
         
         For i = 1 To UBound(cellShapes) - 1
             For j = i + 1 To UBound(cellShapes)
-                If cellShapes(i).Top * 1000000 + cellShapes(i).Left > cellShapes(j).Top * 1000000 + cellShapes(j).Left Then
+                If cellShapes(i).Top * 1000000 + cellShapes(i).left > cellShapes(j).Top * 1000000 + cellShapes(j).left Then
                     Set temp = cellShapes(i)
                     Set cellShapes(i) = cellShapes(j)
                     Set cellShapes(j) = temp
@@ -59,9 +59,9 @@ Sub ConvertShapesToTable()
         Next i
         
         For i = 1 To UBound(cellShapes)
-            If cellShapes(i).Left < minLeft Then minLeft = cellShapes(i).Left
+            If cellShapes(i).left < minLeft Then minLeft = cellShapes(i).left
             If cellShapes(i).Top < minTop Then minTop = cellShapes(i).Top
-            If cellShapes(i).Left + cellShapes(i).Width > maxRight Then maxRight = cellShapes(i).Left + cellShapes(i).Width
+            If cellShapes(i).left + cellShapes(i).Width > maxRight Then maxRight = cellShapes(i).left + cellShapes(i).Width
             If cellShapes(i).Top + cellShapes(i).Height > maxBottom Then maxBottom = cellShapes(i).Top + cellShapes(i).Height
         Next i
         
@@ -86,7 +86,7 @@ Sub ConvertShapesToTable()
                 
                 For j = i + 1 To maxLoop
                     
-                    If (cellShapes(i).Left > cellShapes(j).Left) Then
+                    If (cellShapes(i).left > cellShapes(j).left) Then
                         Set temp = cellShapes(i)
                         Set cellShapes(i) = cellShapes(j)
                         Set cellShapes(j) = temp
@@ -98,7 +98,7 @@ Sub ConvertShapesToTable()
         
         h = 1
         
-        Set ConvertTable = ActiveWindow.Selection.SlideRange(1).shapes.AddTable(numRows, numCols, minLeft, minTop).Table
+        Set ConvertTable = ActiveWindow.Selection.SlideRange(1).Shapes.AddTable(numRows, numCols, minLeft, minTop).Table
         
         For i = 1 To UBound(cellShapes)
             
@@ -108,18 +108,18 @@ Sub ConvertShapesToTable()
                 Set Newcell = ConvertTable.Cell(h, j)
                 
                 With Newcell.shape
-                     .TextFrame.MarginBottom = cellShapes(i).TextFrame.MarginBottom
+                    .TextFrame.MarginBottom = cellShapes(i).TextFrame.MarginBottom
                     .TextFrame.MarginLeft = cellShapes(i).TextFrame.MarginLeft
                     .TextFrame.MarginRight = cellShapes(i).TextFrame.MarginRight
                     .TextFrame.MarginTop = cellShapes(i).TextFrame.MarginTop
                     
                     If cellShapes(i).TextFrame.HasText Then
-                        cellShapes(i).TextFrame.textRange.Copy
-                        .TextFrame.textRange.Paste
+                        cellShapes(i).TextFrame.TextRange.Copy
+                        .TextFrame.TextRange.Paste
                     End If
                     
-                    .TextFrame.textRange.ParagraphFormat.Alignment = cellShapes(i).TextFrame.textRange.ParagraphFormat.Alignment
-                    .TextFrame.textRange.ParagraphFormat.BaseLineAlignment = cellShapes(i).TextFrame.textRange.ParagraphFormat.BaseLineAlignment
+                    .TextFrame.TextRange.ParagraphFormat.Alignment = cellShapes(i).TextFrame.TextRange.ParagraphFormat.Alignment
+                    .TextFrame.TextRange.ParagraphFormat.BaseLineAlignment = cellShapes(i).TextFrame.TextRange.ParagraphFormat.BaseLineAlignment
                     .Fill.ForeColor.RGB = cellShapes(i).Fill.ForeColor.RGB
                     
                 End With
@@ -225,7 +225,7 @@ Sub ConvertTableToShapes()
     ElseIf MyDocument.Selection.ShapeRange.HasTable Then
     
     TableTop = MyDocument.Selection.ShapeRange.Top
-    TableLeft = MyDocument.Selection.ShapeRange.Left
+    TableLeft = MyDocument.Selection.ShapeRange.left
     
     TypeOfColumnGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA COLUMNGAPS")
     TypeOfRowGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA ROWGAPS")
@@ -240,7 +240,7 @@ Sub ConvertTableToShapes()
             
             If Not ((ColsCount Mod 2 = 0 And TypeOfColumnGaps = "even") Or (Not ColsCount Mod 2 = 0 And TypeOfColumnGaps = "odd") Or (RowsCount Mod 2 = 0 And TypeOfRowGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfRowGaps = "odd")) Then
             
-            Set NewShape = MyDocument.Selection.SlideRange.shapes.AddShape(Type:=msoShapeRectangle, Left:=TableLeft, Top:=TableTop, Width:=MyDocument.Selection.ShapeRange.Table.Columns(ColsCount).Width, Height:=MyDocument.Selection.ShapeRange.Table.Rows(RowsCount).Height)
+            Set NewShape = MyDocument.Selection.SlideRange.Shapes.AddShape(Type:=msoShapeRectangle, left:=TableLeft, Top:=TableTop, Width:=MyDocument.Selection.ShapeRange.Table.Columns(ColsCount).Width, Height:=MyDocument.Selection.ShapeRange.Table.Rows(RowsCount).Height)
             
             With NewShape
                 .TextFrame.MarginBottom = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.MarginBottom
@@ -248,13 +248,13 @@ Sub ConvertTableToShapes()
                 .TextFrame.MarginRight = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.MarginRight
                 .TextFrame.MarginTop = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.MarginTop
                 
-                If Not MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.textRange.Text = "" Then
-                    MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.textRange.Cut
-                    .TextFrame.textRange.Paste
+                If Not MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.TextRange.Text = "" Then
+                    MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.TextRange.Cut
+                    .TextFrame.TextRange.Paste
                 End If
                 
-                .TextFrame.textRange.ParagraphFormat.Alignment = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.textRange.ParagraphFormat.Alignment
-                .TextFrame.textRange.ParagraphFormat.BaseLineAlignment = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.textRange.ParagraphFormat.BaseLineAlignment
+                .TextFrame.TextRange.ParagraphFormat.Alignment = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.TextRange.ParagraphFormat.Alignment
+                .TextFrame.TextRange.ParagraphFormat.BaseLineAlignment = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.TextFrame.TextRange.ParagraphFormat.BaseLineAlignment
                 .Fill.ForeColor.RGB = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).shape.Fill.ForeColor.RGB
                 .Line.ForeColor.RGB = MyDocument.Selection.ShapeRange.Table.Cell(RowsCount, ColsCount).Borders(ppBorderBottom).ForeColor.RGB
             End With
@@ -266,7 +266,7 @@ Sub ConvertTableToShapes()
         Next ColsCount
         
         
-        TableLeft = Application.ActiveWindow.Selection.ShapeRange.Left
+        TableLeft = Application.ActiveWindow.Selection.ShapeRange.left
         TableTop = TableTop + Application.ActiveWindow.Selection.ShapeRange.Table.Rows(RowsCount).Height
         
     Next RowsCount

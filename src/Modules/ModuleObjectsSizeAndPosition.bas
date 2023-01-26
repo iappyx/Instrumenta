@@ -22,189 +22,189 @@ Attribute VB_Name = "ModuleObjectsSizeAndPosition"
 'SOFTWARE.
 
 Sub ObjectsSizeToTallest()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim Tallest     As Single
-    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    If myDocument.Selection.HasChildShapeRange Then
+    If MyDocument.Selection.HasChildShapeRange Then
         
-        Tallest = myDocument.Selection.ChildShapeRange(1).Height
+        Tallest = MyDocument.Selection.ChildShapeRange(1).Height
         
-        For Each SlideShape In myDocument.Selection.ChildShapeRange
+        For Each SlideShape In MyDocument.Selection.ChildShapeRange
             If SlideShape.Height > Tallest Then Tallest = SlideShape.Height
         Next
         
-        myDocument.Selection.ChildShapeRange.Height = Tallest
+        MyDocument.Selection.ChildShapeRange.Height = Tallest
         
     Else
-        Tallest = myDocument.Selection.ShapeRange(1).Height
+        Tallest = MyDocument.Selection.ShapeRange(1).Height
         
-        For Each SlideShape In myDocument.Selection.ShapeRange
+        For Each SlideShape In MyDocument.Selection.ShapeRange
             If SlideShape.Height > Tallest Then Tallest = SlideShape.Height
         Next
         
-        myDocument.Selection.ShapeRange.Height = Tallest
+        MyDocument.Selection.ShapeRange.Height = Tallest
         
     End If
     
 End Sub
 
 Sub ObjectsSizeToShortest()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim Shortest    As Single
-    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    If myDocument.Selection.HasChildShapeRange Then
+    If MyDocument.Selection.HasChildShapeRange Then
         
-        Shortest = myDocument.Selection.ChildShapeRange(1).Height
+        Shortest = MyDocument.Selection.ChildShapeRange(1).Height
         
-        For Each SlideShape In myDocument.Selection.ChildShapeRange
+        For Each SlideShape In MyDocument.Selection.ChildShapeRange
             If SlideShape.Height < Shortest Then Shortest = SlideShape.Height
         Next
         
-        myDocument.Selection.ChildShapeRange.Height = Shortest
+        MyDocument.Selection.ChildShapeRange.Height = Shortest
         
     Else
         
-        Shortest = myDocument.Selection.ShapeRange(1).Height
+        Shortest = MyDocument.Selection.ShapeRange(1).Height
         
-        For Each SlideShape In myDocument.Selection.ShapeRange
+        For Each SlideShape In MyDocument.Selection.ShapeRange
             If SlideShape.Height < Shortest Then Shortest = SlideShape.Height
         Next
         
-        myDocument.Selection.ShapeRange.Height = Shortest
+        MyDocument.Selection.ShapeRange.Height = Shortest
         
     End If
     
 End Sub
 
 Sub ObjectsSizeToWidest()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim Widest      As Single
-    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    If myDocument.Selection.HasChildShapeRange Then
+    If MyDocument.Selection.HasChildShapeRange Then
         
-        Widest = myDocument.Selection.ChildShapeRange(1).Width
+        Widest = MyDocument.Selection.ChildShapeRange(1).Width
         
-        For Each SlideShape In myDocument.Selection.ChildShapeRange
+        For Each SlideShape In MyDocument.Selection.ChildShapeRange
             If SlideShape.Width > Widest Then Widest = SlideShape.Width
         Next
         
-        myDocument.Selection.ChildShapeRange.Width = Widest
+        MyDocument.Selection.ChildShapeRange.Width = Widest
         
     Else
-        Widest = myDocument.Selection.ShapeRange(1).Width
+        Widest = MyDocument.Selection.ShapeRange(1).Width
         
-        For Each SlideShape In myDocument.Selection.ShapeRange
+        For Each SlideShape In MyDocument.Selection.ShapeRange
             If SlideShape.Width > Widest Then Widest = SlideShape.Width
         Next
         
-        myDocument.Selection.ShapeRange.Width = Widest
+        MyDocument.Selection.ShapeRange.Width = Widest
         
     End If
     
 End Sub
 
 Sub ObjectsSizeToNarrowest()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim Narrowest   As Single
-    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    If myDocument.Selection.HasChildShapeRange Then
+    If MyDocument.Selection.HasChildShapeRange Then
         
-        Narrowest = myDocument.Selection.ChildShapeRange(1).Width
+        Narrowest = MyDocument.Selection.ChildShapeRange(1).Width
         
-        For Each SlideShape In myDocument.Selection.ChildShapeRange
+        For Each SlideShape In MyDocument.Selection.ChildShapeRange
             If SlideShape.Width < Narrowest Then Narrowest = SlideShape.Width
         Next
         
-        myDocument.Selection.ChildShapeRange.Width = Narrowest
+        MyDocument.Selection.ChildShapeRange.Width = Narrowest
         
     Else
         
-        Narrowest = myDocument.Selection.ShapeRange(1).Width
+        Narrowest = MyDocument.Selection.ShapeRange(1).Width
         
-        For Each SlideShape In myDocument.Selection.ShapeRange
+        For Each SlideShape In MyDocument.Selection.ShapeRange
             If SlideShape.Width < Narrowest Then Narrowest = SlideShape.Width
         Next
         
-        myDocument.Selection.ShapeRange.Width = Narrowest
+        MyDocument.Selection.ShapeRange.Width = Narrowest
         
     End If
     
 End Sub
 
 Sub ObjectsSameHeight()
-    Set myDocument = Application.ActiveWindow
-    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    Set MyDocument = Application.ActiveWindow
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    If myDocument.Selection.HasChildShapeRange Then
-        myDocument.Selection.ChildShapeRange.Height = myDocument.Selection.ChildShapeRange(1).Height
+    If MyDocument.Selection.HasChildShapeRange Then
+        MyDocument.Selection.ChildShapeRange.Height = MyDocument.Selection.ChildShapeRange(1).Height
     Else
-        myDocument.Selection.ShapeRange.Height = myDocument.Selection.ShapeRange(1).Height
+        MyDocument.Selection.ShapeRange.Height = MyDocument.Selection.ShapeRange(1).Height
     End If
     
 End Sub
 
 Sub ObjectsSameWidth()
-    Set myDocument = Application.ActiveWindow
-    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    Set MyDocument = Application.ActiveWindow
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    If myDocument.Selection.HasChildShapeRange Then
-        myDocument.Selection.ChildShapeRange.Width = myDocument.Selection.ChildShapeRange(1).Width
+    If MyDocument.Selection.HasChildShapeRange Then
+        MyDocument.Selection.ChildShapeRange.Width = MyDocument.Selection.ChildShapeRange(1).Width
     Else
-        myDocument.Selection.ShapeRange.Width = myDocument.Selection.ShapeRange(1).Width
+        MyDocument.Selection.ShapeRange.Width = MyDocument.Selection.ShapeRange(1).Width
     End If
     
 End Sub
 
 Sub ObjectsSameHeightAndWidth()
-    Set myDocument = Application.ActiveWindow
-    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    Set MyDocument = Application.ActiveWindow
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    If myDocument.Selection.HasChildShapeRange Then
-        myDocument.Selection.ChildShapeRange.Height = myDocument.Selection.ChildShapeRange(1).Height
-        myDocument.Selection.ChildShapeRange.Width = myDocument.Selection.ChildShapeRange(1).Width
+    If MyDocument.Selection.HasChildShapeRange Then
+        MyDocument.Selection.ChildShapeRange.Height = MyDocument.Selection.ChildShapeRange(1).Height
+        MyDocument.Selection.ChildShapeRange.Width = MyDocument.Selection.ChildShapeRange(1).Width
         
     Else
-        myDocument.Selection.ShapeRange.Height = myDocument.Selection.ShapeRange(1).Height
-        myDocument.Selection.ShapeRange.Width = myDocument.Selection.ShapeRange(1).Width
+        MyDocument.Selection.ShapeRange.Height = MyDocument.Selection.ShapeRange(1).Height
+        MyDocument.Selection.ShapeRange.Width = MyDocument.Selection.ShapeRange(1).Width
     End If
     
 End Sub
 
 Sub ObjectsSwapPosition()
-    Set myDocument = Application.ActiveWindow
-    If Not myDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    Set MyDocument = Application.ActiveWindow
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     Dim Left1, Left2, Top1, Top2 As Single
     
     If ActiveWindow.Selection.ShapeRange.Count = 2 Then
         
-        Left1 = ActiveWindow.Selection.ShapeRange(1).Left
-        Left2 = ActiveWindow.Selection.ShapeRange(2).Left
+        Left1 = ActiveWindow.Selection.ShapeRange(1).left
+        Left2 = ActiveWindow.Selection.ShapeRange(2).left
         Top1 = ActiveWindow.Selection.ShapeRange(1).Top
         Top2 = ActiveWindow.Selection.ShapeRange(2).Top
         
-        ActiveWindow.Selection.ShapeRange(1).Left = Left2
-        ActiveWindow.Selection.ShapeRange(2).Left = Left1
+        ActiveWindow.Selection.ShapeRange(1).left = Left2
+        ActiveWindow.Selection.ShapeRange(2).left = Left1
         ActiveWindow.Selection.ShapeRange(1).Top = Top2
         ActiveWindow.Selection.ShapeRange(2).Top = Top1
         
-    ElseIf myDocument.Selection.HasChildShapeRange Then
+    ElseIf MyDocument.Selection.HasChildShapeRange Then
         
-        If myDocument.Selection.ChildShapeRange.Count = 2 Then
+        If MyDocument.Selection.ChildShapeRange.Count = 2 Then
             
-            Left1 = myDocument.Selection.ChildShapeRange(1).Left
-            Left2 = myDocument.Selection.ChildShapeRange(2).Left
-            Top1 = myDocument.Selection.ChildShapeRange(1).Top
-            Top2 = myDocument.Selection.ChildShapeRange(2).Top
+            Left1 = MyDocument.Selection.ChildShapeRange(1).left
+            Left2 = MyDocument.Selection.ChildShapeRange(2).left
+            Top1 = MyDocument.Selection.ChildShapeRange(1).Top
+            Top2 = MyDocument.Selection.ChildShapeRange(2).Top
             
-            myDocument.Selection.ChildShapeRange(1).Left = Left2
-            myDocument.Selection.ChildShapeRange(2).Left = Left1
-            myDocument.Selection.ChildShapeRange(1).Top = Top2
-            myDocument.Selection.ChildShapeRange(2).Top = Top1
+            MyDocument.Selection.ChildShapeRange(1).left = Left2
+            MyDocument.Selection.ChildShapeRange(2).left = Left1
+            MyDocument.Selection.ChildShapeRange(1).Top = Top2
+            MyDocument.Selection.ChildShapeRange(2).Top = Top1
             
         Else
             

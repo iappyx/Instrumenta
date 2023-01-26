@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SelectSlidesByTagForm 
    Caption         =   "Select slides by tag or stamp"
    ClientHeight    =   5775
-   ClientLeft      =   45
+   ClientLeft      =   42
    ClientTop       =   210
-   ClientWidth     =   8175
+   ClientWidth     =   8176
    OleObjectBlob   =   "SelectSlidesByTagForm.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

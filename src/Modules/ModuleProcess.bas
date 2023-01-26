@@ -23,8 +23,8 @@ Attribute VB_Name = "ModuleProcess"
 
 Sub InsertProcessSmartArt()
 
-Set myDocument = Application.ActiveWindow
-Set ProcessSmartArt = myDocument.Selection.SlideRange.Shapes.AddSmartArt(Application.SmartArtLayouts("urn:microsoft.com/office/officeart/2005/8/layout/hChevron3"), 50, 100, Application.ActivePresentation.PageSetup.SlideWidth - 100, 50)
+Set MyDocument = Application.ActiveWindow
+Set ProcessSmartArt = MyDocument.Selection.SlideRange.Shapes.AddSmartArt(Application.SmartArtLayouts("urn:microsoft.com/office/officeart/2005/8/layout/hChevron3"), 50, 100, Application.ActivePresentation.PageSetup.SlideWidth - 100, 50)
 
 For NodeCount = 1 To ProcessSmartArt.SmartArt.AllNodes.Count
 

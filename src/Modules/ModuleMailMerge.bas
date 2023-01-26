@@ -40,7 +40,7 @@ Sub ImportHeadersFromExcel()
     If ActiveWindow.Selection.Type = ppSelectionText Then
         
         Dim ExcelFile   As String
-        Dim SlideShape  As Shape
+        Dim SlideShape  As shape
         
         Dim ExcelApplication, ExcelSourceSheet, ExcelSourceWorkbook As Object
         
@@ -83,15 +83,15 @@ Sub ImportHeadersFromExcel()
         'Set ExcelApplication = New Excel.Application
         
         #If Mac Then
-            Set ExcelSourceWorkbook = ExcelApplication.Application.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+            Set ExcelSourceWorkbook = ExcelApplication.Application.Workbooks.Open(fileName:=ExcelFile, ReadOnly:=True)
         #Else
-            Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+            Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(fileName:=ExcelFile, ReadOnly:=True)
         #End If
         Set ExcelSourceSheet = ExcelSourceWorkbook.Sheets(1)
         
         On Error GoTo HandleError
-        Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=1, SearchDirection:=2).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=2, SearchDirection:=2).Column)
-        Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=1, SearchDirection:=1).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=2, SearchDirection:=1).Column)
+        Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=1, SearchDirection:=2).row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=2, SearchDirection:=2).Column)
+        Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=1, SearchDirection:=1).row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=2, SearchDirection:=1).Column)
         On Error GoTo 0
         
         'Early binding equivalent for reference:
@@ -99,7 +99,7 @@ Sub ImportHeadersFromExcel()
         'Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", After:=LastCell, SearchOrder:=xlByRows, SearchDirection:=xlNext).Row, ExcelSourceSheet.Cells.Find(What:="*", After:=LastCell, SearchOrder:=xlByColumns, SearchDirection:=xlNext).Column)
         
         Dim MergeFields() As Variant
-        MergeFields = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.Row, LastCell.Column).Address).Value
+        MergeFields = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.row, LastCell.Column).Address).Value
         ExcelSourceWorkbook.Close
         
         For i = LBound(MergeFields, 1) To UBound(MergeFields, 1)
@@ -130,7 +130,7 @@ Sub ExcelMailMerge()
     If ActiveWindow.Selection.Type = ppSelectionSlides Then
         
         Dim ExcelFile   As String
-        Dim SlideShape  As Shape
+        Dim SlideShape  As shape
         
         Dim ExcelApplication, ExcelSourceSheet, ExcelSourceWorkbook As Object
         
@@ -175,15 +175,15 @@ Sub ExcelMailMerge()
         'Set ExcelApplication = New Excel.Application
         
         #If Mac Then
-            Set ExcelSourceWorkbook = ExcelApplication.Application.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+            Set ExcelSourceWorkbook = ExcelApplication.Application.Workbooks.Open(fileName:=ExcelFile, ReadOnly:=True)
         #Else
-            Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+            Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(fileName:=ExcelFile, ReadOnly:=True)
         #End If
         Set ExcelSourceSheet = ExcelSourceWorkbook.Sheets(1)
         
         On Error GoTo HandleError
-        Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=1, SearchDirection:=2).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=2, SearchDirection:=2).Column)
-        Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=1, SearchDirection:=1).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=2, SearchDirection:=1).Column)
+        Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=1, SearchDirection:=2).row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=2, SearchDirection:=2).Column)
+        Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=1, SearchDirection:=1).row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=2, SearchDirection:=1).Column)
         On Error GoTo 0
         
         'Early binding equivalent for reference:
@@ -192,16 +192,16 @@ Sub ExcelMailMerge()
         
         Dim MergeFields() As Variant
         Dim MergeTexts() As Variant
-        MergeFields = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.Row, LastCell.Column).Address).Value
-        MergeTexts = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.Row + 1, FirstCell.Column).Address & ":" & ExcelSourceSheet.Cells(LastCell.Row, LastCell.Column).Address).Value
+        MergeFields = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.row, LastCell.Column).Address).Value
+        MergeTexts = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.row + 1, FirstCell.Column).Address & ":" & ExcelSourceSheet.Cells(LastCell.row, LastCell.Column).Address).Value
         
         PreviewMailMerge.MailMergeHeadersListBox.Clear
         PreviewMailMerge.MailMergeHeadersListBox.ColumnCount = UBound(MergeFields, 2)
-        PreviewMailMerge.MailMergeHeadersListBox.List = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.Row, LastCell.Column).Address).Value
+        PreviewMailMerge.MailMergeHeadersListBox.List = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.row, LastCell.Column).Address).Value
         
         PreviewMailMerge.MailMergeListBox.Clear
         PreviewMailMerge.MailMergeListBox.ColumnCount = UBound(MergeFields, 2)
-        PreviewMailMerge.MailMergeListBox.List = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.Row + 1, FirstCell.Column).Address & ":" & LastCell.Address).Value
+        PreviewMailMerge.MailMergeListBox.List = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.row + 1, FirstCell.Column).Address & ":" & LastCell.Address).Value
         
         PreviewMailMerge.ExampleLabel.Caption = "Data taken from the first sheet of the Excel-file. Current selected slide will be duplicated" & Str(UBound(MergeTexts, 1)) & " times and all mail merge fields placed between {{ }} will be replaced with the data above." & vbNewLine & vbNewLine & "Example: {{" & MergeFields(1, 1) & "}}" & " will be replaced with " & MergeTexts(1, 1) & " on the first slide."
         
@@ -315,11 +315,11 @@ Sub ReplaceMergeFields(SlideShape, MergeFields As Variant, MergeTexts As Variant
             For TableRow = 1 To SlideShape.Table.Rows.Count
                 For TableColumn = 1 To SlideShape.Table.Columns.Count
                     
-                    If Not SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame.TextRange = "" Then
+                    If Not SlideShape.Table.Cell(TableRow, TableColumn).shape.TextFrame.TextRange = "" Then
                         
                         For MergeFieldsCount = LBound(MergeFields) To UBound(MergeFields)
                             
-                            Set ShapeTextRange = SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame.TextRange
+                            Set ShapeTextRange = SlideShape.Table.Cell(TableRow, TableColumn).shape.TextFrame.TextRange
                             Set TemporaryTextRange = ShapeTextRange.Replace(FindWhat:=MergeFields(MergeFieldsCount), Replacewhat:=MergeTexts(MergeFieldsCount), WholeWords:=msoFalse)
                             
                             Do While Not TemporaryTextRange Is Nothing
@@ -371,7 +371,7 @@ End Sub
 
 Sub ManualMailMerge()
     
-    Dim SlideShape  As Shape
+    Dim SlideShape  As shape
     
     ProgressForm.Show
     
@@ -450,7 +450,7 @@ Sub FindMergeFields(SlideShape)
                 If ShapeTextRange.Words.Count > 2 Then
                     For WordCount = 2 To ShapeTextRange.Words.Count - 1
                         
-                        If ShapeTextRange.Words(WordCount - 1) = "{{" And Left(ShapeTextRange.Words(WordCount + 1), 2) = "}}" Then
+                        If ShapeTextRange.Words(WordCount - 1) = "{{" And left(ShapeTextRange.Words(WordCount + 1), 2) = "}}" Then
                             
                             If IsEmpty(ManualHeaders) Then
                                 ReDim Preserve ManualHeaders(0)
@@ -476,14 +476,14 @@ Sub FindMergeFields(SlideShape)
             For TableRow = 1 To SlideShape.Table.Rows.Count
                 For TableColumn = 1 To SlideShape.Table.Columns.Count
                     
-                    If Not SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame.TextRange = "" Then
+                    If Not SlideShape.Table.Cell(TableRow, TableColumn).shape.TextFrame.TextRange = "" Then
                         
-                        Set ShapeTextRange = SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame.TextRange
+                        Set ShapeTextRange = SlideShape.Table.Cell(TableRow, TableColumn).shape.TextFrame.TextRange
                         
                         If ShapeTextRange.Words.Count > 2 Then
                             For WordCount = 2 To ShapeTextRange.Words.Count - 1
                                 
-                                If ShapeTextRange.Words(WordCount - 1) = "{{" And Left(ShapeTextRange.Words(WordCount + 1), 2) = "}}" Then
+                                If ShapeTextRange.Words(WordCount - 1) = "{{" And left(ShapeTextRange.Words(WordCount + 1), 2) = "}}" Then
                                     
                                     If IsEmpty(ManualHeaders) Then
                                         ReDim Preserve ManualHeaders(0)
@@ -520,7 +520,7 @@ Sub FindMergeFields(SlideShape)
                         If ShapeTextRange.Words.Count > 2 Then
                             For WordCount = 2 To ShapeTextRange.Words.Count - 1
                                 
-                                If ShapeTextRange.Words(WordCount - 1) = "{{" And Left(ShapeTextRange.Words(WordCount + 1), 2) = "}}" Then
+                                If ShapeTextRange.Words(WordCount - 1) = "{{" And left(ShapeTextRange.Words(WordCount + 1), 2) = "}}" Then
                                     
                                     If IsEmpty(ManualHeaders) Then
                                         ReDim Preserve ManualHeaders(0)
@@ -553,7 +553,7 @@ End Sub
 Sub ExcelFullFileMailMerge()
     
     Dim ExcelFile   As String
-    Dim SlideShape  As Shape
+    Dim SlideShape  As shape
     
     Dim ExcelApplication, ExcelSourceSheet, ExcelSourceWorkbook As Object
     
@@ -593,35 +593,35 @@ Sub ExcelFullFileMailMerge()
     On Error GoTo 0
     
     #If Mac Then
-        Set ExcelSourceWorkbook = ExcelApplication.Application.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+        Set ExcelSourceWorkbook = ExcelApplication.Application.Workbooks.Open(fileName:=ExcelFile, ReadOnly:=True)
     #Else
-        Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(FileName:=ExcelFile, ReadOnly:=True)
+        Set ExcelSourceWorkbook = ExcelApplication.Workbooks.Open(fileName:=ExcelFile, ReadOnly:=True)
     #End If
     Set ExcelSourceSheet = ExcelSourceWorkbook.Sheets(1)
     
     On Error GoTo HandleError
-    Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=1, SearchDirection:=2).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=2, SearchDirection:=2).Column)
-    Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=1, SearchDirection:=1).Row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=2, SearchDirection:=1).Column)
+    Set LastCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=1, SearchDirection:=2).row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, SearchOrder:=2, SearchDirection:=2).Column)
+    Set FirstCell = ExcelSourceSheet.Cells(ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=1, SearchDirection:=1).row, ExcelSourceSheet.Cells.Find(What:="*", LookIn:=-4163, After:=LastCell, SearchOrder:=2, SearchDirection:=1).Column)
     On Error GoTo 0
     
     Dim MergeFields() As Variant
     Dim MergeTexts() As Variant
-    MergeFields = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.Row, LastCell.Column).Address).Value
-    MergeTexts = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.Row + 1, FirstCell.Column).Address & ":" & ExcelSourceSheet.Cells(LastCell.Row, LastCell.Column).Address).Value
+    MergeFields = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.row, LastCell.Column).Address).Value
+    MergeTexts = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.row + 1, FirstCell.Column).Address & ":" & ExcelSourceSheet.Cells(LastCell.row, LastCell.Column).Address).Value
     
     PreviewFullFileMailMerge.MailMergeHeadersListBox.Clear
     PreviewFullFileMailMerge.MailMergeHeadersListBox.ColumnCount = UBound(MergeFields, 2)
-    PreviewFullFileMailMerge.MailMergeHeadersListBox.List = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.Row, LastCell.Column).Address).Value
+    PreviewFullFileMailMerge.MailMergeHeadersListBox.List = ExcelSourceSheet.Range(FirstCell.Address & ":" & ExcelSourceSheet.Cells(FirstCell.row, LastCell.Column).Address).Value
     
     PreviewFullFileMailMerge.MailMergeListBox.Clear
     PreviewFullFileMailMerge.MailMergeListBox.ColumnCount = UBound(MergeFields, 2)
-    PreviewFullFileMailMerge.MailMergeListBox.List = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.Row + 1, FirstCell.Column).Address & ":" & LastCell.Address).Value
+    PreviewFullFileMailMerge.MailMergeListBox.List = ExcelSourceSheet.Range(ExcelSourceSheet.Cells(FirstCell.row + 1, FirstCell.Column).Address & ":" & LastCell.Address).Value
     
     PreviewFullFileMailMerge.ExampleLabel.Caption = "Data taken from the first sheet of the Excel-file. Current selected slide will be duplicated" & Str(UBound(MergeTexts, 1)) & " times And all mail merge fields placed between {{ }} will be replaced With the data above." & vbNewLine & vbNewLine & "Example: {{" & MergeFields(1, 1) & "}}" & " will be replaced With " & MergeTexts(1, 1) & " On the first slide."
     
     DotPosition = InStrRev(ActivePresentation.Name, ".")
     If DotPosition > 0 Then
-        PresentationFilename = Left(ActivePresentation.Name, DotPosition - 1)
+        PresentationFilename = left(ActivePresentation.Name, DotPosition - 1)
     Else
         PresentationFilename = ActivePresentation.Name
     End If
@@ -672,8 +672,8 @@ Sub ExcelFullFileMailMerge()
             DoEvents        'Mac needs a short delay on my machine
         #End If
         
-        Dim SlidePlaceHolder As PowerPoint.Shape
-        Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
+        Dim SlidePlaceHolder As PowerPoint.shape
+        Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
         SlidePlaceHolder.TextFrame.TextRange.Text = PreviewFullFileMailMerge.MergeFilename.Text
         Set TempFilename = SlidePlaceHolder.TextFrame.TextRange
         

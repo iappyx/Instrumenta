@@ -22,28 +22,28 @@ Attribute VB_Name = "ModuleObjectsRoundedCorners"
 'SOFTWARE.
 
 Sub ObjectsCopyRoundedCorner()
-    Dim SlideShape  As PowerPoint.Shape
-    Set myDocument = Application.ActiveWindow
+    Dim SlideShape  As PowerPoint.shape
+    Set MyDocument = Application.ActiveWindow
     Dim ShapeRadius As Single
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf myDocument.Selection.HasChildShapeRange Then
+    ElseIf MyDocument.Selection.HasChildShapeRange Then
         
         If Application.ActiveWindow.Selection.ChildShapeRange(1).Adjustments.Count > 0 Then
             
-            ShapeRadius = myDocument.Selection.ChildShapeRange(1).Adjustments(1) / (1 / (myDocument.Selection.ChildShapeRange(1).Height + myDocument.Selection.ChildShapeRange(1).Width))
+            ShapeRadius = MyDocument.Selection.ChildShapeRange(1).Adjustments(1) / (1 / (MyDocument.Selection.ChildShapeRange(1).Height + MyDocument.Selection.ChildShapeRange(1).Width))
             
-            If myDocument.Selection.ChildShapeRange(1).Adjustments.Count > 1 Then
-                ShapeRadius2 = myDocument.Selection.ChildShapeRange(1).Adjustments(2) / (1 / (myDocument.Selection.ChildShapeRange(1).Height + myDocument.Selection.ChildShapeRange(1).Width))
+            If MyDocument.Selection.ChildShapeRange(1).Adjustments.Count > 1 Then
+                ShapeRadius2 = MyDocument.Selection.ChildShapeRange(1).Adjustments(2) / (1 / (MyDocument.Selection.ChildShapeRange(1).Height + MyDocument.Selection.ChildShapeRange(1).Width))
             End If
             
             For Each SlideShape In ActiveWindow.Selection.ChildShapeRange
                 With SlideShape
-                    .AutoShapeType = myDocument.Selection.ChildShapeRange(1).AutoShapeType
+                    .AutoShapeType = MyDocument.Selection.ChildShapeRange(1).AutoShapeType
                     .Adjustments(1) = (1 / (SlideShape.Height + SlideShape.Width)) * ShapeRadius
-                    If myDocument.Selection.ChildShapeRange(1).Adjustments.Count > 1 Then
+                    If MyDocument.Selection.ChildShapeRange(1).Adjustments.Count > 1 Then
                         .Adjustments(2) = (1 / (SlideShape.Height + SlideShape.Width)) * ShapeRadius2
                     End If
                 End With
@@ -65,17 +65,17 @@ Sub ObjectsCopyRoundedCorner()
         
         If Application.ActiveWindow.Selection.ShapeRange(1).Adjustments.Count > 0 Then
             
-            ShapeRadius = myDocument.Selection.ShapeRange(1).Adjustments(1) / (1 / (myDocument.Selection.ShapeRange(1).Height + myDocument.Selection.ShapeRange(1).Width))
+            ShapeRadius = MyDocument.Selection.ShapeRange(1).Adjustments(1) / (1 / (MyDocument.Selection.ShapeRange(1).Height + MyDocument.Selection.ShapeRange(1).Width))
             
-            If myDocument.Selection.ShapeRange(1).Adjustments.Count > 1 Then
-                ShapeRadius2 = myDocument.Selection.ShapeRange(1).Adjustments(2) / (1 / (myDocument.Selection.ShapeRange(1).Height + myDocument.Selection.ShapeRange(1).Width))
+            If MyDocument.Selection.ShapeRange(1).Adjustments.Count > 1 Then
+                ShapeRadius2 = MyDocument.Selection.ShapeRange(1).Adjustments(2) / (1 / (MyDocument.Selection.ShapeRange(1).Height + MyDocument.Selection.ShapeRange(1).Width))
             End If
             
             For Each SlideShape In ActiveWindow.Selection.ShapeRange
                 With SlideShape
-                    .AutoShapeType = myDocument.Selection.ShapeRange(1).AutoShapeType
+                    .AutoShapeType = MyDocument.Selection.ShapeRange(1).AutoShapeType
                     .Adjustments(1) = (1 / (SlideShape.Height + SlideShape.Width)) * ShapeRadius
-                    If myDocument.Selection.ShapeRange(1).Adjustments.Count > 1 Then
+                    If MyDocument.Selection.ShapeRange(1).Adjustments.Count > 1 Then
                         .Adjustments(2) = (1 / (SlideShape.Height + SlideShape.Width)) * ShapeRadius2
                     End If
                 End With
@@ -88,23 +88,23 @@ Sub ObjectsCopyRoundedCorner()
 End Sub
 
 Sub ObjectsCopyShapeTypeAndAdjustments()
-    Dim SlideShape  As PowerPoint.Shape
-    Set myDocument = Application.ActiveWindow
+    Dim SlideShape  As PowerPoint.shape
+    Set MyDocument = Application.ActiveWindow
     Dim AdjustmentsCount As Long
     Dim ShapeCount  As Long
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf myDocument.Selection.HasChildShapeRange Then
+    ElseIf MyDocument.Selection.HasChildShapeRange Then
         
         For ShapeCount = 2 To ActiveWindow.Selection.ChildShapeRange.Count
             
-            myDocument.Selection.ChildShapeRange(ShapeCount).AutoShapeType = myDocument.Selection.ChildShapeRange(1).AutoShapeType
+            MyDocument.Selection.ChildShapeRange(ShapeCount).AutoShapeType = MyDocument.Selection.ChildShapeRange(1).AutoShapeType
             
-            For AdjustmentsCount = 1 To myDocument.Selection.ChildShapeRange(1).Adjustments.Count
+            For AdjustmentsCount = 1 To MyDocument.Selection.ChildShapeRange(1).Adjustments.Count
                 
-                myDocument.Selection.ChildShapeRange(ShapeCount).Adjustments(AdjustmentsCount) = myDocument.Selection.ChildShapeRange(1).Adjustments(AdjustmentsCount)
+                MyDocument.Selection.ChildShapeRange(ShapeCount).Adjustments(AdjustmentsCount) = MyDocument.Selection.ChildShapeRange(1).Adjustments(AdjustmentsCount)
                 
             Next AdjustmentsCount
             
@@ -123,11 +123,11 @@ Sub ObjectsCopyShapeTypeAndAdjustments()
         
         For ShapeCount = 2 To ActiveWindow.Selection.ShapeRange.Count
             
-            myDocument.Selection.ShapeRange(ShapeCount).AutoShapeType = myDocument.Selection.ShapeRange(1).AutoShapeType
+            MyDocument.Selection.ShapeRange(ShapeCount).AutoShapeType = MyDocument.Selection.ShapeRange(1).AutoShapeType
             
-            For AdjustmentsCount = 1 To myDocument.Selection.ShapeRange(1).Adjustments.Count
+            For AdjustmentsCount = 1 To MyDocument.Selection.ShapeRange(1).Adjustments.Count
                 
-                myDocument.Selection.ShapeRange(ShapeCount).Adjustments(AdjustmentsCount) = myDocument.Selection.ShapeRange(1).Adjustments(AdjustmentsCount)
+                MyDocument.Selection.ShapeRange(ShapeCount).Adjustments(AdjustmentsCount) = MyDocument.Selection.ShapeRange(1).Adjustments(AdjustmentsCount)
                 
             Next AdjustmentsCount
             

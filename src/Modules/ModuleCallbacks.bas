@@ -25,7 +25,6 @@ Attribute VB_Name = "ModuleCallbacks"
 Public InstrumentaRibbon As IRibbonUI
 Public InstrumentaVisible As String
 
-
  
 Sub InstrumentaInitialize(Ribbon As IRibbonUI)
     InstrumentaVisible = "InstrumentaVisible"
@@ -491,4 +490,12 @@ End Sub
 
 Sub GenerateRAGStatusGreen()
     GenerateRAGStatus ("green")
+End Sub
+
+Sub ColorBoldTextColorPicker()
+ObjectsTextColorBold (False)
+End Sub
+
+Sub ColorBoldTextColorAutomatically()
+ObjectsTextColorBold (True)
 End Sub

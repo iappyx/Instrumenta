@@ -23,10 +23,10 @@ Attribute VB_Name = "ModuleTableTranspose"
 
 Sub TableTranspose()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -54,13 +54,13 @@ Sub TableTranspose()
                 
                 CopyTable.Width = Application.ActiveWindow.Selection.ShapeRange.Width
                 CopyTable.Top = Application.ActiveWindow.Selection.ShapeRange.Top
-                CopyTable.Left = Application.ActiveWindow.Selection.ShapeRange.Left
+                CopyTable.left = Application.ActiveWindow.Selection.ShapeRange.left
                 
                 For RowsCount = 1 To .Rows.Count
                     For ColsCount = 1 To .Columns.Count
                         
-                        .Cell(RowsCount, ColsCount).Shape.TextFrame2.TextRange.Cut
-                        CopyTable.Table.Cell(ColsCount, RowsCount).Shape.TextFrame2.TextRange.Paste
+                        .Cell(RowsCount, ColsCount).shape.TextFrame2.TextRange.Cut
+                        CopyTable.Table.Cell(ColsCount, RowsCount).shape.TextFrame2.TextRange.Paste
                         
                     Next ColsCount
                 Next RowsCount

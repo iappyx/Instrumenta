@@ -40,7 +40,7 @@ Sub ConvertSlidesToPictures()
             #End If
             
             ImageShape.Top = 0
-            ImageShape.Left = 0
+            ImageShape.left = 0
             ImageShape.Width = Application.ActivePresentation.PageSetup.SlideWidth
             ImageShape.Height = Application.ActivePresentation.PageSetup.SlideHeight
             
@@ -60,7 +60,7 @@ Sub ConvertSlidesToPictures()
 End Sub
 
 Sub InsertWatermarkAndConvertSlidesToPictures()
-Dim Watermark As Shape
+Dim Watermark As shape
 Const PI = 3.14159265358979
    
    WatermarkText = InputBox("Please input watermark text", "Watermark", "CONFIDENTIAL")
@@ -74,13 +74,13 @@ Const PI = 3.14159265358979
    
         SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
         
-        Set Watermark = .Shapes.AddTextbox(Orientation:=msoTextOrientationHorizontal, Left:=0, Top:=0, Width:=400, Height:=100)
+        Set Watermark = .Shapes.AddTextbox(Orientation:=msoTextOrientationHorizontal, left:=0, Top:=0, Width:=400, Height:=100)
         Watermark.Width = Sqr(Application.ActivePresentation.PageSetup.SlideWidth * Application.ActivePresentation.PageSetup.SlideWidth + Application.ActivePresentation.PageSetup.SlideHeight * Application.ActivePresentation.PageSetup.SlideHeight)
         Watermark.TextFrame.TextRange.Text = WatermarkText
         Watermark.TextFrame.TextRange.Font.Size = 100
         Watermark.TextFrame.HorizontalAnchor = msoAnchorCenter
         Watermark.Rotation = -Atn(Application.ActivePresentation.PageSetup.SlideHeight / Application.ActivePresentation.PageSetup.SlideWidth) * 180 / PI
-        Watermark.Left = (Application.ActivePresentation.PageSetup.SlideWidth - Watermark.Width) / 2
+        Watermark.left = (Application.ActivePresentation.PageSetup.SlideWidth - Watermark.Width) / 2
         Watermark.Top = (Application.ActivePresentation.PageSetup.SlideHeight - Watermark.Height) / 2
         
         

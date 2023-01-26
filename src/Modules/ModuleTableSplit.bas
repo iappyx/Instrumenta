@@ -23,9 +23,9 @@ Attribute VB_Name = "ModuleTableSplit"
 
 Sub SplitTableByRow()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table or cells selected."
     Else
         
@@ -42,7 +42,7 @@ Sub SplitTableByRow()
                                 
                                 Set ThisTable = Application.ActiveWindow.Selection.ShapeRange(1)
                                 Set DuplicatedTable = ThisTable.Duplicate
-                                DuplicatedTable.Left = ThisTable.Left
+                                DuplicatedTable.left = ThisTable.left
                                 DuplicatedTable.Top = ThisTable.Top
                                 
                                 DuplicatedTable.Table.FirstRow = False
@@ -87,9 +87,9 @@ End Sub
 
 Sub SplitTableByColumn()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table or cells selected."
     Else
         
@@ -106,7 +106,7 @@ Sub SplitTableByColumn()
                                 
                                 Set ThisTable = Application.ActiveWindow.Selection.ShapeRange(1)
                                 Set DuplicatedTable = ThisTable.Duplicate
-                                DuplicatedTable.Left = ThisTable.Left
+                                DuplicatedTable.left = ThisTable.left
                                 DuplicatedTable.Top = ThisTable.Top
                                 
                                 DuplicatedTable.Table.FirstCol = False
@@ -114,11 +114,11 @@ Sub SplitTableByColumn()
                                 For DeleteColumns = 1 To ColsCount - 1
                                     DuplicatedWidth = DuplicatedTable.Table.Columns(1).Width
                                     DuplicatedTable.Table.Columns(1).Delete
-                                    DuplicatedTable.Left = DuplicatedTable.Left + DuplicatedWidth
+                                    DuplicatedTable.left = DuplicatedTable.left + DuplicatedWidth
                                     
                                 Next
                                 
-                                DuplicatedTable.Left = DuplicatedTable.Left + 5
+                                DuplicatedTable.left = DuplicatedTable.left + 5
                                 
                                 For DeleteColumns = .Columns.Count To ColsCount Step -1
                                     ThisTable.Table.Columns(DeleteColumns).Delete

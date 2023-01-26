@@ -23,24 +23,24 @@ Attribute VB_Name = "ModuleStickyNote"
 
 Sub GenerateStickyNote()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfStickies As Long
     NumberOfStickies = 0
     
-    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.Shapes.Count
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
             NumberOfStickies = NumberOfStickies + 1
         End If
         
     Next
     
-    Set StickyNote = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, Application.ActivePresentation.PageSetup.SlideWidth - (105 * (NumberOfStickies + 1)), 5, 100, 100)
+    Set StickyNote = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, Application.ActivePresentation.PageSetup.SlideWidth - (105 * (NumberOfStickies + 1)), 5, 100, 100)
     
     With StickyNote
-        .Line.Visible = False
+        .Line.visible = False
         .Fill.ForeColor.RGB = RGB(255, 192, 0)
         .Fill.Transparency = 0.1
         .Name = "StickyNote" + Str(RandomNumber)
@@ -71,15 +71,15 @@ End Sub
 
 Sub ConvertCommentsToStickyNotes()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfStickies As Long
     NumberOfStickies = 0
     
-    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.Shapes.Count
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
             NumberOfStickies = NumberOfStickies + 1
         End If
         
@@ -88,17 +88,17 @@ Sub ConvertCommentsToStickyNotes()
     Dim CommentsCount As Long
     Dim RepliesCount As Long
     
-    For CommentsCount = myDocument.Selection.SlideRange.Comments.Count To 1 Step -1
+    For CommentsCount = MyDocument.Selection.SlideRange.Comments.Count To 1 Step -1
         
-        Set StickyNote = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, Application.ActivePresentation.PageSetup.SlideWidth - (105 * (NumberOfStickies + 1)), 5, 100, 100)
+        Set StickyNote = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, Application.ActivePresentation.PageSetup.SlideWidth - (105 * (NumberOfStickies + 1)), 5, 100, 100)
         
         With StickyNote
-            .Line.Visible = False
+            .Line.visible = False
             .Fill.ForeColor.RGB = RGB(255, 192, 0)
             .Fill.Transparency = 0.1
             .Name = "StickyNote" + Str(RandomNumber)
-            .Left = myDocument.Selection.SlideRange.Comments(CommentsCount).Left
-            .Top = myDocument.Selection.SlideRange.Comments(CommentsCount).Top
+            .left = MyDocument.Selection.SlideRange.Comments(CommentsCount).left
+            .Top = MyDocument.Selection.SlideRange.Comments(CommentsCount).Top
             .Tags.Add "INSTRUMENTA STICKYNOTE", NumberOfStickies
             
             With .TextFrame
@@ -111,15 +111,15 @@ Sub ConvertCommentsToStickyNotes()
                 
                 With .TextRange
                     .Paragraphs.ParagraphFormat.Alignment = ppAlignLeft
-                    .Text = myDocument.Selection.SlideRange.Comments(CommentsCount).Author & " (" & myDocument.Selection.SlideRange.Comments(CommentsCount).AuthorInitials & "):" & vbNewLine & myDocument.Selection.SlideRange.Comments(CommentsCount).Text
+                    .Text = MyDocument.Selection.SlideRange.Comments(CommentsCount).Author & " (" & MyDocument.Selection.SlideRange.Comments(CommentsCount).AuthorInitials & "):" & vbNewLine & MyDocument.Selection.SlideRange.Comments(CommentsCount).Text
                     With .Font
                         .Size = 10
                         .Color.RGB = RGB(0, 0, 0)
                     End With
                     
-                    For RepliesCount = myDocument.Selection.SlideRange.Comments(CommentsCount).Replies.Count To 1 Step -1
+                    For RepliesCount = MyDocument.Selection.SlideRange.Comments(CommentsCount).Replies.Count To 1 Step -1
                         
-                        .Text = .Text & vbNewLine & vbNewLine & myDocument.Selection.SlideRange.Comments(CommentsCount).Replies(RepliesCount).Author & " (" & myDocument.Selection.SlideRange.Comments(CommentsCount).Replies(RepliesCount).AuthorInitials & "):" & vbNewLine & myDocument.Selection.SlideRange.Comments(CommentsCount).Replies(RepliesCount).Text
+                        .Text = .Text & vbNewLine & vbNewLine & MyDocument.Selection.SlideRange.Comments(CommentsCount).Replies(RepliesCount).Author & " (" & MyDocument.Selection.SlideRange.Comments(CommentsCount).Replies(RepliesCount).AuthorInitials & "):" & vbNewLine & MyDocument.Selection.SlideRange.Comments(CommentsCount).Replies(RepliesCount).Text
                         
                     Next
                     
@@ -128,38 +128,38 @@ Sub ConvertCommentsToStickyNotes()
             End With
         End With
         
-        myDocument.Selection.SlideRange.Comments(CommentsCount).Delete
+        MyDocument.Selection.SlideRange.Comments(CommentsCount).Delete
         NumberOfStickies = NumberOfStickies + 1
     Next
     
 End Sub
 
 Sub MoveStickyNotesOffSlide()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.Shapes.Count
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
             
-            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION TOP", CStr(myDocument.Selection.SlideRange.Shapes(ShapeNumber).Top)
-            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(myDocument.Selection.SlideRange.Shapes(ShapeNumber).Left)
+            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION TOP", CStr(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Top)
+            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).left)
             
             
-            With myDocument.Selection.SlideRange.Shapes(ShapeNumber)
-            ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .Left - .Width)
+            With MyDocument.Selection.SlideRange.Shapes(ShapeNumber)
+            ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .left - .Width)
             ShapeBottom = (Application.ActivePresentation.PageSetup.SlideHeight - .Top - .Height)
                              
-            If .Left <= ShapeRight And .Left <= .Top And .Left <= ShapeBottom Then
+            If .left <= ShapeRight And .left <= .Top And .left <= ShapeBottom Then
             
-            .Left = -5 - .Width
+            .left = -5 - .Width
             
-            ElseIf .Top <= ShapeRight And .Top <= ShapeBottom And .Top <= .Left Then
+            ElseIf .Top <= ShapeRight And .Top <= ShapeBottom And .Top <= .left Then
             
             .Top = -5 - .Height
             
-            ElseIf ShapeRight <= ShapeBottom And ShapeRight <= .Left And ShapeRight <= .Top Then
+            ElseIf ShapeRight <= ShapeBottom And ShapeRight <= .left And ShapeRight <= .Top Then
             
-            .Left = 5 + Application.ActivePresentation.PageSetup.SlideWidth
+            .left = 5 + Application.ActivePresentation.PageSetup.SlideWidth
             
             Else
             
@@ -175,13 +175,13 @@ Sub MoveStickyNotesOffSlide()
 End Sub
 
 Sub MoveStickyNotesOnSlide()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    For ShapeNumber = 1 To myDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.Shapes.Count
         On Error Resume Next
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
-            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Top = CLng(myDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION TOP"))
-            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Left = CLng(myDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
+        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Top = CLng(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION TOP"))
+            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).left = CLng(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
             
         End If
         On Error GoTo 0
@@ -190,12 +190,12 @@ Sub MoveStickyNotesOnSlide()
 End Sub
 
 Sub DeleteStickyNotesOnSlide()
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    For ShapeNumber = myDocument.Selection.SlideRange.Shapes.Count To 1 Step -1
+    For ShapeNumber = MyDocument.Selection.SlideRange.Shapes.Count To 1 Step -1
         
-        If InStr(1, myDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
-            myDocument.Selection.SlideRange.Shapes(ShapeNumber).Delete
+        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
+            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Delete
         End If
         
     Next
@@ -227,7 +227,7 @@ Sub MoveStickyNotesOnAllSlides()
             On Error Resume Next
             If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
             PresentationSlide.Shapes(ShapeNumber).Top = CLng(PresentationSlide.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION TOP"))
-            PresentationSlide.Shapes(ShapeNumber).Left = CLng(PresentationSlide.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
+            PresentationSlide.Shapes(ShapeNumber).left = CLng(PresentationSlide.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
             End If
             On Error GoTo 0
         Next
@@ -246,24 +246,24 @@ Sub MoveStickyNotesOffAllSlides()
             If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "StickyNote") = 1 Then
                 
             PresentationSlide.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION TOP", CStr(PresentationSlide.Shapes(ShapeNumber).Top)
-            PresentationSlide.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(PresentationSlide.Shapes(ShapeNumber).Left)
+            PresentationSlide.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(PresentationSlide.Shapes(ShapeNumber).left)
             
             
             With PresentationSlide.Shapes(ShapeNumber)
-            ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .Left - .Width)
+            ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .left - .Width)
             ShapeBottom = (Application.ActivePresentation.PageSetup.SlideHeight - .Top - .Height)
                              
-            If .Left <= ShapeRight And .Left <= .Top And .Left <= ShapeBottom Then
+            If .left <= ShapeRight And .left <= .Top And .left <= ShapeBottom Then
             
-            .Left = -5 - .Width
+            .left = -5 - .Width
             
-            ElseIf .Top <= ShapeRight And .Top <= ShapeBottom And .Top <= .Left Then
+            ElseIf .Top <= ShapeRight And .Top <= ShapeBottom And .Top <= .left Then
             
             .Top = -5 - .Height
             
-            ElseIf ShapeRight <= ShapeBottom And ShapeRight <= .Left And ShapeRight <= .Top Then
+            ElseIf ShapeRight <= ShapeBottom And ShapeRight <= .left And ShapeRight <= .Top Then
             
-            .Left = 5 + Application.ActivePresentation.PageSetup.SlideWidth
+            .left = 5 + Application.ActivePresentation.PageSetup.SlideWidth
             
             Else
             
@@ -283,7 +283,7 @@ End Sub
 
 Sub ConvertAllCommentsToStickyNotes()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
     For Each PresentationSlide In ActivePresentation.Slides
     
@@ -308,11 +308,11 @@ Sub ConvertAllCommentsToStickyNotes()
         Set StickyNote = PresentationSlide.Shapes.AddShape(msoShapeRectangle, Application.ActivePresentation.PageSetup.SlideWidth - (105 * (NumberOfStickies + 1)), 5, 100, 100)
         
         With StickyNote
-            .Line.Visible = False
+            .Line.visible = False
             .Fill.ForeColor.RGB = RGB(255, 192, 0)
             .Fill.Transparency = 0.1
             .Name = "StickyNote" + Str(RandomNumber)
-            .Left = PresentationSlide.Comments(CommentsCount).Left
+            .left = PresentationSlide.Comments(CommentsCount).left
             .Top = PresentationSlide.Comments(CommentsCount).Top
             .Tags.Add "INSTRUMENTA STICKYNOTE", NumberOfStickies
             

@@ -24,11 +24,11 @@ Attribute VB_Name = "ModuleStoryline"
 Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     
     Dim PresentationSlide As PowerPoint.Slide
-    Dim SlidePlaceHolder As PowerPoint.Shape
+    Dim SlidePlaceHolder As PowerPoint.shape
     Dim ClipboardObject As Object
     Dim StorylineText As String
     
-    Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
+    Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
     Dim PlaceHolderTextRange As TextRange
     Set PlaceHolderTextRange = SlidePlaceHolder.TextFrame.TextRange
     
@@ -77,7 +77,7 @@ Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
                 If WordApplication Is Nothing Then Set WordApplication = CreateObject(Class:="Word.Application")
                 On Error GoTo 0
                 
-                WordApplication.Visible = True
+                WordApplication.visible = True
                 Set WordDocument = WordApplication.Documents.Add
                 
                 With WordApplication
@@ -102,7 +102,7 @@ End Sub
 Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     
     Dim PresentationSlide As PowerPoint.Slide
-    Dim SlidePlaceHolder As PowerPoint.Shape
+    Dim SlidePlaceHolder As PowerPoint.shape
     Dim ClipboardObject As Object
     Dim StorylineText As String
     
@@ -123,7 +123,7 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     
     ProgressForm.Hide
     
-    Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, Left:=0, Top:=0, Width:=100, Height:=100)
+    Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
     SlidePlaceHolder.TextFrame.TextRange.Text = StorylineText
     SlidePlaceHolder.TextFrame.TextRange.Copy
     SlidePlaceHolder.Delete
@@ -151,7 +151,7 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
                 If WordApplication Is Nothing Then Set WordApplication = CreateObject(Class:="Word.Application")
                 On Error GoTo 0
                 
-                WordApplication.Visible = True
+                WordApplication.visible = True
                 Set WordDocument = WordApplication.Documents.Add
                 
                 With WordApplication
@@ -174,13 +174,13 @@ End Sub
 
 Sub PasteStorylineInSelectedShape()
     
-    Set myDocument = Application.ActiveWindow
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    Set MyDocument = Application.ActiveWindow
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "Please select a shape."
     Else
         
         Dim PresentationSlide As PowerPoint.Slide
-        Dim SlidePlaceHolder As PowerPoint.Shape
+        Dim SlidePlaceHolder As PowerPoint.shape
         Dim ClipboardObject As Object
         Dim StorylineText As String
         

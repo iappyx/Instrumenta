@@ -698,7 +698,7 @@ Sub ChangeSpellCheckLanguage()
     TargetLanguage = LanguageNames(ChangeSpellCheckLanguageForm.ComboBox1.ListIndex + 1)
     
     Dim PresentationSlide As PowerPoint.Slide
-    Dim SlideShape  As PowerPoint.Shape
+    Dim SlideShape  As PowerPoint.shape
     Dim SlideSmartArtNode As SmartArtNode
     Dim GroupCount  As Integer
     
@@ -799,7 +799,7 @@ Sub ChangeShapeSpellCheckLanguage(SlideShape, TargetLanguageID)
         If SlideShape.HasTable Then
             For TableRow = 1 To SlideShape.Table.Rows.Count
                     For TableColumn = 1 To SlideShape.Table.Columns.Count
-                        SlideShape.Table.Cell(TableRow, TableColumn).Shape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+                        SlideShape.Table.Cell(TableRow, TableColumn).shape.TextFrame2.TextRange.LanguageID = TargetLanguageID
                     Next
             Next
         End If

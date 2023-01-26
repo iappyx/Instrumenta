@@ -21,14 +21,15 @@ Attribute VB_Name = "ModulePicturesCropToSlide"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+
 Sub PictureCropToSlide()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No picture or shape selected."
         
-    ElseIf myDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         
         Set PictureShape = Application.ActiveWindow.Selection.ShapeRange(1)
         
@@ -47,21 +48,21 @@ Sub PictureCropToSlide()
             
             With PictureShape
                 
-                .PictureFormat.CropLeft = 0
-                .PictureFormat.CropTop = 0
+                .PictureFormat.cropLeft = 0
+                .PictureFormat.cropTop = 0
                 .PictureFormat.CropBottom = 0
                 .PictureFormat.CropRight = 0
                 
-                If .Left < 0 Then
-                    .PictureFormat.CropLeft = 0 - (.Left * ScaledWidth)
+                If .left < 0 Then
+                    .PictureFormat.cropLeft = 0 - (.left * ScaledWidth)
                 End If
                 
                 If .Top < 0 Then
-                    .PictureFormat.CropTop = 0 - (.Top * ScaledHeight)
+                    .PictureFormat.cropTop = 0 - (.Top * ScaledHeight)
                 End If
                 
-                If (.Left + .Width) > Application.ActivePresentation.PageSetup.SlideWidth Then
-                    .PictureFormat.CropRight = (.Left + .Width - Application.ActivePresentation.PageSetup.SlideWidth) * ScaledWidth
+                If (.left + .Width) > Application.ActivePresentation.PageSetup.SlideWidth Then
+                    .PictureFormat.CropRight = (.left + .Width - Application.ActivePresentation.PageSetup.SlideWidth) * ScaledWidth
                 End If
                 
                 If (.Top + .Height) > Application.ActivePresentation.PageSetup.SlideHeight Then

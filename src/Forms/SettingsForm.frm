@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SettingsForm 
    Caption         =   "Settings"
    ClientHeight    =   6930
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   8355.001
+   ClientLeft      =   119
+   ClientTop       =   462
+   ClientWidth     =   8358.001
    OleObjectBlob   =   "SettingsForm.frx":0000
    StartUpPosition =   1  'CenterOwner
 End

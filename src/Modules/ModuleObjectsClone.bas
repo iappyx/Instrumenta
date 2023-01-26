@@ -23,40 +23,40 @@ Attribute VB_Name = "ModuleObjectsClone"
 
 Sub ObjectsCloneRight()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
     
     Dim OldTop, OldLeft As Double
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf myDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         
-        OldTop = myDocument.Selection.ShapeRange.Top
-        OldLeft = myDocument.Selection.ShapeRange.Left
+        OldTop = MyDocument.Selection.ShapeRange.Top
+        OldLeft = MyDocument.Selection.ShapeRange.left
         
-        Set SlideShape = myDocument.Selection.ShapeRange.Duplicate
+        Set SlideShape = MyDocument.Selection.ShapeRange.Duplicate
         
         With SlideShape
             .Top = OldTop
-            .Left = OldLeft + SlideShape.Width
+            .left = OldLeft + SlideShape.Width
         End With
         
         SlideShape.Select
         
     Else
         
-        Set ShapesToDuplicate = myDocument.Selection.ShapeRange.Group
+        Set ShapesToDuplicate = MyDocument.Selection.ShapeRange.Group
         
         OldTop = ShapesToDuplicate.Top
-        OldLeft = ShapesToDuplicate.Left
+        OldLeft = ShapesToDuplicate.left
         
         Set SlideShape = ShapesToDuplicate.Duplicate
         
         With SlideShape
             .Top = OldTop
-            .Left = OldLeft + SlideShape.Width
+            .left = OldLeft + SlideShape.Width
         End With
         
         ShapesToDuplicate.Ungroup
@@ -68,38 +68,38 @@ End Sub
 
 Sub ObjectsCloneDown()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim OldTop, OldLeft As Double
     
-    If Not myDocument.Selection.Type = ppSelectionShapes Then
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf myDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         
-        OldTop = myDocument.Selection.ShapeRange.Top
-        OldLeft = myDocument.Selection.ShapeRange.Left
+        OldTop = MyDocument.Selection.ShapeRange.Top
+        OldLeft = MyDocument.Selection.ShapeRange.left
         
-        Set SlideShape = myDocument.Selection.ShapeRange.Duplicate
+        Set SlideShape = MyDocument.Selection.ShapeRange.Duplicate
         
         With SlideShape
             .Top = OldTop + SlideShape.Height
-            .Left = OldLeft
+            .left = OldLeft
         End With
         
         SlideShape.Select
         
     Else
         
-        Set ShapesToDuplicate = myDocument.Selection.ShapeRange.Group
+        Set ShapesToDuplicate = MyDocument.Selection.ShapeRange.Group
         
         OldTop = ShapesToDuplicate.Top
-        OldLeft = ShapesToDuplicate.Left
+        OldLeft = ShapesToDuplicate.left
         
         Set SlideShape = ShapesToDuplicate.Duplicate
         
         With SlideShape
             .Top = OldTop + SlideShape.Height
-            .Left = OldLeft
+            .left = OldLeft
         End With
         
         ShapesToDuplicate.Ungroup

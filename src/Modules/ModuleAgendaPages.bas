@@ -23,12 +23,12 @@ Attribute VB_Name = "ModuleAgendaPages"
 
 Sub CreateOrUpdateMasterAgenda()
     Dim NumberOfSections As Long
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim MasterExists As Boolean
     hasMasterAgenda = False
     Dim AgendaSlide As Slide
     Dim AgendaLayout As CustomLayout
-    Dim AgendaShape As Shape
+    Dim AgendaShape As shape
     
     If ActivePresentation.SectionProperties.Count >= 2 Then
         
@@ -48,7 +48,7 @@ Sub CreateOrUpdateMasterAgenda()
                         Set OldAgendaShape = AgendaShape.Duplicate
                         
                         With OldAgendaShape
-                            .Left = Application.ActivePresentation.PageSetup.SlideWidth + 10
+                            .left = Application.ActivePresentation.PageSetup.SlideWidth + 10
                         End With
                         
                     End If
@@ -167,7 +167,7 @@ Sub CreateOrUpdateMasterAgenda()
         If HelpRequired = vbYes Then
             
             Do While SectionsReady = False
-                SectionToCreate = InputBox("Enter title for menu-item / section " & Str(SectionNum) & vbNewLine & vbNewLine & "Cancel or close this dialog when you're done.", "Enter title of menu-item / section")
+                SectionToCreate = InputBox("Enter title for menu-item / section " & Str(SectionNum) & vbNewLine & vbNewLine & "Note: Use one or more '-' directly in front of the title to create different levels of subitems" & vbNewLine & vbNewLine & "Cancel or close this dialog when you're done.", "Enter title of menu-item / section")
                 
                 If StrPtr(SectionToCreate) = 0 Then
                     
@@ -193,13 +193,13 @@ End Sub
 
 Sub CreateAgendaPages()
     Dim NumberOfSections As Long
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
     Dim hasMasterAgenda As Boolean
     hasMasterAgenda = False
     Dim MasterAgendaSlide As Slide
     
-    Dim AgendaTextBox As Shape
+    Dim AgendaTextBox As shape
     
     For SlideLoop = ActivePresentation.Slides.Count To 1 Step -1
         
@@ -232,6 +232,25 @@ Sub CreateAgendaPages()
     Next SlideLoop
     
     If hasMasterAgenda = True Then
+    
+        
+        For IndentLoop = 1 To MasterAgendaTextBox.TextFrame2.TextRange.Lines.Count
+        MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).ParagraphFormat.IndentLevel = 1
+        Next IndentLoop
+        
+        For IndentLoop = 1 To MasterAgendaTextBox.TextFrame2.TextRange.Lines.Count
+        
+        For DepthLoop = 1 To 6
+        
+        If MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).Characters(1, 1) = "-" Then
+        MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).ParagraphFormat.Bullet.Type = msoBulletUnnumbered
+        MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).ParagraphFormat.IndentLevel = MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).ParagraphFormat.IndentLevel + 1
+        MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).Characters(1, 1).Delete
+        End If
+        
+        Next DepthLoop
+        
+        Next IndentLoop
         
         For NumberOfSections = 2 To ActivePresentation.SectionProperties.Count - 1
             Set NewSlide = MasterAgendaSlide.Duplicate

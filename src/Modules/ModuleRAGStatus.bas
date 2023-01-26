@@ -23,32 +23,32 @@ Attribute VB_Name = "ModuleRAGStatus"
 
 Sub AverageRAGStatus()
 
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim RAGStatusCount As Integer
     Dim RAGStatusSum As Double
     
     RAGStatusSum = 0
     RAGStatusCount = 0
           
-    If myDocument.Selection.Type = ppSelectionShapes Then
+    If MyDocument.Selection.Type = ppSelectionShapes Then
         
-        For Each Shape In ActiveWindow.Selection.ShapeRange
+        For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If (InStr(Shape.Name, "RAGStatus") = 1) And (Not Shape.Tags("INSTRUMENTA RAGSTATUS") = "") Then
+            If (InStr(shape.Name, "RAGStatus") = 1) And (Not shape.Tags("INSTRUMENTA RAGSTATUS") = "") Then
                 
                 RAGStatusCount = RAGStatusCount + 1
                 
-                If Shape.Tags("INSTRUMENTA RAGSTATUS") = "green" Then
+                If shape.Tags("INSTRUMENTA RAGSTATUS") = "green" Then
                     RAGStatusSum = RAGStatusSum + 3
-                ElseIf Shape.Tags("INSTRUMENTA RAGSTATUS") = "amber" Then
+                ElseIf shape.Tags("INSTRUMENTA RAGSTATUS") = "amber" Then
                     RAGStatusSum = RAGStatusSum + 6
-                ElseIf Shape.Tags("INSTRUMENTA RAGSTATUS") = "red" Then
+                ElseIf shape.Tags("INSTRUMENTA RAGSTATUS") = "red" Then
                     RAGStatusSum = RAGStatusSum + 9
                 End If
                 
             End If
             
-        Next Shape
+        Next shape
     End If
     
     If RAGStatusCount > 0 Then
@@ -77,49 +77,49 @@ End Sub
 
 Sub GenerateRAGStatus(RAGColor As String)
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
     Dim ExistingWidth, ExistingHeight, ExistingTop, ExistingLeft, ExistingRotation As Double
     Dim ExistingRAGStatus As Boolean
     ExistingRAGStatus = False
     
-    If myDocument.Selection.Type = ppSelectionShapes Then
+    If MyDocument.Selection.Type = ppSelectionShapes Then
         
-        For Each Shape In ActiveWindow.Selection.ShapeRange
+        For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If InStr(Shape.Name, "RAGStatus") = 1 Then
+            If InStr(shape.Name, "RAGStatus") = 1 Then
                 
                 ExistingRAGStatus = True
-                ExistingWidth = Shape.Width
-                ExistingHeight = Shape.Height
-                ExistingTop = Shape.Top
-                ExistingLeft = Shape.Left
-                ExistingRotation = Shape.Rotation
-                Shape.Delete
+                ExistingWidth = shape.Width
+                ExistingHeight = shape.Height
+                ExistingTop = shape.Top
+                ExistingLeft = shape.left
+                ExistingRotation = shape.Rotation
+                shape.Delete
                 
             End If
             
             Exit For
-        Next Shape
+        Next shape
     End If
     
     
     Dim RAGStatus As Object
     RandomNumber = Round(Rnd() * 1000000, 0)
     
-        Set RAGBackground = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRoundedRectangle, 100, 100, 94, 34)
+        Set RAGBackground = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRoundedRectangle, 100, 100, 94, 34)
         
         With RAGBackground
-            .Line.Visible = False
+            .Line.visible = False
             .Fill.ForeColor.RGB = RGB(0, 0, 0)
             .Name = "RAGBackground" + Str(RandomNumber)
         End With
         
         
-        Set GreenStatus = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 104, 104, 26, 26)
+        Set GreenStatus = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 104, 104, 26, 26)
         
         With GreenStatus
-            .Line.Visible = False
+            .Line.visible = False
             
             If LCase(RAGColor) = "green" Then
             .Fill.ForeColor.RGB = RGB(0, 176, 80)
@@ -130,10 +130,10 @@ Sub GenerateRAGStatus(RAGColor As String)
             .Name = "GreenStatus" + Str(RandomNumber)
         End With
     
-        Set AmberStatus = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 134, 104, 26, 26)
+        Set AmberStatus = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 134, 104, 26, 26)
         
         With AmberStatus
-            .Line.Visible = False
+            .Line.visible = False
 
             If LCase(RAGColor) = "amber" Then
             .Fill.ForeColor.RGB = RGB(255, 192, 0)
@@ -144,10 +144,10 @@ Sub GenerateRAGStatus(RAGColor As String)
             .Name = "AmberStatus" + Str(RandomNumber)
         End With
     
-        Set RedStatus = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 164, 104, 26, 26)
+        Set RedStatus = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 164, 104, 26, 26)
         
         With RedStatus
-            .Line.Visible = False
+            .Line.visible = False
             
             If LCase(RAGColor) = "red" Then
             .Fill.ForeColor.RGB = RGB(192, 0, 0)
@@ -166,7 +166,7 @@ Sub GenerateRAGStatus(RAGColor As String)
             RAGStatus.Width = ExistingWidth
             RAGStatus.Height = ExistingHeight
             RAGStatus.Top = ExistingTop
-            RAGStatus.Left = ExistingLeft
+            RAGStatus.left = ExistingLeft
             RAGStatus.Rotation = ExistingRotation
         End If
     

@@ -23,25 +23,25 @@ Attribute VB_Name = "ModuleFivePointStars"
 
 Sub AverageFivePointStars()
 
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     Dim FivePointStarCount As Integer
     Dim FivePointStarSum As Double
     
     FivePointStarSum = 0
     FivePointStarCount = 0
           
-    If myDocument.Selection.Type = ppSelectionShapes Then
+    If MyDocument.Selection.Type = ppSelectionShapes Then
         
-        For Each Shape In ActiveWindow.Selection.ShapeRange
+        For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If (InStr(Shape.Name, "StarRating") = 1) And (Not Shape.Tags("INSTRUMENTA STARRATING") = "") Then
+            If (InStr(shape.Name, "StarRating") = 1) And (Not shape.Tags("INSTRUMENTA STARRATING") = "") Then
                 
                 FivePointStarCount = FivePointStarCount + 1
-                FivePointStarSum = FivePointStarSum + CDbl(Shape.Tags("INSTRUMENTA STARRATING"))
+                FivePointStarSum = FivePointStarSum + CDbl(shape.Tags("INSTRUMENTA STARRATING"))
                 
             End If
             
-        Next Shape
+        Next shape
     End If
     
     If FivePointStarCount > 0 Then
@@ -58,30 +58,30 @@ End Sub
 
 Sub GenerateFivePointStars(NumberOfStars As Double)
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
     Dim ExistingWidth, ExistingHeight, ExistingTop, ExistingLeft, ExistingRotation As Double
     Dim ExistingStarRating As Boolean
     ExistingStarRating = False
     
-    If myDocument.Selection.Type = ppSelectionShapes Then
+    If MyDocument.Selection.Type = ppSelectionShapes Then
         
-        For Each Shape In ActiveWindow.Selection.ShapeRange
+        For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If InStr(Shape.Name, "StarRating") = 1 Then
+            If InStr(shape.Name, "StarRating") = 1 Then
                 
                 ExistingStarRating = True
-                ExistingWidth = Shape.Width
-                ExistingHeight = Shape.Height
-                ExistingTop = Shape.Top
-                ExistingLeft = Shape.Left
-                ExistingRotation = Shape.Rotation
-                Shape.Delete
+                ExistingWidth = shape.Width
+                ExistingHeight = shape.Height
+                ExistingTop = shape.Top
+                ExistingLeft = shape.left
+                ExistingRotation = shape.Rotation
+                shape.Delete
                 
             End If
             
             Exit For
-        Next Shape
+        Next shape
     End If
     
     
@@ -92,10 +92,10 @@ Sub GenerateFivePointStars(NumberOfStars As Double)
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     For StarsCount = 1 To 5
-        Set FivePointStar = myDocument.Selection.SlideRange.Shapes.AddShape(msoShape5pointStar, 100 + (StarsCount * 26), 100, 26, 26)
+        Set FivePointStar = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShape5pointStar, 100 + (StarsCount * 26), 100, 26, 26)
         
         With FivePointStar
-            .Line.Visible = False
+            .Line.visible = False
             .Fill.ForeColor.RGB = RGB(242, 242, 242)
             .Name = "FivePointStar" + Str(StarsCount) + Str(RandomNumber)
         End With
@@ -113,16 +113,16 @@ Sub GenerateFivePointStars(NumberOfStars As Double)
         
         If StarsCount < NumberOfStars + 1 Then
             
-            Set FivePointStar = myDocument.Selection.SlideRange.Shapes.AddShape(msoShape5pointStar, 100 + (StarsCount * 26), 100, 26, 26)
+            Set FivePointStar = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShape5pointStar, 100 + (StarsCount * 26), 100, 26, 26)
             
             With FivePointStar
-                .Line.Visible = False
+                .Line.visible = False
                 .Fill.ForeColor.RGB = RGB(255, 192, 0)
                 .Name = "FivePointStar" + Str(StarsCount + 5) + Str(RandomNumber)
             End With
             
             If NumberOfStars < StarsCount Then
-                Set HalfOfFivePointStar = myDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, 113 + (StarsCount * 26), 100, 26, 26)
+                Set HalfOfFivePointStar = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, 113 + (StarsCount * 26), 100, 26, 26)
                 
                 With HalfOfFivePointStar
                     .Name = "HalfFivePointStar" + Str(StarsCount + 5) + Str(RandomNumber)
@@ -152,7 +152,7 @@ Sub GenerateFivePointStars(NumberOfStars As Double)
         StarRating.Width = ExistingWidth
         StarRating.Height = ExistingHeight
         StarRating.Top = ExistingTop
-        StarRating.Left = ExistingLeft
+        StarRating.left = ExistingLeft
         StarRating.Rotation = ExistingRotation
     End If
     

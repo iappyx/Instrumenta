@@ -23,9 +23,9 @@ Attribute VB_Name = "ModuleTableFormatting"
 
 Sub TableQuickFormat()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -48,7 +48,7 @@ Sub TableQuickFormat()
                     
                     For ColumnCount = 1 To .Columns.Count
                         
-                        .Cell(RowCount, ColumnCount).Shape.TextFrame.TextRange.Font.Color.RGB = RGB(0, 0, 0)
+                        .Cell(RowCount, ColumnCount).shape.TextFrame.TextRange.Font.Color.RGB = RGB(0, 0, 0)
 
                     Next
                     
@@ -59,10 +59,10 @@ Sub TableQuickFormat()
                     .Rows(1).Cells(CellCount).Borders(ppBorderTop).Weight = 0
                     .Rows(1).Cells(CellCount).Borders(ppBorderBottom).Weight = 2
                     .Rows(1).Cells(CellCount).Borders(ppBorderBottom).ForeColor.RGB = RGB(0, 0, 0)
-                    .Rows(1).Cells(CellCount).Shape.Fill.Visible = msoFalse
-                    .Rows(1).Cells(CellCount).Shape.TextFrame.VerticalAnchor = msoAnchorBottom
-                    .Rows(1).Cells(CellCount).Shape.TextFrame.TextRange.Font.Bold = msoTrue
-                    .Rows(1).Cells(CellCount).Shape.TextFrame.TextRange.Font.Color.RGB = RGB(0, 0, 0)
+                    .Rows(1).Cells(CellCount).shape.Fill.visible = msoFalse
+                    .Rows(1).Cells(CellCount).shape.TextFrame.VerticalAnchor = msoAnchorBottom
+                    .Rows(1).Cells(CellCount).shape.TextFrame.TextRange.Font.Bold = msoTrue
+                    .Rows(1).Cells(CellCount).shape.TextFrame.TextRange.Font.Color.RGB = RGB(0, 0, 0)
                     
                 Next CellCount
                 
@@ -82,9 +82,9 @@ End Sub
 
 Sub TableRemoveBackgrounds()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -97,11 +97,11 @@ Sub TableRemoveBackgrounds()
                 
                 Application.ActiveWindow.Selection.ShapeRange.Fill.Solid
                 Application.ActiveWindow.Selection.ShapeRange.Fill.ForeColor.RGB = RGB(255, 255, 255)
-                Application.ActiveWindow.Selection.ShapeRange.Fill.Visible = msoFalse
+                Application.ActiveWindow.Selection.ShapeRange.Fill.visible = msoFalse
                 
                 .Background.Fill.Solid
                 .Background.Fill.ForeColor.RGB = RGB(255, 255, 255)
-                .Background.Fill.Visible = msoFalse
+                .Background.Fill.visible = msoFalse
                 
                 ProgressForm.Show
                 
@@ -111,14 +111,14 @@ Sub TableRemoveBackgrounds()
                     
                     For ColumnCount = 1 To .Columns.Count
                         
-                        .Cell(RowCount, ColumnCount).Shape.Fill.Solid
-                        .Cell(RowCount, ColumnCount).Shape.Fill.ForeColor.RGB = RGB(255, 255, 255)
-                        .Cell(RowCount, ColumnCount).Shape.Fill.Visible = msoFalse
+                        .Cell(RowCount, ColumnCount).shape.Fill.Solid
+                        .Cell(RowCount, ColumnCount).shape.Fill.ForeColor.RGB = RGB(255, 255, 255)
+                        .Cell(RowCount, ColumnCount).shape.Fill.visible = msoFalse
                     Next
                     
                 Next
                 
-                ProgressForm.hide
+                ProgressForm.Hide
                 
             End With
             
@@ -134,9 +134,9 @@ End Sub
 
 Sub TableRemoveBorders()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -162,15 +162,15 @@ Sub TableRemoveBorders()
                         .Cell(RowCount, ColumnCount).Borders(ppBorderTop).Weight = 0
                         .Cell(RowCount, ColumnCount).Borders(ppBorderBottom).Weight = 0
                         
-                        .Cell(RowCount, ColumnCount).Borders(ppBorderLeft).Visible = msoFalse
-                        .Cell(RowCount, ColumnCount).Borders(ppBorderRight).Visible = msoFalse
-                        .Cell(RowCount, ColumnCount).Borders(ppBorderTop).Visible = msoFalse
-                        .Cell(RowCount, ColumnCount).Borders(ppBorderBottom).Visible = msoFalse
+                        .Cell(RowCount, ColumnCount).Borders(ppBorderLeft).visible = msoFalse
+                        .Cell(RowCount, ColumnCount).Borders(ppBorderRight).visible = msoFalse
+                        .Cell(RowCount, ColumnCount).Borders(ppBorderTop).visible = msoFalse
+                        .Cell(RowCount, ColumnCount).Borders(ppBorderBottom).visible = msoFalse
                     Next
                     
                 Next
                 
-                ProgressForm.hide
+                ProgressForm.Hide
                 
             End With
             
@@ -186,9 +186,9 @@ End Sub
 
 Sub TableColumnGaps(TypeOfGaps As String, GapSize As Double, Optional GapColor As RGBColor)
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -257,15 +257,15 @@ Sub TableColumnGaps(TypeOfGaps As String, GapSize As Double, Optional GapColor A
                         Set AddedColumn = .Columns.Add(ColumnCount)
                         
                         For CellCount = 1 To AddedColumn.Cells.Count
-                            AddedColumn.Cells(CellCount).Shape.Fill.Visible = msoFalse
+                            AddedColumn.Cells(CellCount).shape.Fill.visible = msoFalse
                             AddedColumn.Cells(CellCount).Borders(ppBorderTop).Weight = 0
                             AddedColumn.Cells(CellCount).Borders(ppBorderBottom).Weight = 0
-                            AddedColumn.Cells(CellCount).Shape.TextFrame.TextRange.Font.Size = 1
+                            AddedColumn.Cells(CellCount).shape.TextFrame.TextRange.Font.Size = 1
                             
-                            AddedColumn.Cells(CellCount).Shape.TextFrame.MarginBottom = 0
-                            AddedColumn.Cells(CellCount).Shape.TextFrame.MarginLeft = 0
-                            AddedColumn.Cells(CellCount).Shape.TextFrame.MarginRight = 0
-                            AddedColumn.Cells(CellCount).Shape.TextFrame.MarginTop = 0
+                            AddedColumn.Cells(CellCount).shape.TextFrame.MarginBottom = 0
+                            AddedColumn.Cells(CellCount).shape.TextFrame.MarginLeft = 0
+                            AddedColumn.Cells(CellCount).shape.TextFrame.MarginRight = 0
+                            AddedColumn.Cells(CellCount).shape.TextFrame.MarginTop = 0
                             
                         Next CellCount
                         
@@ -274,15 +274,15 @@ Sub TableColumnGaps(TypeOfGaps As String, GapSize As Double, Optional GapColor A
                             Set AddedColumn = .Columns.Add
                             
                             For CellCount = 1 To AddedColumn.Cells.Count
-                                AddedColumn.Cells(CellCount).Shape.Fill.Visible = msoFalse
+                                AddedColumn.Cells(CellCount).shape.Fill.visible = msoFalse
                                 AddedColumn.Cells(CellCount).Borders(ppBorderTop).Weight = 0
                                 AddedColumn.Cells(CellCount).Borders(ppBorderBottom).Weight = 0
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.TextRange.Font.Size = 1
+                                AddedColumn.Cells(CellCount).shape.TextFrame.TextRange.Font.Size = 1
                                 
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.MarginBottom = 0
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.MarginLeft = 0
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.MarginRight = 0
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.MarginTop = 0
+                                AddedColumn.Cells(CellCount).shape.TextFrame.MarginBottom = 0
+                                AddedColumn.Cells(CellCount).shape.TextFrame.MarginLeft = 0
+                                AddedColumn.Cells(CellCount).shape.TextFrame.MarginRight = 0
+                                AddedColumn.Cells(CellCount).shape.TextFrame.MarginTop = 0
                                 
                             Next CellCount
                             
@@ -295,15 +295,15 @@ Sub TableColumnGaps(TypeOfGaps As String, GapSize As Double, Optional GapColor A
                             Set AddedColumn = .Columns.Add(ColumnCount)
                             
                             For CellCount = 1 To AddedColumn.Cells.Count
-                                AddedColumn.Cells(CellCount).Shape.Fill.Visible = msoFalse
+                                AddedColumn.Cells(CellCount).shape.Fill.visible = msoFalse
                                 AddedColumn.Cells(CellCount).Borders(ppBorderTop).Weight = 0
                                 AddedColumn.Cells(CellCount).Borders(ppBorderBottom).Weight = 0
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.TextRange.Font.Size = 1
+                                AddedColumn.Cells(CellCount).shape.TextFrame.TextRange.Font.Size = 1
                                 
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.MarginBottom = 0
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.MarginLeft = 0
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.MarginRight = 0
-                                AddedColumn.Cells(CellCount).Shape.TextFrame.MarginTop = 0
+                                AddedColumn.Cells(CellCount).shape.TextFrame.MarginBottom = 0
+                                AddedColumn.Cells(CellCount).shape.TextFrame.MarginLeft = 0
+                                AddedColumn.Cells(CellCount).shape.TextFrame.MarginRight = 0
+                                AddedColumn.Cells(CellCount).shape.TextFrame.MarginTop = 0
                                 
                             Next CellCount
                             
@@ -333,9 +333,9 @@ End Sub
 
 Sub TableColumnIncreaseGaps()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -349,12 +349,15 @@ Sub TableColumnIncreaseGaps()
             End If
             TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA COLUMNGAPS")
             
+            Dim ColumnGapSetting As Double
+            ColumnGapSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeColumnGaps", "1" + GetDecimalSeperator() + "0"))
+            
             With Application.ActiveWindow.Selection.ShapeRange.Table
                 
                 For ColumnCount = 1 To .Columns.Count
                     
                     If (ColumnCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not ColumnCount Mod 2 = 0 And TypeOfGaps = "odd") Then
-                        .Columns(ColumnCount).Width = .Columns(ColumnCount).Width + 1
+                        .Columns(ColumnCount).Width = .Columns(ColumnCount).Width + ColumnGapSetting
                     End If
                     
                 Next ColumnCount
@@ -373,9 +376,9 @@ End Sub
 
 Sub TableColumnDecreaseGaps()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -389,12 +392,15 @@ Sub TableColumnDecreaseGaps()
             End If
             TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA COLUMNGAPS")
             
+            Dim ColumnGapSetting As Double
+            ColumnGapSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeColumnGaps", "1" + GetDecimalSeperator() + "0"))
+            
             With Application.ActiveWindow.Selection.ShapeRange.Table
                 
                 For ColumnCount = 1 To .Columns.Count
                     
-                    If ((ColumnCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not ColumnCount Mod 2 = 0 And TypeOfGaps = "odd") And ((.Columns(ColumnCount).Width - 1) >= 0)) Then
-                        .Columns(ColumnCount).Width = .Columns(ColumnCount).Width - 1
+                    If ((ColumnCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not ColumnCount Mod 2 = 0 And TypeOfGaps = "odd") And ((.Columns(ColumnCount).Width - ColumnGapSetting) >= 0)) Then
+                        .Columns(ColumnCount).Width = .Columns(ColumnCount).Width - ColumnGapSetting
                     End If
                     
                 Next ColumnCount
@@ -413,9 +419,9 @@ End Sub
 
 Sub TableColumnRemoveGaps()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -456,9 +462,9 @@ End Sub
 
 Sub TableRowGaps(TypeOfGaps As String, GapSize As Double, Optional GapColor As RGBColor)
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -527,15 +533,15 @@ Sub TableRowGaps(TypeOfGaps As String, GapSize As Double, Optional GapColor As R
                         Set AddedRow = .Rows.Add(RowCount)
                         
                         For CellCount = 1 To AddedRow.Cells.Count
-                            AddedRow.Cells(CellCount).Shape.Fill.Visible = msoFalse
+                            AddedRow.Cells(CellCount).shape.Fill.visible = msoFalse
                             AddedRow.Cells(CellCount).Borders(ppBorderLeft).Weight = 0
                             AddedRow.Cells(CellCount).Borders(ppBorderRight).Weight = 0
-                            AddedRow.Cells(CellCount).Shape.TextFrame.TextRange.Font.Size = 1
+                            AddedRow.Cells(CellCount).shape.TextFrame.TextRange.Font.Size = 1
                             
-                            AddedRow.Cells(CellCount).Shape.TextFrame.MarginBottom = 0
-                            AddedRow.Cells(CellCount).Shape.TextFrame.MarginLeft = 0
-                            AddedRow.Cells(CellCount).Shape.TextFrame.MarginRight = 0
-                            AddedRow.Cells(CellCount).Shape.TextFrame.MarginTop = 0
+                            AddedRow.Cells(CellCount).shape.TextFrame.MarginBottom = 0
+                            AddedRow.Cells(CellCount).shape.TextFrame.MarginLeft = 0
+                            AddedRow.Cells(CellCount).shape.TextFrame.MarginRight = 0
+                            AddedRow.Cells(CellCount).shape.TextFrame.MarginTop = 0
                             
                         Next CellCount
                         
@@ -544,15 +550,15 @@ Sub TableRowGaps(TypeOfGaps As String, GapSize As Double, Optional GapColor As R
                             Set AddedRow = .Rows.Add
                             
                             For CellCount = 1 To AddedRow.Cells.Count
-                                AddedRow.Cells(CellCount).Shape.Fill.Visible = msoFalse
+                                AddedRow.Cells(CellCount).shape.Fill.visible = msoFalse
                                 AddedRow.Cells(CellCount).Borders(ppBorderLeft).Weight = 0
                                 AddedRow.Cells(CellCount).Borders(ppBorderRight).Weight = 0
-                                AddedRow.Cells(CellCount).Shape.TextFrame.TextRange.Font.Size = 1
+                                AddedRow.Cells(CellCount).shape.TextFrame.TextRange.Font.Size = 1
                                 
-                                AddedRow.Cells(CellCount).Shape.TextFrame.MarginBottom = 0
-                                AddedRow.Cells(CellCount).Shape.TextFrame.MarginLeft = 0
-                                AddedRow.Cells(CellCount).Shape.TextFrame.MarginRight = 0
-                                AddedRow.Cells(CellCount).Shape.TextFrame.MarginTop = 0
+                                AddedRow.Cells(CellCount).shape.TextFrame.MarginBottom = 0
+                                AddedRow.Cells(CellCount).shape.TextFrame.MarginLeft = 0
+                                AddedRow.Cells(CellCount).shape.TextFrame.MarginRight = 0
+                                AddedRow.Cells(CellCount).shape.TextFrame.MarginTop = 0
                                 
                             Next CellCount
                             
@@ -565,15 +571,15 @@ Sub TableRowGaps(TypeOfGaps As String, GapSize As Double, Optional GapColor As R
                             Set AddedRow = .Rows.Add(RowCount)
                             
                             For CellCount = 1 To AddedRow.Cells.Count
-                                AddedRow.Cells(CellCount).Shape.Fill.Visible = msoFalse
+                                AddedRow.Cells(CellCount).shape.Fill.visible = msoFalse
                                 AddedRow.Cells(CellCount).Borders(ppBorderLeft).Weight = 0
                                 AddedRow.Cells(CellCount).Borders(ppBorderRight).Weight = 0
-                                AddedRow.Cells(CellCount).Shape.TextFrame.TextRange.Font.Size = 1
+                                AddedRow.Cells(CellCount).shape.TextFrame.TextRange.Font.Size = 1
                                 
-                                AddedRow.Cells(CellCount).Shape.TextFrame.MarginBottom = 0
-                                AddedRow.Cells(CellCount).Shape.TextFrame.MarginLeft = 0
-                                AddedRow.Cells(CellCount).Shape.TextFrame.MarginRight = 0
-                                AddedRow.Cells(CellCount).Shape.TextFrame.MarginTop = 0
+                                AddedRow.Cells(CellCount).shape.TextFrame.MarginBottom = 0
+                                AddedRow.Cells(CellCount).shape.TextFrame.MarginLeft = 0
+                                AddedRow.Cells(CellCount).shape.TextFrame.MarginRight = 0
+                                AddedRow.Cells(CellCount).shape.TextFrame.MarginTop = 0
                                 
                             Next CellCount
                             
@@ -603,9 +609,9 @@ End Sub
 
 Sub TableRowIncreaseGaps()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -619,12 +625,15 @@ Sub TableRowIncreaseGaps()
             End If
             TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA ROWGAPS")
             
+            Dim RowGapSetting As Double
+            RowGapSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeRowGaps", "1" + GetDecimalSeperator() + "0"))
+            
             With Application.ActiveWindow.Selection.ShapeRange.Table
                 
                 For RowCount = 1 To .Rows.Count
                     
                     If (RowCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowCount Mod 2 = 0 And TypeOfGaps = "odd") Then
-                        .Rows(RowCount).Height = .Rows(RowCount).Height + 1
+                        .Rows(RowCount).Height = .Rows(RowCount).Height + RowGapSetting
                     End If
                     
                 Next RowCount
@@ -643,9 +652,9 @@ End Sub
 
 Sub TableRowDecreaseGaps()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
@@ -659,12 +668,15 @@ Sub TableRowDecreaseGaps()
             End If
             TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA ROWGAPS")
             
+            Dim RowGapSetting As Double
+            RowGapSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeRowGaps", "1" + GetDecimalSeperator() + "0"))
+            
             With Application.ActiveWindow.Selection.ShapeRange.Table
                 
                 For RowCount = 1 To .Rows.Count
                     
-                    If ((RowCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowCount Mod 2 = 0 And TypeOfGaps = "odd") And ((.Rows(RowCount).Height - 1) >= 0)) Then
-                        .Rows(RowCount).Height = .Rows(RowCount).Height - 1
+                    If ((RowCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowCount Mod 2 = 0 And TypeOfGaps = "odd") And ((.Rows(RowCount).Height - RowGapSetting) >= 0)) Then
+                        .Rows(RowCount).Height = .Rows(RowCount).Height - RowGapSetting
                     End If
                     
                 Next RowCount
@@ -683,9 +695,9 @@ End Sub
 
 Sub TableRowRemoveGaps()
     
-    Set myDocument = Application.ActiveWindow
+    Set MyDocument = Application.ActiveWindow
     
-    If Not (myDocument.Selection.Type = ppSelectionShapes Or myDocument.Selection.Type = ppSelectionText) Then
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
         MsgBox "No table selected."
     Else
         
