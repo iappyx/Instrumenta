@@ -14,7 +14,6 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 'MIT License
-
 'Copyright (c) 2021 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -42,6 +41,7 @@ Private Sub UserForm_Activate()
     TableStepSizeColumnGaps = GetSetting("Instrumenta", "Tables", "TableStepSizeColumnGaps", "1" + GetDecimalSeperator() + "0")
     TableStepSizeRowGaps = GetSetting("Instrumenta", "Tables", "TableStepSizeRowGaps", "1" + GetDecimalSeperator() + "0")
     StickyNotesDefaultText = GetSetting("Instrumenta", "StickyNotes", "StickyNotesDefaultText", "Note")
+    SlideLibraryFile = GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", "")
     
     If GetSetting("Instrumenta", "General", "OperatingMode", "pro") = "pro" Then
     OptionButton1.Value = True
@@ -92,6 +92,7 @@ Private Sub SaveSettingsButton_Click()
     SaveSetting "Instrumenta", "Tables", "TableStepSizeColumnGaps", TableStepSizeColumnGaps
     SaveSetting "Instrumenta", "Tables", "TableStepSizeRowGaps", TableStepSizeRowGaps
     SaveSetting "Instrumenta", "StickyNotes", "StickyNotesDefaultText", StickyNotesDefaultText
+    SaveSetting "Instrumenta", "SlideLibrary", "SlideLibraryFile", SlideLibraryFile
       
     If OptionButton2.Value = True Then
      SaveSetting "Instrumenta", "General", "OperatingMode", "review"
@@ -103,6 +104,40 @@ Private Sub SaveSettingsButton_Click()
     
     SettingsForm.Hide
         
+End Sub
+
+
+Private Sub SelectFileButton_Click()
+        #If Mac Then
+            
+            LibraryFile = MacFileDialog("/")
+            
+            If LibraryFile = "" Then
+                MsgBox "No file selected."
+                Exit Sub
+            End If
+            
+        #Else
+            With Application.FileDialog(msoFileDialogFilePicker)
+                .AllowMultiSelect = False
+                .Filters.Add "Powerpoint files", "*.pptx; *.ppt", 1
+                .Show
+                
+                If .SelectedItems.Count = 0 Then
+                    MsgBox "No file selected."
+                    Exit Sub
+                Else
+                    LibraryFile = .SelectedItems.Item(1)
+                End If
+                
+            End With
+        #End If
+        
+        SlideLibraryFile = LibraryFile
+End Sub
+
+Private Sub ClearSlideLibraryButton_Click()
+SlideLibraryFile = ""
 End Sub
 
 Private Sub ShapeStepSizeMargin_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)

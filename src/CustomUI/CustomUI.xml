@@ -315,8 +315,13 @@
             </group>
             <group id="PasteGroup" label="Paste and insert" imageMso="PasteAlternative" tag="PR" getVisible="InstrumentaGetVisible">
                <box id="PasteGroupBox1" boxStyle="horizontal">
-                  <button idMso="PasteJpeg" showLabel="false"/>
+                  <button id="InsertSlideFromSlideLibraryButton" label="Insert slide from slide library" showLabel="false" imageMso="SlideNewGallery" onAction="ShowSlideLibrary" /> 
+                  <splitButton id="PastePngSplitButton" size="normal" showLabel="false">
                   <button idMso="PastePng" showLabel="false"/>
+                  <menu id="PasteJpegMenu" itemSize="normal">
+                            <button idMso="PasteJpeg" showLabel="false"/>
+                  </menu>
+               </splitButton> 
                   <button idMso="ScreenClipping" showLabel="false"/>
                   <button idMso="DateAndTimeInsert" showLabel="false"/>
                   <button id="AgendaPages" imageMso="GroupTableOfContents" label="Create or update agenda pages" showLabel="false" onAction="CreateOrUpdateMasterAgenda" tag="P" getVisible="InstrumentaGetVisible"/>

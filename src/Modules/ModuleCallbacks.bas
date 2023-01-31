@@ -277,6 +277,10 @@ Sub EmojiGallery_OnAction(control As IRibbonControl, id As String, index As Inte
     
 End Sub
 
+Sub ShowSlideLibrary()
+    InsertSlideLibrarySlide.Show
+End Sub
+
 Sub ShowSettings()
     SettingsForm.Show
 End Sub

@@ -21,6 +21,173 @@ Attribute VB_Name = "ModuleObjectsText"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub ConvertTextToShapes()
+    Dim ShapeText       As shape
+    Dim TempRectangle   As shape
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+        For Each ShapeText In ActiveWindow.Selection.ShapeRange
+            
+            If ShapeText.HasTextFrame Then
+                
+                If ShapeText.TextFrame2.HasText Then
+                    
+                    ShapeText.TextFrame2.AutoSize = msoAutoSizeShapeToFitText
+                    
+                    With ShapeText.TextFrame2
+                        Set TempRectangle = ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, ShapeText.left, ShapeText.Top, ShapeText.Width + .TextRange.BoundWidth + .MarginRight, ShapeText.Height + .TextRange.BoundHeight + .MarginBottom)
+                    End With
+                    ShapeText.Fill.visible = msoFalse
+                    ShapeText.Line.visible = msoFalse
+                    TempRectangle.Fill.visible = msoTrue
+                    TempRectangle.Line.visible = msoFalse
+                    Set SlideShapeRange = ActiveWindow.Selection.SlideRange.Shapes.Range(Array(ShapeText.Name, TempRectangle.Name))
+                    SlideShapeRange.Select
+                    CommandBars.ExecuteMso ("ShapesIntersect")
+                    
+                End If
+                
+            End If
+            
+        Next ShapeText
+    End If
+End Sub
+
+Sub ObjectsTextToggleCase()
+    
+    Dim SlideShape  As shape
+    Dim SlideTable  As Table
+    Dim SelectedTextRange As TextRange
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then
+        MsgBox "No shapes selected."
+    Else
+        
+        For Each SlideShape In MyDocument.Selection.ShapeRange
+            
+            If SlideShape.HasTextFrame Then
+                Set SelectedTextRange = SlideShape.TextFrame.TextRange
+                If Not SlideShape.Tags("CurrentCase") = "" Then
+                    CurrentCase = Int(SlideShape.Tags("CurrentCase"))
+                Else
+                    CurrentCase = 0
+                End If
+                SlideShape.Tags.Add "CurrentCase", CurrentCase + 1
+                SelectedTextRange.ChangeCase (1 + (CurrentCase + 1) Mod 4)
+            End If
+            
+            If SlideShape.HasTable Then
+                
+                If Not SlideShape.Tags("CurrentCase") = "" Then
+                    CurrentCase = Int(SlideShape.Tags("CurrentCase"))
+                Else
+                    CurrentCase = 0
+                End If
+                SlideShape.Tags.Add "CurrentCase", CurrentCase + 1
+                
+                Set SlideTable = SlideShape.Table
+                
+                For i = 1 To SlideTable.Rows.Count
+                    For j = 1 To SlideTable.Columns.Count
+                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.TextRange
+                        SelectedTextRange.ChangeCase (1 + (CurrentCase + 1) Mod 4)
+                    Next j
+                Next i
+            End If
+        Next SlideShape
+    End If
+    
+End Sub
+
+Sub ObjectsTextAddPeriods()
+    
+    Dim SlideTable  As Table
+    Dim SelectedTextRange As TextRange
+    Dim SlideShape  As shape
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If MyDocument.Selection.Type = ppSelectionShapes Then
+        
+        For Each SlideShape In ActiveWindow.Selection.ShapeRange
+            
+            If SlideShape.HasTextFrame Then
+                
+                Set SelectedTextRange = SlideShape.TextFrame.TextRange
+                SelectedTextRange.AddPeriods
+                
+            End If
+            
+            If SlideShape.HasTable Then
+                
+                Set SlideTable = SlideShape.Table
+                
+                For i = 1 To SlideTable.Rows.Count
+                    For j = 1 To SlideTable.Columns.Count
+                        
+                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.TextRange
+                        
+                        SelectedTextRange.AddPeriods
+                    Next j
+                Next i
+            End If
+        Next SlideShape
+    ElseIf sel.Type = ppSelectionText Then
+        
+        'sel.TextRange2.AddPeriods
+        MsgBox "This Function only works reliably on shapes"
+        
+    End If
+    
+End Sub
+
+Sub ObjectsTextRemovePeriods()
+    
+    Dim SlideTable  As Table
+    Dim SelectedTextRange As TextRange
+    Dim SlideShape  As shape
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If MyDocument.Selection.Type = ppSelectionShapes Then
+        
+        For Each SlideShape In ActiveWindow.Selection.ShapeRange
+            
+            If SlideShape.HasTextFrame Then
+                
+                Set SelectedTextRange = SlideShape.TextFrame.TextRange
+                SelectedTextRange.RemovePeriods
+                
+            End If
+            
+            If SlideShape.HasTable Then
+                
+                Set SlideTable = SlideShape.Table
+                
+                For i = 1 To SlideTable.Rows.Count
+                    For j = 1 To SlideTable.Columns.Count
+                        
+                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.TextRange
+                        
+                        SelectedTextRange.RemovePeriods
+                    Next j
+                Next i
+            End If
+        Next SlideShape
+    ElseIf sel.Type = ppSelectionText Then
+        
+        'sel.TextRange2.RemovePeriods
+        MsgBox "This Function only works reliably on shapes"
+        
+    End If
+    
+End Sub
+
 Sub ObjectsTextDeleteStrikethrough()
     Dim SlideShape      As shape
     Dim i, j, k         As Long
