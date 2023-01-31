@@ -39,6 +39,10 @@ Sub ConvertShapesToTable()
     Else
     
     If MyDocument.Selection.ShapeRange.Count > 0 Then
+        
+        
+        ObjectsQuicksortTopLeftToBottomRight MyDocument.Selection.ShapeRange
+        
         ReDim cellShapes(1 To MyDocument.Selection.ShapeRange.Count)
         For i = 1 To MyDocument.Selection.ShapeRange.Count
             Set cellShapes(i) = MyDocument.Selection.ShapeRange(i)
@@ -48,15 +52,16 @@ Sub ConvertShapesToTable()
         maxRight = 0
         maxBottom = 0
         
-        For i = 1 To UBound(cellShapes) - 1
-            For j = i + 1 To UBound(cellShapes)
-                If cellShapes(i).Top * 1000000 + cellShapes(i).left > cellShapes(j).Top * 1000000 + cellShapes(j).left Then
-                    Set temp = cellShapes(i)
-                    Set cellShapes(i) = cellShapes(j)
-                    Set cellShapes(j) = temp
-                End If
-            Next j
-        Next i
+        
+        'For i = 1 To UBound(cellShapes) - 1
+        '    For j = i + 1 To UBound(cellShapes)
+        '        If cellShapes(i).Top * 1000000 + cellShapes(i).left > cellShapes(j).Top * 1000000 + cellShapes(j).left Then
+        '            Set temp = cellShapes(i)
+        '            Set cellShapes(i) = cellShapes(j)
+        '            Set cellShapes(j) = temp
+        '        End If
+        '    Next j
+        'Next i
         
         For i = 1 To UBound(cellShapes)
             If cellShapes(i).left < minLeft Then minLeft = cellShapes(i).left
@@ -272,6 +277,7 @@ Sub ConvertTableToShapes()
     Next RowsCount
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     Application.ActiveWindow.Selection.ShapeRange.Delete
     

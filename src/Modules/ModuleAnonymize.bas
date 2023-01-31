@@ -38,6 +38,7 @@ Sub AnonymizeWithLoremIpsum()
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     
 End Sub

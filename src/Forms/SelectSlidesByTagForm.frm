@@ -45,6 +45,7 @@ End Sub
 
 Private Sub CommandButton3_Click()
 SelectSlidesByTagForm.Hide
+Unload Me
 End Sub
 
 Private Sub SlideTagComboBox_Change()

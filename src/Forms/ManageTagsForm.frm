@@ -37,6 +37,7 @@ Attribute VB_Exposed = False
 
 Private Sub CommandButton1_Click()
     ManageTagsForm.Hide
+    Unload Me
 End Sub
 
 Private Sub CommandButton2_Click()

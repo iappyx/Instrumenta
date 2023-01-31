@@ -769,12 +769,15 @@ Sub ChangeSpellCheckLanguage()
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     For Each SlideShape In ActivePresentation.SlideMaster.Shapes
         ChangeShapeSpellCheckLanguage SlideShape, TargetLanguageID
     Next
     
     MsgBox "Changed spellcheck language to " + TargetLanguage + " on all slides."
+    
+    Unload ChangeSpellCheckLanguageForm
     
 End Sub
 

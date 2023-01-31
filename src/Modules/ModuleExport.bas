@@ -66,6 +66,7 @@ Sub SaveSelectedSlides()
         Next SlideLoop
         
         ProgressForm.Hide
+        Unload ProgressForm
         
         PresentationFilename = PresentationFilename & ")"
         Dim exportFilePath As String
@@ -107,6 +108,7 @@ Sub SaveSelectedSlides()
             If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
         ProgressForm.Hide
+        Unload ProgressForm
         
         TemporaryPresentation.Save
         TemporaryPresentation.Close
@@ -176,6 +178,7 @@ Sub EmailSelectedSlides()
         Next SlideLoop
         
         ProgressForm.Hide
+        Unload ProgressForm
         
         PresentationFilename = PresentationFilename & ")"
         
@@ -188,8 +191,8 @@ Sub EmailSelectedSlides()
         PresentationFilename = PresentationFilename & "_1"
         End If
         
-        ThisPresentation.SaveCopyAs ActivePresentation.Path & "/" & PresentationFilename & ".pptx"
-        Set TemporaryPresentation = Presentations.Open(ActivePresentation.Path & "/" & PresentationFilename & ".pptx")
+        ThisPresentation.SaveCopyAs MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & ".pptx"
+        Set TemporaryPresentation = Presentations.Open(MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & ".pptx")
         #Else
         ThisPresentation.SaveCopyAs Environ("TEMP") & "\" & PresentationFilename & ".pptx"
         Set TemporaryPresentation = Presentations.Open(Environ("TEMP") & "\" & PresentationFilename & ".pptx")
@@ -202,6 +205,7 @@ Sub EmailSelectedSlides()
             If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
         ProgressForm.Hide
+        Unload ProgressForm
         
         TemporaryPresentation.Save
         TemporaryPresentation.Close
@@ -213,10 +217,10 @@ Sub EmailSelectedSlides()
         Dim ParamString As String
         Dim OutlookMessageMac As String
 
-        ParamString = EmailSubject & ";" & ActivePresentation.Path & "/" & PresentationFilename & ".pptx"
+        ParamString = EmailSubject & ";" & MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & ".pptx"
         OutlookMessageMac = AppleScriptTask("InstrumentaAppleScriptPlugin.applescript", "SendFileWithOutlook", CStr(ParamString))
 
-        Kill (ActivePresentation.Path & "/" & PresentationFilename & ".pptx")
+        Kill (MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & ".pptx")
         #Else
                
         On Error Resume Next
@@ -302,6 +306,7 @@ Sub EmailSelectedSlidesAsPDF()
         Next SlideLoop
         
         ProgressForm.Hide
+        Unload ProgressForm
         
         PresentationFilename = PresentationFilename & ")"
         
@@ -313,8 +318,8 @@ Sub EmailSelectedSlidesAsPDF()
         'OutlookMessageMac = MacSendMailViaOutlook(EmailSubject, ActivePresentation.Path & "/" & PresentationFilename & ".pptx")
     
         
-        ThisPresentation.SaveCopyAs ActivePresentation.Path & "/" & PresentationFilename & "_temp.pptx"
-        Set TemporaryPresentation = Presentations.Open(ActivePresentation.Path & "/" & PresentationFilename & "_temp.pptx")
+        ThisPresentation.SaveCopyAs MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & "_temp.pptx"
+        Set TemporaryPresentation = Presentations.Open(MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & "_temp.pptx")
         
         ProgressForm.Show
         NumberOfSlides = TemporaryPresentation.Slides.Count
@@ -323,19 +328,20 @@ Sub EmailSelectedSlidesAsPDF()
             If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
         ProgressForm.Hide
+        Unload ProgressForm
         
         TemporaryPresentation.Save
-        TemporaryPresentation.SaveCopyAs ActivePresentation.Path & "/" & PresentationFilename & ".pdf", ppSaveAsPDF
+        TemporaryPresentation.SaveCopyAs MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & ".pdf", ppSaveAsPDF
         TemporaryPresentation.Close
-        Kill (ActivePresentation.Path & "/" & PresentationFilename & "_temp.pptx")
+        Kill (MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & "_temp.pptx")
 
         Dim ParamString As String
         Dim OutlookMessageMac As String
 
-        ParamString = EmailSubject & ";" & ActivePresentation.Path & "/" & PresentationFilename & ".pdf"
+        ParamString = EmailSubject & ";" & MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & ".pdf"
         OutlookMessageMac = AppleScriptTask("InstrumentaAppleScriptPlugin.applescript", "SendFileWithOutlook", CStr(ParamString))
 
-        Kill (ActivePresentation.Path & "/" & PresentationFilename & ".pdf")
+        Kill (MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & ".pdf")
         
         #Else
         

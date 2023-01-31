@@ -25,4 +25,5 @@ Sub DeleteAllInstrumentaSettings()
     SaveSetting "Instrumenta", "temp", "temp", "temp"
     DeleteSetting ("Instrumenta")
     SettingsForm.Hide
+    Unload SettingsForm
 End Sub

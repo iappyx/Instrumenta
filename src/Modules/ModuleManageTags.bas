@@ -140,6 +140,7 @@ Sub SelectSlidesByTag()
     
     SelectSlidesByTagForm.Hide
     MsgBox Str(SlideIndex) & " slides selected with specified tag and value(s)."
+    Unload SelectSlidesByTagForm
     
 End Sub
 
@@ -185,6 +186,7 @@ Sub SelectSlidesByStamp(StampType As String)
     
     SelectSlidesByTagForm.Hide
     MsgBox Str(SlideIndex) & " slides selected with stamp " & StampType & "."
+    Unload SelectSlidesByTagForm
     
 End Sub
 

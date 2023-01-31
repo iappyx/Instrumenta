@@ -56,6 +56,7 @@ Sub ConvertSlidesToPictures()
         Next PresentationSlide
         
         ProgressForm.Hide
+        Unload ProgressForm
     
 End Sub
 
@@ -91,6 +92,7 @@ Const PI = 3.14159265358979
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     ConvertSlidesToPictures
    

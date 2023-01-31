@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} PreviewManualMailMerge 
    Caption         =   "Preview manual mail merge"
-   ClientHeight    =   8113
+   ClientHeight    =   8115
    ClientLeft      =   238
    ClientTop       =   931
    ClientWidth     =   10892
@@ -37,6 +37,7 @@ Attribute VB_Exposed = False
 
 Private Sub CommandButton1_Click()
 PreviewManualMailMerge.Hide
+Unload Me
 End Sub
 
 Private Sub CommandButton2_Click()

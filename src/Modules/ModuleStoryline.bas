@@ -50,6 +50,7 @@ Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     If Not SlidePlaceHolder.TextFrame.TextRange.Text = "" Then
         
@@ -122,6 +123,7 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
     SlidePlaceHolder.TextFrame.TextRange.Text = StorylineText
@@ -200,6 +202,7 @@ Sub PasteStorylineInSelectedShape()
         Next PresentationSlide
         
         ProgressForm.Hide
+        Unload ProgressForm
         
         Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.Text = StorylineText
         

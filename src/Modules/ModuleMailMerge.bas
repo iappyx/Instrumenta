@@ -259,7 +259,9 @@ Sub ExcelMailMerge()
             
         Next i
         
+        Unload PreviewMailMerge
         ProgressForm.Hide
+        Unload ProgressForm
         
     Else
         
@@ -388,6 +390,7 @@ Sub ManualMailMerge()
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     ManualHeaders = RemoveDuplicates(ManualHeaders)
     PreviewManualMailMerge.MailMergeListBox.Clear
@@ -426,7 +429,9 @@ Sub ManualMailMerge()
         
     Next PresentationSlide
     
+    Unload PreviewManualMailMerge
     ProgressForm.Hide
+    Unload ProgressForm
     
 End Sub
 
@@ -780,13 +785,16 @@ Sub ExcelFullFileMailMerge()
         Next SlideLoop
         
         ProgressForm.Hide
+        Unload ProgressForm
         
         TemporaryPresentation.Save
         TemporaryPresentation.Close
         
     Next i
     
+    Unload PreviewFullFileMailMerge
     ProgressForm.Hide
+    Unload ProgressForm
     
     Exit Sub
     

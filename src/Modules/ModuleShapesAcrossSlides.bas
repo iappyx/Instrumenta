@@ -197,5 +197,6 @@ Sub CopyShapeToMultipleSlides()
     Next SelectedCount
     
     CopyShapeToMultipleSlidesForm.Hide
+    Unload CopyShapeToMultipleSlidesForm
     
 End Sub

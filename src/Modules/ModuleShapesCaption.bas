@@ -52,6 +52,7 @@ Sub InsertCaption()
         Next PresentationSlide
         
         ProgressForm.Hide
+        Unload ProgressForm
         
         Dim Caption As shape
         Dim CaptionNumber As shape
@@ -150,6 +151,7 @@ Sub ReNumberCaptions()
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
 End Sub
 

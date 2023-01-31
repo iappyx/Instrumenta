@@ -46,6 +46,7 @@ Sub CleanUpRemoveUnusedMasterSlides()
     On Error GoTo 0
     
     ProgressForm.Hide
+    Unload ProgressForm
     
 End Sub
 
@@ -65,6 +66,7 @@ Sub CleanUpRemoveAnimationsFromAllSlides()
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
 End Sub
 
@@ -86,6 +88,7 @@ Sub CleanUpRemoveSpeakerNotesFromAllSlides()
     Next
     
     ProgressForm.Hide
+    Unload ProgressForm
     
 End Sub
 
@@ -105,6 +108,7 @@ Sub CleanUpRemoveCommentsFromAllSlides()
     Next
     
     ProgressForm.Hide
+    Unload ProgressForm
     
 End Sub
 
@@ -119,6 +123,7 @@ Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
     Next
     
     ProgressForm.Hide
+    Unload ProgressForm
     
 End Sub
 
@@ -141,5 +146,6 @@ Sub CleanUpRemoveHiddenSlides()
     Next
     
     ProgressForm.Hide
+    Unload ProgressForm
     
 End Sub

@@ -119,6 +119,7 @@ Sub TableRemoveBackgrounds()
                 Next
                 
                 ProgressForm.Hide
+                Unload ProgressForm
                 
             End With
             
@@ -171,6 +172,7 @@ Sub TableRemoveBorders()
                 Next
                 
                 ProgressForm.Hide
+                Unload ProgressForm
                 
             End With
             

@@ -74,6 +74,7 @@ Sub LockToggleAllShapesOnAllSlides()
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     #End If
     
@@ -102,6 +103,7 @@ Sub LockAllShapesOnAllSlides()
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     #End If
     
@@ -130,6 +132,7 @@ Sub UnLockAllShapesOnAllSlides()
     Next PresentationSlide
     
     ProgressForm.Hide
+    Unload ProgressForm
     
     #End If
     

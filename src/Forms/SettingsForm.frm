@@ -53,6 +53,7 @@ End Sub
 
 Private Sub CancelButton_Click()
     SettingsForm.Hide
+    Unload Me
 End Sub
 
 Private Sub ClearSettingsButton_Click()
@@ -103,6 +104,8 @@ Private Sub SaveSettingsButton_Click()
     End If
     
     SettingsForm.Hide
+    Unload Me
+    
         
 End Sub
 

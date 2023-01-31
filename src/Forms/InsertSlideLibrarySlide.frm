@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} InsertSlideLibrarySlide 
    Caption         =   "Insert slide from slide library"
-   ClientHeight    =   9373.001
+   ClientHeight    =   6797
    ClientLeft      =   91
    ClientTop       =   406
-   ClientWidth     =   14434
+   ClientWidth     =   14028
    OleObjectBlob   =   "InsertSlideLibrarySlide.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -13,20 +13,20 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private Sub ComboBox1_Change()
+Private Sub ListBox1_Change()
     
-    Dim strPath     As String
-    If ComboBox1.Enabled = True Then
+    Dim TempPath     As String
+    If ListBox1.Enabled = True Then
         #If Mac Then
-            strPath = MacScript("return posix path of (path to temporary items) as string")
+            TempPath = MacScript("return posix path of (path to temporary items) as string")
         #Else
             
-            strPath = Environ("TEMP") & "\"
+            TempPath = Environ("TEMP") & "\"
             
         #End If
     
     
-        InsertSlideLibrarySlide.PreviewImage.Picture = LoadPicture(strPath & "tmp.Slide" & ComboBox1.ListIndex + 1 & ".jpg")
+        InsertSlideLibrarySlide.PreviewImage.Picture = LoadPicture(TempPath & "tmp.Slide" & ListBox1.ListIndex + 1 & ".jpg")
         InsertSlideLibrarySlide.Repaint
     End If
     
@@ -34,40 +34,43 @@ End Sub
 
 Private Sub CommandButton1_Click()
     
-    Dim oPres       As PowerPoint.Presentation
+    Dim LibraryPresentation       As PowerPoint.Presentation
     Dim PresentationSlide As PowerPoint.Slide
-    Dim strPath     As String
+    Dim TempPath     As String
     Set MyDocument = Application.ActiveWindow
-    Set MyApplication = Application
+    Set Testdocument = Application.ActiveWindow.Presentation
+    
+    'Set MyApplication = Application
     
     #If Mac Then
-    Set oPres = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""))
+    Set LibraryPresentation = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""))
     #Else
-    Set oPres = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""), , , msoFalse)
+    Set LibraryPresentation = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""), , , msoFalse)
     #End If
     
-    oPres.Slides.Item(ComboBox1.ListIndex + 1).Copy
+    LibraryPresentation.Slides.Item(ListBox1.ListIndex + 1).Copy
     
-    oPres.Close
-    Set oPres = Nothing
+    LibraryPresentation.Close
+    Set LibraryPresentation = Nothing
     
-    MyApplication.CommandBars.ExecuteMso ("PasteSourceFormatting")
+    Testdocument.Windows(1).Activate
+    Testdocument.Application.CommandBars.ExecuteMso ("PasteSourceFormatting")
     
     
     #If Mac Then
         
-        strPath = MacScript("return posix path of (path to temporary items) as string")
+        TempPath = MacScript("return posix path of (path to temporary items) as string")
     #Else
         
-        strPath = Environ("TEMP") & "\"
+        TempPath = Environ("TEMP") & "\"
         
     #End If
     
-    If InsertSlideLibrarySlide.ComboBox1.Enabled = True Then
+    If InsertSlideLibrarySlide.ListBox1.Enabled = True Then
         
-        For i = 1 To InsertSlideLibrarySlide.ComboBox1.ListCount
+        For i = 1 To InsertSlideLibrarySlide.ListBox1.ListCount
             
-            Kill (strPath & "tmp.Slide" & i & ".jpg")
+            Kill (TempPath & "tmp.Slide" & i & ".jpg")
 
         Next i
         
@@ -75,81 +78,85 @@ Private Sub CommandButton1_Click()
     
 
     
-    InsertSlideLibrarySlide.ComboBox1.Enabled = False
+    InsertSlideLibrarySlide.ListBox1.Enabled = False
     InsertSlideLibrarySlide.Hide
+    Unload Me
     
 End Sub
 
 Private Sub CommandButton2_Click()
     
-    If InsertSlideLibrarySlide.ComboBox1.Enabled = True Then
+    If InsertSlideLibrarySlide.ListBox1.Enabled = True Then
         
-        Dim strPath As String
+        Dim TempPath As String
         
         #If Mac Then
             
 
-            strPath = MacScript("return posix path of (path to temporary items) as string")
+            TempPath = MacScript("return posix path of (path to temporary items) as string")
 
-            Set oPres = Nothing
+            Set LibraryPresentation = Nothing
         #Else
             
-            strPath = Environ("TEMP") & "\"
+            TempPath = Environ("TEMP") & "\"
             
         #End If
 
         
-        For i = 1 To InsertSlideLibrarySlide.ComboBox1.ListCount
+        For i = 1 To InsertSlideLibrarySlide.ListBox1.ListCount
             
-            Kill (strPath & "tmp.Slide" & i & ".jpg")
+            Kill (TempPath & "tmp.Slide" & i & ".jpg")
             
         Next i
         
     End If
     
-    InsertSlideLibrarySlide.ComboBox1.Enabled = False
+    InsertSlideLibrarySlide.ListBox1.Enabled = False
     InsertSlideLibrarySlide.Hide
+    Unload Me
     
 End Sub
 
 Private Sub CommandButton3_Click()
-    Dim oPres       As PowerPoint.Presentation
+    Dim LibraryPresentation       As PowerPoint.Presentation
     Dim PresentationSlide As PowerPoint.Slide
-    Dim strPath     As String
+    Dim TempPath     As String
     Set MyDocument = Application.ActiveWindow
     
     #If Mac Then
-    Set oPres = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""))
+    Set LibraryPresentation = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""))
     #Else
-    Set oPres = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""), , , msoFalse)
+    Set LibraryPresentation = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""), , , msoFalse)
     #End If
     
-    oPres.Slides.Item(ComboBox1.ListIndex + 1).Copy
+    LibraryPresentation.Slides.Item(ListBox1.ListIndex + 1).Copy
     
-    oPres.Close
-    Set oPres = Nothing
+    LibraryPresentation.Close
+    Set LibraryPresentation = Nothing
     
     
     MyDocument.Presentation.Slides.Paste
     
     'clean up
     #If Mac Then
-        strPath = MacScript("return posix path of (path to temporary items) as string")
+        TempPath = MacScript("return posix path of (path to temporary items) as string")
     #Else
-        strPath = Environ("TEMP") & "\"
+        TempPath = Environ("TEMP") & "\"
     #End If
     
-    If InsertSlideLibrarySlide.ComboBox1.Enabled = True Then
+    If InsertSlideLibrarySlide.ListBox1.Enabled = True Then
         
-        For i = 1 To InsertSlideLibrarySlide.ComboBox1.ListCount
-            Kill (strPath & "tmp.Slide" & i & ".jpg")
+        For i = 1 To InsertSlideLibrarySlide.ListBox1.ListCount
+            Kill (TempPath & "tmp.Slide" & i & ".jpg")
         Next i
         
     End If
 
     
-    InsertSlideLibrarySlide.ComboBox1.Enabled = False
+    InsertSlideLibrarySlide.ListBox1.Enabled = False
     InsertSlideLibrarySlide.Hide
+    Unload Me
+    
 End Sub
 
 Private Sub UserForm_Activate()
@@ -166,30 +173,30 @@ Private Sub UserForm_Activate()
    
     'Needed to enable OLE automation for this
     
-    Dim oPres       As PowerPoint.Presentation
+    Dim LibraryPresentation       As PowerPoint.Presentation
     Dim PresentationSlide As PowerPoint.Slide
-    Dim strPath     As String
+    Dim TempPath     As String
     
     #If Mac Then
 
     
-    Set oPres = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""))
+    Set LibraryPresentation = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""))
     #Else
-    Set oPres = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""), , , msoFalse)
+    Set LibraryPresentation = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""), , , msoFalse)
     #End If
     
     #If Mac Then
-        strPath = MacScript("return posix path of (path to temporary items) as string")
+        TempPath = MacScript("return posix path of (path to temporary items) as string")
     #Else
-        strPath = Environ("TEMP") & "\"
+        TempPath = Environ("TEMP") & "\"
     #End If
     
-    NumberOfSlides = oPres.Slides.Count
-    InsertSlideLibrarySlide.ComboBox1.Clear
+    NumberOfSlides = LibraryPresentation.Slides.Count
+    InsertSlideLibrarySlide.ListBox1.Clear
     
-    For Each PresentationSlide In oPres.Slides
+    For Each PresentationSlide In LibraryPresentation.Slides
         
-        PresentationSlide.Export strPath & "tmp.Slide" & PresentationSlide.SlideNumber & ".jpg", "JPG"
+        PresentationSlide.Export TempPath & "tmp.Slide" & PresentationSlide.SlideNumber & ".jpg", "JPG"
         
         SlideTitle = ""
         For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
@@ -201,20 +208,21 @@ Private Sub UserForm_Activate()
         Next SlidePlaceHolder
         
         If SlideTitle = "" Then SlideTitle = PresentationSlide.Name
-        InsertSlideLibrarySlide.ComboBox1.AddItem SlideTitle
+        InsertSlideLibrarySlide.ListBox1.AddItem SlideTitle
         
     Next
     
-    oPres.Close
-    Set oPres = Nothing
+    LibraryPresentation.Close
+    Set LibraryPresentation = Nothing
     
-    InsertSlideLibrarySlide.PreviewImage.Picture = LoadPicture(strPath & "tmp.Slide1.jpg")
-    InsertSlideLibrarySlide.ComboBox1.Enabled = True
-    InsertSlideLibrarySlide.ComboBox1.ListIndex = 0
+    InsertSlideLibrarySlide.PreviewImage.Picture = LoadPicture(TempPath & "tmp.Slide1.jpg")
+    InsertSlideLibrarySlide.ListBox1.Enabled = True
+    InsertSlideLibrarySlide.ListBox1.ListIndex = 0
     InsertSlideLibrarySlide.Repaint
     
     End If
     
     
 End Sub
+
 
