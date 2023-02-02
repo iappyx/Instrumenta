@@ -105,7 +105,14 @@
                <menu idMso="CombineShapesMenu" showLabel="false" />
                <control idMso="ShapeWidth" showLabel="false" />
                <control idMso="ShapeHeight" showLabel="false" />
-               <control idMso="ObjectSizeAndPositionDialog" showLabel="false" />
+               
+               <splitButton id="ObjectSetPositionSplitButton" size="normal" showLabel="false" >
+               <button id="ObjectSetPositionDialog" label="Set position" showLabel="false" imageMso="GroupPosition" onAction="InitialiseSetPositionAppEventHandler" />
+               <menu id="ObjectSetPositionMenu" itemSize="normal">
+               <control idMso="ObjectSizeAndPositionDialog" showLabel="true" />
+               </menu>
+                      </splitButton>
+               
                <control idMso="FormatPainter" showLabel="false" />
                <button id="ObjectsCopyRoundedCorner" label="Copy rounded corner of first selected shape to selected shapes" showLabel="false" imageMso="ShapeRoundedRectangle" onAction="ObjectsCopyRoundedCorner" />
                <button id="ObjectsCopyShapeTypeAndAdjustments" label="Copy shape type and all adjustments of first selected shape to selected shapes" showLabel="false" imageMso="OutlineTasksShowAll" onAction="ObjectsCopyShapeTypeAndAdjustments" />
@@ -437,6 +444,7 @@
                </box>
             </group>
             <group id="AllGroup" label="Advanced" imageMso="AdvancedFileProperties" tag="PR" getVisible="InstrumentaGetVisible">
+               <button idMso="FileNewDefault" showLabel="false" />
                <button idMso="ReplaceDialog" showLabel="false" />
                <button idMso="AdvancedFileProperties" imageMso="ChooseForm" showLabel="false" />
                <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false" >

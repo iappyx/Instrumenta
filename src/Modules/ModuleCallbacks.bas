@@ -24,6 +24,21 @@ Attribute VB_Name = "ModuleCallbacks"
 
 Public InstrumentaRibbon As IRibbonUI
 Public InstrumentaVisible As String
+Dim SetPositionAppEventHandler As New SetPositionEventsClass
+
+Sub InitialiseSetPositionAppEventHandler()
+
+    Set SetPositionAppEventHandler.App = Application
+    SetPositionForm.Show 0
+      
+End Sub
+
+Sub UnloadSetPositionAppEventHandler()
+
+    Set SetPositionAppEventHandler.App = Nothing
+    Unload SetPositionForm
+    
+End Sub
 
  
 Sub InstrumentaInitialize(Ribbon As IRibbonUI)
