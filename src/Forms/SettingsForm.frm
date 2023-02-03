@@ -48,6 +48,14 @@ Private Sub UserForm_Activate()
     Else
     OptionButton2.Value = True
     End If
+    
+    RulerUnitsComboBox.Clear
+    RulerUnitsComboBox.AddItem ("Inches")
+    RulerUnitsComboBox.AddItem ("Centimeters")
+    RulerUnitsComboBox.AddItem ("Milimeters")
+    RulerUnitsComboBox.AddItem ("Points")
+    RulerUnitsComboBox.ListIndex = GetSetting("Instrumenta", "RulerUnits", "ShapePositioning", "1")
+    
 
 End Sub
 
@@ -94,6 +102,7 @@ Private Sub SaveSettingsButton_Click()
     SaveSetting "Instrumenta", "Tables", "TableStepSizeRowGaps", TableStepSizeRowGaps
     SaveSetting "Instrumenta", "StickyNotes", "StickyNotesDefaultText", StickyNotesDefaultText
     SaveSetting "Instrumenta", "SlideLibrary", "SlideLibraryFile", SlideLibraryFile
+    SaveSetting "Instrumenta", "RulerUnits", "ShapePositioning", RulerUnitsComboBox.ListIndex
       
     If OptionButton2.Value = True Then
      SaveSetting "Instrumenta", "General", "OperatingMode", "review"

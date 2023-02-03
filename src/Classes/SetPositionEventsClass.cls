@@ -26,26 +26,26 @@ Set Sel = Application.ActiveWindow.Selection
             Next i
             
             If Sel.ShapeRange(1).left = TotalLeft / Sel.ShapeRange.Count Then
-                SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * 0.0352777778, 2)
+                SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
             Else
                 SetPositionForm.TextBoxLeft = ""
             End If
             
             If Sel.ShapeRange(1).Top = TotalTop / Sel.ShapeRange.Count Then
-                SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * 0.0352777778, 2)
+                SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
             Else
                 SetPositionForm.TextBoxTop = ""
             End If
             
         Else
-            SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * 0.0352777778, 2)
-            SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * 0.0352777778, 2)
+            SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+            SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
         End If
         
     ElseIf Sel.Type = ppSelectionText Then
         
-        SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * 0.0352777778, 2)
-        SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * 0.0352777778, 2)
+        SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+        SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
         
     Else
         
@@ -73,26 +73,26 @@ Private Sub App_WindowSelectionChange(ByVal Sel As Selection)
             Next i
             
             If Sel.ShapeRange(1).left = TotalLeft / Sel.ShapeRange.Count Then
-                SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * 0.0352777778, 2)
+                SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
             Else
                 SetPositionForm.TextBoxLeft = ""
             End If
             
             If Sel.ShapeRange(1).Top = TotalTop / Sel.ShapeRange.Count Then
-                SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * 0.0352777778, 2)
+                SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
             Else
                 SetPositionForm.TextBoxTop = ""
             End If
             
         Else
-            SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * 0.0352777778, 2)
-            SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * 0.0352777778, 2)
+            SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+            SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
         End If
         
     ElseIf Sel.Type = ppSelectionText Then
         
-        SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * 0.0352777778, 2)
-        SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * 0.0352777778, 2)
+        SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+        SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
         
     Else
         

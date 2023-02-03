@@ -55,6 +55,51 @@ Function GetDecimalSeperator() As String
 
 End Function
 
+Function GetRulerUnit() As String
+
+    RulerUnit = GetSetting("Instrumenta", "RulerUnits", "ShapePositioning", "1")
+ 
+    Select Case RulerUnit
+
+        Case "0"
+        GetRulerUnit = "in"
+        
+        Case "1"
+        GetRulerUnit = "cm"
+        
+        Case "2"
+        GetRulerUnit = "mm"
+        
+        Case Else
+        GetRulerUnit = "pts"
+
+    End Select
+
+End Function
+
+Function GetRulerUnitConversion() As Double
+
+    RulerUnit = GetSetting("Instrumenta", "RulerUnits", "ShapePositioning", "1")
+ 
+    Select Case RulerUnit
+
+        Case "0"
+        GetRulerUnitConversion = 1 / 72
+        
+        Case "1"
+        GetRulerUnitConversion = 1 / (72 / 2.54)
+        
+        Case "2"
+        GetRulerUnitConversion = 1 / (72 / 2.54 / 10)
+        
+        Case Else
+        GetRulerUnitConversion = 1
+        
+
+    End Select
+
+End Function
+
 Function RemoveDuplicates(InputArray) As Variant
     
     Dim OutputArray, InputValue, OutputValue As Variant
