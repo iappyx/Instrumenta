@@ -2,3 +2,4 @@
 src/Thumbs.db
 src/*_Backup_*
 bin/*_Backup_*
+*.bak
