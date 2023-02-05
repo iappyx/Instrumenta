@@ -137,7 +137,7 @@ Sub ObjectsTextAddPeriods()
                 Next i
             End If
         Next SlideShape
-    ElseIf sel.Type = ppSelectionText Then
+    ElseIf Sel.Type = ppSelectionText Then
         
         'sel.TextRange2.AddPeriods
         MsgBox "This Function only works reliably on shapes"
@@ -179,7 +179,7 @@ Sub ObjectsTextRemovePeriods()
                 Next i
             End If
         Next SlideShape
-    ElseIf sel.Type = ppSelectionText Then
+    ElseIf Sel.Type = ppSelectionText Then
         
         'sel.TextRange2.RemovePeriods
         MsgBox "This Function only works reliably on shapes"
