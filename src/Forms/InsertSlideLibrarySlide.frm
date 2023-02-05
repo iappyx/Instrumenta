@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} InsertSlideLibrarySlide 
    Caption         =   "Insert slide from slide library"
-   ClientHeight    =   6797
+   ClientHeight    =   4788
    ClientLeft      =   91
    ClientTop       =   406
-   ClientWidth     =   14028
+   ClientWidth     =   10388
    OleObjectBlob   =   "InsertSlideLibrarySlide.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -194,9 +194,15 @@ Private Sub UserForm_Activate()
     NumberOfSlides = LibraryPresentation.Slides.Count
     InsertSlideLibrarySlide.ListBox1.Clear
     
+    SlideHeight = 200
+    SlideWidth = (LibraryPresentation.PageSetup.SlideWidth / LibraryPresentation.PageSetup.SlideHeight) * SlideHeight
+    
     For Each PresentationSlide In LibraryPresentation.Slides
         
-        PresentationSlide.Export TempPath & "tmp.Slide" & PresentationSlide.SlideNumber & ".jpg", "JPG"
+        
+        PresentationSlide.Export TempPath & "tmp.Slide" & PresentationSlide.SlideNumber & ".jpg", "JPG", SlideWidth, SlideHeight
+        'PresentationSlide.Export TempPath & "tmp.Slide" & PresentationSlide.SlideNumber & ".jpg", "JPG"
+        
         
         SlideTitle = ""
         For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
