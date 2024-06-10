@@ -41,7 +41,7 @@ Sub GenerateStickyNote()
     
     With StickyNote
         .Line.visible = False
-        .Fill.ForeColor.RGB = RGB(255, 192, 0)
+        .Fill.ForeColor.RGB = GetSetting("Instrumenta", "StickyNotes", "StickyNotesColor", "49407")
         .Fill.Transparency = 0.1
         .Name = "StickyNote" + Str(RandomNumber)
         
@@ -94,7 +94,7 @@ Sub ConvertCommentsToStickyNotes()
         
         With StickyNote
             .Line.visible = False
-            .Fill.ForeColor.RGB = RGB(255, 192, 0)
+            .Fill.ForeColor.RGB = GetSetting("Instrumenta", "StickyNotes", "StickyNotesColor", "49407")
             .Fill.Transparency = 0.1
             .Name = "StickyNote" + Str(RandomNumber)
             .left = MyDocument.Selection.SlideRange.Comments(CommentsCount).left
@@ -309,7 +309,7 @@ Sub ConvertAllCommentsToStickyNotes()
         
         With StickyNote
             .Line.visible = False
-            .Fill.ForeColor.RGB = RGB(255, 192, 0)
+            .Fill.ForeColor.RGB = GetSetting("Instrumenta", "StickyNotes", "StickyNotesColor", "49407")
             .Fill.Transparency = 0.1
             .Name = "StickyNote" + Str(RandomNumber)
             .left = PresentationSlide.Comments(CommentsCount).left

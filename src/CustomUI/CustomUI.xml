@@ -29,7 +29,6 @@
                   </menu>
                </splitButton>
                   <gallery idMso="CharacterSpacingGallery" showLabel="false" />
-                  <gallery idMso="ChangeCaseGallery" showLabel="false" />
                </box>
                <box id="FontBox3" boxStyle="horizontal">
                   <toggleButton idMso="Superscript" showLabel="false" />
@@ -37,6 +36,7 @@
                   <control idMso="TextHighlightColorPickerLicensed" showLabel="false" />
                   <control idMso="FontColorPicker" showLabel="false" />
                   <button idMso="EyedropperFillText" showLabel="false" />
+                  <gallery idMso="ChangeCaseGallery" showLabel="false" />
                </box>
             </group>
             <group id="TextGroup" label="Text" imageMso="MenuView2" tag="PR" getVisible="InstrumentaGetVisible">
@@ -195,7 +195,12 @@
                   <button idMso="ObjectRotateRight90" showLabel="false" />
                </box>
                <box id="DimensionsBox" boxStyle="horizontal">
+                  <splitButton id="ObjectsSwapPositionSplitButton" size="normal" showLabel="false"> 
                   <button id="ObjectsSwapPosition" imageMso="CircularReferences" label="Swap position of two shapes" showLabel="false" onAction="ObjectsSwapPosition" />
+                  <menu id="ObjectsSwapPositionMenu" label="Swap position of two shapes" imageMso="CircularReferences" showLabel="false">
+                  <button id="ObjectsSwapPositionCentered" imageMso="CircularReferences" label="Swap position of two shapes (centered)" showLabel="false" onAction="ObjectsSwapPositionCentered" />
+                  </menu>
+                  </splitButton>    
                   <button id="ObjectsSameHeightButton" imageMso="RowHeight" label="Set same height" showLabel="false" onAction="ObjectsSameHeight" />
                   <button id="ObjectsSameWidthButton" imageMso="ColumnWidth" label="Set same width" showLabel="false" onAction="ObjectsSameWidth" />
                   <button id="ObjectsSameHeightAndWidthButton" imageMso="SizeToControlHeightAndWidth" label="Set same height and width" showLabel="false" onAction="ObjectsSameHeightAndWidth" />
@@ -441,6 +446,7 @@
                      <button id="DeleteStampsOnAllSlides" label="Delete Stamps on all slides" imageMso="Delete" onAction="DeleteStampsOnAllSlides" />
                   </menu>
                   <button id="InsertProcessSmartArt" imageMso="OutlineDemoteToBodyText" label="Insert process (SmartArt)" showLabel="false" onAction="InsertProcessSmartArt" tag="P" getVisible="InstrumentaGetVisible"/>
+                  <button id="InsertQRCodeButton" imageMso="BarcodeInsert" label="Insert QR-code" showLabel="false" onAction="InsertQRCode"/>
                </box>
             </group>
             <group id="AllGroup" label="Advanced" imageMso="AdvancedFileProperties" tag="PR" getVisible="InstrumentaGetVisible">

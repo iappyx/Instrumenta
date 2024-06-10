@@ -27,10 +27,10 @@ Sub InsertQRCode()
 Set MyDocument = Application.ActiveWindow
 QRCodeText = ""
 
-QRCodeText = InputBox("Please note that this functionality uses external APIs to generate the QR-code (Google Charts)." & vbNewLine & vbNewLine & vbNewLine & "Please provide the URL (or other content) for the QR-code:", "Generate QR-code", "https://")
+QRCodeText = InputBox("Please note that this functionality uses external APIs to generate the QR-code (goqr.me/api/)." & vbNewLine & vbNewLine & vbNewLine & "Please provide the URL (or other content) for the QR-code:", "Generate QR-code", "https://")
 
 If Not QRCodeText = "" Then
-    QRCodeUrl = "https://chart.googleapis.com/chart?chld=L|1&chs=500x500&cht=qr&chl=" & QRCodeText
+    QRCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=" & QRCodeText
     Dim QRCode As shape
     Set QRCode = MyDocument.Selection.SlideRange.Shapes.AddPicture(QRCodeUrl, msoTrue, msoTrue, 0, 0)
     QRCode.Select

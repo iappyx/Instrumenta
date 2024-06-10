@@ -358,43 +358,43 @@ End Sub
 
 Sub GenerateStampConfidential()
     Dim StampColor As Long
-    StampColor = RGB(192, 0, 0)
+    StampColor = GetSetting("Instrumenta", "Stamps", "ConfidentialColor", "192")
     GenerateStamp "CONFIDENTIAL", StampColor
 End Sub
 
 Sub GenerateStampDoNotDistribute()
     Dim StampColor As Long
-    StampColor = RGB(192, 0, 0)
+    StampColor = GetSetting("Instrumenta", "Stamps", "DoNotDistributeColor", "192")
     GenerateStamp "DO NOT DISTRIBUTE", StampColor
 End Sub
 
 Sub GenerateStampDraft()
     Dim StampColor As Long
-    StampColor = RGB(0, 112, 192)
+    StampColor = GetSetting("Instrumenta", "Stamps", "DraftColor", "12611584")
     GenerateStamp "DRAFT", StampColor
 End Sub
 
 Sub GenerateStampUpdated()
     Dim StampColor As Long
-    StampColor = RGB(255, 153, 0)
+    StampColor = GetSetting("Instrumenta", "Stamps", "UpdatedColor", "39423")
     GenerateStamp "UPDATED", StampColor
 End Sub
 
 Sub GenerateStampNew()
     Dim StampColor As Long
-    StampColor = RGB(0, 176, 80)
+    StampColor = GetSetting("Instrumenta", "Stamps", "NewColor", "5287936")
     GenerateStamp "NEW", StampColor
 End Sub
 
 Sub GenerateStampToBeRemoved()
     Dim StampColor As Long
-    StampColor = RGB(179, 0, 0)
+    StampColor = GetSetting("Instrumenta", "Stamps", "ToBeRemovedColor", "179")
     GenerateStamp "TO BE REMOVED", StampColor
 End Sub
 
 Sub GenerateStampToAppendix()
     Dim StampColor As Long
-    StampColor = RGB(127, 127, 127)
+    StampColor = GetSetting("Instrumenta", "Stamps", "ToAppendixColor", "8355711")
     GenerateStamp "TO APPENDIX", StampColor
 End Sub
 

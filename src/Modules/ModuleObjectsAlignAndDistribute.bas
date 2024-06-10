@@ -596,17 +596,87 @@ End Sub
 
 Sub ObjectsAlignLefts()
     Set MyDocument = Application.ActiveWindow
+    Dim Left1, Left2 As Single
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
         If MyDocument.Selection.ChildShapeRange.Count > 1 Then
+            
+            Left1 = MyDocument.Selection.ChildShapeRange(1).left
+            Left2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).left
             MyDocument.Selection.ChildShapeRange.Align msoAlignLefts, msoFalse
         End If
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+            MyDocument.Selection.ChildShapeRange.left = Left1
+        End If
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+            MyDocument.Selection.ChildShapeRange.left = Left2
+        End If
+        
     ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignLefts, msoTrue
     Else
+        
+        Left1 = MyDocument.Selection.ShapeRange(1).left
+        Left2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).left
+        
         MyDocument.Selection.ShapeRange.Align msoAlignLefts, msoFalse
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+            MyDocument.Selection.ShapeRange.left = Left1
+        End If
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+            MyDocument.Selection.ShapeRange.left = Left2
+        End If
+        
+    End If
+    
+End Sub
+
+Sub ObjectsAlignTops()
+    Set MyDocument = Application.ActiveWindow
+    Dim Top1, Top2  As Single
+    
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    If MyDocument.Selection.HasChildShapeRange Then
+        If MyDocument.Selection.ChildShapeRange.Count > 1 Then
+            
+            Top1 = MyDocument.Selection.ChildShapeRange(1).Top
+            Top2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Top
+            
+            MyDocument.Selection.ChildShapeRange.Align msoAlignTops, msoFalse
+        End If
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+            MyDocument.Selection.ChildShapeRange.Top = Top1
+        End If
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+            MyDocument.Selection.ChildShapeRange.Top = Top2
+        End If
+        
+    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+        MyDocument.Selection.ShapeRange.Align msoAlignTops, msoTrue
+    Else
+        
+        Top1 = MyDocument.Selection.ShapeRange(1).Top
+        Top2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Top
+        
+        MyDocument.Selection.ShapeRange.Align msoAlignTops, msoFalse
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+            MyDocument.Selection.ShapeRange.Top = Top1
+        End If
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+            MyDocument.Selection.ShapeRange.Top = Top2
+        End If
+        
     End If
     
 End Sub
@@ -614,16 +684,61 @@ End Sub
 Sub ObjectsAlignRights()
     Set MyDocument = Application.ActiveWindow
     
+    Dim Right1, Right2 As Single
+    
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
         If MyDocument.Selection.ChildShapeRange.Count > 1 Then
-            MyDocument.Selection.ChildShapeRange.Align msoAlignRights, msoFalse
+            
+            Right1 = MyDocument.Selection.ChildShapeRange(1).left + MyDocument.Selection.ChildShapeRange(1).Width
+            Right2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).left + MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Width
+            
+            If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
+                
+                MyDocument.Selection.ChildShapeRange.Align msoAlignRights, msoFalse
+                
+            ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+                
+                For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                    SlideShape.left = Right1 - SlideShape.Width
+                Next SlideShape
+                
+            ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+                
+                For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                    SlideShape.left = Right2 - SlideShape.Width
+                Next SlideShape
+                
+            End If
+            
         End If
+        
     ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignRights, msoTrue
     Else
-        MyDocument.Selection.ShapeRange.Align msoAlignRights, msoFalse
+        
+        Right1 = MyDocument.Selection.ShapeRange(1).left + MyDocument.Selection.ShapeRange(1).Width
+        Right2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).left + MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Width
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
+            
+            MyDocument.Selection.ShapeRange.Align msoAlignRights, msoFalse
+            
+        ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+            
+            For Each SlideShape In MyDocument.Selection.ShapeRange
+                SlideShape.left = Right1 - SlideShape.Width
+            Next SlideShape
+            
+        ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+            
+            For Each SlideShape In MyDocument.Selection.ShapeRange
+                SlideShape.left = Right2 - SlideShape.Width
+            Next SlideShape
+            
+        End If
+        
     End If
     
 End Sub
@@ -631,70 +746,187 @@ End Sub
 Sub ObjectsAlignBottoms()
     Set MyDocument = Application.ActiveWindow
     
+    Dim Bottom1, Bottom2 As Single
+    
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
+        
         If MyDocument.Selection.ChildShapeRange.Count > 1 Then
-            MyDocument.Selection.ChildShapeRange.Align msoAlignBottoms, msoFalse
+            
+            Bottom1 = MyDocument.Selection.ChildShapeRange(1).Top + MyDocument.Selection.ChildShapeRange(1).Height
+            Bottom2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Top + MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Height
+            
+            If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
+                
+                MyDocument.Selection.ChildShapeRange.Align msoAlignBottoms, msoFalse
+                
+            ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+                
+                For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                    SlideShape.Top = Bottom1 - SlideShape.Height
+                Next SlideShape
+                
+            ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+                
+                For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                    SlideShape.Top = Bottom2 - SlideShape.Height
+                Next SlideShape
+                
+            End If
+            
         End If
+        
     ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignBottoms, msoTrue
     Else
-        MyDocument.Selection.ShapeRange.Align msoAlignBottoms, msoFalse
+        
+        Bottom1 = MyDocument.Selection.ShapeRange(1).Top + MyDocument.Selection.ShapeRange(1).Height
+        Bottom2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Top + MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Height
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
+            
+            MyDocument.Selection.ShapeRange.Align msoAlignBottoms, msoFalse
+            
+        ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+            
+            For Each SlideShape In MyDocument.Selection.ShapeRange
+                SlideShape.Top = Bottom1 - SlideShape.Height
+            Next SlideShape
+            
+        ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+            
+            For Each SlideShape In MyDocument.Selection.ShapeRange
+                SlideShape.Top = Bottom2 - SlideShape.Height
+            Next SlideShape
+            
+        End If
+        
     End If
     
 End Sub
 
 Sub ObjectsAlignCenters()
     Set MyDocument = Application.ActiveWindow
+    Dim Center1, Center2 As Single
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
+        
         If MyDocument.Selection.ChildShapeRange.Count > 1 Then
-            MyDocument.Selection.ChildShapeRange.Align msoAlignCenters, msoFalse
+            
+            Center1 = MyDocument.Selection.ChildShapeRange(1).left + (MyDocument.Selection.ChildShapeRange(1).Width / 2)
+            Center2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).left + (MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Width / 2)
+            
+            If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
+                
+                MyDocument.Selection.ChildShapeRange.Align msoAlignCenters, msoFalse
+                
+            ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+                
+                For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                    SlideShape.left = Center1 - (SlideShape.Width / 2)
+                Next SlideShape
+                
+            ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+                
+                For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                    SlideShape.left = Center2 - (SlideShape.Width / 2)
+                Next SlideShape
+                
+            End If
+            
         End If
     ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignCenters, msoTrue
     Else
-        MyDocument.Selection.ShapeRange.Align msoAlignCenters, msoFalse
+        
+        Center1 = MyDocument.Selection.ShapeRange(1).left + (MyDocument.Selection.ShapeRange(1).Width / 2)
+        Center2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).left + (MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Width / 2)
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
+            
+            MyDocument.Selection.ShapeRange.Align msoAlignCenters, msoFalse
+            
+        ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+            
+            For Each SlideShape In MyDocument.Selection.ShapeRange
+                SlideShape.left = Center1 - (SlideShape.Width / 2)
+            Next SlideShape
+            
+        ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+            
+            For Each SlideShape In MyDocument.Selection.ShapeRange
+                SlideShape.left = Center2 - (SlideShape.Width / 2)
+            Next SlideShape
+            
+        End If
+        
     End If
     
 End Sub
 
 Sub ObjectsAlignMiddles()
     Set MyDocument = Application.ActiveWindow
+    Dim Middle1, Middle2 As Single
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
         If MyDocument.Selection.ChildShapeRange.Count > 1 Then
-            MyDocument.Selection.ChildShapeRange.Align msoAlignMiddles, msoFalse
+            
+            Middle1 = MyDocument.Selection.ChildShapeRange(1).Top + (MyDocument.Selection.ChildShapeRange(1).Height / 2)
+            Middle2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Top + (MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Height / 2)
+            
+            If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
+                
+                MyDocument.Selection.ChildShapeRange.Align msoAlignMiddles, msoFalse
+                
+            ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+                
+                For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                    SlideShape.Top = Middle1 - (SlideShape.Height / 2)
+                Next SlideShape
+                
+            ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+                
+                For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                    SlideShape.Top = Middle2 - (SlideShape.Height / 2)
+                Next SlideShape
+                
+            End If
+            
         End If
     ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignMiddles, msoTrue
     Else
-        MyDocument.Selection.ShapeRange.Align msoAlignMiddles, msoFalse
+        
+        Middle1 = MyDocument.Selection.ShapeRange(1).Top + (MyDocument.Selection.ShapeRange(1).Height / 2)
+        Middle2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Top + (MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Height / 2)
+        
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
+            
+            MyDocument.Selection.ShapeRange.Align msoAlignMiddles, msoFalse
+            
+        ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+            
+            For Each SlideShape In MyDocument.Selection.ShapeRange
+                SlideShape.Top = Middle1 - (SlideShape.Height / 2)
+            Next SlideShape
+            
+        ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
+            
+            For Each SlideShape In MyDocument.Selection.ShapeRange
+                SlideShape.Top = Middle2 - (SlideShape.Height / 2)
+            Next SlideShape
+            
+        End If
+        
     End If
     
 End Sub
 
-Sub ObjectsAlignTops()
-    Set MyDocument = Application.ActiveWindow
-    
-    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
-    
-    If MyDocument.Selection.HasChildShapeRange Then
-        If MyDocument.Selection.ChildShapeRange.Count > 1 Then
-            MyDocument.Selection.ChildShapeRange.Align msoAlignTops, msoFalse
-        End If
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
-        MyDocument.Selection.ShapeRange.Align msoAlignTops, msoTrue
-    Else
-        MyDocument.Selection.ShapeRange.Align msoAlignTops, msoFalse
-    End If
-    
-End Sub
 
 Sub ObjectsDistributeHorizontally()
     Set MyDocument = Application.ActiveWindow
