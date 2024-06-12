@@ -76,9 +76,9 @@ The AppleScript file will not change that often, only in case of major changes t
 ## How to build from source
 Creating a build is very simple, all coding is done in PowerPoint.
 
-- Open 'InstrumentaPowerpointToolbar.pptm' from the 'src' directory in PowerPoint
-- Through PowerPoint settings, enable the 'Developer' tab in the PowerPoint ribbon.
-- All coding is done in the Visual Basic Editor (VBA IDE) of PowerPoint, the .bas-files in the 'src' directory are there for reference only. I export them after every build.
+- Open "InstrumentaPowerpointToolbar.pptm" from the "src" directory in PowerPoint
+- Through PowerPoint settings, enable the "Developer" tab in the PowerPoint ribbon.
+- All coding is done in the Visual Basic Editor (VBA IDE) of PowerPoint, the .bas-files in the "src" directory are there for reference only. I export them after every build.
 - To customize the Ribbon you can use [https://github.com/fernandreu/office-ribbonx-editor](https://github.com/fernandreu/office-ribbonx-editor) on the pptm-file.
 - In PowerPoint, save the file as a "PowerPoint Add-in (*.ppam)" file to create your own build
 
