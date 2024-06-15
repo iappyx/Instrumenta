@@ -73,6 +73,15 @@ Additional optional steps to enable export to Outlook and Word:
 
 The AppleScript file will not change that often, only in case of major changes to the export features, or new features that require the use of AppleScript. In that case Instrumenta can detect if the latest version of the file is installed and will inform you when using a feature that requires an updated version.
 
+## How to build from source
+Creating a build is very simple, all coding is done in PowerPoint.
+
+- Open "InstrumentaPowerpointToolbar.pptm" from the "src" directory in PowerPoint
+- Through PowerPoint settings, enable the "Developer" tab in the PowerPoint ribbon.
+- All coding is done in the Visual Basic Editor (VBA IDE) of PowerPoint, the .bas-files in the "src" directory are there for reference only. I export them after every build.
+- To customize the Ribbon you can use [https://github.com/fernandreu/office-ribbonx-editor](https://github.com/fernandreu/office-ribbonx-editor) on the pptm-file.
+- In PowerPoint, save the file as a "PowerPoint Add-in (*.ppam)" file to create your own build
+
 ## Upgrade
 To upgrade make sure Powerpoint is closed and overwrite the add-in file with the new version. 
 
