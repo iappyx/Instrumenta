@@ -124,6 +124,7 @@
                   <button id="ConnectRectangleShapesBottomToTop" label="Shape 1 bottom side to shape 2 top side" onAction="ConnectRectangleShapesBottomToTop" />
                   <button id="ConnectRectangleShapesTopToBottom" label="Shape 1 top side to shape 2 bottom side" onAction="ConnectRectangleShapesTopToBottom" />
                </menu>    
+               <button id="IncreaseShapeTransparency" label="Increase shape transparency" showLabel="false" imageMso="DiagramStylesClassic" onAction="IncreaseShapeTransparency" />
                <separator id="CopyPositionSeperator" />        
                      <splitButton id="LockSplitButton" size="normal" showLabel="false" >
                      <button id="LockToggleSelectedShapesButton" label="Toggle lock or unlock position of selected shapes" showLabel="false" imageMso="Lock" onAction="LockToggleSelectedShapes" />
