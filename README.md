@@ -59,7 +59,7 @@ You can save the add-in to your PC and then install the add-in by adding it to t
 
 ## Mac
 You can save the add-in to your Mac and then install the add-in by adding it to the Add-Ins list:
-- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.27/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
+- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.34/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
 - Open Powerpoint, click Tools in the application menu, and then click Add-ins...
 - In the Add-Ins dialog box, click the + button, browse for the add-in file, and then click Open.
 - Click Ok to close the Add-ins dialog box
