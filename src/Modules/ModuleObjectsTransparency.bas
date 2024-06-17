@@ -60,7 +60,7 @@ Sub SetTransparency(ByVal shp As shape)
     
     If shp.Fill.Type = msoFillSolid Then
         currentFillTransparency = shp.Fill.Transparency
-        adjustedTransparency = currentFillTransparency + 0.1
+        adjustedTransparency = currentFillTransparency + 0.2
 
         If adjustedTransparency > 1 Then
             adjustedTransparency = 0

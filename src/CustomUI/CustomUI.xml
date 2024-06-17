@@ -68,8 +68,18 @@
                </buttonGroup>
                <buttonGroup id="buttonGroupIndent">
                   <gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false" />
+               <splitButton id="IncreaseLineSpacingSplitButton" showLabel="false">
                   <button id="IncreaseLineSpacing" label="Increase line spacing" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="ObjectsIncreaseLineSpacing" />
+                  <menu id="IncreaseLineSpacingMenu" itemSize="normal">
+                        <button id="IncreaseLineSpacingBeforeAndAfter" label="Increase line spacing before and after" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="ObjectsIncreaseLineSpacingBeforeAndAfter" />
+                  </menu>
+               </splitButton>
+               <splitButton id="DecreaseLineSpacingSplitButton" showLabel="false">
                   <button id="DecreaseLineSpacing" label="Decrease line spacing" showLabel="false" imageMso="ParagraphSpacingDecrease" onAction="ObjectsDecreaseLineSpacing" />
+                  <menu id="DecreaseLineSpacingMenu" itemSize="normal">
+                        <button id="DecreaseLineSpacingBeforeAndAfter" label="Decrease line spacing before and after" showLabel="false" imageMso="ParagraphSpacingDecrease" onAction="ObjectsDecreaseLineSpacingBeforeAndAfter" />
+                  </menu>
+               </splitButton>
                   <button idMso="IndentIncrease" showLabel="false" />
                   <button idMso="IndentDecrease" showLabel="false" />
                   <gallery idMso="TextAlignGallery" showLabel="false" />

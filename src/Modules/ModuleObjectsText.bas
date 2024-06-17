@@ -1102,3 +1102,101 @@ Sub ObjectsToggleAutoSizeLoop(SlideShape, AutoSizeNum)
     End If
     
 End Sub
+
+
+Sub ObjectsIncreaseLineSpacingBeforeAndAfter()
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
+        
+        If MyDocument.Selection.HasChildShapeRange Then
+            
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ChildShapeRange(i), 3
+            Next i
+            
+        Else
+            
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                
+                ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ShapeRange(i), 3
+                
+            Next i
+            
+        End If
+        
+    End If
+    
+End Sub
+
+Sub ObjectsDecreaseLineSpacingBeforeAndAfter()
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
+        
+        If MyDocument.Selection.HasChildShapeRange Then
+            
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ChildShapeRange(i), -3
+            Next i
+            
+        Else
+            
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                
+                ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ShapeRange(i), -3
+                
+            Next i
+            
+        End If
+        
+    End If
+    
+End Sub
+
+Sub ObjectsLineSpacingBeforeAndAfterLoop(SlideShape, LineSpacingChange)
+    
+    If SlideShape.Type = msoGroup Then
+        
+        Set SlideShapeGroup = SlideShape.GroupItems
+        
+        For Each SlideShapeChild In SlideShapeGroup
+            ObjectsLineSpacingBeforeAndAfterLoop SlideShapeChild, LineSpacingChange
+        Next
+        
+    Else
+        
+        If SlideShape.HasTextFrame Then
+            
+            With SlideShape.TextFrame.TextRange.ParagraphFormat
+                
+                If LineSpacingChange < 0 Then
+                    
+                    If .SpaceBefore <= -LineSpacingChange Then
+                        .SpaceBefore = 0
+            .SpaceAfter = 0
+                    Else
+                        .SpaceBefore = .SpaceBefore + LineSpacingChange
+            .SpaceAfter = .SpaceBefore
+                    End If
+                    
+                ElseIf LineSpacingChange > 0 Then
+                    
+                    .SpaceBefore = .SpaceBefore + LineSpacingChange
+            .SpaceAfter = .SpaceBefore
+                    
+                End If
+                
+            End With
+            
+        End If
+        
+    End If
+    
+End Sub
