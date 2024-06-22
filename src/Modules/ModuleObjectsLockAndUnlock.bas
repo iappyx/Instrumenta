@@ -21,6 +21,24 @@ Attribute VB_Name = "ModuleObjectsLockAndUnlock"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub LockAspectRatioToggleSelectedShapes()
+    
+    Dim SlideShape As shape
+    
+    For Each SlideShape In ActiveWindow.Selection.ShapeRange
+        
+        If SlideShape.LockAspectRatio = msoTrue Then
+            SlideShape.LockAspectRatio = msoFalse
+        Else
+            SlideShape.LockAspectRatio = msoTrue
+        End If
+        
+    Next SlideShape
+    
+    
+End Sub
+
+
 Sub LockToggleSelectedShapes()
     
     #If Mac Then

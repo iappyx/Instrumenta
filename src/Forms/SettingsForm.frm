@@ -33,10 +33,6 @@ Attribute VB_Exposed = False
 
 
 
-Private Sub MultiPage1_Change()
-
-End Sub
-
 Private Sub UserForm_Activate()
 
     ShapeStepSizeMargin = GetSetting("Instrumenta", "Shapes", "ShapeStepSizeMargin", "0" + GetDecimalSeperator() + "2")
