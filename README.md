@@ -67,7 +67,7 @@ You can save the add-in to your Mac and then install the add-in by adding it to 
 
 Optional steps to show group titles:
 - By default group titles are hidden in the ribbon on the Mac
-- Open PowerPoint, click File in the application menu
+- Open PowerPoint, click PowerPoint in the application menu
 - Then click Preferences
 - Click View
 - Check "Show group titles"
