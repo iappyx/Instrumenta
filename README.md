@@ -4,7 +4,7 @@
 
 Many strategy consultancy firms have proprietary Powerpoint add-ins that provide access to often used tools and features that help to quickly fine tune a powerpoint presentation. After spending 10 years in strategy consulting and joining 'the industry' myself, I was looking for an alternative for the add-ins I was used to. Although lots of commercial options are available, I could not find a free and open source alternative. 
 
-As a spare time project in times of COVID-19, I decided to create Instrumenta as a free and open source consulting powerpoint toolbar. The ultimate goal is to create a feature rich toolbar that is compatible with both Windows and Mac versions of Microsoft Office. MIT-licensed, and use at your own risk.
+As a spare time project in times of COVID-19, I decided to create Instrumenta as a free and open source consulting powerpoint toolbar. The ultimate goal is to create a feature rich toolbar that is compatible with both Windows and Mac versions of Microsoft Office. MIT-licensed, and use at your own risk. If you use the code to create your own toolbar, whether it’s free or commercial, it would be appreciated if you provide attribution.
 
 [@iappyx]( https://github.com/iappyx )
 
