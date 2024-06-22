@@ -65,6 +65,13 @@ You can save the add-in to your Mac and then install the add-in by adding it to 
 - Click Ok to close the Add-ins dialog box
 - There now should be an "Instrumenta" page in the Powerpoint ribbon
 
+Optional steps to show group titles:
+- By default group titles are hidden in the ribbon on the Mac
+- Open PowerPoint, click File in the application menu
+- Then click Preferences
+- Click View
+- Check "Show group titles"
+
 Additional optional steps to enable export to Outlook and Word:
 - Download the AppleScript file (https://github.com/iappyx/Instrumenta/releases/download/1.34/InstrumentaAppleScriptPlugin.applescript) 
 - Copy the AppleScript file to *~/Library/Application Scripts/com.microsoft.Powerpoint/*
@@ -79,6 +86,7 @@ Creating a build is very simple, all coding is done in PowerPoint.
 - Open "InstrumentaPowerpointToolbar.pptm" from the "src" directory in PowerPoint
 - Through PowerPoint settings, enable the "Developer" tab in the PowerPoint ribbon.
 - All coding is done in the Visual Basic Editor (VBA IDE) of PowerPoint, the .bas-files in the "src" directory are there for reference only. I export them after every build.
+- You can use the pptm-file and update or create your own and copy-paste the code
 - To customize the Ribbon you can use [https://github.com/fernandreu/office-ribbonx-editor](https://github.com/fernandreu/office-ribbonx-editor) on the pptm-file.
 - In PowerPoint, save the file as a "PowerPoint Add-in (*.ppam)" file to create your own build
 
