@@ -935,15 +935,14 @@ Sub ObjectsDistributeHorizontally()
     
     If MyDocument.Selection.ShapeRange.Count > 2 Then
         MyDocument.Selection.ShapeRange.Distribute msoDistributeHorizontally, msoFalse
+    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+     MyDocument.Selection.ShapeRange.Align msoAlignCenters, msoTrue
         
     ElseIf MyDocument.Selection.HasChildShapeRange Then
         
         If MyDocument.Selection.ChildShapeRange.Count > 2 Then
             MyDocument.Selection.ChildShapeRange.Distribute msoDistributeHorizontally, msoFalse
         End If
-        
-    Else
-        MsgBox "Select more shapes to use this command."
     End If
     
 End Sub
@@ -955,7 +954,10 @@ Sub ObjectsDistributeVertically()
     
     If MyDocument.Selection.ShapeRange.Count > 2 Then
         MyDocument.Selection.ShapeRange.Distribute msoDistributeVertically, msoFalse
-        
+    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    
+     MyDocument.Selection.ShapeRange.Align msoAlignMiddles, msoTrue
+    
     ElseIf MyDocument.Selection.HasChildShapeRange Then
         
         If MyDocument.Selection.ChildShapeRange.Count > 2 Then
@@ -963,9 +965,6 @@ Sub ObjectsDistributeVertically()
             MyDocument.Selection.ChildShapeRange.Distribute msoDistributeVertically, msoFalse
             
         End If
-        
-    Else
-        MsgBox "Select more shapes to use this command."
     End If
 End Sub
 

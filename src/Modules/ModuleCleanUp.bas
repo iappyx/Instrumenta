@@ -51,7 +51,7 @@ Sub CleanUpRemoveUnusedMasterSlides()
 End Sub
 
 Sub CleanUpRemoveAnimationsFromAllSlides()
-    Dim PresentationSlide As Slide
+    Dim PresentationSlide As slide
     Dim AnimationCount As Long
     
     ProgressForm.Show
@@ -71,7 +71,7 @@ Sub CleanUpRemoveAnimationsFromAllSlides()
 End Sub
 
 Sub CleanUpRemoveSpeakerNotesFromAllSlides()
-    Dim PresentationSlide As Slide
+    Dim PresentationSlide As slide
     Dim SlideShape  As PowerPoint.shape
     
     ProgressForm.Show
@@ -93,7 +93,7 @@ Sub CleanUpRemoveSpeakerNotesFromAllSlides()
 End Sub
 
 Sub CleanUpRemoveCommentsFromAllSlides()
-    Dim PresentationSlide As Slide
+    Dim PresentationSlide As slide
     Dim CommentsCount As Long
     
     ProgressForm.Show
@@ -113,7 +113,7 @@ Sub CleanUpRemoveCommentsFromAllSlides()
 End Sub
 
 Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
-    Dim PresentationSlide As Slide
+    Dim PresentationSlide As slide
     
     ProgressForm.Show
     
@@ -147,5 +147,17 @@ Sub CleanUpRemoveHiddenSlides()
     
     ProgressForm.Hide
     Unload ProgressForm
+    
+End Sub
+
+
+Sub CleanUpHideAndMoveSelectedSlides()
+    NumberOfSlides = ActivePresentation.Slides.Count
+
+    For i = ActiveWindow.Selection.SlideRange.Count To 1 Step -1
+        ActivePresentation.Slides(ActiveWindow.Selection.SlideRange(i).SlideIndex).MoveTo (NumberOfSlides)
+        ActivePresentation.Slides(NumberOfSlides).SlideShowTransition.Hidden = msoTrue
+        NumberOfSlides = NumberOfSlides - 1
+    Next i
     
 End Sub

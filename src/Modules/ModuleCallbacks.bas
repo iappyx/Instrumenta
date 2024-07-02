@@ -352,6 +352,11 @@ Sub TextInsertEuro()
     ObjectsTextInsertSpecialCharacter 8364
 End Sub
 
+Sub TextInsertNoBreakSpace()
+    ObjectsTextInsertSpecialCharacter 160
+End Sub
+
+
 Sub TextInsertCopyright()
     ObjectsTextInsertSpecialCharacter 169
 End Sub
