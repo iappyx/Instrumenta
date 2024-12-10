@@ -596,41 +596,51 @@ End Sub
 
 Sub ObjectsAlignLefts()
     Set MyDocument = Application.ActiveWindow
-    Dim Left1, Left2 As Single
+    Dim Left1 As Single
+    Dim Left2 As Single
+    Dim sh As Shape
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
         If MyDocument.Selection.ChildShapeRange.Count > 1 Then
             
-            Left1 = MyDocument.Selection.ChildShapeRange(1).left
-            Left2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).left
+            Left1 = GetRealLeft(MyDocument.Selection.ChildShapeRange(1))
+            Left2 = GetRealLeft(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
             MyDocument.Selection.ChildShapeRange.Align msoAlignLefts, msoFalse
         End If
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
-            MyDocument.Selection.ChildShapeRange.left = Left1
+            For Each sh In MyDocument.Selection.ChildShapeRange
+                SetRealLeft sh, Left1
+            Next sh
         End If
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
-            MyDocument.Selection.ChildShapeRange.left = Left2
+            For Each sh In MyDocument.Selection.ChildShapeRange
+                SetRealLeft sh, Left2
+            Next sh
         End If
         
     ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignLefts, msoTrue
     Else
         
-        Left1 = MyDocument.Selection.ShapeRange(1).left
-        Left2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).left
+        Left1 = GetRealLeft(MyDocument.Selection.ShapeRange(1))
+        Left2 = GetRealLeft(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count))
         
         MyDocument.Selection.ShapeRange.Align msoAlignLefts, msoFalse
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
-            MyDocument.Selection.ShapeRange.left = Left1
+            For Each sh In MyDocument.Selection.ShapeRange
+                SetRealLeft sh, Left1
+            Next sh
         End If
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
-            MyDocument.Selection.ShapeRange.left = Left2
+            For Each sh In MyDocument.Selection.ShapeRange
+                SetRealLeft sh, Left2
+            Next sh
         End If
         
     End If
@@ -639,42 +649,51 @@ End Sub
 
 Sub ObjectsAlignTops()
     Set MyDocument = Application.ActiveWindow
-    Dim Top1, Top2  As Single
+    Dim Top1 As Single
+    Dim Top2 As Single
+    Dim sh As Shape
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
         If MyDocument.Selection.ChildShapeRange.Count > 1 Then
             
-            Top1 = MyDocument.Selection.ChildShapeRange(1).Top
-            Top2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Top
+            Top1 = GetRealTop(MyDocument.Selection.ChildShapeRange(1))
+            Top2 = GetRealTop(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
             
             MyDocument.Selection.ChildShapeRange.Align msoAlignTops, msoFalse
         End If
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
-            MyDocument.Selection.ChildShapeRange.Top = Top1
+            For Each sh In MyDocument.Selection.ChildShapeRange
+                SetRealTop sh, Top1
+            Next sh
         End If
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
-            MyDocument.Selection.ChildShapeRange.Top = Top2
+            For Each sh In MyDocument.Selection.ChildShapeRange
+                SetRealTop sh, Top2
+            Next sh
         End If
         
     ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignTops, msoTrue
     Else
         
-        Top1 = MyDocument.Selection.ShapeRange(1).Top
-        Top2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Top
+        Top1 = GetRealTop(MyDocument.Selection.ShapeRange(1))
+        Top2 = GetRealTop(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count))
         
-        MyDocument.Selection.ShapeRange.Align msoAlignTops, msoFalse
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
-            MyDocument.Selection.ShapeRange.Top = Top1
+            For Each sh In MyDocument.Selection.ShapeRange
+                SetRealTop sh, Top1
+            Next sh
         End If
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
-            MyDocument.Selection.ShapeRange.Top = Top2
+            For Each sh In MyDocument.Selection.ShapeRange
+                SetRealTop sh, Top2
+            Next sh
         End If
         
     End If
@@ -684,15 +703,17 @@ End Sub
 Sub ObjectsAlignRights()
     Set MyDocument = Application.ActiveWindow
     
-    Dim Right1, Right2 As Single
+    Dim Right1 As Single
+    Dim Right2 As Single
+    Dim sh As Shape
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
         If MyDocument.Selection.ChildShapeRange.Count > 1 Then
             
-            Right1 = MyDocument.Selection.ChildShapeRange(1).left + MyDocument.Selection.ChildShapeRange(1).Width
-            Right2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).left + MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Width
+            Right1 = GetRealLeft(MyDocument.Selection.ChildShapeRange(1)) + GetRealWidth(MyDocument.Selection.ChildShapeRange(1))
+            Right2 = GetRealLeft(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count)) + GetRealWidth(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
             
             If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
                 
@@ -700,15 +721,15 @@ Sub ObjectsAlignRights()
                 
             ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
                 
-                For Each SlideShape In MyDocument.Selection.ChildShapeRange
-                    SlideShape.left = Right1 - SlideShape.Width
-                Next SlideShape
+                For Each sh In MyDocument.Selection.ChildShapeRange
+                    SetRealLeft sh, Right1 - GetRealWidth(sh)
+                Next sh
                 
             ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
                 
-                For Each SlideShape In MyDocument.Selection.ChildShapeRange
-                    SlideShape.left = Right2 - SlideShape.Width
-                Next SlideShape
+                For Each sh In MyDocument.Selection.ChildShapeRange
+                    SetRealLeft sh, Right2 - GetRealWidth(sh)
+                Next sh
                 
             End If
             
@@ -718,8 +739,8 @@ Sub ObjectsAlignRights()
         MyDocument.Selection.ShapeRange.Align msoAlignRights, msoTrue
     Else
         
-        Right1 = MyDocument.Selection.ShapeRange(1).left + MyDocument.Selection.ShapeRange(1).Width
-        Right2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).left + MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Width
+        Right1 = GetRealLeft(MyDocument.Selection.ShapeRange(1)) + GetRealWidth(MyDocument.Selection.ShapeRange(1))
+        Right2 = GetRealLeft(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count)) + GetRealWidth(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count))
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
             
@@ -727,15 +748,15 @@ Sub ObjectsAlignRights()
             
         ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
             
-            For Each SlideShape In MyDocument.Selection.ShapeRange
-                SlideShape.left = Right1 - SlideShape.Width
-            Next SlideShape
+            For Each sh In MyDocument.Selection.ShapeRange
+                SetRealLeft sh, Right1 - GetRealWidth(sh)
+            Next sh
             
         ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
             
-            For Each SlideShape In MyDocument.Selection.ShapeRange
-                SlideShape.left = Right2 - SlideShape.Width
-            Next SlideShape
+            For Each sh In MyDocument.Selection.ShapeRange
+                SetRealLeft sh, Right2 - GetRealWidth(sh)
+            Next sh
             
         End If
         
@@ -746,7 +767,9 @@ End Sub
 Sub ObjectsAlignBottoms()
     Set MyDocument = Application.ActiveWindow
     
-    Dim Bottom1, Bottom2 As Single
+    Dim Bottom1 As Single
+    Dim Bottom2 As Single
+    Dim sh As Shape
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
@@ -754,8 +777,8 @@ Sub ObjectsAlignBottoms()
         
         If MyDocument.Selection.ChildShapeRange.Count > 1 Then
             
-            Bottom1 = MyDocument.Selection.ChildShapeRange(1).Top + MyDocument.Selection.ChildShapeRange(1).Height
-            Bottom2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Top + MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Height
+            Bottom1 = GetRealTop(MyDocument.Selection.ChildShapeRange(1)) + GetRealHeight(MyDocument.Selection.ChildShapeRange(1))
+            Bottom2 = GetRealTop(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count)) + GetRealHeight(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
             
             If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
                 
@@ -763,15 +786,15 @@ Sub ObjectsAlignBottoms()
                 
             ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
                 
-                For Each SlideShape In MyDocument.Selection.ChildShapeRange
-                    SlideShape.Top = Bottom1 - SlideShape.Height
-                Next SlideShape
+                For Each sh In MyDocument.Selection.ChildShapeRange
+                    SetRealTop sh, Bottom1 - GetRealHeight(sh)
+                Next sh
                 
             ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
                 
-                For Each SlideShape In MyDocument.Selection.ChildShapeRange
-                    SlideShape.Top = Bottom2 - SlideShape.Height
-                Next SlideShape
+                For Each sh In MyDocument.Selection.ChildShapeRange
+                    SetRealTop sh, Bottom2 - GetRealHeight(sh)
+                Next sh
                 
             End If
             
@@ -781,8 +804,8 @@ Sub ObjectsAlignBottoms()
         MyDocument.Selection.ShapeRange.Align msoAlignBottoms, msoTrue
     Else
         
-        Bottom1 = MyDocument.Selection.ShapeRange(1).Top + MyDocument.Selection.ShapeRange(1).Height
-        Bottom2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Top + MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Height
+        Bottom1 = GetRealTop(MyDocument.Selection.ShapeRange(1)) + GetRealHeight(MyDocument.Selection.ShapeRange(1))
+        Bottom2 = GetRealTop(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count)) + GetRealHeight(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count))
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
             
@@ -790,15 +813,15 @@ Sub ObjectsAlignBottoms()
             
         ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
             
-            For Each SlideShape In MyDocument.Selection.ShapeRange
-                SlideShape.Top = Bottom1 - SlideShape.Height
-            Next SlideShape
+            For Each sh In MyDocument.Selection.ShapeRange
+                SetRealTop sh, Bottom1 - GetRealHeight(sh)
+            Next sh
             
         ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
             
-            For Each SlideShape In MyDocument.Selection.ShapeRange
-                SlideShape.Top = Bottom2 - SlideShape.Height
-            Next SlideShape
+            For Each sh In MyDocument.Selection.ShapeRange
+                SetRealTop sh, Bottom2 - GetRealHeight(sh)
+            Next sh
             
         End If
         
