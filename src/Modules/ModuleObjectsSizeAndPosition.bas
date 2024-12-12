@@ -23,27 +23,36 @@ Attribute VB_Name = "ModuleObjectsSizeAndPosition"
 
 Sub ObjectsSizeToTallest()
     Set MyDocument = Application.ActiveWindow
-    Dim Tallest     As Single
+    Dim Height As Single
+    Dim Tallest As Single
+    Dim SlideShape As Shape
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
         
-        Tallest = MyDocument.Selection.ChildShapeRange(1).Height
+        Tallest = GetRealHeight(MyDocument.Selection.ChildShapeRange(1))
         
         For Each SlideShape In MyDocument.Selection.ChildShapeRange
-            If SlideShape.Height > Tallest Then Tallest = SlideShape.Height
+            Height = GetRealHeight(SlideShape)
+            If Height > Tallest Then Tallest = Height
         Next
         
-        MyDocument.Selection.ChildShapeRange.Height = Tallest
+        For Each SlideShape In MyDocument.Selection.ChildShapeRange
+            SetRealHeight SlideShape, Tallest
+        Next SlideShape
         
     Else
-        Tallest = MyDocument.Selection.ShapeRange(1).Height
+        Tallest = GetRealHeight(MyDocument.Selection.shapeRange(1))
         
-        For Each SlideShape In MyDocument.Selection.ShapeRange
-            If SlideShape.Height > Tallest Then Tallest = SlideShape.Height
+        For Each SlideShape In MyDocument.Selection.shapeRange
+            Height = GetRealHeight(SlideShape)
+            If Height > Tallest Then Tallest = Height
         Next
         
-        MyDocument.Selection.ShapeRange.Height = Tallest
+        For Each SlideShape In MyDocument.Selection.shapeRange
+            SetRealHeight SlideShape, Tallest
+        Next SlideShape
         
     End If
     
@@ -51,161 +60,240 @@ End Sub
 
 Sub ObjectsSizeToShortest()
     Set MyDocument = Application.ActiveWindow
-    Dim Shortest    As Single
+    Dim Height As Single
+    Dim Shortest As Single
+    Dim SlideShape As Shape
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
-    
+
     If MyDocument.Selection.HasChildShapeRange Then
-        
-        Shortest = MyDocument.Selection.ChildShapeRange(1).Height
-        
+
+        Shortest = GetRealHeight(MyDocument.Selection.ChildShapeRange(1))
+
         For Each SlideShape In MyDocument.Selection.ChildShapeRange
-            If SlideShape.Height < Shortest Then Shortest = SlideShape.Height
+            Height = GetRealHeight(SlideShape)
+            If Height < Shortest Then Shortest = Height
         Next
-        
-        MyDocument.Selection.ChildShapeRange.Height = Shortest
-        
+
+        For Each SlideShape In MyDocument.Selection.ChildShapeRange
+            SetRealHeight SlideShape, Shortest
+        Next SlideShape
+
+
     Else
-        
-        Shortest = MyDocument.Selection.ShapeRange(1).Height
-        
-        For Each SlideShape In MyDocument.Selection.ShapeRange
-            If SlideShape.Height < Shortest Then Shortest = SlideShape.Height
+
+        Shortest = GetRealHeight(MyDocument.Selection.shapeRange(1))
+
+        For Each SlideShape In MyDocument.Selection.shapeRange
+            Height = GetRealHeight(SlideShape)
+            If Height < Shortest Then Shortest = Height
         Next
-        
-        MyDocument.Selection.ShapeRange.Height = Shortest
-        
+
+        For Each SlideShape In MyDocument.Selection.shapeRange
+            SetRealHeight SlideShape, Shortest
+        Next SlideShape
+
     End If
-    
+
 End Sub
 
 Sub ObjectsSizeToWidest()
     Set MyDocument = Application.ActiveWindow
-    Dim Widest      As Single
+    Dim Width As Single
+    Dim Widest As Single
+    Dim SlideShape As Shape
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
-    
+
     If MyDocument.Selection.HasChildShapeRange Then
-        
-        Widest = MyDocument.Selection.ChildShapeRange(1).Width
-        
+
+        Widest = GetRealWidth(MyDocument.Selection.ChildShapeRange(1))
+
         For Each SlideShape In MyDocument.Selection.ChildShapeRange
-            If SlideShape.Width > Widest Then Widest = SlideShape.Width
-        Next
-        
-        MyDocument.Selection.ChildShapeRange.Width = Widest
-        
+            Width = GetRealWidth(SlideShape)
+            If Width > Widest Then Widest = Width
+        Next SlideShape
+
+        For Each SlideShape In MyDocument.Selection.ChildShapeRange
+            SetRealWidth SlideShape, Widest
+        Next SlideShape
+
     Else
-        Widest = MyDocument.Selection.ShapeRange(1).Width
-        
-        For Each SlideShape In MyDocument.Selection.ShapeRange
-            If SlideShape.Width > Widest Then Widest = SlideShape.Width
-        Next
-        
-        MyDocument.Selection.ShapeRange.Width = Widest
-        
+
+        Widest = GetRealWidth(MyDocument.Selection.shapeRange(1))
+
+        For Each SlideShape In MyDocument.Selection.shapeRange
+            Width = GetRealWidth(SlideShape)
+            If Width > Widest Then Widest = Width
+        Next SlideShape
+
+        For Each SlideShape In MyDocument.Selection.shapeRange
+            SetRealWidth SlideShape, Widest
+        Next SlideShape
+
     End If
-    
+
 End Sub
 
 Sub ObjectsSizeToNarrowest()
     Set MyDocument = Application.ActiveWindow
-    Dim Narrowest   As Single
+    Dim Width As Single
+    Dim Narrowest As Single
+    Dim SlideShape As Shape
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
-    
+
     If MyDocument.Selection.HasChildShapeRange Then
-        
-        Narrowest = MyDocument.Selection.ChildShapeRange(1).Width
-        
+
+        Narrowest = GetRealWidth(MyDocument.Selection.ChildShapeRange(1))
+
         For Each SlideShape In MyDocument.Selection.ChildShapeRange
-            If SlideShape.Width < Narrowest Then Narrowest = SlideShape.Width
-        Next
-        
-        MyDocument.Selection.ChildShapeRange.Width = Narrowest
-        
+            Width = GetRealWidth(SlideShape)
+            If Width < Narrowest Then Narrowest = Width
+        Next SlideShape
+
+        For Each SlideShape In MyDocument.Selection.ChildShapeRange
+            SetRealWidth SlideShape, Narrowest
+        Next SlideShape
+
     Else
-        
-        Narrowest = MyDocument.Selection.ShapeRange(1).Width
-        
-        For Each SlideShape In MyDocument.Selection.ShapeRange
-            If SlideShape.Width < Narrowest Then Narrowest = SlideShape.Width
-        Next
-        
-        MyDocument.Selection.ShapeRange.Width = Narrowest
-        
+
+        Narrowest = GetRealWidth(MyDocument.Selection.shapeRange(1))
+
+        For Each SlideShape In MyDocument.Selection.shapeRange
+            Width = GetRealWidth(SlideShape)
+            If Width < Narrowest Then Narrowest = Width
+        Next SlideShape
+
+        For Each SlideShape In MyDocument.Selection.shapeRange
+            SetRealWidth SlideShape, Narrowest
+        Next SlideShape
+
     End If
-    
+
 End Sub
 
 Sub ObjectsSameHeight()
     Set MyDocument = Application.ActiveWindow
+    Dim Height As Single
+    Dim SlideShape As Shape
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
-    
+
     If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultTransformationMethod", "0") = 0 Then
-        
         If MyDocument.Selection.HasChildShapeRange Then
-            MyDocument.Selection.ChildShapeRange.Height = MyDocument.Selection.ChildShapeRange(1).Height
+            Height = GetRealHeight(MyDocument.Selection.ChildShapeRange(1))
+
+            For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                SetRealHeight SlideShape, Height
+            Next SlideShape
         Else
-            MyDocument.Selection.ShapeRange.Height = MyDocument.Selection.ShapeRange(1).Height
+            Height = GetRealHeight(MyDocument.Selection.shapeRange(1))
+
+            For Each SlideShape In MyDocument.Selection.shapeRange
+                SetRealHeight SlideShape, Height
+            Next SlideShape
         End If
-        
     Else
-        
         If MyDocument.Selection.HasChildShapeRange Then
-            MyDocument.Selection.ChildShapeRange.Height = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Height
+            Height = GetRealHeight(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
+
+            For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                SetRealHeight SlideShape, Height
+            Next SlideShape
         Else
-            MyDocument.Selection.ShapeRange.Height = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Height
+            Height = GetRealHeight(MyDocument.Selection.shapeRange(MyDocument.Selection.shapeRange.Count))
+
+            For Each SlideShape In MyDocument.Selection.shapeRange
+                SetRealHeight SlideShape, Height
+            Next SlideShape
         End If
-        
     End If
-    
 End Sub
 
 Sub ObjectsSameWidth()
     Set MyDocument = Application.ActiveWindow
+    Dim Width As Single
+    Dim SlideShape As Shape
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultTransformationMethod", "0") = 0 Then
         If MyDocument.Selection.HasChildShapeRange Then
-            MyDocument.Selection.ChildShapeRange.Width = MyDocument.Selection.ChildShapeRange(1).Width
+            Width = GetRealWidth(MyDocument.Selection.ChildShapeRange(1))
+
+            For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                SetRealWidth SlideShape, Width
+            Next SlideShape
         Else
-            MyDocument.Selection.ShapeRange.Width = MyDocument.Selection.ShapeRange(1).Width
+            Width = GetRealWidth(MyDocument.Selection.shapeRange(1))
+
+            For Each SlideShape In MyDocument.Selection.shapeRange
+                SetRealWidth SlideShape, Width
+            Next SlideShape
         End If
     Else
         If MyDocument.Selection.HasChildShapeRange Then
-            MyDocument.Selection.ChildShapeRange.Width = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Width
+            Width = GetRealWidth(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
+
+            For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                SetRealWidth SlideShape, Width
+            Next SlideShape
         Else
-            MyDocument.Selection.ShapeRange.Width = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Width
+            Width = GetRealWidth(MyDocument.Selection.shapeRange(MyDocument.Selection.shapeRange.Count))
+
+            For Each SlideShape In MyDocument.Selection.shapeRange
+                SetRealWidth SlideShape, Width
+            Next SlideShape
         End If
     End If
 End Sub
 
 Sub ObjectsSameHeightAndWidth()
     Set MyDocument = Application.ActiveWindow
+    Dim Height As Single
+    Dim Width As Single
+    Dim SlideShape As Shape
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
-    
+
     If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultTransformationMethod", "0") = 0 Then
-        
         If MyDocument.Selection.HasChildShapeRange Then
-            MyDocument.Selection.ChildShapeRange.Height = MyDocument.Selection.ChildShapeRange(1).Height
-            MyDocument.Selection.ChildShapeRange.Width = MyDocument.Selection.ChildShapeRange(1).Width
-            
+            Height = GetRealHeight(MyDocument.Selection.ChildShapeRange(1))
+            Width = GetRealWidth(MyDocument.Selection.ChildShapeRange(1))
+
+            For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                SetRealHeight SlideShape, Height
+                SetRealWidth SlideShape, Width
+            Next SlideShape
         Else
-            MyDocument.Selection.ShapeRange.Height = MyDocument.Selection.ShapeRange(1).Height
-            MyDocument.Selection.ShapeRange.Width = MyDocument.Selection.ShapeRange(1).Width
+            Height = GetRealHeight(MyDocument.Selection.shapeRange(1))
+            Width = GetRealWidth(MyDocument.Selection.shapeRange(1))
+
+            For Each SlideShape In MyDocument.Selection.shapeRange
+                SetRealHeight SlideShape, Height
+                SetRealWidth SlideShape, Width
+            Next SlideShape
         End If
-        
     Else
-        
         If MyDocument.Selection.HasChildShapeRange Then
-            MyDocument.Selection.ChildShapeRange.Height = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Height
-            MyDocument.Selection.ChildShapeRange.Width = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Width
-            
+            Height = GetRealHeight(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
+            Width = GetRealWidth(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
+
+            For Each SlideShape In MyDocument.Selection.ChildShapeRange
+                SetRealHeight SlideShape, Height
+                SetRealWidth SlideShape, Width
+            Next SlideShape
         Else
-            MyDocument.Selection.ShapeRange.Height = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Height
-            MyDocument.Selection.ShapeRange.Width = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Width
+            Height = GetRealHeight(MyDocument.Selection.shapeRange(MyDocument.Selection.shapeRange.Count))
+            Width = GetRealWidth(MyDocument.Selection.shapeRange(MyDocument.Selection.shapeRange.Count))
+
+            For Each SlideShape In MyDocument.Selection.shapeRange
+                SetRealHeight SlideShape, Height
+                SetRealWidth SlideShape, Width
+            Next SlideShape
         End If
-        
     End If
-    
 End Sub
 
 Sub ObjectsSwapPosition()
@@ -308,3 +396,4 @@ Sub ObjectsSwapPositionCentered()
     End If
     
 End Sub
+

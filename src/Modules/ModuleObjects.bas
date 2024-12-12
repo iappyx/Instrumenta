@@ -107,36 +107,48 @@ Sub SetRealLeft(sh As Shape, newRealLeft As Single)
     sh.Left = sh.Left + offset
 End Sub
 
-' Sub SetRealWidth(sh As Shape, newRealWidth As Single)
-'     Dim rotation As Double
-'     rotation = sh.Rotation Mod 360
+Sub SetRealWidth(sh As Shape, newRealWidth As Single)
+    Dim rotation As Double
+    rotation = sh.Rotation Mod 360
 
-'     Select Case rotation
-'         Case 0, 180
-'             sh.Width = newRealWidth
-'         Case 90, 270
-'             sh.Height = newRealWidth
-'         Case Else
-'             Dim cosTheta As Double, sinTheta As Double
-'             cosTheta = Abs(Cos(rotation * (3.14159265358979 / 180)))
-'             sinTheta = Abs(Sin(rotation * (3.14159265358979 / 180)))
-'             sh.Width = newRealWidth / (cosTheta + sinTheta)
-'     End Select
-' End Sub
+    Select Case rotation
+        Case 0
+            sh.Width = newRealWidth
+        Case 90
+            sh.Left = sh.Left - (sh.Height - newRealWidth)
+            sh.Height = newRealWidth
+        Case 180
+            sh.Left = sh.Left - (sh.Width - newRealWidth)
+            sh.Width = newRealWidth
+        Case 270
+            sh.Height = newRealWidth
+        Case Else
+            ' Dim cosTheta As Double, sinTheta As Double
+            ' cosTheta = Abs(Cos(rotation * (3.14159265358979 / 180)))
+            ' sinTheta = Abs(Sin(rotation * (3.14159265358979 / 180)))
+            ' sh.Width = newRealWidth / (cosTheta + sinTheta)
+    End Select
+End Sub
 
-' Sub SetRealHeight(sh As Shape, newRealHeight As Single)
-'     Dim rotation As Double
-'     rotation = sh.Rotation Mod 360
+Sub SetRealHeight(sh As Shape, newRealHeight As Single)
+    Dim rotation As Double
+    rotation = sh.Rotation Mod 360
 
-'     Select Case rotation
-'         Case 0, 180
-'             sh.Height = newRealHeight
-'         Case 90, 270
-'             sh.Width = newRealHeight
-'         Case Else
-'             Dim cosTheta As Double, sinTheta As Double
-'             cosTheta = Abs(Cos(rotation * (3.14159265358979 / 180)))
-'             sinTheta = Abs(Sin(rotation * (3.14159265358979 / 180)))
-'             sh.Height = newRealHeight / (cosTheta + sinTheta)
-'     End Select
-' End Sub
+    Select Case rotation
+        Case 0
+            sh.Height = newRealHeight
+        Case 90
+            sh.Width = newRealHeight
+        Case 180
+            sh.Top = sh.Top - (sh.Height - newRealHeight)
+            sh.Height = newRealHeight
+        Case 270
+            sh.Top = sh.Top - (sh.Width - newRealHeight)
+            sh.Width = newRealHeight
+        Case Else
+            ' Dim cosTheta As Double, sinTheta As Double
+            ' cosTheta = Abs(Cos(rotation * (3.14159265358979 / 180)))
+            ' sinTheta = Abs(Sin(rotation * (3.14159265358979 / 180)))
+            ' sh.Height = newRealHeight / (cosTheta + sinTheta)
+    End Select
+End Sub
