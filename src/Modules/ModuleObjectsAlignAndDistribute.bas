@@ -447,7 +447,7 @@ Sub ObjectsSortByLeftPosition(ArrayToSort As Variant)
         StopLoop = False
         For ShapeCount = LBound(ArrayToSort) To UBound(ArrayToSort) - 1
             
-            If ArrayToSort(ShapeCount).left > ArrayToSort(ShapeCount + 1).left Then
+            If GetRealLeft(ArrayToSort(ShapeCount)) > GetRealLeft(ArrayToSort(ShapeCount + 1)) Then
                 Set SlideShapes = ArrayToSort(ShapeCount)
                 Set ArrayToSort(ShapeCount) = ArrayToSort(ShapeCount + 1)
                 Set ArrayToSort(ShapeCount + 1) = SlideShapes
@@ -472,7 +472,7 @@ Sub ObjectsSortByRightPosition(ArrayToSort As Variant)
         StopLoop = False
         For ShapeCount = LBound(ArrayToSort) To UBound(ArrayToSort) - 1
             
-            If (ArrayToSort(ShapeCount).left + ArrayToSort(ShapeCount).Width) > (ArrayToSort(ShapeCount + 1).left + ArrayToSort(ShapeCount + 1).Width) Then
+            If (GetRealLeft(ArrayToSort(ShapeCount)) + GetRealWidth(ArrayToSort(ShapeCount))) > (GetRealLeft(ArrayToSort(ShapeCount + 1)) + GetRealWidth(ArrayToSort(ShapeCount + 1))) Then
                 Set SlideShapes = ArrayToSort(ShapeCount)
                 Set ArrayToSort(ShapeCount) = ArrayToSort(ShapeCount + 1)
                 Set ArrayToSort(ShapeCount + 1) = SlideShapes
@@ -523,10 +523,10 @@ Sub QuicksortTopLeftToBottomRight(ShapeItems() As shape, left As Long, right As 
     
     Set PivotShape = ShapeItems((left + right) \ 2)
     Do
-        Do While (ShapeItems(i).Top < PivotShape.Top) Or (ShapeItems(i).Top = PivotShape.Top And ShapeItems(i).left < PivotShape.left)
+        Do While (GetRealTop(ShapeItems(i)) < GetRealTop(PivotShape)) Or (GetRealTop(ShapeItems(i)) = GetRealTop(PivotShape) And GetRealLeft(sShapeItems(i)) < GetRealLeft(sPivotShape))
             i = i + 1
         Loop
-        Do While (ShapeItems(j).Top > PivotShape.Top) Or (ShapeItems(j).Top = PivotShape.Top And ShapeItems(j).left > PivotShape.left)
+        Do While (GetRealTop(ShapeItems(j)) > GetRealTop(PivotShape)) Or (GetRealTop(ShapeItems(j)) = GetRealTop(PivotShape) And GetRealLeft(sShapeItems(j)) > GetRealLeft(sPivotShape))
             j = j - 1
         Loop
         If i <= j Then
@@ -557,7 +557,7 @@ Sub ObjectsSortByTopPosition(ArrayToSort As Variant)
         StopLoop = False
         For ShapeCount = LBound(ArrayToSort) To UBound(ArrayToSort) - 1
             
-            If ArrayToSort(ShapeCount).Top > ArrayToSort(ShapeCount + 1).Top Then
+            If GetRealTop(ArrayToSort(ShapeCount)) > GetRealTop(ArrayToSort(ShapeCount + 1)) Then
                 Set SlideShapes = ArrayToSort(ShapeCount)
                 Set ArrayToSort(ShapeCount) = ArrayToSort(ShapeCount + 1)
                 Set ArrayToSort(ShapeCount + 1) = SlideShapes
@@ -582,7 +582,7 @@ Sub ObjectsSortByBottomPosition(ArrayToSort As Variant)
         StopLoop = False
         For ShapeCount = LBound(ArrayToSort) To UBound(ArrayToSort) - 1
             
-            If (ArrayToSort(ShapeCount).Top + ArrayToSort(ShapeCount).Height) > (ArrayToSort(ShapeCount + 1).Top + ArrayToSort(ShapeCount + 1).Height) Then
+            If (GetRealTop(ArrayToSort(ShapeCount)) + GetRealHeight(ArrayToSort(ShapeCount))) > (GetRealTop(ArrayToSort(ShapeCount + 1)) + GetRealHeight(ArrayToSort(ShapeCount + 1))) Then
                 Set SlideShapes = ArrayToSort(ShapeCount)
                 Set ArrayToSort(ShapeCount) = ArrayToSort(ShapeCount + 1)
                 Set ArrayToSort(ShapeCount + 1) = SlideShapes
@@ -1020,7 +1020,7 @@ Sub ArrangeShapes()
         
         For Each ShapeGroup In ShapeGroups
             
-            If (SlideShape.left + SlideShape.Width) >= ShapeGroup(1).left And SlideShape.left <= (ShapeGroup(1).left + ShapeGroup(1).Width) Then
+            If (GetRealLeft(SlideShape) + GetRealWidth(SlideShape)) >= GetRealLeft(ShapeGroup(1)) And GetRealLeft(SlideShape) <= (GetRealLeft(ShapeGroup(1)) + GetRealWidth(ShapeGroup(1))) Then
                 ShapeGroup.Add SlideShape
                 ShapeShapeGroupExists = True
                 Exit For
@@ -1081,7 +1081,7 @@ Sub ArrangeShapes()
         
         For Each ShapeGroup In ShapeGroups
             
-            If (SlideShape.Top + SlideShape.Height) >= ShapeGroup(1).Top And SlideShape.Top <= (ShapeGroup(1).Top + ShapeGroup(1).Height) Then
+            If (GetRealTop(SlideShape) + GetRealHeight(SlideShape)) >= GetRealTop(ShapeGroup(1)) And GetRealTop(SlideShape) <= (GetRealTop(ShapeGroup(1)) + GetRealHeight(ShapeGroup(1))) Then
                 ShapeGroup.Add SlideShape
                 ShapeShapeGroupExists = True
                 Exit For
