@@ -300,33 +300,36 @@ Sub ObjectsSwapPosition()
     Set MyDocument = Application.ActiveWindow
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    Dim Left1, Left2, Top1, Top2 As Single
+    Dim Left1 As Single
+    Dim Left2 As Single
+    Dim Top1 As Single
+    Dim Top2 As Single
     
     If ActiveWindow.Selection.ShapeRange.Count = 2 Then
         
-        Left1 = ActiveWindow.Selection.ShapeRange(1).left
-        Left2 = ActiveWindow.Selection.ShapeRange(2).left
-        Top1 = ActiveWindow.Selection.ShapeRange(1).Top
-        Top2 = ActiveWindow.Selection.ShapeRange(2).Top
+        Left1 = GetRealLeft(ActiveWindow.Selection.ShapeRange(1))
+        Left2 = GetRealLeft(ActiveWindow.Selection.ShapeRange(2))
+        Top1 = GetRealTop(ActiveWindow.Selection.ShapeRange(1))
+        Top2 = GetRealTop(ActiveWindow.Selection.ShapeRange(2))
         
-        ActiveWindow.Selection.ShapeRange(1).left = Left2
-        ActiveWindow.Selection.ShapeRange(2).left = Left1
-        ActiveWindow.Selection.ShapeRange(1).Top = Top2
-        ActiveWindow.Selection.ShapeRange(2).Top = Top1
+        SetRealLeft ActiveWindow.Selection.ShapeRange(1), Left2
+        SetRealLeft ActiveWindow.Selection.ShapeRange(2), Left1
+        SetRealTop ActiveWindow.Selection.ShapeRange(1), Top2
+        SetRealTop ActiveWindow.Selection.ShapeRange(2), Top1
         
     ElseIf MyDocument.Selection.HasChildShapeRange Then
         
         If MyDocument.Selection.ChildShapeRange.Count = 2 Then
             
-            Left1 = MyDocument.Selection.ChildShapeRange(1).left
-            Left2 = MyDocument.Selection.ChildShapeRange(2).left
-            Top1 = MyDocument.Selection.ChildShapeRange(1).Top
-            Top2 = MyDocument.Selection.ChildShapeRange(2).Top
+            Left1 = GetRealLeft(MyDocument.Selection.ChildShapeRange(1))
+            Left2 = GetRealLeft(MyDocument.Selection.ChildShapeRange(2))
+            Top1 = GetRealTop(MyDocument.Selection.ChildShapeRange(1))
+            Top2 = GetRealTop(MyDocument.Selection.ChildShapeRange(2))
             
-            MyDocument.Selection.ChildShapeRange(1).left = Left2
-            MyDocument.Selection.ChildShapeRange(2).left = Left1
-            MyDocument.Selection.ChildShapeRange(1).Top = Top2
-            MyDocument.Selection.ChildShapeRange(2).Top = Top1
+            SetRealLeft ActiveWindow.Selection.ChildShapeRange(1), Left2
+            SetRealLeft ActiveWindow.Selection.ChildShapeRange(2), Left1
+            SetRealTop ActiveWindow.Selection.ChildShapeRange(1), Top2
+            SetRealTop ActiveWindow.Selection.ChildShapeRange(2), Top1
             
         Else
             
