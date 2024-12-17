@@ -405,10 +405,10 @@ Sub QuicksortTopLeftToBottomRight(ShapeItems() As shape, left As Long, right As 
     
     Set PivotShape = ShapeItems((left + right) \ 2)
     Do
-        Do While (GetRealTop(ShapeItems(i)) < GetRealTop(PivotShape)) Or (GetRealTop(ShapeItems(i)) = GetRealTop(PivotShape) And GetRealLeft(sShapeItems(i)) < GetRealLeft(sPivotShape))
+        Do While (GetRealTop(ShapeItems(i)) < GetRealTop(PivotShape)) Or (GetRealTop(ShapeItems(i)) = GetRealTop(PivotShape) And GetRealLeft(ShapeItems(i)) < GetRealLeft(PivotShape))
             i = i + 1
         Loop
-        Do While (GetRealTop(ShapeItems(j)) > GetRealTop(PivotShape)) Or (GetRealTop(ShapeItems(j)) = GetRealTop(PivotShape) And GetRealLeft(sShapeItems(j)) > GetRealLeft(sPivotShape))
+        Do While (GetRealTop(ShapeItems(j)) > GetRealTop(PivotShape)) Or (GetRealTop(ShapeItems(j)) = GetRealTop(PivotShape) And GetRealLeft(ShapeItems(j)) > GetRealLeft(PivotShape))
             j = j - 1
         Loop
         If i <= j Then
@@ -876,6 +876,7 @@ End Sub
 Sub ArrangeShapes()
     Dim SlideShape         As shape
     Dim ShapeGroups      As Collection
+    Dim FirstShape As Shape
     Set ShapeGroups = New Collection
     Dim SelectedShapeRange As ShapeRange
        
@@ -902,7 +903,10 @@ Sub ArrangeShapes()
         
         For Each ShapeGroup In ShapeGroups
             
-            If (GetRealLeft(SlideShape) + GetRealWidth(SlideShape)) >= GetRealLeft(ShapeGroup(1)) And GetRealLeft(SlideShape) <= (GetRealLeft(ShapeGroup(1)) + GetRealWidth(ShapeGroup(1))) Then
+            Set FirstShape = ShapeGroup(1)
+
+            If (GetRealLeft(SlideShape) + GetRealWidth(SlideShape)) >= GetRealLeft(FirstShape) _
+            And GetRealLeft(SlideShape) <= (GetRealLeft(FirstShape) + GetRealWidth(FirstShape)) Then
                 ShapeGroup.Add SlideShape
                 ShapeShapeGroupExists = True
                 Exit For
@@ -963,7 +967,10 @@ Sub ArrangeShapes()
         
         For Each ShapeGroup In ShapeGroups
             
-            If (GetRealTop(SlideShape) + GetRealHeight(SlideShape)) >= GetRealTop(ShapeGroup(1)) And GetRealTop(SlideShape) <= (GetRealTop(ShapeGroup(1)) + GetRealHeight(ShapeGroup(1))) Then
+            Set FirstShape = ShapeGroup(1)
+
+            If (GetRealTop(SlideShape) + GetRealHeight(SlideShape)) >= GetRealTop(FirstShape) _
+            And GetRealTop(SlideShape) <= (GetRealTop(FirstShape) + GetRealHeight(FirstShape)) Then
                 ShapeGroup.Add SlideShape
                 ShapeShapeGroupExists = True
                 Exit For
