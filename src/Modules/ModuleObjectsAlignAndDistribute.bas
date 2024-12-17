@@ -29,167 +29,123 @@ Sub ObjectsStretchTop()
     
     Dim ShapeCount  As Long
     Dim SlideShape() As shape
-    
+    Dim BaseTop As Single
+
     If MyDocument.Selection.HasChildShapeRange Then
-        
-        ReDim SlideShape(1 To MyDocument.Selection.ChildShapeRange.Count)
-        
-        For ShapeCount = 1 To MyDocument.Selection.ChildShapeRange.Count
-            Set SlideShape(ShapeCount) = MyDocument.Selection.ChildShapeRange(ShapeCount)
-        Next ShapeCount
-        
-        ObjectsSortByTopPosition SlideShape
-        
-        For ShapeCount = 2 To UBound(SlideShape)
-            SlideShape(ShapeCount).Height = SlideShape(ShapeCount).Height + (SlideShape(ShapeCount).Top - SlideShape(1).Top)
-            SlideShape(ShapeCount).Top = SlideShape(1).Top
-        Next ShapeCount
-        
+        Set ShapeRange = MyDocument.Selection.ChildShapeRange
     Else
-        
-        ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.Count)
-        
-        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
-            Set SlideShape(ShapeCount) = MyDocument.Selection.ShapeRange(ShapeCount)
-        Next ShapeCount
-        
-        ObjectsSortByTopPosition SlideShape
-        
-        For ShapeCount = 2 To UBound(SlideShape)
-            SlideShape(ShapeCount).Height = SlideShape(ShapeCount).Height + (SlideShape(ShapeCount).Top - SlideShape(1).Top)
-            SlideShape(ShapeCount).Top = SlideShape(1).Top
-        Next ShapeCount
-        
+        Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
+
+    ReDim SlideShape(1 To ShapeRange.Count)
+
+    For ShapeCount = 1 To ShapeRange.Count
+        Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByTopPosition SlideShape
+
+    BaseTop = GetRealTop(SlideShape(1))
+
+    For ShapeCount = 2 To UBound(SlideShape)
+        SetRealHeight SlideShape(ShapeCount), GetRealHeight(SlideShape(ShapeCount)) + (getRealTop(SlideShape(ShapeCount)) - BaseTop)
+        SetRealTop SlideShape(ShapeCount), BaseTop
+    Next ShapeCount
     
 End Sub
 
 Sub ObjectsStretchLeft()
-    
+
     Set MyDocument = Application.ActiveWindow
-    
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
-    
-    Dim ShapeCount  As Long
-    Dim SlideShape() As shape
-    
+
+    Dim ShapeCount As Long
+    Dim SlideShape() As Shape
+    Dim BaseLeft As Single
+
     If MyDocument.Selection.HasChildShapeRange Then
-        
-        ReDim SlideShape(1 To MyDocument.Selection.ChildShapeRange.Count)
-        
-        For ShapeCount = 1 To MyDocument.Selection.ChildShapeRange.Count
-            Set SlideShape(ShapeCount) = MyDocument.Selection.ChildShapeRange(ShapeCount)
-        Next ShapeCount
-        
-        ObjectsSortByLeftPosition SlideShape
-        
-        For ShapeCount = 2 To UBound(SlideShape)
-            SlideShape(ShapeCount).Width = SlideShape(ShapeCount).Width + (SlideShape(ShapeCount).left - SlideShape(1).left)
-            SlideShape(ShapeCount).left = SlideShape(1).left
-        Next ShapeCount
-        
+        Set shapeRange = MyDocument.Selection.ChildShapeRange
     Else
-        
-        ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.Count)
-        
-        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
-            Set SlideShape(ShapeCount) = MyDocument.Selection.ShapeRange(ShapeCount)
-        Next ShapeCount
-        
-        ObjectsSortByLeftPosition SlideShape
-        
-        For ShapeCount = 2 To UBound(SlideShape)
-            SlideShape(ShapeCount).Width = SlideShape(ShapeCount).Width + (SlideShape(ShapeCount).left - SlideShape(1).left)
-            SlideShape(ShapeCount).left = SlideShape(1).left
-        Next ShapeCount
-        
+        Set shapeRange = MyDocument.Selection.ShapeRange
     End If
-    
+
+    ReDim SlideShape(1 To shapeRange.Count)
+
+    For ShapeCount = 1 To shapeRange.Count
+        Set SlideShape(ShapeCount) = shapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByLeftPosition SlideShape
+
+    BaseLeft = GetRealLeft(SlideShape(1))
+
+    For ShapeCount = 2 To UBound(SlideShape)
+        SetRealWidth SlideShape(ShapeCount), GetRealWidth(SlideShape(ShapeCount)) + (GetRealLeft(SlideShape(ShapeCount)) - BaseLeft)
+        SetRealLeft SlideShape(ShapeCount), BaseLeft
+    Next ShapeCount
 End Sub
 
 Sub ObjectsStretchBottom()
-    
+
     Set MyDocument = Application.ActiveWindow
-    
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
-    
-    Dim ShapeCount  As Long
-    Dim SlideShape() As shape
-    
+
+    Dim ShapeCount As Long
+    Dim SlideShape() As Shape
+    Dim BaseBottom As Single
+
     If MyDocument.Selection.HasChildShapeRange Then
-        
-        ReDim SlideShape(1 To MyDocument.Selection.ChildShapeRange.Count)
-        
-        For ShapeCount = 1 To MyDocument.Selection.ChildShapeRange.Count
-            Set SlideShape(ShapeCount) = MyDocument.Selection.ChildShapeRange(ShapeCount)
-        Next ShapeCount
-        
-        ObjectsSortByBottomPosition SlideShape
-        
-        For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
-            SlideShape(ShapeCount).Height = SlideShape(ShapeCount).Height + ((SlideShape(UBound(SlideShape)).Top + SlideShape(UBound(SlideShape)).Height) - SlideShape(ShapeCount).Top - SlideShape(ShapeCount).Height)
-            
-        Next ShapeCount
-        
+        Set shapeRange = MyDocument.Selection.ChildShapeRange
     Else
-        
-        ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.Count)
-        
-        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
-            Set SlideShape(ShapeCount) = MyDocument.Selection.ShapeRange(ShapeCount)
-        Next ShapeCount
-        
-        ObjectsSortByBottomPosition SlideShape
-        
-        For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
-            SlideShape(ShapeCount).Height = SlideShape(ShapeCount).Height + ((SlideShape(UBound(SlideShape)).Top + SlideShape(UBound(SlideShape)).Height) - SlideShape(ShapeCount).Top - SlideShape(ShapeCount).Height)
-            
-        Next ShapeCount
-        
+        Set shapeRange = MyDocument.Selection.ShapeRange
     End If
-    
+
+    ReDim SlideShape(1 To shapeRange.Count)
+
+    For ShapeCount = 1 To shapeRange.Count
+        Set SlideShape(ShapeCount) = shapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByBottomPosition SlideShape
+
+    BaseBottom = GetRealTop(SlideShape(UBound(SlideShape))) + GetRealHeight(SlideShape(UBound(SlideShape)))
+
+    For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
+        SetRealHeight SlideShape(ShapeCount), GetRealHeight(SlideShape(ShapeCount)) + (BaseBottom - GetRealTop(SlideShape(ShapeCount)) - GetRealHeight(SlideShape(ShapeCount)))
+    Next ShapeCount
 End Sub
 
 Sub ObjectsStretchRight()
-    
+
     Set MyDocument = Application.ActiveWindow
-    
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
-    
-    Dim ShapeCount  As Long
-    Dim SlideShape() As shape
-    
+
+    Dim ShapeCount As Long
+    Dim SlideShape() As Shape
+    Dim BaseRight As Single
+
     If MyDocument.Selection.HasChildShapeRange Then
-        
-        ReDim SlideShape(1 To MyDocument.Selection.ChildShapeRange.Count)
-        
-        For ShapeCount = 1 To MyDocument.Selection.ChildShapeRange.Count
-            Set SlideShape(ShapeCount) = MyDocument.Selection.ChildShapeRange(ShapeCount)
-        Next ShapeCount
-        
-        ObjectsSortByRightPosition SlideShape
-        
-        For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
-            SlideShape(ShapeCount).Width = SlideShape(ShapeCount).Width + ((SlideShape(UBound(SlideShape)).left + SlideShape(UBound(SlideShape)).Width) - SlideShape(ShapeCount).left - SlideShape(ShapeCount).Width)
-            
-        Next ShapeCount
-        
+        Set shapeRange = MyDocument.Selection.ChildShapeRange
     Else
-        
-        ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.Count)
-        
-        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
-            Set SlideShape(ShapeCount) = MyDocument.Selection.ShapeRange(ShapeCount)
-        Next ShapeCount
-        
-        ObjectsSortByRightPosition SlideShape
-        
-        For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
-            SlideShape(ShapeCount).Width = SlideShape(ShapeCount).Width + ((SlideShape(UBound(SlideShape)).left + SlideShape(UBound(SlideShape)).Width) - SlideShape(ShapeCount).left - SlideShape(ShapeCount).Width)
-            
-        Next ShapeCount
-        
+        Set shapeRange = MyDocument.Selection.ShapeRange
     End If
+
+    ReDim SlideShape(1 To shapeRange.Count)
+
+    For ShapeCount = 1 To shapeRange.Count
+        Set SlideShape(ShapeCount) = shapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByRightPosition SlideShape
+
+    BaseRight = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape)))
+
+    For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
+        SetRealWidth SlideShape(ShapeCount), GetRealWidth(SlideShape(ShapeCount)) + (BaseRight - GetRealLeft(SlideShape(ShapeCount)) - GetRealWidth(SlideShape(ShapeCount)))
+    Next ShapeCount
 End Sub
 
 Sub ObjectsRemoveSpacingHorizontal()
@@ -434,7 +390,7 @@ Sub ObjectsDecreaseSpacingVertical()
     
 End Sub
 
-Sub ObjectsSortByLeftPosition(ArrayToSort As Variant)
+Sub ObjectsSortByLeftPosition(ArrayToSort() As Shape)
     
     Set MyDocument = Application.ActiveWindow
     
@@ -459,7 +415,7 @@ Sub ObjectsSortByLeftPosition(ArrayToSort As Variant)
     Set SlideShapes = Nothing
 End Sub
 
-Sub ObjectsSortByRightPosition(ArrayToSort As Variant)
+Sub ObjectsSortByRightPosition(ArrayToSort() As Shape)
     
     Set MyDocument = Application.ActiveWindow
     
@@ -544,7 +500,7 @@ Sub QuicksortTopLeftToBottomRight(ShapeItems() As shape, left As Long, right As 
     
 End Sub
 
-Sub ObjectsSortByTopPosition(ArrayToSort As Variant)
+Sub ObjectsSortByTopPosition(ArrayToSort() As Shape)
     
     Set MyDocument = Application.ActiveWindow
     
@@ -569,7 +525,7 @@ Sub ObjectsSortByTopPosition(ArrayToSort As Variant)
     Set SlideShapes = Nothing
 End Sub
 
-Sub ObjectsSortByBottomPosition(ArrayToSort As Variant)
+Sub ObjectsSortByBottomPosition(ArrayToSort() As Shape)
     
     Set MyDocument = Application.ActiveWindow
     
