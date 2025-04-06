@@ -2,7 +2,6 @@ Attribute VB_Name = "ModuleObjects"
 'MIT License
 
 'Copyright (c) 2021 iappyx
-'Module contributed by o485 (https://github.com/o485)
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +21,15 @@ Attribute VB_Name = "ModuleObjects"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+'Code contribution by o485 (https://github.com/o485):
+'- GetRealTop
+'- GetRealLeft
+'- GetRealWidth
+'- GetRealHeight
+'- SetRealTop
+'- SetRealLeft
+'- SetRealWidth
+
 Function GetRealTop(SlideShape As shape) As Single
     Dim rotation    As Double
     Dim radians     As Double
@@ -30,7 +38,6 @@ Function GetRealTop(SlideShape As shape) As Single
     rotation = SlideShape.rotation Mod 360
     radians = rotation * (3.14159265358979 / 180)
     centerY = SlideShape.Top + SlideShape.Height / 2
-    
     Select Case rotation
         Case 0, 180
             GetRealTop = SlideShape.Top
@@ -98,7 +105,7 @@ Sub SetRealTop(SlideShape As shape, newRealTop As Single)
     Dim currentRealTop As Single
     Dim offset      As Single
     
-    currentRealTop = GetRealTop(sh)
+    currentRealTop = GetRealTop(SlideShape)
     offset = newRealTop - currentRealTop
     
     SlideShape.Top = SlideShape.Top + offset
@@ -108,7 +115,7 @@ Sub SetRealLeft(SlideShape As shape, newRealLeft As Single)
     Dim currentRealLeft As Single
     Dim offset      As Single
     
-    currentRealLeft = GetRealLeft(sh)
+    currentRealLeft = GetRealLeft(SlideShape)
     offset = newRealLeft - currentRealLeft
     
     SlideShape.left = SlideShape.left + offset

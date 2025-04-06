@@ -565,8 +565,11 @@ Sub ObjectsAlignTops()
         Top1 = GetRealTop(MyDocument.Selection.ShapeRange(1))
         Top2 = GetRealTop(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count))
         
+        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
+            
+        MyDocument.Selection.ShapeRange.Align msoAlignTops, msoFalse
         
-        If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
+        ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
             For Each sh In MyDocument.Selection.ShapeRange
                 SetRealTop sh, Top1
             Next sh
