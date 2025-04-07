@@ -153,11 +153,15 @@ End Sub
 
 Sub CleanUpHideAndMoveSelectedSlides()
     NumberOfSlides = ActivePresentation.Slides.Count
-
+    
+    CurrentSlide = ActiveWindow.Selection.SlideRange(1).SlideIndex
+            
     For i = ActiveWindow.Selection.SlideRange.Count To 1 Step -1
         ActivePresentation.Slides(ActiveWindow.Selection.SlideRange(i).SlideIndex).MoveTo (NumberOfSlides)
         ActivePresentation.Slides(NumberOfSlides).SlideShowTransition.Hidden = msoTrue
         NumberOfSlides = NumberOfSlides - 1
     Next i
     
+    ActiveWindow.View.GotoSlide CurrentSlide
+            
 End Sub

@@ -148,6 +148,133 @@ Sub ObjectsStretchRight()
     Next ShapeCount
 End Sub
 
+Sub ObjectsStretchTopShapeBottom()
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    Dim ShapeCount  As Long
+    Dim SlideShape() As shape
+    Dim BaseTop As Single
+
+    If MyDocument.Selection.HasChildShapeRange Then
+        Set ShapeRange = MyDocument.Selection.ChildShapeRange
+    Else
+        Set ShapeRange = MyDocument.Selection.ShapeRange
+    End If
+
+    ReDim SlideShape(1 To ShapeRange.Count)
+
+    For ShapeCount = 1 To ShapeRange.Count
+        Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByBottomPosition SlideShape
+
+    BaseTop = GetRealTop(SlideShape(1)) + GetRealHeight(SlideShape(1))
+
+    For ShapeCount = 2 To UBound(SlideShape)
+        SetRealHeight SlideShape(ShapeCount), GetRealHeight(SlideShape(ShapeCount)) + (GetRealTop(SlideShape(ShapeCount)) - BaseTop)
+        SetRealTop SlideShape(ShapeCount), BaseTop
+    Next ShapeCount
+    
+End Sub
+
+Sub ObjectsStretchLeftShapeRight()
+
+    Set MyDocument = Application.ActiveWindow
+
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+
+    Dim ShapeCount As Long
+    Dim SlideShape() As shape
+    Dim BaseLeft As Single
+
+    If MyDocument.Selection.HasChildShapeRange Then
+        Set ShapeRange = MyDocument.Selection.ChildShapeRange
+    Else
+        Set ShapeRange = MyDocument.Selection.ShapeRange
+    End If
+
+    ReDim SlideShape(1 To ShapeRange.Count)
+
+    For ShapeCount = 1 To ShapeRange.Count
+        Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByRightPosition SlideShape
+
+    BaseLeft = GetRealLeft(SlideShape(1)) + GetRealWidth(SlideShape(1))
+
+    For ShapeCount = 2 To UBound(SlideShape)
+        SetRealWidth SlideShape(ShapeCount), GetRealWidth(SlideShape(ShapeCount)) + (GetRealLeft(SlideShape(ShapeCount)) - BaseLeft)
+        SetRealLeft SlideShape(ShapeCount), BaseLeft
+    Next ShapeCount
+End Sub
+
+Sub ObjectsStretchBottomShapeTop()
+
+    Set MyDocument = Application.ActiveWindow
+
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+
+    Dim ShapeCount As Long
+    Dim SlideShape() As shape
+    Dim BaseBottom As Single
+
+    If MyDocument.Selection.HasChildShapeRange Then
+        Set ShapeRange = MyDocument.Selection.ChildShapeRange
+    Else
+        Set ShapeRange = MyDocument.Selection.ShapeRange
+    End If
+
+    ReDim SlideShape(1 To ShapeRange.Count)
+
+    For ShapeCount = 1 To ShapeRange.Count
+        Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByTopPosition SlideShape
+
+    BaseBottom = GetRealTop(SlideShape(UBound(SlideShape)))
+
+    For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
+        SetRealHeight SlideShape(ShapeCount), GetRealHeight(SlideShape(ShapeCount)) + (BaseBottom - GetRealTop(SlideShape(ShapeCount)) - GetRealHeight(SlideShape(ShapeCount)))
+    Next ShapeCount
+End Sub
+
+Sub ObjectsStretchRightShapeLeft()
+
+    Set MyDocument = Application.ActiveWindow
+
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+
+    Dim ShapeCount As Long
+    Dim SlideShape() As shape
+    Dim BaseRight As Single
+
+    If MyDocument.Selection.HasChildShapeRange Then
+        Set ShapeRange = MyDocument.Selection.ChildShapeRange
+    Else
+        Set ShapeRange = MyDocument.Selection.ShapeRange
+    End If
+
+    ReDim SlideShape(1 To ShapeRange.Count)
+
+    For ShapeCount = 1 To ShapeRange.Count
+        Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByLeftPosition SlideShape
+
+    BaseRight = GetRealLeft(SlideShape(UBound(SlideShape)))
+
+    For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
+        SetRealWidth SlideShape(ShapeCount), GetRealWidth(SlideShape(ShapeCount)) + (BaseRight - GetRealLeft(SlideShape(ShapeCount)) - GetRealWidth(SlideShape(ShapeCount)))
+    Next ShapeCount
+End Sub
+
 Sub ObjectsRemoveSpacingHorizontal()
     
     Set MyDocument = Application.ActiveWindow

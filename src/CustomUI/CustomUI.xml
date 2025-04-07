@@ -249,6 +249,11 @@
                   <button id="ObjectsStretchRight" label="Stretch shapes to right" onAction="ObjectsStretchRight" />
                   <button id="ObjectsStretchTop" label="Stretch shapes to top" onAction="ObjectsStretchTop" />
                   <button id="ObjectsStretchBottom" label="Stretch shapes to bottom" onAction="ObjectsStretchBottom" />
+                  <menuSeparator id="separatorObjectsStretchMenu" />
+                  <button id="ObjectsStretchLeftShapeRight" label="Stretch shapes to the right edge of the leftmost shape" onAction="ObjectsStretchLeftShapeRight" />
+                  <button id="ObjectsStretchRightShapeLeft" label="Stretch shapes to the left edge of the rightmost shape" onAction="ObjectsStretchRightShapeLeft" />
+                  <button id="ObjectsStretchTopShapeBottom" label="Stretch shapes to the bottom edge of the topmost shape" onAction="ObjectsStretchTopShapeBottom" />
+                  <button id="ObjectsStretchBottomShapeTop" label="Stretch shapes to the top edge of the bottommost shape" onAction="ObjectsStretchBottomShapeTop" />
                </menu>
             </group>
             <group id="TableGroup" label="Tables" imageMso="TableInsert" tag="P" getVisible="InstrumentaGetVisible">
