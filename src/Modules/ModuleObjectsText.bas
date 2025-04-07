@@ -644,6 +644,38 @@ Sub ObjectsRemoveTextLoop(SlideShape)
     
 End Sub
 
+Sub ObjectsRemoveHyperlinks()
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
+        If MyDocument.Selection.HasChildShapeRange Then
+            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+                ObjectsRemoveHyperlinksLoop MyDocument.Selection.ChildShapeRange(i)
+            Next i
+        Else
+            For i = 1 To MyDocument.Selection.ShapeRange.Count
+                ObjectsRemoveHyperlinksLoop MyDocument.Selection.ShapeRange(i)
+            Next i
+        End If
+    End If
+End Sub
+
+Sub ObjectsRemoveHyperlinksLoop(SlideShape)
+    If SlideShape.Type = msoGroup Then
+        Set SlideShapeGroup = SlideShape.GroupItems
+        
+        For Each SlideShapeChild In SlideShapeGroup
+            ObjectsRemoveHyperlinksLoop SlideShapeChild
+        Next
+    Else
+        If SlideShape.HasTextFrame Then
+                SlideShape.TextFrame.TextRange.ActionSettings(ppMouseClick).Hyperlink.Delete
+        End If
+    End If
+End Sub
+
 Sub ObjectsSwapTextNoFormatting()
     
     Dim text1, text2 As String

@@ -382,41 +382,72 @@ Sub ObjectsSwapPositionCentered()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     Dim Left1, Left2, Top1, Top2, Width1, Width2, Height1, Height2 As Single
+    Dim ZOrder1     As Single
+    Dim ZOrder2     As Single
     
     If ActiveWindow.Selection.ShapeRange.Count = 2 Then
         
-        Left1 = ActiveWindow.Selection.ShapeRange(1).left
-        Left2 = ActiveWindow.Selection.ShapeRange(2).left
-        Top1 = ActiveWindow.Selection.ShapeRange(1).Top
-        Top2 = ActiveWindow.Selection.ShapeRange(2).Top
-        Width1 = ActiveWindow.Selection.ShapeRange(1).Width
-        Width2 = ActiveWindow.Selection.ShapeRange(2).Width
-        Height1 = ActiveWindow.Selection.ShapeRange(1).Height
-        Height2 = ActiveWindow.Selection.ShapeRange(2).Height
+        Left1 = GetRealLeft(ActiveWindow.Selection.ShapeRange(1))
+        Left2 = GetRealLeft(ActiveWindow.Selection.ShapeRange(2))
+        Top1 = GetRealTop(ActiveWindow.Selection.ShapeRange(1))
+        Top2 = GetRealTop(ActiveWindow.Selection.ShapeRange(2))
+        Width1 = GetRealWidth(ActiveWindow.Selection.ShapeRange(1))
+        Width2 = GetRealWidth(ActiveWindow.Selection.ShapeRange(2))
+        Height1 = GetRealHeight(ActiveWindow.Selection.ShapeRange(1))
+        Height2 = GetRealHeight(ActiveWindow.Selection.ShapeRange(2))
         
-        ActiveWindow.Selection.ShapeRange(1).left = Left2 + (Width2 - Width1) / 2
-        ActiveWindow.Selection.ShapeRange(2).left = Left1 + (Width1 - Width2) / 2
-        ActiveWindow.Selection.ShapeRange(1).Top = Top2 + (Height2 - Height1) / 2
-        ActiveWindow.Selection.ShapeRange(2).Top = Top1 + (Height1 - Height2) / 2
+        SetRealLeft ActiveWindow.Selection.ShapeRange(1), (Left2 + (Width2 - Width1) / 2)
+        SetRealLeft ActiveWindow.Selection.ShapeRange(2), (Left1 + (Width1 - Width2) / 2)
+        SetRealTop ActiveWindow.Selection.ShapeRange(1), (Top2 + (Height2 - Height1) / 2)
+        SetRealTop ActiveWindow.Selection.ShapeRange(2), (Top1 + (Height1 - Height2) / 2)
+
+        ZOrder1 = ActiveWindow.Selection.ShapeRange(1).ZOrderPosition
+        ZOrder2 = ActiveWindow.Selection.ShapeRange(2).ZOrderPosition
+        
+        If ZOrder1 < ZOrder2 Then
+            For i = 1 To (ZOrder2 - ZOrder1)
+                ActiveWindow.Selection.ShapeRange(2).ZOrder msoSendBackward
+                ActiveWindow.Selection.ShapeRange(1).ZOrder msoBringForward
+            Next i
+        Else
+            For i = 1 To (ZOrder1 - ZOrder2)
+                ActiveWindow.Selection.ShapeRange(1).ZOrder msoSendBackward
+                ActiveWindow.Selection.ShapeRange(2).ZOrder msoBringForward
+            Next i
+        End If
         
     ElseIf MyDocument.Selection.HasChildShapeRange Then
         
         If MyDocument.Selection.ChildShapeRange.Count = 2 Then
             
-            Left1 = MyDocument.Selection.ChildShapeRange(1).left
-            Left2 = MyDocument.Selection.ChildShapeRange(2).left
-            Top1 = MyDocument.Selection.ChildShapeRange(1).Top
-            Top2 = MyDocument.Selection.ChildShapeRange(2).Top
-            
-            Width1 = ActiveWindow.Selection.ChildShapeRange(1).Width
-            Width2 = ActiveWindow.Selection.ChildShapeRange(2).Width
-            Height1 = ActiveWindow.Selection.ChildShapeRange(1).Height
-            Height2 = ActiveWindow.Selection.ChildShapeRange(2).Height
-            
-            ActiveWindow.Selection.ChildShapeRange(1).left = Left2 + (Width2 - Width1) / 2
-            ActiveWindow.Selection.ChildShapeRange(2).left = Left1 + (Width1 - Width2) / 2
-            ActiveWindow.Selection.ChildShapeRange(1).Top = Top2 + (Height2 - Height1) / 2
-            ActiveWindow.Selection.ChildShapeRange(2).Top = Top1 + (Height1 - Height2) / 2
+        Left1 = GetRealLeft(ActiveWindow.Selection.ChildShapeRange(1))
+        Left2 = GetRealLeft(ActiveWindow.Selection.ChildShapeRange(2))
+        Top1 = GetRealTop(ActiveWindow.Selection.ChildShapeRange(1))
+        Top2 = GetRealTop(ActiveWindow.Selection.ChildShapeRange(2))
+        Width1 = GetRealWidth(ActiveWindow.Selection.ChildShapeRange(1))
+        Width2 = GetRealWidth(ActiveWindow.Selection.ChildShapeRange(2))
+        Height1 = GetRealHeight(ActiveWindow.Selection.ChildShapeRange(1))
+        Height2 = GetRealHeight(ActiveWindow.Selection.ChildShapeRange(2))
+        
+        SetRealLeft ActiveWindow.Selection.ChildShapeRange(1), (Left2 + (Width2 - Width1) / 2)
+        SetRealLeft ActiveWindow.Selection.ChildShapeRange(2), (Left1 + (Width1 - Width2) / 2)
+        SetRealTop ActiveWindow.Selection.ChildShapeRange(1), (Top2 + (Height2 - Height1) / 2)
+        SetRealTop ActiveWindow.Selection.ChildShapeRange(2), (Top1 + (Height1 - Height2) / 2)
+
+        ZOrder1 = ActiveWindow.Selection.ChildShapeRange(1).ZOrderPosition
+        ZOrder2 = ActiveWindow.Selection.ChildShapeRange(2).ZOrderPosition
+        
+        If ZOrder1 < ZOrder2 Then
+            For i = 1 To (ZOrder2 - ZOrder1)
+                ActiveWindow.Selection.ChildShapeRange(2).ZOrder msoSendBackward
+                ActiveWindow.Selection.ChildShapeRange(1).ZOrder msoBringForward
+            Next i
+        Else
+            For i = 1 To (ZOrder1 - ZOrder2)
+                ActiveWindow.Selection.ChildShapeRange(1).ZOrder msoSendBackward
+                ActiveWindow.Selection.ChildShapeRange(2).ZOrder msoBringForward
+            Next i
+        End If
             
         Else
             

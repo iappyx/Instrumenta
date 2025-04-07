@@ -63,6 +63,7 @@
                   <menu id="SpecialCharacterMenu" label="Special characters" imageMso="SymbolInsert" showLabel="false" >
                      <button id="TextInsertEuro" label="Euro" onAction="TextInsertEuro" />
                      <button id="TextInsertCopyright" label="Copyright" onAction="TextInsertCopyright" />
+                     <button id="TextInsertNoBreakSpace" label="' ' (NonBreakingSpace)" onAction="TextInsertNoBreakSpace" />
                      <button idMso="SymbolInsert" showLabel="false" />
                   </menu>
                </buttonGroup>
@@ -87,8 +88,13 @@
                <separator id="separator6" />
                <toggleButton id="ToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" />
                <button id="ObjectsTextSplitByParagraphButton" label="Split (by paragraphs) into multiple shapes" imageMso="PageBreakInsertOrRemove" showLabel="false" onAction="ObjectsTextSplitByParagraph" />
-               <button id="ObjectsTextMergeButton" label="Merge text of all shapes in first selected shape" imageMso="SourceControlAddObjects" showLabel="false" onAction="ObjectsTextMerge" />             
-               <button id="RemoveTextButton" label="Remove text" imageMso="ReviewDeleteMarkup" showLabel="false" onAction="ObjectsRemoveText" />
+               <button id="ObjectsTextMergeButton" label="Merge text of all shapes in first selected shape" imageMso="SourceControlAddObjects" showLabel="false" onAction="ObjectsTextMerge" />    
+               <splitButton id="RemoveTextSplitButton" size="normal" showLabel="false" >
+                <button id="RemoveTextButton" label="Remove text" imageMso="ReviewDeleteMarkup" showLabel="false" onAction="ObjectsRemoveText" />
+               <menu id="RemoveTextMenu" itemSize="normal">
+               <button id="RemoveHyperlinksButton" label="Remove hyperlinks" imageMso="ReviewDeleteMarkup" showLabel="true" onAction="ObjectsRemoveHyperlinks" />
+               </menu>
+               </splitButton>
                <button id="SwapTextButton" label="Swap text (no formatting)" imageMso="Copy" showLabel="false" onAction="ObjectsSwapTextNoFormatting" />
                <button id="SwapTextButton2" label="Swap text (with formatting)" imageMso="GroupCompare" showLabel="false" onAction="ObjectsSwapText" />
                <button idMso="FontsReplaceFonts" showLabel="false" />
@@ -467,6 +473,8 @@
                <button idMso="ReplaceDialog" showLabel="false" />
                <button idMso="AdvancedFileProperties" imageMso="ChooseForm" showLabel="false" />
                <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false" >
+                  <button id="cleaning0" label="Move to end and hide selected slides" imageMso="Clear" onAction="CleanUpHideAndMoveSelectedSlides" />
+                  <menuSeparator id="separatorCleaningRemove" />
                   <button id="cleaning1" label="Remove animations from all slides" imageMso="Clear" onAction="CleanUpRemoveAnimationsFromAllSlides" />
                   <button id="cleaning2" label="Remove entry transitions from all slides" imageMso="Clear" onAction="CleanUpRemoveSlideShowTransitionsFromAllSlides" />
                   <button id="cleaning3" label="Remove speaker notes from all slides" imageMso="Clear" onAction="CleanUpRemoveSpeakerNotesFromAllSlides" />
