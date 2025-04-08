@@ -23,23 +23,55 @@ Attribute VB_Name = "ModuleAnonymize"
 
 Sub AnonymizeWithLoremIpsum()
     
-    ProgressForm.Show
-    
-    For Each PresentationSlide In ActivePresentation.Slides
-    
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+    Select Case CallToSlideScopesForm()
         
-        For Each SlideShape In PresentationSlide.Shapes
+        Case "cancel"
             
-         AnonymizeShapeWithLoremIpsum SlideShape
+        Case "selected"
             
-        Next SlideShape
-        
-    Next PresentationSlide
-    
-    ProgressForm.Hide
-    Unload ProgressForm
-    
+            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.Count
+            ProgressForm.Show
+            
+            If TotalSelectedSlides > 0 Then
+                SlideIndex = 0
+                
+                For Each PresentationSlide In ActiveWindow.Selection.SlideRange
+                    SlideIndex = SlideIndex + 1
+                    SetProgress (SlideIndex / TotalSelectedSlides * 100)
+                    
+                    For Each SlideShape In PresentationSlide.Shapes
+                    
+                        AnonymizeShapeWithLoremIpsum SlideShape
+                    
+                    Next SlideShape
+                    
+                Next PresentationSlide
+                
+            End If
+            
+            ProgressForm.Hide
+            Unload ProgressForm
+            
+        Case "all"
+            
+            ProgressForm.Show
+            
+            For Each PresentationSlide In ActivePresentation.Slides
+                
+                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+                
+                For Each SlideShape In PresentationSlide.Shapes
+                    
+                    AnonymizeShapeWithLoremIpsum SlideShape
+                    
+                Next SlideShape
+                
+            Next PresentationSlide
+            
+            ProgressForm.Hide
+            Unload ProgressForm
+            
+    End Select
     
 End Sub
 

@@ -479,17 +479,18 @@
                <button idMso="AdvancedFileProperties" imageMso="ChooseForm" showLabel="false" />
                <menu id="CleaningMenu" label="Cleaning tools" imageMso="ClearMenu" showLabel="false" >
                   <button id="cleaning0" label="Move to end and hide selected slides" imageMso="Clear" onAction="CleanUpHideAndMoveSelectedSlides" />
+                  <button id="cleaning10" label="Add page numbers to all/selected slides (except the first)" imageMso="Clear" onAction="CleanUpAddSlideNumbers" />
                   <menuSeparator id="separatorCleaningRemove" />
-                  <button id="cleaning1" label="Remove animations from all slides" imageMso="Clear" onAction="CleanUpRemoveAnimationsFromAllSlides" />
-                  <button id="cleaning2" label="Remove entry transitions from all slides" imageMso="Clear" onAction="CleanUpRemoveSlideShowTransitionsFromAllSlides" />
-                  <button id="cleaning3" label="Remove speaker notes from all slides" imageMso="Clear" onAction="CleanUpRemoveSpeakerNotesFromAllSlides" />
-                  <button id="cleaning4" label="Remove comments from all slides" imageMso="Clear" onAction="CleanUpRemoveCommentsFromAllSlides" />
-                  <button id="cleaning5" label="Remove unused master slides" imageMso="Clear" onAction="CleanUpRemoveUnusedMasterSlides" />
-                  <button id="cleaning6" label="Remove hidden slides" imageMso="Clear" onAction="CleanUpRemoveHiddenSlides" />                  
+                  <button id="cleaning1" label="Remove animations from all/selected slides" imageMso="Clear" onAction="CleanUpRemoveAnimationsFromAllSlides" />
+                  <button id="cleaning2" label="Remove entry transitions from all/selected slides" imageMso="Clear" onAction="CleanUpRemoveSlideShowTransitionsFromAllSlides" />
+                  <button id="cleaning3" label="Remove speaker notes from all/selected slides" imageMso="Clear" onAction="CleanUpRemoveSpeakerNotesFromAllSlides" />
+                  <button id="cleaning4" label="Remove comments from all/selected slides" imageMso="Clear" onAction="CleanUpRemoveCommentsFromAllSlides" />
+                  <button id="cleaning5" label="Remove all unused master slides" imageMso="Clear" onAction="CleanUpRemoveUnusedMasterSlides" />
+                  <button id="cleaning6" label="Remove all hidden slides" imageMso="Clear" onAction="CleanUpRemoveHiddenSlides" />                  
                   <menuSeparator id="separatorConvertAnonymize" />
-                  <button id="cleaning7" label="Convert slides to pictures (readonly)" imageMso="Clear" onAction="ConvertSlidesToPictures" />
-                  <button id="cleaning8" label="Watermark and then convert slides to pictures (readonly)" imageMso="WatermarkCustomDialog" onAction="InsertWatermarkAndConvertSlidesToPictures" />
-                  <button id="cleaning9" label="Anonymize slides with Lorem Ipsum" imageMso="Clear" onAction="AnonymizeWithLoremIpsum" />
+                  <button id="cleaning7" label="Convert all/selected slides to pictures (readonly)" imageMso="Clear" onAction="ConvertSlidesToPictures" />
+                  <button id="cleaning8" label="Watermark and then convert all/selected slides to pictures (readonly)" imageMso="WatermarkCustomDialog" onAction="InsertWatermarkAndConvertSlidesToPictures" />
+                  <button id="cleaning9" label="Anonymize all/selected slides with Lorem Ipsum" imageMso="Clear" onAction="AnonymizeWithLoremIpsum" />
                </menu>
                <toggleButton idMso="SelectionPane" showLabel="false" />
                <splitButton id="TagsSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
