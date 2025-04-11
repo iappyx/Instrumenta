@@ -202,6 +202,14 @@
                   <button id="ObjectsAlignTopsButton" label="Align top" showLabel="false" imageMso="ObjectsAlignTop" onAction="ObjectsAlignTops" />
                   <button id="ObjectsDistributeHorizontallyButton" label="Distribute horizontally" showLabel="false" imageMso="AlignDistributeHorizontally" onAction="ObjectsDistributeHorizontally" />
                   <button id="ObjectsDistributeVerticallyButton" imageMso="AlignDistributeVertically" label="Distribute vertically" showLabel="false" onAction="ObjectsDistributeVertically" />
+                     <menu id="ObjectsResizeAndSpaceEvenly" label="Resize and space evenly" imageMso="AlignRelativeToPage" showLabel="false" >
+                     <button id="ResizeAndSpaceEvenHorizontal" label="Resize and space horizontally (equal spacing)" onAction="ResizeAndSpaceEvenHorizontal" />
+                     <button id="ResizeAndSpaceEvenHorizontalPreserveFirst" label="Resize and space horizontally (preserve first)" onAction="ResizeAndSpaceEvenHorizontalPreserveFirst" />
+                      <button id="ResizeAndSpaceEvenHorizontalPreserveLast" label="Resize and space horizontally (preserve last)" onAction="ResizeAndSpaceEvenHorizontalPreserveLast" />    
+                      <button id="ResizeAndSpaceEvenVertical" label="Resize and space vertically (equal spacing)" onAction="ResizeAndSpaceEvenVertical" />
+                      <button id="ResizeAndSpaceEvenVerticalPreserveFirst" label="Resize and space vertically (preserve first)" onAction="ResizeAndSpaceEvenVerticalPreserveFirst" />
+                     <button id="ResizeAndSpaceEvenVerticalPreserveLast" label="Resize and space vertically (preserve last)" onAction="ResizeAndSpaceEvenVerticalPreserveLast" />
+                  </menu>
                </box>
                <box id="LayersBox" boxStyle="horizontal">
                   <button idMso="ObjectBringForward" showLabel="false" />

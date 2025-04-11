@@ -21,6 +21,196 @@ Attribute VB_Name = "ModuleObjectsAlignAndDistribute"
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+Sub ResizeAndSpaceEvenHorizontal()
+
+Call ResizeAndSpaceEvenly("evenhorizontal")
+
+End Sub
+
+Sub ResizeAndSpaceEvenHorizontalPreserveFirst()
+
+Call ResizeAndSpaceEvenly("evenhorizontalpreservefirst")
+
+End Sub
+
+Sub ResizeAndSpaceEvenHorizontalPreserveLast()
+
+Call ResizeAndSpaceEvenly("evenhorizontalpreservelast")
+
+End Sub
+
+Sub ResizeAndSpaceEvenVertical()
+
+Call ResizeAndSpaceEvenly("evenvertical")
+
+End Sub
+
+Sub ResizeAndSpaceEvenVerticalPreserveFirst()
+
+Call ResizeAndSpaceEvenly("evenverticalpreservefirst")
+
+End Sub
+
+Sub ResizeAndSpaceEvenVerticalPreserveLast()
+
+Call ResizeAndSpaceEvenly("evenverticalpreservelast")
+
+End Sub
+
+Sub ResizeAndSpaceEvenly(SpacingType As String)
+
+    Dim ShapeSize As Single
+    
+
+    Set MyDocument = Application.ActiveWindow
+
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+
+    Dim ShapeCount As Long
+    Dim SlideShape() As shape
+
+    If MyDocument.Selection.HasChildShapeRange Then
+        Set ShapeRange = MyDocument.Selection.ChildShapeRange
+    Else
+        Set ShapeRange = MyDocument.Selection.ShapeRange
+    End If
+
+    ReDim SlideShape(1 To ShapeRange.Count)
+
+    For ShapeCount = 1 To ShapeRange.Count
+        Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
+    Next ShapeCount
+    
+        On Error Resume Next
+    Dim UserInput As String
+    UserInput = InputBox("Enter desired vertical spacing between objects (in points):", "Vertical Spacing Input", "10")
+    If Not IsNumeric(UserInput) Or Len(UserInput) = 0 Then
+        MsgBox "Invalid input. Please enter a numeric value.", vbExclamation
+        Exit Sub
+    End If
+    On Error GoTo 0
+        
+    If SpacingType = "evenhorizontal" Then
+    
+        ObjectsSortByLeftPosition SlideShape
+           
+        TotalWidth = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape))) - GetRealLeft(SlideShape(1))
+        SpaceWidth = CSng(UserInput)
+        ShapeSize = (TotalWidth - (UBound(SlideShape) - 1) * SpaceWidth) / UBound(SlideShape)
+        
+        SetRealWidth SlideShape(1), ShapeSize
+        
+        For ShapeCount = 2 To UBound(SlideShape)
+            SetRealWidth SlideShape(ShapeCount), ShapeSize
+            SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(1)) + (ShapeSize + SpaceWidth) * (ShapeCount - 1)
+        Next ShapeCount
+    
+    ElseIf SpacingType = "evenhorizontalpreservefirst" Then
+    
+        ObjectsSortByLeftPosition SlideShape
+           
+        TotalWidth = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape))) - GetRealLeft(SlideShape(1))
+        SpaceWidth = CSng(UserInput)
+        
+        TotalShapeWidth = 0
+        
+        For ShapeCount = 2 To UBound(SlideShape)
+            TotalShapeWidth = TotalShapeWidth + GetRealWidth(SlideShape(ShapeCount))
+        Next ShapeCount
+        
+        ShapeSizeIncrease = ((TotalWidth - (UBound(SlideShape) - 1) * SpaceWidth) - GetRealWidth(SlideShape(1)) - TotalShapeWidth) / (UBound(SlideShape) - 1)
+        
+        For ShapeCount = 2 To UBound(SlideShape)
+            SetRealWidth SlideShape(ShapeCount), GetRealWidth(SlideShape(ShapeCount)) + ShapeSizeIncrease
+            SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(ShapeCount - 1)) + GetRealWidth(SlideShape(ShapeCount - 1)) + (SpaceWidth)
+        Next ShapeCount
+    
+    
+    ElseIf SpacingType = "evenhorizontalpreservelast" Then
+    
+        ObjectsSortByLeftPosition SlideShape
+           
+        TotalWidth = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape))) - GetRealLeft(SlideShape(1))
+        SpaceWidth = CSng(UserInput)
+        
+        TotalShapeWidth = 0
+        
+        For ShapeCount = 1 To (UBound(SlideShape) - 1)
+            TotalShapeWidth = TotalShapeWidth + GetRealWidth(SlideShape(ShapeCount))
+        Next ShapeCount
+        
+        ShapeSizeIncrease = ((TotalWidth - (UBound(SlideShape) - 1) * SpaceWidth) - GetRealWidth(SlideShape(UBound(SlideShape))) - TotalShapeWidth) / (UBound(SlideShape) - 1)
+               
+        SetRealWidth SlideShape(1), GetRealWidth(SlideShape(1)) + ShapeSizeIncrease
+        
+        For ShapeCount = 2 To (UBound(SlideShape) - 1)
+            SetRealWidth SlideShape(ShapeCount), GetRealWidth(SlideShape(ShapeCount)) + ShapeSizeIncrease
+            SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(ShapeCount - 1)) + GetRealWidth(SlideShape(ShapeCount - 1)) + (SpaceWidth)
+        Next ShapeCount
+   
+    ElseIf SpacingType = "evenvertical" Then
+    
+        ObjectsSortByTopPosition SlideShape
+        
+        totalHeight = GetRealTop(SlideShape(UBound(SlideShape))) + GetRealHeight(SlideShape(UBound(SlideShape))) - GetRealTop(SlideShape(1))
+        SpaceHeight = CSng(UserInput)
+        ShapeSize = (totalHeight - (UBound(SlideShape) - 1) * SpaceHeight) / UBound(SlideShape)
+        
+        SetRealHeight SlideShape(1), ShapeSize
+        
+        For ShapeCount = 2 To UBound(SlideShape)
+            SetRealHeight SlideShape(ShapeCount), ShapeSize
+            SetRealTop SlideShape(ShapeCount), GetRealTop(SlideShape(1)) + (ShapeSize + SpaceHeight) * (ShapeCount - 1)
+        Next ShapeCount
+
+ElseIf SpacingType = "evenverticalpreservefirst" Then
+
+        ObjectsSortByTopPosition SlideShape
+        
+        totalHeight = GetRealTop(SlideShape(UBound(SlideShape))) + GetRealHeight(SlideShape(UBound(SlideShape))) - GetRealTop(SlideShape(1))
+        SpaceHeight = CSng(UserInput)
+        
+        TotalShapeHeight = 0
+        
+        For ShapeCount = 2 To UBound(SlideShape)
+            TotalShapeHeight = TotalShapeHeight + GetRealHeight(SlideShape(ShapeCount))
+        Next ShapeCount
+        
+        ShapeSizeIncrease = ((totalHeight - (UBound(SlideShape) - 1) * SpaceHeight) - GetRealHeight(SlideShape(1)) - TotalShapeHeight) / (UBound(SlideShape) - 1)
+        
+        For ShapeCount = 2 To UBound(SlideShape)
+            SetRealHeight SlideShape(ShapeCount), GetRealHeight(SlideShape(ShapeCount)) + ShapeSizeIncrease
+            SetRealTop SlideShape(ShapeCount), GetRealTop(SlideShape(ShapeCount - 1)) + GetRealHeight(SlideShape(ShapeCount - 1)) + SpaceHeight
+        Next ShapeCount
+
+ElseIf SpacingType = "evenverticalpreservelast" Then
+
+        ObjectsSortByTopPosition SlideShape
+        
+        totalHeight = GetRealTop(SlideShape(UBound(SlideShape))) + GetRealHeight(SlideShape(UBound(SlideShape))) - GetRealTop(SlideShape(1))
+        SpaceHeight = CSng(UserInput)
+        
+        TotalShapeHeight = 0
+        
+        For ShapeCount = 1 To (UBound(SlideShape) - 1)
+            TotalShapeHeight = TotalShapeHeight + GetRealHeight(SlideShape(ShapeCount))
+        Next ShapeCount
+        
+        ShapeSizeIncrease = ((totalHeight - (UBound(SlideShape) - 1) * SpaceHeight) - GetRealHeight(SlideShape(UBound(SlideShape))) - TotalShapeHeight) / (UBound(SlideShape) - 1)
+        
+        SetRealHeight SlideShape(1), GetRealHeight(SlideShape(1)) + ShapeSizeIncrease
+        
+        For ShapeCount = 2 To (UBound(SlideShape) - 1)
+            SetRealHeight SlideShape(ShapeCount), GetRealHeight(SlideShape(ShapeCount)) + ShapeSizeIncrease
+            SetRealTop SlideShape(ShapeCount), GetRealTop(SlideShape(ShapeCount - 1)) + GetRealHeight(SlideShape(ShapeCount - 1)) + SpaceHeight
+        Next ShapeCount
+
+End If
+    
+ 
+End Sub
+
+
 Sub ObjectsStretchTop()
     
     Set MyDocument = Application.ActiveWindow
@@ -525,7 +715,7 @@ End Sub
 Sub QuicksortTopLeftToBottomRight(ShapeItems() As shape, left As Long, right As Long)
     Dim i As Long, j As Long
     Dim PivotShape As shape
-    Dim TempShape As shape
+    Dim tempShape As shape
     
     i = left
     j = right
@@ -539,9 +729,9 @@ Sub QuicksortTopLeftToBottomRight(ShapeItems() As shape, left As Long, right As 
             j = j - 1
         Loop
         If i <= j Then
-            Set TempShape = ShapeItems(i)
+            Set tempShape = ShapeItems(i)
             Set ShapeItems(i) = ShapeItems(j)
-            Set ShapeItems(j) = TempShape
+            Set ShapeItems(j) = tempShape
             i = i + 1
             j = j - 1
         End If
