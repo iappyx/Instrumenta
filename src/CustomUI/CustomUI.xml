@@ -299,6 +299,22 @@
                      <button id="TableRowSumButton" imageMso="AutoSum" label="Sum row (values left from selected cells)" showLabel="false" onAction="TableRowSum" />
                   </menu>
                </splitButton>
+               <menu id="MoveRowsColumnsMenu" label="Move rows and columns" imageMso="PivotTableEnableSelection" showLabel="false" >
+                     <button id="MoveTableRowUp" label="Move row up" onAction="MoveTableRowUp" />
+                     <button id="MoveTableRowDown" label="Move row down" onAction="MoveTableRowDown" />
+                      <button id="MoveTableColumnLeft" label="Move column left" onAction="MoveTableColumnLeft" />    
+                      <button id="MoveTableColumnRight" label="Move column right" onAction="MoveTableColumnRight" />
+                      <menuSeparator id="MoveRowsColumnsMenuSeperator1" />
+                      <button id="MoveTableRowUpIgnoreBorders" label="Move row up (ignore borders)" onAction="MoveTableRowUpIgnoreBorders" />
+                     <button id="MoveTableRowDownIgnoreBorders" label="Move row down (ignore borders)" onAction="MoveTableRowDownIgnoreBorders" />
+                      <button id="MoveTableColumnLeftIgnoreBorders" label="Move column left (ignore borders)" onAction="MoveTableColumnLeftIgnoreBorders" />    
+                      <button id="MoveTableColumnRightIgnoreBorders" label="Move column right (ignore borders)" onAction="MoveTableColumnRightIgnoreBorders" />
+                      <menuSeparator id="MoveRowsColumnsMenuSeperator2" />
+                      <button id="MoveTableRowUpTextOnly" label="Move row up (text only)" onAction="MoveTableRowUpTextOnly" />
+                     <button id="MoveTableRowDownTextOnly" label="Move row down (text only)" onAction="MoveTableRowDownTextOnly" />
+                      <button id="MoveTableColumnLeftTextOnly" label="Move column left (text only)" onAction="MoveTableColumnLeftTextOnly" />    
+                      <button id="MoveTableColumnRightTextOnly" label="Move column right (text only)" onAction="MoveTableColumnRightTextOnly" />
+                  </menu>
                <separator id="separator7" />
                <splitButton id="TableColumnGapsSplitButton" size="normal" showLabel="false">
                   <button id="TableColumnGapsEven" imageMso="SpeakByRows" label="Add column gaps" showLabel="false" onAction="TableColumnGapsEven" />

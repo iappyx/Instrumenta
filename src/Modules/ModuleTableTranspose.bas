@@ -32,24 +32,24 @@ Sub TableTranspose()
         
         If (Application.ActiveWindow.Selection.ShapeRange.Count = 1) And Application.ActiveWindow.Selection.ShapeRange.HasTable Then
             
-            With Application.ActiveWindow.Selection.ShapeRange.Table
+            With Application.ActiveWindow.Selection.ShapeRange.table
                 
                 Set CopyTable = Application.ActiveWindow.Selection.ShapeRange.Duplicate
                 
                 For RowsCount = .Rows.Count To 2 Step -1
-                    CopyTable.Table.Rows(RowsCount).Delete
+                    CopyTable.table.Rows(RowsCount).Delete
                 Next RowsCount
                 
                 For ColsCount = .Columns.Count To 2 Step -1
-                    CopyTable.Table.Columns(ColsCount).Delete
+                    CopyTable.table.Columns(ColsCount).Delete
                 Next ColsCount
                 
                 For RowsCount = .Rows.Count To 2 Step -1
-                    CopyTable.Table.Columns.Add
+                    CopyTable.table.Columns.Add
                 Next RowsCount
                 
                 For ColsCount = .Columns.Count To 2 Step -1
-                    CopyTable.Table.Rows.Add
+                    CopyTable.table.Rows.Add
                 Next ColsCount
                 
                 CopyTable.Width = Application.ActiveWindow.Selection.ShapeRange.Width
@@ -60,7 +60,8 @@ Sub TableTranspose()
                     For ColsCount = 1 To .Columns.Count
                         
                         .Cell(RowsCount, ColsCount).shape.TextFrame2.TextRange.Cut
-                        CopyTable.Table.Cell(ColsCount, RowsCount).shape.TextFrame2.TextRange.Paste
+                        PauseForMilliseconds (25)
+                        CopyTable.table.Cell(ColsCount, RowsCount).shape.TextFrame2.TextRange.Paste
                         
                     Next ColsCount
                 Next RowsCount
