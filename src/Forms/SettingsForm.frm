@@ -2,9 +2,9 @@ VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SettingsForm 
    Caption         =   "Settings"
    ClientHeight    =   6930
-   ClientLeft      =   119
-   ClientTop       =   462
-   ClientWidth     =   8358.001
+   ClientLeft      =   120
+   ClientTop       =   465
+   ClientWidth     =   8355.001
    OleObjectBlob   =   "SettingsForm.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -30,6 +30,7 @@ Attribute VB_Exposed = False
 'LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
+
 
 
 
@@ -70,10 +71,12 @@ Private Sub UserForm_Activate()
     
     
     
-    If GetSetting("Instrumenta", "General", "OperatingMode", "pro") = "pro" Then
+    If GetSetting("Instrumenta", "General", "OperatingMode", "default") = "pro" Then
     OptionButton1.Value = True
-    Else
+    ElseIf GetSetting("Instrumenta", "General", "OperatingMode", "default") = "review" Then
     OptionButton2.Value = True
+    ElseIf GetSetting("Instrumenta", "General", "OperatingMode", "default") = "default" Then
+    OptionButton3.Value = True
     End If
     
     RulerUnitsComboBox.Clear
@@ -196,8 +199,11 @@ Private Sub SaveSettingsButton_Click()
     If OptionButton2.Value = True Then
      SaveSetting "Instrumenta", "General", "OperatingMode", "review"
      Call InstrumentaRefresh(UpdateTag:="*R*")
-    Else
+    ElseIf OptionButton1.Value = True Then
      SaveSetting "Instrumenta", "General", "OperatingMode", "pro"
+     Call InstrumentaRefresh(UpdateTag:="*")
+    ElseIf OptionButton3.Value = True Then
+     SaveSetting "Instrumenta", "General", "OperatingMode", "default"
      Call InstrumentaRefresh(UpdateTag:="*")
     End If
     

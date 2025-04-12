@@ -57,6 +57,28 @@ Sub InstrumentaInitialize(Ribbon As IRibbonUI)
     
 End Sub
 
+
+Sub InstrumentaGetVisibleOneTabView(control As IRibbonControl, ByRef visible)
+    
+    If GetSetting("Instrumenta", "General", "OperatingMode", "default") = "default" Then
+    visible = False
+    Else
+    visible = True
+    End If
+    
+End Sub
+
+Sub InstrumentaGetVisibleMultiTabView(control As IRibbonControl, ByRef visible)
+
+    If GetSetting("Instrumenta", "General", "OperatingMode", "default") = "default" Then
+    visible = True
+    Else
+    visible = False
+    End If
+
+
+End Sub
+
 Sub InstrumentaRefresh(UpdateTag As String)
 
     InstrumentaVisible = UpdateTag
