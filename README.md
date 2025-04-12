@@ -8,7 +8,9 @@ As a spare time project in times of COVID-19, I decided to create Instrumenta as
 
 [@iappyx]( https://github.com/iappyx )
 
+
 ![Alt text](img/instrumenta-win-1.30.png?raw=true "Instrumenta Powerpoint Toolbar (Windows)")
+
 ![Alt text](img/instrumenta-win-1.44.png?raw=true "Instrumenta Powerpoint Toolbar (Windows)")
 
 
