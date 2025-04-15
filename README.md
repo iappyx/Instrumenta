@@ -99,5 +99,14 @@ Creating a build is very simple, all coding is done in PowerPoint.
 ## Upgrade
 To upgrade make sure Powerpoint is closed and overwrite the add-in file with the new version. 
 
+### Upgrading from version < 1.43
+Starting from version 1.44, Instrumenta introduces a tabbed interface within the ribbon, optimizing usability for users without widescreen displays. Features are now organized into multiple tabs based on functionality, including text, shapes, tables, and advanced options.
+
+By default, the new tabbed layout is enabled, providing a more structured experience. However, users who prefer the classic single-tab view can still access it in both Pro and Review modes by adjusting the Instrumenta settings.
+
+If you're upgrading from an earlier version, the classic view will remain active initially. To switch to the new interface, navigate to Instrumenta settings and set the Operating Mode to "Default: Multiple Tabs."
+
+![Alt text](img/instrumenta-win-settings-1.44.png?raw=true "Instrumenta Powerpoint Toolbar settings (Windows)")
+
 ### Upgrading from version < 1.0 to version 1.0 or higher
 Please know that all versions before the first major release (v1.0) have a different filename. If you are upgrading to v1.0 please remove the old add-in first in the Add-ins dialog box in Powerpoint and then install the new version as mentioned above.
