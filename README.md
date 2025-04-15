@@ -99,7 +99,7 @@ Creating a build is very simple, all coding is done in PowerPoint.
 ## Upgrade
 To upgrade make sure Powerpoint is closed and overwrite the add-in file with the new version. 
 
-### Upgrading from version < 1.43
+### Upgrading from version < 1.44
 Starting from version 1.44, Instrumenta introduces a tabbed interface within the ribbon, optimizing usability for users without widescreen displays. Features are now organized into multiple tabs based on functionality, including text, shapes, tables, and advanced options.
 
 By default, the new tabbed layout is enabled, providing a more structured experience. However, users who prefer the classic single-tab view can still access it in both Pro and Review modes by adjusting the Instrumenta settings.
