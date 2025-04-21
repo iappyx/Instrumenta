@@ -129,10 +129,17 @@ ForceNext:
     
 End Function
 
-Sub SetProgress(PercentageCompleted As Single)
+Sub SetProgress(PercentageCompleted As Single, Optional ProgressDetails As String = "")
 
     ProgressForm.ProgressBar.Width = PercentageCompleted * 2
     ProgressForm.ProgressLabel.Caption = Round(PercentageCompleted, 0) & "% completed"
+    
+    If ProgressDetails = "" Then
+    ProgressForm.ProgressDetails.Caption = ""
+    Else
+    ProgressForm.ProgressDetails.Caption = "" & ProgressDetails
+    End If
+    
     DoEvents
     
 End Sub

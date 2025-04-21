@@ -323,6 +323,13 @@
                         <button id="MoveTableColumnLeftTextOnly" label="Move column left (text only)" onAction="MoveTableColumnLeftTextOnly" />    
                         <button id="MoveTableColumnRightTextOnly" label="Move column right (text only)" onAction="MoveTableColumnRightTextOnly" />
                      </menu>
+                     <menu id="OptimizeTableHeightMenu" label="Optimize table height while preserving width" imageMso="CreateTableInDesignView" showLabel="false" >
+                        <button id="OptimizeTableHeightQuick" label="Quick" onAction="OptimizeTableHeightQuick" />
+                        <button id="OptimizeTableHeight3Iterations" label="Optimized (3 iterations)" onAction="OptimizeTableHeight3Iterations" />
+                        <button id="OptimizeTableHeight5Iterations" label="Optimized (5 iterations)" onAction="OptimizeTableHeight5Iterations" />    
+                        <button id="OptimizeTableHeight10Iterations" label="Optimized (10 iterations)" onAction="OptimizeTableHeight10Iterations" />
+                        <button id="OptimizeTableHeight20Iterations" label="Optimized (20 iterations)" onAction="OptimizeTableHeight20Iterations" />
+                     </menu>
                   <separator id="separator7" />
                   <splitButton id="TableColumnGapsSplitButton" size="normal" showLabel="false">
                      <button id="TableColumnGapsEven" imageMso="SpeakByRows" label="Add column gaps" showLabel="false" onAction="TableColumnGapsEven" />
@@ -863,6 +870,13 @@
                      <button id="TabViewMoveTableRowDownTextOnly" label="Move row down (text only)" onAction="MoveTableRowDownTextOnly" />
                       <button id="TabViewMoveTableColumnLeftTextOnly" label="Move column left (text only)" onAction="MoveTableColumnLeftTextOnly" />    
                       <button id="TabViewMoveTableColumnRightTextOnly" label="Move column right (text only)" onAction="MoveTableColumnRightTextOnly" />
+                  </menu>
+                  <menu id="TabViewOptimizeTableHeightMenu" label="Optimize table height while preserving width" imageMso="CreateTableInDesignView" showLabel="false" >
+                        <button id="TabViewOptimizeTableHeightQuick" label="Quick" onAction="OptimizeTableHeightQuick" />
+                        <button id="TabViewOptimizeTableHeight3Iterations" label="Optimized (3 iterations)" onAction="OptimizeTableHeight3Iterations" />
+                        <button id="TabViewOptimizeTableHeight5Iterations" label="Optimized (5 iterations)" onAction="OptimizeTableHeight5Iterations" />    
+                        <button id="TabViewOptimizeTableHeight10Iterations" label="Optimized (10 iterations)" onAction="OptimizeTableHeight10Iterations" />
+                        <button id="TabViewOptimizeTableHeight20Iterations" label="Optimized (20 iterations)" onAction="OptimizeTableHeight20Iterations" />
                   </menu>
                <separator id="TabViewseparator7" />
                <splitButton id="TabViewTableColumnGapsSplitButton" size="normal" showLabel="false">
