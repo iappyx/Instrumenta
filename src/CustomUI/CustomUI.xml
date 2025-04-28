@@ -266,8 +266,18 @@
                </group>
                <group id="TableGroup" label="Tables" imageMso="TableInsert" tag="P" getVisible="InstrumentaGetVisible">
                   <gallery idMso="TableInsertGallery" showLabel="false" label="&#x200B;" />
+                  <splitButton id="TableInsertColumnsLeftSplitButton" size="normal" showLabel="false">
                   <button idMso="TableInsertColumnsLeft" showLabel="false" />
+                     <menu id="TableInsertColumnsLeftMenu" itemSize="normal">
+                        <button id="InsertColumnToLeftKeepOtherColumnWidths" label="Insert column left (preserve widths)" showLabel="false" onAction="InsertColumnToLeftKeepOtherColumnWidths" />
+                     </menu>
+                  </splitButton>
+                   <splitButton id="TableInsertColumnsRightSplitButton" size="normal" showLabel="false">
                   <button idMso="TableInsertColumnsRight" showLabel="false" />
+                     <menu id="TableInsertColumnsRightMenu" itemSize="normal">
+                        <button id="InsertColumnToRightKeepOtherColumnWidths" label="Insert column right (preserve widths)" showLabel="false" onAction="InsertColumnToRightKeepOtherColumnWidths" />
+                     </menu>
+                  </splitButton>                 
                   <button idMso="TableDeleteColumns" showLabel="false" />
                   <button idMso="TableInsertRowsAbove" showLabel="false" />
                   <button idMso="TableInsertRowsBelow" showLabel="false" />
@@ -814,8 +824,18 @@
          <tab id="TabViewInstrumentaTables" label="[Tables]" getVisible="InstrumentaGetVisibleMultiTabView">
             <group id="TabViewTableGroup" label="Tables" imageMso="TableInsert" tag="P" getVisible="InstrumentaGetVisible">
                <gallery idMso="TableInsertGallery" showLabel="false" label="&#x200B;" />
-               <button idMso="TableInsertColumnsLeft" showLabel="false" />
-               <button idMso="TableInsertColumnsRight" showLabel="false" />
+                  <splitButton id="TabViewTableInsertColumnsLeftSplitButton" size="normal" showLabel="false">
+                  <button idMso="TableInsertColumnsLeft" showLabel="false" />
+                     <menu id="TabViewTableInsertColumnsLeftMenu" itemSize="normal">
+                        <button id="TabViewInsertColumnToLeftKeepOtherColumnWidths" label="Insert column left (preserve widths)" showLabel="false" onAction="InsertColumnToLeftKeepOtherColumnWidths" />
+                     </menu>
+                  </splitButton>
+                   <splitButton id="TabViewTableInsertColumnsRightSplitButton" size="normal" showLabel="false">
+                  <button idMso="TableInsertColumnsRight" showLabel="false" />
+                     <menu id="TabViewTableInsertColumnsRightMenu" itemSize="normal">
+                        <button id="TabViewInsertColumnToRightKeepOtherColumnWidths" label="Insert column right (preserve widths)" showLabel="false" onAction="InsertColumnToRightKeepOtherColumnWidths" />
+                     </menu>
+                  </splitButton>  
                <button idMso="TableDeleteColumns" showLabel="false" />
                <button idMso="TableInsertRowsAbove" showLabel="false" />
                <button idMso="TableInsertRowsBelow" showLabel="false" />
