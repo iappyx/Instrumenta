@@ -57,17 +57,17 @@ Public Sub ToggleCheckBox(ByVal TagValue As Integer)
         InsertSlideButton.Enabled = True
         
         If SelectedCount = 1 Then
-            InsertSlideKeepSourceButton.Caption = "Insert selected And maintain source formatting"
+            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
             InsertSlideButton.Caption = "Insert selected slide"
         Else
-            InsertSlideKeepSourceButton.Caption = "Insert selected And maintain source formatting (" & SelectedCount & ")"
+            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting (" & SelectedCount & ")"
             InsertSlideButton.Caption = "Insert selected slides (" & SelectedCount & ")"
         End If
         
     Else
         InsertSlideKeepSourceButton.Enabled = False
         InsertSlideButton.Enabled = False
-        InsertSlideKeepSourceButton.Caption = "Insert selected And maintain source formatting"
+        InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
         InsertSlideButton.Caption = "Insert selected slide"
     End If
     
@@ -177,17 +177,17 @@ Private Sub SelectAllButton_Click()
         InsertSlideButton.Enabled = True
         
         If SelectedCount = 1 Then
-            InsertSlideKeepSourceButton.Caption = "Insert selected And maintain source formatting"
+            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
             InsertSlideButton.Caption = "Insert selected slide"
         Else
-            InsertSlideKeepSourceButton.Caption = "Insert selected And maintain source formatting (" & SelectedCount & ")"
+            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting (" & SelectedCount & ")"
             InsertSlideButton.Caption = "Insert selected slides (" & SelectedCount & ")"
         End If
         
     Else
         InsertSlideKeepSourceButton.Enabled = False
         InsertSlideButton.Enabled = False
-        InsertSlideKeepSourceButton.Caption = "Insert selected And maintain source formatting"
+        InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
         InsertSlideButton.Caption = "Insert selected slide"
     End If
     
@@ -209,17 +209,17 @@ Private Sub SelectNoneButton_Click()
         InsertSlideButton.Enabled = True
         
         If SelectedCount = 1 Then
-            InsertSlideKeepSourceButton.Caption = "Insert selected And maintain source formatting"
+            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
             InsertSlideButton.Caption = "Insert selected slide"
         Else
-            InsertSlideKeepSourceButton.Caption = "Insert selected And maintain source formatting (" & SelectedCount & ")"
+            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting (" & SelectedCount & ")"
             InsertSlideButton.Caption = "Insert selected slides (" & SelectedCount & ")"
         End If
         
     Else
         InsertSlideKeepSourceButton.Enabled = False
         InsertSlideButton.Enabled = False
-        InsertSlideKeepSourceButton.Caption = "Insert selected And maintain source formatting"
+        InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
         InsertSlideButton.Caption = "Insert selected slide"
     End If
     

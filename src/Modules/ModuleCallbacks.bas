@@ -119,34 +119,34 @@ Sub RibbonObjectGetImage(control As IRibbonControl, ByRef returnedVal)
 #If Mac Then
     
     Select Case control.id
-        Case "FivePointStarMenu"
+        Case "FivePointStarMenu", "TabViewFivePointStarMenu"
             returnedVal = "ShapeStar"
-        Case "StampsMenu"
+        Case "StampsMenu", "TabViewStampsMenu"
             returnedVal = "CustomHeaderGallery"
-        Case "ObjectsSizeToTallest"
+        Case "ObjectsSizeToTallest", "TabViewObjectsSizeToTallest"
             returnedVal = "ObjectNudgeDown"
-        Case "ObjectsSizeShortest"
+        Case "ObjectsSizeShortest", "TabViewObjectsSizeShortest"
             returnedVal = "ObjectNudgeUp"
-        Case "ObjectsSizeToWidest"
+        Case "ObjectsSizeToWidest", "TabViewObjectsSizeToWidest"
             returnedVal = "ObjectNudgeRight"
-        Case "ObjectsSizeNarrowest"
+        Case "ObjectsSizeNarrowest", "TabViewObjectsSizeNarrowest"
             returnedVal = "ObjectNudgeLeft"
     End Select
     
 #Else
     
     Select Case control.id
-        Case "FivePointStarMenu"
+        Case "FivePointStarMenu", "TabViewFivePointStarMenu"
             returnedVal = "StarRatedFull"
-        Case "StampsMenu"
+        Case "StampsMenu", "TabViewStampsMenu"
             returnedVal = "StampTool"
-        Case "ObjectsSizeToTallest"
+        Case "ObjectsSizeToTallest", "TabViewObjectsSizeToTallest"
             returnedVal = "SizeToTallest"
-        Case "ObjectsSizeShortest"
+        Case "ObjectsSizeShortest", "TabViewObjectsSizeShortest"
             returnedVal = "SizeToShortest"
-        Case "ObjectsSizeToWidest"
+        Case "ObjectsSizeToWidest", "TabViewObjectsSizeToWidest"
             returnedVal = "SizeToWidest"
-        Case "ObjectsSizeNarrowest"
+        Case "ObjectsSizeNarrowest", "TabViewObjectsSizeNarrowest"
             returnedVal = "SizeToNarrowest"
     End Select
 
@@ -180,25 +180,25 @@ End Sub
 Sub EmojiGallery_GetItemCount(control As IRibbonControl, ByRef returnedVal)
     
     Select Case control.id
-     Case "EmojiGallery1"
+     Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = 111
-     Case "EmojiGallery2"
+     Case "EmojiGallery2", "TabViewEmojiGallery2"
         returnedVal = 49
-     Case "EmojiGallery3"
+     Case "EmojiGallery3", "TabViewEmojiGallery3"
         returnedVal = 104
-     Case "EmojiGallery4"
+     Case "EmojiGallery4", "TabViewEmojiGallery4"
         returnedVal = 48
-     Case "EmojiGallery5"
+     Case "EmojiGallery5", "TabViewEmojiGallery5"
         returnedVal = 182
-     Case "EmojiGallery6"
+     Case "EmojiGallery6", "TabViewEmojiGallery6"
         returnedVal = 122
-     Case "EmojiGallery7"
+     Case "EmojiGallery7", "TabViewEmojiGallery7"
         returnedVal = 80
-     Case "EmojiGallery8"
+     Case "EmojiGallery8", "TabViewEmojiGallery8"
         returnedVal = 117
-     Case "EmojiGallery9"
+     Case "EmojiGallery9", "TabViewEmojiGallery9"
         returnedVal = 196
-     Case "EmojiGallery10"
+     Case "EmojiGallery10", "TabViewEmojiGallery10"
         returnedVal = 175
     End Select
     
@@ -207,25 +207,25 @@ End Sub
 Sub EmojiGallery_GetItemID(control As IRibbonControl, index As Integer, ByRef returnedVal)
     
     Select Case control.id
-     Case "EmojiGallery1"
+     Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = "Emoji" & index
-     Case "EmojiGallery2"
+     Case "EmojiGallery2", "TabViewEmojiGallery2"
         returnedVal = "Emoji" & index + 111
-     Case "EmojiGallery3"
+     Case "EmojiGallery3", "TabViewEmojiGallery3"
         returnedVal = "Emoji" & index + 111 + 49
-     Case "EmojiGallery4"
+     Case "EmojiGallery4", "TabViewEmojiGallery4"
         returnedVal = "Emoji" & index + 111 + 49 + 104
-     Case "EmojiGallery5"
+     Case "EmojiGallery5", "TabViewEmojiGallery5"
         returnedVal = "Emoji" & index + 111 + 49 + 104 + 48
-     Case "EmojiGallery6"
+     Case "EmojiGallery6", "TabViewEmojiGallery6"
         returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182
-     Case "EmojiGallery7"
+     Case "EmojiGallery7", "TabViewEmojiGallery7"
         returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182 + 122
-     Case "EmojiGallery8"
+     Case "EmojiGallery8", "TabViewEmojiGallery8"
         returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182 + 122 + 80
-     Case "EmojiGallery9"
+     Case "EmojiGallery9", "TabViewEmojiGallery9"
         returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117
-     Case "EmojiGallery10"
+     Case "EmojiGallery10", "TabViewEmojiGallery10"
         returnedVal = "Emoji" & index + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196
     End Select
     
@@ -234,25 +234,25 @@ End Sub
 Sub EmojiGallery_GetItemLabel(control As IRibbonControl, index As Integer, ByRef returnedVal)
 
     Select Case control.id
-     Case "EmojiGallery1"
+     Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = AllEmojis(index + 1)
-     Case "EmojiGallery2"
+     Case "EmojiGallery2", "TabViewEmojiGallery2"
         returnedVal = AllEmojis(index + 1 + 111)
-     Case "EmojiGallery3"
+     Case "EmojiGallery3", "TabViewEmojiGallery3"
         returnedVal = AllEmojis(index + 1 + 111 + 49)
-     Case "EmojiGallery4"
+     Case "EmojiGallery4", "TabViewEmojiGallery4"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104)
-     Case "EmojiGallery5"
+     Case "EmojiGallery5", "TabViewEmojiGallery5"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48)
-     Case "EmojiGallery6"
+     Case "EmojiGallery6", "TabViewEmojiGallery6"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182)
-     Case "EmojiGallery7"
+     Case "EmojiGallery7", "TabViewEmojiGallery7"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122)
-     Case "EmojiGallery8"
+     Case "EmojiGallery8", "TabViewEmojiGallery8"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80)
-     Case "EmojiGallery9"
+     Case "EmojiGallery9", "TabViewEmojiGallery9"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117)
-     Case "EmojiGallery10"
+     Case "EmojiGallery10", "TabViewEmojiGallery10"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196)
     End Select
 
@@ -262,25 +262,25 @@ End Sub
 Sub EmojiGallery_GetItemScreentip(control As IRibbonControl, index As Integer, ByRef returnedVal)
 
     Select Case control.id
-     Case "EmojiGallery1"
+     Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = AllEmojis(index + 1) & " " & StrConv(EmojiNames(index + 1), vbProperCase)
-     Case "EmojiGallery2"
+     Case "EmojiGallery2", "TabViewEmojiGallery2"
         returnedVal = AllEmojis(index + 1 + 111) & " " & StrConv(EmojiNames(index + 1 + 111), vbProperCase)
-     Case "EmojiGallery3"
+     Case "EmojiGallery3", "TabViewEmojiGallery3"
         returnedVal = AllEmojis(index + 1 + 111 + 49) & " " & StrConv(EmojiNames(index + 1 + 111 + 49), vbProperCase)
-     Case "EmojiGallery4"
+     Case "EmojiGallery4", "TabViewEmojiGallery4"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104), vbProperCase)
-     Case "EmojiGallery5"
+     Case "EmojiGallery5", "TabViewEmojiGallery5"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48), vbProperCase)
-     Case "EmojiGallery6"
+     Case "EmojiGallery6", "TabViewEmojiGallery6"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182), vbProperCase)
-     Case "EmojiGallery7"
+     Case "EmojiGallery7", "TabViewEmojiGallery7"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182 + 122), vbProperCase)
-     Case "EmojiGallery8"
+     Case "EmojiGallery8", "TabViewEmojiGallery8"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80), vbProperCase)
-     Case "EmojiGallery9"
+     Case "EmojiGallery9", "TabViewEmojiGallery9"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117), vbProperCase)
-     Case "EmojiGallery10"
+     Case "EmojiGallery10", "TabViewEmojiGallery10"
         returnedVal = AllEmojis(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196) & " " & StrConv(EmojiNames(index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196), vbProperCase)
     End Select
 
@@ -290,25 +290,25 @@ End Sub
 Sub EmojiGallery_OnAction(control As IRibbonControl, id As String, index As Integer)
     
     Select Case control.id
-     Case "EmojiGallery1"
+     Case "EmojiGallery1", "TabViewEmojiGallery1"
         GenerateEmoji (index + 1)
-     Case "EmojiGallery2"
+     Case "EmojiGallery2", "TabViewEmojiGallery2"
         GenerateEmoji (index + 1 + 111)
-     Case "EmojiGallery3"
+     Case "EmojiGallery3", "TabViewEmojiGallery3"
         GenerateEmoji (index + 1 + 111 + 49)
-     Case "EmojiGallery4"
+     Case "EmojiGallery4", "TabViewEmojiGallery4"
         GenerateEmoji (index + 1 + 111 + 49 + 104)
-     Case "EmojiGallery5"
+     Case "EmojiGallery5", "TabViewEmojiGallery5"
         GenerateEmoji (index + 1 + 111 + 49 + 104 + 48)
-     Case "EmojiGallery6"
+     Case "EmojiGallery6", "TabViewEmojiGallery6"
         GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182)
-     Case "EmojiGallery7"
+     Case "EmojiGallery7", "TabViewEmojiGallery7"
         GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182 + 122)
-     Case "EmojiGallery8"
+     Case "EmojiGallery8", "TabViewEmojiGallery8"
         GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80)
-     Case "EmojiGallery9"
+     Case "EmojiGallery9", "TabViewEmojiGallery9"
         GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117)
-     Case "EmojiGallery10"
+     Case "EmojiGallery10", "TabViewEmojiGallery10"
         GenerateEmoji (index + 1 + 111 + 49 + 104 + 48 + 182 + 122 + 80 + 117 + 196)
     End Select
     
