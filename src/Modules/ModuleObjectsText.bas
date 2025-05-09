@@ -38,7 +38,7 @@ Sub ConvertTextToShapes()
                     ShapeText.TextFrame2.AutoSize = msoAutoSizeShapeToFitText
                     
                     With ShapeText.TextFrame2
-                        Set TempRectangle = ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, ShapeText.left, ShapeText.Top, ShapeText.Width + .TextRange.BoundWidth + .MarginRight, ShapeText.Height + .TextRange.BoundHeight + .MarginBottom)
+                        Set TempRectangle = ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, ShapeText.left, ShapeText.Top, ShapeText.Width + .textRange.BoundWidth + .marginRight, ShapeText.Height + .textRange.BoundHeight + .MarginBottom)
                     End With
                     ShapeText.Fill.visible = msoFalse
                     ShapeText.Line.visible = msoFalse
@@ -59,8 +59,8 @@ End Sub
 Sub ObjectsTextToggleCase()
     
     Dim SlideShape  As shape
-    Dim SlideTable  As Table
-    Dim SelectedTextRange As TextRange
+    Dim SlideTable  As table
+    Dim SelectedTextRange As textRange
     
     Set MyDocument = Application.ActiveWindow
     
@@ -71,7 +71,7 @@ Sub ObjectsTextToggleCase()
         For Each SlideShape In MyDocument.Selection.ShapeRange
             
             If SlideShape.HasTextFrame Then
-                Set SelectedTextRange = SlideShape.TextFrame.TextRange
+                Set SelectedTextRange = SlideShape.TextFrame.textRange
                 If Not SlideShape.Tags("CurrentCase") = "" Then
                     CurrentCase = Int(SlideShape.Tags("CurrentCase"))
                 Else
@@ -90,11 +90,11 @@ Sub ObjectsTextToggleCase()
                 End If
                 SlideShape.Tags.Add "CurrentCase", CurrentCase + 1
                 
-                Set SlideTable = SlideShape.Table
+                Set SlideTable = SlideShape.table
                 
                 For i = 1 To SlideTable.Rows.Count
                     For j = 1 To SlideTable.Columns.Count
-                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.TextRange
+                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.textRange
                         SelectedTextRange.ChangeCase (1 + (CurrentCase + 1) Mod 4)
                     Next j
                 Next i
@@ -106,8 +106,8 @@ End Sub
 
 Sub ObjectsTextAddPeriods()
     
-    Dim SlideTable  As Table
-    Dim SelectedTextRange As TextRange
+    Dim SlideTable  As table
+    Dim SelectedTextRange As textRange
     Dim SlideShape  As shape
     
     Set MyDocument = Application.ActiveWindow
@@ -118,19 +118,19 @@ Sub ObjectsTextAddPeriods()
             
             If SlideShape.HasTextFrame Then
                 
-                Set SelectedTextRange = SlideShape.TextFrame.TextRange
+                Set SelectedTextRange = SlideShape.TextFrame.textRange
                 SelectedTextRange.AddPeriods
                 
             End If
             
             If SlideShape.HasTable Then
                 
-                Set SlideTable = SlideShape.Table
+                Set SlideTable = SlideShape.table
                 
                 For i = 1 To SlideTable.Rows.Count
                     For j = 1 To SlideTable.Columns.Count
                         
-                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.TextRange
+                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.textRange
                         
                         SelectedTextRange.AddPeriods
                     Next j
@@ -148,8 +148,8 @@ End Sub
 
 Sub ObjectsTextRemovePeriods()
     
-    Dim SlideTable  As Table
-    Dim SelectedTextRange As TextRange
+    Dim SlideTable  As table
+    Dim SelectedTextRange As textRange
     Dim SlideShape  As shape
     
     Set MyDocument = Application.ActiveWindow
@@ -160,19 +160,19 @@ Sub ObjectsTextRemovePeriods()
             
             If SlideShape.HasTextFrame Then
                 
-                Set SelectedTextRange = SlideShape.TextFrame.TextRange
+                Set SelectedTextRange = SlideShape.TextFrame.textRange
                 SelectedTextRange.RemovePeriods
                 
             End If
             
             If SlideShape.HasTable Then
                 
-                Set SlideTable = SlideShape.Table
+                Set SlideTable = SlideShape.table
                 
                 For i = 1 To SlideTable.Rows.Count
                     For j = 1 To SlideTable.Columns.Count
                         
-                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.TextRange
+                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.textRange
                         
                         SelectedTextRange.RemovePeriods
                     Next j
@@ -205,9 +205,9 @@ Sub ObjectsTextDeleteStrikethrough()
                 
                 If SlideShape.TextFrame.HasText Then
                     
-                    For i = SlideShape.TextFrame2.TextRange.Characters.Count To 1 Step -1
-                        If SlideShape.TextFrame2.TextRange.Characters(i, 1).Font.Strikethrough = True Then
-                            SlideShape.TextFrame2.TextRange.Characters(i, 1).Delete
+                    For i = SlideShape.TextFrame2.textRange.Characters.Count To 1 Step -1
+                        If SlideShape.TextFrame2.textRange.Characters(i, 1).Font.Strikethrough = True Then
+                            SlideShape.TextFrame2.textRange.Characters(i, 1).Delete
                         End If
                     Next i
                     
@@ -218,9 +218,9 @@ Sub ObjectsTextDeleteStrikethrough()
                     If GroupShape.HasTextFrame Then
                         If GroupShape.TextFrame.HasText Then
                             
-                            For j = GroupShape.TextFrame2.TextRange.Characters.Count To 1 Step -1
-                                If GroupShape.TextFrame2.TextRange.Characters(j, 1).Font.Strikethrough = True Then
-                                    GroupShape.TextFrame2.TextRange.Characters(j, 1).Delete
+                            For j = GroupShape.TextFrame2.textRange.Characters.Count To 1 Step -1
+                                If GroupShape.TextFrame2.textRange.Characters(j, 1).Font.Strikethrough = True Then
+                                    GroupShape.TextFrame2.textRange.Characters(j, 1).Delete
                                 End If
                             Next j
                             
@@ -233,17 +233,17 @@ Sub ObjectsTextDeleteStrikethrough()
                 
                 If SlideShape.Type = msoTable Then
                     
-                    Dim SlideTable As Table
-                    Set SlideTable = SlideShape.Table
+                    Dim SlideTable As table
+                    Set SlideTable = SlideShape.table
                     
                     For i = 1 To SlideTable.Rows.Count
                         For j = 1 To SlideTable.Columns.Count
                             If SlideTable.Cell(i, j).shape.HasTextFrame Then
                                 If SlideTable.Cell(i, j).shape.TextFrame.HasText Then
                                     
-                                    For k = SlideTable.Cell(i, j).shape.TextFrame2.TextRange.Characters.Count To 1 Step -1
-                                        If SlideTable.Cell(i, j).shape.TextFrame2.TextRange.Characters(k, 1).Font.Strikethrough = True Then
-                                            SlideTable.Cell(i, j).shape.TextFrame2.TextRange.Characters(k, 1).Delete
+                                    For k = SlideTable.Cell(i, j).shape.TextFrame2.textRange.Characters.Count To 1 Step -1
+                                        If SlideTable.Cell(i, j).shape.TextFrame2.textRange.Characters(k, 1).Font.Strikethrough = True Then
+                                            SlideTable.Cell(i, j).shape.TextFrame2.textRange.Characters(k, 1).Delete
                                         End If
                                     Next k
                                     
@@ -267,7 +267,7 @@ Sub ObjectsTextColorBold(ColorAutomatic)
     Dim SlideShape      As shape
     Dim BoldColor       As Long
     BoldColor = -1
-    Dim ShapeTextRange  As TextRange
+    Dim ShapeTextRange  As textRange
     Dim i, j, k         As Long
     
     Set MyDocument = Application.ActiveWindow
@@ -282,7 +282,7 @@ Sub ObjectsTextColorBold(ColorAutomatic)
                 
                 If SlideShape.TextFrame.HasText Then
                     
-                    Set ShapeTextRange = SlideShape.TextFrame.TextRange
+                    Set ShapeTextRange = SlideShape.TextFrame.textRange
                     
                     If SlideShape.Fill.ForeColor.RGB <> BoldColor Then
                         For i = 1 To ShapeTextRange.Characters.Count
@@ -315,7 +315,7 @@ Sub ObjectsTextColorBold(ColorAutomatic)
                 For Each GroupShape In SlideShape.GroupItems
                     If GroupShape.HasTextFrame Then
                         If GroupShape.TextFrame.HasText Then
-                            Set ShapeTextRange = GroupShape.TextFrame.TextRange
+                            Set ShapeTextRange = GroupShape.TextFrame.textRange
                             If GroupShape.Fill.ForeColor.RGB <> BoldColor Then
                                 For j = 1 To ShapeTextRange.Characters.Count
                                     If ShapeTextRange.Characters(j, 1).Font.Bold = True Then
@@ -347,15 +347,15 @@ Sub ObjectsTextColorBold(ColorAutomatic)
                 
                 If SlideShape.Type = msoTable Then
                     
-                    Dim SlideTable As Table
-                    Set SlideTable = SlideShape.Table
+                    Dim SlideTable As table
+                    Set SlideTable = SlideShape.table
                     
                     For i = 1 To SlideTable.Rows.Count
                         For j = 1 To SlideTable.Columns.Count
                             If SlideTable.Cell(i, j).shape.HasTextFrame Then
                                 If SlideTable.Cell(i, j).shape.TextFrame.HasText Then
                                     If SlideTable.Cell(i, j).shape.Fill.ForeColor.RGB <> BoldColor Then
-                                        Set ShapeTextRange = SlideTable.Cell(i, j).shape.TextFrame.TextRange
+                                        Set ShapeTextRange = SlideTable.Cell(i, j).shape.TextFrame.textRange
                                         For k = 1 To ShapeTextRange.Characters.Count
                                             If ShapeTextRange.Characters(k, 1).Font.Bold = True Then
                                                 If BoldColor = -1 Then
@@ -405,22 +405,22 @@ Sub ObjectsTextSplitByParagraph()
         
         If SlideShape.HasTextFrame Then
         
-        ShapeHeight = SlideShape.Height / SlideShape.TextFrame.TextRange.Paragraphs.Count
+        ShapeHeight = SlideShape.Height / SlideShape.TextFrame.textRange.Paragraphs.Count
         
-        For i = SlideShape.TextFrame2.TextRange.Paragraphs.Count To 1 Step -1
+        For i = SlideShape.TextFrame2.textRange.Paragraphs.Count To 1 Step -1
             
 
             Set DuplicateShape = SlideShape.Duplicate
             
             
-            SlideShape.TextFrame2.TextRange.Paragraphs(i).Copy
-            DuplicateShape.TextFrame2.TextRange.Paste
+            SlideShape.TextFrame2.textRange.Paragraphs(i).Copy
+            DuplicateShape.TextFrame2.textRange.Paste
             
             DuplicateShape.Top = SlideShape.Top + ShapeHeight * (i - 1)
             DuplicateShape.Height = ShapeHeight
             DuplicateShape.left = SlideShape.left
             
-            If DuplicateShape.TextFrame2.TextRange.Text = "" Then
+            If DuplicateShape.TextFrame2.textRange.Text = "" Then
             
             DuplicateShape.Delete
             
@@ -462,14 +462,14 @@ Sub ObjectsTextMerge()
         
         If SlideShape.HasTextFrame Then
             
-            SlideShapeRange(1).TextFrame.TextRange.InsertAfter vbCr
+            SlideShapeRange(1).TextFrame.textRange.InsertAfter vbCr
             
             For i = 2 To MyDocument.Selection.ShapeRange.Count
                 Set MergeShape = SlideShapeRange(i)
                                
                 If MergeShape.HasTextFrame Then
-                    MergeShape.TextFrame2.TextRange.Copy
-                    SlideShapeRange(1).TextFrame2.TextRange.InsertAfter(MergeShape.TextFrame2.TextRange).Paste
+                    MergeShape.TextFrame2.textRange.Copy
+                    SlideShapeRange(1).TextFrame2.textRange.InsertAfter(MergeShape.TextFrame2.textRange).Paste
                     SlideShapeRange(1).Height = SlideShapeRange(1).Height + MergeShape.Height
                 End If
                 
@@ -497,7 +497,7 @@ Sub ObjectsTextInsertSpecialCharacter(SpecialCharacter As Long)
     
     If ActiveWindow.Selection.Type = ppSelectionText Then
         
-        Application.ActiveWindow.Selection.TextRange.InsertSymbol Application.ActiveWindow.Selection.TextRange.Font.Name, SpecialCharacter, MsoTriState.msoTrue
+        Application.ActiveWindow.Selection.textRange.InsertSymbol Application.ActiveWindow.Selection.textRange.Font.Name, SpecialCharacter, MsoTriState.msoTrue
         
     End If
     
@@ -573,30 +573,92 @@ Sub ObjectsLineSpacingLoop(SlideShape, LineSpacingChange)
         
         If SlideShape.HasTextFrame Then
             
-            With SlideShape.TextFrame.TextRange.ParagraphFormat
+            If Not ActiveWindow.Selection.Type = ppSelectionText Then
                 
-                If LineSpacingChange < 0 Then
+                Set textRange = SlideShape.TextFrame.textRange
+                paragraphCount = textRange.Paragraphs.Count
+                
+                If SlideShape.TextFrame2.AutoSize = msoAutoSizeTextToFitShape Then
                     
-                    If .SpaceWithin <= -LineSpacingChange Then
-                        .SpaceWithin = 0
-                    Else
-                        .SpaceWithin = .SpaceWithin + LineSpacingChange
-                    End If
+                    Dim fontSizes() As Single
+                    Dim spaceWithin() As Single
                     
-                ElseIf LineSpacingChange > 0 Then
+                    ReDim fontSizes(1 To textRange.Characters.Count)
+                    ReDim spaceWithin(1 To paragraphCount)
                     
-                    .SpaceWithin = .SpaceWithin + LineSpacingChange
+                    For i = 1 To textRange.Characters.Count
+                        fontSizes(i) = textRange.Characters(i).Font.Size
+                    Next i
+                    
+                    For i = 1 To paragraphCount
+                        spaceWithin(i) = textRange.Paragraphs(i).ParagraphFormat.spaceWithin
+                    Next i
+                    
+                    SlideShape.TextFrame2.AutoSize = msoAutoSizeNone
+                    
+                    For i = 1 To textRange.Characters.Count
+                        textRange.Characters(i).Font.Size = fontSizes(i)
+                    Next i
+                    
+                    For i = 1 To paragraphCount
+                        textRange.Paragraphs(i).ParagraphFormat.spaceWithin = spaceWithin(i)
+                    Next i
+                    
+                    Erase fontSizes
+                    Erase spaceWithin
                     
                 End If
                 
-            End With
+                If LineSpacingChange < 0 Then
+                    For i = 1 To paragraphCount
+                        With textRange.Paragraphs(i).ParagraphFormat
+                            If .spaceWithin <= -LineSpacingChange Then
+                                .spaceWithin = 0
+                            Else
+                                .spaceWithin = .spaceWithin + LineSpacingChange
+                            End If
+                        End With
+                    Next i
+                    
+                ElseIf LineSpacingChange > 0 Then
+                    For i = 1 To paragraphCount
+                        With textRange.Paragraphs(i).ParagraphFormat
+                            .spaceWithin = .spaceWithin + LineSpacingChange
+                        End With
+                    Next i
+                End If
+                
+            Else
+                
+                Set textRange = ActiveWindow.Selection.textRange
+                paragraphCount = textRange.Paragraphs.Count
+                
+                If LineSpacingChange < 0 Then
+                    For i = 1 To paragraphCount
+                        With textRange.Paragraphs(i).ParagraphFormat
+                            If .spaceWithin <= -LineSpacingChange Then
+                                .spaceWithin = 0
+                            Else
+                                .spaceWithin = .spaceWithin + LineSpacingChange
+                            End If
+                        End With
+                    Next i
+                    
+                ElseIf LineSpacingChange > 0 Then
+                    For i = 1 To paragraphCount
+                        With textRange.Paragraphs(i).ParagraphFormat
+                            .spaceWithin = .spaceWithin + LineSpacingChange
+                        End With
+                    Next i
+                End If
+                
+            End If
             
         End If
         
     End If
     
 End Sub
-
 Sub ObjectsRemoveText()
     Set MyDocument = Application.ActiveWindow
     
@@ -636,7 +698,7 @@ Sub ObjectsRemoveTextLoop(SlideShape)
         
         If SlideShape.HasTextFrame Then
             
-            SlideShape.TextFrame.TextRange.Text = ""
+            SlideShape.TextFrame.textRange.Text = ""
             
         End If
         
@@ -671,7 +733,7 @@ Sub ObjectsRemoveHyperlinksLoop(SlideShape)
         Next
     Else
         If SlideShape.HasTextFrame Then
-                SlideShape.TextFrame.TextRange.ActionSettings(ppMouseClick).Hyperlink.Delete
+                SlideShape.TextFrame.textRange.ActionSettings(ppMouseClick).Hyperlink.Delete
         End If
     End If
 End Sub
@@ -689,10 +751,10 @@ Sub ObjectsSwapTextNoFormatting()
             
             If MyDocument.Selection.ShapeRange(1).HasTextFrame And MyDocument.Selection.ShapeRange(2).HasTextFrame Then
                 
-                text1 = MyDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text
-                text2 = MyDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text
-                MyDocument.Selection.ShapeRange(1).TextFrame.TextRange.Text = text2
-                MyDocument.Selection.ShapeRange(2).TextFrame.TextRange.Text = text1
+                text1 = MyDocument.Selection.ShapeRange(1).TextFrame.textRange.Text
+                text2 = MyDocument.Selection.ShapeRange(2).TextFrame.textRange.Text
+                MyDocument.Selection.ShapeRange(1).TextFrame.textRange.Text = text2
+                MyDocument.Selection.ShapeRange(2).TextFrame.textRange.Text = text1
                 
             Else
                 
@@ -707,10 +769,10 @@ Sub ObjectsSwapTextNoFormatting()
                 
                 If MyDocument.Selection.ChildShapeRange(1).HasTextFrame And MyDocument.Selection.ChildShapeRange(2).HasTextFrame Then
                 
-                    text1 = MyDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Text
-                    text2 = MyDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Text
-                    MyDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Text = text2
-                    MyDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Text = text1
+                    text1 = MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.Text
+                    text2 = MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.Text
+                    MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.Text = text2
+                    MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.Text = text1
                 
                 Else
             
@@ -749,14 +811,14 @@ Sub ObjectsSwapText()
                 Dim SlidePlaceHolder As PowerPoint.shape
                 Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
                 
-                MyDocument.Selection.ShapeRange(1).TextFrame.TextRange.Cut
-                SlidePlaceHolder.TextFrame.TextRange.Paste
+                MyDocument.Selection.ShapeRange(1).TextFrame.textRange.Cut
+                SlidePlaceHolder.TextFrame.textRange.Paste
                 
-                MyDocument.Selection.ShapeRange(2).TextFrame.TextRange.Cut
-                MyDocument.Selection.ShapeRange(1).TextFrame.TextRange.Paste
+                MyDocument.Selection.ShapeRange(2).TextFrame.textRange.Cut
+                MyDocument.Selection.ShapeRange(1).TextFrame.textRange.Paste
                 
-                SlidePlaceHolder.TextFrame.TextRange.Cut
-                MyDocument.Selection.ShapeRange(2).TextFrame.TextRange.Paste
+                SlidePlaceHolder.TextFrame.textRange.Cut
+                MyDocument.Selection.ShapeRange(2).TextFrame.textRange.Paste
                 
                 SlidePlaceHolder.Delete
                 
@@ -776,14 +838,14 @@ Sub ObjectsSwapText()
                 Dim SlidePlaceHolderChildShapeRange As PowerPoint.shape
                 Set SlidePlaceHolderChildShapeRange = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
                 
-                MyDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Cut
-                SlidePlaceHolderChildShapeRange.TextFrame.TextRange.Paste
+                MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.Cut
+                SlidePlaceHolderChildShapeRange.TextFrame.textRange.Paste
                 
-                MyDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Cut
-                MyDocument.Selection.ChildShapeRange(1).TextFrame.TextRange.Paste
+                MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.Cut
+                MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.Paste
                 
-                SlidePlaceHolderChildShapeRange.TextFrame.TextRange.Cut
-                MyDocument.Selection.ChildShapeRange(2).TextFrame.TextRange.Paste
+                SlidePlaceHolderChildShapeRange.TextFrame.textRange.Cut
+                MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.Paste
                 
                 SlidePlaceHolderChildShapeRange.Delete
                 
@@ -912,11 +974,11 @@ Sub ObjectsMarginsLoop(SlideShape, MarginsChange)
                     If .MarginBottom >= -MarginsChange Then
                         .MarginBottom = .MarginBottom + MarginsChange
                     End If
-                    If .MarginLeft >= -MarginsChange Then
-                        .MarginLeft = .MarginLeft + MarginsChange
+                    If .marginLeft >= -MarginsChange Then
+                        .marginLeft = .marginLeft + MarginsChange
                     End If
-                    If .MarginRight >= -MarginsChange Then
-                        .MarginRight = .MarginRight + MarginsChange
+                    If .marginRight >= -MarginsChange Then
+                        .marginRight = .marginRight + MarginsChange
                     End If
                     If .MarginTop >= -MarginsChange Then
                         .MarginTop = .MarginTop + MarginsChange
@@ -925,15 +987,15 @@ Sub ObjectsMarginsLoop(SlideShape, MarginsChange)
                 ElseIf MarginsChange > 0 Then
                     
                     .MarginBottom = .MarginBottom + MarginsChange
-                    .MarginLeft = .MarginLeft + MarginsChange
-                    .MarginRight = .MarginRight + MarginsChange
+                    .marginLeft = .marginLeft + MarginsChange
+                    .marginRight = .marginRight + MarginsChange
                     .MarginTop = .MarginTop + MarginsChange
                     
                 ElseIf MarginsChange = 0 Then
                     
                     .MarginBottom = 0
-                    .MarginLeft = 0
-                    .MarginRight = 0
+                    .marginLeft = 0
+                    .marginRight = 0
                     .MarginTop = 0
                     
                 End If
@@ -1206,26 +1268,92 @@ Sub ObjectsLineSpacingBeforeAndAfterLoop(SlideShape, LineSpacingChange)
         
         If SlideShape.HasTextFrame Then
             
-            With SlideShape.TextFrame.TextRange.ParagraphFormat
+            If Not ActiveWindow.Selection.Type = ppSelectionText Then
                 
-                If LineSpacingChange < 0 Then
+                Set textRange = SlideShape.TextFrame.textRange
+                paragraphCount = textRange.Paragraphs.Count
+                
+                If SlideShape.TextFrame2.AutoSize = msoAutoSizeTextToFitShape Then
                     
-                    If .SpaceBefore <= -LineSpacingChange Then
-                        .SpaceBefore = 0
-            .SpaceAfter = 0
-                    Else
-                        .SpaceBefore = .SpaceBefore + LineSpacingChange
-            .SpaceAfter = .SpaceBefore
-                    End If
+                    Dim fontSizes() As Single
+                    Dim spaceWithin() As Single
                     
-                ElseIf LineSpacingChange > 0 Then
+                    ReDim fontSizes(1 To textRange.Characters.Count)
+                    ReDim spaceWithin(1 To paragraphCount)
                     
-                    .SpaceBefore = .SpaceBefore + LineSpacingChange
-            .SpaceAfter = .SpaceBefore
+                    For i = 1 To textRange.Characters.Count
+                        fontSizes(i) = textRange.Characters(i).Font.Size
+                    Next i
+                    
+                    For i = 1 To paragraphCount
+                        spaceWithin(i) = textRange.Paragraphs(i).ParagraphFormat.spaceWithin
+                    Next i
+                    
+                    SlideShape.TextFrame2.AutoSize = msoAutoSizeNone
+                    
+                    For i = 1 To textRange.Characters.Count
+                        textRange.Characters(i).Font.Size = fontSizes(i)
+                    Next i
+                    
+                    For i = 1 To paragraphCount
+                        textRange.Paragraphs(i).ParagraphFormat.spaceWithin = spaceWithin(i)
+                    Next i
+                    
+                    Erase fontSizes
+                    Erase spaceWithin
                     
                 End If
                 
-            End With
+                If LineSpacingChange < 0 Then
+                    For i = 1 To paragraphCount
+                        With textRange.Paragraphs(i).ParagraphFormat
+                            If .SpaceBefore <= -LineSpacingChange Then
+                                .SpaceBefore = 0
+                                .SpaceAfter = 0
+                            Else
+                                .SpaceBefore = .SpaceBefore + LineSpacingChange
+                                .SpaceAfter = .SpaceBefore
+                            End If
+                        End With
+                    Next i
+                    
+                ElseIf LineSpacingChange > 0 Then
+                    For i = 1 To paragraphCount
+                        With textRange.Paragraphs(i).ParagraphFormat
+                            .SpaceBefore = .SpaceBefore + LineSpacingChange
+                            .SpaceAfter = .SpaceBefore
+                        End With
+                    Next i
+                End If
+                
+            Else
+                
+                Set textRange = ActiveWindow.Selection.textRange
+                paragraphCount = textRange.Paragraphs.Count
+                
+                If LineSpacingChange < 0 Then
+                    For i = 1 To paragraphCount
+                        With textRange.Paragraphs(i).ParagraphFormat
+                            If .SpaceBefore <= -LineSpacingChange Then
+                                .SpaceBefore = 0
+                                .SpaceAfter = 0
+                            Else
+                                .SpaceBefore = .SpaceBefore + LineSpacingChange
+                                .SpaceAfter = .SpaceBefore
+                            End If
+                        End With
+                    Next i
+                    
+                ElseIf LineSpacingChange > 0 Then
+                    For i = 1 To paragraphCount
+                        With textRange.Paragraphs(i).ParagraphFormat
+                            .SpaceBefore = .SpaceBefore + LineSpacingChange
+                            .SpaceAfter = .SpaceBefore
+                        End With
+                    Next i
+                End If
+                
+            End If
             
         End If
         
