@@ -47,9 +47,9 @@ Please only update the files in /src/Modules, /src/Forms, /src/CustomUi and /src
 If you like this plugin, please let me and the community know how you are using this in your daily work: https://github.com/iappyx/Instrumenta/discussions/5
 
 # Keyboard shortcuts
-Due to limitations in VBA, Instrumenta does not support keyboard shortcuts. PowerPoint does not provide built-in functionality for assigning shortcuts to macros. Users can access features through the Instrumenta ribbon. You can assign functions to the Quick Access Toolbar instead and use pre-defined shortcuts for these, see [#37](https://github.com/iappyx/Instrumenta/issues/37). There are also commercial options available that offer enhanced shortcut customization for PowerPoint.
-
 I have been working on a keyboard shortcut companion called [Instrumenta Keys](https://github.com/iappyx/Instrumenta-Keys). It only works on Windows and is highly experimental.
+
+Due to limitations in VBA, Instrumenta does not support keyboard shortcuts out-of-the-box. PowerPoint does not provide built-in functionality for assigning shortcuts to macros. Users can access features through the Instrumenta ribbon. You can try Instrumenta Keys, or assign functions to the Quick Access Toolbar instead and use pre-defined shortcuts for these, see [#37](https://github.com/iappyx/Instrumenta/issues/37). There are also commercial options available that offer enhanced shortcut customization for PowerPoint.
 
 # How to install 
 Instrumenta is a Visual Basic for Applications (VBA) add-in that can be installed within Powerpoint, requiring no administrative rights on most enterprise systems.
