@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>Instrumenta PowerPoint Toolbar</title>
+    <welcome file="welcome.html"/>
+    <readme file="readme.html"/>
+    <license file="license.html"/>
+    <conclusion file="conclusion.html"/>
+    <options customize="always"/>
+    
+    <choices-outline>
+        <line choice="install_instrumenta"/>
+        <line choice="install_keys"/>
+        <line choice="uninstall"/>
+    </choices-outline>
+
+    <choice id="install_instrumenta" visible="true" title="Instrumenta" description="Installs Instrumenta, a free and open-source consulting-style PowerPoint toolbar." start_selected="true">
+        <pkg-ref id="com.iappyx.instrumenta"/>
+        <conditional exclude="uninstall" selected="false"/>
+    </choice>
+
+    <choice id="install_keys" visible="true" title="Instrumenta Keys" description="Installs Instrumenta Keys, to support keyboard shortcuts in Instrumenta." start_selected="false">
+        <pkg-ref id="com.iappyx.instrumentakeys"/>
+        <conditional exclude="uninstall" selected="false"/>
+    </choice>
+
+    <choice id="uninstall" visible="true" title="Uninstall Instrumenta" description="Removes Instrumenta from your system." start_selected="false">
+        <pkg-ref id="com.iappyx.instrumenta.uninstall"/>
+        <conditional exclude="install_instrumenta" selected="false"/>
+        <conditional exclude="install_keys" selected="false"/>
+    </choice>
+
+    <pkg-ref id="com.iappyx.instrumenta" installKBytes="2048" version="1.0" auth="Root">#instrumentaPackage.pkg</pkg-ref>
+    <pkg-ref id="com.iappyx.instrumentakeys" installKBytes="1024" version="1.0" auth="Root">#instrumentaKeysPackage.pkg</pkg-ref>
+    <pkg-ref id="com.iappyx.instrumenta.uninstall" installKBytes="512" version="1.0" auth="Root">#InstrumentaUninstallerPackage.pkg</pkg-ref>
+</installer-gui-script>

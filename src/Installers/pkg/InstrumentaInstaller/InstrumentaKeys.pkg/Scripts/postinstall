@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# MIT License
+# Copyright (c) 2021-2025 iappyx
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy 
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights 
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,   
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+PPAM_SOURCE="/Library/Application Support/Instrumenta/InstrumentaKeysHelper.ppam"
+SCRIPT_SOURCE="/Library/Application Support/Instrumenta/InstrumentaKeys.applescript"
+PPAM_DESTINATION="$HOME/Library/Group Containers/UBF8T346G9.Office/User Content.localized/Add-Ins.localized/Instrumenta"
+SCRIPT_DESTINATION="$HOME/Library/Application Scripts/com.microsoft.Powerpoint"
+mkdir -p "$PPAM_DESTINATION"
+mkdir -p "$SCRIPT_DESTINATION"
+mv "$PPAM_SOURCE" "$PPAM_DESTINATION/"
+mv "$SCRIPT_SOURCE" "$SCRIPT_DESTINATION/"
+chmod 644 "$PPAM_DESTINATION/InstrumentaKeysHelper.ppam"
+chmod 755 "$SCRIPT_DESTINATION/InstrumentaKeys.applescript"
+
+INSTRUMENTA_ADDIN_NAME="Instrumenta Keys Helper"
+INSTRUMENTA_ADDIN_PATH="$PPAM_DESTINATION/InstrumentaKeysHelper.ppam"
+
+osascript <<EOF
+tell application "Microsoft PowerPoint"
+    try
+        set InstrumentaAddIn to register add in (POSIX path of "$INSTRUMENTA_ADDIN_PATH")
+    on error
+        display alert "$INSTRUMENTA_ADDIN_NAME installation failed" message "Failed to register $INSTRUMENTA_ADDIN_NAME" as critical buttons {"Cancel"}
+        return
+    end try   
+    set auto load of InstrumentaAddIn to true
+    set loaded of InstrumentaAddIn to true   
+end tell
+EOF
