@@ -1,4 +1,4 @@
-# Installing Instrumenta PowerPoint Plugin
+# Installer-based installation of Instrumenta
 
 Instrumenta is a PowerPoint plugin that I developed as an open-source project in my free time. Since I do not have official code-signing certificates for Windows or a developer account for macOS, installing the plugin may trigger security warnings. This guide provides step-by-step instructions to bypass these warnings and install the software trough the installers.
 
