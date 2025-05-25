@@ -1,10 +1,10 @@
 # Installer-based installation of Instrumenta
 
-Instrumenta is a PowerPoint plugin that I developed as an open-source project in my free time. Since I do not have official code-signing certificates for Windows or a developer account for macOS, installing the plugin may trigger security warnings. This guide provides step-by-step instructions to bypass these warnings and install the software trough the installers.
+Instrumenta is a PowerPoint plugin that I developed as an open-source project in my free time. Since I do not have official code-signing certificates for Windows or a developer account for macOS, installing the plugin may trigger security warnings. This guide provides step-by-step instructions to bypass these warnings and install the software through the installers.
 
 You can always choose not to use the installers and do a manual installation instead.
 
-## Windows
+## Windows installation
 
 When running the `InstrumentaPowerpointToolbarSetup.exe` installer, Windows SmartScreen may block execution. Follow these steps to bypass it:
 
@@ -26,11 +26,9 @@ When running the `InstrumentaPowerpointToolbarSetup.exe` installer, Windows Smar
 ![image](https://github.com/user-attachments/assets/7456d161-d17b-4286-b656-57f0d9cf1d37)
 
 
-
-
 ---
 
-## Mac
+## MacOS installation
 
 macOS may prevent the execution of the unsigned `InstrumentaInstaller` installer package within the `InstrumentaInstaller.dmg`. 
 
