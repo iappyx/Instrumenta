@@ -25,9 +25,10 @@ You can save the add-in to your PC and then install it by adding it to the Avail
 - A security notice appears. Click **Enable Macros**, then **Close**.  
   - *Note:* If you cannot enable Macros in this dialog, follow [Microsoft's instructions](https://support.microsoft.com/en-gb/topic/a-potentially-dangerous-macro-has-been-blocked-0952faa0-37e7-4316-b61d-5b5ed6024216) to unblock Instrumenta.
 
-Once installed, there should be an **Instrumenta** page in the PowerPoint ribbon.
+Once installed, there should be an **Instrumenta** page in the PowerPoint ribbon. 
+To upgrade to a newer version see: [Upgrading a manual installation](#upgrading-a-manual-installation-windows--macos). 
 
-(Instructions based on [Microsoft Support](https://support.microsoft.com/en-us/office/add-or-load-a-powerpoint-add-in-3de8bbc2-2481-457a-8841-7334cd5b455f))
+(Part of the instructions based on [Microsoft Support](https://support.microsoft.com/en-us/office/add-or-load-a-powerpoint-add-in-3de8bbc2-2481-457a-8841-7334cd5b455f))
 
 ### macOS manual installation
 
@@ -55,6 +56,21 @@ You can save the add-in to your Mac and install it manually:
 - In some cases, a **reboot** of your Mac might be required.
 
 The AppleScript file will not change often—only when major updates to export features occur. Instrumenta will notify you when an updated version is required.
+
+### Upgrading a manual installation (Windows & MacOS)
+To upgrade make sure Powerpoint is closed and overwrite the add-in file with the new version. 
+
+#### Upgrading from version < 1.44
+Starting from version 1.44, Instrumenta introduces a tabbed interface within the ribbon, optimizing usability for users without widescreen displays. Features are now organized into multiple tabs based on functionality, including text, shapes, tables, and advanced options.
+
+By default, the new tabbed layout is enabled, providing a more structured experience. However, users who prefer the classic single-tab view can still access it in both Pro and Review modes by adjusting the Instrumenta settings.
+
+If you're upgrading from an earlier version, the classic view will remain active initially. To switch to the new interface, navigate to Instrumenta settings and set the Operating Mode to "Default: Multiple Tabs."
+
+![Alt text](img/instrumenta-win-settings-1.44.png?raw=true "Instrumenta Powerpoint Toolbar settings (Windows)")
+
+#### Upgrading from version < 1.0 to version 1.0 or higher
+Please know that all versions before the first major release (v1.0) have a different filename. If you are upgrading to v1.0 please remove the old add-in first in the Add-ins dialog box in Powerpoint and then install the new version as mentioned above.
 
 ---
 
