@@ -54,47 +54,10 @@ It works on both Windows and Mac, but is highly experimental.
 You can try Instrumenta Keys, or assign functions to the Quick Access Toolbar instead and use pre-defined shortcuts for these, see [#37](https://github.com/iappyx/Instrumenta/issues/37).
 
 # How to install 
-Instrumenta is a Visual Basic for Applications (VBA) add-in that can be installed within Powerpoint, requiring no administrative rights on most enterprise systems.
+See installation instructions [here](INSTALL.md).
 
-## Windows
-You can save the add-in to your PC and then install the add-in by adding it to the Available Add-Ins list:
-- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.49/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
-- Open Powerpoint, click the File tab, and then click Options
-- In the Options dialog box, click Add-Ins.
-- In the Manage list at the bottom of the dialog box, click PowerPoint Add-ins, and then click Go.
-- In the Add-Ins dialog box, click Add New.
-- In the Add New PowerPoint Add-In dialog box, browse for the add-in file, and then click OK.
-- A security notice appears. Click Enable Macros, and then click Close. 
-  - Note: If you cannot enable Macros in this dialog, please refer to [these](https://support.microsoft.com/en-gb/topic/a-potentially-dangerous-macro-has-been-blocked-0952faa0-37e7-4316-b61d-5b5ed6024216) instructions from Microsoft to unblock Instrumenta: (1) Open Windows File Explorer and go to the folder where you saved the file; (2) Right-click the file and choose Properties from the context menu; (3) At the bottom of the General tab, select the Unblock checkbox and select OK.
-- There now should be an "Instrumenta" page in the Powerpoint ribbon
-
-(Instructions based on https://support.microsoft.com/en-us/office/add-or-load-a-powerpoint-add-in-3de8bbc2-2481-457a-8841-7334cd5b455f)
-
-## Mac
-You can save the add-in to your Mac and then install the add-in by adding it to the Add-Ins list:
-- Download the add-in file in the latest release (https://github.com/iappyx/Instrumenta/releases/download/1.49/InstrumentaPowerpointToolbar.ppam) or the latest beta (https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam) and save it in a fixed location
-- Open Powerpoint, click Tools in the application menu, and then click Add-ins...
-- In the Add-Ins dialog box, click the + button, browse for the add-in file, and then click Open.
-- Click Ok to close the Add-ins dialog box
-- There now should be an "Instrumenta" page in the Powerpoint ribbon
-
-Optional steps to show group titles:
-- By default group titles are hidden in the ribbon on the Mac
-- Open PowerPoint, click PowerPoint in the application menu
-- Then click Preferences
-- Click View
-- Check "Show group titles"
-
-Additional optional steps to enable export to Outlook and Word:
-- Download the AppleScript file (https://github.com/iappyx/Instrumenta/releases/download/1.49/InstrumentaAppleScriptPlugin.applescript) 
-- Copy the AppleScript file to *~/Library/Application Scripts/com.microsoft.Powerpoint/*
-- Please note that this is in the library folder of the *current user*. If the folder does not exist, create it.
-- In some cases a reboot of your Mac might be required
-
-The AppleScript file will not change that often, only in case of major changes to the export features, or new features that require the use of AppleScript. In that case Instrumenta can detect if the latest version of the file is installed and will inform you when using a feature that requires an updated version.
-
-## How to build from source
-Creating a build is very simple, all coding is done in PowerPoint.
+# How to build from source
+Creating your own build is very simple, all coding is done in PowerPoint.
 
 - Open "InstrumentaPowerpointToolbar.pptm" from the "src" directory in PowerPoint
 - Through PowerPoint settings, enable the "Developer" tab in the PowerPoint ribbon.
@@ -103,17 +66,4 @@ Creating a build is very simple, all coding is done in PowerPoint.
 - To customize the Ribbon you can use [https://github.com/fernandreu/office-ribbonx-editor](https://github.com/fernandreu/office-ribbonx-editor) on the pptm-file.
 - In PowerPoint, save the file as a "PowerPoint Add-in (*.ppam)" file to create your own build
 
-## Upgrade
-To upgrade make sure Powerpoint is closed and overwrite the add-in file with the new version. 
-
-### Upgrading from version < 1.44
-Starting from version 1.44, Instrumenta introduces a tabbed interface within the ribbon, optimizing usability for users without widescreen displays. Features are now organized into multiple tabs based on functionality, including text, shapes, tables, and advanced options.
-
-By default, the new tabbed layout is enabled, providing a more structured experience. However, users who prefer the classic single-tab view can still access it in both Pro and Review modes by adjusting the Instrumenta settings.
-
-If you're upgrading from an earlier version, the classic view will remain active initially. To switch to the new interface, navigate to Instrumenta settings and set the Operating Mode to "Default: Multiple Tabs."
-
-![Alt text](img/instrumenta-win-settings-1.44.png?raw=true "Instrumenta Powerpoint Toolbar settings (Windows)")
-
-### Upgrading from version < 1.0 to version 1.0 or higher
-Please know that all versions before the first major release (v1.0) have a different filename. If you are upgrading to v1.0 please remove the old add-in first in the Add-ins dialog box in Powerpoint and then install the new version as mentioned above.
+The code for the installers can be found in `/src/Installers/`. For Windows this is a NSIS-script and for Mac the installer can be built with `build.sh`.
