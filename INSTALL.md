@@ -1,4 +1,4 @@
-# Installing Instrumenta PowerPoint Plugin
+# Installing the Instrumenta toolbar
 
 There are **two ways** to install Instrumenta:
 - **[Manual installation](#manual-installation)** (recommended) – This method allows you to install the plugin without an installer, requiring no administrative rights on most enterprise systems.
