@@ -102,6 +102,9 @@ When running the installer, Windows SmartScreen may block execution. Follow thes
 
 ![image](https://github.com/user-attachments/assets/7456d161-d17b-4286-b656-57f0d9cf1d37)
 
+#### Uninstall
+You can uninstall Instrumenta through the standard Windows **Add or Remove Programs** menu.
+
 ### macOS installer-based installation
 
 Download and open the [Instrumenta Installer Disk Image (dmg)](https://github.com/iappyx/Instrumenta/raw/main/bin/Installers/InstrumentaInstaller.dmg).
@@ -118,3 +121,6 @@ macOS may prevent the execution of the unsigned `InstrumentaInstaller` installer
 5. Try opening `InstrumentaInstaller` again.
 
 If you don't want to allow this, the `InstrumentaInstaller.dmg` also contains a folder called `Files for manual installation`, which has all the files needed for a [manual installation](#manual-installation).
+
+#### Uninstall
+You can uninstall Instrumenta by running the installer again. The installer includes a built-in uninstallation option.
