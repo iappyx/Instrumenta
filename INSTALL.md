@@ -102,4 +102,3 @@ macOS may prevent the execution of the unsigned `InstrumentaInstaller` installer
 5. Try opening `InstrumentaInstaller` again.
 
 If you don't want to allow this, the `InstrumentaInstaller.dmg` also contains a folder called `Files for manual installation`, which has all the files needed for a [manual installation](#manual-installation).
----
