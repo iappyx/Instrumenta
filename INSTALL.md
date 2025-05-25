@@ -32,15 +32,15 @@ When running the `InstrumentaPowerpointToolbarSetup.exe` installer, Windows Smar
 
 ## Mac
 
-macOS may prevent the execution of the unsigned `.pkg` installer within the DMG. 
+macOS may prevent the execution of the unsigned `InstrumentaInstaller` installer package within the `InstrumentaInstaller.dmg`. 
 
 ![image](https://github.com/user-attachments/assets/b1554c82-db0a-4b24-9252-b5300fbb2557)
-
 
 ### If the `InstrumentaInstaller` package doesn't open
 1. Open **System Settings** → **Privacy & Security**.
 2. Scroll down to the **Security** section.
-3. You should see a message stating that `InstrumentaInstaller.pkg` was blocked.
+3. You should see a message stating that `InstrumentaInstaller` was blocked.
 4. Click **Allow Anyway**.
-5. Try opening `InstrumentaInstaller.pkg` again.
+5. Try opening `InstrumentaInstaller` again.
 
+If you don't want to allow this, the `InstrumentaInstaller.dmg` also contains the folder `Files for manual installation`. There you'll find all the files you'll need for a `manual installation`.
