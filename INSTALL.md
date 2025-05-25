@@ -9,7 +9,7 @@ You can always choose not to use the installers and do a manual installation ins
 When running the `InstrumentaPowerpointToolbarSetup.exe` installer, Windows SmartScreen may block execution. Follow these steps to bypass it:
 
 1. **Run the installer**  
-   Double-click `InstrumentaPowerpointToolbarSetup.exe`.
+   Open `InstrumentaPowerpointToolbarSetup.exe`.
 
 2. **SmartScreen warning appears**  
    If a security prompt appears stating *"Windows protected your PC"*, do the following:
@@ -21,8 +21,13 @@ When running the `InstrumentaPowerpointToolbarSetup.exe` installer, Windows Smar
 3. **Confirm Installation**  
    Follow the installation steps as guided.
 
-![Alt text](img/installation-smartscreen1.png?raw=true "Smartscreen dialog 1")
-![Alt text](img/installation-smartscreen2.png?raw=true "Smartscreen dialog 2")
+![image](https://github.com/user-attachments/assets/43bba1eb-6e30-4fd2-a16e-eb162fe62b1a)
+
+![image](https://github.com/user-attachments/assets/7456d161-d17b-4286-b656-57f0d9cf1d37)
+
+
+
+
 ---
 
 ## Mac
