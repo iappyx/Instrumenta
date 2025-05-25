@@ -21,6 +21,8 @@ When running the `InstrumentaPowerpointToolbarSetup.exe` installer, Windows Smar
 3. **Confirm Installation**  
    Follow the installation steps as guided.
 
+![Alt text](img/installation-smartscreen1.png?raw=true "Smartscreen dialog 1")
+![Alt text](img/installation-smartscreen2.png?raw=true "Smartscreen dialog 2")
 ---
 
 ## Mac
