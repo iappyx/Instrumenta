@@ -28,8 +28,6 @@ You can save the add-in to your PC and then install it by adding it to the Avail
 Once installed, there should be an **Instrumenta** page in the PowerPoint ribbon. 
 To upgrade to a newer version see: [Upgrading a manual installation](#upgrading-a-manual-installation-windows--macos). 
 
-(Part of the instructions based on [Microsoft Support](https://support.microsoft.com/en-us/office/add-or-load-a-powerpoint-add-in-3de8bbc2-2481-457a-8841-7334cd5b455f))
-
 ### macOS manual installation
 
 You can save the add-in to your Mac and install it manually:
