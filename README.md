@@ -15,7 +15,7 @@ As a spare time project in times of COVID-19, I decided to create Instrumenta as
 
 
 # Features
-Current features include:
+Instrumenta has 260+ features, current features include:
 | Group | Feature |
 |-|-|
 | Generic | - Basic formatting and shortcuts to different frequently used powerpoint functions |
