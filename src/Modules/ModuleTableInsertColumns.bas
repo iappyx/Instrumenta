@@ -70,10 +70,14 @@ Sub InsertColumnKeepOtherColumnWidths(Position As String)
         If Position = "Left" Then
             originalWidths(selectedColumn) = newColumnWidth
             MyDocument.Selection.ShapeRange(1).table.Columns.Add BeforeColumn:=selectedColumn
-        ElseIf Position = "Right" Then
-            originalWidths(selectedColumn + 1) = newColumnWidth
-            MyDocument.Selection.ShapeRange(1).table.Columns.Add BeforeColumn:=selectedColumn + 1
-        Else
+            ElseIf Position = "Right" Then
+                originalWidths(selectedColumn + 1) = newColumnWidth
+                If selectedColumn = MyDocument.Selection.ShapeRange(1).table.Columns.Count Then
+                    MyDocument.Selection.ShapeRange(1).table.Columns.Add
+                Else
+                    MyDocument.Selection.ShapeRange(1).table.Columns.Add BeforeColumn:=selectedColumn + 1
+                End If
+            Else
             MsgBox "Invalid Position! Use 'Left' or 'Right'."
             Exit Sub
         End If

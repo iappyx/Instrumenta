@@ -1,33 +1,46 @@
 Attribute VB_Name = "ModuleEyedropper"
-'================================================================================
-' VBA Module: Eyedropper Simulator using Windows API
-' Purpose: Reads the color of the pixel at the current mouse position and
-'          applies it to the Fill or Outline property of all selected shapes.
-'================================================================================
+'MIT License
 
-' --- 1. Windows API Declarations and Structure ---
+'Copyright (c) 2021 iappyx
+
+'Permission is hereby granted, free of charge, to any person obtaining a copy
+'of this software and associated documentation files (the "Software"), to deal
+'in the Software without restriction, including without limitation the rights
+'to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+'copies of the Software, and to permit persons to whom the Software is
+'furnished to do so, subject to the following conditions:
+
+'The above copyright notice and this permission notice shall be included in all
+'copies or substantial portions of the Software.
+
+'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+'IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+'FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+'AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+'LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+'SOFTWARE.
+
+'Code contribution by FabPei (https://github.com/FabPei)
+
 
 #If VBA7 And Win64 Then
-    ' 64-bit Declarations
     Private Declare PtrSafe Function GetDC Lib "user32" (ByVal hwnd As LongPtr) As LongPtr
     Private Declare PtrSafe Function ReleaseDC Lib "user32" (ByVal hwnd As LongPtr, ByVal hdc As LongPtr) As Long
     Private Declare PtrSafe Function GetPixel Lib "gdi32" (ByVal hdc As LongPtr, ByVal x As Long, ByVal y As Long) As Long
     Private Declare PtrSafe Function GetCursorPos Lib "user32" (lpPoint As POINTAPI) As Long
 #Else
-    ' 32-bit Declarations
     Private Declare Function GetDC Lib "user32" (ByVal hwnd As Long) As Long
     Private Declare Function ReleaseDC Lib "user32" (ByVal hwnd As Long, ByVal hdc As Long) As Long
     Private Declare Function GetPixel Lib "gdi32" (ByVal hdc As Long, ByVal x As Long, ByVal y As Long) As Long
     Private Declare Function GetCursorPos Lib "user32" (lpPoint As POINTAPI) As Long
 #End If
 
-' Structure to store the mouse coordinates (x, y)
 Private Type POINTAPI
     x As Long
     y As Long
 End Type
 
-' --- Helper Function: GetPixelColor ---
 
 #If VBA7 And Win64 Then
     Private Function GetPixelColor() As Long
@@ -57,46 +70,39 @@ End Type
     End Function
 #End If
 
-' --- Apply Pixel Color to FILL ---
-
 Public Sub ApplyPixelColorToFill()
-    Dim oSh As Shape
+    Dim oSh As shape
     Dim lColor As Long
     
     If ActiveWindow.Selection.Type <> ppSelectionShapes Then
-        MsgBox "Please select one or more shapes before running the macro.", vbExclamation
+        MsgBox "Please select one or more shapes.", vbExclamation
         Exit Sub
     End If
     
     lColor = GetPixelColor()
     
     For Each oSh In ActiveWindow.Selection.ShapeRange
-        ' Apply the captured color to the shape's fill
         On Error Resume Next
         oSh.Fill.ForeColor.RGB = lColor
         On Error GoTo 0
     Next oSh
 End Sub
 
-' --- Apply Pixel Color to OUTLINE (Line) ---
-
 Public Sub ApplyPixelColorToOutline()
-    Dim oSh As Shape
+    Dim oSh As shape
     Dim lColor As Long
     
     If ActiveWindow.Selection.Type <> ppSelectionShapes Then
-        MsgBox "Please select one or more shapes before running the macro.", vbExclamation
+        MsgBox "Please select one or more shapes.", vbExclamation
         Exit Sub
     End If
     
     lColor = GetPixelColor()
     
     For Each oSh In ActiveWindow.Selection.ShapeRange
-        ' Apply the captured color to the shape's line/outline
         On Error Resume Next
         
-        ' Ensure the line is visible before setting the color
-        oSh.Line.Visible = msoTrue
+        oSh.Line.visible = msoTrue
         oSh.Line.ForeColor.RGB = lColor
         
         On Error GoTo 0
