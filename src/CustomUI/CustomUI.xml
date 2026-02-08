@@ -462,6 +462,25 @@
                         <menuSeparator id="RAGStatusSeparator" />
                         <button id="AverageRAGStatus" label="Average based on selected RAG status-shapes" onAction="AverageRAGStatus" />
                      </menu>
+                     <menu id="LegendMenu" label="Legend" imageMso="SlidesPerPage3Slides" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
+                        <button id="LegendSquareVerticalThree" label="3 squares vertical" onAction="InsertLegendSquareVerticalThree"/>
+                        <button id="LegendSquareVerticalFive" label="5 squares vertical" onAction="InsertLegendSquareVerticalFive"/>
+                        <button id="LegendSquareVerticalTen" label="10 squares vertical" onAction="InsertLegendSquareVerticalTen"/>
+                        <menuSeparator id="LegendsSeparator1" />
+                        <button id="LegendCircleVerticalThreed" label="3 circles vertical" onAction="InsertLegendCircleVerticalThree"/>
+                        <button id="LegendCircleVerticalFive" label="5 circles vertical" onAction="InsertLegendCircleVerticalFive"/>
+                        <button id="LegendCircleVerticalTen" label="10 circles vertical" onAction="InsertLegendCircleVerticalTen"/>
+                        <menuSeparator id="LegendsSeparator2" />
+                        <button id="LegendSquareHorizontalThree" label="3 squares horizontal" onAction="InsertLegendSquareHorizontalThree"/>
+                        <button id="LegendSquareHorizontalFive" label="5 squares horizontal" onAction="InsertLegendSquareHorizontalFive"/>
+                        <button id="LegendSquareHorizontalTen" label="10 squares horizontal" onAction="InsertLegendSquareHorizontalTen"/>
+                        <menuSeparator id="LegendsSeparator3" />
+                        <button id="LegendCircleHorizontalThree" label="3 circles horizontal" onAction="InsertLegendCircleHorizontalThree"/>
+                        <button id="LegendCircleHorizontalFive" label="5 circles horizontal" onAction="InsertLegendCircleHorizontalFive"/>
+                        <button id="LegendCircleHorizontalTen" label="10 circles horizontal" onAction="InsertLegendCircleHorizontalTen"/>
+                        <menuSeparator id="LegendsSeparator4" />
+                        <button id="LegendInsertCustom" label="Custom" onAction="ShowCustomInsertLegend" />
+                     </menu>
                      <splitButton id="CaptionSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                         <button id="NewCaptionButton" label="Insert caption for selected shape" imageMso="CaptionInsert" onAction="InsertCaption" />
                         <menu id="CaptionMenu" itemSize="normal">
@@ -1022,6 +1041,25 @@
                       <menuSeparator id="TabViewRAGStatusSeparator" />
                      <button id="TabViewAverageRAGStatus" label="Average based on selected RAG status-shapes" onAction="AverageRAGStatus" />
                   </menu>
+                  <menu id="TabViewLegendMenu" label="Legend" imageMso="SlidesPerPage3Slides" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
+                        <button id="TabViewLegendSquareVerticalThree" label="3 squares vertical" onAction="InsertLegendSquareVerticalThree"/>
+                        <button id="TabViewLegendSquareVerticalFive" label="5 squares vertical" onAction="InsertLegendSquareVerticalFive"/>
+                        <button id="TabViewLegendSquareVerticalTen" label="10 squares vertical" onAction="InsertLegendSquareVerticalTen"/>
+                        <menuSeparator id="TabViewLegendsSeparator1" />
+                        <button id="TabViewLegendCircleVerticalThreed" label="3 circles vertical" onAction="InsertLegendCircleVerticalThree"/>
+                        <button id="TabViewLegendCircleVerticalFive" label="5 circles vertical" onAction="InsertLegendCircleVerticalFive"/>
+                        <button id="TabViewLegendCircleVerticalTen" label="10 circles vertical" onAction="InsertLegendCircleVerticalTen"/>
+                        <menuSeparator id="TabViewLegendsSeparator2" />
+                        <button id="TabViewLegendSquareHorizontalThree" label="3 squares horizontal" onAction="InsertLegendSquareHorizontalThree"/>
+                        <button id="TabViewLegendSquareHorizontalFive" label="5 squares horizontal" onAction="InsertLegendSquareHorizontalFive"/>
+                        <button id="TabViewLegendSquareHorizontalTen" label="10 squares horizontal" onAction="InsertLegendSquareHorizontalTen"/>
+                        <menuSeparator id="TabViewLegendsSeparator3" />
+                        <button id="TabViewLegendCircleHorizontalThree" label="3 circles horizontal" onAction="InsertLegendCircleHorizontalThree"/>
+                        <button id="TabViewLegendCircleHorizontalFive" label="5 circles horizontal" onAction="InsertLegendCircleHorizontalFive"/>
+                        <button id="TabViewLegendCircleHorizontalTen" label="10 circles horizontal" onAction="InsertLegendCircleHorizontalTen"/>
+                        <menuSeparator id="TabViewLegendsSeparator4" />
+                        <button id="TabViewLegendInsertCustom" label="Custom" onAction="ShowCustomInsertLegend" />
+                     </menu>
                   <splitButton id="TabViewCaptionSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                      <button id="TabViewNewCaptionButton" label="Insert caption for selected shape" imageMso="CaptionInsert" onAction="InsertCaption" />
                      <menu id="TabViewCaptionMenu" itemSize="normal">
