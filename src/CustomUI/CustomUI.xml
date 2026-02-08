@@ -571,6 +571,7 @@
                         <menuSeparator id="separatorManualMailMerge" />
                         <button id="ManualMailMerge" label="Manually replace all merge fields on all slides" showLabel="false" imageMso="MailMergeDocument" onAction="ManualMailMerge" />
                      </menu>
+                  <button id="ShowFeatureSearchButton" label="Find Instrumenta features" imageMso="ResearchPane" showLabel="false" onAction="ShowFeatureSearch" />
                   <button id="ShowSettingsDialogButton" label="Instrumenta settings" imageMso="FormatCellsDialog" showLabel="false" onAction="ShowSettings" />
                   <button id="ShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" />
                </group>
@@ -1150,6 +1151,7 @@
                      <menuSeparator id="TabViewseparatorManualMailMerge" />
                      <button id="TabViewManualMailMerge" label="Manually replace all merge fields on all slides" showLabel="false" imageMso="MailMergeDocument" onAction="ManualMailMerge" />
                   </menu>
+               <button id="TabViewShowFeatureSearchButton" label="Find Instrumenta features" imageMso="ResearchPane" showLabel="false" onAction="ShowFeatureSearch" />       
                <button id="TabViewShowSettingsDialogButton" label="Instrumenta settings" imageMso="FormatCellsDialog" showLabel="false" onAction="ShowSettings" />
                <button id="TabViewShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" />
             </group>
