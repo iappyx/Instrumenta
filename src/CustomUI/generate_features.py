@@ -81,10 +81,10 @@ def extract_features(root, parent_map):
             hierarchy += f" > {group_label}"
 
         if menu_label:
-            hierarchy += f" > Inside menu {menu_label}"
+            hierarchy += f" > Inside menu '{menu_label}'"
 
         if split_label:
-            hierarchy += f" > Inside splitbutton {split_label}"
+            hierarchy += f" > Inside splitbutton '{split_label}'"
 
         features[ctrl_id] = {
             "label": ctrl_label,
