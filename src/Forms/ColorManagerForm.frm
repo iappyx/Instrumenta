@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ColorManagerForm 
    Caption         =   "Color replacer"
-   ClientHeight    =   5040
+   ClientHeight    =   5385
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   10710
@@ -39,12 +39,9 @@ Option Explicit
 Private ColorData As String
 Private TotalColors As Long
 Private SelectedColorRGB As Long
-Private SlideScope As String
 
 Public Sub ShowColors(colors() As ColorInfo, colorCount As Long, elapsed As Double, scope As String)
-    
-    SlideScope = scope
-    
+       
     Dim i As Long
     Dim colorStr As String
     
@@ -72,6 +69,7 @@ Public Sub ShowColors(colors() As ColorInfo, colorCount As Long, elapsed As Doub
     
     Me.Show vbModeless
 End Sub
+
 
 
 Private Sub lblNewColorPreview_Click()
@@ -200,19 +198,44 @@ Private Sub cmdReplaceColor_Click()
     End If
     
     Dim msg As String
-    msg = "Replace all instances of " & txtOldColor.Text & " with the new color in " & SlideScope & "?" & vbCrLf & vbCrLf
+    msg = "Replace all instances of " & txtOldColor.Text & " with the new color in " & RecolorSlideScope & "?" & vbCrLf & vbCrLf
     msg = msg & "This action cannot be undone (except via Ctrl+Z)."
     
     If MsgBox(msg, vbQuestion + vbYesNo, "Confirm Color Replacement") = vbYes Then
+        
+        With ModuleColorScanner.RecolorUserPerm
+        .AllowFill = chkFill.Value
+        .AllowLine = chkLine.Value
+        .AllowText = chkText.Value
+        .AllowTableFill = chkTableFill.Value
+        .AllowTableBorders = chkTableBorders.Value
+        .AllowChart = chkChart.Value
+        .AllowBackground = chkBackground.Value
+        End With
+
+               
         Me.Hide
-        ModuleColorScanner.ReplaceColor SelectedColorRGB, newRGB, SlideScope
+        
+        
+        If RecolorSlideScope = "selected shapes" Then
+        ModuleColorScanner.ReplaceColorInSelectedShapes SelectedColorRGB, newRGB
+        Unload Me
+        ModuleColorScanner.ScanColorsInSelectedShapes
+        Else
+        ModuleColorScanner.ReplaceColor SelectedColorRGB, newRGB, RecolorSlideScope
         Unload Me
         ModuleColorScanner.ScanAndManageColors
+        End If
+               
+
+     
+        
     End If
 End Sub
 
 
 Private Sub cmdClose_Click()
+    RecolorSlideScope = ""
     Unload Me
 End Sub
 

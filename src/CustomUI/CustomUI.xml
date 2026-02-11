@@ -552,7 +552,12 @@
                      <button id="cleaning8" label="Watermark and then convert all/selected slides to pictures (readonly)" imageMso="WatermarkCustomDialog" onAction="InsertWatermarkAndConvertSlidesToPictures" />
                      <button id="cleaning9" label="Anonymize all/selected slides with Lorem Ipsum" imageMso="Clear" onAction="AnonymizeWithLoremIpsum" />
                   </menu>
-                  <button id="ReplaceColorsButton" label="Replace colors" imageMso="ColorGrayscaleMenu" showLabel="false" onAction="ScanAndManageColors" />
+                  <splitButton id="ReplaceColorSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
+                     <button id="ReplaceColorsShapesButton" label="Replace colors in selected shapes" imageMso="ColorGrayscaleMenu" showLabel="false" onAction="ScanColorsInSelectedShapes" />
+                     <menu id="ReplaceColorsMenu" itemSize="normal">
+                     <button id="ReplaceColorsButton" label="Replace colors in all/selected slides" imageMso="ColorGrayscaleMenu" showLabel="false" onAction="ScanAndManageColors" />
+                     </menu>
+                  </splitButton>     
                   <toggleButton idMso="SelectionPane" showLabel="false" />
                   <splitButton id="TagsSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                      <button id="ShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="NameDefine" onAction="ShowFormManageTags" />
@@ -1133,7 +1138,12 @@
                   <button id="TabViewcleaning8" label="Watermark and then convert all/selected slides to pictures (readonly)" imageMso="WatermarkCustomDialog" onAction="InsertWatermarkAndConvertSlidesToPictures" />
                   <button id="TabViewcleaning9" label="Anonymize all/selected slides with Lorem Ipsum" imageMso="Clear" onAction="AnonymizeWithLoremIpsum" />
                </menu>
-               <button id="TabViewReplaceColorsButton" label="Replace colors" imageMso="ColorGrayscaleMenu" showLabel="false" onAction="ScanAndManageColors" />    
+                  <splitButton id="TabViewReplaceColorSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
+                     <button id="TabViewReplaceColorsShapesButton" label="Replace colors in selected shapes" imageMso="ColorGrayscaleMenu" showLabel="false" onAction="ScanColorsInSelectedShapes" />
+                     <menu id="TabViewReplaceColorsMenu" itemSize="normal">
+                     <button id="TabViewReplaceColorsButton" label="Replace colors in all/selected slides" imageMso="ColorGrayscaleMenu" showLabel="false" onAction="ScanAndManageColors" />
+                     </menu>
+                  </splitButton>   
                <toggleButton idMso="SelectionPane" showLabel="false" />
                <splitButton id="TabViewTagsSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                   <button id="TabViewShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="NameDefine" onAction="ShowFormManageTags" />

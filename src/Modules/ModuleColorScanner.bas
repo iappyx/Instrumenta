@@ -35,33 +35,95 @@ End Type
 
 Private colors() As ColorInfo
 Private colorCount As Long
+Global RecolorSlideScope As String
+
+Public Type RecolorUserPermissions
+    AllowFill As Boolean
+    AllowLine As Boolean
+    AllowText As Boolean
+    AllowTableFill As Boolean
+    AllowTableBorders As Boolean
+    AllowChart As Boolean
+    AllowBackground As Boolean
+End Type
+
+Public RecolorUserPerm As RecolorUserPermissions
+
+
+Public Sub ScanColorsInSelectedShapes()
+    Dim startTime As Double
+    startTime = Timer
+
+    ReDim colors(1 To 1000) As ColorInfo
+    colorCount = 0
+    
+    RecolorSlideScope = "selected shapes"
+    
+    ScanSelectedShapesOnly
+    ConsolidateColors
+    ShowColorResults startTime, "selected shapes"
+End Sub
+
+
+Public Sub ScanSelectedShapesOnly()
+    Dim shp As shape
+    On Error Resume Next
+
+    For Each shp In ActiveWindow.Selection.ShapeRange
+        ScanShape shp
+    Next shp
+
+    On Error GoTo 0
+End Sub
+
+
+Public Sub ReplaceColorInSelectedShapes(oldRGB As Long, newRGB As Long)
+    Dim shp As shape
+    Dim count As Long
+
+    On Error Resume Next
+
+    For Each shp In ActiveWindow.Selection.ShapeRange
+        count = count + ReplaceShapeColor(shp, oldRGB, newRGB)
+    Next shp
+
+    On Error GoTo 0
+
+    MsgBox "Replaced " & count & " instance(s) of the color in selected shapes.", _
+           vbInformation, "Color Replacement Complete"
+End Sub
+
+
 
 Public Sub ScanAndManageColors()
     Dim startTime As Double
-    Dim SlideScope As String
     
     startTime = Timer
     
-    SlideScope = CallToSlideScopesForm()
+    If RecolorSlideScope = "" Or RecolorSlideScope = "selected shapes" Then
+    RecolorSlideScope = CallToSlideScopesForm()
+    End If
     
-    Select Case SlideScope
+    Select Case RecolorSlideScope
         Case "cancel"
             Exit Sub
             
-        Case "selected"
+        Case "selected", "selected slides"
             ReDim colors(1 To 1000) As ColorInfo
             colorCount = 0
 
             ScanSelectedSlides
             ConsolidateColors
+            RecolorSlideScope = "selected slides"
             ShowColorResults startTime, "selected slides"
             
-        Case "all"
+        Case "all", "all slides"
             ReDim colors(1 To 1000) As ColorInfo
             colorCount = 0
             
             ScanAllSlides
             ConsolidateColors
+            RecolorSlideScope = "all slides"
             ShowColorResults startTime, "all slides"
             
     End Select
@@ -401,6 +463,9 @@ Public Sub ReplaceColor(oldRGB As Long, newRGB As Long, scope As String)
 End Sub
 
 Private Function ReplaceSlideBackgroundColor(sld As Slide, oldRGB As Long, newRGB As Long) As Long
+    
+    If Not RecolorUserPerm.AllowBackground Then Exit Function
+
     Dim count As Long
     count = 0
     
@@ -435,7 +500,7 @@ Private Function ReplaceShapeColor(shp As shape, oldRGB As Long, newRGB As Long)
         Exit Function
     End If
     
-        If shp.Fill.visible Then
+        If shp.Fill.visible And RecolorUserPerm.AllowFill Then
             If shp.Fill.Type = msoFillSolid Then
                 If shp.Fill.ForeColor.Type = msoColorTypeRGB _
                    Or shp.Fill.ForeColor.Type = msoColorTypeScheme Then
@@ -444,7 +509,7 @@ Private Function ReplaceShapeColor(shp As shape, oldRGB As Long, newRGB As Long)
                         count = count + 1
                     End If
                 End If
-        ElseIf shp.Fill.Type = msoFillGradient Then
+        ElseIf shp.Fill.Type = msoFillGradient And RecolorUserPerm.AllowFill Then
             Dim i As Long
             For i = 1 To shp.Fill.GradientStops.count
                 If shp.Fill.GradientStops(i).Color.Type = msoColorTypeRGB _
@@ -458,7 +523,7 @@ Private Function ReplaceShapeColor(shp As shape, oldRGB As Long, newRGB As Long)
         End If
     End If
 
-    If shp.Line.visible Then
+    If shp.Line.visible And RecolorUserPerm.AllowLine Then
         If shp.Line.ForeColor.Type = msoColorTypeRGB _
            Or shp.Line.ForeColor.Type = msoColorTypeScheme Then
             If shp.Line.ForeColor.RGB = oldRGB Then
@@ -468,17 +533,19 @@ Private Function ReplaceShapeColor(shp As shape, oldRGB As Long, newRGB As Long)
         End If
     End If
     
-    If shp.HasTextFrame Then
+    If shp.HasTextFrame And RecolorUserPerm.AllowText Then
         If shp.TextFrame.HasText Then
             count = count + ReplaceTextColor(shp.TextFrame.textRange, oldRGB, newRGB)
         End If
     End If
     
     If shp.HasTable Then
+    If RecolorUserPerm.AllowTableFill Or RecolorUserPerm.AllowTableBorders Then
         count = count + ReplaceTableColors(shp.table, oldRGB, newRGB)
     End If
+    End If
     
-    If shp.HasChart Then
+    If shp.HasChart And RecolorUserPerm.AllowChart Then
         count = count + ReplaceChartColors(shp.Chart, oldRGB, newRGB)
     End If
     
@@ -519,7 +586,7 @@ Private Function ReplaceTableColors(tbl As table, oldRGB As Long, newRGB As Long
             If tbl.cell(r, c).shape.Fill.visible Then
             If tbl.cell(r, c).shape.Fill.ForeColor.Type = msoColorTypeRGB _
                Or tbl.cell(r, c).shape.Fill.ForeColor.Type = msoColorTypeScheme Then
-                If tbl.cell(r, c).shape.Fill.ForeColor.RGB = oldRGB Then
+                If tbl.cell(r, c).shape.Fill.ForeColor.RGB = oldRGB And RecolorUserPerm.AllowTableFill Then
                     tbl.cell(r, c).shape.Fill.ForeColor.RGB = newRGB
                     count = count + 1
                 End If
@@ -528,7 +595,7 @@ Private Function ReplaceTableColors(tbl As table, oldRGB As Long, newRGB As Long
 
             count = count + ReplaceCellBorderColors(tbl.cell(r, c), oldRGB, newRGB)
 
-            If tbl.cell(r, c).shape.HasTextFrame Then
+            If tbl.cell(r, c).shape.HasTextFrame And RecolorUserPerm.AllowText Then
                 If tbl.cell(r, c).shape.TextFrame.HasText Then
                     count = count + ReplaceTextColor(tbl.cell(r, c).shape.TextFrame.textRange, oldRGB, newRGB)
                 End If
@@ -541,6 +608,9 @@ Private Function ReplaceTableColors(tbl As table, oldRGB As Long, newRGB As Long
 End Function
 
 Private Function ReplaceCellBorderColors(cell As cell, oldRGB As Long, newRGB As Long) As Long
+
+If Not RecolorUserPerm.AllowTableBorders Then Exit Function
+
     Dim count As Long
     count = 0
     
@@ -591,6 +661,9 @@ End If
 End Function
 
 Private Function ReplaceChartColors(cht As Chart, oldRGB As Long, newRGB As Long) As Long
+
+    If Not RecolorUserPerm.AllowChart Then Exit Function
+    
     Dim count As Long
     Dim ser As Series
     Dim pt As Point
