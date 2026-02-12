@@ -40,6 +40,11 @@ Private ColorData As String
 Private TotalColors As Long
 Private SelectedColorRGB As Long
 
+Private Sub UpdateReplaceButtonState()
+    cmdReplaceColor.Enabled = (chkFill.Value Or chkLine.Value Or chkText.Value Or chkTableFill.Value Or chkTableBorders.Value Or chkChart.Value Or chkBackground.Value)
+End Sub
+
+
 Public Sub ShowColors(colors() As ColorInfo, colorCount As Long, elapsed As Double, scope As String)
        
     Dim i As Long
@@ -140,6 +145,7 @@ Private Sub lstColors_Click()
     
     Dim rows() As String
     Dim fields() As String
+    Dim usageStr As String
     
     rows = Split(ColorData, "||")
     
@@ -156,11 +162,56 @@ Private Sub lstColors_Click()
                                   "Used " & fields(5) & " time(s) in: " & fields(6)
             
             txtOldColor.Text = fields(4)
-            
             cmdReplaceColor.Enabled = True
+            
+            chkFill.Value = False
+            chkLine.Value = False
+            chkText.Value = False
+            chkTableFill.Value = False
+            chkTableBorders.Value = False
+            chkChart.Value = False
+            chkBackground.Value = False
+            
+            usageStr = fields(6)
+            
+            chkFill.Enabled = (InStr(1, usageStr, "Shape Fill", vbTextCompare) > 0) _
+                           Or (InStr(1, usageStr, "Gradient Fill", vbTextCompare) > 0)
+            
+            chkLine.Enabled = (InStr(1, usageStr, "Line/Border", vbTextCompare) > 0)
+            
+            chkText.Enabled = (InStr(1, usageStr, "Font Color", vbTextCompare) > 0)
+            
+            chkTableFill.Enabled = (InStr(1, usageStr, "Table Cell Fill", vbTextCompare) > 0)
+            
+            chkTableBorders.Enabled = (InStr(1, usageStr, "Table Border", vbTextCompare) > 0)
+            
+            chkChart.Enabled = (InStr(1, usageStr, "Chart Series", vbTextCompare) > 0) _
+                            Or (InStr(1, usageStr, "Chart Point", vbTextCompare) > 0)
+            
+            chkBackground.Enabled = (InStr(1, usageStr, "Slide Background", vbTextCompare) > 0)
+            
+            chkFill.Value = chkFill.Enabled
+            chkLine.Value = chkLine.Enabled
+            chkText.Value = chkText.Enabled
+            chkTableFill.Value = chkTableFill.Enabled
+            chkTableBorders.Value = chkTableBorders.Enabled
+            chkChart.Value = chkChart.Enabled
+            chkBackground.Value = chkBackground.Enabled
+            
+            chkFill.Value = chkFill.Enabled
+            chkLine.Value = chkLine.Enabled
+            chkText.Value = chkText.Enabled
+            chkTableFill.Value = chkTableFill.Enabled
+            chkTableBorders.Value = chkTableBorders.Enabled
+            chkChart.Value = chkChart.Enabled
+            chkBackground.Value = chkBackground.Enabled
+            
+            UpdateReplaceButtonState
+            
         End If
     End If
 End Sub
+
 
 Private Sub cmdPickNewColor_Click()
 
@@ -280,3 +331,32 @@ Private Function ParseColorInput(colorStr As String) As Long
 ParseError:
     ParseColorInput = -1
 End Function
+
+Private Sub chkFill_Click()
+    UpdateReplaceButtonState
+End Sub
+
+Private Sub chkLine_Click()
+    UpdateReplaceButtonState
+End Sub
+
+Private Sub chkText_Click()
+    UpdateReplaceButtonState
+End Sub
+
+Private Sub chkTableFill_Click()
+    UpdateReplaceButtonState
+End Sub
+
+Private Sub chkTableBorders_Click()
+    UpdateReplaceButtonState
+End Sub
+
+Private Sub chkChart_Click()
+    UpdateReplaceButtonState
+End Sub
+
+Private Sub chkBackground_Click()
+    UpdateReplaceButtonState
+End Sub
+

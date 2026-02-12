@@ -113,6 +113,7 @@ Private Sub LoadInstrumentaFeatures()
     AddFeature "DecreaseMargins", "Decrease margins", "ObjectsMarginsDecrease", "Shapes", "Instrumenta > Shapes", "[Shapes] > Shapes"
     AddFeature "ApplySameCropToSelectedImages", "Apply same crop to selected pictures", "ApplySameCropToSelectedImages", "Pictures", "Instrumenta > Pictures > Inside splitbutton 'PictureCrop'", "[Shapes] > Pictures > Inside splitbutton 'PictureCrop'"
     AddFeature "PictureCropToSlide", "Crop picture or shape to slide", "PictureCropToSlide", "Pictures", "Instrumenta > Pictures > Inside splitbutton 'PictureCrop'", "[Shapes] > Pictures > Inside splitbutton 'PictureCrop'"
+    AddFeature "PictureCropToPadding", "Trim picture padding by edge color", "CropSelectedImageByDominantEdgeColor", "Pictures", "Instrumenta > Pictures > Inside splitbutton 'PictureCrop'", "[Shapes] > Pictures > Inside splitbutton 'PictureCrop'"
     AddFeature "ObjectsAlignLeftsButton", "Align left", "ObjectsAlignLefts", "Align, distribute and size", "Instrumenta > Align, distribute and size", "[Shapes] > Align, distribute and size"
     AddFeature "ObjectsAlignCentersButton", "Align center", "ObjectsAlignCenters", "Align, distribute and size", "Instrumenta > Align, distribute and size", "[Shapes] > Align, distribute and size"
     AddFeature "ObjectsAlignRightsButton", "Align right", "ObjectsAlignRights", "Align, distribute and size", "Instrumenta > Align, distribute and size", "[Shapes] > Align, distribute and size"

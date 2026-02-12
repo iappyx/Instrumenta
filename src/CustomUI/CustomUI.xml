@@ -183,7 +183,8 @@
                      <toggleButton idMso="PictureCrop" showLabel="false" />
                      <menu id="PictureCropMenu" itemSize="normal">
                         <button id="ApplySameCropToSelectedImages" label="Apply same crop to selected pictures" showLabel="false" onAction="ApplySameCropToSelectedImages" />
-                        <button id="PictureCropToSlide" label="Crop picture or shape to slide" showLabel="false" onAction="PictureCropToSlide" />       
+                        <button id="PictureCropToSlide" label="Crop picture or shape to slide" showLabel="false" onAction="PictureCropToSlide" />
+                        <button id="PictureCropToPadding" label="Trim picture padding by edge color" showLabel="false" onAction="CropSelectedImageByDominantEdgeColor" />                            
                      </menu>
                   </splitButton>
                   <button idMso="PictureReset" showLabel="false" />
@@ -764,7 +765,8 @@
                   <toggleButton idMso="PictureCrop" showLabel="false" />
                   <menu id="TabViewPictureCropMenu" itemSize="normal">
                      <button id="TabViewApplySameCropToSelectedImages" label="Apply same crop to selected pictures" showLabel="false" onAction="ApplySameCropToSelectedImages" />
-                     <button id="TabViewPictureCropToSlide" label="Crop picture or shape to slide" showLabel="false" onAction="PictureCropToSlide" />       
+                     <button id="TabViewPictureCropToSlide" label="Crop picture or shape to slide" showLabel="false" onAction="PictureCropToSlide" /> 
+                     <button id="TabViewPictureCropToPadding" label="Trim picture padding by edge color" showLabel="false" onAction="CropSelectedImageByDominantEdgeColor" />       
                   </menu>
                </splitButton>
                <button idMso="PictureReset" showLabel="false" />
