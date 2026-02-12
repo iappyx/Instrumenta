@@ -75,9 +75,9 @@ Sub ResizeAndSpaceEvenly(SpacingType As String)
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
     
@@ -94,23 +94,23 @@ Sub ResizeAndSpaceEvenly(SpacingType As String)
     
         ObjectsSortByLeftPosition SlideShape
            
-        TotalWidth = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape))) - GetRealLeft(SlideShape(1))
-        SpaceWidth = CSng(UserInput)
-        ShapeSize = (TotalWidth - (UBound(SlideShape) - 1) * SpaceWidth) / UBound(SlideShape)
+        totalWidth = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape))) - GetRealLeft(SlideShape(1))
+        spaceWidth = CSng(UserInput)
+        ShapeSize = (totalWidth - (UBound(SlideShape) - 1) * spaceWidth) / UBound(SlideShape)
         
         SetRealWidth SlideShape(1), ShapeSize
         
         For ShapeCount = 2 To UBound(SlideShape)
             SetRealWidth SlideShape(ShapeCount), ShapeSize
-            SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(1)) + (ShapeSize + SpaceWidth) * (ShapeCount - 1)
+            SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(1)) + (ShapeSize + spaceWidth) * (ShapeCount - 1)
         Next ShapeCount
     
     ElseIf SpacingType = "evenhorizontalpreservefirst" Then
     
         ObjectsSortByLeftPosition SlideShape
            
-        TotalWidth = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape))) - GetRealLeft(SlideShape(1))
-        SpaceWidth = CSng(UserInput)
+        totalWidth = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape))) - GetRealLeft(SlideShape(1))
+        spaceWidth = CSng(UserInput)
         
         TotalShapeWidth = 0
         
@@ -118,11 +118,11 @@ Sub ResizeAndSpaceEvenly(SpacingType As String)
             TotalShapeWidth = TotalShapeWidth + GetRealWidth(SlideShape(ShapeCount))
         Next ShapeCount
         
-        ShapeSizeIncrease = ((TotalWidth - (UBound(SlideShape) - 1) * SpaceWidth) - GetRealWidth(SlideShape(1)) - TotalShapeWidth) / (UBound(SlideShape) - 1)
+        ShapeSizeIncrease = ((totalWidth - (UBound(SlideShape) - 1) * spaceWidth) - GetRealWidth(SlideShape(1)) - TotalShapeWidth) / (UBound(SlideShape) - 1)
         
         For ShapeCount = 2 To UBound(SlideShape)
             SetRealWidth SlideShape(ShapeCount), GetRealWidth(SlideShape(ShapeCount)) + ShapeSizeIncrease
-            SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(ShapeCount - 1)) + GetRealWidth(SlideShape(ShapeCount - 1)) + (SpaceWidth)
+            SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(ShapeCount - 1)) + GetRealWidth(SlideShape(ShapeCount - 1)) + (spaceWidth)
         Next ShapeCount
     
     
@@ -130,8 +130,8 @@ Sub ResizeAndSpaceEvenly(SpacingType As String)
     
         ObjectsSortByLeftPosition SlideShape
            
-        TotalWidth = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape))) - GetRealLeft(SlideShape(1))
-        SpaceWidth = CSng(UserInput)
+        totalWidth = GetRealLeft(SlideShape(UBound(SlideShape))) + GetRealWidth(SlideShape(UBound(SlideShape))) - GetRealLeft(SlideShape(1))
+        spaceWidth = CSng(UserInput)
         
         TotalShapeWidth = 0
         
@@ -139,13 +139,13 @@ Sub ResizeAndSpaceEvenly(SpacingType As String)
             TotalShapeWidth = TotalShapeWidth + GetRealWidth(SlideShape(ShapeCount))
         Next ShapeCount
         
-        ShapeSizeIncrease = ((TotalWidth - (UBound(SlideShape) - 1) * SpaceWidth) - GetRealWidth(SlideShape(UBound(SlideShape))) - TotalShapeWidth) / (UBound(SlideShape) - 1)
+        ShapeSizeIncrease = ((totalWidth - (UBound(SlideShape) - 1) * spaceWidth) - GetRealWidth(SlideShape(UBound(SlideShape))) - TotalShapeWidth) / (UBound(SlideShape) - 1)
                
         SetRealWidth SlideShape(1), GetRealWidth(SlideShape(1)) + ShapeSizeIncrease
         
         For ShapeCount = 2 To (UBound(SlideShape) - 1)
             SetRealWidth SlideShape(ShapeCount), GetRealWidth(SlideShape(ShapeCount)) + ShapeSizeIncrease
-            SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(ShapeCount - 1)) + GetRealWidth(SlideShape(ShapeCount - 1)) + (SpaceWidth)
+            SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(ShapeCount - 1)) + GetRealWidth(SlideShape(ShapeCount - 1)) + (spaceWidth)
         Next ShapeCount
    
     ElseIf SpacingType = "evenvertical" Then
@@ -227,9 +227,9 @@ Sub ObjectsStretchTop()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -260,9 +260,9 @@ Sub ObjectsStretchLeft()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -292,9 +292,9 @@ Sub ObjectsStretchBottom()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -323,9 +323,9 @@ Sub ObjectsStretchRight()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -354,9 +354,9 @@ Sub ObjectsStretchTopShapeBottom()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -387,9 +387,9 @@ Sub ObjectsStretchLeftShapeRight()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -419,9 +419,9 @@ Sub ObjectsStretchBottomShapeTop()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -450,9 +450,9 @@ Sub ObjectsStretchRightShapeLeft()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -480,9 +480,9 @@ Sub ObjectsRemoveSpacingHorizontal()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -491,6 +491,37 @@ Sub ObjectsRemoveSpacingHorizontal()
     For ShapeCount = 2 To UBound(SlideShape)
         SetRealLeft SlideShape(ShapeCount), GetRealLeft(SlideShape(ShapeCount - 1)) + GetRealWidth(SlideShape(ShapeCount - 1))
     Next ShapeCount
+       
+End Sub
+
+Sub ObjectsRemoveSpacingHorizontalRight()
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    Dim ShapeCount  As Long
+    Dim SlideShape() As shape
+
+    If MyDocument.Selection.HasChildShapeRange Then
+        Set ShapeRange = MyDocument.Selection.ChildShapeRange
+    Else
+        Set ShapeRange = MyDocument.Selection.ShapeRange
+    End If
+
+    ReDim SlideShape(1 To ShapeRange.count)
+
+    For ShapeCount = 1 To ShapeRange.count
+        Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByLeftPosition SlideShape
+    
+    For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
+        SetRealLeft SlideShape(ShapeCount), _
+            GetRealLeft(SlideShape(ShapeCount + 1)) - GetRealWidth(SlideShape(ShapeCount))
+    Next ShapeCount
+    
 End Sub
 
 Sub ObjectsRemoveSpacingVertical()
@@ -508,9 +539,9 @@ Sub ObjectsRemoveSpacingVertical()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -519,6 +550,37 @@ Sub ObjectsRemoveSpacingVertical()
     For ShapeCount = 2 To UBound(SlideShape)
         SetRealTop SlideShape(ShapeCount), GetRealTop(SlideShape(ShapeCount - 1)) + GetRealHeight(SlideShape(ShapeCount - 1))
     Next ShapeCount
+
+End Sub
+
+Sub ObjectsRemoveSpacingVerticalDown()
+
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
+    
+    Dim ShapeCount  As Long
+    Dim SlideShape() As shape
+
+    If MyDocument.Selection.HasChildShapeRange Then
+        Set ShapeRange = MyDocument.Selection.ChildShapeRange
+    Else
+        Set ShapeRange = MyDocument.Selection.ShapeRange
+    End If
+
+    ReDim SlideShape(1 To ShapeRange.count)
+
+    For ShapeCount = 1 To ShapeRange.count
+        Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
+    Next ShapeCount
+
+    ObjectsSortByTopPosition SlideShape
+    
+    For ShapeCount = UBound(SlideShape) - 1 To 1 Step -1
+    SetRealTop SlideShape(ShapeCount), _
+        GetRealTop(SlideShape(ShapeCount + 1)) - GetRealHeight(SlideShape(ShapeCount))
+    Next ShapeCount
+
 End Sub
 
 Sub ObjectsIncreaseSpacingHorizontal()
@@ -536,9 +598,9 @@ Sub ObjectsIncreaseSpacingHorizontal()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -564,9 +626,9 @@ Sub ObjectsDecreaseSpacingHorizontal()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -592,9 +654,9 @@ Sub ObjectsIncreaseSpacingVertical()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -620,9 +682,9 @@ Sub ObjectsDecreaseSpacingVertical()
         Set ShapeRange = MyDocument.Selection.ShapeRange
     End If
 
-    ReDim SlideShape(1 To ShapeRange.Count)
+    ReDim SlideShape(1 To ShapeRange.count)
 
-    For ShapeCount = 1 To ShapeRange.Count
+    For ShapeCount = 1 To ShapeRange.count
         Set SlideShape(ShapeCount) = ShapeRange(ShapeCount)
     Next ShapeCount
 
@@ -686,13 +748,13 @@ End Sub
 
 Sub ObjectsQuicksortTopLeftToBottomRight(SlideShapeRange As ShapeRange)
     
-    If SlideShapeRange.Count = 0 Then Exit Sub
+    If SlideShapeRange.count = 0 Then Exit Sub
     
     Dim ArrayToSort() As shape
-    ReDim ArrayToSort(1 To SlideShapeRange.Count)
+    ReDim ArrayToSort(1 To SlideShapeRange.count)
     
     
-    For i = 1 To SlideShapeRange.Count
+    For i = 1 To SlideShapeRange.count
         Set ArrayToSort(i) = SlideShapeRange(i)
     Next i
     
@@ -802,10 +864,10 @@ Sub ObjectsAlignLefts()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
-        If MyDocument.Selection.ChildShapeRange.Count > 1 Then
+        If MyDocument.Selection.ChildShapeRange.count > 1 Then
             
             Left1 = GetRealLeft(MyDocument.Selection.ChildShapeRange(1))
-            Left2 = GetRealLeft(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
+            Left2 = GetRealLeft(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count))
             MyDocument.Selection.ChildShapeRange.Align msoAlignLefts, msoFalse
         End If
         
@@ -821,12 +883,12 @@ Sub ObjectsAlignLefts()
             Next sh
         End If
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignLefts, msoTrue
     Else
         
         Left1 = GetRealLeft(MyDocument.Selection.ShapeRange(1))
-        Left2 = GetRealLeft(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count))
+        Left2 = GetRealLeft(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count))
         
         MyDocument.Selection.ShapeRange.Align msoAlignLefts, msoFalse
         
@@ -855,10 +917,10 @@ Sub ObjectsAlignTops()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
-        If MyDocument.Selection.ChildShapeRange.Count > 1 Then
+        If MyDocument.Selection.ChildShapeRange.count > 1 Then
             
             Top1 = GetRealTop(MyDocument.Selection.ChildShapeRange(1))
-            Top2 = GetRealTop(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
+            Top2 = GetRealTop(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count))
             
             MyDocument.Selection.ChildShapeRange.Align msoAlignTops, msoFalse
         End If
@@ -875,12 +937,12 @@ Sub ObjectsAlignTops()
             Next sh
         End If
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignTops, msoTrue
     Else
         
         Top1 = GetRealTop(MyDocument.Selection.ShapeRange(1))
-        Top2 = GetRealTop(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count))
+        Top2 = GetRealTop(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count))
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
             
@@ -912,10 +974,10 @@ Sub ObjectsAlignRights()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
-        If MyDocument.Selection.ChildShapeRange.Count > 1 Then
+        If MyDocument.Selection.ChildShapeRange.count > 1 Then
             
             Right1 = GetRealLeft(MyDocument.Selection.ChildShapeRange(1)) + GetRealWidth(MyDocument.Selection.ChildShapeRange(1))
-            Right2 = GetRealLeft(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count)) + GetRealWidth(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
+            Right2 = GetRealLeft(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count)) + GetRealWidth(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count))
             
             If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
                 
@@ -937,12 +999,12 @@ Sub ObjectsAlignRights()
             
         End If
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignRights, msoTrue
     Else
         
         Right1 = GetRealLeft(MyDocument.Selection.ShapeRange(1)) + GetRealWidth(MyDocument.Selection.ShapeRange(1))
-        Right2 = GetRealLeft(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count)) + GetRealWidth(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count))
+        Right2 = GetRealLeft(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count)) + GetRealWidth(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count))
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
             
@@ -977,10 +1039,10 @@ Sub ObjectsAlignBottoms()
     
     If MyDocument.Selection.HasChildShapeRange Then
         
-        If MyDocument.Selection.ChildShapeRange.Count > 1 Then
+        If MyDocument.Selection.ChildShapeRange.count > 1 Then
             
             Bottom1 = GetRealTop(MyDocument.Selection.ChildShapeRange(1)) + GetRealHeight(MyDocument.Selection.ChildShapeRange(1))
-            Bottom2 = GetRealTop(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count)) + GetRealHeight(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count))
+            Bottom2 = GetRealTop(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count)) + GetRealHeight(MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count))
             
             If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
                 
@@ -1002,12 +1064,12 @@ Sub ObjectsAlignBottoms()
             
         End If
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignBottoms, msoTrue
     Else
         
         Bottom1 = GetRealTop(MyDocument.Selection.ShapeRange(1)) + GetRealHeight(MyDocument.Selection.ShapeRange(1))
-        Bottom2 = GetRealTop(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count)) + GetRealHeight(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count))
+        Bottom2 = GetRealTop(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count)) + GetRealHeight(MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count))
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
             
@@ -1039,10 +1101,10 @@ Sub ObjectsAlignCenters()
     
     If MyDocument.Selection.HasChildShapeRange Then
         
-        If MyDocument.Selection.ChildShapeRange.Count > 1 Then
+        If MyDocument.Selection.ChildShapeRange.count > 1 Then
             
-            Center1 = MyDocument.Selection.ChildShapeRange(1).left + (MyDocument.Selection.ChildShapeRange(1).Width / 2)
-            Center2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).left + (MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Width / 2)
+            Center1 = MyDocument.Selection.ChildShapeRange(1).left + (MyDocument.Selection.ChildShapeRange(1).width / 2)
+            Center2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count).left + (MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count).width / 2)
             
             If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
                 
@@ -1051,24 +1113,24 @@ Sub ObjectsAlignCenters()
             ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
                 
                 For Each SlideShape In MyDocument.Selection.ChildShapeRange
-                    SlideShape.left = Center1 - (SlideShape.Width / 2)
+                    SlideShape.left = Center1 - (SlideShape.width / 2)
                 Next SlideShape
                 
             ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
                 
                 For Each SlideShape In MyDocument.Selection.ChildShapeRange
-                    SlideShape.left = Center2 - (SlideShape.Width / 2)
+                    SlideShape.left = Center2 - (SlideShape.width / 2)
                 Next SlideShape
                 
             End If
             
         End If
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignCenters, msoTrue
     Else
         
-        Center1 = MyDocument.Selection.ShapeRange(1).left + (MyDocument.Selection.ShapeRange(1).Width / 2)
-        Center2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).left + (MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Width / 2)
+        Center1 = MyDocument.Selection.ShapeRange(1).left + (MyDocument.Selection.ShapeRange(1).width / 2)
+        Center2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count).left + (MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count).width / 2)
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
             
@@ -1077,13 +1139,13 @@ Sub ObjectsAlignCenters()
         ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
             
             For Each SlideShape In MyDocument.Selection.ShapeRange
-                SlideShape.left = Center1 - (SlideShape.Width / 2)
+                SlideShape.left = Center1 - (SlideShape.width / 2)
             Next SlideShape
             
         ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
             
             For Each SlideShape In MyDocument.Selection.ShapeRange
-                SlideShape.left = Center2 - (SlideShape.Width / 2)
+                SlideShape.left = Center2 - (SlideShape.width / 2)
             Next SlideShape
             
         End If
@@ -1099,10 +1161,10 @@ Sub ObjectsAlignMiddles()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     If MyDocument.Selection.HasChildShapeRange Then
-        If MyDocument.Selection.ChildShapeRange.Count > 1 Then
+        If MyDocument.Selection.ChildShapeRange.count > 1 Then
             
-            Middle1 = MyDocument.Selection.ChildShapeRange(1).Top + (MyDocument.Selection.ChildShapeRange(1).Height / 2)
-            Middle2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Top + (MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.Count).Height / 2)
+            Middle1 = MyDocument.Selection.ChildShapeRange(1).Top + (MyDocument.Selection.ChildShapeRange(1).height / 2)
+            Middle2 = MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count).Top + (MyDocument.Selection.ChildShapeRange(MyDocument.Selection.ChildShapeRange.count).height / 2)
             
             If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
                 
@@ -1111,24 +1173,24 @@ Sub ObjectsAlignMiddles()
             ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
                 
                 For Each SlideShape In MyDocument.Selection.ChildShapeRange
-                    SlideShape.Top = Middle1 - (SlideShape.Height / 2)
+                    SlideShape.Top = Middle1 - (SlideShape.height / 2)
                 Next SlideShape
                 
             ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
                 
                 For Each SlideShape In MyDocument.Selection.ChildShapeRange
-                    SlideShape.Top = Middle2 - (SlideShape.Height / 2)
+                    SlideShape.Top = Middle2 - (SlideShape.height / 2)
                 Next SlideShape
                 
             End If
             
         End If
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         MyDocument.Selection.ShapeRange.Align msoAlignMiddles, msoTrue
     Else
         
-        Middle1 = MyDocument.Selection.ShapeRange(1).Top + (MyDocument.Selection.ShapeRange(1).Height / 2)
-        Middle2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Top + (MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.Count).Height / 2)
+        Middle1 = MyDocument.Selection.ShapeRange(1).Top + (MyDocument.Selection.ShapeRange(1).height / 2)
+        Middle2 = MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count).Top + (MyDocument.Selection.ShapeRange(MyDocument.Selection.ShapeRange.count).height / 2)
         
         If GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 0 Then
             
@@ -1137,13 +1199,13 @@ Sub ObjectsAlignMiddles()
         ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 1 Then
             
             For Each SlideShape In MyDocument.Selection.ShapeRange
-                SlideShape.Top = Middle1 - (SlideShape.Height / 2)
+                SlideShape.Top = Middle1 - (SlideShape.height / 2)
             Next SlideShape
             
         ElseIf GetSetting("Instrumenta", "AlignDistributeSize", "DefaultAlignmentMethod", "0") = 2 Then
             
             For Each SlideShape In MyDocument.Selection.ShapeRange
-                SlideShape.Top = Middle2 - (SlideShape.Height / 2)
+                SlideShape.Top = Middle2 - (SlideShape.height / 2)
             Next SlideShape
             
         End If
@@ -1158,14 +1220,14 @@ Sub ObjectsDistributeHorizontally()
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    If MyDocument.Selection.ShapeRange.Count > 2 Then
+    If MyDocument.Selection.ShapeRange.count > 2 Then
         MyDocument.Selection.ShapeRange.Distribute msoDistributeHorizontally, msoFalse
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
      MyDocument.Selection.ShapeRange.Align msoAlignCenters, msoTrue
         
     ElseIf MyDocument.Selection.HasChildShapeRange Then
         
-        If MyDocument.Selection.ChildShapeRange.Count > 2 Then
+        If MyDocument.Selection.ChildShapeRange.count > 2 Then
             MyDocument.Selection.ChildShapeRange.Distribute msoDistributeHorizontally, msoFalse
         End If
     End If
@@ -1177,15 +1239,15 @@ Sub ObjectsDistributeVertically()
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
-    If MyDocument.Selection.ShapeRange.Count > 2 Then
+    If MyDocument.Selection.ShapeRange.count > 2 Then
         MyDocument.Selection.ShapeRange.Distribute msoDistributeVertically, msoFalse
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
     
      MyDocument.Selection.ShapeRange.Align msoAlignMiddles, msoTrue
     
     ElseIf MyDocument.Selection.HasChildShapeRange Then
         
-        If MyDocument.Selection.ChildShapeRange.Count > 2 Then
+        If MyDocument.Selection.ChildShapeRange.count > 2 Then
             
             MyDocument.Selection.ChildShapeRange.Distribute msoDistributeVertically, msoFalse
             
@@ -1210,7 +1272,7 @@ Sub ArrangeShapes()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     For Each SlideShape In SelectedShapeRange
-    SlideShape.Name = "Shape " & SlideShape.id
+    SlideShape.Name = "Shape " & SlideShape.ID
         
     Next SlideShape
     
@@ -1241,23 +1303,23 @@ Sub ArrangeShapes()
     Next SlideShape
     
     Dim GroupNames() As String
-    ReDim GroupNames(ShapeGroups.Count - 1)
+    ReDim GroupNames(ShapeGroups.count - 1)
     
-    For i = 1 To ShapeGroups.Count
+    For i = 1 To ShapeGroups.count
         GroupNames(i - 1) = "ColumnGroup" & i & " " & NameRandomizer
     Next i
     
     For Each ShapeGroup In ShapeGroups
         Dim ShapeNames() As String
-        ReDim ShapeNames(ShapeGroup.Count - 1)
+        ReDim ShapeNames(ShapeGroup.count - 1)
         
         a = a + 1
         
-        For i = 1 To ShapeGroup.Count
+        For i = 1 To ShapeGroup.count
             ShapeNames(i - 1) = ShapeGroup(i).Name
         Next i
         
-        If ShapeGroup.Count > 1 Then
+        If ShapeGroup.count > 1 Then
             MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames).Align msoAlignCenters, msoFalse
             'MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames).Distribute msoDistributeVertically, msoFalse
             Set ColumnGroup = MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames).Group
@@ -1271,7 +1333,7 @@ Sub ArrangeShapes()
         End If
     Next ShapeGroup
     
-    If ShapeGroups.Count > 2 Then
+    If ShapeGroups.count > 2 Then
     MyDocument.Selection.SlideRange.Shapes.Range(GroupNames).Distribute msoDistributeHorizontally, msoFalse
     End If
     
@@ -1306,23 +1368,23 @@ Sub ArrangeShapes()
     
     a = 0
     Dim GroupNames2() As String
-    ReDim GroupNames2(ShapeGroups.Count - 1)
+    ReDim GroupNames2(ShapeGroups.count - 1)
     
-    For i = 1 To ShapeGroups.Count
+    For i = 1 To ShapeGroups.count
         GroupNames2(i - 1) = "RowGroup" & i & " " & NameRandomizer
     Next i
     
     For Each ShapeGroup In ShapeGroups
         Dim ShapeNames2() As String
-        ReDim ShapeNames2(ShapeGroup.Count - 1)
+        ReDim ShapeNames2(ShapeGroup.count - 1)
         
         a = a + 1
         
-        For i = 1 To ShapeGroup.Count
+        For i = 1 To ShapeGroup.count
             ShapeNames2(i - 1) = ShapeGroup(i).Name
         Next i
         
-        If ShapeGroup.Count > 1 Then
+        If ShapeGroup.count > 1 Then
             MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames2).Align msoAlignMiddles, msoFalse
             'MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames2).Distribute msoDistributeHorizontally, msoFalse
             Set RowGroup = MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames2).Group
@@ -1336,7 +1398,7 @@ Sub ArrangeShapes()
         End If
     Next ShapeGroup
     
-    If ShapeGroups.Count > 2 Then
+    If ShapeGroups.count > 2 Then
     MyDocument.Selection.SlideRange.Shapes.Range(GroupNames2).Distribute msoDistributeVertically, msoFalse
     End If
     

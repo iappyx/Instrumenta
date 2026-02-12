@@ -238,10 +238,20 @@
                      <button id="ObjectsSizeNarrowest" getImage="RibbonObjectGetImage" label="Size to narrowest" showLabel="false" onAction="ObjectsSizeToNarrowest" />
                   </box>
                   <separator id="separatorSpacing" />
-                  <button id="ObjectsRemoveSpaceHorizontal" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingHorizontal" />
+                  <splitButton id="ObjectsRemoveSpaceHorizontalSplitButton" size="normal" showLabel="false"> 
+                  <button id="ObjectsRemoveSpaceHorizontal" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes (direction left)" showLabel="false" onAction="ObjectsRemoveSpacingHorizontal" />
+                  <menu id="ObjectsRemoveSpaceHorizontalMenu" itemSize="normal">
+                     <button id="ObjectsRemoveSpaceHorizontalRight" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes (direction right)" showLabel="false" onAction="ObjectsRemoveSpacingHorizontalRight" />
+                   </menu>
+                   </splitButton>
                   <button id="ObjectsIncreaseSpacingHorizontal" imageMso="HorizontalSpacingIncrease" label="Increase horizontal gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingHorizontal" />
-                  <button id="ObjectsDecreaseSpacingHorizontal" imageMso="HorizontalSpacingDecrease" label="Decrease horizontal gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingHorizontal" />
-                  <button id="ObjectsRemoveSpaceVertical" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingVertical" />
+                  <button id="ObjectsDecreaseSpacingHorizontal" imageMso="HorizontalSpacingDecrease" label="Decrease horizontal gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingHorizontal" />                  
+                  <splitButton id="ObjectsRemoveSpaceVerticalSplitButton" size="normal" showLabel="false"> 
+                  <button id="ObjectsRemoveSpaceVertical" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes (direction up)" showLabel="false" onAction="ObjectsRemoveSpacingVertical" />
+                  <menu id="ObjectsRemoveSpaceVerticalMenu" itemSize="normal">
+                     <button id="ObjectsRemoveSpaceVerticalDown" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes (direction down)" showLabel="false" onAction="ObjectsRemoveSpacingVerticalDown" />
+                   </menu>
+                   </splitButton>
                   <button id="ObjectsIncreaseSpacingVertical" imageMso="VerticalSpacingIncrease" label="Increase vertical gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingVertical" />
                   <button id="ObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />
                   <separator id="separatorTableAlign" />
@@ -820,10 +830,20 @@
                   <button id="TabViewObjectsSizeNarrowest" getImage="RibbonObjectGetImage" label="Size to narrowest" showLabel="false" onAction="ObjectsSizeToNarrowest" />
                </box>
                <separator id="TabViewseparatorSpacing" />
-               <button id="TabViewObjectsRemoveSpaceHorizontal" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingHorizontal" />
+                  <splitButton id="TabViewObjectsRemoveSpaceHorizontalSplitButton" size="normal" showLabel="false"> 
+                  <button id="TabViewObjectsRemoveSpaceHorizontal" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes (direction left)" showLabel="false" onAction="ObjectsRemoveSpacingHorizontal" />
+                  <menu id="TabViewObjectsRemoveSpaceHorizontalMenu" itemSize="normal">
+                     <button id="TabViewObjectsRemoveSpaceHorizontalRight" imageMso="ObjectsAlignDistributeHorizontallyRemove" label="Remove horizontal gap between shapes (direction right)" showLabel="false" onAction="ObjectsRemoveSpacingHorizontalRight" />
+                   </menu>
+                   </splitButton>
                <button id="TabViewObjectsIncreaseSpacingHorizontal" imageMso="HorizontalSpacingIncrease" label="Increase horizontal gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingHorizontal" />
                <button id="TabViewObjectsDecreaseSpacingHorizontal" imageMso="HorizontalSpacingDecrease" label="Decrease horizontal gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingHorizontal" />
-               <button id="TabViewObjectsRemoveSpaceVertical" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes" showLabel="false" onAction="ObjectsRemoveSpacingVertical" />
+                  <splitButton id="TabViewObjectsRemoveSpaceVerticalSplitButton" size="normal" showLabel="false"> 
+                  <button id="TabViewObjectsRemoveSpaceVertical" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes (direction up)" showLabel="false" onAction="ObjectsRemoveSpacingVertical" />
+                  <menu id="TabViewObjectsRemoveSpaceVerticalMenu" itemSize="normal">
+                     <button id="TabViewObjectsRemoveSpaceVerticalDown" imageMso="ObjectsAlignDistributeVerticallyRemove" label="Remove vertical gap between shapes (direction down)" showLabel="false" onAction="ObjectsRemoveSpacingVerticalDown" />
+                   </menu>
+                   </splitButton>                            
                <button id="TabViewObjectsIncreaseSpacingVertical" imageMso="VerticalSpacingIncrease" label="Increase vertical gap between shapes" showLabel="false" onAction="ObjectsIncreaseSpacingVertical" />
                <button id="TabViewObjectsDecreaseSpacingVertical" imageMso="VerticalSpacingDecrease" label="Decrease vertical gap between shapes" showLabel="false" onAction="ObjectsDecreaseSpacingVertical" />
                <separator id="TabViewseparatorTableAlign" />
