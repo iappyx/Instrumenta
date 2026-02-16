@@ -77,6 +77,25 @@ Private Sub LoadInstrumentaFeatures()
     AddFeature "SwapTextButton", "Swap text (no formatting)", "ObjectsSwapTextNoFormatting", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
     AddFeature "SwapTextButton2", "Swap text (with formatting)", "ObjectsSwapText", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
     AddFeature "ChangeSpellCheckLanguage", "Set proofing language on all objects and all slides", "ShowChangeSpellCheckLanguageForm", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
+    AddFeature "ApplyH1", "Apply heading 1", "ApplyH1", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "ApplyH2", "Apply heading 2", "ApplyH2", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "ApplyH3", "Apply heading 3", "ApplyH3", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "ApplyParagraph", "Apply paragraph", "ApplyParagraph", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "ApplyQuote", "Apply quote", "ApplyQuote", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "ApplyCustom1", "Apply custom style 1", "ApplyCustom1", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "ApplyCustom2", "Apply custom style 2", "ApplyCustom2", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "ApplyCustom3", "Apply custom style 3", "ApplyCustom3", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "ApplyCustom4", "Apply custom style 4", "ApplyCustom4", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "ApplyCustom5", "Apply custom style 5", "ApplyCustom5", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "StylesUpdateFullShapeStyles", "None", "UpdateFullShapeStyles", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "StylesExportStylesToPPTX", "Export Stylesheet", "ExportStylesToPPTX", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "StylesImportStylesFromPPTX", "Import Stylesheet", "ImportStylesFromPPTX", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "StylesOpenStyleSheet", "Open slide master stylesheet", "OpenStyleSheet", "Styles", "Instrumenta > Styles > Inside splitbutton 'Open slide master stylesheet'", "Instrumenta [Text] > Styles > Inside splitbutton 'Open slide master stylesheet'"
+    AddFeature "StylesCreateStyleSheetLayout", "Create stylesheet on master of current slide", "CreateStyleSheetLayout", "Styles", "Instrumenta > Styles > Inside splitbutton 'Open slide master stylesheet'", "Instrumenta [Text] > Styles > Inside splitbutton 'Open slide master stylesheet'"
+    AddFeature "StylesCreateStyleSheetOnAllMasters", "Create stylesheets on all masters", "CreateStyleSheetOnAllMasters", "Styles", "Instrumenta > Styles > Inside splitbutton 'Open slide master stylesheet'", "Instrumenta [Text] > Styles > Inside splitbutton 'Open slide master stylesheet'"
+    AddFeature "StylesRemoveStylesheet", "Remove stylesheet (current master)", "RemoveInstrumentaStylesheet", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "StylesRemoveStyleSheetsFromAllMasters", "Remove stylesheets (all masters)", "RemoveStyleSheetsFromAllMasters", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "StylesRemoveAllStyleTags", "Remove all style tags", "RemoveAllInstrumentaStyleTags", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
     AddFeature "CloneSelectionRight", "Clone selection to right", "ObjectsCloneRight", "Shapes", "Instrumenta > Shapes", "[Shapes] > Shapes"
     AddFeature "CloneSelectionDown", "Clone selection down", "ObjectsCloneDown", "Shapes", "Instrumenta > Shapes", "[Shapes] > Shapes"
     AddFeature "ObjectSetPositionDialog", "Set position", "InitialiseSetPositionAppEventHandler", "Shapes", "Instrumenta > Shapes > Inside splitbutton 'Set position'", "[Shapes] > Shapes > Inside splitbutton 'Set position'"
@@ -322,6 +341,7 @@ Private Sub LoadInstrumentaFeatures()
     AddFeature "ShowFeatureSearchButton", "Find Instrumenta features", "ShowFeatureSearch", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
     AddFeature "ShowSettingsDialogButton", "Instrumenta settings", "ShowSettings", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
     AddFeature "ShowAboutDialogButton", "Show about dialog", "ShowAboutDialog", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
+ 
     
     ReDim Preserve Features(1 To FeatureCount) As FeatureData
     

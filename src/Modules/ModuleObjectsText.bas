@@ -38,13 +38,13 @@ Sub ConvertTextToShapes()
                     ShapeText.TextFrame2.AutoSize = msoAutoSizeShapeToFitText
                     
                     With ShapeText.TextFrame2
-                        Set TempRectangle = ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, ShapeText.left, ShapeText.Top, ShapeText.Width + .textRange.BoundWidth + .marginRight, ShapeText.Height + .textRange.BoundHeight + .MarginBottom)
+                        Set TempRectangle = ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, ShapeText.left, ShapeText.Top, ShapeText.width + .textRange.BoundWidth + .marginRight, ShapeText.height + .textRange.BoundHeight + .MarginBottom)
                     End With
                     ShapeText.Fill.visible = msoFalse
                     ShapeText.Line.visible = msoFalse
                     TempRectangle.Fill.visible = msoTrue
                     TempRectangle.Line.visible = msoFalse
-                    Set SlideShapeRange = ActiveWindow.Selection.SlideRange.Shapes.Range(Array(ShapeText.Name, TempRectangle.Name))
+                    Set SlideShapeRange = ActiveWindow.Selection.SlideRange.Shapes.Range(Array(ShapeText.name, TempRectangle.name))
                     SlideShapeRange.Select
                     CommandBars.ExecuteMso ("ShapesIntersect")
                     
@@ -92,9 +92,9 @@ Sub ObjectsTextToggleCase()
                 
                 Set SlideTable = SlideShape.table
                 
-                For i = 1 To SlideTable.Rows.Count
-                    For j = 1 To SlideTable.Columns.Count
-                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.textRange
+                For i = 1 To SlideTable.rows.count
+                    For j = 1 To SlideTable.Columns.count
+                        Set SelectedTextRange = SlideTable.cell(i, j).shape.TextFrame.textRange
                         SelectedTextRange.ChangeCase (1 + (CurrentCase + 1) Mod 4)
                     Next j
                 Next i
@@ -127,10 +127,10 @@ Sub ObjectsTextAddPeriods()
                 
                 Set SlideTable = SlideShape.table
                 
-                For i = 1 To SlideTable.Rows.Count
-                    For j = 1 To SlideTable.Columns.Count
+                For i = 1 To SlideTable.rows.count
+                    For j = 1 To SlideTable.Columns.count
                         
-                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.textRange
+                        Set SelectedTextRange = SlideTable.cell(i, j).shape.TextFrame.textRange
                         
                         SelectedTextRange.AddPeriods
                     Next j
@@ -169,10 +169,10 @@ Sub ObjectsTextRemovePeriods()
                 
                 Set SlideTable = SlideShape.table
                 
-                For i = 1 To SlideTable.Rows.Count
-                    For j = 1 To SlideTable.Columns.Count
+                For i = 1 To SlideTable.rows.count
+                    For j = 1 To SlideTable.Columns.count
                         
-                        Set SelectedTextRange = SlideTable.Cell(i, j).shape.TextFrame.textRange
+                        Set SelectedTextRange = SlideTable.cell(i, j).shape.TextFrame.textRange
                         
                         SelectedTextRange.RemovePeriods
                     Next j
@@ -197,7 +197,7 @@ Sub ObjectsTextDeleteStrikethrough()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
        
-    ElseIf MyDocument.Selection.ShapeRange.Count > 0 Then
+    ElseIf MyDocument.Selection.ShapeRange.count > 0 Then
         
         For Each SlideShape In MyDocument.Selection.ShapeRange
             
@@ -205,9 +205,9 @@ Sub ObjectsTextDeleteStrikethrough()
                 
                 If SlideShape.TextFrame.HasText Then
                     
-                    For i = SlideShape.TextFrame2.textRange.Characters.Count To 1 Step -1
+                    For i = SlideShape.TextFrame2.textRange.Characters.count To 1 Step -1
                         If SlideShape.TextFrame2.textRange.Characters(i, 1).Font.Strikethrough = True Then
-                            SlideShape.TextFrame2.textRange.Characters(i, 1).Delete
+                            SlideShape.TextFrame2.textRange.Characters(i, 1).delete
                         End If
                     Next i
                     
@@ -218,9 +218,9 @@ Sub ObjectsTextDeleteStrikethrough()
                     If GroupShape.HasTextFrame Then
                         If GroupShape.TextFrame.HasText Then
                             
-                            For j = GroupShape.TextFrame2.textRange.Characters.Count To 1 Step -1
+                            For j = GroupShape.TextFrame2.textRange.Characters.count To 1 Step -1
                                 If GroupShape.TextFrame2.textRange.Characters(j, 1).Font.Strikethrough = True Then
-                                    GroupShape.TextFrame2.textRange.Characters(j, 1).Delete
+                                    GroupShape.TextFrame2.textRange.Characters(j, 1).delete
                                 End If
                             Next j
                             
@@ -236,14 +236,14 @@ Sub ObjectsTextDeleteStrikethrough()
                     Dim SlideTable As table
                     Set SlideTable = SlideShape.table
                     
-                    For i = 1 To SlideTable.Rows.Count
-                        For j = 1 To SlideTable.Columns.Count
-                            If SlideTable.Cell(i, j).shape.HasTextFrame Then
-                                If SlideTable.Cell(i, j).shape.TextFrame.HasText Then
+                    For i = 1 To SlideTable.rows.count
+                        For j = 1 To SlideTable.Columns.count
+                            If SlideTable.cell(i, j).shape.HasTextFrame Then
+                                If SlideTable.cell(i, j).shape.TextFrame.HasText Then
                                     
-                                    For k = SlideTable.Cell(i, j).shape.TextFrame2.textRange.Characters.Count To 1 Step -1
-                                        If SlideTable.Cell(i, j).shape.TextFrame2.textRange.Characters(k, 1).Font.Strikethrough = True Then
-                                            SlideTable.Cell(i, j).shape.TextFrame2.textRange.Characters(k, 1).Delete
+                                    For k = SlideTable.cell(i, j).shape.TextFrame2.textRange.Characters.count To 1 Step -1
+                                        If SlideTable.cell(i, j).shape.TextFrame2.textRange.Characters(k, 1).Font.Strikethrough = True Then
+                                            SlideTable.cell(i, j).shape.TextFrame2.textRange.Characters(k, 1).delete
                                         End If
                                     Next k
                                     
@@ -274,7 +274,7 @@ Sub ObjectsTextColorBold(ColorAutomatic)
      
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
-    ElseIf MyDocument.Selection.ShapeRange.Count > 0 Then
+    ElseIf MyDocument.Selection.ShapeRange.count > 0 Then
         
         For Each SlideShape In MyDocument.Selection.ShapeRange
             
@@ -285,24 +285,24 @@ Sub ObjectsTextColorBold(ColorAutomatic)
                     Set ShapeTextRange = SlideShape.TextFrame.textRange
                     
                     If SlideShape.Fill.ForeColor.RGB <> BoldColor Then
-                        For i = 1 To ShapeTextRange.Characters.Count
+                        For i = 1 To ShapeTextRange.Characters.count
                             If ShapeTextRange.Characters(i, 1).Font.Bold = True Then
                                 If BoldColor = -1 Then
                                     
-                                    BoldColor = ShapeTextRange.Characters(i, 1).Font.Color.RGB
+                                    BoldColor = ShapeTextRange.Characters(i, 1).Font.color.RGB
                                     
                                     If ColorAutomatic = False Then
                                     BoldColor = ColorDialog(BoldColor)
                                     
                                     If SlideShape.Fill.ForeColor.RGB <> BoldColor Then
-                                    ShapeTextRange.Characters(i, 1).Font.Color.RGB = BoldColor
+                                    ShapeTextRange.Characters(i, 1).Font.color.RGB = BoldColor
                                     End If
                                     
                                     End If
                                     
                                 Else
                                     If SlideShape.Fill.ForeColor.RGB <> BoldColor Then
-                                        ShapeTextRange.Characters(i, 1).Font.Color = BoldColor
+                                        ShapeTextRange.Characters(i, 1).Font.color = BoldColor
                                         
                                     End If
                                 End If
@@ -317,23 +317,23 @@ Sub ObjectsTextColorBold(ColorAutomatic)
                         If GroupShape.TextFrame.HasText Then
                             Set ShapeTextRange = GroupShape.TextFrame.textRange
                             If GroupShape.Fill.ForeColor.RGB <> BoldColor Then
-                                For j = 1 To ShapeTextRange.Characters.Count
+                                For j = 1 To ShapeTextRange.Characters.count
                                     If ShapeTextRange.Characters(j, 1).Font.Bold = True Then
                                         If BoldColor = -1 Then
-                                            BoldColor = ShapeTextRange.Characters(j, 1).Font.Color.RGB
+                                            BoldColor = ShapeTextRange.Characters(j, 1).Font.color.RGB
                                             
                                             If ColorAutomatic = False Then
                                             BoldColor = ColorDialog(BoldColor)
                                             
                                             If SlideShape.Fill.ForeColor.RGB <> BoldColor Then
-                                            ShapeTextRange.Characters(j, 1).Font.Color.RGB = BoldColor
+                                            ShapeTextRange.Characters(j, 1).Font.color.RGB = BoldColor
                                             End If
                                             
                                             End If
                                             
                                         Else
                                             If GroupShape.Fill.ForeColor.RGB <> BoldColor Then
-                                                ShapeTextRange.Characters(j, 1).Font.Color = BoldColor
+                                                ShapeTextRange.Characters(j, 1).Font.color = BoldColor
                                             End If
                                         End If
                                     End If
@@ -350,19 +350,19 @@ Sub ObjectsTextColorBold(ColorAutomatic)
                     Dim SlideTable As table
                     Set SlideTable = SlideShape.table
                     
-                    For i = 1 To SlideTable.Rows.Count
-                        For j = 1 To SlideTable.Columns.Count
-                            If SlideTable.Cell(i, j).shape.HasTextFrame Then
-                                If SlideTable.Cell(i, j).shape.TextFrame.HasText Then
-                                    If SlideTable.Cell(i, j).shape.Fill.ForeColor.RGB <> BoldColor Then
-                                        Set ShapeTextRange = SlideTable.Cell(i, j).shape.TextFrame.textRange
-                                        For k = 1 To ShapeTextRange.Characters.Count
+                    For i = 1 To SlideTable.rows.count
+                        For j = 1 To SlideTable.Columns.count
+                            If SlideTable.cell(i, j).shape.HasTextFrame Then
+                                If SlideTable.cell(i, j).shape.TextFrame.HasText Then
+                                    If SlideTable.cell(i, j).shape.Fill.ForeColor.RGB <> BoldColor Then
+                                        Set ShapeTextRange = SlideTable.cell(i, j).shape.TextFrame.textRange
+                                        For k = 1 To ShapeTextRange.Characters.count
                                             If ShapeTextRange.Characters(k, 1).Font.Bold = True Then
                                                 If BoldColor = -1 Then
-                                                    BoldColor = ShapeTextRange.Characters(k, 1).Font.Color
+                                                    BoldColor = ShapeTextRange.Characters(k, 1).Font.color
                                                 Else
-                                                    If SlideTable.Cell(i, j).shape.Fill.ForeColor.RGB <> BoldColor Then
-                                                        ShapeTextRange.Characters(k, 1).Font.Color = BoldColor
+                                                    If SlideTable.cell(i, j).shape.Fill.ForeColor.RGB <> BoldColor Then
+                                                        ShapeTextRange.Characters(k, 1).Font.color = BoldColor
                                                     End If
                                                     
                                                 End If
@@ -385,119 +385,151 @@ Sub ObjectsTextColorBold(ColorAutomatic)
     End If
 End Sub
 
+
 Sub ObjectsTextSplitByParagraph()
-    
+
+    Dim MyDocument As DocumentWindow
+    Dim SlideShape As shape
+    Dim DuplicateShape As shape
+    Dim paraCount As Long
+    Dim paraHeight As Single
+    Dim i As Long
+
     Set MyDocument = Application.ActiveWindow
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf MyDocument.Selection.ShapeRange.Count > 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count > 1 Then
         
         MsgBox "Please Select one shape to split."
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
-        
-        Dim SlideShape As shape
-        Dim ShapeHeight As Integer
-        
-        Set SlideShape = MyDocument.Selection.ShapeRange(1)
-        
-        If SlideShape.HasTextFrame Then
-        
-        ShapeHeight = SlideShape.Height / SlideShape.TextFrame.textRange.Paragraphs.Count
-        
-        For i = SlideShape.TextFrame2.textRange.Paragraphs.Count To 1 Step -1
-            
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
 
-            Set DuplicateShape = SlideShape.Duplicate
-            
-            
-            SlideShape.TextFrame2.textRange.Paragraphs(i).Copy
-            DuplicateShape.TextFrame2.textRange.Paste
-            
-            DuplicateShape.Top = SlideShape.Top + ShapeHeight * (i - 1)
-            DuplicateShape.Height = ShapeHeight
-            DuplicateShape.left = SlideShape.left
-            
-            If DuplicateShape.TextFrame2.textRange.Text = "" Then
-            
-            DuplicateShape.Delete
-            
-            End If
-            
-        Next i
-        
-        SlideShape.Delete
-        
-        Else
-        
-            MsgBox "The selected shape has no textframe."
-        
-        End If
-        
-        
+    Set SlideShape = MyDocument.Selection.ShapeRange(1)
+
+    If Not SlideShape.HasTextFrame Then
+        MsgBox "The selected shape has no textframe."
+        Exit Sub
     End If
-    
-End Sub
 
+    paraCount = SlideShape.TextFrame2.textRange.Paragraphs.count
+    If paraCount = 0 Then Exit Sub
+
+    paraHeight = SlideShape.height / paraCount
+
+    For i = paraCount To 1 Step -1
+
+        Set DuplicateShape = SlideShape.Duplicate(1)
+
+        DuplicateShape.TextFrame2.textRange.text = ""
+
+        SlideShape.TextFrame2.textRange.Paragraphs(i).Copy
+        DoEvents
+
+        DuplicateShape.TextFrame2.textRange.Characters(1, 0).Paste
+        DoEvents
+
+        DuplicateShape.Top = SlideShape.Top + paraHeight * (i - 1)
+        DuplicateShape.left = SlideShape.left
+        DuplicateShape.height = paraHeight
+
+Dim tr As TextRange2
+Dim p As TextRange2
+
+Set tr = DuplicateShape.TextFrame2.textRange
+
+If Not DuplicateShape.TextFrame2.HasText Then
+    DuplicateShape.delete
+Else
+    If tr.Paragraphs.count = 1 Then
+        Set p = tr.Paragraphs(1)
+        If p.Length = 1 And (p.text = vbCr Or p.text = vbLf) Then
+            DuplicateShape.delete
+        End If
+    End If
+End If
+        
+    Next i
+    
+    SlideShape.delete
+    
+    End If
+
+End Sub
 
 Sub ObjectsTextMerge()
-    
+
+    Dim MyDocument As DocumentWindow
+    Dim SlideShape As shape
+    Dim SlideShapeRange As ShapeRange
+    Dim MergeShape As shape
+    Dim tgt As TextRange2
+    Dim src As TextRange2
+    Dim i As Long
+
     Set MyDocument = Application.ActiveWindow
-    
+
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
-        
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
-        MsgBox "Please select more than one shape."
-        
-    ElseIf MyDocument.Selection.ShapeRange.Count > 1 Then
-        
-        Dim SlideShape As shape
-        Dim SlideShapeRange As ShapeRange
-
-        Set SlideShapeRange = MyDocument.Selection.ShapeRange
-        Set SlideShape = SlideShapeRange(1)
-        
-        If SlideShape.HasTextFrame Then
-            
-            SlideShapeRange(1).TextFrame.textRange.InsertAfter vbCr
-            
-            For i = 2 To MyDocument.Selection.ShapeRange.Count
-                Set MergeShape = SlideShapeRange(i)
-                               
-                If MergeShape.HasTextFrame Then
-                    MergeShape.TextFrame2.textRange.Copy
-                    SlideShapeRange(1).TextFrame2.textRange.InsertAfter(MergeShape.TextFrame2.textRange).Paste
-                    SlideShapeRange(1).Height = SlideShapeRange(1).Height + MergeShape.Height
-                End If
-                
-            Next i
-            
-            For i = MyDocument.Selection.ShapeRange.Count To 2 Step -1
-                
-                If SlideShapeRange(i).HasTextFrame Then
-                    SlideShapeRange(i).Delete
-                End If
-                
-            Next i
-            
-        Else
-            MsgBox "The first selected shape has no textframe."
-            
-        End If
-        
+        Exit Sub
     End If
-    
+
+    If MyDocument.Selection.ShapeRange.count = 1 Then
+        MsgBox "Please select more than one shape."
+        Exit Sub
+    End If
+
+    Set SlideShapeRange = MyDocument.Selection.ShapeRange
+    Set SlideShape = SlideShapeRange(1)
+
+    If Not SlideShape.HasTextFrame Then
+        MsgBox "The first selected shape has no textframe."
+        Exit Sub
+    End If
+
+    Set tgt = SlideShape.TextFrame2.textRange
+
+    If tgt.Length > 0 Then
+        tgt.InsertAfter vbCrLf
+    End If
+
+    For i = 2 To SlideShapeRange.count
+
+        Set MergeShape = SlideShapeRange(i)
+
+        If MergeShape.HasTextFrame And MergeShape.TextFrame2.HasText Then
+
+            Set src = MergeShape.TextFrame2.textRange
+
+            If src.Length > 0 Then
+
+                src.Copy
+                DoEvents
+
+                With tgt
+                    .Characters(.Length + 1, 0).Paste
+                End With
+                DoEvents
+
+                tgt.InsertAfter vbCrLf
+            End If
+        End If
+    Next i
+
+    For i = SlideShapeRange.count To 2 Step -1
+        SlideShapeRange(i).delete
+    Next i
+
 End Sub
+
 
 
 Sub ObjectsTextInsertSpecialCharacter(SpecialCharacter As Long)
     
     If ActiveWindow.Selection.Type = ppSelectionText Then
         
-        Application.ActiveWindow.Selection.textRange.InsertSymbol Application.ActiveWindow.Selection.textRange.Font.Name, SpecialCharacter, MsoTriState.msoTrue
+        Application.ActiveWindow.Selection.textRange.InsertSymbol Application.ActiveWindow.Selection.textRange.Font.name, SpecialCharacter, MsoTriState.msoTrue
         
     End If
     
@@ -513,13 +545,13 @@ Sub ObjectsIncreaseLineSpacing()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsLineSpacingLoop MyDocument.Selection.ChildShapeRange(i), 0.1
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 
                 ObjectsLineSpacingLoop MyDocument.Selection.ShapeRange(i), 0.1
                 
@@ -541,13 +573,13 @@ Sub ObjectsDecreaseLineSpacing()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsLineSpacingLoop MyDocument.Selection.ChildShapeRange(i), -0.1
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 
                 ObjectsLineSpacingLoop MyDocument.Selection.ShapeRange(i), -0.1
                 
@@ -576,17 +608,17 @@ Sub ObjectsLineSpacingLoop(SlideShape, LineSpacingChange)
             If Not ActiveWindow.Selection.Type = ppSelectionText Then
                 
                 Set textRange = SlideShape.TextFrame.textRange
-                paragraphCount = textRange.Paragraphs.Count
+                paragraphCount = textRange.Paragraphs.count
                 
                 If SlideShape.TextFrame2.AutoSize = msoAutoSizeTextToFitShape Then
                     
                     Dim fontSizes() As Single
                     Dim spaceWithin() As Single
                     
-                    ReDim fontSizes(1 To textRange.Characters.Count)
+                    ReDim fontSizes(1 To textRange.Characters.count)
                     ReDim spaceWithin(1 To paragraphCount)
                     
-                    For i = 1 To textRange.Characters.Count
+                    For i = 1 To textRange.Characters.count
                         fontSizes(i) = textRange.Characters(i).Font.Size
                     Next i
                     
@@ -596,7 +628,7 @@ Sub ObjectsLineSpacingLoop(SlideShape, LineSpacingChange)
                     
                     SlideShape.TextFrame2.AutoSize = msoAutoSizeNone
                     
-                    For i = 1 To textRange.Characters.Count
+                    For i = 1 To textRange.Characters.count
                         textRange.Characters(i).Font.Size = fontSizes(i)
                     Next i
                     
@@ -631,7 +663,7 @@ Sub ObjectsLineSpacingLoop(SlideShape, LineSpacingChange)
             Else
                 
                 Set textRange = ActiveWindow.Selection.textRange
-                paragraphCount = textRange.Paragraphs.Count
+                paragraphCount = textRange.Paragraphs.count
                 
                 If LineSpacingChange < 0 Then
                     For i = 1 To paragraphCount
@@ -668,13 +700,13 @@ Sub ObjectsRemoveText()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsRemoveTextLoop MyDocument.Selection.ChildShapeRange(i)
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsRemoveTextLoop MyDocument.Selection.ShapeRange(i)
             Next i
             
@@ -698,7 +730,7 @@ Sub ObjectsRemoveTextLoop(SlideShape)
         
         If SlideShape.HasTextFrame Then
             
-            SlideShape.TextFrame.textRange.Text = ""
+            SlideShape.TextFrame.textRange.text = ""
             
         End If
         
@@ -713,11 +745,11 @@ Sub ObjectsRemoveHyperlinks()
         MsgBox "No shapes selected."
     Else
         If MyDocument.Selection.HasChildShapeRange Then
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsRemoveHyperlinksLoop MyDocument.Selection.ChildShapeRange(i)
             Next i
         Else
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsRemoveHyperlinksLoop MyDocument.Selection.ShapeRange(i)
             Next i
         End If
@@ -733,7 +765,7 @@ Sub ObjectsRemoveHyperlinksLoop(SlideShape)
         Next
     Else
         If SlideShape.HasTextFrame Then
-                SlideShape.TextFrame.textRange.ActionSettings(ppMouseClick).Hyperlink.Delete
+                SlideShape.TextFrame.textRange.ActionSettings(ppMouseClick).Hyperlink.delete
         End If
     End If
 End Sub
@@ -747,14 +779,14 @@ Sub ObjectsSwapTextNoFormatting()
         MsgBox "No shapes selected."
     Else
         
-        If MyDocument.Selection.ShapeRange.Count = 2 Then
+        If MyDocument.Selection.ShapeRange.count = 2 Then
             
             If MyDocument.Selection.ShapeRange(1).HasTextFrame And MyDocument.Selection.ShapeRange(2).HasTextFrame Then
                 
-                text1 = MyDocument.Selection.ShapeRange(1).TextFrame.textRange.Text
-                text2 = MyDocument.Selection.ShapeRange(2).TextFrame.textRange.Text
-                MyDocument.Selection.ShapeRange(1).TextFrame.textRange.Text = text2
-                MyDocument.Selection.ShapeRange(2).TextFrame.textRange.Text = text1
+                text1 = MyDocument.Selection.ShapeRange(1).TextFrame.textRange.text
+                text2 = MyDocument.Selection.ShapeRange(2).TextFrame.textRange.text
+                MyDocument.Selection.ShapeRange(1).TextFrame.textRange.text = text2
+                MyDocument.Selection.ShapeRange(2).TextFrame.textRange.text = text1
                 
             Else
                 
@@ -765,14 +797,14 @@ Sub ObjectsSwapTextNoFormatting()
         ElseIf MyDocument.Selection.HasChildShapeRange Then
             
             
-            If MyDocument.Selection.ChildShapeRange.Count = 2 Then
+            If MyDocument.Selection.ChildShapeRange.count = 2 Then
                 
                 If MyDocument.Selection.ChildShapeRange(1).HasTextFrame And MyDocument.Selection.ChildShapeRange(2).HasTextFrame Then
                 
-                    text1 = MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.Text
-                    text2 = MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.Text
-                    MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.Text = text2
-                    MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.Text = text1
+                    text1 = MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.text
+                    text2 = MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.text
+                    MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.text = text2
+                    MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.text = text1
                 
                 Else
             
@@ -804,12 +836,12 @@ Sub ObjectsSwapText()
         MsgBox "No shapes selected."
     Else
         
-        If MyDocument.Selection.ShapeRange.Count = 2 Then
+        If MyDocument.Selection.ShapeRange.count = 2 Then
             
             If MyDocument.Selection.ShapeRange(1).HasTextFrame And MyDocument.Selection.ShapeRange(2).HasTextFrame Then
                 
                 Dim SlidePlaceHolder As PowerPoint.shape
-                Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
+                Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, width:=100, height:=100)
                 
                 MyDocument.Selection.ShapeRange(1).TextFrame.textRange.Cut
                 SlidePlaceHolder.TextFrame.textRange.Paste
@@ -820,7 +852,7 @@ Sub ObjectsSwapText()
                 SlidePlaceHolder.TextFrame.textRange.Cut
                 MyDocument.Selection.ShapeRange(2).TextFrame.textRange.Paste
                 
-                SlidePlaceHolder.Delete
+                SlidePlaceHolder.delete
                 
             Else
                 
@@ -831,12 +863,12 @@ Sub ObjectsSwapText()
         ElseIf MyDocument.Selection.HasChildShapeRange Then
             
             
-            If MyDocument.Selection.ChildShapeRange.Count = 2 Then
+            If MyDocument.Selection.ChildShapeRange.count = 2 Then
                 
                 If MyDocument.Selection.ChildShapeRange(1).HasTextFrame And MyDocument.Selection.ChildShapeRange(2).HasTextFrame Then
                                
                 Dim SlidePlaceHolderChildShapeRange As PowerPoint.shape
-                Set SlidePlaceHolderChildShapeRange = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
+                Set SlidePlaceHolderChildShapeRange = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, width:=100, height:=100)
                 
                 MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.Cut
                 SlidePlaceHolderChildShapeRange.TextFrame.textRange.Paste
@@ -847,7 +879,7 @@ Sub ObjectsSwapText()
                 SlidePlaceHolderChildShapeRange.TextFrame.textRange.Cut
                 MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.Paste
                 
-                SlidePlaceHolderChildShapeRange.Delete
+                SlidePlaceHolderChildShapeRange.delete
                 
                 Else
             
@@ -881,13 +913,13 @@ Sub ObjectsMarginsToZero()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsMarginsLoop MyDocument.Selection.ChildShapeRange(i), 0
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsMarginsLoop MyDocument.Selection.ShapeRange(i), 0
             Next i
             
@@ -911,13 +943,13 @@ Sub ObjectsMarginsIncrease()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsMarginsLoop MyDocument.Selection.ChildShapeRange(i), ShapeMarginSetting
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsMarginsLoop MyDocument.Selection.ShapeRange(i), ShapeMarginSetting
             Next i
             
@@ -939,12 +971,12 @@ Sub ObjectsMarginsDecrease()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsMarginsLoop MyDocument.Selection.ChildShapeRange(i), -ShapeMarginSetting
             Next i
             
         Else
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsMarginsLoop MyDocument.Selection.ShapeRange(i), -ShapeMarginSetting
             Next i
             
@@ -1018,13 +1050,13 @@ Sub ObjectsTextWordwrapToggle()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsTextWordwrapToggleLoop MyDocument.Selection.ChildShapeRange(i)
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsTextWordwrapToggleLoop MyDocument.Selection.ShapeRange(i)
             Next i
             
@@ -1068,13 +1100,13 @@ Sub ObjectsAutoSizeTextToFitShape()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsToggleAutoSizeLoop MyDocument.Selection.ChildShapeRange(i), 2
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsToggleAutoSizeLoop MyDocument.Selection.ShapeRange(i), 2
             Next i
             
@@ -1092,13 +1124,13 @@ Sub ObjectsAutoSizeShapeToFitText()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsToggleAutoSizeLoop MyDocument.Selection.ChildShapeRange(i), 1
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsToggleAutoSizeLoop MyDocument.Selection.ShapeRange(i), 1
             Next i
             
@@ -1117,13 +1149,13 @@ Sub ObjectsAutoSizeNone()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsToggleAutoSizeLoop MyDocument.Selection.ChildShapeRange(i), 0
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsToggleAutoSizeLoop MyDocument.Selection.ShapeRange(i), 0
             Next i
             
@@ -1142,13 +1174,13 @@ Sub ObjectsToggleAutoSize()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsToggleAutoSizeLoop MyDocument.Selection.ChildShapeRange(i), 5
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 ObjectsToggleAutoSizeLoop MyDocument.Selection.ShapeRange(i), 5
             Next i
             
@@ -1208,13 +1240,13 @@ Sub ObjectsIncreaseLineSpacingBeforeAndAfter()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ChildShapeRange(i), 3
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 
                 ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ShapeRange(i), 3
                 
@@ -1236,13 +1268,13 @@ Sub ObjectsDecreaseLineSpacingBeforeAndAfter()
         
         If MyDocument.Selection.HasChildShapeRange Then
             
-            For i = 1 To MyDocument.Selection.ChildShapeRange.Count
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
                 ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ChildShapeRange(i), -3
             Next i
             
         Else
             
-            For i = 1 To MyDocument.Selection.ShapeRange.Count
+            For i = 1 To MyDocument.Selection.ShapeRange.count
                 
                 ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ShapeRange(i), -3
                 
@@ -1271,17 +1303,17 @@ Sub ObjectsLineSpacingBeforeAndAfterLoop(SlideShape, LineSpacingChange)
             If Not ActiveWindow.Selection.Type = ppSelectionText Then
                 
                 Set textRange = SlideShape.TextFrame.textRange
-                paragraphCount = textRange.Paragraphs.Count
+                paragraphCount = textRange.Paragraphs.count
                 
                 If SlideShape.TextFrame2.AutoSize = msoAutoSizeTextToFitShape Then
                     
                     Dim fontSizes() As Single
                     Dim spaceWithin() As Single
                     
-                    ReDim fontSizes(1 To textRange.Characters.Count)
+                    ReDim fontSizes(1 To textRange.Characters.count)
                     ReDim spaceWithin(1 To paragraphCount)
                     
-                    For i = 1 To textRange.Characters.Count
+                    For i = 1 To textRange.Characters.count
                         fontSizes(i) = textRange.Characters(i).Font.Size
                     Next i
                     
@@ -1291,7 +1323,7 @@ Sub ObjectsLineSpacingBeforeAndAfterLoop(SlideShape, LineSpacingChange)
                     
                     SlideShape.TextFrame2.AutoSize = msoAutoSizeNone
                     
-                    For i = 1 To textRange.Characters.Count
+                    For i = 1 To textRange.Characters.count
                         textRange.Characters(i).Font.Size = fontSizes(i)
                     Next i
                     
@@ -1329,7 +1361,7 @@ Sub ObjectsLineSpacingBeforeAndAfterLoop(SlideShape, LineSpacingChange)
             Else
                 
                 Set textRange = ActiveWindow.Selection.textRange
-                paragraphCount = textRange.Paragraphs.Count
+                paragraphCount = textRange.Paragraphs.count
                 
                 If LineSpacingChange < 0 Then
                     For i = 1 To paragraphCount

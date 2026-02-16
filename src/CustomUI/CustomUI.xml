@@ -101,6 +101,39 @@
                   <button id="ChangeSpellCheckLanguage" label="Set proofing language on all objects and all slides" imageMso="SetLanguage" showLabel="false" onAction="ShowChangeSpellCheckLanguageForm" />
                   <button idMso="PasteTextOnly" showLabel="false" />
                </group>
+              <group id="StylesGroup" label="Styles" imageMso="StyleInspector" tag="PR" getVisible="InstrumentaGetVisible">
+               <buttonGroup id="StylesHeadingButtons">
+                  <button id="ApplyH1" showLabel="false" imageMso="_1" onAction="ApplyH1" label="Apply heading 1"/>
+                  <button id="ApplyH2" showLabel="false" imageMso="_2" onAction="ApplyH2" label="Apply heading 2"/>
+                  <button id="ApplyH3" showLabel="false" imageMso="_3" onAction="ApplyH3" label="Apply heading 3"/>
+                  <button id="ApplyParagraph" showLabel="false" imageMso="P" onAction="ApplyParagraph" label="Apply paragraph"/>
+                  <button id="ApplyQuote" showLabel="false" imageMso="Q" onAction="ApplyQuote" label="Apply quote"/>
+               </buttonGroup>
+               <buttonGroup id="StylesCustomStyleButtons">
+                  <button id="ApplyCustom1" showLabel="false" imageMso="A" onAction="ApplyCustom1" label="Apply custom style 1"/>
+                  <button id="ApplyCustom2" showLabel="false" imageMso="B" onAction="ApplyCustom2" label="Apply custom style 2"/>
+                  <button id="ApplyCustom3" showLabel="false" imageMso="B" onAction="ApplyCustom3" label="Apply custom style 3"/>
+                  <button id="ApplyCustom4" showLabel="false" imageMso="D" onAction="ApplyCustom4" label="Apply custom style 4"/>
+                  <button id="ApplyCustom5" showLabel="false" imageMso="E" onAction="ApplyCustom5" label="Apply custom style 5"/>
+               </buttonGroup>
+               <button id="StylesUpdateFullShapeStyles" showLabel="false" imageMso="Refresh" onAction="UpdateFullShapeStyles"/>
+               <menu id="StylesImportExportMenu" showLabel="false" imageMso="FileSaveAs">
+                  <button id="StylesExportStylesToPPTX" label="Export Stylesheet" showLabel="true" imageMso="FileSaveAs" onAction="ExportStylesToPPTX"/>
+                  <button id="StylesImportStylesFromPPTX" label="Import Stylesheet" showLabel="true" imageMso="FileOpen" onAction="ImportStylesFromPPTX"/>
+               </menu>
+               <splitButton id="StylesCreateStylesheetSplit" showLabel="false">
+               <button id="StylesOpenStyleSheet" showLabel="false" imageMso="StylesPane" onAction="OpenStyleSheet" label="Open slide master stylesheet"/>
+               <menu id="StylesCreateStylesheetMenu" itemSize="normal">
+                  <button id="StylesCreateStyleSheetLayout" showLabel="false" onAction="CreateStyleSheetLayout" label="Create stylesheet on master of current slide"/>
+                  <button id="StylesCreateStyleSheetOnAllMasters" label="Create stylesheets on all masters" showLabel="true" onAction="CreateStyleSheetOnAllMasters"/> 
+               </menu>
+            </splitButton>   
+               <menu id="StylesRemoveMenu" showLabel="false" imageMso="Delete">
+                  <button id="StylesRemoveStylesheet" label="Remove stylesheet (current master)" showLabel="true" imageMso="Delete" onAction="RemoveInstrumentaStylesheet"/>
+                  <button id="StylesRemoveStyleSheetsFromAllMasters" label="Remove stylesheets (all masters)" showLabel="true" imageMso="Delete" onAction="RemoveStyleSheetsFromAllMasters"/>
+                  <button id="StylesRemoveAllStyleTags" label="Remove all style tags" showLabel="true" imageMso="Delete" onAction="RemoveAllInstrumentaStyleTags"/>
+               </menu>
+            </group>                  
                <group id="FormattingGroup" label="Shapes" imageMso="ShapesMoreShapes" tag="P" getVisible="InstrumentaGetVisible">
                   <control idMso="ShapeFillColorPicker" showLabel="false" label="&#x200B;" />
                   <gallery idMso="ShapeStylesGallery" showLabel="false" label="&#x200B;" />
@@ -692,6 +725,39 @@
                <button id="TabViewChangeSpellCheckLanguage" label="Set proofing language on all objects and all slides" imageMso="SetLanguage" showLabel="false" onAction="ShowChangeSpellCheckLanguageForm" />
                <button idMso="PasteTextOnly" showLabel="false" />
             </group>
+               <group id="TabViewStylesGroup" label="Styles" imageMso="StyleInspector" tag="PR" getVisible="InstrumentaGetVisible">
+               <buttonGroup id="TabViewStylesHeadingButtons">
+                  <button id="TabViewApplyH1" showLabel="false" imageMso="_1" onAction="ApplyH1" label="Apply heading 1"/>
+                  <button id="TabViewApplyH2" showLabel="false" imageMso="_2" onAction="ApplyH2" label="Apply heading 2"/>
+                  <button id="TabViewApplyH3" showLabel="false" imageMso="_3" onAction="ApplyH3" label="Apply heading 3"/>
+                  <button id="TabViewApplyParagraph" showLabel="false" imageMso="P" onAction="ApplyParagraph" label="Apply paragraph"/>
+                  <button id="TabViewApplyQuote" showLabel="false" imageMso="Q" onAction="ApplyQuote" label="Apply quote"/>
+               </buttonGroup>
+               <buttonGroup id="TabViewStylesCustomStyleButtons">
+                  <button id="TabViewApplyCustom1" showLabel="false" imageMso="A" onAction="ApplyCustom1" label="Apply custom style 1"/>
+                  <button id="TabViewApplyCustom2" showLabel="false" imageMso="B" onAction="ApplyCustom2" label="Apply custom style 2"/>
+                  <button id="TabViewApplyCustom3" showLabel="false" imageMso="B" onAction="ApplyCustom3" label="Apply custom style 3"/>
+                  <button id="TabViewApplyCustom4" showLabel="false" imageMso="D" onAction="ApplyCustom4" label="Apply custom style 4"/>
+                  <button id="TabViewApplyCustom5" showLabel="false" imageMso="E" onAction="ApplyCustom5" label="Apply custom style 5"/>
+               </buttonGroup>
+               <button id="TabViewStylesUpdateFullShapeStyles" showLabel="false" imageMso="Refresh" onAction="UpdateFullShapeStyles"/>
+               <menu id="TabViewStylesImportExportMenu" showLabel="false" imageMso="FileSaveAs">
+                  <button id="TabViewStylesExportStylesToPPTX" label="Export Stylesheet" showLabel="true" imageMso="FileSaveAs" onAction="ExportStylesToPPTX"/>
+                  <button id="TabViewStylesImportStylesFromPPTX" label="Import Stylesheet" showLabel="true" imageMso="FileOpen" onAction="ImportStylesFromPPTX"/>
+               </menu>
+               <splitButton id="TabViewStylesCreateStylesheetSplit" showLabel="false">
+               <button id="TabViewStylesOpenStyleSheet" showLabel="false" imageMso="StylesPane" onAction="OpenStyleSheet" label="Open slide master stylesheet"/>
+               <menu id="TabViewStylesCreateStylesheetMenu" itemSize="normal">
+                  <button id="TabViewStylesCreateStyleSheetLayout" showLabel="false" onAction="CreateStyleSheetLayout" label="Create stylesheet on master of current slide"/>
+                  <button id="TabViewStylesCreateStyleSheetOnAllMasters" label="Create stylesheets on all masters" showLabel="true" onAction="CreateStyleSheetOnAllMasters"/>
+               </menu>
+            </splitButton>   
+               <menu id="TabViewStylesRemoveMenu" showLabel="false" imageMso="Delete">
+                  <button id="TabViewStylesRemoveStylesheet" label="Remove stylesheet (current master)" showLabel="true" imageMso="Delete" onAction="RemoveInstrumentaStylesheet"/>
+                  <button id="TabViewStylesRemoveStyleSheetsFromAllMasters" label="Remove stylesheets (all masters)" showLabel="true" imageMso="Delete" onAction="RemoveStyleSheetsFromAllMasters"/>
+                  <button id="TabViewStylesRemoveAllStyleTags" label="Remove all style tags" showLabel="true" imageMso="Delete" onAction="RemoveAllInstrumentaStyleTags"/>
+               </menu>
+            </group>      
          </tab>
          <tab id="TabViewInstrumentaShapes" label="[Shapes]" getVisible="InstrumentaGetVisibleMultiTabView">
             <group id="TabViewFormattingGroup" label="Shapes" imageMso="ShapesMoreShapes" tag="P" getVisible="InstrumentaGetVisible">
