@@ -35,6 +35,23 @@ Attribute VB_Exposed = False
 'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 'SOFTWARE.
 
+#If Mac Then
+#Else
+#If VBA7 Then
+    Private Declare PtrSafe Function OpenClipboard Lib "user32" (ByVal hwnd As LongPtr) As Long
+    Private Declare PtrSafe Function CloseClipboard Lib "user32" () As Long
+    Private Declare PtrSafe Function EmptyClipboard Lib "user32" () As Long
+    Private Declare PtrSafe Function SetClipboardData Lib "user32" (ByVal wFormat As Long, ByVal hMem As LongPtr) As LongPtr
+    Private Declare PtrSafe Function GlobalAlloc Lib "kernel32" (ByVal wFlags As Long, ByVal dwBytes As LongPtr) As LongPtr
+    Private Declare PtrSafe Function GlobalLock Lib "kernel32" (ByVal hMem As LongPtr) As LongPtr
+    Private Declare PtrSafe Function GlobalUnlock Lib "kernel32" (ByVal hMem As LongPtr) As Long
+    Private Declare PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByVal dest As LongPtr, ByVal src As LongPtr, ByVal cb As LongPtr)
+#End If
+
+Const GMEM_MOVEABLE As Long = &H2
+Const CF_UNICODETEXT As Long = 13
+#End If
+
 Private Type PyramidNode
     text As String
     depth As Long
@@ -46,36 +63,414 @@ Private nodeCount As Long
 Private selectedIndex As Long
 
 Private Sub btnClear_Click()
-RemoveAllInstrumentaPyramidTags
-Unload Me
+    Dim answer As VbMsgBoxResult
+    
+    answer = MsgBox("This will delete all pyramid data and cannot be undone." & vbCrLf & vbCrLf & _
+                    "Are you sure you want to continue?", _
+                    vbYesNo + vbExclamation, "Confirm Clear")
+    
+    If answer = vbNo Then Exit Sub
+    
+    RemoveAllInstrumentaPyramidTags
+    Unload Me
 End Sub
+
+Private Function FindListIndexForNode(nodeIdx As Long) As Long
+    Dim i As Long
+    For i = 0 To lstPyramid.ListCount - 1
+        If CLng(lstPyramid.List(i, 1)) = nodeIdx Then
+            FindListIndexForNode = i
+            Exit Function
+        End If
+    Next i
+    FindListIndexForNode = -1
+End Function
+
+
+
+
+Public Sub CopyToClipboard(text As String)
+    Dim hMem As LongPtr
+    Dim pMem As LongPtr
+    Dim bytes As Long
+
+    bytes = (Len(text) * 2) + 2
+
+    OpenClipboard 0
+    EmptyClipboard
+
+    hMem = GlobalAlloc(GMEM_MOVEABLE, bytes)
+    pMem = GlobalLock(hMem)
+
+    CopyMemory pMem, StrPtr(text), bytes
+
+    GlobalUnlock hMem
+    SetClipboardData CF_UNICODETEXT, hMem
+    CloseClipboard
+End Sub
+
+
+Private Function PromptJsonInput(title As String) As String
+    With JsonInputForm
+        .Caption = title
+        .txtJson.text = ""
+        .Cancelled = False
+        .Show
+        
+        If .Cancelled Then
+            PromptJsonInput = ""
+        Else
+            PromptJsonInput = .Result
+        End If
+    End With
+End Function
+
+Private Sub btnImportAI_Click()
+    Dim jsonText As String
+    
+    jsonText = PromptJsonInput("Paste AI JSON Result")
+    If Trim(jsonText) = "" Then Exit Sub
+    
+    On Error GoTo ParseError
+    Call ParsePyramidJson(jsonText)
+    Call RefreshList
+    
+    MsgBox "AI JSON imported successfully!", vbInformation
+    Exit Sub
+
+ParseError:
+    MsgBox "The JSON could not be parsed. Please check the format.", vbCritical
+End Sub
+
+Private Sub btnImproveStorylinePrompt_Click()
+
+    Dim answer As VbMsgBoxResult
+    Dim prompt As String
+    Dim json As String
+    Dim i As Long
+
+    answer = MsgBox( _
+        "This action will include the full current storyline (SCQ + all nodes) in the AI prompt." & vbCrLf & vbCrLf & _
+        "If your storyline contains confidential, personal, or sensitive information, " & _
+        "be aware that sending it to an external AI service may pose a security or privacy risk." & vbCrLf & vbCrLf & _
+        "Do you want to continue?", _
+        vbYesNo + vbExclamation, _
+        "Security Warning")
+
+    If answer = vbNo Then Exit Sub
+
+    json = "{""situation"": """ & EscapeJson(txtSituation.text) & """," & vbCrLf
+    json = json & " ""complication"": """ & EscapeJson(txtComplication.text) & """," & vbCrLf
+    json = json & " ""question"": """ & EscapeJson(txtQuestion.text) & """," & vbCrLf
+    json = json & " ""nodes"": [" & vbCrLf
+
+    For i = 0 To nodeCount - 1
+        json = json & "    {""text"": """ & EscapeJson(nodes(i).text) & """, "
+        json = json & """depth"": " & nodes(i).depth & ", "
+        json = json & """parentIndex"": " & nodes(i).parentIndex & "}"
+        If i < nodeCount - 1 Then json = json & ","
+        json = json & vbCrLf
+    Next i
+
+    json = json & "  ]" & vbCrLf & "}" & vbCrLf
+
+    prompt = ""
+    prompt = prompt & "I want to improve an existing Pyramid Principle storyline." & vbCrLf & vbCrLf
+    prompt = prompt & "Below is the current storyline in JSON format. Please analyze it carefully:" & vbCrLf & vbCrLf
+    prompt = prompt & json & vbCrLf
+
+    prompt = prompt & "Your task is to help me refine, strengthen, and improve this storyline." & vbCrLf & vbCrLf
+
+    prompt = prompt & "Please follow these instructions exactly:" & vbCrLf & vbCrLf
+
+    prompt = prompt & "1. First, ask me what I want to improve" & vbCrLf
+    prompt = prompt & "   - clarity" & vbCrLf
+    prompt = prompt & "   - logic" & vbCrLf
+    prompt = prompt & "   - MECE structure" & vbCrLf
+    prompt = prompt & "   - slide titles" & vbCrLf
+    prompt = prompt & "   - depth/structure" & vbCrLf
+    prompt = prompt & "   - or all of the above" & vbCrLf & vbCrLf
+
+    prompt = prompt & "2. After I specify what I want improved, propose a revised storyline:" & vbCrLf
+    prompt = prompt & "   - Rewrite the Situation, Complication, and Question if needed" & vbCrLf
+    prompt = prompt & "   - Improve the Answer" & vbCrLf
+    prompt = prompt & "   - Rewrite key lines as full-sentence slide titles" & vbCrLf
+    prompt = prompt & "   - Ensure all supporting points are full-sentence and logically grouped" & vbCrLf
+    prompt = prompt & "   - Ensure the structure is MECE and follows the Pyramid Principle" & vbCrLf & vbCrLf
+
+    prompt = prompt & "3. Present the improved storyline as a hierarchical bullet list using this exact formatting:" & vbCrLf & vbCrLf
+    prompt = prompt & "- **Answer:** Full-sentence answer" & vbCrLf
+    prompt = prompt & "  - Full-sentence key line" & vbCrLf
+    prompt = prompt & "    - Full-sentence supporting point" & vbCrLf
+    prompt = prompt & "    - Full-sentence supporting point" & vbCrLf
+    prompt = prompt & "  - Another full-sentence key line" & vbCrLf
+    prompt = prompt & "    - Supporting point" & vbCrLf
+    prompt = prompt & "    - Supporting point" & vbCrLf & vbCrLf
+
+    prompt = prompt & "(Use hyphens for bullets and two spaces for indentation per level.)" & vbCrLf & vbCrLf
+
+    prompt = prompt & "4. Ask me whether I want further changes or if I approve the improved storyline." & vbCrLf & vbCrLf
+
+    prompt = prompt & "5. ONLY AFTER I approve the improved storyline, generate the final JSON output in this exact format:" & vbCrLf & vbCrLf
+
+    prompt = prompt & "{" & vbCrLf
+    prompt = prompt & "  ""situation"": ""…""," & vbCrLf
+    prompt = prompt & "  ""complication"": ""…""," & vbCrLf
+    prompt = prompt & "  ""question"": ""…""," & vbCrLf
+    prompt = prompt & "  ""nodes"": [" & vbCrLf
+    prompt = prompt & "    {""text"": ""Answer sentence"", ""depth"": 0, ""parentIndex"": -1}," & vbCrLf
+    prompt = prompt & "    {""text"": ""Full-sentence key line"", ""depth"": 1, ""parentIndex"": 0}," & vbCrLf
+    prompt = prompt & "    {""text"": ""Full-sentence supporting point"", ""depth"": 2, ""parentIndex"": 1}" & vbCrLf
+    prompt = prompt & "  ]" & vbCrLf
+    prompt = prompt & "}" & vbCrLf & vbCrLf
+
+    prompt = prompt & "6. JSON rules you MUST follow:" & vbCrLf
+    prompt = prompt & "   - The first node must always be the Answer node with depth 0 and parentIndex -1." & vbCrLf
+    prompt = prompt & "   - Every node must include:" & vbCrLf
+    prompt = prompt & "       ""text"": string (full-sentence slide title, no ending period)" & vbCrLf
+    prompt = prompt & "       ""depth"": integer (0 = top, increasing for children)" & vbCrLf
+    prompt = prompt & "       ""parentIndex"": integer (index of parent node in the array)" & vbCrLf
+    prompt = prompt & "   - parentIndex must always point to a node that appears earlier in the list." & vbCrLf
+    prompt = prompt & "   - The structure must form a valid tree." & vbCrLf
+    prompt = prompt & "   - No trailing commas." & vbCrLf
+    prompt = prompt & "   - No commentary outside the JSON." & vbCrLf & vbCrLf
+
+    prompt = prompt & "After you generate the JSON, stop. Do not add explanations or notes." & vbCrLf
+
+#If Mac Then
+    MsgBox "Not yet supported on Mac."
+#Else
+    CopyToClipboard prompt
+#End If
+
+    MsgBox "The improvement prompt has been copied to your clipboard.", vbInformation
+
+End Sub
+
+
+
+
+Private Sub btnStorylinePrompt_Click()
+
+
+    Dim prompt As String
+    Dim shp As shape
+    Dim sld As Slide
+
+    prompt = ""
+    prompt = prompt & "I want to generate a Pyramid Principle storyline in JSON format so I can import it into my tool." & vbCrLf & vbCrLf
+    prompt = prompt & "Please follow these instructions exactly:" & vbCrLf & vbCrLf
+
+    prompt = prompt & "1. First, ask me for the topic or business situation I want the storyline to be about." & vbCrLf & vbCrLf
+
+    prompt = prompt & "2. After I provide the topic, create:" & vbCrLf
+    prompt = prompt & "   - A clear Situation (S)" & vbCrLf
+    prompt = prompt & "   - A clear Complication (C)" & vbCrLf
+    prompt = prompt & "   - A clear Question (Q)" & vbCrLf
+    prompt = prompt & "   - A draft storyline written as a hierarchical bullet list." & vbCrLf & vbCrLf
+
+    prompt = prompt & "3. Every bullet in the draft storyline must:" & vbCrLf
+    prompt = prompt & "   - Be a full-sentence slide title" & vbCrLf
+    prompt = prompt & "   - Clearly state the main conclusion of that slide (consulting-style key message)" & vbCrLf
+    prompt = prompt & "   - NOT end with a period or any other punctuation mark" & vbCrLf
+    prompt = prompt & "   - NOT be a fragment or label" & vbCrLf & vbCrLf
+
+    prompt = prompt & "4. Present the draft storyline using this exact bullet formatting:" & vbCrLf & vbCrLf
+    prompt = prompt & "- **Answer:** Full-sentence answer" & vbCrLf
+    prompt = prompt & "  - Full-sentence key line" & vbCrLf
+    prompt = prompt & "    - Full-sentence supporting point" & vbCrLf
+    prompt = prompt & "    - Full-sentence supporting point" & vbCrLf
+    prompt = prompt & "  - Another full-sentence key line" & vbCrLf
+    prompt = prompt & "    - Supporting point" & vbCrLf
+    prompt = prompt & "    - Supporting point" & vbCrLf & vbCrLf
+
+    prompt = prompt & "(Use hyphens for bullets and two spaces for indentation per level.)" & vbCrLf & vbCrLf
+
+    prompt = prompt & "5. After presenting the draft storyline, ask me whether I want to:" & vbCrLf
+    prompt = prompt & "   - Approve it as-is, or" & vbCrLf
+    prompt = prompt & "   - Request changes or improvements" & vbCrLf & vbCrLf
+
+    prompt = prompt & "6. Only AFTER I approve the storyline, generate the final output in the following JSON format:" & vbCrLf & vbCrLf
+
+    prompt = prompt & "{" & vbCrLf
+    prompt = prompt & "  ""situation"": ""…""," & vbCrLf
+    prompt = prompt & "  ""complication"": ""…""," & vbCrLf
+    prompt = prompt & "  ""question"": ""…""," & vbCrLf
+    prompt = prompt & "  ""nodes"": [" & vbCrLf
+    prompt = prompt & "    {""text"": ""Answer sentence"", ""depth"": 0, ""parentIndex"": -1}," & vbCrLf
+    prompt = prompt & "    {""text"": ""Full-sentence key line"", ""depth"": 1, ""parentIndex"": 0}," & vbCrLf
+    prompt = prompt & "    {""text"": ""Full-sentence supporting point"", ""depth"": 2, ""parentIndex"": 1}" & vbCrLf
+    prompt = prompt & "  ]" & vbCrLf
+    prompt = prompt & "}" & vbCrLf & vbCrLf
+
+    prompt = prompt & "7. JSON rules you MUST follow:" & vbCrLf
+    prompt = prompt & "   - The first node must always be the Answer node with depth 0 and parentIndex -1." & vbCrLf
+    prompt = prompt & "   - Every node must include:" & vbCrLf
+    prompt = prompt & "       ""text"": string (full-sentence slide title, no ending period)" & vbCrLf
+    prompt = prompt & "       ""depth"": integer (0 = top, increasing for children)" & vbCrLf
+    prompt = prompt & "       ""parentIndex"": integer (index of parent node in the array)" & vbCrLf
+    prompt = prompt & "   - parentIndex must always point to a node that appears earlier in the list." & vbCrLf
+    prompt = prompt & "   - The structure must form a valid tree." & vbCrLf
+    prompt = prompt & "   - No trailing commas." & vbCrLf
+    prompt = prompt & "   - No commentary outside the JSON." & vbCrLf & vbCrLf
+
+    prompt = prompt & "8. Unless I specify otherwise:" & vbCrLf
+    prompt = prompt & "   - You may generate any number of nodes." & vbCrLf
+    prompt = prompt & "   - Ensure the storyline is coherent, MECE, and follows the Pyramid Principle." & vbCrLf & vbCrLf
+
+    prompt = prompt & "After you generate the JSON, stop. Do not add explanations or notes." & vbCrLf
+
+   #If Mac Then
+   
+   MsgBox "Not yet supported on Mac."
+    #Else
+   CopyToClipboard prompt
+
+    #End If
+
+    MsgBox "The storyline prompt has been copied to your clipboard.", vbInformation
+
+
+End Sub
+
 
 Private Sub UserForm_Initialize()
     selectedIndex = -1
     nodeCount = 0
         
-    optCurrentPres.Value = True
+    optCurrentPres.value = True
+    
+    With lstPyramid
+    .ColumnCount = 2
+    .ColumnWidths = "200 pt;0 pt"
+    .BoundColumn = 1
+    End With
+
     
     Call LoadPyramidFromTags
     
     If nodeCount = 0 Then
-        Call AddNode("Answer", 0, -1)
-        Call AddNode("Key Line 1", 1, 0)
-        Call AddNode("Key Line 2", 1, 0)
+        If ActivePresentation.Slides.count > 0 Then
+            Dim answer As VbMsgBoxResult
+            answer = MsgBox("Would you like to import the current slide titles as your pyramid structure?" & vbCrLf & vbCrLf & _
+                           "This will create a pyramid from existing slide titles (under 'Answer' node).", _
+                           vbYesNo + vbQuestion, "Import Existing Storyline")
+            
+            If answer = vbYes Then
+                Call ImportExistingSlides
+            Else
+                Call AddNode("Answer", 0, -1)
+                Call AddNode("Key Line 1", 1, 0)
+                Call AddNode("Key Line 2", 1, 0)
+            End If
+        Else
+            Call AddNode("Answer", 0, -1)
+            Call AddNode("Key Line 1", 1, 0)
+            Call AddNode("Key Line 2", 1, 0)
+        End If
     End If
     
     Call RefreshList
 End Sub
 
+Private Sub ImportExistingSlides()
+    Dim sld As Slide
+    Dim slideTitle As String
+    Dim pyramidSlideIdx As Long
+    Dim contentSlides As Collection
+    Dim i As Long
+    
+    Call AddNode("Answer", 0, -1)
+    
+    Set contentSlides = New Collection
+    
+    For Each sld In ActivePresentation.Slides
+        If sld.layout <> ppLayoutTitle And sld.layout <> ppLayoutTitleOnly Then
+
+            On Error Resume Next
+            slideTitle = ""
+            If sld.Shapes.HasTitle Then
+                slideTitle = Trim(sld.Shapes.title.TextFrame.textRange.text)
+            End If
+            On Error GoTo 0
+            
+
+            If slideTitle <> "" Then
+               
+                Call AddNode(slideTitle, 1, 0)
+                
+  
+                contentSlides.Add sld
+            End If
+        End If
+    Next sld
+    
+
+    pyramidSlideIdx = 3
+    
+    For i = 1 To contentSlides.count
+        Set sld = contentSlides(i)
+        sld.Tags.Add "InstrumentaPyramidSlideIndex", CStr(pyramidSlideIdx)
+        pyramidSlideIdx = pyramidSlideIdx + 1
+    Next i
+    
+
+    If nodeCount = 1 Then
+        Call AddNode("Key Line 1", 1, 0)
+        Call AddNode("Key Line 2", 1, 0)
+    End If
+    
+    MsgBox nodeCount - 1 & " slide title(s) imported as pyramid structure." & vbCrLf & _
+           "(Title slides were skipped, existing slides will be reused)", vbInformation
+End Sub
+
 Private Sub lstPyramid_Click()
     If lstPyramid.ListIndex >= 0 Then
-        selectedIndex = lstPyramid.ListIndex
+        selectedIndex = CLng(lstPyramid.List(lstPyramid.ListIndex, 1))
         txtNodeText.text = nodes(selectedIndex).text
     End If
 End Sub
 
+Private Function GetInsertIndexForChild(parentIdx As Long) As Long
+    Dim i As Long
+    Dim baseDepth As Long
+    
+    baseDepth = nodes(parentIdx).depth
+    
+    GetInsertIndexForChild = parentIdx + 1
+    
+    For i = parentIdx + 1 To nodeCount - 1
+        If nodes(i).depth <= baseDepth Then
+            Exit Function
+        End If
+        GetInsertIndexForChild = i + 1
+    Next i
+End Function
+
+Private Sub InsertNodeAt(insertIdx As Long, text As String, depth As Long, parentIndex As Long)
+    Dim i As Long
+    
+    If nodeCount = 0 Then
+        ReDim nodes(0)
+    Else
+        ReDim Preserve nodes(nodeCount)
+        For i = nodeCount - 1 To insertIdx Step -1
+            nodes(i + 1) = nodes(i)
+        Next i
+    End If
+    
+    nodes(insertIdx).text = text
+    nodes(insertIdx).depth = depth
+    nodes(insertIdx).parentIndex = parentIndex
+    
+    nodeCount = nodeCount + 1
+End Sub
+
+
+
 Private Sub btnAddChild_Click()
     Dim newText As String
+    Dim insertIdx As Long
     
     If selectedIndex < 0 Then
         MsgBox "Please select a parent node first.", vbExclamation
@@ -88,10 +483,14 @@ Private Sub btnAddChild_Click()
         Exit Sub
     End If
     
-    Call AddNode(newText, nodes(selectedIndex).depth + 1, selectedIndex)
+    insertIdx = GetInsertIndexForChild(selectedIndex)
+    Call InsertNodeAt(insertIdx, newText, nodes(selectedIndex).depth + 1, selectedIndex)
+    
+    selectedIndex = insertIdx
     txtNodeText.text = ""
     Call RefreshList
 End Sub
+
 
 Private Sub btnPromote_Click()
     
@@ -458,6 +857,11 @@ End Sub
 
 Private Sub btnGenerate_Click()
     Dim createNew As Boolean
+    Dim previewMsg As String
+    Dim answer As VbMsgBoxResult
+    Dim newCount As Long
+    Dim updateCount As Long
+    Dim totalSlides As Long
     
     If Trim(txtSituation.text) = "" Or Trim(txtComplication.text) = "" Or Trim(txtQuestion.text) = "" Then
         MsgBox "Please fill in Situation, Complication, and Question.", vbExclamation
@@ -469,9 +873,32 @@ Private Sub btnGenerate_Click()
         Exit Sub
     End If
     
-    Call SavePyramidToTags
+    createNew = optNewPres.value
     
-    createNew = optNewPres.Value
+    totalSlides = 2 + (nodeCount - 1)
+    
+    If createNew Then
+        previewMsg = "Will create " & totalSlides & " new slides in a new presentation." & vbCrLf & vbCrLf & _
+                     "Continue?"
+    Else
+        Call CountCreateVsUpdate(newCount, updateCount)
+        
+        If newCount > 0 And updateCount > 0 Then
+            previewMsg = "Will create " & newCount & " new slide(s) and update " & updateCount & " existing slide(s)." & vbCrLf & vbCrLf & _
+                         "Continue?"
+        ElseIf newCount > 0 Then
+            previewMsg = "Will create " & newCount & " new slide(s)." & vbCrLf & vbCrLf & _
+                         "Continue?"
+        Else
+            previewMsg = "Will update " & updateCount & " existing slide(s)." & vbCrLf & vbCrLf & _
+                         "Continue?"
+        End If
+    End If
+    
+    answer = MsgBox(previewMsg, vbYesNo + vbQuestion, "Generate Slides")
+    If answer = vbNo Then Exit Sub
+    
+    Call SavePyramidToTags
     Call GenerateSlides(createNew)
     
     MsgBox "Slides generated successfully!", vbInformation
@@ -479,9 +906,272 @@ Private Sub btnGenerate_Click()
     Unload Me
 End Sub
 
+Private Sub CountCreateVsUpdate(ByRef newCount As Long, ByRef updateCount As Long)
+    Dim i As Long
+    Dim slideIdx As Long
+    Dim sld As Slide
+    
+    newCount = 0
+    updateCount = 0
+    
+    slideIdx = 1
+    Set sld = FindPyramidSlide(ActivePresentation, slideIdx)
+    If sld Is Nothing Then
+        newCount = newCount + 1
+    Else
+        updateCount = updateCount + 1
+    End If
+    
+    slideIdx = 2
+    Set sld = FindPyramidSlide(ActivePresentation, slideIdx)
+    If sld Is Nothing Then
+        newCount = newCount + 1
+    Else
+        updateCount = updateCount + 1
+    End If
+    
+    For i = 1 To nodeCount - 1
+        slideIdx = i + 2
+        Set sld = FindPyramidSlide(ActivePresentation, slideIdx)
+        If sld Is Nothing Then
+            newCount = newCount + 1
+        Else
+            updateCount = updateCount + 1
+        End If
+    Next i
+End Sub
+
 Private Sub btnCancel_Click()
     Unload Me
 End Sub
+
+Private Sub btnExportPyramid_Click()
+    Dim exportPath As String
+    Dim fileNum As Integer
+    Dim jsonContent As String
+    Dim i As Long
+    
+    #If Mac Then
+        exportPath = MacSaveAsDialog("PyramidStructure.json")
+        If exportPath = "" Or exportPath = "False" Then Exit Sub
+    #Else
+        Dim fd As Object
+        Set fd = Application.FileDialog(msoFileDialogSaveAs)
+        With fd
+            .title = "Export Pyramid Structure"
+            .InitialFileName = "PyramidStructure.json"
+            .FilterIndex = 1
+            
+            If .Show <> -1 Then Exit Sub
+            exportPath = .SelectedItems(1)
+        End With
+    #End If
+     
+    
+    If LCase(right(exportPath, 5)) <> ".json" Then
+        exportPath = exportPath & ".json"
+    End If
+    
+    jsonContent = "{" & vbCrLf
+    jsonContent = jsonContent & "  ""situation"": """ & EscapeJson(txtSituation.text) & """," & vbCrLf
+    jsonContent = jsonContent & "  ""complication"": """ & EscapeJson(txtComplication.text) & """," & vbCrLf
+    jsonContent = jsonContent & "  ""question"": """ & EscapeJson(txtQuestion.text) & """," & vbCrLf
+    jsonContent = jsonContent & "  ""nodes"": [" & vbCrLf
+    
+    For i = 0 To nodeCount - 1
+        jsonContent = jsonContent & "    {""text"": """ & EscapeJson(nodes(i).text) & """, "
+        jsonContent = jsonContent & """depth"": " & nodes(i).depth & ", "
+        jsonContent = jsonContent & """parentIndex"": " & nodes(i).parentIndex & "}"
+        If i < nodeCount - 1 Then jsonContent = jsonContent & ","
+        jsonContent = jsonContent & vbCrLf
+    Next i
+    
+    jsonContent = jsonContent & "  ]" & vbCrLf
+    jsonContent = jsonContent & "}" & vbCrLf
+    
+    fileNum = FreeFile
+    Open exportPath For Output As #fileNum
+    Print #fileNum, jsonContent
+    Close #fileNum
+    
+    MsgBox "Pyramid structure exported to:" & vbCrLf & exportPath, vbInformation
+End Sub
+
+Private Sub btnImportPyramid_Click()
+    Dim importPath As String
+    Dim fileNum As Integer
+    Dim jsonContent As String
+    Dim fileLine As String
+    Dim answer As VbMsgBoxResult
+    
+    If nodeCount > 0 Then
+        answer = MsgBox("Importing will replace the current pyramid structure." & vbCrLf & vbCrLf & _
+                        "Continue?", vbYesNo + vbQuestion, "Confirm Import")
+        If answer = vbNo Then Exit Sub
+    End If
+    
+    #If Mac Then
+        importPath = MacOpenDialog("json")
+        If importPath = "" Or importPath = "False" Then Exit Sub
+    #Else
+        Dim fd As Object
+        Set fd = Application.FileDialog(msoFileDialogFilePicker)
+        With fd
+            .title = "Import Pyramid Structure"
+            .Filters.Clear
+            .Filters.Add "JSON Files", "*.json"
+            
+            If .Show <> -1 Then Exit Sub
+            importPath = .SelectedItems(1)
+        End With
+    #End If
+    
+    fileNum = FreeFile
+    Open importPath For Input As #fileNum
+    jsonContent = ""
+    Do Until EOF(fileNum)
+        Line Input #fileNum, fileLine
+        jsonContent = jsonContent & fileLine & vbCrLf
+    Loop
+    Close #fileNum
+    
+    Call ParsePyramidJson(jsonContent)
+    
+    Call RefreshList
+    
+    MsgBox "Pyramid structure imported successfully!", vbInformation
+End Sub
+
+Private Function EscapeJson(text As String) As String
+    Dim Result As String
+    Result = text
+    Result = Replace(Result, "\", "\\")
+    Result = Replace(Result, """", "\""")
+    Result = Replace(Result, vbCrLf, "\n")
+    Result = Replace(Result, vbCr, "\n")
+    Result = Replace(Result, vbLf, "\n")
+    Result = Replace(Result, vbTab, "\t")
+    EscapeJson = Result
+End Function
+
+Private Sub ParsePyramidJson(jsonContent As String)
+    Dim cleaned As String
+    Dim pos As Long
+    Dim arrNodes As Variant
+    Dim node As Variant
+    
+    cleaned = Replace(jsonContent, vbCrLf, vbLf)
+    cleaned = Replace(cleaned, vbCr, vbLf)
+    
+    txtSituation.text = ExtractJsonValueByKey(cleaned, "situation")
+    txtComplication.text = ExtractJsonValueByKey(cleaned, "complication")
+    txtQuestion.text = ExtractJsonValueByKey(cleaned, "question")
+    
+    Dim nodesJson As String
+    nodesJson = ExtractJsonArray(cleaned, "nodes")
+    
+    arrNodes = SplitNodes(nodesJson)
+    
+    nodeCount = 0
+    ReDim nodes(0)
+    
+    For Each node In arrNodes
+        Dim t As String, d As Long, p As Long
+        
+        t = ExtractJsonValueByKey(CStr(node), "text")
+        d = CLng(ExtractJsonValueByKey(CStr(node), "depth"))
+        p = CLng(ExtractJsonValueByKey(CStr(node), "parentIndex"))
+        
+        AddNode t, d, p
+    Next node
+End Sub
+
+Private Function ExtractJsonValueByKey(ByVal json As String, key As String) As String
+    Dim pattern As String
+    Dim startPos As Long, endPos As Long
+    
+    pattern = """" & key & """:"
+    
+    startPos = InStr(1, json, pattern)
+    If startPos = 0 Then Exit Function
+    
+    startPos = startPos + Len(pattern)
+    
+    Do While Mid$(json, startPos, 1) = " "
+        startPos = startPos + 1
+    Loop
+    
+    If Mid$(json, startPos, 1) = """" Then
+        startPos = startPos + 1
+        endPos = InStr(startPos, json, """")
+        ExtractJsonValueByKey = Mid$(json, startPos, endPos - startPos)
+        Exit Function
+    End If
+    
+    endPos = startPos
+    Do While endPos <= Len(json) And Mid$(json, endPos, 1) Like "[0-9-]"
+        endPos = endPos + 1
+    Loop
+    
+    ExtractJsonValueByKey = Trim(Mid$(json, startPos, endPos - startPos))
+End Function
+
+Private Function ExtractJsonArray(ByVal json As String, key As String) As String
+
+    Dim startPos As Long, endPos As Long, depth As Long
+    
+    startPos = InStr(json, """" & key & """:")
+    If startPos = 0 Then Exit Function
+    
+    startPos = InStr(startPos, json, "[")
+    If startPos = 0 Then Exit Function
+    
+    depth = 1
+    endPos = startPos + 1
+    
+    Do While endPos <= Len(json) And depth > 0
+        Select Case Mid$(json, endPos, 1)
+            Case "[": depth = depth + 1
+            Case "]": depth = depth - 1
+        End Select
+        endPos = endPos + 1
+    Loop
+    
+    ExtractJsonArray = Mid$(json, startPos + 1, endPos - startPos - 2)
+End Function
+
+Private Function SplitNodes(nodesJson As String) As Variant
+    Dim items As Collection
+    Dim Result() As String
+    Dim i As Long, startPos As Long, depth As Long
+    Dim ch As String
+    
+    Set items = New Collection
+    startPos = 1
+    depth = 0
+    
+    For i = 1 To Len(nodesJson)
+        ch = Mid$(nodesJson, i, 1)
+        
+        If ch = "{" Then
+            If depth = 0 Then startPos = i
+            depth = depth + 1
+        ElseIf ch = "}" Then
+            depth = depth - 1
+            If depth = 0 Then
+                items.Add Mid$(nodesJson, startPos, i - startPos + 1)
+            End If
+        End If
+    Next i
+    
+    ReDim Result(items.count - 1)
+    For i = 1 To items.count
+        Result(i - 1) = items(i)
+    Next i
+    
+    SplitNodes = Result
+End Function
+
 
 Private Sub AddNode(text As String, depth As Long, parentIndex As Long)
     If nodeCount = 0 Then
@@ -501,75 +1191,76 @@ Private Sub RefreshList()
     Dim i As Long
     Dim indent As String
     Dim displayText As String
-    
+    Dim listIdx As Long
+
     lstPyramid.Clear
-    
+
     For i = 0 To nodeCount - 1
         indent = String(nodes(i).depth * 2, " ")
-        If nodes(i).depth > 0 Then
-            indent = indent & "- "
-        End If
-        
+        If nodes(i).depth > 0 Then indent = indent & "- "
+
         displayText = indent & nodes(i).text
+
         lstPyramid.AddItem displayText
+        lstPyramid.List(lstPyramid.ListCount - 1, 1) = CStr(i)   ' store true node index
     Next i
-    
-    If selectedIndex >= 0 And selectedIndex < nodeCount Then
-        lstPyramid.ListIndex = selectedIndex
+
+    If selectedIndex >= 0 Then
+        listIdx = FindListIndexForNode(selectedIndex)
+        If listIdx >= 0 Then lstPyramid.ListIndex = listIdx
     End If
 End Sub
 
+
+
+
 Private Sub LoadPyramidFromTags()
-    On Error Resume Next
-    
     Dim structureData As String
+    Dim chunk As String
+    Dim i As Long
     Dim items() As String
     Dim parts() As String
-    Dim i As Long
-    Dim sld As Slide
-    Dim slideIdx As Long
     
     txtSituation.text = ActivePresentation.Tags("InstrumentaPyramidSCQ_Situation")
     txtComplication.text = ActivePresentation.Tags("InstrumentaPyramidSCQ_Complication")
     txtQuestion.text = ActivePresentation.Tags("InstrumentaPyramidSCQ_Question")
     
-    structureData = ActivePresentation.Tags("InstrumentaPyramidSCQ_Structure")
+    structureData = ""
+    i = 1
     
-    If structureData <> "" Then
-        items = Split(structureData, ";")
-        nodeCount = 0
-        ReDim nodes(UBound(items))
-        
-        For i = 0 To UBound(items)
-            parts = Split(items(i), "|")
-            If UBound(parts) >= 2 Then
-                nodes(nodeCount).text = parts(0)
-                nodes(nodeCount).depth = CLng(parts(1))
-                nodes(nodeCount).parentIndex = CLng(parts(2))
-                nodeCount = nodeCount + 1
-            End If
-        Next i
-        
-        For i = 1 To nodeCount - 1
-            slideIdx = i + 2
-            Set sld = FindPyramidSlide(ActivePresentation, slideIdx)
-            
-            If Not sld Is Nothing Then
-                On Error Resume Next
-                If sld.Shapes.HasTitle Then
-                    nodes(i).text = sld.Shapes.Title.TextFrame.textRange.text
-                End If
-                On Error GoTo 0
-            End If
-        Next i
-    End If
+    Do
+        chunk = ActivePresentation.Tags("InstrumentaPyramidSCQ_Structure_" & i)
+        If chunk = "" Then Exit Do
+        structureData = structureData & chunk
+        i = i + 1
+    Loop
     
-    On Error GoTo 0
+   
+    If structureData = "" Then Exit Sub
+    
+    items = Split(structureData, ";")
+    nodeCount = 0
+    ReDim nodes(UBound(items))
+    
+    For i = 0 To UBound(items)
+        parts = Split(items(i), "|")
+        If UBound(parts) >= 2 Then
+            nodes(nodeCount).text = UnescapeDelimiter(parts(0))
+            nodes(nodeCount).depth = CLng(parts(1))
+            nodes(nodeCount).parentIndex = CLng(parts(2))
+            nodeCount = nodeCount + 1
+        End If
+    Next i
 End Sub
+
 
 Private Sub SavePyramidToTags()
     Dim structureData As String
     Dim i As Long
+    Dim chunkSize As Long: chunkSize = 1800
+    Dim chunkCount As Long
+    Dim pos As Long
+    Dim chunk As String
     
     ActivePresentation.Tags.Add "InstrumentaPyramidSCQ_Situation", Trim(txtSituation.text)
     ActivePresentation.Tags.Add "InstrumentaPyramidSCQ_Complication", Trim(txtComplication.text)
@@ -578,11 +1269,27 @@ Private Sub SavePyramidToTags()
     structureData = ""
     For i = 0 To nodeCount - 1
         If i > 0 Then structureData = structureData & ";"
-        structureData = structureData & nodes(i).text & "|" & nodes(i).depth & "|" & nodes(i).parentIndex
+        'structureData = structureData & nodes(i).text & "|" & nodes(i).depth & "|" & nodes(i).parentIndex
+        structureData = structureData & EscapeDelimiter(nodes(i).text) & "|" & nodes(i).depth & "|" & nodes(i).parentIndex
     Next i
     
-    ActivePresentation.Tags.Add "InstrumentaPyramidSCQ_Structure", structureData
+    i = 1
+    Do While ActivePresentation.Tags("InstrumentaPyramidSCQ_Structure_" & i) <> ""
+        ActivePresentation.Tags.Delete "InstrumentaPyramidSCQ_Structure_" & i
+        i = i + 1
+    Loop
+    
+    pos = 1
+    chunkCount = 1
+    
+    Do While pos <= Len(structureData)
+        chunk = Mid$(structureData, pos, chunkSize)
+        ActivePresentation.Tags.Add "InstrumentaPyramidSCQ_Structure_" & chunkCount, chunk
+        pos = pos + chunkSize
+        chunkCount = chunkCount + 1
+    Loop
 End Sub
+
 
 Private Function FindPyramidSlide(pres As Presentation, slideIndex As Long) As Slide
     Dim sld As Slide
@@ -616,70 +1323,7 @@ Private Sub GenerateSlides(createNew As Boolean)
     End If
     
     slideIdx = 0
-    targetPosition = pres.Slides.count + 1 '
-    
-    slideIdx = slideIdx + 1
-    Set sld = FindPyramidSlide(pres, slideIdx)
-    
-    If sld Is Nothing Then
-        Set sld = pres.Slides.Add(targetPosition, ppLayoutBlank)
-        sld.Tags.Add "InstrumentaPyramidSlideIndex", CStr(slideIdx)
-        sld.layout = ppLayoutBlank
-        
-        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, 50, 30, pres.PageSetup.slideWidth - 100, 60)
-        shp.Tags.Add "InstrumentaPyramidElement", "Title"
-        With shp.TextFrame2.textRange
-            .text = "Situation - Complication - Question"
-            .Font.Size = 32
-            .Font.Bold = msoTrue
-            .ParagraphFormat.Alignment = msoAlignCenter
-        End With
-        
-        colWidth = (pres.PageSetup.slideWidth - 150) / 3
-        
-        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, 50, 120, colWidth, 300)
-        shp.Tags.Add "InstrumentaPyramidElement", "Situation"
-        
-        leftPos = 50 + colWidth + 25
-        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, 120, colWidth, 300)
-        shp.Tags.Add "InstrumentaPyramidElement", "Complication"
-        
-        leftPos = leftPos + colWidth + 25
-        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, 120, colWidth, 300)
-        shp.Tags.Add "InstrumentaPyramidElement", "Question"
-        
-        targetPosition = targetPosition + 1
-    Else
-        Call MoveSlideToPosition(sld, slideIdx, pres)
-    End If
-    
-    For Each shp In sld.Shapes
-        If shp.Tags("InstrumentaPyramidElement") = "Situation" Then
-            With shp
-                .TextFrame2.WordWrap = msoTrue
-                .TextFrame2.textRange.text = "Situation" & vbCrLf & vbCrLf & txtSituation.text
-                .TextFrame2.textRange.Font.Size = 14
-                .TextFrame2.textRange.Paragraphs(1).Font.Bold = msoTrue
-                .TextFrame2.textRange.Paragraphs(1).Font.Size = 18
-            End With
-        ElseIf shp.Tags("InstrumentaPyramidElement") = "Complication" Then
-            With shp
-                .TextFrame2.WordWrap = msoTrue
-                .TextFrame2.textRange.text = "Complication" & vbCrLf & vbCrLf & txtComplication.text
-                .TextFrame2.textRange.Font.Size = 14
-                .TextFrame2.textRange.Paragraphs(1).Font.Bold = msoTrue
-                .TextFrame2.textRange.Paragraphs(1).Font.Size = 18
-            End With
-        ElseIf shp.Tags("InstrumentaPyramidElement") = "Question" Then
-            With shp
-                .TextFrame2.WordWrap = msoTrue
-                .TextFrame2.textRange.text = "Question" & vbCrLf & vbCrLf & txtQuestion.text
-                .TextFrame2.textRange.Font.Size = 14
-                .TextFrame2.textRange.Paragraphs(1).Font.Bold = msoTrue
-                .TextFrame2.textRange.Paragraphs(1).Font.Size = 18
-            End With
-        End If
-    Next shp
+    targetPosition = pres.Slides.count + 1
     
     slideIdx = slideIdx + 1
     Set sld = FindPyramidSlide(pres, slideIdx)
@@ -692,7 +1336,79 @@ Private Sub GenerateSlides(createNew As Boolean)
         Call MoveSlideToPosition(sld, slideIdx, pres)
     End If
     
-    sld.Shapes.Title.TextFrame.textRange.text = "Management Summary"
+    sld.Shapes.title.TextFrame.textRange.text = "Situation - Complication - Question"
+    
+    On Error Resume Next
+    sld.Shapes.Placeholders(2).Delete
+    On Error GoTo 0
+    
+    colWidth = (pres.PageSetup.slideWidth - 150) / 3
+    
+    Set shp = Nothing
+    For Each shp In sld.Shapes
+        If shp.Tags("InstrumentaPyramidElement") = "Situation" Then Exit For
+        Set shp = Nothing
+    Next shp
+    If shp Is Nothing Then
+        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, 50, 120, colWidth, 300)
+        shp.Tags.Add "InstrumentaPyramidElement", "Situation"
+    End If
+    With shp
+        .TextFrame2.WordWrap = msoTrue
+        .TextFrame2.textRange.text = "Situation" & vbCrLf & vbCrLf & txtSituation.text
+        .TextFrame2.textRange.Font.Size = 14
+        .TextFrame2.textRange.Paragraphs(1).Font.Bold = msoTrue
+        .TextFrame2.textRange.Paragraphs(1).Font.Size = 18
+    End With
+    
+    Set shp = Nothing
+    For Each shp In sld.Shapes
+        If shp.Tags("InstrumentaPyramidElement") = "Complication" Then Exit For
+        Set shp = Nothing
+    Next shp
+    leftPos = 50 + colWidth + 25
+    If shp Is Nothing Then
+        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, 120, colWidth, 300)
+        shp.Tags.Add "InstrumentaPyramidElement", "Complication"
+    End If
+    With shp
+        .TextFrame2.WordWrap = msoTrue
+        .TextFrame2.textRange.text = "Complication" & vbCrLf & vbCrLf & txtComplication.text
+        .TextFrame2.textRange.Font.Size = 14
+        .TextFrame2.textRange.Paragraphs(1).Font.Bold = msoTrue
+        .TextFrame2.textRange.Paragraphs(1).Font.Size = 18
+    End With
+    
+    Set shp = Nothing
+    For Each shp In sld.Shapes
+        If shp.Tags("InstrumentaPyramidElement") = "Question" Then Exit For
+        Set shp = Nothing
+    Next shp
+    leftPos = leftPos + colWidth + 25
+    If shp Is Nothing Then
+        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, 120, colWidth, 300)
+        shp.Tags.Add "InstrumentaPyramidElement", "Question"
+    End If
+    With shp
+        .TextFrame2.WordWrap = msoTrue
+        .TextFrame2.textRange.text = "Question" & vbCrLf & vbCrLf & txtQuestion.text
+        .TextFrame2.textRange.Font.Size = 14
+        .TextFrame2.textRange.Paragraphs(1).Font.Bold = msoTrue
+        .TextFrame2.textRange.Paragraphs(1).Font.Size = 18
+    End With
+    
+    slideIdx = slideIdx + 1
+    Set sld = FindPyramidSlide(pres, slideIdx)
+    
+    If sld Is Nothing Then
+        Set sld = pres.Slides.Add(targetPosition, ppLayoutText)
+        sld.Tags.Add "InstrumentaPyramidSlideIndex", CStr(slideIdx)
+        targetPosition = targetPosition + 1
+    Else
+        Call MoveSlideToPosition(sld, slideIdx, pres)
+    End If
+    
+    sld.Shapes.title.TextFrame.textRange.text = "Management Summary"
     
     Dim summaryText As String
     Dim tr As TextRange2
@@ -747,7 +1463,7 @@ Private Sub GenerateSlides(createNew As Boolean)
             Call MoveSlideToPosition(sld, slideIdx, pres)
         End If
         
-        sld.Shapes.Title.TextFrame.textRange.text = nodes(i).text
+        sld.Shapes.title.TextFrame.textRange.text = nodes(i).text
     Next i
     
     Call DeleteOrphanPyramidSlides(pres, slideIdx)
@@ -773,7 +1489,7 @@ Private Sub MoveSlideToPosition(sld As Slide, expectedIndex As Long, pres As Pre
     Next s
     
     Dim firstPyramidPos As Long
-    firstPyramidPos = 999999
+    firstPyramidPos = 0
     
     For Each s In pres.Slides
         If s.Tags("InstrumentaPyramidSlideIndex") = "1" Then
@@ -782,13 +1498,21 @@ Private Sub MoveSlideToPosition(sld As Slide, expectedIndex As Long, pres As Pre
         End If
     Next s
     
-    If firstPyramidPos = 999999 Then
+
+    If firstPyramidPos = 0 Then
+
         targetPos = pres.Slides.count
     Else
+
         targetPos = firstPyramidPos + pyramidSlidesBefore
     End If
     
-    If currentPos <> targetPos Then
+
+    If targetPos < 1 Then targetPos = 1
+    If targetPos > pres.Slides.count Then targetPos = pres.Slides.count
+    
+
+    If currentPos <> targetPos And targetPos >= 1 And targetPos <= pres.Slides.count Then
         sld.MoveTo targetPos
     End If
 End Sub
@@ -811,8 +1535,15 @@ Private Function GetNodeIndexForParagraph(paraNum As Long) As Long
     Dim count As Long
     Dim i As Long
     
+    If paraNum < 1 Then
+        GetNodeIndexForParagraph = -1
+        Exit Function
+    End If
+    
     count = 0
     For i = 1 To nodeCount - 1
+        If i > UBound(nodes) Then Exit For
+        
         If nodes(i).depth <= 2 Then
             count = count + 1
             If count = paraNum Then
@@ -840,6 +1571,8 @@ Private Sub RemoveAllInstrumentaPyramidTags()
     Dim pres As Presentation
     Dim sld As Slide
     Dim shp As shape
+    Dim i As Long
+    Dim tagName As String
     
     Set pres = ActivePresentation
 
@@ -847,8 +1580,15 @@ Private Sub RemoveAllInstrumentaPyramidTags()
     pres.Tags.Delete "InstrumentaPyramidSCQ_Situation"
     pres.Tags.Delete "InstrumentaPyramidSCQ_Complication"
     pres.Tags.Delete "InstrumentaPyramidSCQ_Question"
-    pres.Tags.Delete "InstrumentaPyramidSCQ_Structure"
     On Error GoTo 0
+
+    i = 1
+    Do
+        tagName = "InstrumentaPyramidSCQ_Structure_" & i
+        If pres.Tags(tagName) = "" Then Exit Do
+        pres.Tags.Delete tagName
+        i = i + 1
+    Loop
 
     For Each sld In pres.Slides
         On Error Resume Next
@@ -866,3 +1606,11 @@ Private Sub RemoveAllInstrumentaPyramidTags()
            vbInformation, "Cleanup Complete"
 
 End Sub
+
+Private Function EscapeDelimiter(text As String) As String
+    EscapeDelimiter = Replace(text, "|", "~~PIPE~~")
+End Function
+
+Private Function UnescapeDelimiter(text As String) As String
+    UnescapeDelimiter = Replace(text, "~~PIPE~~", "|")
+End Function

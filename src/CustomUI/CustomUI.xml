@@ -175,6 +175,14 @@
                   </menu>    
                   <button id="IncreaseShapeTransparency" label="Increase shape transparency" showLabel="false" imageMso="DiagramStylesClassic" onAction="IncreaseShapeTransparency" />
                   <button id="LockAspectRatioToggleSelectedShapes" label="Toggle lock aspect ratio of selected shape(s)" showLabel="false" imageMso="MasterDocumentLockSubdocument" onAction="LockAspectRatioToggleSelectedShapes" />
+                  <menu id="MoveSelectedShapeToMasterMenu" label="Move shapes to master" imageMso="MasterDocumentInsertSubdocument" showLabel="false" >
+                    <button id="MoveSelectedShapeToMaster" label="Move selected shape to master slide" onAction="MoveSelectedShapeToMaster" />
+                    <button id="CopySelectedShapeToMaster" label="Copy selected shape to master slide" onAction="CopySelectedShapeToMaster" />
+                    <button id="MoveSelectedShapeToAllMasters" label="Move selected shape to all master slides" onAction="MoveSelectedShapeToAllMasters" />
+                    <button id="CopySelectedShapeToAllMasters" label="Copy selected shape to all master slides" onAction="CopySelectedShapeToAllMasters" />
+                    <button id="MoveSelectedShapeToUsedMasters" label="Move selected shape to all master slides currently in use" onAction="MoveSelectedShapeToUsedMasters" />
+                    <button id="CopySelectedShapeToUsedMasters" label="Copy selected shape to all master slides currently in use" onAction="CopySelectedShapeToUsedMasters" />
+                  </menu> 
                   <separator id="CopyPositionSeperator" />        
                         <splitButton id="LockSplitButton" size="normal" showLabel="false" >
                         <button id="LockToggleSelectedShapesButton" label="Toggle lock or unlock position of selected shapes" showLabel="false" imageMso="Lock" onAction="LockToggleSelectedShapes" />
@@ -801,6 +809,14 @@
                </menu>    
                <button id="TabViewIncreaseShapeTransparency" label="Increase shape transparency" showLabel="false" imageMso="DiagramStylesClassic" onAction="IncreaseShapeTransparency" />
                <button id="TabViewLockAspectRatioToggleSelectedShapes" label="Toggle lock aspect ratio of selected shape(s)" showLabel="false" imageMso="MasterDocumentLockSubdocument" onAction="LockAspectRatioToggleSelectedShapes" />
+               <menu id="TabViewMoveSelectedShapeToMasterMenu" label="Move shapes to master" imageMso="MasterDocumentInsertSubdocument" showLabel="false" >
+                    <button id="TabViewMoveSelectedShapeToMaster" label="Move selected shape to master slide" onAction="MoveSelectedShapeToMaster" />
+                    <button id="TabViewCopySelectedShapeToMaster" label="Copy selected shape to master slide" onAction="CopySelectedShapeToMaster" />
+                    <button id="TabViewMoveSelectedShapeToAllMasters" label="Move selected shape to all master slides" onAction="MoveSelectedShapeToAllMasters" />
+                    <button id="TabViewCopySelectedShapeToAllMasters" label="Copy selected shape to all master slides" onAction="CopySelectedShapeToAllMasters" />
+                    <button id="TabViewMoveSelectedShapeToUsedMasters" label="Move selected shape to all master slides currently in use" onAction="MoveSelectedShapeToUsedMasters" />
+                    <button id="TabViewCopySelectedShapeToUsedMasters" label="Copy selected shape to all master slides currently in use" onAction="CopySelectedShapeToUsedMasters" />
+                  </menu> 
                <separator id="TabViewCopyPositionSeperator" />        
                      <splitButton id="TabViewLockSplitButton" size="normal" showLabel="false" >
                      <button id="TabViewLockToggleSelectedShapesButton" label="Toggle lock or unlock position of selected shapes" showLabel="false" imageMso="Lock" onAction="LockToggleSelectedShapes" />

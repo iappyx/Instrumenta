@@ -101,7 +101,7 @@ Sub ShapeToMasterSlide(deleteOriginal As Boolean, toAllLayouts As Boolean, Optio
     End If
 
     If deleteOriginal Then
-        shp.delete
+        shp.Delete
         If toAllLayouts Then
             If onlyUsedLayouts Then
                 MsgBox "Shape moved to all used master layouts."
