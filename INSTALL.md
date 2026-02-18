@@ -76,6 +76,8 @@ Please know that all versions before the first major release (v1.0) have a diffe
 
 Instrumenta offers dedicated installers for both macOS and Windows. You can choose to install Instrumenta Keys alongside the core package. The Windows installer should be able to work without requiring administrative rights, ensuring installation even in restricted environments. The installers are currently in beta and being tested across multiple scenarios to ensure reliability and compatibility. However, as they are still under development, use them at your own risk, and be aware that unexpected issues may arise.
 
+**Installers are not generated for every beta release, so they will not always include the latest beta.**
+
 Instrumenta is a PowerPoint add-in that I developed as an open-source project in my free time. Since I do not have official code-signing certificates for Windows or a developer account for macOS, installing through these installers may trigger security warnings.
 
 ### Windows installer-based installation
