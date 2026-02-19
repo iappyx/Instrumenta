@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 from collections import defaultdict
 
 XML_FILE = "CustomUI.xml"
-OUTPUT_FILE = "generated_features.txt"
+OUTPUT_FILE = "CustomUI_generated_features.txt"
 
 NS = {"ns": "http://schemas.microsoft.com/office/2006/01/customui"}
 

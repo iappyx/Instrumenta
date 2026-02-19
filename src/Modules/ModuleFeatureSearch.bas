@@ -87,7 +87,7 @@ Private Sub LoadInstrumentaFeatures()
     AddFeature "ApplyCustom3", "Apply custom style 3", "ApplyCustom3", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
     AddFeature "ApplyCustom4", "Apply custom style 4", "ApplyCustom4", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
     AddFeature "ApplyCustom5", "Apply custom style 5", "ApplyCustom5", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
-    AddFeature "StylesUpdateFullShapeStyles", "None", "UpdateFullShapeStyles", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
+    AddFeature "StylesUpdateFullShapeStyles", "Update shapes with styles applied to match stylesheet", "UpdateFullShapeStyles", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
     AddFeature "StylesExportStylesToPPTX", "Export Stylesheet", "ExportStylesToPPTX", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
     AddFeature "StylesImportStylesFromPPTX", "Import Stylesheet", "ImportStylesFromPPTX", "Styles", "Instrumenta > Styles", "Instrumenta [Text] > Styles"
     AddFeature "StylesOpenStyleSheet", "Open slide master stylesheet", "OpenStyleSheet", "Styles", "Instrumenta > Styles > Inside splitbutton 'Open slide master stylesheet'", "Instrumenta [Text] > Styles > Inside splitbutton 'Open slide master stylesheet'"
@@ -348,7 +348,7 @@ Private Sub LoadInstrumentaFeatures()
     AddFeature "ShowFeatureSearchButton", "Find Instrumenta features", "ShowFeatureSearch", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
     AddFeature "ShowSettingsDialogButton", "Instrumenta settings", "ShowSettings", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
     AddFeature "ShowAboutDialogButton", "Show about dialog", "ShowAboutDialog", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
-    
+
     ReDim Preserve Features(1 To FeatureCount) As FeatureData
     
     Exit Sub

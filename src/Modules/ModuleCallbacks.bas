@@ -24,18 +24,23 @@ Attribute VB_Name = "ModuleCallbacks"
 
 Public InstrumentaRibbon As IRibbonUI
 Public InstrumentaVisible As String
+Public RibbonEvents As RibbonEventsClass
+Public SettingContextualButtons As Boolean
+
+
 Dim SetPositionAppEventHandler As New SetPositionEventsClass
+
 
 Sub InitialiseSetPositionAppEventHandler()
 
-    Set SetPositionAppEventHandler.App = Application
+    Set SetPositionAppEventHandler.app = Application
     SetPositionForm.Show 0
       
 End Sub
 
 Sub UnloadSetPositionAppEventHandler()
 
-    Set SetPositionAppEventHandler.App = Nothing
+    Set SetPositionAppEventHandler.app = Nothing
     Unload SetPositionForm
     
 End Sub
@@ -50,10 +55,19 @@ Sub InstrumentaInitialize(Ribbon As IRibbonUI)
     InstrumentaRibbon.Invalidate
     'InstrumentaRibbon.ActivateTab "InstrumentaPowerpointToolbar"
     
+    SettingContextualButtons = (GetSetting("Instrumenta", "General", "ContextualButtons", "False") = "True")
+    
+    If SettingContextualButtons Then
+        Set RibbonEvents = New RibbonEventsClass
+        RibbonEvents.Initialize
+    End If
+    
     'set Pro or Review mode
     If GetSetting("Instrumenta", "General", "OperatingMode", "pro") = "review" Then
      Call InstrumentaRefresh(UpdateTag:="*R*")
     End If
+    
+
     
 End Sub
 
@@ -118,7 +132,7 @@ Sub RibbonObjectGetImage(control As IRibbonControl, ByRef returnedVal)
 
 #If Mac Then
     
-    Select Case control.id
+    Select Case control.ID
         Case "FivePointStarMenu", "TabViewFivePointStarMenu"
             returnedVal = "ShapeStar"
         Case "StampsMenu", "TabViewStampsMenu"
@@ -135,7 +149,7 @@ Sub RibbonObjectGetImage(control As IRibbonControl, ByRef returnedVal)
     
 #Else
     
-    Select Case control.id
+    Select Case control.ID
         Case "FivePointStarMenu", "TabViewFivePointStarMenu"
             returnedVal = "StarRatedFull"
         Case "StampsMenu", "TabViewStampsMenu"
@@ -179,7 +193,7 @@ End Sub
 
 Sub EmojiGallery_GetItemCount(control As IRibbonControl, ByRef returnedVal)
     
-    Select Case control.id
+    Select Case control.ID
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = 111
      Case "EmojiGallery2", "TabViewEmojiGallery2"
@@ -206,7 +220,7 @@ End Sub
 
 Sub EmojiGallery_GetItemID(control As IRibbonControl, index As Integer, ByRef returnedVal)
     
-    Select Case control.id
+    Select Case control.ID
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = "Emoji" & index
      Case "EmojiGallery2", "TabViewEmojiGallery2"
@@ -233,7 +247,7 @@ End Sub
 
 Sub EmojiGallery_GetItemLabel(control As IRibbonControl, index As Integer, ByRef returnedVal)
 
-    Select Case control.id
+    Select Case control.ID
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = AllEmojis(index + 1)
      Case "EmojiGallery2", "TabViewEmojiGallery2"
@@ -261,7 +275,7 @@ End Sub
 
 Sub EmojiGallery_GetItemScreentip(control As IRibbonControl, index As Integer, ByRef returnedVal)
 
-    Select Case control.id
+    Select Case control.ID
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = AllEmojis(index + 1) & " " & StrConv(EmojiNames(index + 1), vbProperCase)
      Case "EmojiGallery2", "TabViewEmojiGallery2"
@@ -287,9 +301,9 @@ Sub EmojiGallery_GetItemScreentip(control As IRibbonControl, index As Integer, B
 End Sub
 
 
-Sub EmojiGallery_OnAction(control As IRibbonControl, id As String, index As Integer)
+Sub EmojiGallery_OnAction(control As IRibbonControl, ID As String, index As Integer)
     
-    Select Case control.id
+    Select Case control.ID
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         GenerateEmoji (index + 1)
      Case "EmojiGallery2", "TabViewEmojiGallery2"

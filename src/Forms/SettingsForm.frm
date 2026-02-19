@@ -14,7 +14,6 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 'MIT License
-
 'Copyright (c) 2021 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -58,8 +57,8 @@ Private Sub UserForm_Activate()
     DraftColor = GetSetting("Instrumenta", "Stamps", "DraftColor", "12611584")
     DraftColorButton.BackColor = DraftColor
     
-    NewColor = GetSetting("Instrumenta", "Stamps", "NewColor", "5287936")
-    NewColorButton.BackColor = NewColor
+    newColor = GetSetting("Instrumenta", "Stamps", "NewColor", "5287936")
+    NewColorButton.BackColor = newColor
     
     ToAppendixColor = GetSetting("Instrumenta", "Stamps", "ToAppendixColor", "8355711")
     ToAppendixColorButton.BackColor = ToAppendixColor
@@ -82,6 +81,8 @@ Private Sub UserForm_Activate()
     ElseIf GetSetting("Instrumenta", "General", "OperatingMode", "default") = "default" Then
     OptionButton3.Value = True
     End If
+    
+    CheckBox1.Value = GetSetting("Instrumenta", "General", "ContextualButtons", "False")
     
     RulerUnitsComboBox.Clear
     RulerUnitsComboBox.AddItem ("Inches")
@@ -151,6 +152,7 @@ Private Sub SaveSettingsButton_Click()
     SaveSetting "Instrumenta", "AlignDistributeSize", "DefaultTransformationMethod", DefaultTransformationMethodComboBox.ListIndex
     
     
+    
     red = StickyNoteColorButton.BackColor Mod 256
     green = StickyNoteColorButton.BackColor \ 256 Mod 256
     blue = StickyNoteColorButton.BackColor \ 65536 Mod 256
@@ -199,7 +201,14 @@ Private Sub SaveSettingsButton_Click()
     
     SaveSetting "Instrumenta", "Stamps", "UpdatedColor", RGB(red, green, blue)
     
-      
+    If CheckBox1.Value = "True" Then
+    SettingContextualButtons = "True"
+    Else
+    SettingContextualButtons = "False"
+    End If
+                
+    SaveSetting "Instrumenta", "General", "ContextualButtons", CheckBox1.Value
+          
     If OptionButton2.Value = True Then
      SaveSetting "Instrumenta", "General", "OperatingMode", "review"
      Call InstrumentaRefresh(UpdateTag:="*R*")
@@ -315,7 +324,7 @@ Private Sub SelectFileButton_Click()
                 .Filters.Add "Powerpoint files", "*.pptx; *.ppt", 1
                 .Show
                 
-                If .SelectedItems.Count = 0 Then
+                If .SelectedItems.count = 0 Then
                     MsgBox "No file selected."
                     Exit Sub
                 Else
