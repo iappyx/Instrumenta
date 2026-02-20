@@ -37,4 +37,4 @@ Common things to change after running:
 
 ---
 
-For the full language reference, see [SCRIPT.md](../SCRIPT.md).
+For the full language reference, see [SCRIPT.md](https://github.com/iappyx/Instrumenta/blob/main/SCRIPT.md).
