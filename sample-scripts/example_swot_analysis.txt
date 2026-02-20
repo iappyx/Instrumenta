@@ -1,0 +1,154 @@
+# ============================================================
+# SWOT Analysis
+# ============================================================
+# A 2x2 grid with Strengths, Weaknesses, Opportunities,
+# Threats. Each quadrant has a colored header band and a
+# lighter content area for bullet points.
+#
+# Slide canvas: 720 x 405 pt (standard 16:9)
+#
+# Customize:
+#   - Quadrant colors below
+#   - Header text (hardcoded INSERT TEXTBOX lines)
+#   - Content placeholder text
+# ============================================================
+
+# Clean up previous run
+DELETE WHERE name STARTSWITH "swot_"
+
+# ============================================================
+# LAYOUT CONSTANTS (adjust here)
+# originX = 60, originY = 60
+# cellW = 290, cellH = 150
+# headerH = 28
+# ============================================================
+
+# ============================================================
+# BACKGROUND CELLS (full quadrant)
+# ============================================================
+
+# Strengths (top-left) - green
+INSERT RECTANGLE AT 60, 60 WIDTH 290 HEIGHT 155 NAME "swot_bg_0_0"
+SET fill.color = #EAF5EC
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Weaknesses (top-right) - red
+INSERT RECTANGLE AT 370, 60 WIDTH 290 HEIGHT 155 NAME "swot_bg_0_1"
+SET fill.color = #FDECEA
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Opportunities (bottom-left) - blue
+INSERT RECTANGLE AT 60, 225 WIDTH 290 HEIGHT 155 NAME "swot_bg_1_0"
+SET fill.color = #E8F0F8
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Threats (bottom-right) - amber
+INSERT RECTANGLE AT 370, 225 WIDTH 290 HEIGHT 155 NAME "swot_bg_1_1"
+SET fill.color = #FEF6E4
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# ============================================================
+# HEADER BANDS
+# ============================================================
+
+# Strengths header
+INSERT RECTANGLE AT 60, 60 WIDTH 290 HEIGHT 28 NAME "swot_hdr_0_0"
+SET fill.color = #00873D
+SET border.color = #00873D
+SET border.width = 1
+
+# Weaknesses header
+INSERT RECTANGLE AT 370, 60 WIDTH 290 HEIGHT 28 NAME "swot_hdr_0_1"
+SET fill.color = #CC0000
+SET border.color = #CC0000
+SET border.width = 1
+
+# Opportunities header
+INSERT RECTANGLE AT 60, 225 WIDTH 290 HEIGHT 28 NAME "swot_hdr_1_0"
+SET fill.color = #003366
+SET border.color = #003366
+SET border.width = 1
+
+# Threats header
+INSERT RECTANGLE AT 370, 225 WIDTH 290 HEIGHT 28 NAME "swot_hdr_1_1"
+SET fill.color = #E8A000
+SET border.color = #E8A000
+SET border.width = 1
+
+# ============================================================
+# HEADER LABELS
+# ============================================================
+
+INSERT TEXTBOX AT 64, 64 WIDTH 282 HEIGHT 22 NAME "swot_hl_0_0" TEXT "S  —  Strengths"
+SET font.size = 10
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 374, 64 WIDTH 282 HEIGHT 22 NAME "swot_hl_0_1" TEXT "W  —  Weaknesses"
+SET font.size = 10
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 64, 229 WIDTH 282 HEIGHT 22 NAME "swot_hl_1_0" TEXT "O  —  Opportunities"
+SET font.size = 10
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 374, 229 WIDTH 282 HEIGHT 22 NAME "swot_hl_1_1" TEXT "T  —  Threats"
+SET font.size = 10
+SET font.bold = TRUE
+SET font.color = #111111
+SET font.name = "Calibri"
+
+# ============================================================
+# CONTENT PLACEHOLDER TEXT
+# ============================================================
+
+INSERT TEXTBOX AT 68, 94 WIDTH 274 HEIGHT 114 NAME "swot_ct_0_0" TEXT "• Add strength here"
+SET font.size = 9
+SET font.color = #1A4D2E
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 378, 94 WIDTH 274 HEIGHT 114 NAME "swot_ct_0_1" TEXT "• Add weakness here"
+SET font.size = 9
+SET font.color = #7A1010
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 68, 259 WIDTH 274 HEIGHT 114 NAME "swot_ct_1_0" TEXT "• Add opportunity here"
+SET font.size = 9
+SET font.color = #003366
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 378, 259 WIDTH 274 HEIGHT 114 NAME "swot_ct_1_1" TEXT "• Add threat here"
+SET font.size = 9
+SET font.color = #7A4800
+SET font.name = "Calibri"
+
+# ============================================================
+# CENTER DIVIDERS (optional cross lines)
+# ============================================================
+
+INSERT RECTANGLE AT 352, 60 WIDTH 8 HEIGHT 320 NAME "swot_div_v"
+SET fill.color = #FFFFFF
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT 60, 208 WIDTH 600 HEIGHT 8 NAME "swot_div_h"
+SET fill.color = #FFFFFF
+SET border.visible = FALSE
+
+# ============================================================
+# SLIDE TITLE
+# ============================================================
+
+INSERT TEXTBOX AT 60, 18 WIDTH 400 HEIGHT 28 NAME "swot_title" TEXT "SWOT Analysis"
+SET font.size = 14
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"

@@ -1,0 +1,251 @@
+# ============================================================
+# Stakeholder Map
+# ============================================================
+# A 2x2 matrix plotting stakeholders by Influence (y-axis)
+# and Interest (x-axis), with labeled oval placeholders
+# for each stakeholder group.
+#
+# Quadrants:
+#   High Influence, Low Interest  : Keep Satisfied
+#   High Influence, High Interest : Manage Closely  <- key
+#   Low Influence,  Low Interest  : Monitor
+#   Low Influence,  High Interest : Keep Informed
+#
+# Slide canvas: 720 x 405 pt (standard 16:9)
+# Grid: 2x2, each cell 270 x 145 pt
+# Origin: x=100, y=35
+#
+# Stakeholder ovals are pre-positioned in each quadrant.
+# Add, remove or reposition them after running.
+#
+# Customize:
+#   - Stakeholder names and positions
+#   - Quadrant colors
+#   - Oval sizes
+# ============================================================
+
+# Clean up previous run
+DELETE WHERE name STARTSWITH "sm_"
+
+# ============================================================
+# QUADRANT BACKGROUNDS
+# ============================================================
+
+# Top-left: Keep Satisfied (high influence, low interest)
+INSERT RECTANGLE AT 100, 35 WIDTH 270 HEIGHT 145 NAME "sm_bg_0_0"
+SET fill.color = #FEF6E4
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Top-right: Manage Closely (high influence, high interest)
+INSERT RECTANGLE AT 370, 35 WIDTH 270 HEIGHT 145 NAME "sm_bg_0_1"
+SET fill.color = #E8F0F8
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Bottom-left: Monitor (low influence, low interest)
+INSERT RECTANGLE AT 100, 180 WIDTH 270 HEIGHT 145 NAME "sm_bg_1_0"
+SET fill.color = #F5F5F5
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Bottom-right: Keep Informed (low influence, high interest)
+INSERT RECTANGLE AT 370, 180 WIDTH 270 HEIGHT 145 NAME "sm_bg_1_1"
+SET fill.color = #EAF5EC
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# ============================================================
+# QUADRANT HEADER BANDS
+# ============================================================
+
+# Keep Satisfied
+INSERT RECTANGLE AT 100, 35 WIDTH 270 HEIGHT 24 NAME "sm_hdr_0_0"
+SET fill.color = #E8A000
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 104, 38 WIDTH 262 HEIGHT 18 NAME "sm_hl_0_0" TEXT "Keep Satisfied"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# Manage Closely
+INSERT RECTANGLE AT 370, 35 WIDTH 270 HEIGHT 24 NAME "sm_hdr_0_1"
+SET fill.color = #003366
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 374, 38 WIDTH 262 HEIGHT 18 NAME "sm_hl_0_1" TEXT "Manage Closely"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# Monitor
+INSERT RECTANGLE AT 100, 180 WIDTH 270 HEIGHT 24 NAME "sm_hdr_1_0"
+SET fill.color = #888888
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 104, 183 WIDTH 262 HEIGHT 18 NAME "sm_hl_1_0" TEXT "Monitor"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# Keep Informed
+INSERT RECTANGLE AT 370, 180 WIDTH 270 HEIGHT 24 NAME "sm_hdr_1_1"
+SET fill.color = #00873D
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 374, 183 WIDTH 262 HEIGHT 18 NAME "sm_hl_1_1" TEXT "Keep Informed"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# ============================================================
+# AXIS LABELS
+# ============================================================
+
+# Y-axis label (rotated) — Influence
+INSERT TEXTBOX AT 30, 120 WIDTH 130 HEIGHT 20 NAME "sm_yaxis" TEXT "Influence  ↑"
+SET font.size = 9
+SET font.italic = TRUE
+SET font.color = #555555
+SET font.name = "Calibri"
+ROTATE 270
+
+# X-axis label — Interest
+INSERT TEXTBOX AT 100, 334 WIDTH 540 HEIGHT 20 NAME "sm_xaxis" TEXT "Interest  →"
+SET font.size = 9
+SET font.italic = TRUE
+SET font.color = #555555
+SET font.name = "Calibri"
+
+# Low / High labels on axes
+INSERT TEXTBOX AT 100, 356 WIDTH 80 HEIGHT 16 NAME "sm_x_low" TEXT "Low"
+SET font.size = 8
+SET font.color = #888888
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 620, 356 WIDTH 80 HEIGHT 16 NAME "sm_x_high" TEXT "High"
+SET font.size = 8
+SET font.color = #888888
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 60, 290 WIDTH 40 HEIGHT 16 NAME "sm_y_low" TEXT "Low"
+SET font.size = 8
+SET font.color = #888888
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 60, 50 WIDTH 40 HEIGHT 16 NAME "sm_y_high" TEXT "High"
+SET font.size = 8
+SET font.color = #888888
+SET font.name = "Calibri"
+
+# ============================================================
+# STAKEHOLDER OVALS
+# --- Top-left: Keep Satisfied ---
+# ============================================================
+
+INSERT OVAL AT 120, 75 WIDTH 100 HEIGHT 36 NAME "sm_sh_0" TEXT "Regulator"
+SET fill.color = #E8A000
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT OVAL AT 248, 100 WIDTH 100 HEIGHT 36 NAME "sm_sh_1" TEXT "Board"
+SET fill.color = #E8A000
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# ============================================================
+# --- Top-right: Manage Closely ---
+# ============================================================
+
+INSERT OVAL AT 388, 68 WIDTH 110 HEIGHT 36 NAME "sm_sh_2" TEXT "Exec Sponsor"
+SET fill.color = #003366
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT OVAL AT 510, 80 WIDTH 110 HEIGHT 36 NAME "sm_sh_3" TEXT "Project Steering"
+SET fill.color = #003366
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT OVAL AT 395, 120 WIDTH 110 HEIGHT 36 NAME "sm_sh_4" TEXT "Key Client"
+SET fill.color = #0055AA
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# ============================================================
+# --- Bottom-left: Monitor ---
+# ============================================================
+
+INSERT OVAL AT 130, 220 WIDTH 100 HEIGHT 36 NAME "sm_sh_5" TEXT "Media"
+SET fill.color = #888888
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT OVAL AT 248, 248 WIDTH 100 HEIGHT 36 NAME "sm_sh_6" TEXT "General Public"
+SET fill.color = #888888
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# ============================================================
+# --- Bottom-right: Keep Informed ---
+# ============================================================
+
+INSERT OVAL AT 388, 215 WIDTH 100 HEIGHT 36 NAME "sm_sh_7" TEXT "End Users"
+SET fill.color = #00873D
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT OVAL AT 510, 230 WIDTH 100 HEIGHT 36 NAME "sm_sh_8" TEXT "Dept. Managers"
+SET fill.color = #00873D
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT OVAL AT 400, 268 WIDTH 100 HEIGHT 36 NAME "sm_sh_9" TEXT "HR & Finance"
+SET fill.color = #4CAF50
+SET border.visible = FALSE
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# ============================================================
+# SLIDE TITLE
+# ============================================================
+
+INSERT TEXTBOX AT 100, 8 WIDTH 400 HEIGHT 22 NAME "sm_title" TEXT "Stakeholder Map"
+SET font.size = 13
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"

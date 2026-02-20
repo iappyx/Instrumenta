@@ -1,0 +1,257 @@
+# ============================================================
+# Maturity Model
+# ============================================================
+# A grid with 5 maturity level columns and 5 capability rows.
+# Cells are shaded to show current state (solid) vs
+# target state (lighter) vs not applicable (grey).
+#
+# Maturity levels (columns):
+#   1 - Initial  2 - Developing  3 - Defined
+#   4 - Managed  5 - Optimized
+#
+# Capability areas (rows):
+#   Strategy, People, Process, Technology, Governance
+#
+# Color coding:
+#   Current state  : dark blue  (col < currentLevel per row)
+#   Target state   : light blue (col = targetLevel per row)
+#   Beyond target  : grey       (col > targetLevel)
+#
+# Slide canvas: 720 x 405 pt (standard 16:9)
+# cellW = 96, cellH = 44, labelW = 110
+# originX = 110, originY = 80
+#
+# Customize:
+#   - currentLevel and targetLevel per row in the IF blocks
+#   - Row and column labels in the TEXTBOX section
+# ============================================================
+
+# Clean up previous run
+DELETE WHERE name STARTSWITH "mat_"
+
+# ============================================================
+# COLUMN HEADER CELLS
+# ============================================================
+
+REPEAT 5 AS col
+    INSERT RECTANGLE AT 110+(col*96), 80 WIDTH 96 HEIGHT 30 NAME "mat_hdr_"+col
+    SET fill.color = #003366
+    SET border.color = #FFFFFF
+    SET border.width = 2
+END REPEAT
+
+# Column header labels
+INSERT TEXTBOX AT 110, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_0" TEXT "1 — Initial"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 206, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_1" TEXT "2 — Developing"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 302, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_2" TEXT "3 — Defined"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 398, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_3" TEXT "4 — Managed"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 494, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_4" TEXT "5 — Optimized"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# ============================================================
+# ROW LABEL COLUMN
+# ============================================================
+
+REPEAT 5 AS row
+    INSERT RECTANGLE AT 0, 110+(row*44) WIDTH 110 HEIGHT 44 NAME "mat_rowlbl_"+row
+    SET border.color = #CCCCCC
+    SET border.width = 1
+
+    IF row = 0 OR row = 2 OR row = 4
+        SET fill.color = #F0F4F8
+    ELSE
+        SET fill.color = #E4EBF2
+    END IF
+END REPEAT
+
+INSERT TEXTBOX AT 4, 118 WIDTH 102 HEIGHT 28 NAME "mat_rl_0" TEXT "Strategy"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 4, 162 WIDTH 102 HEIGHT 28 NAME "mat_rl_1" TEXT "People"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 4, 206 WIDTH 102 HEIGHT 28 NAME "mat_rl_2" TEXT "Process"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 4, 250 WIDTH 102 HEIGHT 28 NAME "mat_rl_3" TEXT "Technology"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 4, 294 WIDTH 102 HEIGHT 28 NAME "mat_rl_4" TEXT "Governance"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"
+
+# ============================================================
+# GRID CELLS
+# Current / target levels per row (0-indexed col):
+#   Row 0 Strategy  : current=2, target=4
+#   Row 1 People    : current=1, target=3
+#   Row 2 Process   : current=3, target=4
+#   Row 3 Technology: current=2, target=3
+#   Row 4 Governance: current=0, target=2
+# ============================================================
+
+# --- Row 0: Strategy (current < 2, target = 4) ---
+REPEAT 5 AS col
+    INSERT RECTANGLE AT 110+(col*96), 110 WIDTH 96 HEIGHT 44 NAME "mat_r0_"+col
+    SET border.color = #FFFFFF
+    SET border.width = 2
+
+    IF col < 2
+        SET fill.color = #003366
+    ELSE IF col = 4
+        SET fill.color = #A8D4F0
+    ELSE
+        SET fill.color = #D0E4F4
+    END IF
+END REPEAT
+
+# --- Row 1: People (current < 1, target = 3) ---
+REPEAT 5 AS col
+    INSERT RECTANGLE AT 110+(col*96), 154 WIDTH 96 HEIGHT 44 NAME "mat_r1_"+col
+    SET border.color = #FFFFFF
+    SET border.width = 2
+
+    IF col < 1
+        SET fill.color = #003366
+    ELSE IF col = 3
+        SET fill.color = #A8D4F0
+    ELSE IF col > 3
+        SET fill.color = #EEEEEE
+    ELSE
+        SET fill.color = #D0E4F4
+    END IF
+END REPEAT
+
+# --- Row 2: Process (current < 3, target = 4) ---
+REPEAT 5 AS col
+    INSERT RECTANGLE AT 110+(col*96), 198 WIDTH 96 HEIGHT 44 NAME "mat_r2_"+col
+    SET border.color = #FFFFFF
+    SET border.width = 2
+
+    IF col < 3
+        SET fill.color = #003366
+    ELSE IF col = 4
+        SET fill.color = #A8D4F0
+    ELSE
+        SET fill.color = #D0E4F4
+    END IF
+END REPEAT
+
+# --- Row 3: Technology (current < 2, target = 3) ---
+REPEAT 5 AS col
+    INSERT RECTANGLE AT 110+(col*96), 242 WIDTH 96 HEIGHT 44 NAME "mat_r3_"+col
+    SET border.color = #FFFFFF
+    SET border.width = 2
+
+    IF col < 2
+        SET fill.color = #003366
+    ELSE IF col = 3
+        SET fill.color = #A8D4F0
+    ELSE IF col > 3
+        SET fill.color = #EEEEEE
+    ELSE
+        SET fill.color = #D0E4F4
+    END IF
+END REPEAT
+
+# --- Row 4: Governance (current < 0, target = 2) ---
+REPEAT 5 AS col
+    INSERT RECTANGLE AT 110+(col*96), 286 WIDTH 96 HEIGHT 44 NAME "mat_r4_"+col
+    SET border.color = #FFFFFF
+    SET border.width = 2
+
+    IF col = 2
+        SET fill.color = #A8D4F0
+    ELSE IF col > 2
+        SET fill.color = #EEEEEE
+    ELSE
+        SET fill.color = #D0E4F4
+    END IF
+END REPEAT
+
+# ============================================================
+# LEGEND
+# ============================================================
+
+INSERT RECTANGLE AT 110, 348 WIDTH 16 HEIGHT 14 NAME "mat_leg_1"
+SET fill.color = #003366
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 130, 346 WIDTH 100 HEIGHT 16 NAME "mat_legt_1" TEXT "Current state"
+SET font.size = 8
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT RECTANGLE AT 240, 348 WIDTH 16 HEIGHT 14 NAME "mat_leg_2"
+SET fill.color = #A8D4F0
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 260, 346 WIDTH 100 HEIGHT 16 NAME "mat_legt_2" TEXT "Target state"
+SET font.size = 8
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT RECTANGLE AT 370, 348 WIDTH 16 HEIGHT 14 NAME "mat_leg_3"
+SET fill.color = #D0E4F4
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 390, 346 WIDTH 100 HEIGHT 16 NAME "mat_legt_3" TEXT "Gap"
+SET font.size = 8
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT RECTANGLE AT 440, 348 WIDTH 16 HEIGHT 14 NAME "mat_leg_4"
+SET fill.color = #EEEEEE
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 460, 346 WIDTH 120 HEIGHT 16 NAME "mat_legt_4" TEXT "Not applicable"
+SET font.size = 8
+SET font.color = #333333
+SET font.name = "Calibri"
+
+# ============================================================
+# SLIDE TITLE
+# ============================================================
+
+INSERT TEXTBOX AT 0, 40 WIDTH 400 HEIGHT 28 NAME "mat_title" TEXT "Capability Maturity Model"
+SET font.size = 14
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"

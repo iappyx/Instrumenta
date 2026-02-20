@@ -1,0 +1,186 @@
+# ============================================================
+# Risk Matrix (5x5)
+# ============================================================
+# A 5x5 grid shaded from green (low risk) to red (high risk)
+# based on Likelihood (x-axis) x Impact (y-axis).
+#
+# Color logic (likelihood + impact score, max 10):
+#   2-3  : Green  - low risk
+#   4-5  : Yellow - low-medium risk
+#   6-7  : Amber  - medium-high risk
+#   8-10 : Red    - high risk
+#
+# Slide canvas: 720 x 405 pt (standard 16:9)
+# Grid: 5x5 cells of 60x50 pt, origin at (150, 55)
+#
+# Customize:
+#   - Axis labels (bottom and left textboxes)
+#   - Risk zone colors
+#   - Cell size / position
+# ============================================================
+
+# Clean up previous run
+DELETE WHERE name STARTSWITH "risk_"
+
+# ============================================================
+# GRID CELLS
+# row 0 = top (highest impact), col 0 = left (lowest likelihood)
+# Score = (col+1) + (4-row+1) = likelihood + impact
+# ============================================================
+
+REPEAT 5 AS row
+    REPEAT 5 AS col
+
+        INSERT RECTANGLE AT 150+(col*60), 55+(row*50) WIDTH 60 HEIGHT 50 NAME "risk_cell_"+row+"_"+col
+        SET border.color = #FFFFFF
+        SET border.width = 2
+
+        # Score: likelihood (col+1) + impact (5-row)
+        # High impact = low row index
+        # We approximate zones by col+row position:
+        #   col+row <= 2 : green
+        #   col+row = 3  : yellow-green
+        #   col+row = 4  : yellow
+        #   col+row = 5  : amber
+        #   col+row = 6  : orange
+        #   col+row >= 7 : red
+
+        IF col+row <= 2
+            SET fill.color = #00873D
+        ELSE IF col+row = 3
+            SET fill.color = #4CAF50
+        ELSE IF col+row = 4
+            SET fill.color = #CDDC39
+        ELSE IF col+row = 5
+            SET fill.color = #E8A000
+        ELSE IF col+row = 6
+            SET fill.color = #E05C00
+        ELSE
+            SET fill.color = #CC0000
+        END IF
+
+    END REPEAT
+END REPEAT
+
+# ============================================================
+# LIKELIHOOD AXIS LABELS (x-axis, below grid)
+# ============================================================
+
+INSERT TEXTBOX AT 150, 312 WIDTH 60 HEIGHT 18 NAME "risk_xl_0" TEXT "Rare"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 210, 312 WIDTH 60 HEIGHT 18 NAME "risk_xl_1" TEXT "Unlikely"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 270, 312 WIDTH 60 HEIGHT 18 NAME "risk_xl_2" TEXT "Possible"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 330, 312 WIDTH 60 HEIGHT 18 NAME "risk_xl_3" TEXT "Likely"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 390, 312 WIDTH 60 HEIGHT 18 NAME "risk_xl_4" TEXT "Almost Certain"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+# X-axis title
+INSERT TEXTBOX AT 150, 332 WIDTH 300 HEIGHT 18 NAME "risk_xaxis" TEXT "Likelihood  →"
+SET font.size = 9
+SET font.italic = TRUE
+SET font.color = #333333
+SET font.name = "Calibri"
+
+# ============================================================
+# IMPACT AXIS LABELS (y-axis, left of grid)
+# ============================================================
+
+INSERT TEXTBOX AT 60, 255 WIDTH 80 HEIGHT 18 NAME "risk_yl_0" TEXT "Negligible"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 60, 205 WIDTH 80 HEIGHT 18 NAME "risk_yl_1" TEXT "Minor"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 60, 155 WIDTH 80 HEIGHT 18 NAME "risk_yl_2" TEXT "Moderate"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 60, 105 WIDTH 80 HEIGHT 18 NAME "risk_yl_3" TEXT "Major"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 60, 55 WIDTH 80 HEIGHT 18 NAME "risk_yl_4" TEXT "Catastrophic"
+SET font.size = 8
+SET font.color = #555555
+SET font.name = "Calibri"
+
+# Y-axis title (rotated)
+INSERT TEXTBOX AT 20, 130 WIDTH 130 HEIGHT 18 NAME "risk_yaxis" TEXT "Impact  →"
+SET font.size = 9
+SET font.italic = TRUE
+SET font.color = #333333
+SET font.name = "Calibri"
+ROTATE 270
+
+# ============================================================
+# LEGEND
+# ============================================================
+
+INSERT RECTANGLE AT 510, 80 WIDTH 16 HEIGHT 16 NAME "risk_leg_1"
+SET fill.color = #00873D
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 530, 79 WIDTH 120 HEIGHT 18 NAME "risk_legt_1" TEXT "Low risk"
+SET font.size = 8
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT RECTANGLE AT 510, 104 WIDTH 16 HEIGHT 16 NAME "risk_leg_2"
+SET fill.color = #CDDC39
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 530, 103 WIDTH 120 HEIGHT 18 NAME "risk_legt_2" TEXT "Medium risk"
+SET font.size = 8
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT RECTANGLE AT 510, 128 WIDTH 16 HEIGHT 16 NAME "risk_leg_3"
+SET fill.color = #E8A000
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 530, 127 WIDTH 120 HEIGHT 18 NAME "risk_legt_3" TEXT "High risk"
+SET font.size = 8
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT RECTANGLE AT 510, 152 WIDTH 16 HEIGHT 16 NAME "risk_leg_4"
+SET fill.color = #CC0000
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 530, 151 WIDTH 120 HEIGHT 18 NAME "risk_legt_4" TEXT "Critical risk"
+SET font.size = 8
+SET font.color = #333333
+SET font.name = "Calibri"
+
+# ============================================================
+# SLIDE TITLE
+# ============================================================
+
+INSERT TEXTBOX AT 60, 18 WIDTH 400 HEIGHT 28 NAME "risk_title" TEXT "Risk Assessment Matrix"
+SET font.size = 14
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"

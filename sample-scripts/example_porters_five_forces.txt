@@ -1,0 +1,153 @@
+# ============================================================
+# Porter's Five Forces
+# ============================================================
+# A center box (Industry Rivalry) with four surrounding boxes
+# connected by arrows pointing inward from each force.
+#
+# Layout:
+#   Center:  Industry Rivalry (large box, center of slide)
+#   Top:     Threat of New Entrants
+#   Bottom:  Threat of Substitutes
+#   Left:    Bargaining Power of Suppliers
+#   Right:   Bargaining Power of Buyers
+#
+# Slide canvas: 720 x 405 pt (standard 16:9)
+#
+# Customize:
+#   - Box colors
+#   - Label text
+#   - Subtitle text per force (description lines)
+# ============================================================
+
+# Clean up previous run
+DELETE WHERE name STARTSWITH "p5f_"
+
+# ============================================================
+# CENTER BOX — Industry Rivalry
+# ============================================================
+
+INSERT RECTANGLE AT 245, 138 WIDTH 230 HEIGHT 130 NAME "p5f_center"
+SET fill.color = #003366
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 253, 158 WIDTH 214 HEIGHT 30 NAME "p5f_center_title" TEXT "Industry Rivalry"
+SET font.size = 12
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 253, 192 WIDTH 214 HEIGHT 60 NAME "p5f_center_sub" TEXT "Intensity of competition among existing players"
+SET font.size = 8
+SET font.color = #AACCEE
+SET font.name = "Calibri"
+
+# ============================================================
+# TOP BOX — Threat of New Entrants
+# ============================================================
+
+INSERT RECTANGLE AT 245, 18 WIDTH 230 HEIGHT 90 NAME "p5f_top"
+SET fill.color = #0055AA
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 253, 24 WIDTH 214 HEIGHT 30 NAME "p5f_top_title" TEXT "Threat of New Entrants"
+SET font.size = 10
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 253, 52 WIDTH 214 HEIGHT 50 NAME "p5f_top_sub" TEXT "Barriers to entry, capital requirements, brand loyalty"
+SET font.size = 8
+SET font.color = #AACCEE
+SET font.name = "Calibri"
+
+# ============================================================
+# BOTTOM BOX — Threat of Substitutes
+# ============================================================
+
+INSERT RECTANGLE AT 245, 298 WIDTH 230 HEIGHT 90 NAME "p5f_bottom"
+SET fill.color = #0055AA
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 253, 308 WIDTH 214 HEIGHT 30 NAME "p5f_bottom_title" TEXT "Threat of Substitutes"
+SET font.size = 10
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 253, 336 WIDTH 214 HEIGHT 46 NAME "p5f_bottom_sub" TEXT "Alternative products, switching costs, price-performance"
+SET font.size = 8
+SET font.color = #AACCEE
+SET font.name = "Calibri"
+
+# ============================================================
+# LEFT BOX — Bargaining Power of Suppliers
+# ============================================================
+
+INSERT RECTANGLE AT 18, 148 WIDTH 190 HEIGHT 110 NAME "p5f_left"
+SET fill.color = #0055AA
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 26, 158 WIDTH 174 HEIGHT 40 NAME "p5f_left_title" TEXT "Bargaining Power of Suppliers"
+SET font.size = 10
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 26, 200 WIDTH 174 HEIGHT 46 NAME "p5f_left_sub" TEXT "Supplier concentration, input differentiation, switching costs"
+SET font.size = 8
+SET font.color = #AACCEE
+SET font.name = "Calibri"
+
+# ============================================================
+# RIGHT BOX — Bargaining Power of Buyers
+# ============================================================
+
+INSERT RECTANGLE AT 512, 148 WIDTH 190 HEIGHT 110 NAME "p5f_right"
+SET fill.color = #0055AA
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT 520, 158 WIDTH 174 HEIGHT 40 NAME "p5f_right_title" TEXT "Bargaining Power of Buyers"
+SET font.size = 10
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 520, 200 WIDTH 174 HEIGHT 46 NAME "p5f_right_sub" TEXT "Buyer concentration, price sensitivity, volume, information"
+SET font.size = 8
+SET font.color = #AACCEE
+SET font.name = "Calibri"
+
+# ============================================================
+# ARROWS — pointing inward toward center
+# Using narrow rectangles as arrow bodies + arrowhead chevrons
+# ============================================================
+
+# Top arrow (pointing down)
+INSERT ARROWDOWN AT 346, 108 WIDTH 48 HEIGHT 34 NAME "p5f_arrow_top"
+SET fill.color = #56A8E0
+SET border.visible = FALSE
+
+# Bottom arrow (pointing up)
+INSERT ARROWUP AT 346, 264 WIDTH 48 HEIGHT 34 NAME "p5f_arrow_bottom"
+SET fill.color = #56A8E0
+SET border.visible = FALSE
+
+# Left arrow (pointing right)
+INSERT ARROWRIGHT AT 208, 183 WIDTH 40 HEIGHT 40 NAME "p5f_arrow_left"
+SET fill.color = #56A8E0
+SET border.visible = FALSE
+
+# Right arrow (pointing left)
+INSERT ARROWLEFT AT 472, 183 WIDTH 40 HEIGHT 40 NAME "p5f_arrow_right"
+SET fill.color = #56A8E0
+SET border.visible = FALSE
+
+# ============================================================
+# SLIDE TITLE
+# ============================================================
+
+INSERT TEXTBOX AT 18, 375 WIDTH 500 HEIGHT 22 NAME "p5f_title" TEXT "Porter's Five Forces Analysis"
+SET font.size = 11
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"

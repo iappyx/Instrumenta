@@ -1,0 +1,125 @@
+# ============================================================
+# Four-Quadrant Matrix
+# ============================================================
+# A 2x2 matrix with labeled quadrants, axis labels, and title.
+# Common in consulting for prioritization, BCG-style charts,
+# risk maps, effort/impact grids, etc.
+#
+# Slide canvas: 720 x 405 pt (standard 16:9)
+# Matrix is centered on the slide
+#
+# Customize:
+#   QUADRANT_LABELS  - the four quadrant titles (hardcoded below)
+#   AXIS labels      - x and y axis titles
+#   Colors           - fill.color per quadrant
+# ============================================================
+
+# Clean up previous run
+DELETE WHERE name STARTSWITH "matrix_"
+
+# --- Settings (adjust these) ---
+# Cell size
+# cellW = 140, cellH = 110
+# Top-left origin of the 2x2 grid
+# originX = 180, originY = 80
+
+# ============================================================
+# QUADRANT CELLS (row 0 = top, col 0 = left)
+# ============================================================
+
+REPEAT 2 AS row
+    REPEAT 2 AS col
+
+        INSERT RECTANGLE AT 180+(col*140), 80+(row*110) WIDTH 140 HEIGHT 110 NAME "matrix_cell_"+row+"_"+col
+
+        # Top-left: Question Marks / low priority
+        IF row = 0 AND col = 0
+            SET fill.color = #E8F0F8
+            SET border.color = #AAAAAA
+            SET border.width = 1
+        END IF
+
+        # Top-right: Stars / high priority
+        IF row = 0 AND col = 1
+            SET fill.color = #003366
+            SET border.color = #AAAAAA
+            SET border.width = 1
+        END IF
+
+        # Bottom-left: Dogs / deprioritize
+        IF row = 1 AND col = 0
+            SET fill.color = #F5F5F5
+            SET border.color = #AAAAAA
+            SET border.width = 1
+        END IF
+
+        # Bottom-right: Cash Cows / maintain
+        IF row = 1 AND col = 1
+            SET fill.color = #DCEAF7
+            SET border.color = #AAAAAA
+            SET border.width = 1
+        END IF
+
+    END REPEAT
+END REPEAT
+
+# ============================================================
+# QUADRANT TITLE LABELS
+# ============================================================
+
+# Top-left label
+INSERT TEXTBOX AT 188, 88 WIDTH 124 HEIGHT 30 NAME "matrix_label_0_0" TEXT "Question Marks"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #333333
+SET font.name = "Calibri"
+
+# Top-right label
+INSERT TEXTBOX AT 328, 88 WIDTH 124 HEIGHT 30 NAME "matrix_label_0_1" TEXT "Stars"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# Bottom-left label
+INSERT TEXTBOX AT 188, 198 WIDTH 124 HEIGHT 30 NAME "matrix_label_1_0" TEXT "Dogs"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #333333
+SET font.name = "Calibri"
+
+# Bottom-right label
+INSERT TEXTBOX AT 328, 198 WIDTH 124 HEIGHT 30 NAME "matrix_label_1_1" TEXT "Cash Cows"
+SET font.size = 9
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"
+
+# ============================================================
+# AXIS LABELS
+# ============================================================
+
+# X-axis label (below matrix, centered)
+INSERT TEXTBOX AT 180, 302 WIDTH 280 HEIGHT 20 NAME "matrix_xaxis" TEXT "Market Growth Rate  →"
+SET font.size = 9
+SET font.color = #555555
+SET font.name = "Calibri"
+SET font.italic = TRUE
+
+# Y-axis label (left of matrix, rotated)
+INSERT TEXTBOX AT 110, 100 WIDTH 130 HEIGHT 20 NAME "matrix_yaxis" TEXT "Market Share  →"
+SET font.size = 9
+SET font.color = #555555
+SET font.name = "Calibri"
+SET font.italic = TRUE
+ROTATE 270
+
+# ============================================================
+# SLIDE TITLE
+# ============================================================
+
+INSERT TEXTBOX AT 180, 45 WIDTH 280 HEIGHT 28 NAME "matrix_title" TEXT "Portfolio Analysis"
+SET font.size = 14
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"

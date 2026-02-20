@@ -1,0 +1,271 @@
+# ============================================================
+# Business Model Canvas
+# ============================================================
+# The classic Osterwalder Business Model Canvas with 9 blocks.
+#
+# Layout (left to right):
+#   Top half (5 columns):
+#     Key Partners | Key Activities | Value Proposition | Customer Relationships | Customer Segments
+#     Key Partners | Key Resources  | Value Proposition | Channels               | Customer Segments
+#   Bottom strip (2 wide blocks):
+#     Cost Structure | Revenue Streams
+#
+# Slide canvas: 720 x 405 pt (standard 16:9)
+# Top section height: 280 pt (two rows of 140 pt)
+# Bottom section height: 70 pt
+# Column widths: 130 | 120 | 140 | 120 | 130  (total 640)
+# originX: 40, originY: 40
+#
+# Customize:
+#   - Placeholder text per block
+#   - Header colors per block
+#   - Block dimensions
+# ============================================================
+
+# Clean up previous run
+DELETE WHERE name STARTSWITH "bmc_"
+
+# ============================================================
+# COLUMN X POSITIONS (originX = 40)
+# Col 0: 40   (w=130) Key Partners
+# Col 1: 170  (w=120) Key Activities / Key Resources
+# Col 2: 290  (w=140) Value Proposition
+# Col 3: 430  (w=120) Customer Relationships / Channels
+# Col 4: 550  (w=130) Customer Segments
+# ============================================================
+
+# ============================================================
+# BLOCK BACKGROUNDS
+# ============================================================
+
+# Key Partners (full left column, spans both rows)
+INSERT RECTANGLE AT 40, 40 WIDTH 130 HEIGHT 280 NAME "bmc_bg_partners"
+SET fill.color = #EEF2F7
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Key Activities (top-right of col 1)
+INSERT RECTANGLE AT 170, 40 WIDTH 120 HEIGHT 140 NAME "bmc_bg_activities"
+SET fill.color = #EEF2F7
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Key Resources (bottom-right of col 1)
+INSERT RECTANGLE AT 170, 180 WIDTH 120 HEIGHT 140 NAME "bmc_bg_resources"
+SET fill.color = #EEF2F7
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Value Proposition (full center column, spans both rows)
+INSERT RECTANGLE AT 290, 40 WIDTH 140 HEIGHT 280 NAME "bmc_bg_vp"
+SET fill.color = #E8F0F8
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Customer Relationships (top of col 3)
+INSERT RECTANGLE AT 430, 40 WIDTH 120 HEIGHT 140 NAME "bmc_bg_relationships"
+SET fill.color = #EEF2F7
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Channels (bottom of col 3)
+INSERT RECTANGLE AT 430, 180 WIDTH 120 HEIGHT 140 NAME "bmc_bg_channels"
+SET fill.color = #EEF2F7
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Customer Segments (full right column, spans both rows)
+INSERT RECTANGLE AT 550, 40 WIDTH 130 HEIGHT 280 NAME "bmc_bg_segments"
+SET fill.color = #EEF2F7
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Cost Structure (bottom-left wide block)
+INSERT RECTANGLE AT 40, 320 WIDTH 320 HEIGHT 70 NAME "bmc_bg_cost"
+SET fill.color = #FEF6E4
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# Revenue Streams (bottom-right wide block)
+INSERT RECTANGLE AT 360, 320 WIDTH 320 HEIGHT 70 NAME "bmc_bg_revenue"
+SET fill.color = #EAF5EC
+SET border.color = #CCCCCC
+SET border.width = 1
+
+# ============================================================
+# HEADER BANDS
+# ============================================================
+
+# Key Partners
+INSERT RECTANGLE AT 40, 40 WIDTH 130 HEIGHT 24 NAME "bmc_hdr_partners"
+SET fill.color = #003366
+SET border.visible = FALSE
+
+# Key Activities
+INSERT RECTANGLE AT 170, 40 WIDTH 120 HEIGHT 24 NAME "bmc_hdr_activities"
+SET fill.color = #003366
+SET border.visible = FALSE
+
+# Key Resources
+INSERT RECTANGLE AT 170, 180 WIDTH 120 HEIGHT 24 NAME "bmc_hdr_resources"
+SET fill.color = #003366
+SET border.visible = FALSE
+
+# Value Proposition
+INSERT RECTANGLE AT 290, 40 WIDTH 140 HEIGHT 24 NAME "bmc_hdr_vp"
+SET fill.color = #0055AA
+SET border.visible = FALSE
+
+# Customer Relationships
+INSERT RECTANGLE AT 430, 40 WIDTH 120 HEIGHT 24 NAME "bmc_hdr_relationships"
+SET fill.color = #003366
+SET border.visible = FALSE
+
+# Channels
+INSERT RECTANGLE AT 430, 180 WIDTH 120 HEIGHT 24 NAME "bmc_hdr_channels"
+SET fill.color = #003366
+SET border.visible = FALSE
+
+# Customer Segments
+INSERT RECTANGLE AT 550, 40 WIDTH 130 HEIGHT 24 NAME "bmc_hdr_segments"
+SET fill.color = #003366
+SET border.visible = FALSE
+
+# Cost Structure
+INSERT RECTANGLE AT 40, 320 WIDTH 320 HEIGHT 24 NAME "bmc_hdr_cost"
+SET fill.color = #C07800
+SET border.visible = FALSE
+
+# Revenue Streams
+INSERT RECTANGLE AT 360, 320 WIDTH 320 HEIGHT 24 NAME "bmc_hdr_revenue"
+SET fill.color = #00873D
+SET border.visible = FALSE
+
+# ============================================================
+# HEADER LABELS
+# ============================================================
+
+INSERT TEXTBOX AT 44, 43 WIDTH 122 HEIGHT 18 NAME "bmc_hl_partners" TEXT "Key Partners"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 174, 43 WIDTH 112 HEIGHT 18 NAME "bmc_hl_activities" TEXT "Key Activities"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 174, 183 WIDTH 112 HEIGHT 18 NAME "bmc_hl_resources" TEXT "Key Resources"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 294, 43 WIDTH 132 HEIGHT 18 NAME "bmc_hl_vp" TEXT "Value Proposition"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 434, 43 WIDTH 112 HEIGHT 18 NAME "bmc_hl_relationships" TEXT "Customer Relationships"
+SET font.size = 7
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 434, 183 WIDTH 112 HEIGHT 18 NAME "bmc_hl_channels" TEXT "Channels"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 554, 43 WIDTH 122 HEIGHT 18 NAME "bmc_hl_segments" TEXT "Customer Segments"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 44, 323 WIDTH 312 HEIGHT 18 NAME "bmc_hl_cost" TEXT "Cost Structure"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 364, 323 WIDTH 312 HEIGHT 18 NAME "bmc_hl_revenue" TEXT "Revenue Streams"
+SET font.size = 8
+SET font.bold = TRUE
+SET font.color = #FFFFFF
+SET font.name = "Calibri"
+
+# ============================================================
+# PLACEHOLDER CONTENT TEXT
+# ============================================================
+
+INSERT TEXTBOX AT 44, 70 WIDTH 118 HEIGHT 240 NAME "bmc_ct_partners" TEXT "• Who are our key partners and suppliers?
+• Which resources do we acquire from them?
+• Which activities do they perform?"
+SET font.size = 7
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 174, 70 WIDTH 108 HEIGHT 100 NAME "bmc_ct_activities" TEXT "• What activities does our value proposition require?
+• Distribution, production, problem-solving?"
+SET font.size = 7
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 174, 210 WIDTH 108 HEIGHT 100 NAME "bmc_ct_resources" TEXT "• What key resources does our value proposition require?
+• Physical, intellectual, human, financial?"
+SET font.size = 7
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 294, 70 WIDTH 128 HEIGHT 240 NAME "bmc_ct_vp" TEXT "• What value do we deliver to customers?
+• Which problems are we solving?
+• What bundles of products and services do we offer?"
+SET font.size = 7
+SET font.color = #003366
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 434, 70 WIDTH 108 HEIGHT 100 NAME "bmc_ct_relationships" TEXT "• What relationship does each customer segment expect?
+• Personal, automated, self-service?"
+SET font.size = 7
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 434, 210 WIDTH 108 HEIGHT 100 NAME "bmc_ct_channels" TEXT "• How do we reach our customer segments?
+• Which channels work best and are most cost-efficient?"
+SET font.size = 7
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 554, 70 WIDTH 118 HEIGHT 240 NAME "bmc_ct_segments" TEXT "• For whom are we creating value?
+• Who are our most important customers?
+• Mass market, niche, segmented, diversified?"
+SET font.size = 7
+SET font.color = #333333
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 44, 348 WIDTH 308 HEIGHT 36 NAME "bmc_ct_cost" TEXT "• What are the most important costs in our business model?
+• Fixed costs, variable costs, economies of scale?"
+SET font.size = 7
+SET font.color = #7A4800
+SET font.name = "Calibri"
+
+INSERT TEXTBOX AT 364, 348 WIDTH 308 HEIGHT 36 NAME "bmc_ct_revenue" TEXT "• For what value are customers willing to pay?
+• Asset sale, subscription, licensing, advertising?"
+SET font.size = 7
+SET font.color = #1A4D2E
+SET font.name = "Calibri"
+
+# ============================================================
+# SLIDE TITLE
+# ============================================================
+
+INSERT TEXTBOX AT 40, 12 WIDTH 400 HEIGHT 22 NAME "bmc_title" TEXT "Business Model Canvas"
+SET font.size = 13
+SET font.bold = TRUE
+SET font.color = #003366
+SET font.name = "Calibri"
