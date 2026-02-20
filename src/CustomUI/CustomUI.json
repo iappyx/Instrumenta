@@ -2049,7 +2049,7 @@
       "showLabel": "false",
       "imageMso": "AlignDistributeHorizontally",
       "onAction": "ObjectsDistributeHorizontally",
-      "getEnabled": "EnableWhenMultipleShapesSelected",
+      "getEnabled": "EnableWhenShapeOrText",
       "supertip": "Evenly distributes the selected objects horizontally",
       "screentip": "Distribute Horizontally"
     },
@@ -2060,7 +2060,7 @@
       "label": "Distribute vertically",
       "showLabel": "false",
       "onAction": "ObjectsDistributeVertically",
-      "getEnabled": "EnableWhenMultipleShapesSelected",
+      "getEnabled": "EnableWhenShapeOrText",
       "supertip": "Evenly distributes the selected objects vertically",
       "screentip": "Distribute Vertically"
     },
@@ -3684,7 +3684,6 @@
       "imageMso": "FileSaveAs",
       "showLabel": "false",
       "onAction": "SaveSelectedSlides",
-      "getEnabled": "EnableWhenSlidesSelected",
       "supertip": "Saves the selected slides as a new presentation",
       "screentip": "Save Selected Slides"
     },
@@ -3695,7 +3694,6 @@
       "imageMso": "FileSendAsAttachment",
       "showLabel": "false",
       "onAction": "EmailSelectedSlides",
-      "getEnabled": "EnableWhenSlidesSelected",
       "supertip": "E‑mails the selected slides as a new presentation",
       "screentip": "E‑mail Selected Slides"
     },
@@ -3706,7 +3704,6 @@
       "showLabel": "false",
       "imageMso": "FileEmailAsPdfEmailAttachment",
       "onAction": "EmailSelectedSlidesAsPDF",
-      "getEnabled": "EnableWhenSlidesSelected",
       "supertip": "E‑mails the selected slides as a PDF file",
       "screentip": "E‑mail as PDF"
     },
@@ -5591,6 +5588,16 @@
       "supertip": "Opens the storyline builder to capture SCQ and structure your message",
       "screentip": "Storyline Builder"
     },
+    "ShowInstrumentaScriptButton": {
+      "_tag": "button",
+      "id": "ShowInstrumentaScriptButton",
+      "label": "Instrumenta script editor",
+      "imageMso": "MacroPlay",
+      "showLabel": "false",
+      "onAction": "ShowScriptEditor",
+      "supertip": "Opens the Instrumenta script editor",
+      "screentip": "Instrumenta Script Editor"
+    },
     "SelectionPane": {
       "_tag": "toggleButton",
       "idMso": "SelectionPane",
@@ -6739,6 +6746,10 @@
                         "_tag": "button"
                       },
                       {
+                        "$ref": "ShowInstrumentaScriptButton",
+                        "_tag": "button"
+                      },
+                      {
                         "$ref": "SelectionPane",
                         "_tag": "toggleButton"
                       },
@@ -7702,6 +7713,10 @@
                       },
                       {
                         "$ref": "PyramidBuilder",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "ShowInstrumentaScriptButton",
                         "_tag": "button"
                       },
                       {
