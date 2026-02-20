@@ -82,7 +82,7 @@ Private Sub UserForm_Activate()
     OptionButton3.Value = True
     End If
     
-    CheckBox1.Value = GetSetting("Instrumenta", "General", "ContextualButtons", "False")
+    CheckBox1.Value = CBool(GetSetting("Instrumenta", "General", "ContextualButtons", "False"))
     
     RulerUnitsComboBox.Clear
     RulerUnitsComboBox.AddItem ("Inches")
@@ -200,14 +200,8 @@ Private Sub SaveSettingsButton_Click()
     blue = UpdatedColorButton.BackColor \ 65536 Mod 256
     
     SaveSetting "Instrumenta", "Stamps", "UpdatedColor", RGB(red, green, blue)
-    
-    If CheckBox1.Value = "True" Then
-    SettingContextualButtons = "True"
-    Else
-    SettingContextualButtons = "False"
-    End If
-                
-    SaveSetting "Instrumenta", "General", "ContextualButtons", CheckBox1.Value
+    SaveSetting "Instrumenta", "General", "ContextualButtons", CStr(CheckBox1.Value)
+    DoEvents
           
     If OptionButton2.Value = True Then
      SaveSetting "Instrumenta", "General", "OperatingMode", "review"
@@ -219,6 +213,8 @@ Private Sub SaveSettingsButton_Click()
      SaveSetting "Instrumenta", "General", "OperatingMode", "default"
      Call InstrumentaRefresh(UpdateTag:="*")
     End If
+    
+
     
     SettingsForm.Hide
     Unload Me

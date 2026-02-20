@@ -90,6 +90,7 @@ End Function
 
 
 Public Sub CopyToClipboard(text As String)
+#If Win Then
     Dim hMem As LongPtr
     Dim pMem As LongPtr
     Dim bytes As Long
@@ -107,6 +108,7 @@ Public Sub CopyToClipboard(text As String)
     GlobalUnlock hMem
     SetClipboardData CF_UNICODETEXT, hMem
     CloseClipboard
+#End If
 End Sub
 
 
@@ -338,7 +340,7 @@ Private Sub UserForm_Initialize()
     selectedIndex = -1
     nodeCount = 0
         
-    optCurrentPres.value = True
+    optCurrentPres.Value = True
     
     With lstPyramid
     .ColumnCount = 2
@@ -873,7 +875,7 @@ Private Sub btnGenerate_Click()
         Exit Sub
     End If
     
-    createNew = optNewPres.value
+    createNew = optNewPres.Value
     
     totalSlides = 2 + (nodeCount - 1)
     
@@ -1011,7 +1013,7 @@ Private Sub btnImportPyramid_Click()
     End If
     
     #If Mac Then
-        importPath = MacOpenDialog("json")
+        importPath = MacFileDialog("/")
         If importPath = "" Or importPath = "False" Then Exit Sub
     #Else
         Dim fd As Object
