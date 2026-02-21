@@ -24,8 +24,8 @@ Attribute VB_Name = "ModuleFeatureSearch"
 Option Explicit
 
 Public Type FeatureData
-    ID As String
-    Label As String
+    id As String
+    label As String
     OnAction As String
     GroupLabel As String
     TabSingleView As String
@@ -322,6 +322,9 @@ Private Sub LoadInstrumentaFeatures()
     AddFeature "DeleteStampsOnAllSlides", "Delete Stamps on all slides", "DeleteStampsOnAllSlides", "Paste and insert", "Instrumenta > Paste and insert > Inside menu 'Stamps'", "[Advanced] > Paste and insert > Inside menu 'Stamps'"
     AddFeature "InsertProcessSmartArt", "Insert process (SmartArt)", "InsertProcessSmartArt", "Paste and insert", "Instrumenta > Paste and insert", "[Advanced] > Paste and insert"
     AddFeature "InsertQRCodeButton", "Insert QR-code", "InsertQRCode", "Paste and insert", "Instrumenta > Paste and insert", "[Advanced] > Paste and insert"
+    AddFeature "ShowInstrumentaScriptButton", "Instrumenta script editor", "ShowScriptEditor", "Instrumenta script", "Instrumenta > Instrumenta script", "[Advanced] > Instrumenta script"
+    AddFeature "InstrumentaScriptPresets", "Preset", "ScriptPreset_OnAction", "Instrumenta script", "Instrumenta > Instrumenta script", "[Advanced] > Instrumenta script"
+    AddFeature "InstrumentaScriptPresetRun", "Run preset", "ScriptPreset_Run", "Instrumenta script", "Instrumenta > Instrumenta script", "[Advanced] > Instrumenta script"
     AddFeature "cleaning0", "Move to end and hide selected slides", "CleanUpHideAndMoveSelectedSlides", "Advanced", "Instrumenta > Advanced > Inside menu 'Cleaning tools'", "[Advanced] > Advanced > Inside menu 'Cleaning tools'"
     AddFeature "cleaning10", "Add page numbers to all/selected slides (except the first)", "CleanUpAddSlideNumbers", "Advanced", "Instrumenta > Advanced > Inside menu 'Cleaning tools'", "[Advanced] > Advanced > Inside menu 'Cleaning tools'"
     AddFeature "cleaning1", "Remove animations from all/selected slides", "CleanUpRemoveAnimationsFromAllSlides", "Advanced", "Instrumenta > Advanced > Inside menu 'Cleaning tools'", "[Advanced] > Advanced > Inside menu 'Cleaning tools'"
@@ -357,10 +360,10 @@ ErrorHandler:
     MsgBox "Error loading features: " & Err.Description, vbCritical
 End Sub
 
-Private Sub AddFeature(ID As String, lbl As String, action As String, grp As String, tabSingle As String, tabMulti As String)
+Private Sub AddFeature(id As String, lbl As String, action As String, grp As String, tabSingle As String, tabMulti As String)
     FeatureCount = FeatureCount + 1
-    Features(FeatureCount).ID = ID
-    Features(FeatureCount).Label = lbl
+    Features(FeatureCount).id = id
+    Features(FeatureCount).label = lbl
     Features(FeatureCount).OnAction = action
     Features(FeatureCount).GroupLabel = grp
     Features(FeatureCount).TabSingleView = tabSingle
@@ -386,7 +389,7 @@ Public Function SearchFeatures(query As String) As String
     Else
 
         For i = 1 To FeatureCount
-            If InStr(1, LCase(Features(i).Label), searchTerm) > 0 Or _
+            If InStr(1, LCase(Features(i).label), searchTerm) > 0 Or _
                InStr(1, LCase(Features(i).GroupLabel), searchTerm) > 0 Or _
                InStr(1, LCase(Features(i).TabSingleView), searchTerm) > 0 Or _
                InStr(1, LCase(Features(i).TabMultiView), searchTerm) > 0 Then

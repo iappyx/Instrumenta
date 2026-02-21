@@ -37,23 +37,27 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
+Private Const APP_KEY      As String = "Instrumenta"
+Private Const SECTION_DATA As String = "ISCRPresetData"
+
+
 Private Sub btnRun_Click()
     If Trim(txtScript.text) = "" Then
         MsgBox "Please enter a script first.", vbInformation
         Exit Sub
     End If
-    
+
     txtLog.text = ""
-    
+
     RunInstrumentaScript txtScript.text
-    
+
     Dim msg As Variant
     Dim logText As String
     For Each msg In IScr_ScriptLog
         logText = logText & msg & vbCrLf
     Next msg
     txtLog.text = logText
-    
+
     txtLog.SelStart = 0
 End Sub
 
@@ -93,26 +97,173 @@ Private Sub btnExample_Click()
     example = example & "# After CALL, re-sync working set explicitly if needed" & vbCrLf
     example = example & "USE SELECTION" & vbCrLf
     example = example & "SET font.name = ""Calibri""" & vbCrLf
-    
+
     If Trim(txtScript.text) <> "" Then
         If MsgBox("Replace current script with example?", vbQuestion + vbYesNo) = vbNo Then
             Exit Sub
         End If
     End If
-    
+
     txtScript.text = example
     txtScript.SetFocus
 End Sub
 
 Private Sub btnClose_Click()
+    If UnsavedChanges() Then
+        Dim answer As Integer
+        answer = MsgBox("The current script has not been saved as a preset." & vbCrLf & "Close without saving?", vbQuestion + vbYesNo)
+        If answer = vbNo Then Exit Sub
+    End If
     Unload Me
 End Sub
+
+
+
+Private Sub btnPresetSave_Click()
+    Dim presetName As String
+    presetName = Trim(txtPresetName.text)
+
+
+    If presetName = "" Then
+        If lstPresets.ListIndex >= 0 Then
+            presetName = lstPresets.value
+        Else
+            MsgBox "Enter a preset name first.", vbInformation
+            txtPresetName.SetFocus
+            Exit Sub
+        End If
+    End If
+
+    If Trim(txtScript.text) = "" Then
+        MsgBox "The script is empty — nothing to save.", vbInformation
+        Exit Sub
+    End If
+
+    If PresetExists(presetName) Then
+        If MsgBox("Overwrite preset """ & presetName & """?", vbQuestion + vbYesNo) = vbNo Then
+            Exit Sub
+        End If
+    End If
+
+    SaveSetting APP_KEY, SECTION_DATA, presetName, txtScript.text
+
+    RefreshPresetList
+    SelectPresetInList presetName
+    txtPresetName.text = ""
+End Sub
+
+
+Private Sub btnPresetLoad_Click()
+    If lstPresets.ListIndex = -1 Then
+        MsgBox "Select a preset from the list first.", vbInformation
+        Exit Sub
+    End If
+
+    Dim presetName As String
+    presetName = lstPresets.value
+
+    If Trim(txtScript.text) <> "" Then
+        If MsgBox("Replace current script with """ & presetName & """?", vbQuestion + vbYesNo) = vbNo Then
+            Exit Sub
+        End If
+    End If
+
+    txtScript.text = GetSetting(APP_KEY, SECTION_DATA, presetName, "")
+    txtScript.SetFocus
+End Sub
+
+Private Sub btnPresetDelete_Click()
+    If lstPresets.ListIndex = -1 Then
+        MsgBox "Select a preset from the list first.", vbInformation
+        Exit Sub
+    End If
+
+    Dim presetName As String
+    presetName = lstPresets.value
+
+    If MsgBox("Delete preset """ & presetName & """?", vbQuestion + vbYesNo) = vbNo Then
+        Exit Sub
+    End If
+
+    DeleteSetting APP_KEY, SECTION_DATA, presetName
+    RefreshPresetList
+End Sub
+
+
+Private Sub lstPresets_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
+    If lstPresets.ListIndex >= 0 Then
+        txtPresetName.text = lstPresets.value
+    End If
+End Sub
+
+
+Private Function PresetExists(presetName As String) As Boolean
+    Dim all As Variant
+    all = GetAllSettings(APP_KEY, SECTION_DATA)
+    If IsEmpty(all) Then Exit Function
+    Dim i As Integer
+    For i = 0 To UBound(all, 1)
+        If LCase(all(i, 0)) = LCase(presetName) Then
+            PresetExists = True
+            Exit Function
+        End If
+    Next i
+End Function
+
+Private Sub RefreshPresetList()
+    lstPresets.Clear
+    Dim all As Variant
+    all = GetAllSettings(APP_KEY, SECTION_DATA)
+    If IsEmpty(all) Then Exit Sub
+    Dim i As Integer
+    For i = 0 To UBound(all, 1)
+        lstPresets.AddItem all(i, 0)
+    Next i
+    
+    If Not InstrumentaRibbon Is Nothing Then
+    
+    InstrumentaRibbon.Invalidate
+       
+    End If
+    
+End Sub
+
+Private Sub SelectPresetInList(presetName As String)
+    Dim i As Integer
+    For i = 0 To lstPresets.ListCount - 1
+        If LCase(lstPresets.List(i)) = LCase(presetName) Then
+            lstPresets.ListIndex = i
+            Exit Sub
+        End If
+    Next i
+End Sub
+
+Private Function UnsavedChanges() As Boolean
+    Dim currentScript As String
+    currentScript = Trim(txtScript.text)
+
+    If currentScript = "" Then Exit Function
+
+    Dim all As Variant
+    all = GetAllSettings(APP_KEY, SECTION_DATA)
+    If IsEmpty(all) Then
+        UnsavedChanges = True
+        Exit Function
+    End If
+
+    Dim i As Integer
+    For i = 0 To UBound(all, 1)
+        If all(i, 1) = currentScript Then Exit Function
+    Next i
+
+    UnsavedChanges = True
+End Function
+
 
 
 Private Sub Label3_Click()
     Dim URL As String
     Dim tempPresentation As Presentation
-
 
     URL = "https://github.com/iappyx/Instrumenta/blob/main/SCRIPT.MD"
 
@@ -125,22 +276,26 @@ Private Sub Label3_Click()
     End If
 End Sub
 
+
 Private Sub UserForm_Initialize()
-    
-    txtScript.text = "# Type your script here" & vbCrLf & "# Example: SELECT ALL"
-    txtLog.text = ""
-    txtLog.Locked = True
-    
-        Dim codeFontName As String
+    If txtScript.text = "" Then
+        txtScript.text = "# Type your script here" & vbCrLf & "# Example: SELECT ALL"
+        txtLog.text = ""
+        txtLog.Locked = True
+    End If
+
+    Dim codeFontName As String
     #If Mac Then
         codeFontName = "Courier New"
     #Else
         codeFontName = "Consolas"
     #End If
-    
+
     txtScript.Font.name = codeFontName
     txtScript.Font.Size = 8
     txtLog.Font.name = codeFontName
     txtLog.Font.Size = 8
-    
+
+    RefreshPresetList
 End Sub
+

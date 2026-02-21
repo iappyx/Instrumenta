@@ -1,0 +1,1267 @@
+# ============================================================
+# Instrumenta Script — COMPLETE FEATURE TEST
+# ============================================================
+# Every feature in one script. Run on a blank slide.
+# Fully re-runnable. Layout flows top-to-bottom in rows.
+#
+# SECTIONS
+#  1  INSERT basic shapes
+#  2  INSERT more basic shapes
+#  3  INSERT arrow shapes
+#  4  INSERT flowchart + callout shapes
+#  5  INSERT LINE (styles + loop)
+#  6  INSERT CONNECTOR (direct + loop)
+#  7  SET font (all properties)
+#  8  SET text.align + text.valign
+#  9  SET fill.gradient
+# 10  SET fill.gradient.direction          *** NEW ***
+# 11  SET shadow
+# 12  SET fill.transparent + opacity
+# 13  SET z.order
+# 14  SET name + SET text
+# 15  SET border (all styles + radius)     *** NEW ***
+# 16  SET size + position
+# 17  SET connector.style                  *** NEW ***
+# 18  DUPLICATE (default, OFFSET, var, multi)
+# 19  ROTATE (absolute, BY, loop)
+# 20  GROUP / GROUP NAME + SET on group
+# 21  UNGROUP                              *** NEW ***
+# 22  REPEAT (default, FROM, STEP, FROM+STEP, nested)
+# 23  BREAK
+# 24  IF / ELSE IF / ELSE / END IF (all operators)
+# 25  SELECT (all variants)
+# 26  SET VAR GET property FROM shape      *** NEW ***
+# 27  Built-in variables (slideWidth etc.)
+# 28  String + numeric expressions
+# 29  CALL + USE SELECTION
+# 30  SET VAR INPUT                        *** NEW ***
+# ============================================================
+
+DELETE WHERE name STARTSWITH "ft_"
+
+# ============================================================
+# CONSTANTS
+# ============================================================
+SET VAR ox = 20
+SET VAR oy = 20
+SET VAR cw = 80
+SET VAR ch = 36
+SET VAR g  = 4
+SET VAR s  = cw + g
+
+SET VAR c_dark  = "#003366"
+SET VAR c_mid   = "#0055AA"
+SET VAR c_lite  = "#56A8E0"
+SET VAR c_grn   = "#00873D"
+SET VAR c_red   = "#CC0000"
+SET VAR c_amber = "#E8A000"
+SET VAR c_white = "#FFFFFF"
+SET VAR c_lgrey = "#EEEEEE"
+SET VAR c_dgrey = "#888888"
+SET VAR fn      = "Calibri"
+
+# Row Y positions
+SET VAR r1  = oy
+SET VAR r2  = r1  + ch + g
+SET VAR r3  = r2  + ch + g
+SET VAR r4  = r3  + ch + g
+SET VAR r5  = r4  + ch + g
+SET VAR r6  = r5  + ch + g + 8
+SET VAR r7  = r6  + ch + g
+SET VAR r8  = r7  + ch + g
+SET VAR r9  = r8  + ch + g
+SET VAR r10 = r9  + ch + g
+SET VAR r11 = r10 + ch + g
+SET VAR r12 = r11 + ch + g
+SET VAR r13 = r12 + ch + g
+SET VAR r14 = r13 + ch + g
+SET VAR r15 = r14 + ch + g
+SET VAR r16 = r15 + ch + g
+SET VAR r17 = r16 + ch + g + 8
+
+# ============================================================
+# SECTION 1 — INSERT basic shapes
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r1 WIDTH cw HEIGHT ch NAME "ft_rect" TEXT "RECT"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT ROUNDEDRECTANGLE AT ox+s*1, r1 WIDTH cw HEIGHT ch NAME "ft_rrect" TEXT "RRECT"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT OVAL AT ox+s*2, r1 WIDTH cw HEIGHT ch NAME "ft_oval" TEXT "OVAL"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT TRIANGLE AT ox+s*3, r1 WIDTH cw HEIGHT ch NAME "ft_tri" TEXT "TRI"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT RIGHTTRIANGLE AT ox+s*4, r1 WIDTH cw HEIGHT ch NAME "ft_rtri" TEXT "RTRI"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT DIAMOND AT ox+s*5, r1 WIDTH cw HEIGHT ch NAME "ft_diamond" TEXT "DIAM"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT PARALLELOGRAM AT ox+s*6, r1 WIDTH cw HEIGHT ch NAME "ft_para" TEXT "PARA"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+# ============================================================
+# SECTION 2 — INSERT more basic shapes
+# ============================================================
+INSERT TRAPEZOID AT ox+s*0, r2 WIDTH cw HEIGHT ch NAME "ft_trap" TEXT "TRAP"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT HEXAGON AT ox+s*1, r2 WIDTH cw HEIGHT ch NAME "ft_hex" TEXT "HEX"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT PENTAGON AT ox+s*2, r2 WIDTH cw HEIGHT ch NAME "ft_pent" TEXT "PENT"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT OCTAGON AT ox+s*3, r2 WIDTH cw HEIGHT ch NAME "ft_oct" TEXT "OCT"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT ox+s*4, r2 WIDTH cw HEIGHT ch NAME "ft_textbox" TEXT "TEXTBOX"
+SET font.color = c_mid
+SET font.size = 8
+SET font.bold = TRUE
+
+# ============================================================
+# SECTION 3 — INSERT arrow shapes
+# ============================================================
+INSERT ARROWRIGHT AT ox+s*0, r3 WIDTH cw HEIGHT ch NAME "ft_arr_r" TEXT "RIGHT"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT ARROWLEFT AT ox+s*1, r3 WIDTH cw HEIGHT ch NAME "ft_arr_l" TEXT "LEFT"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT ARROWUP AT ox+s*2, r3 WIDTH cw HEIGHT ch NAME "ft_arr_u" TEXT "UP"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT ARROWDOWN AT ox+s*3, r3 WIDTH cw HEIGHT ch NAME "ft_arr_d" TEXT "DOWN"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT ARROWLEFTRIGHT AT ox+s*4, r3 WIDTH cw HEIGHT ch NAME "ft_arr_lr" TEXT "L-R"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT CHEVRON AT ox+s*5, r3 WIDTH cw HEIGHT ch NAME "ft_chev" TEXT "CHEV"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT PENTAGON_ARROW AT ox+s*6, r3 WIDTH cw HEIGHT ch NAME "ft_pentarr" TEXT "PENT->"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT CIRCULARRIGHTARROW AT ox+s*7, r3 WIDTH cw HEIGHT ch NAME "ft_circarr" TEXT "CIRC"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+# ============================================================
+# SECTION 4 — INSERT flowchart + callout shapes
+# ============================================================
+INSERT FLOWCHART_PROCESS AT ox+s*0, r4 WIDTH cw HEIGHT ch NAME "ft_fc_proc" TEXT "PROC"
+SET fill.color = c_red
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT FLOWCHART_DECISION AT ox+s*1, r4 WIDTH cw HEIGHT ch NAME "ft_fc_dec" TEXT "DEC?"
+SET fill.color = c_red
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT FLOWCHART_TERMINATOR AT ox+s*2, r4 WIDTH cw HEIGHT ch NAME "ft_fc_term" TEXT "TERM"
+SET fill.color = c_red
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT FLOWCHART_DATA AT ox+s*3, r4 WIDTH cw HEIGHT ch NAME "ft_fc_data" TEXT "DATA"
+SET fill.color = c_red
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT FLOWCHART_DOCUMENT AT ox+s*4, r4 WIDTH cw HEIGHT ch NAME "ft_fc_doc" TEXT "DOC"
+SET fill.color = c_red
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT FLOWCHART_CONNECTOR AT ox+s*5, r4 WIDTH ch HEIGHT ch NAME "ft_fc_conn" TEXT "O"
+SET fill.color = c_red
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT CALLOUT_RECT AT ox+s*6, r4 WIDTH cw HEIGHT ch NAME "ft_co_rect" TEXT "CO-RECT"
+SET fill.color = c_dgrey
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT CALLOUT_OVAL AT ox+s*7, r4 WIDTH cw HEIGHT ch NAME "ft_co_oval" TEXT "CO-OVAL"
+SET fill.color = c_dgrey
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT CALLOUT_CLOUD AT ox+s*8, r4 WIDTH cw HEIGHT ch NAME "ft_co_cloud" TEXT "CO-CLOUD"
+SET fill.color = c_dgrey
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+# ============================================================
+# SECTION 5 — INSERT LINE (styles + loop verticals)
+# ============================================================
+INSERT LINE FROM ox, r5 TO ox+cw*3, r5 NAME "ft_line_solid"
+SET border.color = c_dark
+SET border.width = 2
+
+INSERT LINE FROM ox, r5+10 TO ox+cw*3, r5+10 NAME "ft_line_dash"
+SET border.color = c_mid
+SET border.width = 2
+SET border.style = DASH
+
+INSERT LINE FROM ox, r5+20 TO ox+cw*3, r5+20 NAME "ft_line_dot"
+SET border.color = c_lite
+SET border.width = 2
+SET border.style = DOT
+
+INSERT LINE FROM ox, r5+30 TO ox+cw*3, r5+30 NAME "ft_line_dashdot"
+SET border.color = c_amber
+SET border.width = 2
+SET border.style = DASHDOT
+
+REPEAT 6 AS i
+    INSERT LINE FROM ox+cw*3+g+(i*18), r5 TO ox+cw*3+g+(i*18), r5+ch NAME "ft_vline_"+i
+    SET border.color = c_dark
+    SET border.width = 1
+END REPEAT
+
+# ============================================================
+# SECTION 6 — INSERT CONNECTOR (direct + loop)
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r6 WIDTH cw HEIGHT ch NAME "ft_conn_a" TEXT "FROM"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*2, r6 WIDTH cw HEIGHT ch NAME "ft_conn_b" TEXT "TO"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT CONNECTOR FROM "ft_conn_a" TO "ft_conn_b" NAME "ft_connector_1"
+SET border.color = c_dark
+SET border.width = 2
+
+REPEAT 3 AS i
+    INSERT RECTANGLE AT ox+s*(i+4), r6 WIDTH cw HEIGHT ch NAME "ft_seq_"+i TEXT "S"+i
+    SET fill.color = c_grn
+    SET font.color = c_white
+    SET font.size = 9
+    SET border.visible = FALSE
+END REPEAT
+
+REPEAT 2 AS i
+    INSERT CONNECTOR FROM "ft_seq_"+i TO "ft_seq_"+(i+1) NAME "ft_seq_conn_"+i
+    SET border.color = c_grn
+    SET border.width = 1
+    SET border.style = DASH
+END REPEAT
+
+# ============================================================
+# SECTION 7 — SET font (all properties)
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r7 WIDTH cw*2+g HEIGHT ch NAME "ft_fontbg"
+SET fill.color = c_lgrey
+SET border.visible = FALSE
+
+INSERT TEXTBOX AT ox+s*0, r7 WIDTH cw*2+g HEIGHT ch NAME "ft_font_all" TEXT "Bold Italic Underline"
+SET font.bold = TRUE
+SET font.italic = TRUE
+SET font.underline = TRUE
+SET font.size = 11
+SET font.color = c_dark
+SET font.name = fn
+
+INSERT RECTANGLE AT ox+s*3, r7 WIDTH cw HEIGHT ch NAME "ft_font_sm_bg"
+SET fill.color = c_lgrey
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*3, r7 WIDTH cw HEIGHT ch NAME "ft_font_sm" TEXT "size=8"
+SET font.size = 8
+SET font.color = c_dark
+
+INSERT RECTANGLE AT ox+s*4, r7 WIDTH cw HEIGHT ch NAME "ft_font_lg_bg"
+SET fill.color = c_lgrey
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*4, r7 WIDTH cw HEIGHT ch NAME "ft_font_lg" TEXT "size=14"
+SET font.size = 14
+SET font.color = c_red
+
+# ============================================================
+# SECTION 8 — SET text.align + text.valign
+# LEFT/CENTER/RIGHT/JUSTIFY x TOP/MIDDLE/BOTTOM
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r8 WIDTH cw HEIGHT ch NAME "ft_al_lt_bg"
+SET fill.color = c_lgrey
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*0, r8 WIDTH cw HEIGHT ch NAME "ft_al_lt" TEXT "L+TOP"
+SET font.size = 8
+SET font.color = c_dark
+SET text.align = LEFT
+SET text.valign = TOP
+
+INSERT RECTANGLE AT ox+s*1, r8 WIDTH cw HEIGHT ch NAME "ft_al_cm_bg"
+SET fill.color = c_lgrey
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*1, r8 WIDTH cw HEIGHT ch NAME "ft_al_cm" TEXT "C+MID"
+SET font.size = 8
+SET font.color = c_dark
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+INSERT RECTANGLE AT ox+s*2, r8 WIDTH cw HEIGHT ch NAME "ft_al_rb_bg"
+SET fill.color = c_lgrey
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*2, r8 WIDTH cw HEIGHT ch NAME "ft_al_rb" TEXT "R+BOT"
+SET font.size = 8
+SET font.color = c_dark
+SET text.align = RIGHT
+SET text.valign = BOTTOM
+
+INSERT RECTANGLE AT ox+s*3, r8 WIDTH cw HEIGHT ch NAME "ft_al_jm_bg"
+SET fill.color = c_lgrey
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*3, r8 WIDTH cw HEIGHT ch NAME "ft_al_jm" TEXT "JUSTIFY+MID"
+SET font.size = 8
+SET font.color = c_dark
+SET text.align = JUSTIFY
+SET text.valign = MIDDLE
+
+# ============================================================
+# SECTION 9 — SET fill.gradient
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r9 WIDTH cw HEIGHT ch NAME "ft_grad_1"
+SET fill.gradient = "#003366,#56A8E0"
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*0, r9 WIDTH cw HEIGHT ch NAME "ft_grad_1_lbl" TEXT "dark->lite"
+SET font.size = 7
+SET font.color = c_white
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+INSERT RECTANGLE AT ox+s*1, r9 WIDTH cw HEIGHT ch NAME "ft_grad_2"
+SET fill.gradient = "#CC0000,#E8A000"
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*1, r9 WIDTH cw HEIGHT ch NAME "ft_grad_2_lbl" TEXT "red->amber"
+SET font.size = 7
+SET font.color = c_white
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+INSERT RECTANGLE AT ox+s*2, r9 WIDTH cw HEIGHT ch NAME "ft_grad_3"
+SET fill.gradient = "#00873D,#EEEEEE"
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*2, r9 WIDTH cw HEIGHT ch NAME "ft_grad_3_lbl" TEXT "grn->lgrey"
+SET font.size = 7
+SET font.color = c_dark
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+# ============================================================
+# SECTION 10 — SET fill.gradient.direction   *** NEW ***
+# Same colors, all 4 directions side by side
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r10 WIDTH cw HEIGHT ch NAME "ft_gd_h"
+SET fill.gradient = "#003366,#56A8E0"
+SET fill.gradient.direction = HORIZONTAL
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*0, r10 WIDTH cw HEIGHT ch NAME "ft_gd_h_lbl" TEXT "HORIZ"
+SET font.size = 7
+SET font.color = c_white
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+INSERT RECTANGLE AT ox+s*1, r10 WIDTH cw HEIGHT ch NAME "ft_gd_v"
+SET fill.gradient = "#003366,#56A8E0"
+SET fill.gradient.direction = VERTICAL
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*1, r10 WIDTH cw HEIGHT ch NAME "ft_gd_v_lbl" TEXT "VERT"
+SET font.size = 7
+SET font.color = c_white
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+INSERT RECTANGLE AT ox+s*2, r10 WIDTH cw HEIGHT ch NAME "ft_gd_d"
+SET fill.gradient = "#003366,#56A8E0"
+SET fill.gradient.direction = DIAGONAL
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*2, r10 WIDTH cw HEIGHT ch NAME "ft_gd_d_lbl" TEXT "DIAG"
+SET font.size = 7
+SET font.color = c_white
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+INSERT RECTANGLE AT ox+s*3, r10 WIDTH cw HEIGHT ch NAME "ft_gd_dd"
+SET fill.gradient = "#003366,#56A8E0"
+SET fill.gradient.direction = DIAGONAL_DOWN
+SET border.visible = FALSE
+INSERT TEXTBOX AT ox+s*3, r10 WIDTH cw HEIGHT ch NAME "ft_gd_dd_lbl" TEXT "DIAG_DOWN"
+SET font.size = 7
+SET font.color = c_white
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+# Guard: direction without gradient first should log WARNING, not crash
+INSERT RECTANGLE AT ox+s*4, r10 WIDTH cw HEIGHT ch NAME "ft_gd_guard" TEXT "GUARD"
+SET fill.color = c_dgrey
+SET font.color = c_white
+SET font.size = 7
+SET border.visible = FALSE
+SET fill.gradient.direction = VERTICAL
+
+# ============================================================
+# SECTION 11 — SET shadow
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r11 WIDTH cw HEIGHT ch NAME "ft_shad_1" TEXT "grey shad"
+SET fill.color = c_white
+SET font.size = 8
+SET font.color = c_dark
+SET border.visible = FALSE
+SET shadow = TRUE
+SET shadow.color = #888888
+SET shadow.offset.x = 4
+SET shadow.offset.y = 4
+
+INSERT RECTANGLE AT ox+s*1, r11 WIDTH cw HEIGHT ch NAME "ft_shad_2" TEXT "dark shad"
+SET fill.color = c_white
+SET font.size = 8
+SET font.color = c_dark
+SET border.visible = FALSE
+SET shadow = TRUE
+SET shadow.color = #000000
+SET shadow.offset.x = 6
+SET shadow.offset.y = 6
+
+INSERT RECTANGLE AT ox+s*2, r11 WIDTH cw HEIGHT ch NAME "ft_shad_3" TEXT "blue shad"
+SET fill.color = c_white
+SET font.size = 8
+SET font.color = c_dark
+SET border.visible = FALSE
+SET shadow = TRUE
+SET shadow.color = #0055AA
+SET shadow.offset.x = 5
+SET shadow.offset.y = 3
+
+INSERT RECTANGLE AT ox+s*3, r11 WIDTH cw HEIGHT ch NAME "ft_shad_off" TEXT "shad OFF"
+SET fill.color = c_white
+SET font.size = 8
+SET font.color = c_dark
+SET border.visible = FALSE
+SET shadow = TRUE
+SET shadow.color = #888888
+SET shadow.offset.x = 4
+SET shadow.offset.y = 4
+SET shadow = FALSE
+
+# ============================================================
+# SECTION 12 — SET fill.transparent + opacity
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r12 WIDTH cw HEIGHT ch NAME "ft_transp_bg"
+SET fill.color = c_amber
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*0+8, r12+6 WIDTH cw-16 HEIGHT ch-12 NAME "ft_transp"
+SET fill.transparent = TRUE
+SET border.color = c_dark
+SET border.width = 2
+
+INSERT RECTANGLE AT ox+s*2, r12 WIDTH cw HEIGHT ch NAME "ft_op_bg1"
+SET fill.color = c_dark
+SET border.visible = FALSE
+INSERT RECTANGLE AT ox+s*2+8, r12+6 WIDTH cw-8 HEIGHT ch-6 NAME "ft_op_25" TEXT "25%"
+SET fill.color = c_lite
+SET font.size = 8
+SET font.color = c_dark
+SET border.visible = FALSE
+SET opacity = 25
+
+INSERT RECTANGLE AT ox+s*4, r12 WIDTH cw HEIGHT ch NAME "ft_op_bg2"
+SET fill.color = c_dark
+SET border.visible = FALSE
+INSERT RECTANGLE AT ox+s*4+8, r12+6 WIDTH cw-8 HEIGHT ch-6 NAME "ft_op_75" TEXT "75%"
+SET fill.color = c_lite
+SET font.size = 8
+SET font.color = c_dark
+SET border.visible = FALSE
+SET opacity = 75
+
+# ============================================================
+# SECTION 13 — SET z.order (FRONT / BACK / FORWARD / BACKWARD)
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r13 WIDTH cw HEIGHT ch NAME "ft_z_back" TEXT "BACK"
+SET fill.color = c_amber
+SET font.size = 8
+SET font.color = c_white
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*0+15, r13+8 WIDTH cw-10 HEIGHT ch-16 NAME "ft_z_front" TEXT "FRONT"
+SET fill.color = c_dark
+SET font.size = 8
+SET font.color = c_white
+SET border.visible = FALSE
+SET z.order = FRONT
+
+INSERT RECTANGLE AT ox+s*2, r13 WIDTH cw HEIGHT ch NAME "ft_z_bot" TEXT "bottom"
+SET fill.color = c_red
+SET font.size = 7
+SET font.color = c_white
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*2+10, r13+5 WIDTH cw-10 HEIGHT ch-10 NAME "ft_z_mid" TEXT "mid"
+SET fill.color = c_amber
+SET font.size = 7
+SET font.color = c_white
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*2+20, r13+10 WIDTH cw-20 HEIGHT ch-20 NAME "ft_z_top" TEXT "top"
+SET fill.color = c_grn
+SET font.size = 7
+SET font.color = c_white
+SET border.visible = FALSE
+
+SELECT WHERE name = "ft_z_top"
+SET z.order = BACKWARD
+
+# ============================================================
+# SECTION 14 — SET name + SET text
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r14 WIDTH cw HEIGHT ch NAME "ft_rename_tmp" TEXT "will rename"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+SET name = "ft_renamed_ok"
+
+SELECT WHERE name = "ft_renamed_ok"
+SET fill.color = c_grn
+SET text = "renamed+selected"
+SET font.size = 7
+
+INSERT RECTANGLE AT ox+s*2, r14 WIDTH cw HEIGHT ch NAME "ft_text_before" TEXT "BEFORE"
+SET fill.color = c_red
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+SET text = "AFTER"
+
+# ============================================================
+# SECTION 15 — SET border (all styles + border.radius)  *** NEW ***
+# ============================================================
+INSERT RECTANGLE AT ox+s*0, r15 WIDTH cw HEIGHT ch NAME "ft_brd_solid" TEXT "SOLID"
+SET fill.color = c_lgrey
+SET font.size = 8
+SET font.color = c_dark
+SET border.color = c_dark
+SET border.width = 2
+SET border.style = SOLID
+
+INSERT RECTANGLE AT ox+s*1, r15 WIDTH cw HEIGHT ch NAME "ft_brd_dash" TEXT "DASH"
+SET fill.color = c_lgrey
+SET font.size = 8
+SET font.color = c_dark
+SET border.color = c_dark
+SET border.width = 2
+SET border.style = DASH
+
+INSERT RECTANGLE AT ox+s*2, r15 WIDTH cw HEIGHT ch NAME "ft_brd_dot" TEXT "DOT"
+SET fill.color = c_lgrey
+SET font.size = 8
+SET font.color = c_dark
+SET border.color = c_dark
+SET border.width = 2
+SET border.style = DOT
+
+INSERT RECTANGLE AT ox+s*3, r15 WIDTH cw HEIGHT ch NAME "ft_brd_dd" TEXT "DASHDOT"
+SET fill.color = c_lgrey
+SET font.size = 8
+SET font.color = c_dark
+SET border.color = c_dark
+SET border.width = 2
+SET border.style = DASHDOT
+
+INSERT RECTANGLE AT ox+s*4, r15 WIDTH cw HEIGHT ch NAME "ft_brd_hidden" TEXT "hidden"
+SET fill.color = c_lgrey
+SET font.size = 8
+SET font.color = c_dark
+SET border.color = c_red
+SET border.width = 3
+SET border.visible = FALSE
+
+# border.radius — 4 rounded rects with increasing radius
+INSERT ROUNDEDRECTANGLE AT ox+s*0, r15+ch+g WIDTH cw HEIGHT ch NAME "ft_rad_0" TEXT "radius=0"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 7
+SET border.visible = FALSE
+SET border.radius = 0
+
+INSERT ROUNDEDRECTANGLE AT ox+s*1, r15+ch+g WIDTH cw HEIGHT ch NAME "ft_rad_25" TEXT "radius=25"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 7
+SET border.visible = FALSE
+SET border.radius = 25
+
+INSERT ROUNDEDRECTANGLE AT ox+s*2, r15+ch+g WIDTH cw HEIGHT ch NAME "ft_rad_50" TEXT "radius=50"
+SET fill.color = c_lite
+SET font.color = c_white
+SET font.size = 7
+SET border.visible = FALSE
+SET border.radius = 50
+
+INSERT ROUNDEDRECTANGLE AT ox+s*3, r15+ch+g WIDTH cw HEIGHT ch NAME "ft_rad_100" TEXT "radius=100"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 7
+SET border.visible = FALSE
+SET border.radius = 100
+
+# Guard: border.radius on a non-ROUNDEDRECTANGLE should log WARNING, not crash
+INSERT RECTANGLE AT ox+s*4, r15+ch+g WIDTH cw HEIGHT ch NAME "ft_rad_guard" TEXT "GUARD"
+SET fill.color = c_dgrey
+SET font.color = c_white
+SET font.size = 7
+SET border.visible = FALSE
+SET border.radius = 50
+
+# ============================================================
+# SECTION 16 — SET size + position
+# ============================================================
+SET VAR r16b = r15 + (ch+g)*2 + g
+
+INSERT RECTANGLE AT ox+s*0, r16b WIDTH cw HEIGHT ch NAME "ft_size_orig" TEXT "original"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*1, r16b WIDTH cw HEIGHT ch NAME "ft_size_changed" TEXT "resized"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+SET width = cw*1.5
+SET height = ch*0.6
+
+INSERT RECTANGLE AT ox+s*3, r16b WIDTH cw HEIGHT ch NAME "ft_pos_move" TEXT "pos.x set"
+SET fill.color = c_amber
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+SET position.x = ox+s*4
+SET position.y = r16b
+
+# ============================================================
+# SECTION 17 — SET connector.style   *** NEW ***
+# STRAIGHT, ELBOW, CURVED — one pair per style
+# ============================================================
+SET VAR r17b = r16b + ch + g + 8
+
+INSERT RECTANGLE AT ox+s*0, r17b WIDTH cw HEIGHT ch NAME "ft_cs_src_s" TEXT "SRC"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*2, r17b WIDTH cw HEIGHT ch NAME "ft_cs_dst_s" TEXT "STRAIGHT"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT CONNECTOR FROM "ft_cs_src_s" TO "ft_cs_dst_s" NAME "ft_conn_straight"
+SET connector.style = STRAIGHT
+SET border.color = c_dark
+SET border.width = 2
+
+INSERT RECTANGLE AT ox+s*4, r17b WIDTH cw HEIGHT ch NAME "ft_cs_src_e" TEXT "SRC"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*6, r17b+15 WIDTH cw HEIGHT ch NAME "ft_cs_dst_e" TEXT "ELBOW"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT CONNECTOR FROM "ft_cs_src_e" TO "ft_cs_dst_e" NAME "ft_conn_elbow"
+SET connector.style = ELBOW
+SET border.color = c_grn
+SET border.width = 2
+
+INSERT RECTANGLE AT ox+s*0, r17b+ch+g+8 WIDTH cw HEIGHT ch NAME "ft_cs_src_c" TEXT "SRC"
+SET fill.color = c_amber
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*2, r17b+ch+g+8+20 WIDTH cw HEIGHT ch NAME "ft_cs_dst_c" TEXT "CURVED"
+SET fill.color = c_amber
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT CONNECTOR FROM "ft_cs_src_c" TO "ft_cs_dst_c" NAME "ft_conn_curved"
+SET connector.style = CURVED
+SET border.color = c_amber
+SET border.width = 2
+
+# Guard: connector.style on a non-connector should log WARNING, not crash
+INSERT RECTANGLE AT ox+s*4, r17b+ch+g+8 WIDTH cw HEIGHT ch NAME "ft_cs_guard" TEXT "GUARD"
+SET fill.color = c_dgrey
+SET font.color = c_white
+SET font.size = 7
+SET border.visible = FALSE
+SET connector.style = ELBOW
+
+# ============================================================
+# SECTION 18 — DUPLICATE (default, OFFSET, var, multi)
+# ============================================================
+SET VAR r18b = r17b + (ch+g)*2 + 30
+
+INSERT RECTANGLE AT ox+s*0, r18b WIDTH cw HEIGHT ch NAME "ft_dup_src1" TEXT "src"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+DUPLICATE
+SET fill.color = c_lite
+SET text = "dup(default)"
+SET font.size = 7
+SET font.color = c_dark
+
+INSERT RECTANGLE AT ox+s*2, r18b WIDTH cw HEIGHT ch NAME "ft_dup_src2" TEXT "src"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+DUPLICATE OFFSET s, 0
+SET fill.color = c_amber
+SET text = "dup(offset)"
+SET font.size = 7
+
+SET VAR dupOff = s*2
+INSERT OVAL AT ox+s*5, r18b WIDTH cw HEIGHT ch NAME "ft_dup_src3" TEXT "src"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+DUPLICATE OFFSET dupOff, 0
+SET fill.color = c_grn
+SET text = "dup(var)"
+SET font.size = 7
+
+INSERT RECTANGLE AT ox+s*0, r18b+ch+g WIDTH cw HEIGHT ch NAME "ft_dup_ma" TEXT "multi A"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*1, r18b+ch+g WIDTH cw HEIGHT ch NAME "ft_dup_mb" TEXT "multi B"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+SELECT WHERE name STARTSWITH "ft_dup_m"
+DUPLICATE OFFSET 0, ch+g
+
+# ============================================================
+# SECTION 19 — ROTATE (absolute, BY, loop)
+# ============================================================
+SET VAR r19b = r18b + (ch+g)*2 + g
+
+INSERT DIAMOND AT ox+s*0, r19b WIDTH ch HEIGHT ch NAME "ft_rot_45"
+SET fill.color = c_dark
+SET border.visible = FALSE
+ROTATE 45
+
+INSERT DIAMOND AT ox+s*1, r19b WIDTH ch HEIGHT ch NAME "ft_rot_0"
+SET fill.color = c_mid
+SET border.visible = FALSE
+ROTATE 0
+
+INSERT DIAMOND AT ox+s*2, r19b WIDTH ch HEIGHT ch NAME "ft_rot_by"
+SET fill.color = c_grn
+SET border.visible = FALSE
+ROTATE BY 30
+
+REPEAT 5 AS i
+    INSERT RECTANGLE AT ox+s*3+(i*38), r19b WIDTH 28 HEIGHT 28 NAME "ft_rot_loop_"+i
+    SET fill.color = c_amber
+    SET border.visible = FALSE
+    ROTATE BY i*25
+END REPEAT
+
+# ============================================================
+# SECTION 20 — GROUP / GROUP NAME + SET on group
+# ============================================================
+SET VAR r20b = r19b + ch + g + 10
+
+INSERT RECTANGLE AT ox+s*0, r20b WIDTH cw HEIGHT ch NAME "ft_grp_a" TEXT "A"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 9
+SET border.visible = FALSE
+
+INSERT OVAL AT ox+s*1, r20b WIDTH cw HEIGHT ch NAME "ft_grp_b" TEXT "B"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 9
+SET border.visible = FALSE
+
+INSERT TRIANGLE AT ox+s*2, r20b WIDTH cw HEIGHT ch NAME "ft_grp_c" TEXT "C"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 9
+SET border.visible = FALSE
+
+SELECT WHERE name STARTSWITH "ft_grp_"
+GROUP NAME "ft_group_abc"
+SET opacity = 70
+
+# ============================================================
+# SECTION 21 — UNGROUP   *** NEW ***
+# Group 3 shapes, set opacity to 60%, ungroup, restore to 100%
+# All 3 children should end up at full opacity
+# ============================================================
+SET VAR r21b = r20b + ch + g
+
+INSERT RECTANGLE AT ox+s*4, r21b WIDTH cw HEIGHT ch NAME "ft_ug_a" TEXT "A"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 9
+SET border.visible = FALSE
+
+INSERT OVAL AT ox+s*5, r21b WIDTH cw HEIGHT ch NAME "ft_ug_b" TEXT "B"
+SET fill.color = c_mid
+SET font.color = c_white
+SET font.size = 9
+SET border.visible = FALSE
+
+INSERT TRIANGLE AT ox+s*6, r21b WIDTH cw HEIGHT ch NAME "ft_ug_c" TEXT "C"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 9
+SET border.visible = FALSE
+
+SELECT WHERE name STARTSWITH "ft_ug_"
+GROUP NAME "ft_ug_group"
+SET opacity = 60
+
+SELECT WHERE name = "ft_ug_group"
+UNGROUP
+SET opacity = 100
+
+# Guard: UNGROUP on a non-group should log WARNING, not crash
+INSERT RECTANGLE AT ox+s*7, r21b WIDTH cw HEIGHT ch NAME "ft_ug_guard" TEXT "GUARD"
+SET fill.color = c_dgrey
+SET font.color = c_white
+SET font.size = 7
+SET border.visible = FALSE
+
+SELECT WHERE name = "ft_ug_guard"
+UNGROUP
+
+# ============================================================
+# SECTION 22 — REPEAT (default, FROM, STEP, FROM+STEP, nested)
+# ============================================================
+SET VAR r22b = r21b + ch + g + 8
+
+REPEAT 4 AS i
+    INSERT RECTANGLE AT ox+(i*s), r22b WIDTH cw HEIGHT ch NAME "ft_rep_"+i TEXT "i="+i
+    SET fill.color = c_dark
+    SET font.color = c_white
+    SET font.size = 8
+    SET border.visible = FALSE
+END REPEAT
+
+REPEAT 3 AS i FROM 1
+    INSERT OVAL AT ox+(i+3)*s, r22b WIDTH cw HEIGHT ch NAME "ft_from_"+i TEXT "i="+i
+    SET fill.color = c_mid
+    SET font.color = c_white
+    SET font.size = 8
+    SET border.visible = FALSE
+END REPEAT
+
+SET VAR r22c = r22b + ch + g
+
+REPEAT 4 AS i STEP 2
+    INSERT CHEVRON AT ox+(i/2)*s, r22c WIDTH cw HEIGHT ch NAME "ft_step_"+i TEXT "i="+i
+    SET fill.color = c_grn
+    SET font.color = c_white
+    SET font.size = 8
+    SET border.visible = FALSE
+END REPEAT
+
+REPEAT 3 AS i FROM 10 STEP 5
+    INSERT DIAMOND AT ox+((i-10)/5+4)*s, r22c WIDTH cw HEIGHT ch NAME "ft_fmst_"+i TEXT "i="+i
+    SET fill.color = c_amber
+    SET font.color = c_white
+    SET font.size = 8
+    SET border.visible = FALSE
+END REPEAT
+
+SET VAR r22d = r22c + ch + g
+REPEAT 2 AS row
+    REPEAT 3 AS col
+        INSERT RECTANGLE AT ox+(col*s), r22d+(row*(ch+g)) WIDTH cw HEIGHT ch NAME "ft_nest_"+row+"_"+col TEXT "r"+row+"c"+col
+        SET fill.color = c_lite
+        SET font.color = c_dark
+        SET font.size = 8
+        SET border.visible = FALSE
+    END REPEAT
+END REPEAT
+
+# ============================================================
+# SECTION 23 — BREAK (only i=0,1,2 created — loop stops at 3)
+# ============================================================
+SET VAR r23b = r22d + (ch+g)*2 + g
+
+REPEAT 6 AS i
+    IF i = 3
+        BREAK
+    END IF
+
+    INSERT RECTANGLE AT ox+(i*s), r23b WIDTH cw HEIGHT ch NAME "ft_brk_"+i TEXT "i="+i
+    SET font.size = 8
+    SET border.visible = FALSE
+    SET fill.color = c_grn
+    SET font.color = c_white
+END REPEAT
+
+# ============================================================
+# SECTION 24 — IF / ELSE IF / ELSE — all operators
+# = <> > < >= <= AND OR NOT parentheses
+# ============================================================
+SET VAR r24b = r23b + ch + g
+
+REPEAT 7 AS i
+    INSERT RECTANGLE AT ox+(i*s), r24b WIDTH cw HEIGHT ch NAME "ft_if_"+i TEXT "i="+i
+    SET font.size = 8
+    SET font.name = fn
+    SET border.visible = FALSE
+
+    IF i = 0
+        SET fill.color = c_red
+        SET font.color = c_white
+    ELSE IF i <> 1
+        SET fill.color = c_amber
+        SET font.color = c_white
+    ELSE IF i >= 2 AND i <= 3
+        SET fill.color = c_grn
+        SET font.color = c_white
+    ELSE IF i > 4 OR i = 4
+        SET fill.color = c_mid
+        SET font.color = c_white
+    ELSE IF NOT i = 6
+        SET fill.color = c_lite
+        SET font.color = c_dark
+    ELSE
+        SET fill.color = c_dgrey
+        SET font.color = c_white
+    END IF
+END REPEAT
+
+SET VAR r24c = r24b + ch + g
+
+INSERT RECTANGLE AT ox+s*0, r24c WIDTH cw HEIGHT ch NAME "ft_neq" TEXT "1<>2=TRUE"
+SET font.size = 7
+SET border.visible = FALSE
+IF 1 <> 2
+    SET fill.color = c_grn
+    SET font.color = c_white
+ELSE
+    SET fill.color = c_red
+    SET font.color = c_white
+END IF
+
+INSERT RECTANGLE AT ox+s*1, r24c WIDTH cw HEIGHT ch NAME "ft_paren" TEXT "(A AND B) OR C"
+SET font.size = 7
+SET border.visible = FALSE
+IF (1 = 1 AND 2 = 2) OR 3 = 9
+    SET fill.color = c_grn
+    SET font.color = c_white
+ELSE
+    SET fill.color = c_red
+    SET font.color = c_white
+END IF
+
+INSERT RECTANGLE AT ox+s*2, r24c WIDTH cw HEIGHT ch NAME "ft_not" TEXT "NOT false"
+SET font.size = 8
+SET border.visible = FALSE
+IF NOT 1 = 2
+    SET fill.color = c_grn
+    SET font.color = c_white
+ELSE
+    SET fill.color = c_red
+    SET font.color = c_white
+END IF
+
+# ============================================================
+# SECTION 25 — SELECT: all variants
+# ============================================================
+
+# name = — recolor one specific shape
+SELECT WHERE name = "ft_rect"
+SET border.color = c_amber
+SET border.width = 3
+
+# name CONTAINS
+SELECT WHERE name CONTAINS "ft_arr"
+SET border.color = c_white
+SET border.width = 1
+
+# name STARTSWITH
+SELECT WHERE name STARTSWITH "ft_fc"
+SET opacity = 75
+
+# type = RECTANGLE
+SELECT WHERE type = RECTANGLE
+SET border.color = "#DDDDDD"
+SET border.width = 1
+
+# type = LINE
+SELECT WHERE type = LINE
+SET border.color = c_dark
+
+# SELECT ALL — nudge every shape opacity slightly to confirm ALL works
+SELECT ALL
+SET opacity = 98
+
+# ============================================================
+# SECTION 26 — SET VAR x = GET property FROM "shape"  *** NEW ***
+# Read position, size, font.size, text, name from a reference shape
+# and use them to drive the layout of new shapes
+# ============================================================
+SET VAR r26b = r24c + ch + g + 8
+
+# Reference shape with deliberate non-round size + position
+INSERT RECTANGLE AT ox+22, r26b WIDTH 138 HEIGHT 42 NAME "ft_get_ref" TEXT "GET source"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 12
+SET border.visible = FALSE
+
+# Read position and size back — use them to place two new shapes precisely
+SET VAR gotX = GET position.x FROM "ft_get_ref"
+SET VAR gotY = GET position.y FROM "ft_get_ref"
+SET VAR gotW = GET width FROM "ft_get_ref"
+SET VAR gotH = GET height FROM "ft_get_ref"
+
+# Shape flush to the right of the reference
+INSERT RECTANGLE AT gotX+gotW+g, gotY WIDTH gotW/2 HEIGHT gotH NAME "ft_get_right" TEXT "x+w+gap"
+SET fill.color = c_grn
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+# Shape flush below the reference
+INSERT RECTANGLE AT gotX, gotY+gotH+g WIDTH gotW HEIGHT gotH/2 NAME "ft_get_below" TEXT "y+h+gap"
+SET fill.color = c_amber
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+# Read opacity, font.size, text, name — display them to confirm values in log
+SET VAR gotFs   = GET font.size FROM "ft_get_ref"
+SET VAR gotTxt  = GET text FROM "ft_get_ref"
+SET VAR gotNm   = GET name FROM "ft_get_ref"
+
+INSERT TEXTBOX AT gotX+gotW+g, gotY+gotH+g WIDTH gotW HEIGHT gotH NAME "ft_get_readout" TEXT "fs="+gotFs+" | "+gotTxt+" | "+gotNm
+SET font.size = 7
+SET font.color = c_dark
+
+# Guards: non-existent shape and unknown property should each log ERROR, not crash
+SET VAR guard1 = GET position.x FROM "ft_shape_does_not_exist"
+SET VAR guard2 = GET unknownprop FROM "ft_get_ref"
+
+# ============================================================
+# SECTION 27 — Built-in variables
+# slideWidth, slideHeight, slideCenterX, slideCenterY
+# ============================================================
+SET VAR bW = 130
+SET VAR bH = 22
+
+INSERT RECTANGLE AT slideCenterX-(bW/2), slideHeight-bH-8 WIDTH bW HEIGHT bH NAME "ft_center_box"
+SET fill.color = c_dark
+SET border.visible = FALSE
+INSERT TEXTBOX AT slideCenterX-(bW/2), slideHeight-bH-8 WIDTH bW HEIGHT bH NAME "ft_center_lbl" TEXT "slideCenterX"
+SET font.size = 8
+SET font.color = c_white
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+INSERT RECTANGLE AT slideWidth-ox-bW, slideHeight-bH-8 WIDTH bW HEIGHT bH NAME "ft_right_box"
+SET fill.color = c_grn
+SET border.visible = FALSE
+INSERT TEXTBOX AT slideWidth-ox-bW, slideHeight-bH-8 WIDTH bW HEIGHT bH NAME "ft_right_lbl" TEXT "slideWidth"
+SET font.size = 8
+SET font.color = c_white
+SET text.align = CENTER
+SET text.valign = MIDDLE
+
+INSERT RECTANGLE AT slideWidth-bH-8, slideCenterY-(bH/2) WIDTH bH HEIGHT bH NAME "ft_vcenter_box"
+SET fill.color = c_amber
+SET border.visible = FALSE
+
+# READ-ONLY GUARD — all four should log WARNING and be silently ignored
+SET VAR slideWidth   = 999
+SET VAR slideHeight  = 999
+SET VAR slideCenterX = 999
+SET VAR slideCenterY = 999
+
+# ============================================================
+# SECTION 28 — String + numeric expressions
+# ============================================================
+SET VAR r28b = r26b + 60
+SET VAR pfx = "ft_str_"
+SET VAR lbl = "item"
+
+REPEAT 4 AS i
+    INSERT TEXTBOX AT ox+(i*s), r28b WIDTH cw HEIGHT ch NAME pfx+i TEXT lbl+" "+i
+    SET font.size = 8
+    SET font.color = c_dark
+    SET font.name = fn
+END REPEAT
+
+SET VAR exprW = (cw + g) * 2 - g
+INSERT RECTANGLE AT ox+s*5, r28b WIDTH exprW HEIGHT ch NAME "ft_expr_1" TEXT "(cw+g)*2-g"
+SET fill.color = c_lgrey
+SET font.color = c_dark
+SET font.size = 7
+SET border.color = c_dark
+SET border.width = 1
+
+INSERT RECTANGLE AT ox+s*5+exprW+g, r28b WIDTH cw/2 HEIGHT ch NAME "ft_expr_2" TEXT "cw/2"
+SET fill.color = c_lgrey
+SET font.color = c_dark
+SET font.size = 7
+SET border.color = c_dark
+SET border.width = 1
+
+# ============================================================
+# SECTION 29 — CALL + USE SELECTION
+# ============================================================
+SET VAR r29b = r28b + ch + g
+
+INSERT RECTANGLE AT ox+s*0, r29b WIDTH cw HEIGHT ch NAME "ft_call_a" TEXT "call A"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*1, r29b WIDTH cw HEIGHT ch NAME "ft_call_b" TEXT "call B"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+INSERT RECTANGLE AT ox+s*2, r29b WIDTH cw HEIGHT ch NAME "ft_call_c" TEXT "call C"
+SET fill.color = c_dark
+SET font.color = c_white
+SET font.size = 8
+SET border.visible = FALSE
+
+SELECT WHERE name STARTSWITH "ft_call"
+CALL ObjectsAlignTops
+
+USE SELECTION
+SET opacity = 75
+
+# ============================================================
+# SECTION 30 — SET VAR x = INPUT   *** NEW ***
+# Two prompts: one numeric (drives a REPEAT), one string (drives TEXT)
+# ============================================================
+SET VAR r30b = r29b + ch + g
+
+SET VAR inputCount = INPUT "SECTION 30a — Enter number of boxes to draw (try 3):"
+
+REPEAT inputCount AS i
+    INSERT RECTANGLE AT ox+(i*s), r30b WIDTH cw HEIGHT ch NAME "ft_input_box_"+i TEXT "box "+i
+    SET fill.color = c_dark
+    SET font.color = c_white
+    SET font.size = 9
+    SET border.visible = FALSE
+END REPEAT
+
+SET VAR inputLabel = INPUT "SECTION 30b — Enter a label string (try: Hello):"
+
+INSERT RECTANGLE AT ox, r30b+ch+g WIDTH cw*2 HEIGHT ch NAME "ft_input_lbl" TEXT inputLabel
+SET fill.color = c_lite
+SET font.color = c_white
+SET font.size = 10
+SET border.visible = FALSE

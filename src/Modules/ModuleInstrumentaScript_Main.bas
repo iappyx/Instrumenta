@@ -51,6 +51,15 @@ Public Sub RunInstrumentaScript(scriptText As String)
     ReDim IScr_varStrValues(0)
     ReDim IScr_varIsString(0)
 
+    Dim slideW As Double
+    Dim slideH As Double
+    slideW = ActivePresentation.PageSetup.slideWidth
+    slideH = ActivePresentation.PageSetup.slideHeight
+    IScr_SetVar "slidewidth", slideW
+    IScr_SetVar "slideheight", slideH
+    IScr_SetVar "slidecenterx", slideW / 2
+    IScr_SetVar "slidecentery", slideH / 2
+
     Dim rawLines() As String
     If InStr(scriptText, vbLf) > 0 Then
         rawLines = Split(scriptText, vbLf)
@@ -106,7 +115,30 @@ Public Function IScr_RunBlock(lines() As String, startIdx As Integer, endIdx As 
         ElseIf upperLine = "USE SELECTION" Then
             Set selectedShapes = IScr_ExecuteUseSelection(lineNum)
             IScr_Log "Line " & lineNum & ": Using PowerPoint selection - " & selectedShapes.count & " shape(s)"
-
+        
+        ElseIf left(upperLine, 11) = "INSERT LINE" Then
+            Dim newLine As shape
+            Set newLine = IScr_ExecuteInsertLine(line, lineNum)
+            If Not newLine Is Nothing Then
+                Set selectedShapes = New Collection
+                selectedShapes.Add newLine
+                IScr_SyncSelectionToPowerPoint selectedShapes, lineNum
+                IScr_Log "Line " & lineNum & ": Inserted line """ & newLine.name & """ - now working set"
+            Else
+                Set selectedShapes = New Collection
+            End If
+        
+        ElseIf left(upperLine, 16) = "INSERT CONNECTOR" Then
+            Dim IScr_newConn As shape
+            Set IScr_newConn = IScr_ExecuteInsertConnector(line, lineNum)
+            If Not IScr_newConn Is Nothing Then
+                Set selectedShapes = New Collection
+                selectedShapes.Add IScr_newConn
+                IScr_SyncSelectionToPowerPoint selectedShapes, lineNum
+                IScr_Log "Line " & lineNum & ": Inserted connector """ & IScr_newConn.name & """ - now working set"
+            Else
+                Set selectedShapes = New Collection
+            End If
         
         ElseIf left(upperLine, 6) = "INSERT" Then
             Dim newShape As shape
@@ -138,6 +170,12 @@ Public Function IScr_RunBlock(lines() As String, startIdx As Integer, endIdx As 
         
         ElseIf left(upperLine, 4) = "CALL" Then
             IScr_InvokeCommand line, lineNum
+
+        ElseIf left(upperLine, 9) = "DUPLICATE" Then
+            Set selectedShapes = IScr_ExecuteDuplicate(selectedShapes, line, lineNum)
+            
+        ElseIf left(upperLine, 7) = "UNGROUP" Then
+            Set selectedShapes = IScr_ExecuteUngroup(selectedShapes, lineNum)
 
         ElseIf left(upperLine, 5) = "GROUP" Then
             Set selectedShapes = IScr_ExecuteGroup(line, selectedShapes, lineNum)
@@ -621,6 +659,247 @@ Public Function IScr_ExecuteInsert(line As String, lineNum As Integer) As shape
     Set IScr_ExecuteInsert = newShp
 End Function
 
+Public Function IScr_ExecuteInsertLine(line As String, lineNum As Integer) As shape
+    Set IScr_ExecuteInsertLine = Nothing
+
+    Dim upperLine As String
+    upperLine = UCase(Trim(line))
+
+    Dim fromPos As Integer
+    fromPos = InStr(upperLine, " FROM ")
+    If fromPos = 0 Then
+        IScr_Log "Line " & lineNum & ": ERROR - INSERT LINE requires FROM x1, y1"
+        Exit Function
+    End If
+
+    Dim toPos As Integer
+    toPos = InStr(upperLine, " TO ")
+    If toPos = 0 Then
+        IScr_Log "Line " & lineNum & ": ERROR - INSERT LINE requires TO x2, y2"
+        Exit Function
+    End If
+
+    Dim fromExpr As String
+    fromExpr = Trim(Mid(line, fromPos + 6, toPos - fromPos - 6))
+    Dim fromComma As Integer
+    fromComma = IScr_FindCommaOutsideParens(fromExpr)
+    If fromComma = 0 Then
+        IScr_Log "Line " & lineNum & ": ERROR - INSERT LINE FROM requires x1, y1 (comma separated)"
+        Exit Function
+    End If
+    Dim x1Val As Single: x1Val = CSng(IScr_ComputeNumber(Trim(left(fromExpr, fromComma - 1))))
+    Dim y1Val As Single: y1Val = CSng(IScr_ComputeNumber(Trim(Mid(fromExpr, fromComma + 1))))
+
+    Dim namePos As Integer
+    namePos = InStr(toPos + 1, upperLine, " NAME ")
+    Dim toExpr As String
+    If namePos > 0 Then
+        toExpr = Trim(Mid(line, toPos + 4, namePos - toPos - 4))
+    Else
+        toExpr = Trim(Mid(line, toPos + 4))
+    End If
+    Dim toComma As Integer
+    toComma = IScr_FindCommaOutsideParens(toExpr)
+    If toComma = 0 Then
+        IScr_Log "Line " & lineNum & ": ERROR - INSERT LINE TO requires x2, y2 (comma separated)"
+        Exit Function
+    End If
+    Dim x2Val As Single: x2Val = CSng(IScr_ComputeNumber(Trim(left(toExpr, toComma - 1))))
+    Dim y2Val As Single: y2Val = CSng(IScr_ComputeNumber(Trim(Mid(toExpr, toComma + 1))))
+
+    Dim shapeName As String
+    shapeName = IScr_ParseKeywordStringExpr(upperLine, line, "NAME")
+    If shapeName = "" Then
+        IScr_insertCounter = IScr_insertCounter + 1
+        shapeName = "script_line_" & IScr_insertCounter
+    End If
+
+    Dim oSlide As Slide
+    Set oSlide = ActiveWindow.View.Slide
+
+    If IScr_ShapeNameExists(oSlide, shapeName) Then
+        IScr_Log "Line " & lineNum & ": ERROR - Shape """ & shapeName & """ already exists. Delete it first or use a different name."
+        Exit Function
+    End If
+
+    Dim newShp As shape
+    Set newShp = oSlide.shapes.AddLine(x1Val, y1Val, x2Val, y2Val)
+    newShp.name = shapeName
+
+    Set IScr_ExecuteInsertLine = newShp
+End Function
+
+Public Function IScr_ExecuteDuplicate(IScr_shapes As Collection, line As String, lineNum As Integer) As Collection
+   
+    Dim IScr_result As Collection
+    Set IScr_result = New Collection
+
+    If IScr_shapes.count = 0 Then
+        IScr_Log "Line " & lineNum & ": WARNING - DUPLICATE called but no shapes in working set"
+        Set IScr_ExecuteDuplicate = IScr_result
+        Exit Function
+    End If
+
+    Dim IScr_dx As Single: IScr_dx = 10
+    Dim IScr_dy As Single: IScr_dy = 10
+    Dim IScr_upper As String
+    IScr_upper = UCase(Trim(line))
+    Dim IScr_offPos As Integer
+    IScr_offPos = InStr(IScr_upper, " OFFSET ")
+    If IScr_offPos > 0 Then
+        Dim IScr_offExpr As String
+        IScr_offExpr = Trim(Mid(line, IScr_offPos + 8))
+        Dim IScr_offComma As Integer
+        IScr_offComma = IScr_FindCommaOutsideParens(IScr_offExpr)
+        If IScr_offComma > 0 Then
+            IScr_dx = CSng(IScr_ComputeNumber(Trim(left(IScr_offExpr, IScr_offComma - 1))))
+            IScr_dy = CSng(IScr_ComputeNumber(Trim(Mid(IScr_offExpr, IScr_offComma + 1))))
+        End If
+    End If
+
+    Dim IScr_shp As shape
+    Dim IScr_dupRange As ShapeRange
+    Dim IScr_dup As shape
+    For Each IScr_shp In IScr_shapes
+        Set IScr_dupRange = IScr_shp.Duplicate
+        Set IScr_dup = IScr_dupRange(1)
+        IScr_dup.left = IScr_shp.left + IScr_dx
+        IScr_dup.Top = IScr_shp.Top + IScr_dy
+        IScr_insertCounter = IScr_insertCounter + 1
+        IScr_dup.name = IScr_shp.name & "_dup" & IScr_insertCounter
+        IScr_result.Add IScr_dup
+        IScr_Log "Line " & lineNum & ": Duplicated """ & IScr_shp.name & """ -> """ & IScr_dup.name & """"
+    Next IScr_shp
+
+    IScr_SyncSelectionToPowerPoint IScr_result, lineNum
+    Set IScr_ExecuteDuplicate = IScr_result
+End Function
+
+
+Public Function IScr_ExecuteInsertConnector(line As String, lineNum As Integer) As shape
+    Set IScr_ExecuteInsertConnector = Nothing
+
+    Dim IScr_upper As String
+    IScr_upper = UCase(Trim(line))
+
+    Dim IScr_fromPos As Integer
+    IScr_fromPos = InStr(IScr_upper, " FROM ")
+    Dim IScr_toPos As Integer
+    IScr_toPos = InStr(IScr_upper, " TO ")
+    If IScr_fromPos = 0 Or IScr_toPos = 0 Then
+        IScr_Log "Line " & lineNum & ": ERROR - INSERT CONNECTOR requires FROM ""name"" TO ""name"""
+        Exit Function
+    End If
+
+    Dim IScr_fromExpr As String
+    IScr_fromExpr = Trim(Mid(line, IScr_fromPos + 6, IScr_toPos - IScr_fromPos - 6))
+    Dim IScr_toRest As String
+    IScr_toRest = Trim(Mid(line, IScr_toPos + 4))
+
+    Dim IScr_namePos As Integer
+    IScr_namePos = InStr(UCase(IScr_toRest), " NAME ")
+    Dim IScr_toExpr As String
+    If IScr_namePos > 0 Then
+        IScr_toExpr = Trim(left(IScr_toRest, IScr_namePos - 1))
+    Else
+        IScr_toExpr = IScr_toRest
+    End If
+
+    Dim IScr_fromName As String
+    IScr_fromName = IScr_ComputeText(IScr_fromExpr)
+    Dim IScr_toName As String
+    IScr_toName = IScr_ComputeText(IScr_toExpr)
+
+    Dim IScr_oSlide As Slide
+    Set IScr_oSlide = ActiveWindow.View.Slide
+
+    Dim IScr_fromShp As shape
+    Dim IScr_toShp As shape
+    Dim IScr_s As shape
+    For Each IScr_s In IScr_oSlide.shapes
+        If LCase(IScr_s.name) = LCase(IScr_fromName) Then Set IScr_fromShp = IScr_s
+        If LCase(IScr_s.name) = LCase(IScr_toName) Then Set IScr_toShp = IScr_s
+    Next IScr_s
+
+    If IScr_fromShp Is Nothing Then
+        IScr_Log "Line " & lineNum & ": ERROR - INSERT CONNECTOR: shape """ & IScr_fromName & """ not found"
+        Exit Function
+    End If
+    If IScr_toShp Is Nothing Then
+        IScr_Log "Line " & lineNum & ": ERROR - INSERT CONNECTOR: shape """ & IScr_toName & """ not found"
+        Exit Function
+    End If
+    
+    If IScr_fromShp.ConnectionSiteCount = 0 Then
+        IScr_Log "Line " & lineNum & ": ERROR - INSERT CONNECTOR: shape """ & IScr_fromName & """ has no connector points"
+        Exit Function
+    End If
+    If IScr_toShp.ConnectionSiteCount = 0 Then
+        IScr_Log "Line " & lineNum & ": ERROR - INSERT CONNECTOR: shape """ & IScr_toName & """ has no connector points"
+        Exit Function
+    End If
+
+    Dim IScr_shapeName As String
+    IScr_shapeName = IScr_ParseKeywordStringExpr(IScr_upper, line, "NAME")
+    If IScr_shapeName = "" Then
+        IScr_insertCounter = IScr_insertCounter + 1
+        IScr_shapeName = "script_conn_" & IScr_insertCounter
+    End If
+
+    If IScr_ShapeNameExists(IScr_oSlide, IScr_shapeName) Then
+        IScr_Log "Line " & lineNum & ": ERROR - Shape """ & IScr_shapeName & """ already exists"
+        Exit Function
+    End If
+
+    Dim IScr_conn As shape
+    Dim i As Integer, j As Integer
+    Dim bestFrom As Integer, bestTo As Integer
+    Dim bestSurface As Double
+    Dim surf As Double
+
+    Set IScr_conn = IScr_oSlide.shapes.AddConnector( _
+        msoConnectorStraight, _
+        IScr_fromShp.left + IScr_fromShp.width / 2, _
+        IScr_fromShp.Top + IScr_fromShp.height / 2, _
+        IScr_toShp.left + IScr_toShp.width / 2, _
+        IScr_toShp.Top + IScr_toShp.height / 2)
+
+    bestSurface = 1E+30
+
+    For i = 1 To IScr_fromShp.ConnectionSiteCount
+        For j = 1 To IScr_toShp.ConnectionSiteCount
+
+            With IScr_conn.ConnectorFormat
+                .BeginConnect IScr_fromShp, i
+                .EndConnect IScr_toShp, j
+            End With
+
+            IScr_conn.RerouteConnections
+
+            surf = IScr_conn.width * IScr_conn.height
+
+            If surf < bestSurface Then
+                bestSurface = surf
+                bestFrom = i
+                bestTo = j
+            End If
+
+        Next j
+    Next i
+
+    With IScr_conn.ConnectorFormat
+        .BeginConnect IScr_fromShp, bestFrom
+        .EndConnect IScr_toShp, bestTo
+    End With
+
+    IScr_conn.RerouteConnections
+    IScr_conn.name = IScr_shapeName
+
+    Set IScr_ExecuteInsertConnector = IScr_conn
+End Function
+
+
+
 Public Sub IScr_ExecuteDelete(line As String, lineNum As Integer)
     Dim upperLine As String
     upperLine = UCase(Trim(line))
@@ -761,6 +1040,44 @@ Public Function IScr_ExecuteGroup(line As String, shapes As Collection, lineNum 
 Failed:
     IScr_Log "Line " & lineNum & ": ERROR - GROUP failed: " & Err.Description
     Set IScr_ExecuteGroup = shapes
+End Function
+
+
+Public Function IScr_ExecuteUngroup(IScr_shapes As Collection, lineNum As Integer) As Collection
+    Dim IScr_result As Collection
+    Set IScr_result = New Collection
+
+    If IScr_shapes.count = 0 Then
+        IScr_Log "Line " & lineNum & ": WARNING - UNGROUP called but no shapes in working set"
+        Set IScr_ExecuteUngroup = IScr_result
+        Exit Function
+    End If
+
+    Dim IScr_oSlide As Slide
+    Set IScr_oSlide = ActiveWindow.View.Slide
+
+    Dim IScr_shp As shape
+    Dim IScr_ungroupCount As Integer
+    IScr_ungroupCount = 0
+
+    For Each IScr_shp In IScr_shapes
+        If IScr_shp.Type = msoGroup Then
+            Dim IScr_sr As ShapeRange
+            Set IScr_sr = IScr_shp.Ungroup
+            Dim IScr_k As Integer
+            For IScr_k = 1 To IScr_sr.count
+                IScr_result.Add IScr_sr(IScr_k)
+            Next IScr_k
+            IScr_ungroupCount = IScr_ungroupCount + 1
+        Else
+            IScr_Log "Line " & lineNum & ": WARNING - UNGROUP: """ & IScr_shp.name & """ is not a group, skipped"
+            IScr_result.Add IScr_shp
+        End If
+    Next IScr_shp
+
+    IScr_SyncSelectionToPowerPoint IScr_result, lineNum
+    IScr_Log "Line " & lineNum & ": UNGROUP -> ungrouped " & IScr_ungroupCount & " group(s), " & IScr_result.count & " shape(s) now in working set"
+    Set IScr_ExecuteUngroup = IScr_result
 End Function
 
 
@@ -1008,9 +1325,6 @@ Public Function IScr_ShapeMatchesType(shp As shape, typeVal As String) As Boolea
     End Select
 End Function
 
-
-
-
 Public Function IScr_FindCommaOutsideParens(s As String) As Integer
     Dim depth As Integer: depth = 0
     Dim i As Integer
@@ -1036,7 +1350,6 @@ Public Function IScr_ShapeNameExists(oSlide As Slide, shapeName As String) As Bo
     Next shp
     IScr_ShapeNameExists = False
 End Function
-
 
 
 

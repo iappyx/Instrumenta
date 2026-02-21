@@ -5333,6 +5333,38 @@
       "supertip": "Inserts a QR code that links to a URL",
       "screentip": "Insert QR Code"
     },
+    "ShowInstrumentaScriptButton": {
+      "_tag": "button",
+      "id": "ShowInstrumentaScriptButton",
+      "label": "Instrumenta script editor",
+      "imageMso": "CodeEdit",
+      "showLabel": "false",
+      "onAction": "ShowScriptEditor",
+      "supertip": "Opens the Instrumenta script editor",
+      "screentip": "Instrumenta Script Editor"
+    },
+    "InstrumentaScriptPresets": {
+      "_tag": "dropDown",
+      "id": "InstrumentaScriptPresets",
+      "label": "Preset",
+      "screentip": "Select a saved script preset",
+      "showLabel": "false",
+      "getItemCount": "ScriptPreset_GetItemCount",
+      "getItemLabel": "ScriptPreset_GetItemLabel",
+      "getItemID": "ScriptPreset_GetItemID",
+      "onAction": "ScriptPreset_OnAction",
+      "supertip": ""
+    },
+    "InstrumentaScriptPresetRun": {
+      "_tag": "button",
+      "id": "InstrumentaScriptPresetRun",
+      "label": "Run preset",
+      "screentip": "Run the selected preset",
+      "imageMso": "MacroPlay",
+      "showLabel": "false",
+      "onAction": "ScriptPreset_Run",
+      "supertip": ""
+    },
     "FileNewDefault": {
       "_tag": "button",
       "idMso": "FileNewDefault",
@@ -5587,16 +5619,6 @@
       "onAction": "ShowPyramidBuilder",
       "supertip": "Opens the storyline builder to capture SCQ and structure your message",
       "screentip": "Storyline Builder"
-    },
-    "ShowInstrumentaScriptButton": {
-      "_tag": "button",
-      "id": "ShowInstrumentaScriptButton",
-      "label": "Instrumenta script editor",
-      "imageMso": "MacroPlay",
-      "showLabel": "false",
-      "onAction": "ShowScriptEditor",
-      "supertip": "Opens the Instrumenta script editor",
-      "screentip": "Instrumenta Script Editor"
     },
     "SelectionPane": {
       "_tag": "toggleButton",
@@ -6715,6 +6737,28 @@
                   },
                   {
                     "_tag": "group",
+                    "id": "ISCRGroup",
+                    "label": "Instrumenta script",
+                    "imageMso": "MacroPlay",
+                    "tag": "PR",
+                    "getVisible": "InstrumentaGetVisible",
+                    "_children": [
+                      {
+                        "$ref": "ShowInstrumentaScriptButton",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "InstrumentaScriptPresets",
+                        "_tag": "dropDown"
+                      },
+                      {
+                        "$ref": "InstrumentaScriptPresetRun",
+                        "_tag": "button"
+                      }
+                    ]
+                  },
+                  {
+                    "_tag": "group",
                     "id": "AllGroup",
                     "label": "Advanced",
                     "imageMso": "AdvancedFileProperties",
@@ -6743,10 +6787,6 @@
                       },
                       {
                         "$ref": "PyramidBuilder",
-                        "_tag": "button"
-                      },
-                      {
-                        "$ref": "ShowInstrumentaScriptButton",
                         "_tag": "button"
                       },
                       {
@@ -7685,6 +7725,28 @@
                   },
                   {
                     "_tag": "group",
+                    "id": "TabViewISCRGroup",
+                    "label": "Instrumenta script",
+                    "imageMso": "MacroPlay",
+                    "tag": "PR",
+                    "getVisible": "InstrumentaGetVisible",
+                    "_children": [
+                      {
+                        "$ref": "ShowInstrumentaScriptButton",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "InstrumentaScriptPresets",
+                        "_tag": "dropDown"
+                      },
+                      {
+                        "$ref": "InstrumentaScriptPresetRun",
+                        "_tag": "button"
+                      }
+                    ]
+                  },
+                  {
+                    "_tag": "group",
                     "id": "TabViewAllGroup",
                     "label": "Advanced",
                     "imageMso": "AdvancedFileProperties",
@@ -7713,10 +7775,6 @@
                       },
                       {
                         "$ref": "PyramidBuilder",
-                        "_tag": "button"
-                      },
-                      {
-                        "$ref": "ShowInstrumentaScriptButton",
                         "_tag": "button"
                       },
                       {

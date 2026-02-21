@@ -583,6 +583,11 @@
                   <button id="InsertQRCodeButton" imageMso="BarcodeInsert" label="Insert QR-code" showLabel="false" onAction="InsertQRCode" supertip="Inserts a QR code that links to a URL" screentip="Insert QR Code"/>
                </box>
             </group>
+            <group id="ISCRGroup" label="Instrumenta script" imageMso="MacroPlay" tag="PR" getVisible="InstrumentaGetVisible">
+               <button id="ShowInstrumentaScriptButton" label="Instrumenta script editor" imageMso="CodeEdit" showLabel="false" onAction="ShowScriptEditor" supertip="Opens the Instrumenta script editor" screentip="Instrumenta Script Editor"/>
+               <dropDown id="InstrumentaScriptPresets" label="Preset" screentip="Select a saved script preset" showLabel="false" getItemCount="ScriptPreset_GetItemCount" getItemLabel="ScriptPreset_GetItemLabel" getItemID="ScriptPreset_GetItemID" onAction="ScriptPreset_OnAction"/>
+               <button id="InstrumentaScriptPresetRun" label="Run preset" screentip="Run the selected preset" imageMso="MacroPlay" showLabel="false" onAction="ScriptPreset_Run"/>
+            </group>
             <group id="AllGroup" label="Advanced" imageMso="AdvancedFileProperties" tag="PR" getVisible="InstrumentaGetVisible">
                <button idMso="FileNewDefault" showLabel="false"/>
                <button idMso="ReplaceDialog" showLabel="false"/>
@@ -609,7 +614,6 @@
                   </menu>
                </splitButton>
                <button id="PyramidBuilder" label="Pyramid storyline builder" showLabel="false" imageMso="DiagramPyramidInsertClassic" onAction="ShowPyramidBuilder" supertip="Opens the storyline builder to capture SCQ and structure your message" screentip="Storyline Builder"/>
-               <button id="ShowInstrumentaScriptButton" label="Instrumenta script editor" imageMso="MacroPlay" showLabel="false" onAction="ShowScriptEditor" supertip="Opens the Instrumenta script editor" screentip="Instrumenta Script Editor"/>
                <toggleButton idMso="SelectionPane" showLabel="false"/>
                <splitButton id="TagsSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                   <button id="ShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="NameDefine" onAction="ShowFormManageTags" supertip="Manages the hidden tags applied to shapes or slides" screentip="Manage Tags"/>
@@ -1221,6 +1225,11 @@
                   <button id="TabViewInsertQRCodeButton" imageMso="BarcodeInsert" label="Insert QR-code" showLabel="false" onAction="InsertQRCode" supertip="Inserts a QR code that links to a URL" screentip="Insert QR Code"/>
                </box>
             </group>
+            <group id="TabViewISCRGroup" label="Instrumenta script" imageMso="MacroPlay" tag="PR" getVisible="InstrumentaGetVisible">
+               <button id="TabViewShowInstrumentaScriptButton" label="Instrumenta script editor" imageMso="CodeEdit" showLabel="false" onAction="ShowScriptEditor" supertip="Opens the Instrumenta script editor" screentip="Instrumenta Script Editor"/>
+               <dropDown id="TabViewInstrumentaScriptPresets" label="Preset" screentip="Select a saved script preset" showLabel="false" getItemCount="ScriptPreset_GetItemCount" getItemLabel="ScriptPreset_GetItemLabel" getItemID="ScriptPreset_GetItemID" onAction="ScriptPreset_OnAction"/>
+               <button id="TabViewInstrumentaScriptPresetRun" label="Run preset" screentip="Run the selected preset" imageMso="MacroPlay" showLabel="false" onAction="ScriptPreset_Run"/>
+            </group>
             <group id="TabViewAllGroup" label="Advanced" imageMso="AdvancedFileProperties" tag="PR" getVisible="InstrumentaGetVisible">
                <button idMso="FileNewDefault" showLabel="false"/>
                <button idMso="ReplaceDialog" showLabel="false"/>
@@ -1247,7 +1256,6 @@
                   </menu>
                </splitButton>
                <button id="TabViewPyramidBuilder" label="Pyramid storyline builder" showLabel="false" imageMso="DiagramPyramidInsertClassic" onAction="ShowPyramidBuilder" supertip="Opens the storyline builder to capture SCQ and structure your message" screentip="Storyline Builder"/>
-               <button id="TabViewShowInstrumentaScriptButton" label="Instrumenta script editor" imageMso="MacroPlay" showLabel="false" onAction="ShowScriptEditor" supertip="Opens the Instrumenta script editor" screentip="Instrumenta Script Editor"/>
                <toggleButton idMso="SelectionPane" showLabel="false"/>
                <splitButton id="TabViewTagsSplitButton" size="normal" showLabel="false" tag="P" getVisible="InstrumentaGetVisible">
                   <button id="TabViewShowFormManageTagsButton" label="Manage hidden tags to shapes or slides" showLabel="false" imageMso="NameDefine" onAction="ShowFormManageTags" supertip="Manages the hidden tags applied to shapes or slides" screentip="Manage Tags"/>

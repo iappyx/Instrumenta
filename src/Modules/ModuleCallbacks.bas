@@ -26,6 +26,7 @@ Public InstrumentaRibbon As IRibbonUI
 Public InstrumentaVisible As String
 Public RibbonEvents As RibbonEventsClass
 Public SettingContextualButtons As Boolean
+Private IScr_SelectedPresetIndex As Integer
 
 
 Dim SetPositionAppEventHandler As New SetPositionEventsClass
@@ -118,6 +119,46 @@ Sub InstrumentaGetVisible(control As IRibbonControl, ByRef visible)
 End Sub
 
 
+
+Public Sub ScriptPreset_GetItemCount(control As IRibbonControl, ByRef count As Variant)
+    Dim all As Variant
+    all = GetAllSettings("Instrumenta", "ISCRPresetData")
+    If IsEmpty(all) Then count = 0 Else count = UBound(all, 1) + 1
+End Sub
+
+Public Sub ScriptPreset_GetItemLabel(control As IRibbonControl, index As Integer, ByRef label As Variant)
+    Dim all As Variant
+    all = GetAllSettings("Instrumenta", "ISCRPresetData")
+    label = all(index, 0)
+End Sub
+
+Public Sub ScriptPreset_GetItemID(control As IRibbonControl, index As Integer, ByRef id As Variant)
+    id = "scriptpreset_" & index
+End Sub
+
+Public Sub ScriptPreset_OnAction(control As IRibbonControl, id As String, index As Integer)
+    IScr_SelectedPresetIndex = index
+End Sub
+
+Public Sub ScriptPreset_Run(control As IRibbonControl)
+    Dim all As Variant
+    all = GetAllSettings("Instrumenta", "ISCRPresetData")
+    If IsEmpty(all) Then
+        MsgBox "No presets saved yet.", vbInformation
+        Exit Sub
+    End If
+    If IScr_SelectedPresetIndex > UBound(all, 1) Then
+        IScr_SelectedPresetIndex = 0
+    End If
+    Dim scriptText As String
+    scriptText = all(IScr_SelectedPresetIndex, 1)
+    If Trim(scriptText) = "" Then
+        MsgBox "Selected preset is empty.", vbInformation
+        Exit Sub
+    End If
+    RunInstrumentaScript scriptText
+End Sub
+
 Sub EmojiGallery_GetItemImage(control As IRibbonControl, index As Integer, ByRef returnedVal)
 
 #If Mac Then
@@ -132,7 +173,7 @@ Sub RibbonObjectGetImage(control As IRibbonControl, ByRef returnedVal)
 
 #If Mac Then
     
-    Select Case control.ID
+    Select Case control.id
         Case "FivePointStarMenu", "TabViewFivePointStarMenu"
             returnedVal = "ShapeStar"
         Case "StampsMenu", "TabViewStampsMenu"
@@ -149,7 +190,7 @@ Sub RibbonObjectGetImage(control As IRibbonControl, ByRef returnedVal)
     
 #Else
     
-    Select Case control.ID
+    Select Case control.id
         Case "FivePointStarMenu", "TabViewFivePointStarMenu"
             returnedVal = "StarRatedFull"
         Case "StampsMenu", "TabViewStampsMenu"
@@ -193,7 +234,7 @@ End Sub
 
 Sub EmojiGallery_GetItemCount(control As IRibbonControl, ByRef returnedVal)
     
-    Select Case control.ID
+    Select Case control.id
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = 111
      Case "EmojiGallery2", "TabViewEmojiGallery2"
@@ -220,7 +261,7 @@ End Sub
 
 Sub EmojiGallery_GetItemID(control As IRibbonControl, index As Integer, ByRef returnedVal)
     
-    Select Case control.ID
+    Select Case control.id
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = "Emoji" & index
      Case "EmojiGallery2", "TabViewEmojiGallery2"
@@ -247,7 +288,7 @@ End Sub
 
 Sub EmojiGallery_GetItemLabel(control As IRibbonControl, index As Integer, ByRef returnedVal)
 
-    Select Case control.ID
+    Select Case control.id
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = AllEmojis(index + 1)
      Case "EmojiGallery2", "TabViewEmojiGallery2"
@@ -275,7 +316,7 @@ End Sub
 
 Sub EmojiGallery_GetItemScreentip(control As IRibbonControl, index As Integer, ByRef returnedVal)
 
-    Select Case control.ID
+    Select Case control.id
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         returnedVal = AllEmojis(index + 1) & " " & StrConv(EmojiNames(index + 1), vbProperCase)
      Case "EmojiGallery2", "TabViewEmojiGallery2"
@@ -301,9 +342,9 @@ Sub EmojiGallery_GetItemScreentip(control As IRibbonControl, index As Integer, B
 End Sub
 
 
-Sub EmojiGallery_OnAction(control As IRibbonControl, ID As String, index As Integer)
+Sub EmojiGallery_OnAction(control As IRibbonControl, id As String, index As Integer)
     
-    Select Case control.ID
+    Select Case control.id
      Case "EmojiGallery1", "TabViewEmojiGallery1"
         GenerateEmoji (index + 1)
      Case "EmojiGallery2", "TabViewEmojiGallery2"
