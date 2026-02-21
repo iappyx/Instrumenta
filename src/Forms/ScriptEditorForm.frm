@@ -265,7 +265,7 @@ Private Sub Label3_Click()
     Dim URL As String
     Dim tempPresentation As Presentation
 
-    URL = "https://github.com/iappyx/Instrumenta/blob/main/SCRIPT.MD"
+    URL = "https://github.com/iappyx/Instrumenta/blob/main/SCRIPT.md"
 
     If Presentations.count = 0 Then
         Set tempPresentation = Presentations.Add
