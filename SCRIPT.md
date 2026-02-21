@@ -189,6 +189,70 @@ Applies a property to all shapes in the current working set.
 
 ---
 
+### SET VAR
+Declares a named variable for use throughout the script. Variables can hold numeric values or strings, and can be used in any expression where a number or string is expected.
+
+```
+SET VAR name = <numeric expression>
+SET VAR name = "string value"
+```
+
+- Variable names are case-insensitive and may contain letters, digits, and underscores
+- Numeric variables work in any numeric expression: `AT`, `WIDTH`, `HEIGHT`, `ROTATE`, `SET` values
+- String variables work in `NAME`, `TEXT`, color values, font names, and any string expression
+- String values must be quoted — including colors (e.g. `"#003366"`)
+- Variables can reference previously declared variables in their definition
+- Declaring a variable that already exists overwrites it
+
+```
+# Declare constants at the top
+SET VAR originX = 40
+SET VAR originY = 60
+SET VAR cellW = 140
+SET VAR cellH = 90
+SET VAR prefix = "grid_"
+SET VAR primary = "#003366"
+SET VAR fontName = "Calibri"
+
+# Use them throughout the script
+REPEAT 3 AS row
+    REPEAT 4 AS col
+        INSERT RECTANGLE AT originX+(col*cellW), originY+(row*cellH) WIDTH cellW HEIGHT cellH NAME prefix+row+"_"+col
+        SET fill.color = primary
+        SET font.name = fontName
+    END REPEAT
+END REPEAT
+```
+
+#### Numeric variables
+Numeric variables are substituted into expressions before evaluation, so they work identically to loop variables.
+
+```
+SET VAR gap = 10
+SET VAR boxW = 120
+
+INSERT RECTANGLE AT 50, 100 WIDTH boxW HEIGHT 60 NAME "box_a"
+INSERT RECTANGLE AT 50+(boxW+gap), 100 WIDTH boxW HEIGHT 60 NAME "box_b"
+INSERT RECTANGLE AT 50+(boxW+gap)*2, 100 WIDTH boxW HEIGHT 60 NAME "box_c"
+```
+
+#### String variables
+String variables are substituted into string expressions before evaluation. They must be declared with quoted values.
+
+```
+SET VAR prefix = "chart_"
+SET VAR title = "Revenue"
+SET VAR accent = "#E8A000"
+
+INSERT RECTANGLE AT 50, 50 WIDTH 200 HEIGHT 40 NAME prefix+"header" TEXT title
+SET fill.color = accent
+SET font.color = "#FFFFFF"
+```
+
+> Color values assigned to string variables must be quoted: `SET VAR primary = "#003366"`, not `SET VAR primary = #003366`.
+
+---
+
 ### ROTATE
 Rotates all shapes in the working set. Supports absolute and relative rotation.
 
@@ -449,3 +513,4 @@ END REPEAT
 
 **GROUP then SET.** After `GROUP`, the group itself becomes the working set, so you can immediately apply `SET` or `ROTATE` to the whole group as one object.
 
+**Use SET VAR for constants.** Declare layout values like `originX`, `cellW`, and colors at the top of a script using `SET VAR`. Change them once and the whole layout updates.

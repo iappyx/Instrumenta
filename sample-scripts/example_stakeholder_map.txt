@@ -2,250 +2,260 @@
 # Stakeholder Map
 # ============================================================
 # A 2x2 matrix plotting stakeholders by Influence (y-axis)
-# and Interest (x-axis), with labeled oval placeholders
-# for each stakeholder group.
+# and Interest (x-axis), with labeled oval placeholders.
 #
 # Quadrants:
 #   High Influence, Low Interest  : Keep Satisfied
-#   High Influence, High Interest : Manage Closely  <- key
+#   High Influence, High Interest : Manage Closely
 #   Low Influence,  Low Interest  : Monitor
 #   Low Influence,  High Interest : Keep Informed
 #
 # Slide canvas: 720 x 405 pt (standard 16:9)
-# Grid: 2x2, each cell 270 x 145 pt
-# Origin: x=100, y=35
 #
-# Stakeholder ovals are pre-positioned in each quadrant.
-# Add, remove or reposition them after running.
-#
-# Customize:
-#   - Stakeholder names and positions
-#   - Quadrant colors
-#   - Oval sizes
+# Customize: edit the SET VAR block below
 # ============================================================
 
 # Clean up previous run
 DELETE WHERE name STARTSWITH "sm_"
 
 # ============================================================
+# CONSTANTS
+# ============================================================
+SET VAR originX = 100
+SET VAR originY = 35
+SET VAR cellW = 270
+SET VAR cellH = 145
+SET VAR headerH = 24
+SET VAR ovalW = 100
+SET VAR ovalH = 36
+
+SET VAR col2X = 370
+SET VAR row2Y = 180
+
+SET VAR colorKeepSatisfied = "#E8A000"
+SET VAR colorManageClosely = "#003366"
+SET VAR colorManageClosely2 = "#0055AA"
+SET VAR colorMonitor = "#888888"
+SET VAR colorKeepInformed = "#00873D"
+SET VAR colorKeepInformed2 = "#4CAF50"
+
+SET VAR bgKeepSatisfied = "#FEF6E4"
+SET VAR bgManageClosely = "#E8F0F8"
+SET VAR bgMonitor = "#F5F5F5"
+SET VAR bgKeepInformed = "#EAF5EC"
+
+SET VAR borderColor = "#CCCCCC"
+SET VAR titleText = "Stakeholder Map"
+SET VAR titleColor = "#003366"
+SET VAR fontName = "Calibri"
+
+# ============================================================
 # QUADRANT BACKGROUNDS
 # ============================================================
 
-# Top-left: Keep Satisfied (high influence, low interest)
-INSERT RECTANGLE AT 100, 35 WIDTH 270 HEIGHT 145 NAME "sm_bg_0_0"
-SET fill.color = #FEF6E4
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT originX, originY WIDTH cellW HEIGHT cellH NAME "sm_bg_0_0"
+SET fill.color = bgKeepSatisfied
+SET border.color = borderColor
 SET border.width = 1
 
-# Top-right: Manage Closely (high influence, high interest)
-INSERT RECTANGLE AT 370, 35 WIDTH 270 HEIGHT 145 NAME "sm_bg_0_1"
-SET fill.color = #E8F0F8
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT col2X, originY WIDTH cellW HEIGHT cellH NAME "sm_bg_0_1"
+SET fill.color = bgManageClosely
+SET border.color = borderColor
 SET border.width = 1
 
-# Bottom-left: Monitor (low influence, low interest)
-INSERT RECTANGLE AT 100, 180 WIDTH 270 HEIGHT 145 NAME "sm_bg_1_0"
-SET fill.color = #F5F5F5
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT originX, row2Y WIDTH cellW HEIGHT cellH NAME "sm_bg_1_0"
+SET fill.color = bgMonitor
+SET border.color = borderColor
 SET border.width = 1
 
-# Bottom-right: Keep Informed (low influence, high interest)
-INSERT RECTANGLE AT 370, 180 WIDTH 270 HEIGHT 145 NAME "sm_bg_1_1"
-SET fill.color = #EAF5EC
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT col2X, row2Y WIDTH cellW HEIGHT cellH NAME "sm_bg_1_1"
+SET fill.color = bgKeepInformed
+SET border.color = borderColor
 SET border.width = 1
 
 # ============================================================
-# QUADRANT HEADER BANDS
+# HEADER BANDS
 # ============================================================
 
-# Keep Satisfied
-INSERT RECTANGLE AT 100, 35 WIDTH 270 HEIGHT 24 NAME "sm_hdr_0_0"
-SET fill.color = #E8A000
+INSERT RECTANGLE AT originX, originY WIDTH cellW HEIGHT headerH NAME "sm_hdr_0_0"
+SET fill.color = colorKeepSatisfied
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 104, 38 WIDTH 262 HEIGHT 18 NAME "sm_hl_0_0" TEXT "Keep Satisfied"
+INSERT TEXTBOX AT originX+4, originY+3 WIDTH cellW-8 HEIGHT 18 NAME "sm_hl_0_0" TEXT "Keep Satisfied"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-# Manage Closely
-INSERT RECTANGLE AT 370, 35 WIDTH 270 HEIGHT 24 NAME "sm_hdr_0_1"
-SET fill.color = #003366
+INSERT RECTANGLE AT col2X, originY WIDTH cellW HEIGHT headerH NAME "sm_hdr_0_1"
+SET fill.color = colorManageClosely
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 374, 38 WIDTH 262 HEIGHT 18 NAME "sm_hl_0_1" TEXT "Manage Closely"
+INSERT TEXTBOX AT col2X+4, originY+3 WIDTH cellW-8 HEIGHT 18 NAME "sm_hl_0_1" TEXT "Manage Closely"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-# Monitor
-INSERT RECTANGLE AT 100, 180 WIDTH 270 HEIGHT 24 NAME "sm_hdr_1_0"
-SET fill.color = #888888
+INSERT RECTANGLE AT originX, row2Y WIDTH cellW HEIGHT headerH NAME "sm_hdr_1_0"
+SET fill.color = colorMonitor
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 104, 183 WIDTH 262 HEIGHT 18 NAME "sm_hl_1_0" TEXT "Monitor"
+INSERT TEXTBOX AT originX+4, row2Y+3 WIDTH cellW-8 HEIGHT 18 NAME "sm_hl_1_0" TEXT "Monitor"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-# Keep Informed
-INSERT RECTANGLE AT 370, 180 WIDTH 270 HEIGHT 24 NAME "sm_hdr_1_1"
-SET fill.color = #00873D
+INSERT RECTANGLE AT col2X, row2Y WIDTH cellW HEIGHT headerH NAME "sm_hdr_1_1"
+SET fill.color = colorKeepInformed
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 374, 183 WIDTH 262 HEIGHT 18 NAME "sm_hl_1_1" TEXT "Keep Informed"
+INSERT TEXTBOX AT col2X+4, row2Y+3 WIDTH cellW-8 HEIGHT 18 NAME "sm_hl_1_1" TEXT "Keep Informed"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
 # ============================================================
 # AXIS LABELS
 # ============================================================
 
-# Y-axis label (rotated) — Influence
 INSERT TEXTBOX AT 30, 120 WIDTH 130 HEIGHT 20 NAME "sm_yaxis" TEXT "Influence  ↑"
 SET font.size = 9
 SET font.italic = TRUE
-SET font.color = #555555
-SET font.name = "Calibri"
+SET font.color = "#555555"
+SET font.name = fontName
 ROTATE 270
 
-# X-axis label — Interest
-INSERT TEXTBOX AT 100, 334 WIDTH 540 HEIGHT 20 NAME "sm_xaxis" TEXT "Interest  →"
+INSERT TEXTBOX AT originX, row2Y+cellH+14 WIDTH cellW*2 HEIGHT 20 NAME "sm_xaxis" TEXT "Interest  →"
 SET font.size = 9
 SET font.italic = TRUE
-SET font.color = #555555
-SET font.name = "Calibri"
+SET font.color = "#555555"
+SET font.name = fontName
 
-# Low / High labels on axes
-INSERT TEXTBOX AT 100, 356 WIDTH 80 HEIGHT 16 NAME "sm_x_low" TEXT "Low"
+INSERT TEXTBOX AT originX, row2Y+cellH+36 WIDTH 80 HEIGHT 16 NAME "sm_x_low" TEXT "Low"
 SET font.size = 8
-SET font.color = #888888
-SET font.name = "Calibri"
+SET font.color = "#888888"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 620, 356 WIDTH 80 HEIGHT 16 NAME "sm_x_high" TEXT "High"
+INSERT TEXTBOX AT col2X+cellW-60, row2Y+cellH+36 WIDTH 80 HEIGHT 16 NAME "sm_x_high" TEXT "High"
 SET font.size = 8
-SET font.color = #888888
-SET font.name = "Calibri"
+SET font.color = "#888888"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 60, 290 WIDTH 40 HEIGHT 16 NAME "sm_y_low" TEXT "Low"
+INSERT TEXTBOX AT 60, row2Y+cellH-30 WIDTH 40 HEIGHT 16 NAME "sm_y_low" TEXT "Low"
 SET font.size = 8
-SET font.color = #888888
-SET font.name = "Calibri"
+SET font.color = "#888888"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 60, 50 WIDTH 40 HEIGHT 16 NAME "sm_y_high" TEXT "High"
+INSERT TEXTBOX AT 60, originY+15 WIDTH 40 HEIGHT 16 NAME "sm_y_high" TEXT "High"
 SET font.size = 8
-SET font.color = #888888
-SET font.name = "Calibri"
+SET font.color = "#888888"
+SET font.name = fontName
 
 # ============================================================
-# STAKEHOLDER OVALS
-# --- Top-left: Keep Satisfied ---
+# STAKEHOLDER OVALS — Top-left: Keep Satisfied
 # ============================================================
 
-INSERT OVAL AT 120, 75 WIDTH 100 HEIGHT 36 NAME "sm_sh_0" TEXT "Regulator"
-SET fill.color = #E8A000
+INSERT OVAL AT originX+20, originY+headerH+16 WIDTH ovalW HEIGHT ovalH NAME "sm_sh_0" TEXT "Regulator"
+SET fill.color = colorKeepSatisfied
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT OVAL AT 248, 100 WIDTH 100 HEIGHT 36 NAME "sm_sh_1" TEXT "Board"
-SET fill.color = #E8A000
+INSERT OVAL AT originX+148, originY+headerH+41 WIDTH ovalW HEIGHT ovalH NAME "sm_sh_1" TEXT "Board"
+SET fill.color = colorKeepSatisfied
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
 # ============================================================
-# --- Top-right: Manage Closely ---
+# STAKEHOLDER OVALS — Top-right: Manage Closely
 # ============================================================
 
-INSERT OVAL AT 388, 68 WIDTH 110 HEIGHT 36 NAME "sm_sh_2" TEXT "Exec Sponsor"
-SET fill.color = #003366
+INSERT OVAL AT col2X+18, originY+headerH+9 WIDTH ovalW+10 HEIGHT ovalH NAME "sm_sh_2" TEXT "Exec Sponsor"
+SET fill.color = colorManageClosely
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT OVAL AT 510, 80 WIDTH 110 HEIGHT 36 NAME "sm_sh_3" TEXT "Project Steering"
-SET fill.color = #003366
+INSERT OVAL AT col2X+140, originY+headerH+21 WIDTH ovalW+10 HEIGHT ovalH NAME "sm_sh_3" TEXT "Project Steering"
+SET fill.color = colorManageClosely
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT OVAL AT 395, 120 WIDTH 110 HEIGHT 36 NAME "sm_sh_4" TEXT "Key Client"
-SET fill.color = #0055AA
+INSERT OVAL AT col2X+25, originY+headerH+61 WIDTH ovalW+10 HEIGHT ovalH NAME "sm_sh_4" TEXT "Key Client"
+SET fill.color = colorManageClosely2
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
 # ============================================================
-# --- Bottom-left: Monitor ---
+# STAKEHOLDER OVALS — Bottom-left: Monitor
 # ============================================================
 
-INSERT OVAL AT 130, 220 WIDTH 100 HEIGHT 36 NAME "sm_sh_5" TEXT "Media"
-SET fill.color = #888888
+INSERT OVAL AT originX+30, row2Y+headerH+16 WIDTH ovalW HEIGHT ovalH NAME "sm_sh_5" TEXT "Media"
+SET fill.color = colorMonitor
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT OVAL AT 248, 248 WIDTH 100 HEIGHT 36 NAME "sm_sh_6" TEXT "General Public"
-SET fill.color = #888888
+INSERT OVAL AT originX+148, row2Y+headerH+44 WIDTH ovalW HEIGHT ovalH NAME "sm_sh_6" TEXT "General Public"
+SET fill.color = colorMonitor
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
 # ============================================================
-# --- Bottom-right: Keep Informed ---
+# STAKEHOLDER OVALS — Bottom-right: Keep Informed
 # ============================================================
 
-INSERT OVAL AT 388, 215 WIDTH 100 HEIGHT 36 NAME "sm_sh_7" TEXT "End Users"
-SET fill.color = #00873D
+INSERT OVAL AT col2X+18, row2Y+headerH+11 WIDTH ovalW HEIGHT ovalH NAME "sm_sh_7" TEXT "End Users"
+SET fill.color = colorKeepInformed
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT OVAL AT 510, 230 WIDTH 100 HEIGHT 36 NAME "sm_sh_8" TEXT "Dept. Managers"
-SET fill.color = #00873D
+INSERT OVAL AT col2X+140, row2Y+headerH+26 WIDTH ovalW HEIGHT ovalH NAME "sm_sh_8" TEXT "Dept. Managers"
+SET fill.color = colorKeepInformed
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT OVAL AT 400, 268 WIDTH 100 HEIGHT 36 NAME "sm_sh_9" TEXT "HR & Finance"
-SET fill.color = #4CAF50
+INSERT OVAL AT col2X+30, row2Y+headerH+64 WIDTH ovalW HEIGHT ovalH NAME "sm_sh_9" TEXT "HR & Finance"
+SET fill.color = colorKeepInformed2
 SET border.visible = FALSE
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
 # ============================================================
 # SLIDE TITLE
 # ============================================================
 
-INSERT TEXTBOX AT 100, 8 WIDTH 400 HEIGHT 22 NAME "sm_title" TEXT "Stakeholder Map"
+INSERT TEXTBOX AT originX, 8 WIDTH 400 HEIGHT 22 NAME "sm_title" TEXT titleText
 SET font.size = 13
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = titleColor
+SET font.name = fontName

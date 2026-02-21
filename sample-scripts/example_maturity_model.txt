@@ -2,207 +2,218 @@
 # Maturity Model
 # ============================================================
 # A grid with 5 maturity level columns and 5 capability rows.
-# Cells are shaded to show current state (solid) vs
-# target state (lighter) vs not applicable (grey).
+# Cells are shaded to show current state vs target vs gap vs N/A.
 #
-# Maturity levels (columns):
-#   1 - Initial  2 - Developing  3 - Defined
-#   4 - Managed  5 - Optimized
-#
-# Capability areas (rows):
-#   Strategy, People, Process, Technology, Governance
+# Maturity levels (columns): 1-Initial to 5-Optimized
+# Capability areas (rows): Strategy, People, Process, Technology, Governance
 #
 # Color coding:
-#   Current state  : dark blue  (col < currentLevel per row)
-#   Target state   : light blue (col = targetLevel per row)
-#   Beyond target  : grey       (col > targetLevel)
+#   Current state : dark blue  (cells up to current level)
+#   Target state  : light blue (cell at target level)
+#   Gap           : pale blue  (cells between current and target)
+#   Not applicable: grey       (cells beyond target)
 #
 # Slide canvas: 720 x 405 pt (standard 16:9)
-# cellW = 96, cellH = 44, labelW = 110
-# originX = 110, originY = 80
 #
-# Customize:
-#   - currentLevel and targetLevel per row in the IF blocks
-#   - Row and column labels in the TEXTBOX section
+# Customize: edit the SET VAR block below.
+# Current/target levels per row are set in the IF blocks below.
 # ============================================================
 
 # Clean up previous run
 DELETE WHERE name STARTSWITH "mat_"
 
 # ============================================================
+# CONSTANTS
+# ============================================================
+SET VAR originX = 110
+SET VAR originY = 80
+SET VAR cellW = 96
+SET VAR cellH = 44
+SET VAR labelW = 110
+SET VAR headerH = 30
+
+SET VAR colorCurrent = "#003366"
+SET VAR colorTarget = "#A8D4F0"
+SET VAR colorGap = "#D0E4F4"
+SET VAR colorNA = "#EEEEEE"
+SET VAR colorHdr = "#003366"
+SET VAR colorRowOdd = "#F0F4F8"
+SET VAR colorRowEven = "#E4EBF2"
+SET VAR borderColor = "#FFFFFF"
+SET VAR borderColorLabel = "#CCCCCC"
+
+SET VAR titleText = "Capability Maturity Model"
+SET VAR titleColor = "#003366"
+SET VAR fontName = "Calibri"
+
+# ============================================================
 # COLUMN HEADER CELLS
 # ============================================================
 
 REPEAT 5 AS col
-    INSERT RECTANGLE AT 110+(col*96), 80 WIDTH 96 HEIGHT 30 NAME "mat_hdr_"+col
-    SET fill.color = #003366
-    SET border.color = #FFFFFF
+    INSERT RECTANGLE AT originX+(col*cellW), originY WIDTH cellW HEIGHT headerH NAME "mat_hdr_"+col
+    SET fill.color = colorHdr
+    SET border.color = borderColor
     SET border.width = 2
 END REPEAT
 
-# Column header labels
-INSERT TEXTBOX AT 110, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_0" TEXT "1 — Initial"
+INSERT TEXTBOX AT originX, originY+4 WIDTH cellW HEIGHT 22 NAME "mat_hc_0" TEXT "1 — Initial"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 206, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_1" TEXT "2 — Developing"
+INSERT TEXTBOX AT originX+cellW, originY+4 WIDTH cellW HEIGHT 22 NAME "mat_hc_1" TEXT "2 — Developing"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 302, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_2" TEXT "3 — Defined"
+INSERT TEXTBOX AT originX+cellW*2, originY+4 WIDTH cellW HEIGHT 22 NAME "mat_hc_2" TEXT "3 — Defined"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 398, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_3" TEXT "4 — Managed"
+INSERT TEXTBOX AT originX+cellW*3, originY+4 WIDTH cellW HEIGHT 22 NAME "mat_hc_3" TEXT "4 — Managed"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 494, 84 WIDTH 96 HEIGHT 22 NAME "mat_hc_4" TEXT "5 — Optimized"
+INSERT TEXTBOX AT originX+cellW*4, originY+4 WIDTH cellW HEIGHT 22 NAME "mat_hc_4" TEXT "5 — Optimized"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
 # ============================================================
 # ROW LABEL COLUMN
 # ============================================================
 
 REPEAT 5 AS row
-    INSERT RECTANGLE AT 0, 110+(row*44) WIDTH 110 HEIGHT 44 NAME "mat_rowlbl_"+row
-    SET border.color = #CCCCCC
+    INSERT RECTANGLE AT 0, originY+headerH+(row*cellH) WIDTH labelW HEIGHT cellH NAME "mat_rowlbl_"+row
+    SET border.color = borderColorLabel
     SET border.width = 1
-
     IF row = 0 OR row = 2 OR row = 4
-        SET fill.color = #F0F4F8
+        SET fill.color = colorRowOdd
     ELSE
-        SET fill.color = #E4EBF2
+        SET fill.color = colorRowEven
     END IF
 END REPEAT
 
-INSERT TEXTBOX AT 4, 118 WIDTH 102 HEIGHT 28 NAME "mat_rl_0" TEXT "Strategy"
+INSERT TEXTBOX AT 4, originY+headerH+8 WIDTH labelW-8 HEIGHT 28 NAME "mat_rl_0" TEXT "Strategy"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = "#003366"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 4, 162 WIDTH 102 HEIGHT 28 NAME "mat_rl_1" TEXT "People"
+INSERT TEXTBOX AT 4, originY+headerH+cellH+8 WIDTH labelW-8 HEIGHT 28 NAME "mat_rl_1" TEXT "People"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = "#003366"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 4, 206 WIDTH 102 HEIGHT 28 NAME "mat_rl_2" TEXT "Process"
+INSERT TEXTBOX AT 4, originY+headerH+cellH*2+8 WIDTH labelW-8 HEIGHT 28 NAME "mat_rl_2" TEXT "Process"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = "#003366"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 4, 250 WIDTH 102 HEIGHT 28 NAME "mat_rl_3" TEXT "Technology"
+INSERT TEXTBOX AT 4, originY+headerH+cellH*3+8 WIDTH labelW-8 HEIGHT 28 NAME "mat_rl_3" TEXT "Technology"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = "#003366"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 4, 294 WIDTH 102 HEIGHT 28 NAME "mat_rl_4" TEXT "Governance"
+INSERT TEXTBOX AT 4, originY+headerH+cellH*4+8 WIDTH labelW-8 HEIGHT 28 NAME "mat_rl_4" TEXT "Governance"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = "#003366"
+SET font.name = fontName
 
 # ============================================================
 # GRID CELLS
-# Current / target levels per row (0-indexed col):
-#   Row 0 Strategy  : current=2, target=4
-#   Row 1 People    : current=1, target=3
-#   Row 2 Process   : current=3, target=4
-#   Row 3 Technology: current=2, target=3
-#   Row 4 Governance: current=0, target=2
+# To change current/target per row, edit the IF conditions.
+# Col index is 0-based (0=Initial ... 4=Optimized)
+#   Row 0 Strategy  : current < 2, target = 4
+#   Row 1 People    : current < 1, target = 3
+#   Row 2 Process   : current < 3, target = 4
+#   Row 3 Technology: current < 2, target = 3
+#   Row 4 Governance: current = none, target = 2
 # ============================================================
 
-# --- Row 0: Strategy (current < 2, target = 4) ---
+# --- Row 0: Strategy ---
 REPEAT 5 AS col
-    INSERT RECTANGLE AT 110+(col*96), 110 WIDTH 96 HEIGHT 44 NAME "mat_r0_"+col
-    SET border.color = #FFFFFF
+    INSERT RECTANGLE AT originX+(col*cellW), originY+headerH WIDTH cellW HEIGHT cellH NAME "mat_r0_"+col
+    SET border.color = borderColor
     SET border.width = 2
-
     IF col < 2
-        SET fill.color = #003366
+        SET fill.color = colorCurrent
     ELSE IF col = 4
-        SET fill.color = #A8D4F0
+        SET fill.color = colorTarget
     ELSE
-        SET fill.color = #D0E4F4
+        SET fill.color = colorGap
     END IF
 END REPEAT
 
-# --- Row 1: People (current < 1, target = 3) ---
+# --- Row 1: People ---
 REPEAT 5 AS col
-    INSERT RECTANGLE AT 110+(col*96), 154 WIDTH 96 HEIGHT 44 NAME "mat_r1_"+col
-    SET border.color = #FFFFFF
+    INSERT RECTANGLE AT originX+(col*cellW), originY+headerH+cellH WIDTH cellW HEIGHT cellH NAME "mat_r1_"+col
+    SET border.color = borderColor
     SET border.width = 2
-
     IF col < 1
-        SET fill.color = #003366
+        SET fill.color = colorCurrent
     ELSE IF col = 3
-        SET fill.color = #A8D4F0
+        SET fill.color = colorTarget
     ELSE IF col > 3
-        SET fill.color = #EEEEEE
+        SET fill.color = colorNA
     ELSE
-        SET fill.color = #D0E4F4
+        SET fill.color = colorGap
     END IF
 END REPEAT
 
-# --- Row 2: Process (current < 3, target = 4) ---
+# --- Row 2: Process ---
 REPEAT 5 AS col
-    INSERT RECTANGLE AT 110+(col*96), 198 WIDTH 96 HEIGHT 44 NAME "mat_r2_"+col
-    SET border.color = #FFFFFF
+    INSERT RECTANGLE AT originX+(col*cellW), originY+headerH+cellH*2 WIDTH cellW HEIGHT cellH NAME "mat_r2_"+col
+    SET border.color = borderColor
     SET border.width = 2
-
     IF col < 3
-        SET fill.color = #003366
+        SET fill.color = colorCurrent
     ELSE IF col = 4
-        SET fill.color = #A8D4F0
+        SET fill.color = colorTarget
     ELSE
-        SET fill.color = #D0E4F4
+        SET fill.color = colorGap
     END IF
 END REPEAT
 
-# --- Row 3: Technology (current < 2, target = 3) ---
+# --- Row 3: Technology ---
 REPEAT 5 AS col
-    INSERT RECTANGLE AT 110+(col*96), 242 WIDTH 96 HEIGHT 44 NAME "mat_r3_"+col
-    SET border.color = #FFFFFF
+    INSERT RECTANGLE AT originX+(col*cellW), originY+headerH+cellH*3 WIDTH cellW HEIGHT cellH NAME "mat_r3_"+col
+    SET border.color = borderColor
     SET border.width = 2
-
     IF col < 2
-        SET fill.color = #003366
+        SET fill.color = colorCurrent
     ELSE IF col = 3
-        SET fill.color = #A8D4F0
+        SET fill.color = colorTarget
     ELSE IF col > 3
-        SET fill.color = #EEEEEE
+        SET fill.color = colorNA
     ELSE
-        SET fill.color = #D0E4F4
+        SET fill.color = colorGap
     END IF
 END REPEAT
 
-# --- Row 4: Governance (current < 0, target = 2) ---
+# --- Row 4: Governance ---
 REPEAT 5 AS col
-    INSERT RECTANGLE AT 110+(col*96), 286 WIDTH 96 HEIGHT 44 NAME "mat_r4_"+col
-    SET border.color = #FFFFFF
+    INSERT RECTANGLE AT originX+(col*cellW), originY+headerH+cellH*4 WIDTH cellW HEIGHT cellH NAME "mat_r4_"+col
+    SET border.color = borderColor
     SET border.width = 2
-
     IF col = 2
-        SET fill.color = #A8D4F0
+        SET fill.color = colorTarget
     ELSE IF col > 2
-        SET fill.color = #EEEEEE
+        SET fill.color = colorNA
     ELSE
-        SET fill.color = #D0E4F4
+        SET fill.color = colorGap
     END IF
 END REPEAT
 
@@ -210,48 +221,50 @@ END REPEAT
 # LEGEND
 # ============================================================
 
-INSERT RECTANGLE AT 110, 348 WIDTH 16 HEIGHT 14 NAME "mat_leg_1"
-SET fill.color = #003366
+SET VAR legendY = originY+headerH+cellH*5+14
+
+INSERT RECTANGLE AT originX, legendY WIDTH 16 HEIGHT 14 NAME "mat_leg_1"
+SET fill.color = colorCurrent
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 130, 346 WIDTH 100 HEIGHT 16 NAME "mat_legt_1" TEXT "Current state"
+INSERT TEXTBOX AT originX+20, legendY-2 WIDTH 100 HEIGHT 16 NAME "mat_legt_1" TEXT "Current state"
 SET font.size = 8
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = "#333333"
+SET font.name = fontName
 
-INSERT RECTANGLE AT 240, 348 WIDTH 16 HEIGHT 14 NAME "mat_leg_2"
-SET fill.color = #A8D4F0
+INSERT RECTANGLE AT originX+130, legendY WIDTH 16 HEIGHT 14 NAME "mat_leg_2"
+SET fill.color = colorTarget
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 260, 346 WIDTH 100 HEIGHT 16 NAME "mat_legt_2" TEXT "Target state"
+INSERT TEXTBOX AT originX+150, legendY-2 WIDTH 100 HEIGHT 16 NAME "mat_legt_2" TEXT "Target state"
 SET font.size = 8
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = "#333333"
+SET font.name = fontName
 
-INSERT RECTANGLE AT 370, 348 WIDTH 16 HEIGHT 14 NAME "mat_leg_3"
-SET fill.color = #D0E4F4
+INSERT RECTANGLE AT originX+260, legendY WIDTH 16 HEIGHT 14 NAME "mat_leg_3"
+SET fill.color = colorGap
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 390, 346 WIDTH 100 HEIGHT 16 NAME "mat_legt_3" TEXT "Gap"
+INSERT TEXTBOX AT originX+280, legendY-2 WIDTH 100 HEIGHT 16 NAME "mat_legt_3" TEXT "Gap"
 SET font.size = 8
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = "#333333"
+SET font.name = fontName
 
-INSERT RECTANGLE AT 440, 348 WIDTH 16 HEIGHT 14 NAME "mat_leg_4"
-SET fill.color = #EEEEEE
+INSERT RECTANGLE AT originX+330, legendY WIDTH 16 HEIGHT 14 NAME "mat_leg_4"
+SET fill.color = colorNA
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 460, 346 WIDTH 120 HEIGHT 16 NAME "mat_legt_4" TEXT "Not applicable"
+INSERT TEXTBOX AT originX+350, legendY-2 WIDTH 120 HEIGHT 16 NAME "mat_legt_4" TEXT "Not applicable"
 SET font.size = 8
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = "#333333"
+SET font.name = fontName
 
 # ============================================================
 # SLIDE TITLE
 # ============================================================
 
-INSERT TEXTBOX AT 0, 40 WIDTH 400 HEIGHT 28 NAME "mat_title" TEXT "Capability Maturity Model"
+INSERT TEXTBOX AT 0, 40 WIDTH 400 HEIGHT 28 NAME "mat_title" TEXT titleText
 SET font.size = 14
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = titleColor
+SET font.name = fontName

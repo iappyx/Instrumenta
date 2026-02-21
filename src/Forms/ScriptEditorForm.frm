@@ -45,11 +45,11 @@ Private Sub btnRun_Click()
     
     txtLog.text = ""
     
-    RunScript txtScript.text
+    RunInstrumentaScript txtScript.text
     
     Dim msg As Variant
     Dim logText As String
-    For Each msg In ScriptLog
+    For Each msg In IScr_ScriptLog
         logText = logText & msg & vbCrLf
     Next msg
     txtLog.text = logText

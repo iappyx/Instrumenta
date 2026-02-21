@@ -4,209 +4,210 @@
 # A management scorecard with a label column on the left and
 # colored RAG status cells (Red / Amber / Green).
 #
-# Structure:
-#   - 1 header row (dark blue)
-#   - 6 data rows, each with:
-#       col 0: metric name (light background)
-#       col 1: status cell (RAG color)
-#       col 2: trend indicator (text)
-#       col 3: comment (light background)
-#
 # Slide canvas: 720 x 405 pt (standard 16:9)
 #
-# Customize:
-#   - Row count: change REPEAT count
-#   - Colors: adjust the RAG fill.color values
-#   - Labels: change TEXT values per row
+# Customize: edit the SET VAR block below
 # ============================================================
 
 # Clean up previous run
 DELETE WHERE name STARTSWITH "sc_"
 
 # ============================================================
+# CONSTANTS
+# ============================================================
+SET VAR originY = 55
+SET VAR headerH = 28
+SET VAR rowH = 34
+SET VAR dataStartY = 83
+
+SET VAR xMetric = 60
+SET VAR xStatus = 260
+SET VAR xTrend = 320
+SET VAR xComment = 380
+
+SET VAR colWMetric = 200
+SET VAR colWStatus = 60
+SET VAR colWTrend = 60
+SET VAR colWComment = 280
+
+SET VAR colorHeader = "#003366"
+SET VAR colorGreen = "#00873D"
+SET VAR colorAmber = "#E8A000"
+SET VAR colorRed = "#CC0000"
+SET VAR colorRowOdd = "#F5F7FA"
+SET VAR colorRowEven = "#FFFFFF"
+SET VAR borderColor = "#CCCCCC"
+
+SET VAR titleText = "Performance Scorecard — Q1 2025"
+SET VAR titleColor = "#003366"
+SET VAR fontName = "Calibri"
+
+# ============================================================
 # HEADER ROW
 # ============================================================
 
-# Header: Metric
-INSERT RECTANGLE AT 60, 55 WIDTH 200 HEIGHT 28 NAME "sc_h_metric"
-SET fill.color = #003366
-SET border.color = #003366
+INSERT RECTANGLE AT xMetric, originY WIDTH colWMetric HEIGHT headerH NAME "sc_h_metric"
+SET fill.color = colorHeader
+SET border.color = colorHeader
 SET border.width = 1
 
-INSERT TEXTBOX AT 64, 59 WIDTH 192 HEIGHT 22 NAME "sc_ht_metric" TEXT "Metric"
+INSERT TEXTBOX AT xMetric+4, originY+4 WIDTH colWMetric-8 HEIGHT 22 NAME "sc_ht_metric" TEXT "Metric"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-# Header: Status
-INSERT RECTANGLE AT 260, 55 WIDTH 60 HEIGHT 28 NAME "sc_h_status"
-SET fill.color = #003366
-SET border.color = #003366
+INSERT RECTANGLE AT xStatus, originY WIDTH colWStatus HEIGHT headerH NAME "sc_h_status"
+SET fill.color = colorHeader
+SET border.color = colorHeader
 SET border.width = 1
 
-INSERT TEXTBOX AT 262, 59 WIDTH 56 HEIGHT 22 NAME "sc_ht_status" TEXT "Status"
+INSERT TEXTBOX AT xStatus+2, originY+4 WIDTH colWStatus-4 HEIGHT 22 NAME "sc_ht_status" TEXT "Status"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-# Header: Trend
-INSERT RECTANGLE AT 320, 55 WIDTH 60 HEIGHT 28 NAME "sc_h_trend"
-SET fill.color = #003366
-SET border.color = #003366
+INSERT RECTANGLE AT xTrend, originY WIDTH colWTrend HEIGHT headerH NAME "sc_h_trend"
+SET fill.color = colorHeader
+SET border.color = colorHeader
 SET border.width = 1
 
-INSERT TEXTBOX AT 322, 59 WIDTH 56 HEIGHT 22 NAME "sc_ht_trend" TEXT "Trend"
+INSERT TEXTBOX AT xTrend+2, originY+4 WIDTH colWTrend-4 HEIGHT 22 NAME "sc_ht_trend" TEXT "Trend"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-# Header: Comment
-INSERT RECTANGLE AT 380, 55 WIDTH 280 HEIGHT 28 NAME "sc_h_comment"
-SET fill.color = #003366
-SET border.color = #003366
+INSERT RECTANGLE AT xComment, originY WIDTH colWComment HEIGHT headerH NAME "sc_h_comment"
+SET fill.color = colorHeader
+SET border.color = colorHeader
 SET border.width = 1
 
-INSERT TEXTBOX AT 384, 59 WIDTH 272 HEIGHT 22 NAME "sc_ht_comment" TEXT "Comment"
+INSERT TEXTBOX AT xComment+4, originY+4 WIDTH colWComment-8 HEIGHT 22 NAME "sc_ht_comment" TEXT "Comment"
 SET font.size = 9
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
 # ============================================================
 # DATA ROWS
-# Row height: 34 pt, starting at y = 83
-# 6 rows = 204 pt total height
 # ============================================================
 
 REPEAT 6 AS i
-
-    # Metric label cell (alternating background)
-    INSERT RECTANGLE AT 60, 83+(i*34) WIDTH 200 HEIGHT 34 NAME "sc_metric_"+i
-    SET border.color = #CCCCCC
+    INSERT RECTANGLE AT xMetric, dataStartY+(i*rowH) WIDTH colWMetric HEIGHT rowH NAME "sc_metric_"+i
+    SET border.color = borderColor
     SET border.width = 1
-
     IF i = 0 OR i = 2 OR i = 4
-        SET fill.color = #F5F7FA
+        SET fill.color = colorRowOdd
     ELSE
-        SET fill.color = #FFFFFF
+        SET fill.color = colorRowEven
     END IF
 
-    # Status cell - RAG color
-    # Row 0,1: Green | Row 2,3: Amber | Row 4,5: Red
-    INSERT RECTANGLE AT 260, 83+(i*34) WIDTH 60 HEIGHT 34 NAME "sc_status_"+i
-    SET border.color = #CCCCCC
+    INSERT RECTANGLE AT xStatus, dataStartY+(i*rowH) WIDTH colWStatus HEIGHT rowH NAME "sc_status_"+i
+    SET border.color = borderColor
     SET border.width = 1
-
     IF i < 2
-        SET fill.color = #00873D
+        SET fill.color = colorGreen
     ELSE IF i < 4
-        SET fill.color = #E8A000
+        SET fill.color = colorAmber
     ELSE
-        SET fill.color = #CC0000
+        SET fill.color = colorRed
     END IF
 
-    # Trend cell
-    INSERT RECTANGLE AT 320, 83+(i*34) WIDTH 60 HEIGHT 34 NAME "sc_trend_"+i
-    SET border.color = #CCCCCC
+    INSERT RECTANGLE AT xTrend, dataStartY+(i*rowH) WIDTH colWTrend HEIGHT rowH NAME "sc_trend_"+i
+    SET border.color = borderColor
     SET border.width = 1
-
     IF i = 0 OR i = 2 OR i = 4
-        SET fill.color = #F5F7FA
+        SET fill.color = colorRowOdd
     ELSE
-        SET fill.color = #FFFFFF
+        SET fill.color = colorRowEven
     END IF
 
-    # Comment cell
-    INSERT RECTANGLE AT 380, 83+(i*34) WIDTH 280 HEIGHT 34 NAME "sc_comment_"+i
-    SET border.color = #CCCCCC
+    INSERT RECTANGLE AT xComment, dataStartY+(i*rowH) WIDTH colWComment HEIGHT rowH NAME "sc_comment_"+i
+    SET border.color = borderColor
     SET border.width = 1
-
     IF i = 0 OR i = 2 OR i = 4
-        SET fill.color = #F5F7FA
+        SET fill.color = colorRowOdd
     ELSE
-        SET fill.color = #FFFFFF
+        SET fill.color = colorRowEven
     END IF
-
 END REPEAT
 
 # ============================================================
 # ROW LABEL TEXT
-# Add metric names - one per row
 # ============================================================
 
-INSERT TEXTBOX AT 64, 90 WIDTH 192 HEIGHT 22 NAME "sc_lt_0" TEXT "Revenue vs. Target"
+INSERT TEXTBOX AT xMetric+4, dataStartY+8 WIDTH colWMetric-8 HEIGHT 22 NAME "sc_lt_0" TEXT "Revenue vs. Target"
 SET font.size = 9
-SET font.color = #111111
-SET font.name = "Calibri"
+SET font.color = "#111111"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 64, 124 WIDTH 192 HEIGHT 22 NAME "sc_lt_1" TEXT "Customer Satisfaction (NPS)"
+INSERT TEXTBOX AT xMetric+4, dataStartY+rowH+8 WIDTH colWMetric-8 HEIGHT 22 NAME "sc_lt_1" TEXT "Customer Satisfaction (NPS)"
 SET font.size = 9
-SET font.color = #111111
-SET font.name = "Calibri"
+SET font.color = "#111111"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 64, 158 WIDTH 192 HEIGHT 22 NAME "sc_lt_2" TEXT "Operating Margin"
+INSERT TEXTBOX AT xMetric+4, dataStartY+rowH*2+8 WIDTH colWMetric-8 HEIGHT 22 NAME "sc_lt_2" TEXT "Operating Margin"
 SET font.size = 9
-SET font.color = #111111
-SET font.name = "Calibri"
+SET font.color = "#111111"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 64, 192 WIDTH 192 HEIGHT 22 NAME "sc_lt_3" TEXT "Headcount vs. Plan"
+INSERT TEXTBOX AT xMetric+4, dataStartY+rowH*3+8 WIDTH colWMetric-8 HEIGHT 22 NAME "sc_lt_3" TEXT "Headcount vs. Plan"
 SET font.size = 9
-SET font.color = #111111
-SET font.name = "Calibri"
+SET font.color = "#111111"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 64, 226 WIDTH 192 HEIGHT 22 NAME "sc_lt_4" TEXT "Project Delivery On-Time"
+INSERT TEXTBOX AT xMetric+4, dataStartY+rowH*4+8 WIDTH colWMetric-8 HEIGHT 22 NAME "sc_lt_4" TEXT "Project Delivery On-Time"
 SET font.size = 9
-SET font.color = #111111
-SET font.name = "Calibri"
+SET font.color = "#111111"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 64, 260 WIDTH 192 HEIGHT 22 NAME "sc_lt_5" TEXT "Budget Utilisation"
+INSERT TEXTBOX AT xMetric+4, dataStartY+rowH*5+8 WIDTH colWMetric-8 HEIGHT 22 NAME "sc_lt_5" TEXT "Budget Utilisation"
 SET font.size = 9
-SET font.color = #111111
-SET font.name = "Calibri"
+SET font.color = "#111111"
+SET font.name = fontName
 
 # ============================================================
 # TREND INDICATORS
 # ============================================================
 
-INSERT TEXTBOX AT 322, 90 WIDTH 56 HEIGHT 22 NAME "sc_tr_0" TEXT "↑"
+INSERT TEXTBOX AT xTrend+2, dataStartY+8 WIDTH colWTrend-4 HEIGHT 22 NAME "sc_tr_0" TEXT "↑"
 SET font.size = 11
-SET font.color = #00873D
-SET font.name = "Calibri"
+SET font.color = colorGreen
+SET font.name = fontName
 
-INSERT TEXTBOX AT 322, 124 WIDTH 56 HEIGHT 22 NAME "sc_tr_1" TEXT "→"
+INSERT TEXTBOX AT xTrend+2, dataStartY+rowH+8 WIDTH colWTrend-4 HEIGHT 22 NAME "sc_tr_1" TEXT "→"
 SET font.size = 11
-SET font.color = #00873D
-SET font.name = "Calibri"
+SET font.color = colorGreen
+SET font.name = fontName
 
-INSERT TEXTBOX AT 322, 158 WIDTH 56 HEIGHT 22 NAME "sc_tr_2" TEXT "↓"
+INSERT TEXTBOX AT xTrend+2, dataStartY+rowH*2+8 WIDTH colWTrend-4 HEIGHT 22 NAME "sc_tr_2" TEXT "↓"
 SET font.size = 11
-SET font.color = #E8A000
-SET font.name = "Calibri"
+SET font.color = colorAmber
+SET font.name = fontName
 
-INSERT TEXTBOX AT 322, 192 WIDTH 56 HEIGHT 22 NAME "sc_tr_3" TEXT "→"
+INSERT TEXTBOX AT xTrend+2, dataStartY+rowH*3+8 WIDTH colWTrend-4 HEIGHT 22 NAME "sc_tr_3" TEXT "→"
 SET font.size = 11
-SET font.color = #E8A000
-SET font.name = "Calibri"
+SET font.color = colorAmber
+SET font.name = fontName
 
-INSERT TEXTBOX AT 322, 226 WIDTH 56 HEIGHT 22 NAME "sc_tr_4" TEXT "↓"
+INSERT TEXTBOX AT xTrend+2, dataStartY+rowH*4+8 WIDTH colWTrend-4 HEIGHT 22 NAME "sc_tr_4" TEXT "↓"
 SET font.size = 11
-SET font.color = #CC0000
-SET font.name = "Calibri"
+SET font.color = colorRed
+SET font.name = fontName
 
-INSERT TEXTBOX AT 322, 260 WIDTH 56 HEIGHT 22 NAME "sc_tr_5" TEXT "↓"
+INSERT TEXTBOX AT xTrend+2, dataStartY+rowH*5+8 WIDTH colWTrend-4 HEIGHT 22 NAME "sc_tr_5" TEXT "↓"
 SET font.size = 11
-SET font.color = #CC0000
-SET font.name = "Calibri"
+SET font.color = colorRed
+SET font.name = fontName
 
 # ============================================================
 # SLIDE TITLE
 # ============================================================
 
-INSERT TEXTBOX AT 60, 18 WIDTH 400 HEIGHT 28 NAME "sc_title" TEXT "Performance Scorecard — Q1 2025"
+INSERT TEXTBOX AT xMetric, 18 WIDTH 400 HEIGHT 28 NAME "sc_title" TEXT titleText
 SET font.size = 14
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = titleColor
+SET font.name = fontName

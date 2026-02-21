@@ -4,150 +4,170 @@
 # A center box (Industry Rivalry) with four surrounding boxes
 # connected by arrows pointing inward from each force.
 #
-# Layout:
-#   Center:  Industry Rivalry (large box, center of slide)
-#   Top:     Threat of New Entrants
-#   Bottom:  Threat of Substitutes
-#   Left:    Bargaining Power of Suppliers
-#   Right:   Bargaining Power of Buyers
-#
 # Slide canvas: 720 x 405 pt (standard 16:9)
 #
-# Customize:
-#   - Box colors
-#   - Label text
-#   - Subtitle text per force (description lines)
+# Customize: edit the SET VAR block below
 # ============================================================
 
 # Clean up previous run
 DELETE WHERE name STARTSWITH "p5f_"
 
 # ============================================================
+# CONSTANTS
+# ============================================================
+SET VAR centerX = 245
+SET VAR centerY = 138
+SET VAR centerW = 230
+SET VAR centerH = 130
+
+SET VAR topX = 245
+SET VAR topY = 18
+SET VAR topW = 230
+SET VAR topH = 90
+
+SET VAR bottomX = 245
+SET VAR bottomY = 298
+SET VAR bottomW = 230
+SET VAR bottomH = 90
+
+SET VAR leftX = 18
+SET VAR leftY = 148
+SET VAR sideW = 190
+SET VAR sideH = 110
+
+SET VAR rightX = 512
+SET VAR rightY = 148
+
+SET VAR arrowColor = "#56A8E0"
+SET VAR colorCenter = "#003366"
+SET VAR colorForce = "#0055AA"
+SET VAR colorSub = "#AACCEE"
+
+SET VAR titleText = "Porter's Five Forces Analysis"
+SET VAR titleColor = "#003366"
+SET VAR fontName = "Calibri"
+
+# ============================================================
 # CENTER BOX — Industry Rivalry
 # ============================================================
 
-INSERT RECTANGLE AT 245, 138 WIDTH 230 HEIGHT 130 NAME "p5f_center"
-SET fill.color = #003366
+INSERT RECTANGLE AT centerX, centerY WIDTH centerW HEIGHT centerH NAME "p5f_center"
+SET fill.color = colorCenter
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 253, 158 WIDTH 214 HEIGHT 30 NAME "p5f_center_title" TEXT "Industry Rivalry"
+INSERT TEXTBOX AT centerX+8, centerY+20 WIDTH centerW-16 HEIGHT 30 NAME "p5f_center_title" TEXT "Industry Rivalry"
 SET font.size = 12
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 253, 192 WIDTH 214 HEIGHT 60 NAME "p5f_center_sub" TEXT "Intensity of competition among existing players"
+INSERT TEXTBOX AT centerX+8, centerY+54 WIDTH centerW-16 HEIGHT 60 NAME "p5f_center_sub" TEXT "Intensity of competition among existing players"
 SET font.size = 8
-SET font.color = #AACCEE
-SET font.name = "Calibri"
+SET font.color = colorSub
+SET font.name = fontName
 
 # ============================================================
 # TOP BOX — Threat of New Entrants
 # ============================================================
 
-INSERT RECTANGLE AT 245, 18 WIDTH 230 HEIGHT 90 NAME "p5f_top"
-SET fill.color = #0055AA
+INSERT RECTANGLE AT topX, topY WIDTH topW HEIGHT topH NAME "p5f_top"
+SET fill.color = colorForce
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 253, 24 WIDTH 214 HEIGHT 30 NAME "p5f_top_title" TEXT "Threat of New Entrants"
+INSERT TEXTBOX AT topX+8, topY+6 WIDTH topW-16 HEIGHT 30 NAME "p5f_top_title" TEXT "Threat of New Entrants"
 SET font.size = 10
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 253, 52 WIDTH 214 HEIGHT 50 NAME "p5f_top_sub" TEXT "Barriers to entry, capital requirements, brand loyalty"
+INSERT TEXTBOX AT topX+8, topY+34 WIDTH topW-16 HEIGHT 50 NAME "p5f_top_sub" TEXT "Barriers to entry, capital requirements, brand loyalty"
 SET font.size = 8
-SET font.color = #AACCEE
-SET font.name = "Calibri"
+SET font.color = colorSub
+SET font.name = fontName
 
 # ============================================================
 # BOTTOM BOX — Threat of Substitutes
 # ============================================================
 
-INSERT RECTANGLE AT 245, 298 WIDTH 230 HEIGHT 90 NAME "p5f_bottom"
-SET fill.color = #0055AA
+INSERT RECTANGLE AT bottomX, bottomY WIDTH bottomW HEIGHT bottomH NAME "p5f_bottom"
+SET fill.color = colorForce
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 253, 308 WIDTH 214 HEIGHT 30 NAME "p5f_bottom_title" TEXT "Threat of Substitutes"
+INSERT TEXTBOX AT bottomX+8, bottomY+10 WIDTH bottomW-16 HEIGHT 30 NAME "p5f_bottom_title" TEXT "Threat of Substitutes"
 SET font.size = 10
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 253, 336 WIDTH 214 HEIGHT 46 NAME "p5f_bottom_sub" TEXT "Alternative products, switching costs, price-performance"
+INSERT TEXTBOX AT bottomX+8, bottomY+38 WIDTH bottomW-16 HEIGHT 46 NAME "p5f_bottom_sub" TEXT "Alternative products, switching costs, price-performance"
 SET font.size = 8
-SET font.color = #AACCEE
-SET font.name = "Calibri"
+SET font.color = colorSub
+SET font.name = fontName
 
 # ============================================================
 # LEFT BOX — Bargaining Power of Suppliers
 # ============================================================
 
-INSERT RECTANGLE AT 18, 148 WIDTH 190 HEIGHT 110 NAME "p5f_left"
-SET fill.color = #0055AA
+INSERT RECTANGLE AT leftX, leftY WIDTH sideW HEIGHT sideH NAME "p5f_left"
+SET fill.color = colorForce
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 26, 158 WIDTH 174 HEIGHT 40 NAME "p5f_left_title" TEXT "Bargaining Power of Suppliers"
+INSERT TEXTBOX AT leftX+8, leftY+10 WIDTH sideW-16 HEIGHT 40 NAME "p5f_left_title" TEXT "Bargaining Power of Suppliers"
 SET font.size = 10
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 26, 200 WIDTH 174 HEIGHT 46 NAME "p5f_left_sub" TEXT "Supplier concentration, input differentiation, switching costs"
+INSERT TEXTBOX AT leftX+8, leftY+52 WIDTH sideW-16 HEIGHT 46 NAME "p5f_left_sub" TEXT "Supplier concentration, input differentiation, switching costs"
 SET font.size = 8
-SET font.color = #AACCEE
-SET font.name = "Calibri"
+SET font.color = colorSub
+SET font.name = fontName
 
 # ============================================================
 # RIGHT BOX — Bargaining Power of Buyers
 # ============================================================
 
-INSERT RECTANGLE AT 512, 148 WIDTH 190 HEIGHT 110 NAME "p5f_right"
-SET fill.color = #0055AA
+INSERT RECTANGLE AT rightX, rightY WIDTH sideW HEIGHT sideH NAME "p5f_right"
+SET fill.color = colorForce
 SET border.visible = FALSE
 
-INSERT TEXTBOX AT 520, 158 WIDTH 174 HEIGHT 40 NAME "p5f_right_title" TEXT "Bargaining Power of Buyers"
+INSERT TEXTBOX AT rightX+8, rightY+10 WIDTH sideW-16 HEIGHT 40 NAME "p5f_right_title" TEXT "Bargaining Power of Buyers"
 SET font.size = 10
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 520, 200 WIDTH 174 HEIGHT 46 NAME "p5f_right_sub" TEXT "Buyer concentration, price sensitivity, volume, information"
+INSERT TEXTBOX AT rightX+8, rightY+52 WIDTH sideW-16 HEIGHT 46 NAME "p5f_right_sub" TEXT "Buyer concentration, price sensitivity, volume, information"
 SET font.size = 8
-SET font.color = #AACCEE
-SET font.name = "Calibri"
+SET font.color = colorSub
+SET font.name = fontName
 
 # ============================================================
 # ARROWS — pointing inward toward center
-# Using narrow rectangles as arrow bodies + arrowhead chevrons
 # ============================================================
 
-# Top arrow (pointing down)
 INSERT ARROWDOWN AT 346, 108 WIDTH 48 HEIGHT 34 NAME "p5f_arrow_top"
-SET fill.color = #56A8E0
+SET fill.color = arrowColor
 SET border.visible = FALSE
 
-# Bottom arrow (pointing up)
 INSERT ARROWUP AT 346, 264 WIDTH 48 HEIGHT 34 NAME "p5f_arrow_bottom"
-SET fill.color = #56A8E0
+SET fill.color = arrowColor
 SET border.visible = FALSE
 
-# Left arrow (pointing right)
 INSERT ARROWRIGHT AT 208, 183 WIDTH 40 HEIGHT 40 NAME "p5f_arrow_left"
-SET fill.color = #56A8E0
+SET fill.color = arrowColor
 SET border.visible = FALSE
 
-# Right arrow (pointing left)
 INSERT ARROWLEFT AT 472, 183 WIDTH 40 HEIGHT 40 NAME "p5f_arrow_right"
-SET fill.color = #56A8E0
+SET fill.color = arrowColor
 SET border.visible = FALSE
 
 # ============================================================
 # SLIDE TITLE
 # ============================================================
 
-INSERT TEXTBOX AT 18, 375 WIDTH 500 HEIGHT 22 NAME "p5f_title" TEXT "Porter's Five Forces Analysis"
+INSERT TEXTBOX AT leftX, 375 WIDTH 500 HEIGHT 22 NAME "p5f_title" TEXT titleText
 SET font.size = 11
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = titleColor
+SET font.name = fontName

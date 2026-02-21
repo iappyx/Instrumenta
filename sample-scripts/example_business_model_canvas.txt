@@ -11,261 +11,275 @@
 #     Cost Structure | Revenue Streams
 #
 # Slide canvas: 720 x 405 pt (standard 16:9)
-# Top section height: 280 pt (two rows of 140 pt)
-# Bottom section height: 70 pt
-# Column widths: 130 | 120 | 140 | 120 | 130  (total 640)
-# originX: 40, originY: 40
 #
-# Customize:
-#   - Placeholder text per block
-#   - Header colors per block
-#   - Block dimensions
+# Customize: edit the SET VAR block below
 # ============================================================
 
 # Clean up previous run
 DELETE WHERE name STARTSWITH "bmc_"
 
 # ============================================================
-# COLUMN X POSITIONS (originX = 40)
-# Col 0: 40   (w=130) Key Partners
-# Col 1: 170  (w=120) Key Activities / Key Resources
-# Col 2: 290  (w=140) Value Proposition
-# Col 3: 430  (w=120) Customer Relationships / Channels
-# Col 4: 550  (w=130) Customer Segments
+# CONSTANTS
 # ============================================================
+SET VAR originY = 40
+SET VAR rowH = 140
+SET VAR topH = 280
+SET VAR headerH = 24
+SET VAR bottomY = 320
+SET VAR bottomH = 70
+
+# Column X positions
+SET VAR x0 = 40
+SET VAR x1 = 170
+SET VAR x2 = 290
+SET VAR x3 = 430
+SET VAR x4 = 550
+
+# Column widths
+SET VAR w0 = 130
+SET VAR w1 = 120
+SET VAR w2 = 140
+SET VAR w3 = 120
+SET VAR w4 = 130
+SET VAR wBottom = 320
+
+# Background colors
+SET VAR bgDefault = "#EEF2F7"
+SET VAR bgVP = "#E8F0F8"
+SET VAR bgCost = "#FEF6E4"
+SET VAR bgRevenue = "#EAF5EC"
+
+# Header colors
+SET VAR hdrDefault = "#003366"
+SET VAR hdrVP = "#0055AA"
+SET VAR hdrCost = "#C07800"
+SET VAR hdrRevenue = "#00873D"
+
+# Font colors
+SET VAR fontBody = "#333333"
+SET VAR fontVP = "#003366"
+SET VAR fontCost = "#7A4800"
+SET VAR fontRevenue = "#1A4D2E"
+SET VAR borderColor = "#CCCCCC"
+
+SET VAR titleText = "Business Model Canvas"
+SET VAR titleColor = "#003366"
+SET VAR fontName = "Calibri"
 
 # ============================================================
 # BLOCK BACKGROUNDS
 # ============================================================
 
-# Key Partners (full left column, spans both rows)
-INSERT RECTANGLE AT 40, 40 WIDTH 130 HEIGHT 280 NAME "bmc_bg_partners"
-SET fill.color = #EEF2F7
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT x0, originY WIDTH w0 HEIGHT topH NAME "bmc_bg_partners"
+SET fill.color = bgDefault
+SET border.color = borderColor
 SET border.width = 1
 
-# Key Activities (top-right of col 1)
-INSERT RECTANGLE AT 170, 40 WIDTH 120 HEIGHT 140 NAME "bmc_bg_activities"
-SET fill.color = #EEF2F7
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT x1, originY WIDTH w1 HEIGHT rowH NAME "bmc_bg_activities"
+SET fill.color = bgDefault
+SET border.color = borderColor
 SET border.width = 1
 
-# Key Resources (bottom-right of col 1)
-INSERT RECTANGLE AT 170, 180 WIDTH 120 HEIGHT 140 NAME "bmc_bg_resources"
-SET fill.color = #EEF2F7
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT x1, originY+rowH WIDTH w1 HEIGHT rowH NAME "bmc_bg_resources"
+SET fill.color = bgDefault
+SET border.color = borderColor
 SET border.width = 1
 
-# Value Proposition (full center column, spans both rows)
-INSERT RECTANGLE AT 290, 40 WIDTH 140 HEIGHT 280 NAME "bmc_bg_vp"
-SET fill.color = #E8F0F8
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT x2, originY WIDTH w2 HEIGHT topH NAME "bmc_bg_vp"
+SET fill.color = bgVP
+SET border.color = borderColor
 SET border.width = 1
 
-# Customer Relationships (top of col 3)
-INSERT RECTANGLE AT 430, 40 WIDTH 120 HEIGHT 140 NAME "bmc_bg_relationships"
-SET fill.color = #EEF2F7
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT x3, originY WIDTH w3 HEIGHT rowH NAME "bmc_bg_relationships"
+SET fill.color = bgDefault
+SET border.color = borderColor
 SET border.width = 1
 
-# Channels (bottom of col 3)
-INSERT RECTANGLE AT 430, 180 WIDTH 120 HEIGHT 140 NAME "bmc_bg_channels"
-SET fill.color = #EEF2F7
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT x3, originY+rowH WIDTH w3 HEIGHT rowH NAME "bmc_bg_channels"
+SET fill.color = bgDefault
+SET border.color = borderColor
 SET border.width = 1
 
-# Customer Segments (full right column, spans both rows)
-INSERT RECTANGLE AT 550, 40 WIDTH 130 HEIGHT 280 NAME "bmc_bg_segments"
-SET fill.color = #EEF2F7
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT x4, originY WIDTH w4 HEIGHT topH NAME "bmc_bg_segments"
+SET fill.color = bgDefault
+SET border.color = borderColor
 SET border.width = 1
 
-# Cost Structure (bottom-left wide block)
-INSERT RECTANGLE AT 40, 320 WIDTH 320 HEIGHT 70 NAME "bmc_bg_cost"
-SET fill.color = #FEF6E4
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT x0, bottomY WIDTH wBottom HEIGHT bottomH NAME "bmc_bg_cost"
+SET fill.color = bgCost
+SET border.color = borderColor
 SET border.width = 1
 
-# Revenue Streams (bottom-right wide block)
-INSERT RECTANGLE AT 360, 320 WIDTH 320 HEIGHT 70 NAME "bmc_bg_revenue"
-SET fill.color = #EAF5EC
-SET border.color = #CCCCCC
+INSERT RECTANGLE AT x0+wBottom, bottomY WIDTH wBottom HEIGHT bottomH NAME "bmc_bg_revenue"
+SET fill.color = bgRevenue
+SET border.color = borderColor
 SET border.width = 1
 
 # ============================================================
 # HEADER BANDS
 # ============================================================
 
-# Key Partners
-INSERT RECTANGLE AT 40, 40 WIDTH 130 HEIGHT 24 NAME "bmc_hdr_partners"
-SET fill.color = #003366
+INSERT RECTANGLE AT x0, originY WIDTH w0 HEIGHT headerH NAME "bmc_hdr_partners"
+SET fill.color = hdrDefault
 SET border.visible = FALSE
 
-# Key Activities
-INSERT RECTANGLE AT 170, 40 WIDTH 120 HEIGHT 24 NAME "bmc_hdr_activities"
-SET fill.color = #003366
+INSERT RECTANGLE AT x1, originY WIDTH w1 HEIGHT headerH NAME "bmc_hdr_activities"
+SET fill.color = hdrDefault
 SET border.visible = FALSE
 
-# Key Resources
-INSERT RECTANGLE AT 170, 180 WIDTH 120 HEIGHT 24 NAME "bmc_hdr_resources"
-SET fill.color = #003366
+INSERT RECTANGLE AT x1, originY+rowH WIDTH w1 HEIGHT headerH NAME "bmc_hdr_resources"
+SET fill.color = hdrDefault
 SET border.visible = FALSE
 
-# Value Proposition
-INSERT RECTANGLE AT 290, 40 WIDTH 140 HEIGHT 24 NAME "bmc_hdr_vp"
-SET fill.color = #0055AA
+INSERT RECTANGLE AT x2, originY WIDTH w2 HEIGHT headerH NAME "bmc_hdr_vp"
+SET fill.color = hdrVP
 SET border.visible = FALSE
 
-# Customer Relationships
-INSERT RECTANGLE AT 430, 40 WIDTH 120 HEIGHT 24 NAME "bmc_hdr_relationships"
-SET fill.color = #003366
+INSERT RECTANGLE AT x3, originY WIDTH w3 HEIGHT headerH NAME "bmc_hdr_relationships"
+SET fill.color = hdrDefault
 SET border.visible = FALSE
 
-# Channels
-INSERT RECTANGLE AT 430, 180 WIDTH 120 HEIGHT 24 NAME "bmc_hdr_channels"
-SET fill.color = #003366
+INSERT RECTANGLE AT x3, originY+rowH WIDTH w3 HEIGHT headerH NAME "bmc_hdr_channels"
+SET fill.color = hdrDefault
 SET border.visible = FALSE
 
-# Customer Segments
-INSERT RECTANGLE AT 550, 40 WIDTH 130 HEIGHT 24 NAME "bmc_hdr_segments"
-SET fill.color = #003366
+INSERT RECTANGLE AT x4, originY WIDTH w4 HEIGHT headerH NAME "bmc_hdr_segments"
+SET fill.color = hdrDefault
 SET border.visible = FALSE
 
-# Cost Structure
-INSERT RECTANGLE AT 40, 320 WIDTH 320 HEIGHT 24 NAME "bmc_hdr_cost"
-SET fill.color = #C07800
+INSERT RECTANGLE AT x0, bottomY WIDTH wBottom HEIGHT headerH NAME "bmc_hdr_cost"
+SET fill.color = hdrCost
 SET border.visible = FALSE
 
-# Revenue Streams
-INSERT RECTANGLE AT 360, 320 WIDTH 320 HEIGHT 24 NAME "bmc_hdr_revenue"
-SET fill.color = #00873D
+INSERT RECTANGLE AT x0+wBottom, bottomY WIDTH wBottom HEIGHT headerH NAME "bmc_hdr_revenue"
+SET fill.color = hdrRevenue
 SET border.visible = FALSE
 
 # ============================================================
 # HEADER LABELS
 # ============================================================
 
-INSERT TEXTBOX AT 44, 43 WIDTH 122 HEIGHT 18 NAME "bmc_hl_partners" TEXT "Key Partners"
+INSERT TEXTBOX AT x0+4, originY+3 WIDTH w0-8 HEIGHT 18 NAME "bmc_hl_partners" TEXT "Key Partners"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 174, 43 WIDTH 112 HEIGHT 18 NAME "bmc_hl_activities" TEXT "Key Activities"
+INSERT TEXTBOX AT x1+4, originY+3 WIDTH w1-8 HEIGHT 18 NAME "bmc_hl_activities" TEXT "Key Activities"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 174, 183 WIDTH 112 HEIGHT 18 NAME "bmc_hl_resources" TEXT "Key Resources"
+INSERT TEXTBOX AT x1+4, originY+rowH+3 WIDTH w1-8 HEIGHT 18 NAME "bmc_hl_resources" TEXT "Key Resources"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 294, 43 WIDTH 132 HEIGHT 18 NAME "bmc_hl_vp" TEXT "Value Proposition"
+INSERT TEXTBOX AT x2+4, originY+3 WIDTH w2-8 HEIGHT 18 NAME "bmc_hl_vp" TEXT "Value Proposition"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 434, 43 WIDTH 112 HEIGHT 18 NAME "bmc_hl_relationships" TEXT "Customer Relationships"
+INSERT TEXTBOX AT x3+4, originY+3 WIDTH w3-8 HEIGHT 18 NAME "bmc_hl_relationships" TEXT "Customer Relationships"
 SET font.size = 7
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 434, 183 WIDTH 112 HEIGHT 18 NAME "bmc_hl_channels" TEXT "Channels"
+INSERT TEXTBOX AT x3+4, originY+rowH+3 WIDTH w3-8 HEIGHT 18 NAME "bmc_hl_channels" TEXT "Channels"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 554, 43 WIDTH 122 HEIGHT 18 NAME "bmc_hl_segments" TEXT "Customer Segments"
+INSERT TEXTBOX AT x4+4, originY+3 WIDTH w4-8 HEIGHT 18 NAME "bmc_hl_segments" TEXT "Customer Segments"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 44, 323 WIDTH 312 HEIGHT 18 NAME "bmc_hl_cost" TEXT "Cost Structure"
+INSERT TEXTBOX AT x0+4, bottomY+3 WIDTH wBottom-8 HEIGHT 18 NAME "bmc_hl_cost" TEXT "Cost Structure"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
-INSERT TEXTBOX AT 364, 323 WIDTH 312 HEIGHT 18 NAME "bmc_hl_revenue" TEXT "Revenue Streams"
+INSERT TEXTBOX AT x0+wBottom+4, bottomY+3 WIDTH wBottom-8 HEIGHT 18 NAME "bmc_hl_revenue" TEXT "Revenue Streams"
 SET font.size = 8
 SET font.bold = TRUE
-SET font.color = #FFFFFF
-SET font.name = "Calibri"
+SET font.color = "#FFFFFF"
+SET font.name = fontName
 
 # ============================================================
 # PLACEHOLDER CONTENT TEXT
 # ============================================================
 
-INSERT TEXTBOX AT 44, 70 WIDTH 118 HEIGHT 240 NAME "bmc_ct_partners" TEXT "• Who are our key partners and suppliers?
+INSERT TEXTBOX AT x0+4, originY+headerH+6 WIDTH w0-8 HEIGHT topH-headerH-10 NAME "bmc_ct_partners" TEXT "• Who are our key partners and suppliers?
 • Which resources do we acquire from them?
 • Which activities do they perform?"
 SET font.size = 7
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = fontBody
+SET font.name = fontName
 
-INSERT TEXTBOX AT 174, 70 WIDTH 108 HEIGHT 100 NAME "bmc_ct_activities" TEXT "• What activities does our value proposition require?
+INSERT TEXTBOX AT x1+4, originY+headerH+6 WIDTH w1-8 HEIGHT rowH-headerH-10 NAME "bmc_ct_activities" TEXT "• What activities does our value proposition require?
 • Distribution, production, problem-solving?"
 SET font.size = 7
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = fontBody
+SET font.name = fontName
 
-INSERT TEXTBOX AT 174, 210 WIDTH 108 HEIGHT 100 NAME "bmc_ct_resources" TEXT "• What key resources does our value proposition require?
+INSERT TEXTBOX AT x1+4, originY+rowH+headerH+6 WIDTH w1-8 HEIGHT rowH-headerH-10 NAME "bmc_ct_resources" TEXT "• What key resources does our value proposition require?
 • Physical, intellectual, human, financial?"
 SET font.size = 7
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = fontBody
+SET font.name = fontName
 
-INSERT TEXTBOX AT 294, 70 WIDTH 128 HEIGHT 240 NAME "bmc_ct_vp" TEXT "• What value do we deliver to customers?
+INSERT TEXTBOX AT x2+4, originY+headerH+6 WIDTH w2-8 HEIGHT topH-headerH-10 NAME "bmc_ct_vp" TEXT "• What value do we deliver to customers?
 • Which problems are we solving?
 • What bundles of products and services do we offer?"
 SET font.size = 7
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = fontVP
+SET font.name = fontName
 
-INSERT TEXTBOX AT 434, 70 WIDTH 108 HEIGHT 100 NAME "bmc_ct_relationships" TEXT "• What relationship does each customer segment expect?
+INSERT TEXTBOX AT x3+4, originY+headerH+6 WIDTH w3-8 HEIGHT rowH-headerH-10 NAME "bmc_ct_relationships" TEXT "• What relationship does each customer segment expect?
 • Personal, automated, self-service?"
 SET font.size = 7
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = fontBody
+SET font.name = fontName
 
-INSERT TEXTBOX AT 434, 210 WIDTH 108 HEIGHT 100 NAME "bmc_ct_channels" TEXT "• How do we reach our customer segments?
+INSERT TEXTBOX AT x3+4, originY+rowH+headerH+6 WIDTH w3-8 HEIGHT rowH-headerH-10 NAME "bmc_ct_channels" TEXT "• How do we reach our customer segments?
 • Which channels work best and are most cost-efficient?"
 SET font.size = 7
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = fontBody
+SET font.name = fontName
 
-INSERT TEXTBOX AT 554, 70 WIDTH 118 HEIGHT 240 NAME "bmc_ct_segments" TEXT "• For whom are we creating value?
+INSERT TEXTBOX AT x4+4, originY+headerH+6 WIDTH w4-8 HEIGHT topH-headerH-10 NAME "bmc_ct_segments" TEXT "• For whom are we creating value?
 • Who are our most important customers?
 • Mass market, niche, segmented, diversified?"
 SET font.size = 7
-SET font.color = #333333
-SET font.name = "Calibri"
+SET font.color = fontBody
+SET font.name = fontName
 
-INSERT TEXTBOX AT 44, 348 WIDTH 308 HEIGHT 36 NAME "bmc_ct_cost" TEXT "• What are the most important costs in our business model?
+INSERT TEXTBOX AT x0+4, bottomY+headerH+4 WIDTH wBottom-8 HEIGHT bottomH-headerH-8 NAME "bmc_ct_cost" TEXT "• What are the most important costs in our business model?
 • Fixed costs, variable costs, economies of scale?"
 SET font.size = 7
-SET font.color = #7A4800
-SET font.name = "Calibri"
+SET font.color = fontCost
+SET font.name = fontName
 
-INSERT TEXTBOX AT 364, 348 WIDTH 308 HEIGHT 36 NAME "bmc_ct_revenue" TEXT "• For what value are customers willing to pay?
+INSERT TEXTBOX AT x0+wBottom+4, bottomY+headerH+4 WIDTH wBottom-8 HEIGHT bottomH-headerH-8 NAME "bmc_ct_revenue" TEXT "• For what value are customers willing to pay?
 • Asset sale, subscription, licensing, advertising?"
 SET font.size = 7
-SET font.color = #1A4D2E
-SET font.name = "Calibri"
+SET font.color = fontRevenue
+SET font.name = fontName
 
 # ============================================================
 # SLIDE TITLE
 # ============================================================
 
-INSERT TEXTBOX AT 40, 12 WIDTH 400 HEIGHT 22 NAME "bmc_title" TEXT "Business Model Canvas"
+INSERT TEXTBOX AT x0, 12 WIDTH 400 HEIGHT 22 NAME "bmc_title" TEXT titleText
 SET font.size = 13
 SET font.bold = TRUE
-SET font.color = #003366
-SET font.name = "Calibri"
+SET font.color = titleColor
+SET font.name = fontName
