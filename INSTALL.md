@@ -2,7 +2,7 @@
 
 There are **two ways** to install Instrumenta:
 - **[Manual installation](#manual-installation)** (recommended) – This method allows you to install the plugin without an installer, requiring no administrative rights on most enterprise systems.
-- **[Installer-based installation](#installer-based-installation-beta)** (beta) – This method uses automated installers but may require bypassing security warnings.
+- **[Installer-based installation](#installer-based-installation-beta)** (beta - does not contain latest version) – This method uses automated installers but may require bypassing security warnings.
 
 ---
 
@@ -15,7 +15,7 @@ Instrumenta is a Visual Basic for Applications (VBA) add-in that can be installe
 You can save the add-in to your PC and then install it by adding it to the Available Add-Ins list:
 
 - Download the add-in file:  
-  - Choose the [latest release](https://github.com/iappyx/Instrumenta/releases/download/1.49/InstrumentaPowerpointToolbar.ppam) or the [latest beta](https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam)  
+  - Choose the [latest release](https://github.com/iappyx/Instrumenta/releases/download/1.66/InstrumentaPowerpointToolbar.ppam) or the [latest beta](https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam)  
   - Save it in a fixed location.
 - Open PowerPoint, click **File** → **Options**.
 - In the **Options** dialog box, click **Add-Ins**.
@@ -33,7 +33,7 @@ To upgrade to a newer version see: [Upgrading a manual installation](#upgrading-
 You can save the add-in to your Mac and install it manually:
 
 - Download the add-in file in the latest release:  
-  - Choose the [latest release](https://github.com/iappyx/Instrumenta/releases/download/1.49/InstrumentaPowerpointToolbar.ppam) or the [latest beta](https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam)  
+  - Choose the [latest release](https://github.com/iappyx/Instrumenta/releases/download/1.66/InstrumentaPowerpointToolbar.ppam) or the [latest beta](https://github.com/iappyx/Instrumenta/raw/main/bin/InstrumentaPowerpointToolbar.ppam)  
   - Save it in a fixed location.
 - Open PowerPoint, click **Tools** → **Add-ins...**.
 - In the **Add-Ins** dialog box, click the **+** button, browse for the add-in file, then click **Open**.
@@ -48,7 +48,7 @@ You can save the add-in to your Mac and install it manually:
 
 #### Optional steps to enable export to Outlook and Word:
 - Download the AppleScript file:  
-  - [Instrumenta AppleScript Plugin](https://github.com/iappyx/Instrumenta/releases/download/1.49/InstrumentaAppleScriptPlugin.applescript).
+  - [Instrumenta AppleScript Plugin](https://github.com/iappyx/Instrumenta/releases/download/1.66/InstrumentaAppleScriptPlugin.applescript).
 - Copy the AppleScript file to: `~/Library/Application Scripts/com.microsoft.Powerpoint/`
 - This is in the library folder of the **current user**. If the folder does not exist, create it.
 - In some cases, a **reboot** of your Mac might be required.
