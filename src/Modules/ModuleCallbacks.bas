@@ -118,22 +118,20 @@ Sub InstrumentaGetVisible(control As IRibbonControl, ByRef visible)
     End If
 End Sub
 
-
-
 Public Sub ScriptPreset_GetItemCount(control As IRibbonControl, ByRef count As Variant)
-    #If Win Then
-    Dim all As Variant
-    all = GetAllSettings("Instrumenta", "ISCRPresetData")
-    If IsEmpty(all) Then count = 0 Else count = UBound(all, 1) + 1
-    #End If
+    Dim names As String
+    names = GetSetting("Instrumenta", "ISCRPresetData", "PresetNames", "")
+    If names = "" Then
+        count = 0
+    Else
+        count = UBound(Split(names, Chr(30))) + 1
+    End If
 End Sub
 
 Public Sub ScriptPreset_GetItemLabel(control As IRibbonControl, index As Integer, ByRef label As Variant)
-    #If Win Then
-    Dim all As Variant
-    all = GetAllSettings("Instrumenta", "ISCRPresetData")
-    label = all(index, 0)
-    #End If
+    Dim names As String
+    names = GetSetting("Instrumenta", "ISCRPresetData", "PresetNames", "")
+    label = Split(names, Chr(30))(index)
 End Sub
 
 Public Sub ScriptPreset_GetItemID(control As IRibbonControl, index As Integer, ByRef id As Variant)
@@ -145,24 +143,22 @@ Public Sub ScriptPreset_OnAction(control As IRibbonControl, id As String, index 
 End Sub
 
 Public Sub ScriptPreset_Run(control As IRibbonControl)
-    #If Win Then
-    Dim all As Variant
-    all = GetAllSettings("Instrumenta", "ISCRPresetData")
-    If IsEmpty(all) Then
+    Dim names As String
+    names = GetSetting("Instrumenta", "ISCRPresetData", "PresetNames", "")
+    If names = "" Then
         MsgBox "No presets saved yet.", vbInformation
         Exit Sub
     End If
-    If IScr_SelectedPresetIndex > UBound(all, 1) Then
-        IScr_SelectedPresetIndex = 0
-    End If
+    Dim parts() As String
+    parts = Split(names, Chr(30))
+    If IScr_SelectedPresetIndex > UBound(parts) Then IScr_SelectedPresetIndex = 0
     Dim scriptText As String
-    scriptText = all(IScr_SelectedPresetIndex, 1)
+    scriptText = GetSetting("Instrumenta", "ISCRPresetData", parts(IScr_SelectedPresetIndex), "")
     If Trim(scriptText) = "" Then
         MsgBox "Selected preset is empty.", vbInformation
         Exit Sub
     End If
     RunInstrumentaScript scriptText
-    #End If
 End Sub
 
 Sub EmojiGallery_GetItemImage(control As IRibbonControl, index As Integer, ByRef returnedVal)

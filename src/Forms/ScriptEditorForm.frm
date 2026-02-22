@@ -39,6 +39,8 @@ Option Explicit
 
 Private Const APP_KEY      As String = "Instrumenta"
 Private Const SECTION_DATA As String = "ISCRPresetData"
+Private Const NAMES_KEY    As String = "PresetNames"
+Dim NAMES_SEP As String
 
 
 Private Sub btnRun_Click()
@@ -123,7 +125,6 @@ Private Sub btnPresetSave_Click()
     Dim presetName As String
     presetName = Trim(txtPresetName.text)
 
-
     If presetName = "" Then
         If lstPresets.ListIndex >= 0 Then
             presetName = lstPresets.value
@@ -135,7 +136,7 @@ Private Sub btnPresetSave_Click()
     End If
 
     If Trim(txtScript.text) = "" Then
-        MsgBox "The script is empty ó nothing to save.", vbInformation
+        MsgBox "The script is empty — nothing to save.", vbInformation
         Exit Sub
     End If
 
@@ -146,6 +147,7 @@ Private Sub btnPresetSave_Click()
     End If
 
     SaveSetting APP_KEY, SECTION_DATA, presetName, txtScript.text
+    PresetSaveName presetName
 
     RefreshPresetList
     SelectPresetInList presetName
@@ -168,7 +170,7 @@ Private Sub btnPresetLoad_Click()
         End If
     End If
 
-    txtScript.text = GetSetting(APP_KEY, SECTION_DATA, presetName, "")
+    txtScript.text = PresetGetScript(presetName)
     txtScript.SetFocus
 End Sub
 
@@ -186,6 +188,7 @@ Private Sub btnPresetDelete_Click()
     End If
 
     DeleteSetting APP_KEY, SECTION_DATA, presetName
+    PresetDeleteName presetName
     RefreshPresetList
 End Sub
 
@@ -197,39 +200,79 @@ Private Sub lstPresets_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 End Sub
 
 
+Private Function PresetGetNames() As String
+    PresetGetNames = GetSetting(APP_KEY, SECTION_DATA, NAMES_KEY, "")
+End Function
+
 Private Function PresetExists(presetName As String) As Boolean
-    #If Win Then
-    Dim all As Variant
-    all = GetAllSettings(APP_KEY, SECTION_DATA)
-    If IsEmpty(all) Then Exit Function
+    Dim names As String
+    names = PresetGetNames()
+    If names = "" Then Exit Function
+    Dim parts() As String
+    parts = Split(names, NAMES_SEP)
     Dim i As Integer
-    For i = 0 To UBound(all, 1)
-        If LCase(all(i, 0)) = LCase(presetName) Then
+    For i = 0 To UBound(parts)
+        If LCase(parts(i)) = LCase(presetName) Then
             PresetExists = True
             Exit Function
         End If
     Next i
-    #End If
 End Function
 
-Private Sub RefreshPresetList()
-    #If Win Then
-    stPresets.Clear
-    Dim all As Variant
-    all = GetAllSettings(APP_KEY, SECTION_DATA)
-    If IsEmpty(all) Then Exit Sub
+Private Function PresetGetScript(presetName As String) As String
+    PresetGetScript = GetSetting(APP_KEY, SECTION_DATA, presetName, "")
+End Function
+
+Private Sub PresetSaveName(presetName As String)
+    If PresetExists(presetName) Then Exit Sub
+    Dim names As String
+    names = PresetGetNames()
+    If names = "" Then
+        names = presetName
+    Else
+        names = names & NAMES_SEP & presetName
+    End If
+    SaveSetting APP_KEY, SECTION_DATA, NAMES_KEY, names
+End Sub
+
+Private Sub PresetDeleteName(presetName As String)
+    Dim names As String
+    names = PresetGetNames()
+    If names = "" Then Exit Sub
+    Dim parts() As String
+    parts = Split(names, NAMES_SEP)
+    Dim result As String
+    result = ""
     Dim i As Integer
-    For i = 0 To UBound(all, 1)
-        lstPresets.AddItem all(i, 0)
+    For i = 0 To UBound(parts)
+        If LCase(parts(i)) <> LCase(presetName) Then
+            If result = "" Then
+                result = parts(i)
+            Else
+                result = result & NAMES_SEP & parts(i)
+            End If
+        End If
     Next i
-    
+    SaveSetting APP_KEY, SECTION_DATA, NAMES_KEY, result
+End Sub
+
+Private Sub RefreshPresetList()
+    lstPresets.Clear
+    Dim names As String
+    names = PresetGetNames()
+    If names = "" Then GoTo Invalidate
+    Dim parts() As String
+    parts = Split(names, NAMES_SEP)
+    Dim i As Integer
+    For i = 0 To UBound(parts)
+        If parts(i) <> "" Then lstPresets.AddItem parts(i)
+    Next i
+Invalidate:
     If Not InstrumentaRibbon Is Nothing Then
     
     InstrumentaRibbon.Invalidate
        
     End If
-    #End If
-    
 End Sub
 
 Private Sub SelectPresetInList(presetName As String)
@@ -243,26 +286,22 @@ Private Sub SelectPresetInList(presetName As String)
 End Sub
 
 Private Function UnsavedChanges() As Boolean
-    #If Win Then
     Dim currentScript As String
     currentScript = Trim(txtScript.text)
-
     If currentScript = "" Then Exit Function
-
-    Dim all As Variant
-    all = GetAllSettings(APP_KEY, SECTION_DATA)
-    If IsEmpty(all) Then
+    Dim names As String
+    names = PresetGetNames()
+    If names = "" Then
         UnsavedChanges = True
         Exit Function
     End If
-
+    Dim parts() As String
+    parts = Split(names, NAMES_SEP)
     Dim i As Integer
-    For i = 0 To UBound(all, 1)
-        If all(i, 1) = currentScript Then Exit Function
+    For i = 0 To UBound(parts)
+        If PresetGetScript(parts(i)) = currentScript Then Exit Function
     Next i
-
     UnsavedChanges = True
-    #End If
 End Function
 
 
@@ -284,6 +323,7 @@ End Sub
 
 
 Private Sub UserForm_Initialize()
+    NAMES_SEP = Chr(30)
     If txtScript.text = "" Then
         txtScript.text = "# Type your script here" & vbCrLf & "# Example: SELECT ALL"
         txtLog.text = ""
@@ -301,6 +341,8 @@ Private Sub UserForm_Initialize()
     txtScript.Font.Size = 8
     txtLog.Font.name = codeFontName
     txtLog.Font.Size = 8
+    
+    
 
     RefreshPresetList
 End Sub
