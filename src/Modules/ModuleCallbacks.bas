@@ -121,15 +121,19 @@ End Sub
 
 
 Public Sub ScriptPreset_GetItemCount(control As IRibbonControl, ByRef count As Variant)
+    #If Win Then
     Dim all As Variant
     all = GetAllSettings("Instrumenta", "ISCRPresetData")
     If IsEmpty(all) Then count = 0 Else count = UBound(all, 1) + 1
+    #End If
 End Sub
 
 Public Sub ScriptPreset_GetItemLabel(control As IRibbonControl, index As Integer, ByRef label As Variant)
+    #If Win Then
     Dim all As Variant
     all = GetAllSettings("Instrumenta", "ISCRPresetData")
     label = all(index, 0)
+    #End If
 End Sub
 
 Public Sub ScriptPreset_GetItemID(control As IRibbonControl, index As Integer, ByRef id As Variant)
@@ -141,6 +145,7 @@ Public Sub ScriptPreset_OnAction(control As IRibbonControl, id As String, index 
 End Sub
 
 Public Sub ScriptPreset_Run(control As IRibbonControl)
+    #If Win Then
     Dim all As Variant
     all = GetAllSettings("Instrumenta", "ISCRPresetData")
     If IsEmpty(all) Then
@@ -157,6 +162,7 @@ Public Sub ScriptPreset_Run(control As IRibbonControl)
         Exit Sub
     End If
     RunInstrumentaScript scriptText
+    #End If
 End Sub
 
 Sub EmojiGallery_GetItemImage(control As IRibbonControl, index As Integer, ByRef returnedVal)
@@ -600,3 +606,4 @@ End Sub
 Sub ColorBoldTextColorAutomatically()
 ObjectsTextColorBold (True)
 End Sub
+

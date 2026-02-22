@@ -135,7 +135,7 @@ Private Sub btnPresetSave_Click()
     End If
 
     If Trim(txtScript.text) = "" Then
-        MsgBox "The script is empty — nothing to save.", vbInformation
+        MsgBox "The script is empty ó nothing to save.", vbInformation
         Exit Sub
     End If
 
@@ -198,6 +198,7 @@ End Sub
 
 
 Private Function PresetExists(presetName As String) As Boolean
+    #If Win Then
     Dim all As Variant
     all = GetAllSettings(APP_KEY, SECTION_DATA)
     If IsEmpty(all) Then Exit Function
@@ -208,10 +209,12 @@ Private Function PresetExists(presetName As String) As Boolean
             Exit Function
         End If
     Next i
+    #End If
 End Function
 
 Private Sub RefreshPresetList()
-    lstPresets.Clear
+    #If Win Then
+    stPresets.Clear
     Dim all As Variant
     all = GetAllSettings(APP_KEY, SECTION_DATA)
     If IsEmpty(all) Then Exit Sub
@@ -225,6 +228,7 @@ Private Sub RefreshPresetList()
     InstrumentaRibbon.Invalidate
        
     End If
+    #End If
     
 End Sub
 
@@ -239,6 +243,7 @@ Private Sub SelectPresetInList(presetName As String)
 End Sub
 
 Private Function UnsavedChanges() As Boolean
+    #If Win Then
     Dim currentScript As String
     currentScript = Trim(txtScript.text)
 
@@ -257,6 +262,7 @@ Private Function UnsavedChanges() As Boolean
     Next i
 
     UnsavedChanges = True
+    #End If
 End Function
 
 
@@ -298,4 +304,5 @@ Private Sub UserForm_Initialize()
 
     RefreshPresetList
 End Sub
+
 
