@@ -90,11 +90,17 @@ End Function
 
 
 Public Sub CopyToClipboard(text As String)
-#If Win Then
+
+    #If Mac Then
+   
+    MacScript "set the clipboard to """ & Replace(text, """", "\""") & """"
+    
+    #Else
+
     Dim hMem As LongPtr
     Dim pMem As LongPtr
     Dim bytes As Long
-
+    
     bytes = (Len(text) * 2) + 2
 
     OpenClipboard 0
@@ -108,7 +114,9 @@ Public Sub CopyToClipboard(text As String)
     GlobalUnlock hMem
     SetClipboardData CF_UNICODETEXT, hMem
     CloseClipboard
-#End If
+
+    #End If
+    
 End Sub
 
 
@@ -122,7 +130,7 @@ Private Function PromptJsonInput(title As String) As String
         If .Cancelled Then
             PromptJsonInput = ""
         Else
-            PromptJsonInput = .Result
+            PromptJsonInput = .result
         End If
     End With
 End Function
@@ -239,11 +247,7 @@ Private Sub btnImproveStorylinePrompt_Click()
 
     prompt = prompt & "After you generate the JSON, stop. Do not add explanations or notes." & vbCrLf
 
-#If Mac Then
-    MsgBox "Not yet supported on Mac."
-#Else
     CopyToClipboard prompt
-#End If
 
     MsgBox "The improvement prompt has been copied to your clipboard.", vbInformation
 
@@ -322,15 +326,9 @@ Private Sub btnStorylinePrompt_Click()
 
     prompt = prompt & "After you generate the JSON, stop. Do not add explanations or notes." & vbCrLf
 
-   #If Mac Then
-   
-   MsgBox "Not yet supported on Mac."
-    #Else
    CopyToClipboard prompt
 
-    #End If
-
-    MsgBox "The storyline prompt has been copied to your clipboard.", vbInformation
+   MsgBox "The storyline prompt has been copied to your clipboard.", vbInformation
 
 
 End Sub
@@ -340,7 +338,7 @@ Private Sub UserForm_Initialize()
     selectedIndex = -1
     nodeCount = 0
         
-    optCurrentPres.Value = True
+    optCurrentPres.value = True
     
     With lstPyramid
     .ColumnCount = 2
@@ -391,8 +389,8 @@ Private Sub ImportExistingSlides()
 
             On Error Resume Next
             slideTitle = ""
-            If sld.Shapes.HasTitle Then
-                slideTitle = Trim(sld.Shapes.title.TextFrame.textRange.text)
+            If sld.shapes.HasTitle Then
+                slideTitle = Trim(sld.shapes.title.TextFrame.textRange.text)
             End If
             On Error GoTo 0
             
@@ -875,7 +873,7 @@ Private Sub btnGenerate_Click()
         Exit Sub
     End If
     
-    createNew = optNewPres.Value
+    createNew = optNewPres.value
     
     totalSlides = 2 + (nodeCount - 1)
     
@@ -1045,15 +1043,15 @@ Private Sub btnImportPyramid_Click()
 End Sub
 
 Private Function EscapeJson(text As String) As String
-    Dim Result As String
-    Result = text
-    Result = Replace(Result, "\", "\\")
-    Result = Replace(Result, """", "\""")
-    Result = Replace(Result, vbCrLf, "\n")
-    Result = Replace(Result, vbCr, "\n")
-    Result = Replace(Result, vbLf, "\n")
-    Result = Replace(Result, vbTab, "\t")
-    EscapeJson = Result
+    Dim result As String
+    result = text
+    result = Replace(result, "\", "\\")
+    result = Replace(result, """", "\""")
+    result = Replace(result, vbCrLf, "\n")
+    result = Replace(result, vbCr, "\n")
+    result = Replace(result, vbLf, "\n")
+    result = Replace(result, vbTab, "\t")
+    EscapeJson = result
 End Function
 
 Private Sub ParsePyramidJson(jsonContent As String)
@@ -1144,7 +1142,7 @@ End Function
 
 Private Function SplitNodes(nodesJson As String) As Variant
     Dim items As Collection
-    Dim Result() As String
+    Dim result() As String
     Dim i As Long, startPos As Long, depth As Long
     Dim ch As String
     
@@ -1166,12 +1164,12 @@ Private Function SplitNodes(nodesJson As String) As Variant
         End If
     Next i
     
-    ReDim Result(items.count - 1)
+    ReDim result(items.count - 1)
     For i = 1 To items.count
-        Result(i - 1) = items(i)
+        result(i - 1) = items(i)
     Next i
     
-    SplitNodes = Result
+    SplitNodes = result
 End Function
 
 
@@ -1338,21 +1336,21 @@ Private Sub GenerateSlides(createNew As Boolean)
         Call MoveSlideToPosition(sld, slideIdx, pres)
     End If
     
-    sld.Shapes.title.TextFrame.textRange.text = "Situation - Complication - Question"
+    sld.shapes.title.TextFrame.textRange.text = "Situation - Complication - Question"
     
     On Error Resume Next
-    sld.Shapes.Placeholders(2).Delete
+    sld.shapes.Placeholders(2).Delete
     On Error GoTo 0
     
     colWidth = (pres.PageSetup.slideWidth - 150) / 3
     
     Set shp = Nothing
-    For Each shp In sld.Shapes
+    For Each shp In sld.shapes
         If shp.Tags("InstrumentaPyramidElement") = "Situation" Then Exit For
         Set shp = Nothing
     Next shp
     If shp Is Nothing Then
-        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, 50, 120, colWidth, 300)
+        Set shp = sld.shapes.AddTextbox(msoTextOrientationHorizontal, 50, 120, colWidth, 300)
         shp.Tags.Add "InstrumentaPyramidElement", "Situation"
     End If
     With shp
@@ -1364,13 +1362,13 @@ Private Sub GenerateSlides(createNew As Boolean)
     End With
     
     Set shp = Nothing
-    For Each shp In sld.Shapes
+    For Each shp In sld.shapes
         If shp.Tags("InstrumentaPyramidElement") = "Complication" Then Exit For
         Set shp = Nothing
     Next shp
     leftPos = 50 + colWidth + 25
     If shp Is Nothing Then
-        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, 120, colWidth, 300)
+        Set shp = sld.shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, 120, colWidth, 300)
         shp.Tags.Add "InstrumentaPyramidElement", "Complication"
     End If
     With shp
@@ -1382,13 +1380,13 @@ Private Sub GenerateSlides(createNew As Boolean)
     End With
     
     Set shp = Nothing
-    For Each shp In sld.Shapes
+    For Each shp In sld.shapes
         If shp.Tags("InstrumentaPyramidElement") = "Question" Then Exit For
         Set shp = Nothing
     Next shp
     leftPos = leftPos + colWidth + 25
     If shp Is Nothing Then
-        Set shp = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, 120, colWidth, 300)
+        Set shp = sld.shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, 120, colWidth, 300)
         shp.Tags.Add "InstrumentaPyramidElement", "Question"
     End If
     With shp
@@ -1410,7 +1408,7 @@ Private Sub GenerateSlides(createNew As Boolean)
         Call MoveSlideToPosition(sld, slideIdx, pres)
     End If
     
-    sld.Shapes.title.TextFrame.textRange.text = "Management Summary"
+    sld.shapes.title.TextFrame.textRange.text = "Management Summary"
     
     Dim summaryText As String
     Dim tr As TextRange2
@@ -1426,7 +1424,7 @@ Private Sub GenerateSlides(createNew As Boolean)
         End If
     Next i
     
-    Set tr = sld.Shapes.Placeholders(2).TextFrame2.textRange
+    Set tr = sld.shapes.Placeholders(2).TextFrame2.textRange
     tr.text = summaryText
     
     para = 1
@@ -1465,7 +1463,7 @@ Private Sub GenerateSlides(createNew As Boolean)
             Call MoveSlideToPosition(sld, slideIdx, pres)
         End If
         
-        sld.Shapes.title.TextFrame.textRange.text = nodes(i).text
+        sld.shapes.title.TextFrame.textRange.text = nodes(i).text
     Next i
     
     Call DeleteOrphanPyramidSlides(pres, slideIdx)
@@ -1597,7 +1595,7 @@ Private Sub RemoveAllInstrumentaPyramidTags()
         sld.Tags.Delete "InstrumentaPyramidSlideIndex"
         On Error GoTo 0
         
-        For Each shp In sld.Shapes
+        For Each shp In sld.shapes
             On Error Resume Next
             shp.Tags.Delete "InstrumentaPyramidElement"
             On Error GoTo 0
