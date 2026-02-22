@@ -5812,6 +5812,16 @@
         }
       ]
     },
+    "ShowSlideGraderButton": {
+      "_tag": "button",
+      "id": "ShowSlideGraderButton",
+      "label": "Slide Grader",
+      "imageMso": "ReviewTrackChanges",
+      "showLabel": "false",
+      "onAction": "ShowSlideGrader",
+      "supertip": "Analyses all slides for common quality issues including action titles, double spaces, font inconsistencies, text overflow, overlapping shapes, and more",
+      "screentip": "Slide Grader"
+    },
     "ShowFeatureSearchButton": {
       "_tag": "button",
       "id": "ShowFeatureSearchButton",
@@ -6802,6 +6812,10 @@
                         "_tag": "menu"
                       },
                       {
+                        "$ref": "ShowSlideGraderButton",
+                        "_tag": "button"
+                      },
+                      {
                         "$ref": "ShowFeatureSearchButton",
                         "_tag": "button"
                       },
@@ -7788,6 +7802,10 @@
                       {
                         "$ref": "MailMergeMenu",
                         "_tag": "menu"
+                      },
+                      {
+                        "$ref": "ShowSlideGraderButton",
+                        "_tag": "button"
                       },
                       {
                         "$ref": "ShowFeatureSearchButton",

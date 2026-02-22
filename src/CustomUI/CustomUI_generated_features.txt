@@ -293,6 +293,7 @@ AddFeature "ExcelFullFileMailMerge", "Mail merge full presentation based on Exce
 AddFeature "InsertMergeField", "Insert empty merge field", "InsertMergeField", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
 AddFeature "ImportHeadersFromExcel", "Insert merge fields from Excel-file", "ImportHeadersFromExcel", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
 AddFeature "ManualMailMerge", "Manually replace all merge fields on all slides", "ManualMailMerge", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
+AddFeature "ShowSlideGraderButton", "Slide Grader", "ShowSlideGrader", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
 AddFeature "ShowFeatureSearchButton", "Find Instrumenta features", "ShowFeatureSearch", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
 AddFeature "ShowSettingsDialogButton", "Instrumenta settings", "ShowSettings", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
 AddFeature "ShowAboutDialogButton", "Show about dialog", "ShowAboutDialog", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"

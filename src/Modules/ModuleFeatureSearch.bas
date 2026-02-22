@@ -348,10 +348,10 @@ Private Sub LoadInstrumentaFeatures()
     AddFeature "InsertMergeField", "Insert empty merge field", "InsertMergeField", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
     AddFeature "ImportHeadersFromExcel", "Insert merge fields from Excel-file", "ImportHeadersFromExcel", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
     AddFeature "ManualMailMerge", "Manually replace all merge fields on all slides", "ManualMailMerge", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
+    AddFeature "ShowSlideGraderButton", "Slide Grader", "ShowSlideGrader", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
     AddFeature "ShowFeatureSearchButton", "Find Instrumenta features", "ShowFeatureSearch", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
     AddFeature "ShowSettingsDialogButton", "Instrumenta settings", "ShowSettings", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
     AddFeature "ShowAboutDialogButton", "Show about dialog", "ShowAboutDialog", "Advanced", "Instrumenta > Advanced", "[Advanced] > Advanced"
-
     ReDim Preserve Features(1 To FeatureCount) As FeatureData
     
     Exit Sub
@@ -422,7 +422,7 @@ Public Sub ExecuteFeature(actionName As String)
      Exit Sub
      End If
     
-    Application.Run actionName
+    Application.run actionName
     Exit Sub
 ErrorHandler:
     MsgBox "Could not execute: " & actionName & vbCrLf & Err.Description, vbExclamation

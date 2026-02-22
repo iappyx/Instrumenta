@@ -633,6 +633,7 @@
                   <menuSeparator id="separatorManualMailMerge"/>
                   <button id="ManualMailMerge" label="Manually replace all merge fields on all slides" showLabel="false" imageMso="MailMergeDocument" onAction="ManualMailMerge" supertip="Replaces all merge fields on all slides using manually entered values" screentip="Manual Mail Merge"/>
                </menu>
+               <button id="ShowSlideGraderButton" label="Slide Grader" imageMso="ReviewTrackChanges" showLabel="false" onAction="ShowSlideGrader" supertip="Analyses all slides for common quality issues including action titles, double spaces, font inconsistencies, text overflow, overlapping shapes, and more" screentip="Slide Grader"/>
                <button id="ShowFeatureSearchButton" label="Find Instrumenta features" imageMso="ResearchPane" showLabel="false" onAction="ShowFeatureSearch" supertip="Opens the search tool to quickly find Instrumenta features and commands" screentip="Feature Search"/>
                <button id="ShowSettingsDialogButton" label="Instrumenta settings" imageMso="FormatCellsDialog" showLabel="false" onAction="ShowSettings" supertip="Opens the Instrumenta settings dialog" screentip="Instrumenta Settings"/>
                <button id="ShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" supertip="Opens the About dialog with version and support information" screentip="About"/>
@@ -1275,6 +1276,7 @@
                   <menuSeparator id="TabViewseparatorManualMailMerge"/>
                   <button id="TabViewManualMailMerge" label="Manually replace all merge fields on all slides" showLabel="false" imageMso="MailMergeDocument" onAction="ManualMailMerge" supertip="Replaces all merge fields on all slides using manually entered values" screentip="Manual Mail Merge"/>
                </menu>
+               <button id="TabViewShowSlideGraderButton" label="Slide Grader" imageMso="ReviewTrackChanges" showLabel="false" onAction="ShowSlideGrader" supertip="Analyses all slides for common quality issues including action titles, double spaces, font inconsistencies, text overflow, overlapping shapes, and more" screentip="Slide Grader"/>
                <button id="TabViewShowFeatureSearchButton" label="Find Instrumenta features" imageMso="ResearchPane" showLabel="false" onAction="ShowFeatureSearch" supertip="Opens the search tool to quickly find Instrumenta features and commands" screentip="Feature Search"/>
                <button id="TabViewShowSettingsDialogButton" label="Instrumenta settings" imageMso="FormatCellsDialog" showLabel="false" onAction="ShowSettings" supertip="Opens the Instrumenta settings dialog" screentip="Instrumenta Settings"/>
                <button id="TabViewShowAboutDialogButton" label="Show about dialog" imageMso="Help" showLabel="false" onAction="ShowAboutDialog" supertip="Opens the About dialog with version and support information" screentip="About"/>

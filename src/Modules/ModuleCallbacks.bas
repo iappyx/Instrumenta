@@ -375,6 +375,10 @@ Sub ShowSlideLibrary()
     InsertSlideLibrarySlide.Show
 End Sub
 
+Sub ShowSlideGrader()
+    ModuleSlideGrader.ShowSlideGrader
+End Sub
+
 Sub ShowSettings()
     SettingsForm.Show
 End Sub
