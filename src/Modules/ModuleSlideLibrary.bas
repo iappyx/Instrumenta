@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleSlideLibrary"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ If GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", "") = "" Then
     
 Else
     
-    If Application.ActiveWindow.Selection.SlideRange.Count > 0 Then
+    If Application.ActiveWindow.Selection.SlideRange.count > 0 Then
         
         Set LibraryPresentation = PowerPoint.Presentations.Open(GetSetting("Instrumenta", "SlideLibrary", "SlideLibraryFile", ""))
         

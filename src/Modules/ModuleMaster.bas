@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleMaster"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -74,8 +74,8 @@ Sub ShapeToMasterSlide(deleteOriginal As Boolean, toAllLayouts As Boolean, Optio
 
             If (Not onlyUsedLayouts) Or LayoutIsUsed(layout) Then
 
-                layout.Shapes.Paste
-                Set dup = layout.Shapes(layout.Shapes.count)
+                layout.shapes.Paste
+                Set dup = layout.shapes(layout.shapes.count)
 
                 dup.left = shp.left
                 dup.Top = shp.Top
@@ -90,8 +90,8 @@ Sub ShapeToMasterSlide(deleteOriginal As Boolean, toAllLayouts As Boolean, Optio
 
         Set layout = sld.CustomLayout
 
-        layout.Shapes.Paste
-        Set dup = layout.Shapes(layout.Shapes.count)
+        layout.shapes.Paste
+        Set dup = layout.shapes(layout.shapes.count)
 
         dup.left = shp.left
         dup.Top = shp.Top

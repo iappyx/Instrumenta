@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} CopyShapeToMultipleSlidesForm 
-   Caption         =   "Copy shape to multiple slides"
-   ClientHeight    =   7470
-   ClientLeft      =   -14
-   ClientTop       =   -147
-   ClientWidth     =   8757.001
-   OleObjectBlob   =   "CopyShapeToMultipleSlidesForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "CopyShapeToMultipleSlidesForm"
+Attribute VB_Base = "0{88B15003-DC14-47DC-B88B-B373CE6FA905}{ABB09866-3AEF-4A1D-B520-CC516AC1A57A}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -38,3 +31,4 @@ Attribute VB_Exposed = False
 Private Sub CopyShapesToSelectedSlidesButton_Click()
 CopyShapeToMultipleSlides
 End Sub
+

@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleTableOptimizeHeight"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -66,22 +66,22 @@ Sub OptimizeTableHeightByContent(numRuns As Integer, Optional earlyStop As Boole
     
     If optimizeTable Is Nothing Then Exit Sub
     
-    totalWidth = optimizeTableShape.Width
+    totalWidth = optimizeTableShape.width
     
-    ReDim textLength(1 To optimizeTable.Columns.Count)
-    ReDim colWidths(1 To optimizeTable.Columns.Count)
+    ReDim textLength(1 To optimizeTable.Columns.count)
+    ReDim colWidths(1 To optimizeTable.Columns.count)
     
-    For colIndex = 1 To optimizeTable.Columns.Count
+    For colIndex = 1 To optimizeTable.Columns.count
         textLength(colIndex) = 0
-        For rowIndex = 1 To optimizeTable.Rows.Count
-            textLength(colIndex) = textLength(colIndex) + Len(optimizeTable.Cell(rowIndex, colIndex).shape.TextFrame.textRange.Text)
+        For rowIndex = 1 To optimizeTable.rows.count
+            textLength(colIndex) = textLength(colIndex) + Len(optimizeTable.cell(rowIndex, colIndex).shape.TextFrame.textRange.text)
         Next
         sumTextLength = sumTextLength + textLength(colIndex)
     Next
     
-    For colIndex = 1 To optimizeTable.Columns.Count
+    For colIndex = 1 To optimizeTable.Columns.count
         colWidths(colIndex) = (textLength(colIndex) / sumTextLength) * totalWidth
-        optimizeTable.Columns(colIndex).Width = colWidths(colIndex)
+        optimizeTable.Columns(colIndex).width = colWidths(colIndex)
     Next
     
     If numRuns > 0 Then
@@ -129,9 +129,9 @@ Sub OptimizeTableMultipleRuns(numRuns As Integer, Optional earlyStop As Boolean 
     
     stepSize = Round(CalculateAverageFontSizeByParagraph(optimizeTableShape) / 2)
     maxIncrements = 5
-    totalWidth = optimizeTableShape.Width
-    ReDim bestWidths(1 To originalTable.Columns.Count)
-    ReDim globalBestWidths(1 To originalTable.Columns.Count)
+    totalWidth = optimizeTableShape.width
+    ReDim bestWidths(1 To originalTable.Columns.count)
+    ReDim globalBestWidths(1 To originalTable.Columns.count)
     globalMinHeight = 1E+30
     
     ProgressForm.Show
@@ -140,31 +140,31 @@ Sub OptimizeTableMultipleRuns(numRuns As Integer, Optional earlyStop As Boolean 
         SetProgress (runIndex / numRuns * 100), "Starting iteration " & runIndex & " of " & numRuns
         
 
-        ReDim testResults(1 To originalTable.Rows.Count * originalTable.Columns.Count * maxIncrements, 1 To 6 + originalTable.Columns.Count)
+        ReDim testResults(1 To originalTable.rows.count * originalTable.Columns.count * maxIncrements, 1 To 6 + originalTable.Columns.count)
         Dim resultIndex As Integer
         resultIndex = 1
         
-        For colIndex = 1 To originalTable.Columns.Count
+        For colIndex = 1 To originalTable.Columns.count
             SetProgress (runIndex / numRuns * 100), "Testing column " & colIndex & " in iteration " & runIndex & " of " & numRuns
-            For rowIndex = 1 To originalTable.Rows.Count
+            For rowIndex = 1 To originalTable.rows.count
                 For increment = 1 To maxIncrements
                     
                     Set duplicateTableShape = optimizeTableShape.Duplicate
                     Set optimizeTable = duplicateTableShape.table
                     
                     Dim originalWidth As Single
-                    originalWidth = optimizeTable.Columns(colIndex).Width
-                    optimizeTable.Columns(colIndex).Width = originalWidth + (increment * stepSize)
+                    originalWidth = optimizeTable.Columns(colIndex).width
+                    optimizeTable.Columns(colIndex).width = originalWidth + (increment * stepSize)
                     
-                    totalAdjustedWidth = (increment * stepSize) / (optimizeTable.Columns.Count - 1)
+                    totalAdjustedWidth = (increment * stepSize) / (optimizeTable.Columns.count - 1)
                     Dim otherColIndex As Integer
-                    For otherColIndex = 1 To optimizeTable.Columns.Count
+                    For otherColIndex = 1 To optimizeTable.Columns.count
                         If otherColIndex <> colIndex Then
-                            optimizeTable.Columns(otherColIndex).Width = optimizeTable.Columns(otherColIndex).Width - totalAdjustedWidth
+                            optimizeTable.Columns(otherColIndex).width = optimizeTable.Columns(otherColIndex).width - totalAdjustedWidth
                         End If
                     Next
                     
-                    currentTableHeight = duplicateTableShape.Height
+                    currentTableHeight = duplicateTableShape.height
                     
                     Dim currentTotalLines As Long
                     Dim currentPenalty As Long
@@ -177,9 +177,9 @@ Sub OptimizeTableMultipleRuns(numRuns As Integer, Optional earlyStop As Boolean 
                     testResults(resultIndex, 5) = currentTotalLines
                     testResults(resultIndex, 6) = currentPenalty
                     Dim colWidthsArray() As Single
-                    ReDim colWidthsArray(1 To optimizeTable.Columns.Count)
-                    For otherColIndex = 1 To optimizeTable.Columns.Count
-                        testResults(resultIndex, 6 + otherColIndex) = optimizeTable.Columns(otherColIndex).Width
+                    ReDim colWidthsArray(1 To optimizeTable.Columns.count)
+                    For otherColIndex = 1 To optimizeTable.Columns.count
+                        testResults(resultIndex, 6 + otherColIndex) = optimizeTable.Columns(otherColIndex).width
                     Next
                     resultIndex = resultIndex + 1
                     
@@ -202,7 +202,7 @@ Sub OptimizeTableMultipleRuns(numRuns As Integer, Optional earlyStop As Boolean 
             minHeight = testResults(testRow, 4)
             bestTotalLines = testResults(testRow, 5)
             bestPenalty = testResults(testRow, 6)
-            For colIndex = 1 To originalTable.Columns.Count
+            For colIndex = 1 To originalTable.Columns.count
                 bestWidths(colIndex) = testResults(testRow, 6 + colIndex)
             Next
         End If
@@ -212,13 +212,13 @@ Sub OptimizeTableMultipleRuns(numRuns As Integer, Optional earlyStop As Boolean 
         globalMinHeight = minHeight
         totalLines = bestTotalLines
         penaltyForWordSplits = bestPenalty
-        For colIndex = 1 To originalTable.Columns.Count
+        For colIndex = 1 To originalTable.Columns.count
             globalBestWidths(colIndex) = bestWidths(colIndex)
         Next
     End If
     
-    For colIndex = 1 To originalTable.Columns.Count
-        originalTable.Columns(colIndex).Width = bestWidths(colIndex)
+    For colIndex = 1 To originalTable.Columns.count
+        originalTable.Columns(colIndex).width = bestWidths(colIndex)
     Next
     
     
@@ -244,8 +244,8 @@ Sub OptimizeTableMultipleRuns(numRuns As Integer, Optional earlyStop As Boolean 
     End If
 Next
 
-For colIndex = 1 To originalTable.Columns.Count
-    originalTable.Columns(colIndex).Width = globalBestWidths(colIndex)
+For colIndex = 1 To originalTable.Columns.count
+    originalTable.Columns(colIndex).width = globalBestWidths(colIndex)
 Next
 
 ProgressForm.Hide
@@ -266,15 +266,15 @@ Function CountTotalLines(targetTable As table, ByRef penalty As Long) As Long
     Dim totalLines As Long
     penalty = 0
 
-    For colIndex = 1 To targetTable.Columns.Count
-        For rowIndex = 1 To targetTable.Rows.Count
-            With targetTable.Cell(rowIndex, colIndex).shape.TextFrame2.textRange
+    For colIndex = 1 To targetTable.Columns.count
+        For rowIndex = 1 To targetTable.rows.count
+            With targetTable.cell(rowIndex, colIndex).shape.TextFrame2.textRange
                 
-                totalLines = totalLines + .Lines.Count
+                totalLines = totalLines + .lines.count
 
 
-                If .Lines.Count > 1 Then
-                    If .Words.Count = 1 Then
+                If .lines.count > 1 Then
+                    If .words.count = 1 Then
                         penalty = penalty + 3
                     Else
                         penalty = penalty + 1
@@ -303,14 +303,14 @@ Function CalculateAverageFontSizeByParagraph(sourceTableShape As shape) As Singl
     fontSizeSum = 0
     paragraphCount = 0
     
-    For colIndex = 1 To sourceTable.Columns.Count
-        For rowIndex = 1 To sourceTable.Rows.Count
+    For colIndex = 1 To sourceTable.Columns.count
+        For rowIndex = 1 To sourceTable.rows.count
             
-            Set textRange = sourceTable.Cell(rowIndex, colIndex).shape.TextFrame.textRange
+            Set textRange = sourceTable.cell(rowIndex, colIndex).shape.TextFrame.textRange
             
-            If Len(Trim(textRange.Text)) > 0 Then
+            If Len(Trim(textRange.text)) > 0 Then
                 
-                For paragraphIndex = 1 To textRange.Paragraphs.Count
+                For paragraphIndex = 1 To textRange.Paragraphs.count
                     Set paragraphRange = textRange.Paragraphs(paragraphIndex)
                     fontSizeSum = fontSizeSum + paragraphRange.Font.Size
                     paragraphCount = paragraphCount + 1

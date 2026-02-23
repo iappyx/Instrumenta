@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleShapesAcrossSlides"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -30,8 +30,8 @@ Sub DeleteTaggedShapes()
         If Not Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA CROSS-SLIDE SHAPE") = "" Then
             CrossSlideShapeId = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA CROSS-SLIDE SHAPE")
             
-            For SlideCount = 1 To ActivePresentation.Slides.Count
-                For Each shape In ActivePresentation.Slides(SlideCount).Shapes
+            For slideCount = 1 To ActivePresentation.Slides.count
+                For Each shape In ActivePresentation.Slides(slideCount).shapes
                     
                     If shape.Tags("INSTRUMENTA CROSS-SLIDE SHAPE") = CrossSlideShapeId Then
                         
@@ -61,16 +61,16 @@ Sub UpdateTaggedShapePositionAndDimensions()
         If Not Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA CROSS-SLIDE SHAPE") = "" Then
             CrossSlideShapeId = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA CROSS-SLIDE SHAPE")
             
-            For SlideCount = 1 To ActivePresentation.Slides.Count
-                For Each shape In ActivePresentation.Slides(SlideCount).Shapes
+            For slideCount = 1 To ActivePresentation.Slides.count
+                For Each shape In ActivePresentation.Slides(slideCount).shapes
                     
                     If shape.Tags("INSTRUMENTA CROSS-SLIDE SHAPE") = CrossSlideShapeId Then
                         
                         With shape
                             .Top = Application.ActiveWindow.Selection.ShapeRange.Top
                             .left = Application.ActiveWindow.Selection.ShapeRange.left
-                            .Width = Application.ActiveWindow.Selection.ShapeRange.Width
-                            .Height = Application.ActiveWindow.Selection.ShapeRange.Height
+                            .width = Application.ActiveWindow.Selection.ShapeRange.width
+                            .height = Application.ActiveWindow.Selection.ShapeRange.height
                             
                         End With
                         
@@ -100,11 +100,11 @@ Sub ShowFormCopyShapeToMultipleSlides()
     
     If MyDocument.Selection.Type = ppSelectionShapes Then
         
-        CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.Value = "NewShape" + Str(RandomNumber)
+        CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.value = "NewShape" + Str(RandomNumber)
         
         If Not Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA CROSS-SLIDE SHAPE") = "" Then
-            CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.Value = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA CROSS-SLIDE SHAPE")
-            CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.Text = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA CROSS-SLIDE SHAPE")
+            CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.value = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA CROSS-SLIDE SHAPE")
+            CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.text = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA CROSS-SLIDE SHAPE")
         End If
         
         Dim StorylineText As String
@@ -113,33 +113,33 @@ Sub ShowFormCopyShapeToMultipleSlides()
         
         On Error Resume Next
         
-        For SlideCount = 1 To ActivePresentation.Slides.Count
+        For slideCount = 1 To ActivePresentation.Slides.count
             
-            If Not ActivePresentation.Slides(SlideCount).SlideNumber = Application.ActiveWindow.Selection.SlideRange.SlideNumber Then
+            If Not ActivePresentation.Slides(slideCount).SlideNumber = Application.ActiveWindow.Selection.SlideRange.SlideNumber Then
                 
                 StorylineText = "Untitled"
                 
                 On Error Resume Next
-                For Each SlidePlaceHolder In ActivePresentation.Slides(SlideCount).Shapes.Placeholders
+                For Each SlidePlaceHolder In ActivePresentation.Slides(slideCount).shapes.Placeholders
                     
                     If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
-                        StorylineText = SlidePlaceHolder.TextFrame.TextRange.Text
+                        StorylineText = SlidePlaceHolder.TextFrame.textRange.text
                         Exit For
                     End If
                 Next SlidePlaceHolder
                 On Error GoTo 0
                 
                 CopyShapeToMultipleSlidesForm.AllSlidesListBox.AddItem
-                CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(SlideCount - 1 - CurrentSlide, 0) = ActivePresentation.Slides(SlideCount).SlideNumber
-                CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(SlideCount - 1 - CurrentSlide, 1) = StorylineText
-                CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(SlideCount - 1 - CurrentSlide, 2) = ActivePresentation.Slides(SlideCount).SlideID
+                CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(slideCount - 1 - CurrentSlide, 0) = ActivePresentation.Slides(slideCount).SlideNumber
+                CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(slideCount - 1 - CurrentSlide, 1) = StorylineText
+                CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(slideCount - 1 - CurrentSlide, 2) = ActivePresentation.Slides(slideCount).SlideID
                 
             Else
                 CurrentSlide = 1
                 
             End If
             
-        Next SlideCount
+        Next slideCount
         On Error GoTo 0
         
         CopyShapeToMultipleSlidesForm.Show
@@ -158,8 +158,8 @@ Sub CopyShapeToMultipleSlides()
     Dim CrossSlideShapeId As String
     Dim SkipSlide   As Boolean
     
-    OverwriteExisting = CopyShapeToMultipleSlidesForm.OptionExistingShapes1.Value
-    CrossSlideShapeId = CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.Value
+    OverwriteExisting = CopyShapeToMultipleSlidesForm.OptionExistingShapes1.value
+    CrossSlideShapeId = CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.value
     
     Application.ActiveWindow.Selection.ShapeRange.Tags.Add "INSTRUMENTA CROSS-SLIDE SHAPE", CrossSlideShapeId
     
@@ -168,7 +168,7 @@ Sub CopyShapeToMultipleSlides()
             
             SkipSlide = False
             
-            For Each shape In ActivePresentation.Slides(CLng(CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(SelectedCount))).Shapes
+            For Each shape In ActivePresentation.Slides(CLng(CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(SelectedCount))).shapes
                 
                 If shape.Tags("INSTRUMENTA CROSS-SLIDE SHAPE") = CrossSlideShapeId Then
                     
@@ -188,8 +188,8 @@ Sub CopyShapeToMultipleSlides()
             
             If SkipSlide = False Then
                 Application.ActiveWindow.Selection.ShapeRange.Copy
-                Set PastedShape = ActivePresentation.Slides(CLng(CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(SelectedCount))).Shapes.Paste
-                PastedShape.Name = CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.Value + Str(RandomNumber)
+                Set PastedShape = ActivePresentation.Slides(CLng(CopyShapeToMultipleSlidesForm.AllSlidesListBox.List(SelectedCount))).shapes.Paste
+                PastedShape.name = CopyShapeToMultipleSlidesForm.ShapeIdentifierTextBox.value + Str(RandomNumber)
                 PastedShape.Tags.Add "INSTRUMENTA CROSS-SLIDE SHAPE", CrossSlideShapeId
             End If
             

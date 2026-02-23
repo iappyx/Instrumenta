@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjectsClone"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@ Sub ObjectsCloneRight()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         
         OldTop = MyDocument.Selection.ShapeRange.Top
         OldLeft = MyDocument.Selection.ShapeRange.left
@@ -40,7 +40,7 @@ Sub ObjectsCloneRight()
         
         With SlideShape
             .Top = OldTop
-            .left = OldLeft + SlideShape.Width
+            .left = OldLeft + SlideShape.width
         End With
         
         SlideShape.Select
@@ -56,7 +56,7 @@ Sub ObjectsCloneRight()
         
         With SlideShape
             .Top = OldTop
-            .left = OldLeft + SlideShape.Width
+            .left = OldLeft + SlideShape.width
         End With
         
         ShapesToDuplicate.Ungroup
@@ -74,7 +74,7 @@ Sub ObjectsCloneDown()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         
         OldTop = MyDocument.Selection.ShapeRange.Top
         OldLeft = MyDocument.Selection.ShapeRange.left
@@ -82,7 +82,7 @@ Sub ObjectsCloneDown()
         Set SlideShape = MyDocument.Selection.ShapeRange.Duplicate
         
         With SlideShape
-            .Top = OldTop + SlideShape.Height
+            .Top = OldTop + SlideShape.height
             .left = OldLeft
         End With
         
@@ -98,7 +98,7 @@ Sub ObjectsCloneDown()
         Set SlideShape = ShapesToDuplicate.Duplicate
         
         With SlideShape
-            .Top = OldTop + SlideShape.Height
+            .Top = OldTop + SlideShape.height
             .left = OldLeft
         End With
         

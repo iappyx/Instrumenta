@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ColorManagerForm 
-   Caption         =   "Color replacer"
-   ClientHeight    =   5385
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   10710
-   OleObjectBlob   =   "ColorManagerForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "ColorManagerForm"
+Attribute VB_Base = "0{5A66CA5E-4611-4CDB-BF83-2546AF736422}{588338C7-81D9-4319-B684-40F37B738F89}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +34,7 @@ Private TotalColors As Long
 Private SelectedColorRGB As Long
 
 Private Sub UpdateReplaceButtonState()
-    cmdReplaceColor.Enabled = (chkFill.Value Or chkLine.Value Or chkText.Value Or chkTableFill.Value Or chkTableBorders.Value Or chkChart.Value Or chkBackground.Value)
+    cmdReplaceColor.enabled = (chkFill.value Or chkLine.value Or chkText.value Or chkTableFill.value Or chkTableBorders.value Or chkChart.value Or chkBackground.value)
 End Sub
 
 
@@ -63,7 +56,7 @@ Public Sub ShowColors(colors() As ColorInfo, colorCount As Long, elapsed As Doub
     ColorData = colorStr
     TotalColors = colorCount
     
-    Me.Caption = "Color Manager - " & colorCount & " unique colors found in " & scope
+    Me.caption = "Color Manager - " & colorCount & " unique colors found in " & scope
     
     With lstColors
         .ColumnCount = 4
@@ -88,12 +81,12 @@ Private Sub lblNewColorPreview_Click()
     g = (newColor \ 256) Mod 256
     b = (newColor \ 65536) Mod 256
     
-    txtNewColor.Text = RGBToHex(r, g, b)
+    txtNewColor.text = RGBToHex(r, g, b)
     lblNewColorPreview.BackColor = newColor
 End Sub
 
 Private Sub UserForm_Initialize()
-    cmdReplaceColor.Enabled = False
+    cmdReplaceColor.enabled = False
     lblColorPreview.BackColor = vbWhite
     lblColorPreview.BorderStyle = fmBorderStyleSingle
     
@@ -156,55 +149,55 @@ Private Sub lstColors_Click()
             SelectedColorRGB = CLng(fields(0))
             
             lblColorPreview.BackColor = SelectedColorRGB
-            lblColorInfo.Caption = "Selected Color:" & vbCrLf & _
+            lblColorInfo.caption = "Selected Color:" & vbCrLf & _
                                   "Hex: " & fields(4) & vbCrLf & _
                                   "RGB: " & fields(1) & ", " & fields(2) & ", " & fields(3) & vbCrLf & _
                                   "Used " & fields(5) & " time(s) in: " & fields(6)
             
-            txtOldColor.Text = fields(4)
-            cmdReplaceColor.Enabled = True
+            txtOldColor.text = fields(4)
+            cmdReplaceColor.enabled = True
             
-            chkFill.Value = False
-            chkLine.Value = False
-            chkText.Value = False
-            chkTableFill.Value = False
-            chkTableBorders.Value = False
-            chkChart.Value = False
-            chkBackground.Value = False
+            chkFill.value = False
+            chkLine.value = False
+            chkText.value = False
+            chkTableFill.value = False
+            chkTableBorders.value = False
+            chkChart.value = False
+            chkBackground.value = False
             
             usageStr = fields(6)
             
-            chkFill.Enabled = (InStr(1, usageStr, "Shape Fill", vbTextCompare) > 0) _
+            chkFill.enabled = (InStr(1, usageStr, "Shape Fill", vbTextCompare) > 0) _
                            Or (InStr(1, usageStr, "Gradient Fill", vbTextCompare) > 0)
             
-            chkLine.Enabled = (InStr(1, usageStr, "Line/Border", vbTextCompare) > 0)
+            chkLine.enabled = (InStr(1, usageStr, "Line/Border", vbTextCompare) > 0)
             
-            chkText.Enabled = (InStr(1, usageStr, "Font Color", vbTextCompare) > 0)
+            chkText.enabled = (InStr(1, usageStr, "Font Color", vbTextCompare) > 0)
             
-            chkTableFill.Enabled = (InStr(1, usageStr, "Table Cell Fill", vbTextCompare) > 0)
+            chkTableFill.enabled = (InStr(1, usageStr, "Table Cell Fill", vbTextCompare) > 0)
             
-            chkTableBorders.Enabled = (InStr(1, usageStr, "Table Border", vbTextCompare) > 0)
+            chkTableBorders.enabled = (InStr(1, usageStr, "Table Border", vbTextCompare) > 0)
             
-            chkChart.Enabled = (InStr(1, usageStr, "Chart Series", vbTextCompare) > 0) _
+            chkChart.enabled = (InStr(1, usageStr, "Chart Series", vbTextCompare) > 0) _
                             Or (InStr(1, usageStr, "Chart Point", vbTextCompare) > 0)
             
-            chkBackground.Enabled = (InStr(1, usageStr, "Slide Background", vbTextCompare) > 0)
+            chkBackground.enabled = (InStr(1, usageStr, "Slide Background", vbTextCompare) > 0)
             
-            chkFill.Value = chkFill.Enabled
-            chkLine.Value = chkLine.Enabled
-            chkText.Value = chkText.Enabled
-            chkTableFill.Value = chkTableFill.Enabled
-            chkTableBorders.Value = chkTableBorders.Enabled
-            chkChart.Value = chkChart.Enabled
-            chkBackground.Value = chkBackground.Enabled
+            chkFill.value = chkFill.enabled
+            chkLine.value = chkLine.enabled
+            chkText.value = chkText.enabled
+            chkTableFill.value = chkTableFill.enabled
+            chkTableBorders.value = chkTableBorders.enabled
+            chkChart.value = chkChart.enabled
+            chkBackground.value = chkBackground.enabled
             
-            chkFill.Value = chkFill.Enabled
-            chkLine.Value = chkLine.Enabled
-            chkText.Value = chkText.Enabled
-            chkTableFill.Value = chkTableFill.Enabled
-            chkTableBorders.Value = chkTableBorders.Enabled
-            chkChart.Value = chkChart.Enabled
-            chkBackground.Value = chkBackground.Enabled
+            chkFill.value = chkFill.enabled
+            chkLine.value = chkLine.enabled
+            chkText.value = chkText.enabled
+            chkTableFill.value = chkTableFill.enabled
+            chkTableBorders.value = chkTableBorders.enabled
+            chkChart.value = chkChart.enabled
+            chkBackground.value = chkBackground.enabled
             
             UpdateReplaceButtonState
             
@@ -224,7 +217,7 @@ Private Sub cmdPickNewColor_Click()
     g = (newColor \ 256) Mod 256
     b = (newColor \ 65536) Mod 256
     
-    txtNewColor.Text = RGBToHex(r, g, b)
+    txtNewColor.text = RGBToHex(r, g, b)
     lblNewColorPreview.BackColor = newColor
    
 End Sub
@@ -235,13 +228,13 @@ Private Sub cmdReplaceColor_Click()
         Exit Sub
     End If
     
-    If Len(Trim(txtNewColor.Text)) = 0 Then
+    If Len(Trim(txtNewColor.text)) = 0 Then
         MsgBox "Please enter a new color.", vbExclamation
         Exit Sub
     End If
     
     Dim newRGB As Long
-    newRGB = ParseColorInput(txtNewColor.Text)
+    newRGB = ParseColorInput(txtNewColor.text)
     
     If newRGB = -1 Then
         MsgBox "Invalid color format. Use hex (#FF0000) or RGB (255,0,0).", vbExclamation
@@ -249,19 +242,19 @@ Private Sub cmdReplaceColor_Click()
     End If
     
     Dim msg As String
-    msg = "Replace all instances of " & txtOldColor.Text & " with the new color in " & RecolorSlideScope & "?" & vbCrLf & vbCrLf
+    msg = "Replace all instances of " & txtOldColor.text & " with the new color in " & RecolorSlideScope & "?" & vbCrLf & vbCrLf
     msg = msg & "This action cannot be undone (except via Ctrl+Z)."
     
     If MsgBox(msg, vbQuestion + vbYesNo, "Confirm Color Replacement") = vbYes Then
         
         With ModuleColorScanner.RecolorUserPerm
-        .AllowFill = chkFill.Value
-        .AllowLine = chkLine.Value
-        .AllowText = chkText.Value
-        .AllowTableFill = chkTableFill.Value
-        .AllowTableBorders = chkTableBorders.Value
-        .AllowChart = chkChart.Value
-        .AllowBackground = chkBackground.Value
+        .AllowFill = chkFill.value
+        .AllowLine = chkLine.value
+        .AllowText = chkText.value
+        .AllowTableFill = chkTableFill.value
+        .AllowTableBorders = chkTableBorders.value
+        .AllowChart = chkChart.value
+        .AllowBackground = chkBackground.value
         End With
 
                

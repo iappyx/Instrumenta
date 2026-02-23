@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ManageTagsForm 
-   Caption         =   "Manage tags"
-   ClientHeight    =   5130
-   ClientLeft      =   90
-   ClientTop       =   405
-   ClientWidth     =   15045
-   OleObjectBlob   =   "ManageTagsForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "ManageTagsForm"
+Attribute VB_Base = "0{AA4D7C4F-CA2E-4915-802B-973EEE27D5DA}{BDDDAA70-2E74-44EE-BF83-447E36E11318}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal

@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} PyramidForm 
-   Caption         =   "Pyramid builder"
-   ClientHeight    =   9810.001
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   10665
-   OleObjectBlob   =   "PyramidForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "PyramidForm"
+Attribute VB_Base = "0{A969CD80-A666-466F-83CB-7063CC261B15}{E30B44A2-3DF3-4B05-8DF2-DADED7EAD4DD}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -122,7 +115,7 @@ End Sub
 
 Private Function PromptJsonInput(title As String) As String
     With JsonInputForm
-        .Caption = title
+        .caption = title
         .txtJson.text = ""
         .Cancelled = False
         .Show
@@ -224,9 +217,9 @@ Private Sub btnImproveStorylinePrompt_Click()
     prompt = prompt & "5. ONLY AFTER I approve the improved storyline, generate the final JSON output in this exact format:" & vbCrLf & vbCrLf
 
     prompt = prompt & "{" & vbCrLf
-    prompt = prompt & "  ""situation"": ""…""," & vbCrLf
-    prompt = prompt & "  ""complication"": ""…""," & vbCrLf
-    prompt = prompt & "  ""question"": ""…""," & vbCrLf
+    prompt = prompt & "  ""situation"": ""ï¿½""," & vbCrLf
+    prompt = prompt & "  ""complication"": ""ï¿½""," & vbCrLf
+    prompt = prompt & "  ""question"": ""ï¿½""," & vbCrLf
     prompt = prompt & "  ""nodes"": [" & vbCrLf
     prompt = prompt & "    {""text"": ""Answer sentence"", ""depth"": 0, ""parentIndex"": -1}," & vbCrLf
     prompt = prompt & "    {""text"": ""Full-sentence key line"", ""depth"": 1, ""parentIndex"": 0}," & vbCrLf
@@ -299,9 +292,9 @@ Private Sub btnStorylinePrompt_Click()
     prompt = prompt & "6. Only AFTER I approve the storyline, generate the final output in the following JSON format:" & vbCrLf & vbCrLf
 
     prompt = prompt & "{" & vbCrLf
-    prompt = prompt & "  ""situation"": ""…""," & vbCrLf
-    prompt = prompt & "  ""complication"": ""…""," & vbCrLf
-    prompt = prompt & "  ""question"": ""…""," & vbCrLf
+    prompt = prompt & "  ""situation"": ""ï¿½""," & vbCrLf
+    prompt = prompt & "  ""complication"": ""ï¿½""," & vbCrLf
+    prompt = prompt & "  ""question"": ""ï¿½""," & vbCrLf
     prompt = prompt & "  ""nodes"": [" & vbCrLf
     prompt = prompt & "    {""text"": ""Answer sentence"", ""depth"": 0, ""parentIndex"": -1}," & vbCrLf
     prompt = prompt & "    {""text"": ""Full-sentence key line"", ""depth"": 1, ""parentIndex"": 0}," & vbCrLf

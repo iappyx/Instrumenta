@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjecstAlignToTable"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 '
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -28,19 +28,19 @@ Sub ObjectsAlignToTable()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf MyDocument.Selection.ShapeRange.Count > 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count > 1 Then
         
         Dim ShapeCount, TableIndex, TableDimensions  As Long
         
         TableIndex = 0
         TableDimensions = 0
         
-        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
+        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.count
             If MyDocument.Selection.ShapeRange(ShapeCount).HasTable = True Then
                 
-                If (MyDocument.Selection.ShapeRange(ShapeCount).Width * MyDocument.Selection.ShapeRange(ShapeCount).Height) > TableDimensions Then
+                If (MyDocument.Selection.ShapeRange(ShapeCount).width * MyDocument.Selection.ShapeRange(ShapeCount).height) > TableDimensions Then
                     TableIndex = ShapeCount
-                    TableDimensions = MyDocument.Selection.ShapeRange(ShapeCount).Width * MyDocument.Selection.ShapeRange(ShapeCount).Height
+                    TableDimensions = MyDocument.Selection.ShapeRange(ShapeCount).width * MyDocument.Selection.ShapeRange(ShapeCount).height
                     
                 End If
                 
@@ -50,27 +50,27 @@ Sub ObjectsAlignToTable()
         If TableIndex >= 1 Then
             
             Dim SlideShape() As shape
-            ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.Count - 1)
+            ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.count - 1)
             Dim SlideShapeCounter As Integer
             
             SlideShapeCounter = 1
             
-            For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
+            For ShapeCount = 1 To MyDocument.Selection.ShapeRange.count
                 If ShapeCount <> TableIndex Then
                     Set SlideShape(SlideShapeCounter) = MyDocument.Selection.ShapeRange(ShapeCount)
                     SlideShapeCounter = SlideShapeCounter + 1
                 End If
             Next ShapeCount
             
-            Dim Rows    As Integer, Columns As Integer
+            Dim rows    As Integer, Columns As Integer
             
-            Rows = MyDocument.Selection.ShapeRange(TableIndex).Table.Rows.Count
-            Columns = MyDocument.Selection.ShapeRange(TableIndex).Table.Columns.Count
+            rows = MyDocument.Selection.ShapeRange(TableIndex).table.rows.count
+            Columns = MyDocument.Selection.ShapeRange(TableIndex).table.Columns.count
             
             Dim TableXBorder, TableYBorder, TableCols(), TableRows(), TableXCenter(), TableYCenter() As Double
             
-            ReDim TableCols(Columns), TableRows(Rows)
-            ReDim TableXCenter(1 To Columns), TableYCenter(1 To Rows)
+            ReDim TableCols(Columns), TableRows(rows)
+            ReDim TableXCenter(1 To Columns), TableYCenter(1 To rows)
             
             TableXBorder = MyDocument.Selection.ShapeRange(TableIndex).left
             TableYBorder = MyDocument.Selection.ShapeRange(TableIndex).Top
@@ -78,28 +78,28 @@ Sub ObjectsAlignToTable()
             TableRows(0) = TableYBorder
             TableCols(0) = TableXBorder
             
-            For RowsCount = 1 To Rows
-                TableYBorder = TableYBorder + MyDocument.Selection.ShapeRange(TableIndex).Table.Rows(RowsCount).Height
+            For RowsCount = 1 To rows
+                TableYBorder = TableYBorder + MyDocument.Selection.ShapeRange(TableIndex).table.rows(RowsCount).height
                 TableRows(RowsCount) = TableYBorder
-                TableYCenter(RowsCount) = TableYBorder - (MyDocument.Selection.ShapeRange(TableIndex).Table.Rows(RowsCount).Height / 2)
+                TableYCenter(RowsCount) = TableYBorder - (MyDocument.Selection.ShapeRange(TableIndex).table.rows(RowsCount).height / 2)
             Next RowsCount
             
             For ColsCount = 1 To Columns
-                TableXBorder = TableXBorder + MyDocument.Selection.ShapeRange(TableIndex).Table.Columns(ColsCount).Width
+                TableXBorder = TableXBorder + MyDocument.Selection.ShapeRange(TableIndex).table.Columns(ColsCount).width
                 TableCols(ColsCount) = TableXBorder
-                TableXCenter(ColsCount) = TableXBorder - (MyDocument.Selection.ShapeRange(TableIndex).Table.Columns(ColsCount).Width / 2)
+                TableXCenter(ColsCount) = TableXBorder - (MyDocument.Selection.ShapeRange(TableIndex).table.Columns(ColsCount).width / 2)
             Next ColsCount
             
-            For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count - 1
+            For ShapeCount = 1 To MyDocument.Selection.ShapeRange.count - 1
                 
-                ShapeXCenter = SlideShape(ShapeCount).left + (SlideShape(ShapeCount).Width / 2)
-                ShapeYCenter = SlideShape(ShapeCount).Top + (SlideShape(ShapeCount).Height / 2)
+                ShapeXCenter = SlideShape(ShapeCount).left + (SlideShape(ShapeCount).width / 2)
+                ShapeYCenter = SlideShape(ShapeCount).Top + (SlideShape(ShapeCount).height / 2)
                 
-                For RowsCount = 1 To Rows
+                For RowsCount = 1 To rows
                     
                     If ShapeYCenter >= TableRows(RowsCount - 1) And ShapeYCenter < TableRows(RowsCount) Then
                         
-                        SlideShape(ShapeCount).Top = TableYCenter(RowsCount) - (SlideShape(ShapeCount).Height / 2)
+                        SlideShape(ShapeCount).Top = TableYCenter(RowsCount) - (SlideShape(ShapeCount).height / 2)
                         Exit For
                         
                     End If
@@ -108,7 +108,7 @@ Sub ObjectsAlignToTable()
                 For ColsCount = 1 To Columns
                     If ShapeXCenter >= TableCols(ColsCount - 1) And ShapeXCenter < TableCols(ColsCount) Then
                         
-                        SlideShape(ShapeCount).left = TableXCenter(ColsCount) - (SlideShape(ShapeCount).Width / 2)
+                        SlideShape(ShapeCount).left = TableXCenter(ColsCount) - (SlideShape(ShapeCount).width / 2)
                         Exit For
                         
                     End If
@@ -136,19 +136,19 @@ Sub ObjectsAlignToTableColumn()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf MyDocument.Selection.ShapeRange.Count > 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count > 1 Then
         
         Dim ShapeCount, TableIndex, TableDimensions  As Long
         
         TableIndex = 0
         TableDimensions = 0
         
-        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
+        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.count
             If MyDocument.Selection.ShapeRange(ShapeCount).HasTable = True Then
                 
-                If MyDocument.Selection.ShapeRange(ShapeCount).Height > TableDimensions Then
+                If MyDocument.Selection.ShapeRange(ShapeCount).height > TableDimensions Then
                     TableIndex = ShapeCount
-                    TableDimensions = MyDocument.Selection.ShapeRange(ShapeCount).Height
+                    TableDimensions = MyDocument.Selection.ShapeRange(ShapeCount).height
                     
                 End If
                 
@@ -167,18 +167,18 @@ Sub ObjectsAlignToTableColumn()
             
             Dim SlideShape() As shape
             Dim SlideShapeOrdered() As shape
-            ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.Count - 1)
-            ReDim SlideShapeOrdered(1 To MyDocument.Selection.ShapeRange.Count)
+            ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.count - 1)
+            ReDim SlideShapeOrdered(1 To MyDocument.Selection.ShapeRange.count)
             
-            Shapes = 0
+            shapes = 0
             
-            For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
+            For ShapeCount = 1 To MyDocument.Selection.ShapeRange.count
                 
                 If ShapeCount = TableIndex Then
                     
                 Else
-                    Shapes = Shapes + 1
-                    Set SlideShape(Shapes) = MyDocument.Selection.ShapeRange(ShapeCount)
+                    shapes = shapes + 1
+                    Set SlideShape(shapes) = MyDocument.Selection.ShapeRange(ShapeCount)
                     
                 End If
                 
@@ -189,31 +189,31 @@ Sub ObjectsAlignToTableColumn()
             End If
             
             Set SlideShapeOrdered(1) = MyDocument.Selection.ShapeRange(TableIndex)
-            For ShapeCount = 2 To MyDocument.Selection.ShapeRange.Count
+            For ShapeCount = 2 To MyDocument.Selection.ShapeRange.count
                 Set SlideShapeOrdered(ShapeCount) = SlideShape(ShapeCount - 1)
             Next ShapeCount
             
-            For RowsCount = 1 To MyDocument.Selection.ShapeRange(TableIndex).Table.Rows.Count
+            For RowsCount = 1 To MyDocument.Selection.ShapeRange(TableIndex).table.rows.count
                 
-                For ColsCount = 1 To MyDocument.Selection.ShapeRange(TableIndex).Table.Columns.Count
+                For ColsCount = 1 To MyDocument.Selection.ShapeRange(TableIndex).table.Columns.count
                     
-                    If (ColsCount = AlignmentColumn) And RowsCount > SkipRows And (RowsCount < (MyDocument.Selection.ShapeRange.Count + SkipRows)) Then
+                    If (ColsCount = AlignmentColumn) And RowsCount > SkipRows And (RowsCount < (MyDocument.Selection.ShapeRange.count + SkipRows)) Then
                         
                         With SlideShapeOrdered(RowsCount + 1 - SkipRows)
                             
-                            .left = TableLeft + MyDocument.Selection.ShapeRange(TableIndex).Table.Columns(ColsCount).Width / 2 - .Width / 2
-                            .Top = TableTop + MyDocument.Selection.ShapeRange(TableIndex).Table.Rows(RowsCount).Height / 2 - .Height / 2
+                            .left = TableLeft + MyDocument.Selection.ShapeRange(TableIndex).table.Columns(ColsCount).width / 2 - .width / 2
+                            .Top = TableTop + MyDocument.Selection.ShapeRange(TableIndex).table.rows(RowsCount).height / 2 - .height / 2
                             
                         End With
                         
                     End If
                     
-                    TableLeft = TableLeft + Application.ActiveWindow.Selection.ShapeRange(TableIndex).Table.Columns(ColsCount).Width
+                    TableLeft = TableLeft + Application.ActiveWindow.Selection.ShapeRange(TableIndex).table.Columns(ColsCount).width
                     
                 Next ColsCount
                 
                 TableLeft = Application.ActiveWindow.Selection.ShapeRange(TableIndex).left
-                TableTop = TableTop + Application.ActiveWindow.Selection.ShapeRange(TableIndex).Table.Rows(RowsCount).Height
+                TableTop = TableTop + Application.ActiveWindow.Selection.ShapeRange(TableIndex).table.rows(RowsCount).height
                 
             Next RowsCount
             
@@ -237,19 +237,19 @@ Sub ObjectsAlignToTableRow()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
         
-    ElseIf MyDocument.Selection.ShapeRange.Count > 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count > 1 Then
         
         Dim ShapeCount, TableIndex, TableDimensions  As Long
         
         TableIndex = 0
         TableDimensions = 0
         
-        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
+        For ShapeCount = 1 To MyDocument.Selection.ShapeRange.count
             If MyDocument.Selection.ShapeRange(ShapeCount).HasTable = True Then
                 
-                If MyDocument.Selection.ShapeRange(ShapeCount).Width > TableDimensions Then
+                If MyDocument.Selection.ShapeRange(ShapeCount).width > TableDimensions Then
                     TableIndex = ShapeCount
-                    TableDimensions = MyDocument.Selection.ShapeRange(ShapeCount).Width
+                    TableDimensions = MyDocument.Selection.ShapeRange(ShapeCount).width
                     
                 End If
                 
@@ -268,18 +268,18 @@ Sub ObjectsAlignToTableRow()
             
             Dim SlideShape() As shape
             Dim SlideShapeOrdered() As shape
-            ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.Count - 1)
-            ReDim SlideShapeOrdered(1 To MyDocument.Selection.ShapeRange.Count)
+            ReDim SlideShape(1 To MyDocument.Selection.ShapeRange.count - 1)
+            ReDim SlideShapeOrdered(1 To MyDocument.Selection.ShapeRange.count)
             
-            Shapes = 0
+            shapes = 0
             
-            For ShapeCount = 1 To MyDocument.Selection.ShapeRange.Count
+            For ShapeCount = 1 To MyDocument.Selection.ShapeRange.count
                 
                 If ShapeCount = TableIndex Then
                     
                 Else
-                    Shapes = Shapes + 1
-                    Set SlideShape(Shapes) = MyDocument.Selection.ShapeRange(ShapeCount)
+                    shapes = shapes + 1
+                    Set SlideShape(shapes) = MyDocument.Selection.ShapeRange(ShapeCount)
                     
                 End If
                 
@@ -290,31 +290,31 @@ Sub ObjectsAlignToTableRow()
             End If
             
             Set SlideShapeOrdered(1) = MyDocument.Selection.ShapeRange(TableIndex)
-            For ShapeCount = 2 To MyDocument.Selection.ShapeRange.Count
+            For ShapeCount = 2 To MyDocument.Selection.ShapeRange.count
                 Set SlideShapeOrdered(ShapeCount) = SlideShape(ShapeCount - 1)
             Next ShapeCount
             
-            For RowsCount = 1 To MyDocument.Selection.ShapeRange(TableIndex).Table.Rows.Count
+            For RowsCount = 1 To MyDocument.Selection.ShapeRange(TableIndex).table.rows.count
                 
-                For ColsCount = 1 To MyDocument.Selection.ShapeRange(TableIndex).Table.Columns.Count
+                For ColsCount = 1 To MyDocument.Selection.ShapeRange(TableIndex).table.Columns.count
                     
-                    If (RowsCount = AlignmentRow) And ColsCount > SkipColumns And (ColsCount < (MyDocument.Selection.ShapeRange.Count + SkipColumns)) Then
+                    If (RowsCount = AlignmentRow) And ColsCount > SkipColumns And (ColsCount < (MyDocument.Selection.ShapeRange.count + SkipColumns)) Then
                         
                         With SlideShapeOrdered(ColsCount + 1 - SkipColumns)
                             
-                            .left = TableLeft + MyDocument.Selection.ShapeRange(TableIndex).Table.Columns(ColsCount).Width / 2 - .Width / 2
-                            .Top = TableTop + MyDocument.Selection.ShapeRange(TableIndex).Table.Rows(RowsCount).Height / 2 - .Height / 2
+                            .left = TableLeft + MyDocument.Selection.ShapeRange(TableIndex).table.Columns(ColsCount).width / 2 - .width / 2
+                            .Top = TableTop + MyDocument.Selection.ShapeRange(TableIndex).table.rows(RowsCount).height / 2 - .height / 2
                             
                         End With
                         
                     End If
                     
-                    TableLeft = TableLeft + Application.ActiveWindow.Selection.ShapeRange(TableIndex).Table.Columns(ColsCount).Width
+                    TableLeft = TableLeft + Application.ActiveWindow.Selection.ShapeRange(TableIndex).table.Columns(ColsCount).width
                     
                 Next ColsCount
                 
                 TableLeft = Application.ActiveWindow.Selection.ShapeRange(TableIndex).left
-                TableTop = TableTop + Application.ActiveWindow.Selection.ShapeRange(TableIndex).Table.Rows(RowsCount).Height
+                TableTop = TableTop + Application.ActiveWindow.Selection.ShapeRange(TableIndex).table.rows(RowsCount).height
                 
             Next RowsCount
             
@@ -331,3 +331,4 @@ Sub ObjectsAlignToTableRow()
     End If
     
 End Sub
+

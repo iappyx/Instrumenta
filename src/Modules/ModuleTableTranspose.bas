@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleTableTranspose"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -30,38 +30,38 @@ Sub TableTranspose()
         MsgBox "No table selected."
     Else
         
-        If (Application.ActiveWindow.Selection.ShapeRange.Count = 1) And Application.ActiveWindow.Selection.ShapeRange.HasTable Then
+        If (Application.ActiveWindow.Selection.ShapeRange.count = 1) And Application.ActiveWindow.Selection.ShapeRange.HasTable Then
             
             With Application.ActiveWindow.Selection.ShapeRange.table
                 
                 Set CopyTable = Application.ActiveWindow.Selection.ShapeRange.Duplicate
                 
-                For RowsCount = .Rows.Count To 2 Step -1
-                    CopyTable.table.Rows(RowsCount).Delete
+                For RowsCount = .rows.count To 2 Step -1
+                    CopyTable.table.rows(RowsCount).Delete
                 Next RowsCount
                 
-                For ColsCount = .Columns.Count To 2 Step -1
+                For ColsCount = .Columns.count To 2 Step -1
                     CopyTable.table.Columns(ColsCount).Delete
                 Next ColsCount
                 
-                For RowsCount = .Rows.Count To 2 Step -1
+                For RowsCount = .rows.count To 2 Step -1
                     CopyTable.table.Columns.Add
                 Next RowsCount
                 
-                For ColsCount = .Columns.Count To 2 Step -1
-                    CopyTable.table.Rows.Add
+                For ColsCount = .Columns.count To 2 Step -1
+                    CopyTable.table.rows.Add
                 Next ColsCount
                 
-                CopyTable.Width = Application.ActiveWindow.Selection.ShapeRange.Width
+                CopyTable.width = Application.ActiveWindow.Selection.ShapeRange.width
                 CopyTable.Top = Application.ActiveWindow.Selection.ShapeRange.Top
                 CopyTable.left = Application.ActiveWindow.Selection.ShapeRange.left
                 
-                For RowsCount = 1 To .Rows.Count
-                    For ColsCount = 1 To .Columns.Count
+                For RowsCount = 1 To .rows.count
+                    For ColsCount = 1 To .Columns.count
                         
-                        .Cell(RowsCount, ColsCount).shape.TextFrame2.TextRange.Cut
+                        .cell(RowsCount, ColsCount).shape.TextFrame2.textRange.Cut
                         PauseForMilliseconds (25)
-                        CopyTable.table.Cell(ColsCount, RowsCount).shape.TextFrame2.TextRange.Paste
+                        CopyTable.table.cell(ColsCount, RowsCount).shape.TextFrame2.textRange.Paste
                         
                     Next ColsCount
                 Next RowsCount

@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} InsertLegendForm 
-   Caption         =   "Insert custom legend"
-   ClientHeight    =   1695
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   6120
-   OleObjectBlob   =   "InsertLegendForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "InsertLegendForm"
+Attribute VB_Base = "0{6C14F08A-52C5-405D-8EE8-D90CD7C79FA1}{0D13E540-EE37-4D27-BF47-3273B40D6A11}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal

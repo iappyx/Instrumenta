@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SlideGraderForm 
-   Caption         =   "Slide grader"
-   ClientHeight    =   9330.001
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   12510
-   OleObjectBlob   =   "SlideGraderForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "SlideGraderForm"
+Attribute VB_Base = "0{F7B02A32-2C7C-4327-A762-D77EFDB412C4}{292BB159-FA70-489B-917E-919A521E96F6}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal

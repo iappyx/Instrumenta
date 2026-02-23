@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleProcess"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,14 @@ Attribute VB_Name = "ModuleProcess"
 Sub InsertProcessSmartArt()
 
 Set MyDocument = Application.ActiveWindow
-Set ProcessSmartArt = MyDocument.Selection.SlideRange.Shapes.AddSmartArt(Application.SmartArtLayouts("urn:microsoft.com/office/officeart/2005/8/layout/hChevron3"), 50, 100, Application.ActivePresentation.PageSetup.SlideWidth - 100, 50)
+Set ProcessSmartArt = MyDocument.Selection.SlideRange.shapes.AddSmartArt(Application.SmartArtLayouts("urn:microsoft.com/office/officeart/2005/8/layout/hChevron3"), 50, 100, Application.ActivePresentation.PageSetup.slideWidth - 100, 50)
 
-For NodeCount = 1 To ProcessSmartArt.SmartArt.AllNodes.Count
+For nodeCount = 1 To ProcessSmartArt.SmartArt.AllNodes.count
 
-With ProcessSmartArt.SmartArt.AllNodes(NodeCount).TextFrame2.TextRange
+With ProcessSmartArt.SmartArt.AllNodes(nodeCount).TextFrame2.textRange
 .Font.Size = 14
 .Font.Bold = msoTrue
-.Text = "Step" & Str(NodeCount)
+.text = "Step" & Str(nodeCount)
 End With
 
 Next

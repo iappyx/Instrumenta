@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjects"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -37,14 +37,14 @@ Function GetRealTop(SlideShape As shape) As Single
     
     rotation = SlideShape.rotation Mod 360
     radians = rotation * (3.14159265358979 / 180)
-    centerY = SlideShape.Top + SlideShape.Height / 2
+    centerY = SlideShape.Top + SlideShape.height / 2
     Select Case rotation
         Case 0, 180
             GetRealTop = SlideShape.Top
         Case 90, 270
-            GetRealTop = centerY - SlideShape.Width / 2
+            GetRealTop = centerY - SlideShape.width / 2
         Case Else
-            GetRealTop = centerY - (SlideShape.Height * Abs(Cos(radians)) + SlideShape.Width * Abs(Sin(radians))) / 2
+            GetRealTop = centerY - (SlideShape.height * Abs(Cos(radians)) + SlideShape.width * Abs(Sin(radians))) / 2
     End Select
 End Function
 
@@ -55,15 +55,15 @@ Function GetRealLeft(SlideShape As shape) As Single
     
     rotation = SlideShape.rotation Mod 360
     radians = rotation * (3.14159265358979 / 180)
-    centerX = SlideShape.left + SlideShape.Width / 2
+    centerX = SlideShape.left + SlideShape.width / 2
     
     Select Case rotation
         Case 0, 180
             GetRealLeft = SlideShape.left
         Case 90, 270
-            GetRealLeft = centerX - SlideShape.Height / 2
+            GetRealLeft = centerX - SlideShape.height / 2
         Case Else
-            GetRealLeft = centerX - (SlideShape.Width * Abs(Cos(radians)) + SlideShape.Height * Abs(Sin(radians))) / 2
+            GetRealLeft = centerX - (SlideShape.width * Abs(Cos(radians)) + SlideShape.height * Abs(Sin(radians))) / 2
     End Select
 End Function
 
@@ -76,11 +76,11 @@ Function GetRealWidth(SlideShape As shape) As Single
     
     Select Case rotation
         Case 0, 180
-            GetRealWidth = SlideShape.Width
+            GetRealWidth = SlideShape.width
         Case 90, 270
-            GetRealWidth = SlideShape.Height
+            GetRealWidth = SlideShape.height
         Case Else
-            GetRealWidth = SlideShape.Width * Abs(Cos(radians)) + SlideShape.Height * Abs(Sin(radians))
+            GetRealWidth = SlideShape.width * Abs(Cos(radians)) + SlideShape.height * Abs(Sin(radians))
     End Select
 End Function
 
@@ -93,11 +93,11 @@ Function GetRealHeight(SlideShape As shape) As Single
     
     Select Case rotation
         Case 0, 180
-            GetRealHeight = SlideShape.Height
+            GetRealHeight = SlideShape.height
         Case 90, 270
-            GetRealHeight = SlideShape.Width
+            GetRealHeight = SlideShape.width
         Case Else
-            GetRealHeight = SlideShape.Height * Abs(Cos(radians)) + SlideShape.Width * Abs(Sin(radians))
+            GetRealHeight = SlideShape.height * Abs(Cos(radians)) + SlideShape.width * Abs(Sin(radians))
     End Select
 End Function
 
@@ -127,15 +127,15 @@ Sub SetRealWidth(SlideShape As shape, newRealWidth As Single)
     
     Select Case rotation
         Case 0
-            SlideShape.Width = newRealWidth
+            SlideShape.width = newRealWidth
         Case 90
-            SlideShape.left = SlideShape.left - (SlideShape.Height - newRealWidth)
-            SlideShape.Height = newRealWidth
+            SlideShape.left = SlideShape.left - (SlideShape.height - newRealWidth)
+            SlideShape.height = newRealWidth
         Case 180
-            SlideShape.left = SlideShape.left - (SlideShape.Width - newRealWidth)
-            SlideShape.Width = newRealWidth
+            SlideShape.left = SlideShape.left - (SlideShape.width - newRealWidth)
+            SlideShape.width = newRealWidth
         Case 270
-            SlideShape.Height = newRealWidth
+            SlideShape.height = newRealWidth
         Case Else
             Dim radians As Double
             Dim cosTheta As Double
@@ -145,10 +145,10 @@ Sub SetRealWidth(SlideShape As shape, newRealWidth As Single)
             cosTheta = Cos(radians)
             sinTheta = Sin(radians)
             
-            aspectRatio = SlideShape.Width / SlideShape.Height
+            aspectRatio = SlideShape.width / SlideShape.height
             
-            SlideShape.Width = newRealWidth / ((Abs(cosTheta) + (Abs(sinTheta)) / aspectRatio))
-            SlideShape.Height = SlideShape.Width / aspectRatio
+            SlideShape.width = newRealWidth / ((Abs(cosTheta) + (Abs(sinTheta)) / aspectRatio))
+            SlideShape.height = SlideShape.width / aspectRatio
     End Select
 End Sub
 
@@ -158,15 +158,15 @@ Sub SetRealHeight(SlideShape As shape, newRealHeight As Single)
     
     Select Case rotation
         Case 0
-            SlideShape.Height = newRealHeight
+            SlideShape.height = newRealHeight
         Case 90
-            SlideShape.Width = newRealHeight
+            SlideShape.width = newRealHeight
         Case 180
-            SlideShape.Top = SlideShape.Top - (SlideShape.Height - newRealHeight)
-            SlideShape.Height = newRealHeight
+            SlideShape.Top = SlideShape.Top - (SlideShape.height - newRealHeight)
+            SlideShape.height = newRealHeight
         Case 270
-            SlideShape.Top = SlideShape.Top - (SlideShape.Width - newRealHeight)
-            SlideShape.Width = newRealHeight
+            SlideShape.Top = SlideShape.Top - (SlideShape.width - newRealHeight)
+            SlideShape.width = newRealHeight
         Case Else
             Dim radians As Double
             Dim cosTheta As Double
@@ -176,9 +176,9 @@ Sub SetRealHeight(SlideShape As shape, newRealHeight As Single)
             cosTheta = Cos(radians)
             sinTheta = Sin(radians)
             
-            aspectRatio = SlideShape.Width / SlideShape.Height
+            aspectRatio = SlideShape.width / SlideShape.height
             
-            SlideShape.Height = newRealHeight / (Abs(cosTheta) + (Abs(sinTheta) * aspectRatio))
-            SlideShape.Width = SlideShape.Height * aspectRatio
+            SlideShape.height = newRealHeight / (Abs(cosTheta) + (Abs(sinTheta) * aspectRatio))
+            SlideShape.width = SlideShape.height * aspectRatio
     End Select
 End Sub

@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjectsRowsAndColumns"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ Sub GroupShapesByColumns()
     Set ShapeGroups = New Collection
     
     For Each SlideShape In ActiveWindow.Selection.ShapeRange
-    SlideShape.Name = "Shape " & SlideShape.id
+    SlideShape.name = "Shape " & SlideShape.id
     Next SlideShape
     
     For Each SlideShape In ActiveWindow.Selection.ShapeRange
@@ -37,7 +37,7 @@ Sub GroupShapesByColumns()
         
         For Each ShapeGroup In ShapeGroups
             
-            If (SlideShape.left + SlideShape.Width) >= ShapeGroup(1).left And SlideShape.left <= (ShapeGroup(1).left + ShapeGroup(1).Width) Then
+            If (SlideShape.left + SlideShape.width) >= ShapeGroup(1).left And SlideShape.left <= (ShapeGroup(1).left + ShapeGroup(1).width) Then
                 ShapeGroup.Add SlideShape
                 ShapeShapeGroupExists = True
                 Exit For
@@ -53,13 +53,13 @@ Sub GroupShapesByColumns()
     
     For Each ShapeGroup In ShapeGroups
         Dim ShapeNames() As String
-        ReDim ShapeNames(ShapeGroup.Count - 1)
-        For i = 1 To ShapeGroup.Count
-            ShapeNames(i - 1) = ShapeGroup(i).Name
+        ReDim ShapeNames(ShapeGroup.count - 1)
+        For i = 1 To ShapeGroup.count
+            ShapeNames(i - 1) = ShapeGroup(i).name
         Next i
         
-        If ShapeGroup.Count > 1 Then
-            ActiveWindow.Selection.SlideRange.Shapes.Range(ShapeNames).Group
+        If ShapeGroup.count > 1 Then
+            ActiveWindow.Selection.SlideRange.shapes.Range(ShapeNames).Group
         End If
     Next ShapeGroup
     
@@ -71,7 +71,7 @@ Sub GroupShapesByRows()
     Set ShapeGroups = New Collection
     
     For Each SlideShape In ActiveWindow.Selection.ShapeRange
-    SlideShape.Name = "Shape " & SlideShape.id
+    SlideShape.name = "Shape " & SlideShape.id
     Next SlideShape
     
     For Each SlideShape In ActiveWindow.Selection.ShapeRange
@@ -81,7 +81,7 @@ Sub GroupShapesByRows()
         
         For Each ShapeGroup In ShapeGroups
             
-            If (SlideShape.Top + SlideShape.Height) >= ShapeGroup(1).Top And SlideShape.Top <= (ShapeGroup(1).Top + ShapeGroup(1).Height) Then
+            If (SlideShape.Top + SlideShape.height) >= ShapeGroup(1).Top And SlideShape.Top <= (ShapeGroup(1).Top + ShapeGroup(1).height) Then
                 ShapeGroup.Add SlideShape
                 ShapeShapeGroupExists = True
                 Exit For
@@ -97,13 +97,13 @@ Sub GroupShapesByRows()
     
     For Each ShapeGroup In ShapeGroups
         Dim ShapeNames() As String
-        ReDim ShapeNames(ShapeGroup.Count - 1)
-        For i = 1 To ShapeGroup.Count
-            ShapeNames(i - 1) = ShapeGroup(i).Name
+        ReDim ShapeNames(ShapeGroup.count - 1)
+        For i = 1 To ShapeGroup.count
+            ShapeNames(i - 1) = ShapeGroup(i).name
         Next i
         
-        If ShapeGroup.Count > 1 Then
-            ActiveWindow.Selection.SlideRange.Shapes.Range(ShapeNames).Group
+        If ShapeGroup.count > 1 Then
+            ActiveWindow.Selection.SlideRange.shapes.Range(ShapeNames).Group
         End If
     Next ShapeGroup
     

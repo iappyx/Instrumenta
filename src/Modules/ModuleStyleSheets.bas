@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleStyleSheets"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -114,7 +114,7 @@ Sub CreateStyleSheetLayout()
             
             If answer = vbNo Then Exit Sub
             
-            layout.delete
+            layout.Delete
             Exit For
         End If
     Next layout
@@ -130,7 +130,7 @@ Sub CreateStyleShape(layout As CustomLayout, name As String, text As String, _
                      isBold As Boolean, isItalic As Boolean, leftPos As Single)
 
     Dim shp As shape
-    Set shp = layout.Shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, topPos, STYLE_SHAPE_WIDTH, STYLE_SHAPE_HEIGHT)
+    Set shp = layout.shapes.AddTextbox(msoTextOrientationHorizontal, leftPos, topPos, STYLE_SHAPE_WIDTH, STYLE_SHAPE_HEIGHT)
 
     shp.name = name
 
@@ -199,7 +199,7 @@ Sub ApplyTextStyle(styleName As String)
         Exit Sub
     End If
 
-    For Each styleShp In stylesheet.Shapes
+    For Each styleShp In stylesheet.shapes
         If styleShp.name = styleName Then
 
             If sel.Type = ppSelectionShapes Then
@@ -340,12 +340,12 @@ Sub UpdateFullShapeStyles()
         
         If Not stylesheet Is Nothing Then
         
-            For Each shp In sld.Shapes
+            For Each shp In sld.shapes
 
                 styleName = shp.Tags("InstrumentaStyle")
                 If styleName <> "" Then
 
-                    For Each styleShp In stylesheet.Shapes
+                    For Each styleShp In stylesheet.shapes
                         If styleShp.name = styleName Then
 
                             styleShp.PickUp
@@ -378,10 +378,10 @@ Sub RemoveAllInstrumentaStyleTags()
     countRemoved = 0
 
     For Each sld In ActivePresentation.Slides
-        For Each shp In sld.Shapes
+        For Each shp In sld.shapes
 
             If shp.Tags("InstrumentaStyle") <> "" Then
-                shp.Tags.delete "InstrumentaStyle"
+                shp.Tags.Delete "InstrumentaStyle"
                 countRemoved = countRemoved + 1
             End If
 
@@ -412,7 +412,7 @@ Sub RemoveInstrumentaStylesheet()
         Exit Sub
     End If
 
-    stylesheet.delete
+    stylesheet.Delete
 
     MsgBox "Instrumenta stylesheet layout has been removed from this slide master.", _
            vbInformation, "Stylesheet Removed"
@@ -470,8 +470,8 @@ Sub CreateStyleSheetOnMaster(sm As Object)
     Set layout = sm.CustomLayouts(sm.CustomLayouts.count).Duplicate
     layout.name = "InstrumentaStylesheet"
 
-    Do While layout.Shapes.count > 0
-        layout.Shapes(1).delete
+    Do While layout.shapes.count > 0
+        layout.shapes(1).Delete
     Loop
 
     topPos = STYLE_COLUMN_TOP
@@ -492,7 +492,7 @@ Sub CreateStyleSheetOnMaster(sm As Object)
     slideHeight = sm.height
     marginBottom = 10
 
-    Set warn = layout.Shapes.AddTextbox( _
+    Set warn = layout.shapes.AddTextbox( _
         orientation:=msoTextOrientationHorizontal, _
         left:=0, _
         Top:=slideHeight - marginBottom - 80, _
@@ -541,7 +541,7 @@ Sub RemoveStyleSheetsFromAllMasters()
         If stylesheet Is Nothing Then
             skippedCount = skippedCount + 1
         Else
-            stylesheet.delete
+            stylesheet.Delete
             removedCount = removedCount + 1
         End If
         
@@ -599,9 +599,9 @@ Sub ExportStylesToPPTX()
     Set tempPres = Presentations.Add(msoFalse)
     Set tempSlide = tempPres.Slides.Add(1, ppLayoutBlank)
 
-    For Each shp In stylesheet.Shapes
+    For Each shp In stylesheet.shapes
         shp.Copy
-        tempSlide.Shapes.Paste
+        tempSlide.shapes.Paste
     Next shp
 
     tempPres.SaveAs exportPath
@@ -665,7 +665,7 @@ End If
     #Else
         Dim importFileDialog As FileDialog
         Set importFileDialog = Application.FileDialog(msoFileDialogFilePicker)
-        importFileDialog.Title = "Import Instrumenta Stylesheet"
+        importFileDialog.title = "Import Instrumenta Stylesheet"
         importFileDialog.Filters.Clear
         importFileDialog.Filters.Add "PowerPoint Files", "*.pptx"
         
@@ -681,13 +681,13 @@ End If
     Set importPres = Presentations.Open(importPath, WithWindow:=msoFalse)
     Set importSlide = importPres.Slides(1)
     
-    Do While stylesheet.Shapes.count > 0
-        stylesheet.Shapes(1).delete
+    Do While stylesheet.shapes.count > 0
+        stylesheet.shapes(1).Delete
     Loop
 
-    For Each shp In importSlide.Shapes
+    For Each shp In importSlide.shapes
         shp.Copy
-        stylesheet.Shapes.Paste
+        stylesheet.shapes.Paste
     Next shp
 
     importPres.Close

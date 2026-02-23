@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleTableDistributeWithGaps"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -24,9 +24,9 @@ Attribute VB_Name = "ModuleTableDistributeWithGaps"
 Sub TableDistributeColumnsWithGaps()
 
     Set MyDocument = Application.ActiveWindow
-    Dim TotalWidth As Double
+    Dim totalWidth As Double
     Dim NumberOfColumnsToDistribute As Long
-    TotalWidth = 0
+    totalWidth = 0
     NumberOfColumnsToDistribute = 0
      
     If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
@@ -36,19 +36,19 @@ Sub TableDistributeColumnsWithGaps()
         
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
         
-    With Application.ActiveWindow.Selection.ShapeRange.Table
+    With Application.ActiveWindow.Selection.ShapeRange.table
         
         TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA COLUMNGAPS")
         
-        For ColsCount = 1 To .Columns.Count
+        For ColsCount = 1 To .Columns.count
         
-            For RowsCount = 1 To .Rows.Count
+            For RowsCount = 1 To .rows.count
                 
-                If .Cell(RowsCount, ColsCount).Selected Then
+                If .cell(RowsCount, ColsCount).Selected Then
                     
                 If Not ((ColsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not ColsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
-                TotalWidth = TotalWidth + .Columns(ColsCount).Width
+                totalWidth = totalWidth + .Columns(ColsCount).width
                 NumberOfColumnsToDistribute = NumberOfColumnsToDistribute + 1
                 Exit For
                     
@@ -62,15 +62,15 @@ Sub TableDistributeColumnsWithGaps()
         
         
         If NumberOfColumnsToDistribute > 0 Then
-        For ColsCount = 1 To .Columns.Count
+        For ColsCount = 1 To .Columns.count
         
-            For RowsCount = 1 To .Rows.Count
+            For RowsCount = 1 To .rows.count
                 
-                If .Cell(RowsCount, ColsCount).Selected Then
+                If .cell(RowsCount, ColsCount).Selected Then
                     
                 If Not ((ColsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not ColsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
-                .Columns(ColsCount).Width = TotalWidth / NumberOfColumnsToDistribute
+                .Columns(ColsCount).width = totalWidth / NumberOfColumnsToDistribute
                 Exit For
                     
                 End If
@@ -109,19 +109,19 @@ Sub TableDistributeRowsWithGaps()
         
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
         
-    With Application.ActiveWindow.Selection.ShapeRange.Table
+    With Application.ActiveWindow.Selection.ShapeRange.table
         
         TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA ROWGAPS")
         
-        For RowsCount = 1 To .Rows.Count
+        For RowsCount = 1 To .rows.count
            
-            For ColsCount = 1 To .Columns.Count
+            For ColsCount = 1 To .Columns.count
                 
-                If .Cell(RowsCount, ColsCount).Selected Then
+                If .cell(RowsCount, ColsCount).Selected Then
                     
                 If Not ((RowsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
-                totalHeight = totalHeight + .Rows(RowsCount).Height
+                totalHeight = totalHeight + .rows(RowsCount).height
                 NumberOfRowsToDistribute = NumberOfRowsToDistribute + 1
                 Exit For
                     
@@ -136,15 +136,15 @@ Sub TableDistributeRowsWithGaps()
         
         If NumberOfRowsToDistribute > 0 Then
         
-        For RowsCount = 1 To .Rows.Count
+        For RowsCount = 1 To .rows.count
         
-            For ColsCount = 1 To .Columns.Count
+            For ColsCount = 1 To .Columns.count
                 
-                If .Cell(RowsCount, ColsCount).Selected Then
+                If .cell(RowsCount, ColsCount).Selected Then
                     
                 If Not ((RowsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
-                .Rows(RowsCount).Height = totalHeight / NumberOfRowsToDistribute
+                .rows(RowsCount).height = totalHeight / NumberOfRowsToDistribute
                 Exit For
                     
                 End If

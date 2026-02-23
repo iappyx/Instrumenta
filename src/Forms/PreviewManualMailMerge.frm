@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} PreviewManualMailMerge 
-   Caption         =   "Preview manual mail merge"
-   ClientHeight    =   8113
-   ClientLeft      =   238
-   ClientTop       =   931
-   ClientWidth     =   10892
-   OleObjectBlob   =   "PreviewManualMailMerge.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "PreviewManualMailMerge"
+Attribute VB_Base = "0{50187C45-F286-44A1-B44D-69AD609AA6DA}{D50BD8B4-FA89-4709-95AA-F79C91200BC0}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -45,14 +38,14 @@ PreviewManualMailMerge.Hide
 End Sub
 
 Private Sub CommandButton3_Click()
-PreviewManualMailMerge.MailMergeListBox.List(PreviewManualMailMerge.MailMergeListBox.ListIndex, 1) = ReplaceTextTextBox.Text
+PreviewManualMailMerge.MailMergeListBox.List(PreviewManualMailMerge.MailMergeListBox.ListIndex, 1) = ReplaceTextTextBox.text
 End Sub
 
 Private Sub MailMergeListBox_Click()
 
 If Not PreviewManualMailMerge.MailMergeListBox.ListIndex = -1 Then
-ReplaceTextTextBox.Text = PreviewManualMailMerge.MailMergeListBox.List(PreviewManualMailMerge.MailMergeListBox.ListIndex, 1)
-ReplaceTextFrame.Caption = "Replace " & PreviewManualMailMerge.MailMergeListBox.List(PreviewManualMailMerge.MailMergeListBox.ListIndex, 0) & " with:"
+ReplaceTextTextBox.text = PreviewManualMailMerge.MailMergeListBox.List(PreviewManualMailMerge.MailMergeListBox.ListIndex, 1)
+ReplaceTextFrame.caption = "Replace " & PreviewManualMailMerge.MailMergeListBox.List(PreviewManualMailMerge.MailMergeListBox.ListIndex, 0) & " with:"
 End If
 
 

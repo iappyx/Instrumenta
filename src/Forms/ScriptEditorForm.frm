@@ -1,20 +1,13 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ScriptEditorForm 
-   Caption         =   "Instrumenta script editor"
-   ClientHeight    =   11415
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   16560
-   OleObjectBlob   =   "ScriptEditorForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "ScriptEditorForm"
+Attribute VB_Base = "0{F0DF4DD3-D13D-43D9-BF9D-392CD71FE740}{6F2B6E26-7CAC-47AF-B6A6-5C800AE84635}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -136,7 +129,7 @@ Private Sub btnPresetSave_Click()
     End If
 
     If Trim(txtScript.text) = "" Then
-        MsgBox "The script is empty — nothing to save.", vbInformation
+        MsgBox "The script is empty ï¿½ nothing to save.", vbInformation
         Exit Sub
     End If
 

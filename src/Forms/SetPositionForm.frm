@@ -1,20 +1,13 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SetPositionForm 
-   Caption         =   "Set position"
-   ClientHeight    =   1253
-   ClientLeft      =   91
-   ClientTop       =   406
-   ClientWidth     =   3647
-   OleObjectBlob   =   "SetPositionForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "SetPositionForm"
+Attribute VB_Base = "0{00E2087C-21A6-41E8-A1FE-4BF3C477E9D0}{39C1AC14-2D08-445E-BB13-8C2601CF5C71}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -109,100 +102,100 @@ End Sub
 
 Private Sub UserForm_Activate()
 
-RulerTextLeft.Caption = GetRulerUnit()
-RulerTextTop.Caption = GetRulerUnit()
+RulerTextLeft.caption = GetRulerUnit()
+RulerTextTop.caption = GetRulerUnit()
 
-Set Sel = Application.ActiveWindow.Selection
-    If Sel.Type = ppSelectionShapes Then
+Set sel = Application.ActiveWindow.Selection
+    If sel.Type = ppSelectionShapes Then
 
-        SetPositionForm.TextBoxLeft.Enabled = True
-        SetPositionForm.TextBoxTop.Enabled = True
+        SetPositionForm.TextBoxLeft.enabled = True
+        SetPositionForm.TextBoxTop.enabled = True
         
-        If Sel.ShapeRange.Count > 1 Then
+        If sel.ShapeRange.count > 1 Then
             
-            For i = 1 To Sel.ShapeRange.Count
-                TotalTop = TotalTop + Sel.ShapeRange(i).Top
-                TotalLeft = TotalLeft + Sel.ShapeRange(i).left
+            For i = 1 To sel.ShapeRange.count
+                TotalTop = TotalTop + sel.ShapeRange(i).Top
+                TotalLeft = TotalLeft + sel.ShapeRange(i).left
             Next i
             
-            If Sel.ShapeRange(1).left = TotalLeft / Sel.ShapeRange.Count Then
-                SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+            If sel.ShapeRange(1).left = TotalLeft / sel.ShapeRange.count Then
+                SetPositionForm.TextBoxLeft = Round(sel.ShapeRange.left * GetRulerUnitConversion(), 2)
             Else
                 SetPositionForm.TextBoxLeft = ""
             End If
             
-            If Sel.ShapeRange(1).Top = TotalTop / Sel.ShapeRange.Count Then
-                SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
+            If sel.ShapeRange(1).Top = TotalTop / sel.ShapeRange.count Then
+                SetPositionForm.TextBoxTop = Round(sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
             Else
                 SetPositionForm.TextBoxTop = ""
             End If
             
         Else
-            SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
-            SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
+            SetPositionForm.TextBoxLeft = Round(sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+            SetPositionForm.TextBoxTop = Round(sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
         End If
         
-    ElseIf Sel.Type = ppSelectionText Then
+    ElseIf sel.Type = ppSelectionText Then
         
-        SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
-        SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
+        SetPositionForm.TextBoxLeft = Round(sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+        SetPositionForm.TextBoxTop = Round(sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
         
     Else
         
         SetPositionForm.TextBoxLeft = ""
         SetPositionForm.TextBoxTop = ""
-        SetPositionForm.TextBoxLeft.Enabled = False
-        SetPositionForm.TextBoxTop.Enabled = False
+        SetPositionForm.TextBoxLeft.enabled = False
+        SetPositionForm.TextBoxTop.enabled = False
        
     End If
 End Sub
 
 
-Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
 
 
-Set Sel = Application.ActiveWindow.Selection
+Set sel = Application.ActiveWindow.Selection
        
-    If Sel.Type = ppSelectionShapes Then
+    If sel.Type = ppSelectionShapes Then
 
-        SetPositionForm.TextBoxLeft.Enabled = True
-        SetPositionForm.TextBoxTop.Enabled = True
+        SetPositionForm.TextBoxLeft.enabled = True
+        SetPositionForm.TextBoxTop.enabled = True
         
-        If Sel.ShapeRange.Count > 1 Then
+        If sel.ShapeRange.count > 1 Then
             
-            For i = 1 To Sel.ShapeRange.Count
-                TotalTop = TotalTop + Sel.ShapeRange(i).Top
-                TotalLeft = TotalLeft + Sel.ShapeRange(i).left
+            For i = 1 To sel.ShapeRange.count
+                TotalTop = TotalTop + sel.ShapeRange(i).Top
+                TotalLeft = TotalLeft + sel.ShapeRange(i).left
             Next i
             
-            If Sel.ShapeRange(1).left = TotalLeft / Sel.ShapeRange.Count Then
-                SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+            If sel.ShapeRange(1).left = TotalLeft / sel.ShapeRange.count Then
+                SetPositionForm.TextBoxLeft = Round(sel.ShapeRange.left * GetRulerUnitConversion(), 2)
             Else
                 SetPositionForm.TextBoxLeft = ""
             End If
             
-            If Sel.ShapeRange(1).Top = TotalTop / Sel.ShapeRange.Count Then
-                SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
+            If sel.ShapeRange(1).Top = TotalTop / sel.ShapeRange.count Then
+                SetPositionForm.TextBoxTop = Round(sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
             Else
                 SetPositionForm.TextBoxTop = ""
             End If
             
         Else
-            SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
-            SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
+            SetPositionForm.TextBoxLeft = Round(sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+            SetPositionForm.TextBoxTop = Round(sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
         End If
         
-    ElseIf Sel.Type = ppSelectionText Then
+    ElseIf sel.Type = ppSelectionText Then
         
-        SetPositionForm.TextBoxLeft = Round(Sel.ShapeRange.left * GetRulerUnitConversion(), 2)
-        SetPositionForm.TextBoxTop = Round(Sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
+        SetPositionForm.TextBoxLeft = Round(sel.ShapeRange.left * GetRulerUnitConversion(), 2)
+        SetPositionForm.TextBoxTop = Round(sel.ShapeRange.Top * GetRulerUnitConversion(), 2)
         
     Else
         
         SetPositionForm.TextBoxLeft = ""
         SetPositionForm.TextBoxTop = ""
-        SetPositionForm.TextBoxLeft.Enabled = False
-        SetPositionForm.TextBoxTop.Enabled = False
+        SetPositionForm.TextBoxLeft.enabled = False
+        SetPositionForm.TextBoxTop.enabled = False
         
     End If
 End Sub

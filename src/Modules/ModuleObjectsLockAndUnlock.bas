@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjectsLockAndUnlock"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -77,9 +77,9 @@ Sub LockToggleAllShapesOnAllSlides()
     
     For Each PresentationSlide In ActivePresentation.Slides
     
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
         
-        For Each SlideShape In PresentationSlide.Shapes
+        For Each SlideShape In PresentationSlide.shapes
             
             If SlideShape.Locked = msoTrue Then
                 SlideShape.Locked = msoFalse
@@ -110,9 +110,9 @@ Sub LockAllShapesOnAllSlides()
     
     For Each PresentationSlide In ActivePresentation.Slides
     
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
         
-        For Each SlideShape In PresentationSlide.Shapes
+        For Each SlideShape In PresentationSlide.shapes
 
                 SlideShape.Locked = msoTrue
             
@@ -139,9 +139,9 @@ Sub UnLockAllShapesOnAllSlides()
     
     For Each PresentationSlide In ActivePresentation.Slides
     
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
         
-        For Each SlideShape In PresentationSlide.Shapes
+        For Each SlideShape In PresentationSlide.shapes
 
                 SlideShape.Locked = msoFalse
             

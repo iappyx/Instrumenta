@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleFunctions"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -131,38 +131,38 @@ End Function
 
 Sub SetProgress(PercentageCompleted As Single, Optional ProgressDetails As String = "")
 
-    ProgressForm.ProgressBar.Width = PercentageCompleted * 2
-    ProgressForm.ProgressLabel.Caption = Round(PercentageCompleted, 0) & "% completed"
+    ProgressForm.ProgressBar.width = PercentageCompleted * 2
+    ProgressForm.ProgressLabel.caption = Round(PercentageCompleted, 0) & "% completed"
     
     If ProgressDetails = "" Then
-    ProgressForm.ProgressDetails.Caption = ""
+    ProgressForm.ProgressDetails.caption = ""
     Else
-    ProgressForm.ProgressDetails.Caption = "" & ProgressDetails
+    ProgressForm.ProgressDetails.caption = "" & ProgressDetails
     End If
     
     DoEvents
     
 End Sub
 
-Function MacFileDialog(filepath As String) As String
+Function MacFileDialog(filePath As String) As String
   MacFileDialogMacScript = "set applescript's text item delimiters to "","" " & vbNewLine & "try " & vbNewLine & "set selectedFile to (choose file " & _
-    "with prompt ""Please select a file"" default location alias """ & filepath & """ multiple selections allowed false) as string" & vbNewLine & "set applescript's text item delimiters to """" " & vbNewLine & _
+    "with prompt ""Please select a file"" default location alias """ & filePath & """ multiple selections allowed false) as string" & vbNewLine & "set applescript's text item delimiters to """" " & vbNewLine & _
     "on error errStr number errorNumber" & vbNewLine & "return errorNumber " & vbNewLine & "end try " & vbNewLine & "return selectedFile"
   MacFileDialog = MacScript(MacFileDialogMacScript)
   
   If MacFileDialog = "-128" Then
   MacFileDialog = ""
   Else
-      If CInt(Split(Application.Version, ".")(0)) >= 15 Then
+      If CInt(Split(Application.VERSION, ".")(0)) >= 15 Then
     MacFileDialog = Replace(MacFileDialog, ":", "/")
-    MacFileDialog = Replace(MacFileDialog, "Macintosh HD", "", Count:=1)
+    MacFileDialog = Replace(MacFileDialog, "Macintosh HD", "", count:=1)
         End If
   End If
   
 End Function
 
-Function MacSaveAsDialog(fileName) As String
-  MacFileDialogMacScript = "set theFile to choose file name with prompt ""Save As"" default name """ & fileName & """ default location (path to desktop folder)" & vbNewLine & "return POSIX path of theFile"
+Function MacSaveAsDialog(filename) As String
+  MacFileDialogMacScript = "set theFile to choose file name with prompt ""Save As"" default name """ & filename & """ default location (path to desktop folder)" & vbNewLine & "return POSIX path of theFile"
   MacSaveAsDialog = MacScript(MacFileDialogMacScript)
   
     If MacSaveAsDialog = "-128" Then
@@ -226,8 +226,8 @@ Function ColorDialog(StandardColor As Variant) As Variant
     
     Static PredefinedColors(16)  As Long
          
-    If ActivePresentation.ExtraColors.Count > 0 Then
-        For ExtraColorCount = 1 To ActivePresentation.ExtraColors.Count
+    If ActivePresentation.ExtraColors.count > 0 Then
+        For ExtraColorCount = 1 To ActivePresentation.ExtraColors.count
             PredefinedColors(ExtraColorCount - 1) = ActivePresentation.ExtraColors(ExtraColorCount)
         Next
     End If

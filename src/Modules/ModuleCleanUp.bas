@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleCleanUp"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -28,16 +28,16 @@ Sub CleanUpRemoveUnusedMasterSlides()
     
     On Error Resume Next
     
-    DesignsCount = ActivePresentation.Designs.Count
+    DesignsCount = ActivePresentation.Designs.count
     
-    For NumberOfDesigns = ActivePresentation.Designs.Count To 1 Step -1
+    For NumberOfDesigns = ActivePresentation.Designs.count To 1 Step -1
         
         SetProgress ((DesignsCount - NumberOfDesigns) / DesignsCount * 100)
-        For NumberOfCustomLayouts = ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts.Count To 1 Step -1
+        For NumberOfCustomLayouts = ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts.count To 1 Step -1
             ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts(NumberOfCustomLayouts).Delete
         Next NumberOfCustomLayouts
         
-        If ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts.Count = 0 Then
+        If ActivePresentation.Designs(NumberOfDesigns).SlideMaster.CustomLayouts.count = 0 Then
             ActivePresentation.Designs(NumberOfDesigns).Delete
         End If
         
@@ -56,7 +56,7 @@ Public Function CallToSlideScopesForm() As String
 End Function
 
 Sub CleanUpRemoveAnimationsFromAllSlides()
-    Dim PresentationSlide As slide
+    Dim PresentationSlide As Slide
     Dim AnimationCount As Long
     
     Select Case CallToSlideScopesForm()
@@ -65,17 +65,17 @@ Sub CleanUpRemoveAnimationsFromAllSlides()
             
         Case "selected"
             
-            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.Count
+            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.count
             ProgressForm.Show
             
             If TotalSelectedSlides > 0 Then
-                SlideIndex = 0
+                slideIndex = 0
                 
                 For Each PresentationSlide In ActiveWindow.Selection.SlideRange
-                    SlideIndex = SlideIndex + 1
-                    SetProgress (SlideIndex / TotalSelectedSlides * 100)
+                    slideIndex = slideIndex + 1
+                    SetProgress (slideIndex / TotalSelectedSlides * 100)
                     
-                    For AnimationCount = PresentationSlide.TimeLine.MainSequence.Count To 1 Step -1
+                    For AnimationCount = PresentationSlide.TimeLine.MainSequence.count To 1 Step -1
                         PresentationSlide.TimeLine.MainSequence.Item(AnimationCount).Delete
                     Next AnimationCount
                 Next PresentationSlide
@@ -91,9 +91,9 @@ Sub CleanUpRemoveAnimationsFromAllSlides()
             
             For Each PresentationSlide In ActivePresentation.Slides
                 
-                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
                 
-                For AnimationCount = PresentationSlide.TimeLine.MainSequence.Count To 1 Step -1
+                For AnimationCount = PresentationSlide.TimeLine.MainSequence.count To 1 Step -1
                     PresentationSlide.TimeLine.MainSequence.Item(AnimationCount).Delete
                 Next AnimationCount
             Next PresentationSlide
@@ -106,7 +106,7 @@ Sub CleanUpRemoveAnimationsFromAllSlides()
 End Sub
 
 Sub CleanUpRemoveSpeakerNotesFromAllSlides()
-    Dim PresentationSlide As slide
+    Dim PresentationSlide As Slide
     Dim SlideShape  As PowerPoint.shape
     
     Select Case CallToSlideScopesForm()
@@ -115,19 +115,19 @@ Sub CleanUpRemoveSpeakerNotesFromAllSlides()
             
         Case "selected"
             
-            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.Count
+            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.count
             ProgressForm.Show
             
             If TotalSelectedSlides > 0 Then
-                SlideIndex = 0
+                slideIndex = 0
                 
                 For Each PresentationSlide In ActiveWindow.Selection.SlideRange
-                    SlideIndex = SlideIndex + 1
-                    SetProgress (SlideIndex / TotalSelectedSlides * 100)
+                    slideIndex = slideIndex + 1
+                    SetProgress (slideIndex / TotalSelectedSlides * 100)
                     
-                    For Each SlideShape In PresentationSlide.NotesPage.Shapes
+                    For Each SlideShape In PresentationSlide.NotesPage.shapes
                         If SlideShape.TextFrame.HasText Then
-                            SlideShape.TextFrame.TextRange = ""
+                            SlideShape.TextFrame.textRange = ""
                         End If
                     Next
                     
@@ -144,11 +144,11 @@ Sub CleanUpRemoveSpeakerNotesFromAllSlides()
             
             For Each PresentationSlide In ActivePresentation.Slides
                 
-                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
                 
-                For Each SlideShape In PresentationSlide.NotesPage.Shapes
+                For Each SlideShape In PresentationSlide.NotesPage.shapes
                     If SlideShape.TextFrame.HasText Then
-                        SlideShape.TextFrame.TextRange = ""
+                        SlideShape.TextFrame.textRange = ""
                     End If
                 Next
             Next
@@ -161,7 +161,7 @@ Sub CleanUpRemoveSpeakerNotesFromAllSlides()
 End Sub
 
 Sub CleanUpRemoveCommentsFromAllSlides()
-    Dim PresentationSlide As slide
+    Dim PresentationSlide As Slide
     Dim CommentsCount As Long
     
     Select Case CallToSlideScopesForm()
@@ -170,17 +170,17 @@ Sub CleanUpRemoveCommentsFromAllSlides()
             
         Case "selected"
             
-            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.Count
+            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.count
             ProgressForm.Show
             
             If TotalSelectedSlides > 0 Then
-                SlideIndex = 0
+                slideIndex = 0
                 
                 For Each PresentationSlide In ActiveWindow.Selection.SlideRange
-                    SlideIndex = SlideIndex + 1
-                    SetProgress (SlideIndex / TotalSelectedSlides * 100)
+                    slideIndex = slideIndex + 1
+                    SetProgress (slideIndex / TotalSelectedSlides * 100)
                     
-                    For CommentsCount = PresentationSlide.Comments.Count To 1 Step -1
+                    For CommentsCount = PresentationSlide.Comments.count To 1 Step -1
                         PresentationSlide.Comments(1).Delete
                     Next
                     
@@ -197,9 +197,9 @@ Sub CleanUpRemoveCommentsFromAllSlides()
             
             For Each PresentationSlide In ActivePresentation.Slides
                 
-                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
                 
-                For CommentsCount = PresentationSlide.Comments.Count To 1 Step -1
+                For CommentsCount = PresentationSlide.Comments.count To 1 Step -1
                     PresentationSlide.Comments(1).Delete
                 Next
             Next
@@ -212,7 +212,7 @@ Sub CleanUpRemoveCommentsFromAllSlides()
 End Sub
 
 Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
-    Dim PresentationSlide As slide
+    Dim PresentationSlide As Slide
     
     Select Case CallToSlideScopesForm()
         
@@ -220,15 +220,15 @@ Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
             
         Case "selected"
             
-            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.Count
+            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.count
             ProgressForm.Show
             
             If TotalSelectedSlides > 0 Then
-                SlideIndex = 0
+                slideIndex = 0
                 
                 For Each PresentationSlide In ActiveWindow.Selection.SlideRange
-                    SlideIndex = SlideIndex + 1
-                    SetProgress (SlideIndex / TotalSelectedSlides * 100)
+                    slideIndex = slideIndex + 1
+                    SetProgress (slideIndex / TotalSelectedSlides * 100)
                     
                     PresentationSlide.SlideShowTransition.EntryEffect = 0
                     
@@ -244,7 +244,7 @@ Sub CleanUpRemoveSlideShowTransitionsFromAllSlides()
             ProgressForm.Show
             
             For Each PresentationSlide In ActivePresentation.Slides
-                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
                 PresentationSlide.SlideShowTransition.EntryEffect = 0
             Next
             
@@ -259,9 +259,9 @@ Sub CleanUpRemoveHiddenSlides()
     
     ProgressForm.Show
     
-    NumberOfSlides = ActivePresentation.Slides.Count
+    NumberOfSlides = ActivePresentation.Slides.count
     
-    For SlideLoop = ActivePresentation.Slides.Count To 1 Step -1
+    For SlideLoop = ActivePresentation.Slides.count To 1 Step -1
         
         SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
         
@@ -279,12 +279,12 @@ Sub CleanUpRemoveHiddenSlides()
 End Sub
 
 Sub CleanUpHideAndMoveSelectedSlides()
-    NumberOfSlides = ActivePresentation.Slides.Count
+    NumberOfSlides = ActivePresentation.Slides.count
     
-    CurrentSlide = ActiveWindow.Selection.SlideRange(1).SlideIndex
+    CurrentSlide = ActiveWindow.Selection.SlideRange(1).slideIndex
     
-    For i = ActiveWindow.Selection.SlideRange.Count To 1 Step -1
-        ActivePresentation.Slides(ActiveWindow.Selection.SlideRange(i).SlideIndex).MoveTo (NumberOfSlides)
+    For i = ActiveWindow.Selection.SlideRange.count To 1 Step -1
+        ActivePresentation.Slides(ActiveWindow.Selection.SlideRange(i).slideIndex).MoveTo (NumberOfSlides)
         ActivePresentation.Slides(NumberOfSlides).SlideShowTransition.Hidden = msoTrue
         NumberOfSlides = NumberOfSlides - 1
     Next i
@@ -294,7 +294,7 @@ Sub CleanUpHideAndMoveSelectedSlides()
 End Sub
 
 Sub CleanUpAddSlideNumbers()
-    Dim PresentationSlide As slide
+    Dim PresentationSlide As Slide
     Dim SlideShape  As shape
     Dim hasSlideNumber As Boolean
     
@@ -304,16 +304,16 @@ Sub CleanUpAddSlideNumbers()
             
         Case "selected"
             
-            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.Count
+            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.count
             
             If TotalSelectedSlides > 0 Then
                 
                 For Each PresentationSlide In ActiveWindow.Selection.SlideRange
                     hasSlideNumber = False
                     
-                    If PresentationSlide.SlideIndex = 1 Then GoTo NextSlideSelected
+                    If PresentationSlide.slideIndex = 1 Then GoTo NextSlideSelected
                     
-                    For Each SlideShape In PresentationSlide.Shapes
+                    For Each SlideShape In PresentationSlide.shapes
                         If SlideShape.Type = msoPlaceholder Then
                             If SlideShape.PlaceholderFormat.Type = ppPlaceholderSlideNumber Then
                                 hasSlideNumber = True
@@ -337,9 +337,9 @@ NextSlideSelected:
             For Each PresentationSlide In ActivePresentation.Slides
                 hasSlideNumber = False
                 
-                If PresentationSlide.SlideIndex = 1 Then GoTo NextSlideAll
+                If PresentationSlide.slideIndex = 1 Then GoTo NextSlideAll
                 
-                For Each SlideShape In PresentationSlide.Shapes
+                For Each SlideShape In PresentationSlide.shapes
                     If SlideShape.Type = msoPlaceholder Then
                         If SlideShape.PlaceholderFormat.Type = ppPlaceholderSlideNumber Then
                             hasSlideNumber = True

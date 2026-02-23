@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleSlidesConvertToPictures"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -27,29 +27,29 @@ Sub ConvertAllSlidesToPictures()
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
         
         PresentationSlide.Copy
-        PresentationSlide.Shapes.Range.Delete
+        PresentationSlide.shapes.Range.Delete
         
         #If Mac Then
-            Set ImageShape = PresentationSlide.Shapes.Paste
+            Set ImageShape = PresentationSlide.shapes.Paste
         #Else
-            Set ImageShape = PresentationSlide.Shapes.PasteSpecial(ppPasteEnhancedMetafile)
+            Set ImageShape = PresentationSlide.shapes.PasteSpecial(ppPasteEnhancedMetafile)
         #End If
         
         ImageShape.Top = 0
         ImageShape.left = 0
-        ImageShape.Width = Application.ActivePresentation.PageSetup.SlideWidth
-        ImageShape.Height = Application.ActivePresentation.PageSetup.SlideHeight
+        ImageShape.width = Application.ActivePresentation.PageSetup.slideWidth
+        ImageShape.height = Application.ActivePresentation.PageSetup.slideHeight
         
         ImageShape.Copy
         ImageShape.Delete
         
         #If Mac Then
-            Set ImageShape2 = PresentationSlide.Shapes.Paste
+            Set ImageShape2 = PresentationSlide.shapes.Paste
         #Else
-            Set ImageShape2 = PresentationSlide.Shapes.PasteSpecial(ppPasteJPG)
+            Set ImageShape2 = PresentationSlide.shapes.PasteSpecial(ppPasteJPG)
         #End If
         
     Next PresentationSlide
@@ -61,39 +61,39 @@ End Sub
 
 Sub ConvertSelectedSlidesToPictures()
     
-    TotalSelectedSlides = ActiveWindow.Selection.SlideRange.Count
+    TotalSelectedSlides = ActiveWindow.Selection.SlideRange.count
     ProgressForm.Show
     
     If TotalSelectedSlides > 0 Then
-        SlideIndex = 0
+        slideIndex = 0
         
         ProgressForm.Show
         
         For Each PresentationSlide In ActiveWindow.Selection.SlideRange
-            SlideIndex = SlideIndex + 1
-            SetProgress (SlideIndex / TotalSelectedSlides * 100)
+            slideIndex = slideIndex + 1
+            SetProgress (slideIndex / TotalSelectedSlides * 100)
             
             PresentationSlide.Copy
-            PresentationSlide.Shapes.Range.Delete
+            PresentationSlide.shapes.Range.Delete
             
             #If Mac Then
-                Set ImageShape = PresentationSlide.Shapes.Paste
+                Set ImageShape = PresentationSlide.shapes.Paste
             #Else
-                Set ImageShape = PresentationSlide.Shapes.PasteSpecial(ppPasteEnhancedMetafile)
+                Set ImageShape = PresentationSlide.shapes.PasteSpecial(ppPasteEnhancedMetafile)
             #End If
             
             ImageShape.Top = 0
             ImageShape.left = 0
-            ImageShape.Width = Application.ActivePresentation.PageSetup.SlideWidth
-            ImageShape.Height = Application.ActivePresentation.PageSetup.SlideHeight
+            ImageShape.width = Application.ActivePresentation.PageSetup.slideWidth
+            ImageShape.height = Application.ActivePresentation.PageSetup.slideHeight
             
             ImageShape.Copy
             ImageShape.Delete
             
             #If Mac Then
-                Set ImageShape2 = PresentationSlide.Shapes.Paste
+                Set ImageShape2 = PresentationSlide.shapes.Paste
             #Else
-                Set ImageShape2 = PresentationSlide.Shapes.PasteSpecial(ppPasteJPG)
+                Set ImageShape2 = PresentationSlide.shapes.PasteSpecial(ppPasteJPG)
             #End If
             
         Next PresentationSlide
@@ -133,10 +133,10 @@ Sub InsertWatermarkAndConvertSlidesToPictures()
             
         Case "selected"
             
-            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.Count
+            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.count
             
             If TotalSelectedSlides > 0 Then
-                SlideIndex = 0
+                slideIndex = 0
                 
                 WatermarkText = InputBox("Please input watermark text", "Watermark", "CONFIDENTIAL")
                 PredefinedColor = RGB(204, 0, 0)
@@ -146,22 +146,22 @@ Sub InsertWatermarkAndConvertSlidesToPictures()
                 
                 For Each PresentationSlide In ActiveWindow.Selection.SlideRange
                     
-                    SlideIndex = SlideIndex + 1
-                    SetProgress (SlideIndex / TotalSelectedSlides * 100)
+                    slideIndex = slideIndex + 1
+                    SetProgress (slideIndex / TotalSelectedSlides * 100)
                     
                     With PresentationSlide
                         
-                        Set Watermark = .Shapes.AddTextbox(Orientation:=msoTextOrientationHorizontal, left:=0, Top:=0, Width:=400, Height:=100)
-                        Watermark.Width = Sqr(Application.ActivePresentation.PageSetup.SlideWidth * Application.ActivePresentation.PageSetup.SlideWidth + Application.ActivePresentation.PageSetup.SlideHeight * Application.ActivePresentation.PageSetup.SlideHeight)
-                        Watermark.TextFrame.TextRange.Text = WatermarkText
-                        Watermark.TextFrame.TextRange.Font.Size = 100
+                        Set Watermark = .shapes.AddTextbox(orientation:=msoTextOrientationHorizontal, left:=0, Top:=0, width:=400, height:=100)
+                        Watermark.width = Sqr(Application.ActivePresentation.PageSetup.slideWidth * Application.ActivePresentation.PageSetup.slideWidth + Application.ActivePresentation.PageSetup.slideHeight * Application.ActivePresentation.PageSetup.slideHeight)
+                        Watermark.TextFrame.textRange.text = WatermarkText
+                        Watermark.TextFrame.textRange.Font.Size = 100
                         Watermark.TextFrame.HorizontalAnchor = msoAnchorCenter
-                        Watermark.rotation = -Atn(Application.ActivePresentation.PageSetup.SlideHeight / Application.ActivePresentation.PageSetup.SlideWidth) * 180 / PI
-                        Watermark.left = (Application.ActivePresentation.PageSetup.SlideWidth - Watermark.Width) / 2
-                        Watermark.Top = (Application.ActivePresentation.PageSetup.SlideHeight - Watermark.Height) / 2
+                        Watermark.rotation = -Atn(Application.ActivePresentation.PageSetup.slideHeight / Application.ActivePresentation.PageSetup.slideWidth) * 180 / PI
+                        Watermark.left = (Application.ActivePresentation.PageSetup.slideWidth - Watermark.width) / 2
+                        Watermark.Top = (Application.ActivePresentation.PageSetup.slideHeight - Watermark.height) / 2
                         
-                        Watermark.TextFrame2.TextRange.Characters.Font.Fill.ForeColor.RGB = WatermarkTextColor
-                        Watermark.TextFrame2.TextRange.Characters.Font.Fill.Transparency = 0.9
+                        Watermark.TextFrame2.textRange.Characters.Font.Fill.ForeColor.RGB = WatermarkTextColor
+                        Watermark.TextFrame2.textRange.Characters.Font.Fill.Transparency = 0.9
                         
                     End With
                 Next PresentationSlide
@@ -184,19 +184,19 @@ Sub InsertWatermarkAndConvertSlidesToPictures()
             For Each PresentationSlide In ActivePresentation.Slides
                 With PresentationSlide
                     
-                    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+                    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
                     
-                    Set Watermark = .Shapes.AddTextbox(Orientation:=msoTextOrientationHorizontal, left:=0, Top:=0, Width:=400, Height:=100)
-                    Watermark.Width = Sqr(Application.ActivePresentation.PageSetup.SlideWidth * Application.ActivePresentation.PageSetup.SlideWidth + Application.ActivePresentation.PageSetup.SlideHeight * Application.ActivePresentation.PageSetup.SlideHeight)
-                    Watermark.TextFrame.TextRange.Text = WatermarkText
-                    Watermark.TextFrame.TextRange.Font.Size = 100
+                    Set Watermark = .shapes.AddTextbox(orientation:=msoTextOrientationHorizontal, left:=0, Top:=0, width:=400, height:=100)
+                    Watermark.width = Sqr(Application.ActivePresentation.PageSetup.slideWidth * Application.ActivePresentation.PageSetup.slideWidth + Application.ActivePresentation.PageSetup.slideHeight * Application.ActivePresentation.PageSetup.slideHeight)
+                    Watermark.TextFrame.textRange.text = WatermarkText
+                    Watermark.TextFrame.textRange.Font.Size = 100
                     Watermark.TextFrame.HorizontalAnchor = msoAnchorCenter
-                    Watermark.rotation = -Atn(Application.ActivePresentation.PageSetup.SlideHeight / Application.ActivePresentation.PageSetup.SlideWidth) * 180 / PI
-                    Watermark.left = (Application.ActivePresentation.PageSetup.SlideWidth - Watermark.Width) / 2
-                    Watermark.Top = (Application.ActivePresentation.PageSetup.SlideHeight - Watermark.Height) / 2
+                    Watermark.rotation = -Atn(Application.ActivePresentation.PageSetup.slideHeight / Application.ActivePresentation.PageSetup.slideWidth) * 180 / PI
+                    Watermark.left = (Application.ActivePresentation.PageSetup.slideWidth - Watermark.width) / 2
+                    Watermark.Top = (Application.ActivePresentation.PageSetup.slideHeight - Watermark.height) / 2
                     
-                    Watermark.TextFrame2.TextRange.Characters.Font.Fill.ForeColor.RGB = WatermarkTextColor
-                    Watermark.TextFrame2.TextRange.Characters.Font.Fill.Transparency = 0.9
+                    Watermark.TextFrame2.textRange.Characters.Font.Fill.ForeColor.RGB = WatermarkTextColor
+                    Watermark.TextFrame2.textRange.Characters.Font.Fill.Transparency = 0.9
                     
                 End With
             Next PresentationSlide

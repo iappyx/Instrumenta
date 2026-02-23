@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleCopyPosition"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -34,8 +34,8 @@ Sub CopyPosition()
     
     TopToCopy = MyDocument.Selection.ShapeRange(1).Top
     LeftToCopy = MyDocument.Selection.ShapeRange(1).left
-    WidthToCopy = MyDocument.Selection.ShapeRange(1).Width
-    HeightToCopy = MyDocument.Selection.ShapeRange(1).Height
+    WidthToCopy = MyDocument.Selection.ShapeRange(1).width
+    HeightToCopy = MyDocument.Selection.ShapeRange(1).height
     PositionCopied = True
     
     End If
@@ -69,8 +69,8 @@ Sub PastePositionAndDimensions()
     If PositionCopied = True Then
         MyDocument.Selection.ShapeRange(1).Top = TopToCopy
         MyDocument.Selection.ShapeRange(1).left = LeftToCopy
-        MyDocument.Selection.ShapeRange(1).Width = WidthToCopy
-        MyDocument.Selection.ShapeRange(1).Height = HeightToCopy
+        MyDocument.Selection.ShapeRange(1).width = WidthToCopy
+        MyDocument.Selection.ShapeRange(1).height = HeightToCopy
     Else
         MsgBox "No dimensions available. First copy position / dimension of a shape."
     End If

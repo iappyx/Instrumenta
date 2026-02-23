@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleEmojis"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -2421,7 +2421,7 @@ Sub GenerateEmoji(index As Integer)
         End If
         #End If
     
-        Application.ActiveWindow.Selection.TextRange.Characters.Text = EmojiCharacters(index)
+        Application.ActiveWindow.Selection.textRange.Characters.text = EmojiCharacters(index)
     End If
     
 End Sub

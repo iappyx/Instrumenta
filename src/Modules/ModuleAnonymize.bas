@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleAnonymize"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -29,17 +29,17 @@ Sub AnonymizeWithLoremIpsum()
             
         Case "selected"
             
-            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.Count
+            TotalSelectedSlides = ActiveWindow.Selection.SlideRange.count
             ProgressForm.Show
             
             If TotalSelectedSlides > 0 Then
-                SlideIndex = 0
+                slideIndex = 0
                 
                 For Each PresentationSlide In ActiveWindow.Selection.SlideRange
-                    SlideIndex = SlideIndex + 1
-                    SetProgress (SlideIndex / TotalSelectedSlides * 100)
+                    slideIndex = slideIndex + 1
+                    SetProgress (slideIndex / TotalSelectedSlides * 100)
                     
-                    For Each SlideShape In PresentationSlide.Shapes
+                    For Each SlideShape In PresentationSlide.shapes
                     
                         AnonymizeShapeWithLoremIpsum SlideShape
                     
@@ -58,9 +58,9 @@ Sub AnonymizeWithLoremIpsum()
             
             For Each PresentationSlide In ActivePresentation.Slides
                 
-                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+                SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
                 
-                For Each SlideShape In PresentationSlide.Shapes
+                For Each SlideShape In PresentationSlide.shapes
                     
                     AnonymizeShapeWithLoremIpsum SlideShape
                     
@@ -89,21 +89,21 @@ Sub AnonymizeShapeWithLoremIpsum(SlideShape)
         
         If SlideShape.HasTextFrame Then
             
-            For Each Paragraph In SlideShape.TextFrame2.TextRange.Paragraphs
+            For Each Paragraph In SlideShape.TextFrame2.textRange.Paragraphs
                 If Paragraph.Length > 1 Then
-                Paragraph.Text = GetLoremIpsum(Paragraph.Words.Count, Paragraph.Length)
+                Paragraph.text = GetLoremIpsum(Paragraph.words.count, Paragraph.Length)
                 End If
             Next
             
         End If
         
         If SlideShape.HasTable Then
-            For TableRow = 1 To SlideShape.Table.Rows.Count
-                For TableColumn = 1 To SlideShape.Table.Columns.Count
+            For TableRow = 1 To SlideShape.table.rows.count
+                For TableColumn = 1 To SlideShape.table.Columns.count
                     
-                    For Each Paragraph In SlideShape.Table.Cell(TableRow, TableColumn).shape.TextFrame2.TextRange.Paragraphs
+                    For Each Paragraph In SlideShape.table.cell(TableRow, TableColumn).shape.TextFrame2.textRange.Paragraphs
                         If Paragraph.Length > 1 Then
-                        Paragraph.Text = GetLoremIpsum(Paragraph.Words.Count, Paragraph.Length)
+                        Paragraph.text = GetLoremIpsum(Paragraph.words.count, Paragraph.Length)
                         End If
                     Next
                     
@@ -113,11 +113,11 @@ Sub AnonymizeShapeWithLoremIpsum(SlideShape)
         
         If SlideShape.HasSmartArt Then
             
-            For SlideShapeSmartArtNode = 1 To SlideShape.SmartArt.AllNodes.Count
+            For SlideShapeSmartArtNode = 1 To SlideShape.SmartArt.AllNodes.count
                 
-                For Each Paragraph In SlideShape.SmartArt.AllNodes(SlideShapeSmartArtNode).TextFrame2.TextRange.Paragraphs
+                For Each Paragraph In SlideShape.SmartArt.AllNodes(SlideShapeSmartArtNode).TextFrame2.textRange.Paragraphs
                     If Paragraph.Length > 1 Then
-                    Paragraph.Text = GetLoremIpsum(Paragraph.Words.Count, Paragraph.Length)
+                    Paragraph.text = GetLoremIpsum(Paragraph.words.count, Paragraph.Length)
                     End If
                 Next
                 
@@ -138,7 +138,7 @@ Public Function GetLoremIpsum(NumberOfWords As Long, MaxLength As Long) As Strin
     
     Dim LoremIpsumWords() As String
     Dim LoremResult As String
-    Dim WordCount   As Long
+    Dim wordCount   As Long
     
     LoremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac finibus purus. Phasellus et ultricies erat. Nullam maximus risus est, a pulvinar lectus pulvinar ut. Integer dictum malesuada sapien ac vulputate. Nam leo mauris, tincidunt quis dictum vel, semper nec est. Sed et dignissim tortor. Phasellus bibendum elit posuere erat malesuada ornare a sed odio. Integer purus lectus, gravida ac porttitor in, volutpat dictum sem. Pellentesque fermentum ante euismod dolor pellentesque, vitae vestibulum odio sagittis. In et massa massa."
     LoremIpsum = LoremIpsum + "Mauris maximus sem eget semper sollicitudin. Nullam gravida eros non scelerisque cursus. Sed non sem iaculis diam lacinia fermentum id vitae neque. Nulla facilisi. Vestibulum interdum ex non lorem tristique condimentum. Vestibulum facilisis tincidunt nulla at commodo. Ut pretium rhoncus lacus eget porttitor. Etiam quis euismod risus. Maecenas vel porta ante. Curabitur at rutrum eros, et vehicula ligula. Duis in maximus ante. Duis sed est in diam finibus venenatis."
@@ -161,15 +161,15 @@ Public Function GetLoremIpsum(NumberOfWords As Long, MaxLength As Long) As Strin
     End If
     
     LoremResult = LoremIpsumWords(0)
-    WordCount = 1
+    wordCount = 1
     
-    Do While (WordCount < NumberOfWords)
+    Do While (wordCount < NumberOfWords)
     
-        If (Len(LoremResult & " " & LoremIpsumWords(WordCount)) <= MaxLength) Or NumberOfWords <= 2 Then
-            LoremResult = LoremResult & " " & LoremIpsumWords(WordCount)
+        If (Len(LoremResult & " " & LoremIpsumWords(wordCount)) <= MaxLength) Or NumberOfWords <= 2 Then
+            LoremResult = LoremResult & " " & LoremIpsumWords(wordCount)
         End If
         
-        WordCount = WordCount + 1
+        wordCount = wordCount + 1
     Loop
     
     GetLoremIpsum = LoremResult

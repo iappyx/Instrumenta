@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleStoryline"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -28,19 +28,19 @@ Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     Dim ClipboardObject As Object
     Dim StorylineText As String
     
-    Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
-    Dim PlaceHolderTextRange As TextRange
-    Set PlaceHolderTextRange = SlidePlaceHolder.TextFrame.TextRange
+    Set SlidePlaceHolder = ActivePresentation.Slides(1).shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, width:=100, height:=100)
+    Dim PlaceHolderTextRange As textRange
+    Set PlaceHolderTextRange = SlidePlaceHolder.TextFrame.textRange
     
     ProgressForm.Show
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
         
-        If PresentationSlide.NotesPage.Shapes.Placeholders(2).TextFrame.HasText Then
+        If PresentationSlide.NotesPage.shapes.Placeholders(2).TextFrame.HasText Then
             
-            PresentationSlide.NotesPage.Shapes.Placeholders(2).TextFrame.TextRange.Copy
+            PresentationSlide.NotesPage.shapes.Placeholders(2).TextFrame.textRange.Copy
             
             PlaceHolderTextRange.Characters(0).InsertAfter Chr(13) & Chr(13) & "[Slide " & Str(PresentationSlide.SlideNumber) & "]" & Chr(13)
             PlaceHolderTextRange.Characters(0).Paste
@@ -52,9 +52,9 @@ Sub CopySlideNotesToClipboard(ExportToWord As Boolean)
     ProgressForm.Hide
     Unload ProgressForm
     
-    If Not SlidePlaceHolder.TextFrame.TextRange.Text = "" Then
+    If Not SlidePlaceHolder.TextFrame.textRange.text = "" Then
         
-        SlidePlaceHolder.TextFrame.TextRange.Copy
+        SlidePlaceHolder.TextFrame.textRange.Copy
         
         If ExportToWord = True Then
             
@@ -111,12 +111,12 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+        SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
         
-        For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
+        For Each SlidePlaceHolder In PresentationSlide.shapes.Placeholders
             
             If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
-                StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.Text & Chr(13)
+                StorylineText = StorylineText & SlidePlaceHolder.TextFrame.textRange.text & Chr(13)
                 Exit For
             End If
         Next SlidePlaceHolder
@@ -125,9 +125,9 @@ Sub CopyStorylineToClipboard(ExportToWord As Boolean)
     ProgressForm.Hide
     Unload ProgressForm
     
-    Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, Width:=100, Height:=100)
-    SlidePlaceHolder.TextFrame.TextRange.Text = StorylineText
-    SlidePlaceHolder.TextFrame.TextRange.Copy
+    Set SlidePlaceHolder = ActivePresentation.Slides(1).shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, width:=100, height:=100)
+    SlidePlaceHolder.TextFrame.textRange.text = StorylineText
+    SlidePlaceHolder.TextFrame.textRange.Copy
     SlidePlaceHolder.Delete
     
     If Not StorylineText = "" Then
@@ -190,12 +190,12 @@ Sub PasteStorylineInSelectedShape()
         
         For Each PresentationSlide In ActivePresentation.Slides
             
-            SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+            SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
             
-            For Each SlidePlaceHolder In PresentationSlide.Shapes.Placeholders
+            For Each SlidePlaceHolder In PresentationSlide.shapes.Placeholders
                 
                 If SlidePlaceHolder.PlaceholderFormat.Type = ppPlaceholderTitle Then
-                    StorylineText = StorylineText & SlidePlaceHolder.TextFrame.TextRange.Text & Chr(13)
+                    StorylineText = StorylineText & SlidePlaceHolder.TextFrame.textRange.text & Chr(13)
                     Exit For
                 End If
             Next SlidePlaceHolder
@@ -204,7 +204,7 @@ Sub PasteStorylineInSelectedShape()
         ProgressForm.Hide
         Unload ProgressForm
         
-        Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.TextRange.Text = StorylineText
+        Application.ActiveWindow.Selection.ShapeRange(1).TextFrame.textRange.text = StorylineText
         
     End If
     

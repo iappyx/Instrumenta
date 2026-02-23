@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleExport"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -41,11 +41,11 @@ Sub SaveSelectedSlides()
         On Error GoTo 0
         
         'Strip extension from filename
-        DotPosition = InStrRev(ThisPresentation.Name, ".")
+        DotPosition = InStrRev(ThisPresentation.name, ".")
         If DotPosition > 0 Then
-            PresentationFilename = left(ThisPresentation.Name, DotPosition - 1)
+            PresentationFilename = left(ThisPresentation.name, DotPosition - 1)
         Else
-            PresentationFilename = ThisPresentation.Name
+            PresentationFilename = ThisPresentation.name
         End If
         
         'Set filename and e-mailsubject
@@ -53,15 +53,15 @@ Sub SaveSelectedSlides()
         
         ProgressForm.Show
         
-        For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.Count
+        For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.count
         
-        SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.Count * 100)
+        SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.count * 100)
         
             ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
-            If SlideLoop <> ActiveWindow.Selection.SlideRange.Count Then
-                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex & ","
+            If SlideLoop <> ActiveWindow.Selection.SlideRange.count Then
+                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex & ","
             Else
-                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex
+                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex
             End If
         Next SlideLoop
         
@@ -102,8 +102,8 @@ Sub SaveSelectedSlides()
         Set TemporaryPresentation = Presentations.Open(exportFilePath)
         
         ProgressForm.Show
-        NumberOfSlides = TemporaryPresentation.Slides.Count
-        For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
+        NumberOfSlides = TemporaryPresentation.Slides.count
+        For SlideLoop = TemporaryPresentation.Slides.count To 1 Step -1
             SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
             If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
@@ -152,11 +152,11 @@ Sub EmailSelectedSlides()
         On Error GoTo 0
         
         'Strip extension from filename
-        DotPosition = InStrRev(ThisPresentation.Name, ".")
+        DotPosition = InStrRev(ThisPresentation.name, ".")
         If DotPosition > 0 Then
-            PresentationFilename = left(ThisPresentation.Name, DotPosition - 1)
+            PresentationFilename = left(ThisPresentation.name, DotPosition - 1)
         Else
-            PresentationFilename = ThisPresentation.Name
+            PresentationFilename = ThisPresentation.name
         End If
         
         'Set filename and e-mailsubject
@@ -165,15 +165,15 @@ Sub EmailSelectedSlides()
         
         ProgressForm.Show
         
-        For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.Count
+        For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.count
         
-        SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.Count * 100)
+        SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.count * 100)
         
             ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
-            If SlideLoop <> ActiveWindow.Selection.SlideRange.Count Then
-                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex & ","
+            If SlideLoop <> ActiveWindow.Selection.SlideRange.count Then
+                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex & ","
             Else
-                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex
+                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex
             End If
         Next SlideLoop
         
@@ -187,7 +187,7 @@ Sub EmailSelectedSlides()
         
         #If Mac Then
         
-        If PresentationFilename & ".pptx" = ThisPresentation.Name Then
+        If PresentationFilename & ".pptx" = ThisPresentation.name Then
         PresentationFilename = PresentationFilename & "_1"
         End If
         
@@ -199,8 +199,8 @@ Sub EmailSelectedSlides()
         #End If
         
         ProgressForm.Show
-        NumberOfSlides = TemporaryPresentation.Slides.Count
-        For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
+        NumberOfSlides = TemporaryPresentation.Slides.count
+        For SlideLoop = TemporaryPresentation.Slides.count To 1 Step -1
             SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
             If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop
@@ -273,12 +273,12 @@ Sub EmailSelectedSlidesAsPDF()
         Dim SlideLoop As Long
         Dim DotPosition As Integer
         
-        DotPosition = InStrRev(ActivePresentation.Name, ".")
+        DotPosition = InStrRev(ActivePresentation.name, ".")
         
         If DotPosition > 0 Then
-            PresentationFilename = left(ActivePresentation.Name, DotPosition - 1)
+            PresentationFilename = left(ActivePresentation.name, DotPosition - 1)
         Else
-            PresentationFilename = ActivePresentation.Name
+            PresentationFilename = ActivePresentation.name
         End If
         
         On Error Resume Next
@@ -293,15 +293,15 @@ Sub EmailSelectedSlidesAsPDF()
         
         ProgressForm.Show
         
-        For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.Count
+        For SlideLoop = 1 To ActiveWindow.Selection.SlideRange.count
         
-        SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.Count * 100)
+        SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.count * 100)
         
             ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
-            If SlideLoop <> ActiveWindow.Selection.SlideRange.Count Then
-                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex & ","
+            If SlideLoop <> ActiveWindow.Selection.SlideRange.count Then
+                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex & ","
             Else
-                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).SlideIndex
+                PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex
             End If
         Next SlideLoop
         
@@ -322,8 +322,8 @@ Sub EmailSelectedSlidesAsPDF()
         Set TemporaryPresentation = Presentations.Open(MacScript("return posix path of (path to temporary items) as string") & PresentationFilename & "_temp.pptx")
         
         ProgressForm.Show
-        NumberOfSlides = TemporaryPresentation.Slides.Count
-        For SlideLoop = TemporaryPresentation.Slides.Count To 1 Step -1
+        NumberOfSlides = TemporaryPresentation.Slides.count
+        For SlideLoop = TemporaryPresentation.Slides.count To 1 Step -1
             SetProgress ((NumberOfSlides - SlideLoop) / NumberOfSlides * 100)
             If TemporaryPresentation.Slides(SlideLoop).Tags("INSTRUMENTA EXPORT") <> "YES" Then TemporaryPresentation.Slides(SlideLoop).Delete
         Next SlideLoop

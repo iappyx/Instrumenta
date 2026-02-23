@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjectsSelectBy"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -30,28 +30,28 @@ Sub ObjectsSelectBySameType()
     Else
     
     Dim SlideShape, SlideShapeToCheck As PowerPoint.shape
-    Dim SelectedShapes() As String
+    Dim selectedShapes() As String
     Dim ShapeCount  As Long
     ShapeCount = 1
     
     Set SlideShape = ActiveWindow.Selection.ShapeRange(1)
     
-    ReDim Preserve SelectedShapes(0)
-    SelectedShapes(0) = SlideShape.Name
+    ReDim Preserve selectedShapes(0)
+    selectedShapes(0) = SlideShape.name
     
-    For Each SlideShapeToCheck In MyDocument.View.Slide.Shapes
+    For Each SlideShapeToCheck In MyDocument.View.Slide.shapes
         
         If (SlideShapeToCheck.AutoShapeType = SlideShape.AutoShapeType) Then
             
-            If (SlideShapeToCheck.Name <> SlideShape.Name) Then
-                ReDim Preserve SelectedShapes(ShapeCount + 1)
-                SelectedShapes(ShapeCount) = SlideShapeToCheck.Name
+            If (SlideShapeToCheck.name <> SlideShape.name) Then
+                ReDim Preserve selectedShapes(ShapeCount + 1)
+                selectedShapes(ShapeCount) = SlideShapeToCheck.name
                 ShapeCount = ShapeCount + 1
             End If
         End If
         
     Next SlideShapeToCheck
-    MyDocument.View.Slide.Shapes.Range(SelectedShapes).Select
+    MyDocument.View.Slide.shapes.Range(selectedShapes).Select
     
     End If
     
@@ -66,28 +66,28 @@ Sub ObjectsSelectBySameFillAndLineColor()
     Else
     
     Dim SlideShape, SlideShapeToCheck As PowerPoint.shape
-    Dim SelectedShapes() As String
+    Dim selectedShapes() As String
     Dim ShapeCount  As Long
     ShapeCount = 1
     
     Set SlideShape = ActiveWindow.Selection.ShapeRange(1)
     
-    ReDim Preserve SelectedShapes(0)
-    SelectedShapes(0) = SlideShape.Name
+    ReDim Preserve selectedShapes(0)
+    selectedShapes(0) = SlideShape.name
     
-    For Each SlideShapeToCheck In MyDocument.View.Slide.Shapes
+    For Each SlideShapeToCheck In MyDocument.View.Slide.shapes
         
-        If (SlideShapeToCheck.Fill.ForeColor.RGB = SlideShape.Fill.ForeColor.RGB) And (SlideShapeToCheck.Line.ForeColor.RGB = SlideShape.Line.ForeColor.RGB) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.visible = True) And (SlideShapeToCheck.Line.visible = True) Then
+        If (SlideShapeToCheck.Fill.ForeColor.RGB = SlideShape.Fill.ForeColor.RGB) And (SlideShapeToCheck.line.ForeColor.RGB = SlideShape.line.ForeColor.RGB) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.visible = True) And (SlideShapeToCheck.line.visible = True) Then
             
-            If (SlideShapeToCheck.Name <> SlideShape.Name) Then
-                ReDim Preserve SelectedShapes(ShapeCount + 1)
-                SelectedShapes(ShapeCount) = SlideShapeToCheck.Name
+            If (SlideShapeToCheck.name <> SlideShape.name) Then
+                ReDim Preserve selectedShapes(ShapeCount + 1)
+                selectedShapes(ShapeCount) = SlideShapeToCheck.name
                 ShapeCount = ShapeCount + 1
             End If
         End If
         
     Next SlideShapeToCheck
-    MyDocument.View.Slide.Shapes.Range(SelectedShapes).Select
+    MyDocument.View.Slide.shapes.Range(selectedShapes).Select
     
     End If
 End Sub
@@ -101,28 +101,28 @@ Sub ObjectsSelectBySameFillColor()
     Else
     
     Dim SlideShape, SlideShapeToCheck As PowerPoint.shape
-    Dim SelectedShapes() As String
+    Dim selectedShapes() As String
     Dim ShapeCount  As Long
     ShapeCount = 1
     
     Set SlideShape = ActiveWindow.Selection.ShapeRange(1)
     
-    ReDim Preserve SelectedShapes(0)
-    SelectedShapes(0) = SlideShape.Name
+    ReDim Preserve selectedShapes(0)
+    selectedShapes(0) = SlideShape.name
     
-    For Each SlideShapeToCheck In MyDocument.View.Slide.Shapes
+    For Each SlideShapeToCheck In MyDocument.View.Slide.shapes
         
         If (SlideShapeToCheck.Fill.ForeColor.RGB = SlideShape.Fill.ForeColor.RGB) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.visible = True) Then
             
-            If (SlideShapeToCheck.Name <> SlideShape.Name) Then
-                ReDim Preserve SelectedShapes(ShapeCount + 1)
-                SelectedShapes(ShapeCount) = SlideShapeToCheck.Name
+            If (SlideShapeToCheck.name <> SlideShape.name) Then
+                ReDim Preserve selectedShapes(ShapeCount + 1)
+                selectedShapes(ShapeCount) = SlideShapeToCheck.name
                 ShapeCount = ShapeCount + 1
             End If
         End If
         
     Next SlideShapeToCheck
-    MyDocument.View.Slide.Shapes.Range(SelectedShapes).Select
+    MyDocument.View.Slide.shapes.Range(selectedShapes).Select
     
     End If
     
@@ -137,28 +137,28 @@ Sub ObjectsSelectBySameLineColor()
     Else
     
     Dim SlideShape, SlideShapeToCheck As PowerPoint.shape
-    Dim SelectedShapes() As String
+    Dim selectedShapes() As String
     Dim ShapeCount  As Long
     ShapeCount = 1
     
     Set SlideShape = ActiveWindow.Selection.ShapeRange(1)
     
-    ReDim Preserve SelectedShapes(0)
-    SelectedShapes(0) = SlideShape.Name
+    ReDim Preserve selectedShapes(0)
+    selectedShapes(0) = SlideShape.name
     
-    For Each SlideShapeToCheck In MyDocument.View.Slide.Shapes
+    For Each SlideShapeToCheck In MyDocument.View.Slide.shapes
         
-        If (SlideShapeToCheck.Line.ForeColor.RGB = SlideShape.Line.ForeColor.RGB) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Line.visible = True) Then
+        If (SlideShapeToCheck.line.ForeColor.RGB = SlideShape.line.ForeColor.RGB) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.line.visible = True) Then
             
-            If (SlideShapeToCheck.Name <> SlideShape.Name) Then
-                ReDim Preserve SelectedShapes(ShapeCount + 1)
-                SelectedShapes(ShapeCount) = SlideShapeToCheck.Name
+            If (SlideShapeToCheck.name <> SlideShape.name) Then
+                ReDim Preserve selectedShapes(ShapeCount + 1)
+                selectedShapes(ShapeCount) = SlideShapeToCheck.name
                 ShapeCount = ShapeCount + 1
             End If
         End If
         
     Next SlideShapeToCheck
-    MyDocument.View.Slide.Shapes.Range(SelectedShapes).Select
+    MyDocument.View.Slide.shapes.Range(selectedShapes).Select
     
     End If
 End Sub
@@ -172,28 +172,28 @@ Sub ObjectsSelectBySameWidthAndHeight()
     Else
     
     Dim SlideShape, SlideShapeToCheck As PowerPoint.shape
-    Dim SelectedShapes() As String
+    Dim selectedShapes() As String
     Dim ShapeCount  As Long
     ShapeCount = 1
     
     Set SlideShape = ActiveWindow.Selection.ShapeRange(1)
     
-    ReDim Preserve SelectedShapes(0)
-    SelectedShapes(0) = SlideShape.Name
+    ReDim Preserve selectedShapes(0)
+    selectedShapes(0) = SlideShape.name
     
-    For Each SlideShapeToCheck In MyDocument.View.Slide.Shapes
+    For Each SlideShapeToCheck In MyDocument.View.Slide.shapes
         
-        If (SlideShapeToCheck.Width = SlideShape.Width) And (SlideShapeToCheck.Height = SlideShape.Height) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.visible = True) Then
+        If (SlideShapeToCheck.width = SlideShape.width) And (SlideShapeToCheck.height = SlideShape.height) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.visible = True) Then
             
-            If (SlideShapeToCheck.Name <> SlideShape.Name) Then
-                ReDim Preserve SelectedShapes(ShapeCount + 1)
-                SelectedShapes(ShapeCount) = SlideShapeToCheck.Name
+            If (SlideShapeToCheck.name <> SlideShape.name) Then
+                ReDim Preserve selectedShapes(ShapeCount + 1)
+                selectedShapes(ShapeCount) = SlideShapeToCheck.name
                 ShapeCount = ShapeCount + 1
             End If
         End If
         
     Next SlideShapeToCheck
-    MyDocument.View.Slide.Shapes.Range(SelectedShapes).Select
+    MyDocument.View.Slide.shapes.Range(selectedShapes).Select
     
     End If
 End Sub
@@ -207,28 +207,28 @@ Sub ObjectsSelectBySameWidth()
     Else
     
     Dim SlideShape, SlideShapeToCheck As PowerPoint.shape
-    Dim SelectedShapes() As String
+    Dim selectedShapes() As String
     Dim ShapeCount  As Long
     ShapeCount = 1
     
     Set SlideShape = ActiveWindow.Selection.ShapeRange(1)
     
-    ReDim Preserve SelectedShapes(0)
-    SelectedShapes(0) = SlideShape.Name
+    ReDim Preserve selectedShapes(0)
+    selectedShapes(0) = SlideShape.name
     
-    For Each SlideShapeToCheck In MyDocument.View.Slide.Shapes
+    For Each SlideShapeToCheck In MyDocument.View.Slide.shapes
         
-        If (SlideShapeToCheck.Width = SlideShape.Width) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.visible = True) Then
+        If (SlideShapeToCheck.width = SlideShape.width) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.visible = True) Then
             
-            If (SlideShapeToCheck.Name <> SlideShape.Name) Then
-                ReDim Preserve SelectedShapes(ShapeCount + 1)
-                SelectedShapes(ShapeCount) = SlideShapeToCheck.Name
+            If (SlideShapeToCheck.name <> SlideShape.name) Then
+                ReDim Preserve selectedShapes(ShapeCount + 1)
+                selectedShapes(ShapeCount) = SlideShapeToCheck.name
                 ShapeCount = ShapeCount + 1
             End If
         End If
         
     Next SlideShapeToCheck
-    MyDocument.View.Slide.Shapes.Range(SelectedShapes).Select
+    MyDocument.View.Slide.shapes.Range(selectedShapes).Select
     
     End If
 End Sub
@@ -242,28 +242,28 @@ Sub ObjectsSelectBySameHeight()
     Else
     
     Dim SlideShape, SlideShapeToCheck As PowerPoint.shape
-    Dim SelectedShapes() As String
+    Dim selectedShapes() As String
     Dim ShapeCount  As Long
     ShapeCount = 1
     
     Set SlideShape = ActiveWindow.Selection.ShapeRange(1)
     
-    ReDim Preserve SelectedShapes(0)
-    SelectedShapes(0) = SlideShape.Name
+    ReDim Preserve selectedShapes(0)
+    selectedShapes(0) = SlideShape.name
     
-    For Each SlideShapeToCheck In MyDocument.View.Slide.Shapes
+    For Each SlideShapeToCheck In MyDocument.View.Slide.shapes
         
-        If (SlideShapeToCheck.Height = SlideShape.Height) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.visible = True) Then
+        If (SlideShapeToCheck.height = SlideShape.height) And (SlideShapeToCheck.Type <> msoPlaceholder) And (SlideShapeToCheck.Fill.visible = True) Then
             
-            If (SlideShapeToCheck.Name <> SlideShape.Name) Then
-                ReDim Preserve SelectedShapes(ShapeCount + 1)
-                SelectedShapes(ShapeCount) = SlideShapeToCheck.Name
+            If (SlideShapeToCheck.name <> SlideShape.name) Then
+                ReDim Preserve selectedShapes(ShapeCount + 1)
+                selectedShapes(ShapeCount) = SlideShapeToCheck.name
                 ShapeCount = ShapeCount + 1
             End If
         End If
         
     Next SlideShapeToCheck
-    MyDocument.View.Slide.Shapes.Range(SelectedShapes).Select
+    MyDocument.View.Slide.shapes.Range(selectedShapes).Select
     
     End If
 End Sub

@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleColorScanner"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -150,7 +150,7 @@ Private Sub ScanSelectedSlides()
     For Each sld In ActiveWindow.Selection.SlideRange
         ScanSlideBackground sld
         
-        For Each shp In sld.Shapes
+        For Each shp In sld.shapes
             ScanShape shp
         Next shp
     Next sld
@@ -166,7 +166,7 @@ Private Sub ScanAllSlides()
     
     For Each sld In ActivePresentation.Slides
         ScanSlideBackground sld
-        For Each shp In sld.Shapes
+        For Each shp In sld.shapes
             ScanShape shp
         Next shp
     Next sld
@@ -209,19 +209,19 @@ Private Sub ScanShape(shp As shape)
                     If shp.Fill.GradientStops.count > 0 Then
                         Dim i As Long
                         For i = 1 To shp.Fill.GradientStops.count
-                            If shp.Fill.GradientStops(i).Color.Type = msoColorTypeRGB _
-                               Or shp.Fill.GradientStops(i).Color.Type = msoColorTypeScheme Then
-                                AddColor shp.Fill.GradientStops(i).Color.RGB, "Gradient Fill"
+                            If shp.Fill.GradientStops(i).color.Type = msoColorTypeRGB _
+                               Or shp.Fill.GradientStops(i).color.Type = msoColorTypeScheme Then
+                                AddColor shp.Fill.GradientStops(i).color.RGB, "Gradient Fill"
                             End If
                         Next i
 End If
         End Select
     End If
     
-    If shp.Line.visible Then
-        If shp.Line.ForeColor.Type = msoColorTypeRGB _
-           Or shp.Line.ForeColor.Type = msoColorTypeScheme Then
-            AddColor shp.Line.ForeColor.RGB, "Line/Border"
+    If shp.line.visible Then
+        If shp.line.ForeColor.Type = msoColorTypeRGB _
+           Or shp.line.ForeColor.Type = msoColorTypeScheme Then
+            AddColor shp.line.ForeColor.RGB, "Line/Border"
         End If
     End If
     
@@ -248,9 +248,9 @@ Private Sub ScanTextColors(txtRange As textRange)
     Dim i As Long
 
     For i = 1 To txtRange.Length
-        If txtRange.Characters(i, 1).Font.Color.Type = msoColorTypeRGB _
-           Or txtRange.Characters(i, 1).Font.Color.Type = msoColorTypeScheme Then
-            AddColor txtRange.Characters(i, 1).Font.Color.RGB, "Font Color"
+        If txtRange.Characters(i, 1).Font.color.Type = msoColorTypeRGB _
+           Or txtRange.Characters(i, 1).Font.color.Type = msoColorTypeScheme Then
+            AddColor txtRange.Characters(i, 1).Font.color.RGB, "Font Color"
         End If
     Next i
     
@@ -442,7 +442,7 @@ Public Sub ReplaceColor(oldRGB As Long, newRGB As Long, scope As String)
         For Each sld In ActiveWindow.Selection.SlideRange
             replaceCount = replaceCount + ReplaceSlideBackgroundColor(sld, oldRGB, newRGB)
             
-            For Each shp In sld.Shapes
+            For Each shp In sld.shapes
                 replaceCount = replaceCount + ReplaceShapeColor(shp, oldRGB, newRGB)
             Next shp
         Next sld
@@ -450,7 +450,7 @@ Public Sub ReplaceColor(oldRGB As Long, newRGB As Long, scope As String)
         For Each sld In ActivePresentation.Slides
             replaceCount = replaceCount + ReplaceSlideBackgroundColor(sld, oldRGB, newRGB)
             
-            For Each shp In sld.Shapes
+            For Each shp In sld.shapes
                 replaceCount = replaceCount + ReplaceShapeColor(shp, oldRGB, newRGB)
             Next shp
         Next sld
@@ -512,10 +512,10 @@ Private Function ReplaceShapeColor(shp As shape, oldRGB As Long, newRGB As Long)
         ElseIf shp.Fill.Type = msoFillGradient And RecolorUserPerm.AllowFill Then
             Dim i As Long
             For i = 1 To shp.Fill.GradientStops.count
-                If shp.Fill.GradientStops(i).Color.Type = msoColorTypeRGB _
-                   Or shp.Fill.GradientStops(i).Color.Type = msoColorTypeScheme Then
-                    If shp.Fill.GradientStops(i).Color.RGB = oldRGB Then
-                        shp.Fill.GradientStops(i).Color.RGB = newRGB
+                If shp.Fill.GradientStops(i).color.Type = msoColorTypeRGB _
+                   Or shp.Fill.GradientStops(i).color.Type = msoColorTypeScheme Then
+                    If shp.Fill.GradientStops(i).color.RGB = oldRGB Then
+                        shp.Fill.GradientStops(i).color.RGB = newRGB
                         count = count + 1
                     End If
                 End If
@@ -523,11 +523,11 @@ Private Function ReplaceShapeColor(shp As shape, oldRGB As Long, newRGB As Long)
         End If
     End If
 
-    If shp.Line.visible And RecolorUserPerm.AllowLine Then
-        If shp.Line.ForeColor.Type = msoColorTypeRGB _
-           Or shp.Line.ForeColor.Type = msoColorTypeScheme Then
-            If shp.Line.ForeColor.RGB = oldRGB Then
-                shp.Line.ForeColor.RGB = newRGB
+    If shp.line.visible And RecolorUserPerm.AllowLine Then
+        If shp.line.ForeColor.Type = msoColorTypeRGB _
+           Or shp.line.ForeColor.Type = msoColorTypeScheme Then
+            If shp.line.ForeColor.RGB = oldRGB Then
+                shp.line.ForeColor.RGB = newRGB
                 count = count + 1
             End If
         End If
@@ -561,10 +561,10 @@ Private Function ReplaceTextColor(txtRange As textRange, oldRGB As Long, newRGB 
     On Error Resume Next
     
     For i = 1 To txtRange.Length
-        If txtRange.Characters(i, 1).Font.Color.Type = msoColorTypeRGB _
-           Or txtRange.Characters(i, 1).Font.Color.Type = msoColorTypeScheme Then
-            If txtRange.Characters(i, 1).Font.Color.RGB = oldRGB Then
-                txtRange.Characters(i, 1).Font.Color.RGB = newRGB
+        If txtRange.Characters(i, 1).Font.color.Type = msoColorTypeRGB _
+           Or txtRange.Characters(i, 1).Font.color.Type = msoColorTypeScheme Then
+            If txtRange.Characters(i, 1).Font.color.RGB = oldRGB Then
+                txtRange.Characters(i, 1).Font.color.RGB = newRGB
                 count = count + 1
             End If
         End If

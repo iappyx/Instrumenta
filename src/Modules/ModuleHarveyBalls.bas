@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleHarveyBalls"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ Sub AverageHarveyBall()
         
         For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If (InStr(shape.Name, "HarveyBall") = 1) And (Not shape.Tags("INSTRUMENTA HARVEYBALL") = "") Then
+            If (InStr(shape.name, "HarveyBall") = 1) And (Not shape.Tags("INSTRUMENTA HARVEYBALL") = "") Then
                 
                 HarveyCount = HarveyCount + 1
                 HarveySum = HarveySum + CDbl(shape.Tags("INSTRUMENTA HARVEYBALL"))
@@ -66,14 +66,14 @@ Sub GenerateHarveyBallPercent(FillPercentage As Double)
         
         For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If InStr(shape.Name, "HarveyBall") = 1 Then
+            If InStr(shape.name, "HarveyBall") = 1 Then
                 
                 ExistingHarveyBall = True
-                ExistingWidth = shape.Width
-                ExistingHeight = shape.Height
+                ExistingWidth = shape.width
+                ExistingHeight = shape.height
                 ExistingTop = shape.Top
                 ExistingLeft = shape.left
-                ExistingRotation = shape.Rotation
+                ExistingRotation = shape.rotation
                 shape.Delete
                 
             End If
@@ -86,18 +86,18 @@ Sub GenerateHarveyBallPercent(FillPercentage As Double)
     
     Dim HarveyCircle, HarveyFill As shape
     
-    Set HarveyCircle = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 100, 100, 50, 50)
-    Set HarveyFill = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapePie, 101, 101, 48, 48)
+    Set HarveyCircle = MyDocument.Selection.SlideRange.shapes.AddShape(msoShapeOval, 100, 100, 50, 50)
+    Set HarveyFill = MyDocument.Selection.SlideRange.shapes.AddShape(msoShapePie, 101, 101, 48, 48)
     With HarveyFill
-        .Name = "HarveyFill" + Str(RandomNumber)
+        .name = "HarveyFill" + Str(RandomNumber)
         .Adjustments.Item(2) = -90
         .Adjustments.Item(1) = ((FillPercentage / 100) * 360) - 90
-        .Line.visible = False
+        .line.visible = False
         .Fill.ForeColor.RGB = RGB(0, 0, 0)
     End With
     With HarveyCircle
-        .Name = "HarveyCircle" + Str(RandomNumber)
-        .Line.visible = False
+        .name = "HarveyCircle" + Str(RandomNumber)
+        .line.visible = False
         .Fill.ForeColor.RGB = RGB(0, 0, 0)
     End With
     
@@ -105,18 +105,18 @@ Sub GenerateHarveyBallPercent(FillPercentage As Double)
         HarveyFill.Adjustments(1) = HarveyFill.Adjustments(1) - 0.1
     End If
     
-    ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("HarveyCircle" + Str(RandomNumber), "HarveyFill" + Str(RandomNumber))).Select
+    ActiveWindow.Selection.SlideRange(1).shapes.Range(Array("HarveyCircle" + Str(RandomNumber), "HarveyFill" + Str(RandomNumber))).Select
     CommandBars.ExecuteMso ("ShapesCombine")
     For Each shape In ActiveWindow.Selection.ShapeRange
         
-        shape.Name = "HarveyBall" + Str(RandomNumber)
+        shape.name = "HarveyBall" + Str(RandomNumber)
         
         If ExistingHarveyBall = True Then
-            shape.Width = ExistingWidth
-            shape.Height = ExistingHeight
+            shape.width = ExistingWidth
+            shape.height = ExistingHeight
             shape.Top = ExistingTop
             shape.left = ExistingLeft
-            shape.Rotation = ExistingRotation
+            shape.rotation = ExistingRotation
         End If
         
         shape.Tags.Add "INSTRUMENTA HARVEYBALL", FillPercentage

@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleConnectRectangleShapes"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -25,63 +25,63 @@ Sub ConnectRectangleShapes(ShapeDirection As String)
     
     If ActiveWindow.Selection.Type = ppSelectionShapes Then
     
-    If ActiveWindow.Selection.ShapeRange.Count = 2 Then
+    If ActiveWindow.Selection.ShapeRange.count = 2 Then
     
     Dim Left1, Right1, Top1, Bottom1, Left2, Right2, Top2, Bottom2 As Double
     
     
     Left1 = ActiveWindow.Selection.ShapeRange(1).left
-    Right1 = Left1 + ActiveWindow.Selection.ShapeRange(1).Width
+    Right1 = Left1 + ActiveWindow.Selection.ShapeRange(1).width
     Top1 = ActiveWindow.Selection.ShapeRange(1).Top
-    Bottom1 = Top1 + ActiveWindow.Selection.ShapeRange(1).Height
+    Bottom1 = Top1 + ActiveWindow.Selection.ShapeRange(1).height
     
     Left2 = ActiveWindow.Selection.ShapeRange(2).left
-    Right2 = Left2 + ActiveWindow.Selection.ShapeRange(2).Width
+    Right2 = Left2 + ActiveWindow.Selection.ShapeRange(2).width
     Top2 = ActiveWindow.Selection.ShapeRange(2).Top
-    Bottom2 = Top2 + ActiveWindow.Selection.ShapeRange(2).Height
+    Bottom2 = Top2 + ActiveWindow.Selection.ShapeRange(2).height
     
     Set MyDocument = Application.ActiveWindow.Selection.SlideRange
     
     Select Case ShapeDirection
     
     Case "RightToLeft"
-        With MyDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Right1, Y1:=Top1)
+        With MyDocument.shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Right1, Y1:=Top1)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Bottom1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Bottom2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Top2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Top1
             '.ConvertToShape
-            .ConvertToShape.Line.visible = msoFalse
+            .ConvertToShape.line.visible = msoFalse
         End With
         
     Case "LeftToRight"
-        With MyDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Right2, Y1:=Top2)
+        With MyDocument.shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Right2, Y1:=Top2)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Bottom2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Bottom1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Top1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Top2
             '.ConvertToShape
-            .ConvertToShape.Line.visible = msoFalse
+            .ConvertToShape.line.visible = msoFalse
         End With
         
      Case "BottomToTop"
-        With MyDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Left1, Y1:=Bottom1)
+        With MyDocument.shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Left1, Y1:=Bottom1)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Bottom1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Top2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Top2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Bottom1
             '.ConvertToShape
-            .ConvertToShape.Line.visible = msoFalse
+            .ConvertToShape.line.visible = msoFalse
         End With
         
      Case "TopToBottom"
-        With MyDocument.Shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Left2, Y1:=Bottom2)
+        With MyDocument.shapes.BuildFreeform(EditingType:=msoEditingCorner, X1:=Left2, Y1:=Bottom2)
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right2, Y1:=Bottom2
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Right1, Y1:=Top1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left1, Y1:=Top1
             .AddNodes SegmentType:=msoSegmentLine, EditingType:=msoEditingAuto, X1:=Left2, Y1:=Bottom2
             '.ConvertToShape
-            .ConvertToShape.Line.visible = msoFalse
+            .ConvertToShape.line.visible = msoFalse
         End With
         
         

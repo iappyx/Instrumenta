@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ChangeSpellCheckLanguageForm 
-   Caption         =   "Set proofing language"
-   ClientHeight    =   1635
-   ClientLeft      =   119
-   ClientTop       =   462
-   ClientWidth     =   4564
-   OleObjectBlob   =   "ChangeSpellCheckLanguageForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "ChangeSpellCheckLanguageForm"
+Attribute VB_Base = "0{94B2AE84-AF00-4F60-87C0-6E4D212D4FEE}{54599771-7306-4E4B-AA5D-0C42CCF0CAC5}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -38,3 +31,4 @@ Attribute VB_Exposed = False
 Private Sub SetProofingLanguageButton_Click()
 ChangeSpellCheckLanguage
 End Sub
+

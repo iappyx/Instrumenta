@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjectsRotateAndFlip"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ Sub ObjectsFlipHorizontal()
             If shp.Type <> msoTable Then shp.Flip msoFlipHorizontal
         Next shp
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         If MyDocument.Selection.ShapeRange(1).Type <> msoTable Then
             MyDocument.Selection.ShapeRange(1).Flip msoFlipHorizontal
         End If
@@ -58,7 +58,7 @@ Sub ObjectsFlipVertical()
             If shp.Type <> msoTable Then shp.Flip msoFlipVertical
         Next shp
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         If MyDocument.Selection.ShapeRange(1).Type <> msoTable Then
             MyDocument.Selection.ShapeRange(1).Flip msoFlipVertical
         End If
@@ -82,7 +82,7 @@ Sub ObjectsRotateClockwise()
             If shp.Type <> msoTable Then shp.rotation = shp.rotation + 90
         Next shp
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         If MyDocument.Selection.ShapeRange(1).Type <> msoTable Then
             MyDocument.Selection.ShapeRange(1).rotation = MyDocument.Selection.ShapeRange(1).rotation + 90
         End If
@@ -107,7 +107,7 @@ Sub ObjectsRotateCounterclockwise()
             If shp.Type <> msoTable Then shp.rotation = shp.rotation - 90
         Next shp
         
-    ElseIf MyDocument.Selection.ShapeRange.Count = 1 Then
+    ElseIf MyDocument.Selection.ShapeRange.count = 1 Then
         If MyDocument.Selection.ShapeRange(1).Type <> msoTable Then
             MyDocument.Selection.ShapeRange(1).rotation = MyDocument.Selection.ShapeRange(1).rotation - 90
         End If

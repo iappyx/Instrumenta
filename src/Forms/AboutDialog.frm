@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} AboutDialog 
-   Caption         =   "About"
-   ClientHeight    =   4109
-   ClientLeft      =   238
-   ClientTop       =   931
-   ClientWidth     =   7679
-   OleObjectBlob   =   "AboutDialog.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "AboutDialog"
+Attribute VB_Base = "0{E4410F15-CA46-4F54-8D0E-BD9A50FF855B}{86A7DC72-A884-4323-9132-C8B95F5C6FEE}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +34,7 @@ Private Sub Label2_Click()
         
     URL = "https://github.com/iappyx/Instrumenta"
     
-    If Presentations.Count = 0 Then
+    If Presentations.count = 0 Then
         Set tempPresentation = Presentations.Add
         tempPresentation.FollowHyperlink URL
         tempPresentation.Close
@@ -60,7 +53,7 @@ Private Sub Label3_Click()
 
     URL = "https://github.com/iappyx/Instrumenta/blob/main/v/" & InstrumentaVersion & ".md"
 
-    If Presentations.Count = 0 Then
+    If Presentations.count = 0 Then
         Set tempPresentation = Presentations.Add
         tempPresentation.FollowHyperlink URL
         tempPresentation.Close
@@ -70,4 +63,3 @@ Private Sub Label3_Click()
 
 
 End Sub
-

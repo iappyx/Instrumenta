@@ -1,20 +1,13 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SettingsForm 
-   Caption         =   "Settings"
-   ClientHeight    =   6930
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   8355.001
-   OleObjectBlob   =   "SettingsForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "SettingsForm"
+Attribute VB_Base = "0{DEFD6183-A2BE-48CB-8511-1A1EE8876D38}{FCE69533-BD8E-4FE4-82A5-ECFFF78AC703}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -75,14 +68,14 @@ Private Sub UserForm_Activate()
     
     
     If GetSetting("Instrumenta", "General", "OperatingMode", "default") = "pro" Then
-    OptionButton1.Value = True
+    OptionButton1.value = True
     ElseIf GetSetting("Instrumenta", "General", "OperatingMode", "default") = "review" Then
-    OptionButton2.Value = True
+    OptionButton2.value = True
     ElseIf GetSetting("Instrumenta", "General", "OperatingMode", "default") = "default" Then
-    OptionButton3.Value = True
+    OptionButton3.value = True
     End If
     
-    CheckBox1.Value = CBool(GetSetting("Instrumenta", "General", "ContextualButtons", "False"))
+    CheckBox1.value = CBool(GetSetting("Instrumenta", "General", "ContextualButtons", "False"))
     
     RulerUnitsComboBox.Clear
     RulerUnitsComboBox.AddItem ("Inches")
@@ -200,16 +193,16 @@ Private Sub SaveSettingsButton_Click()
     blue = UpdatedColorButton.BackColor \ 65536 Mod 256
     
     SaveSetting "Instrumenta", "Stamps", "UpdatedColor", RGB(red, green, blue)
-    SaveSetting "Instrumenta", "General", "ContextualButtons", CStr(CheckBox1.Value)
+    SaveSetting "Instrumenta", "General", "ContextualButtons", CStr(CheckBox1.value)
     DoEvents
           
-    If OptionButton2.Value = True Then
+    If OptionButton2.value = True Then
      SaveSetting "Instrumenta", "General", "OperatingMode", "review"
      Call InstrumentaRefresh(UpdateTag:="*R*")
-    ElseIf OptionButton1.Value = True Then
+    ElseIf OptionButton1.value = True Then
      SaveSetting "Instrumenta", "General", "OperatingMode", "pro"
      Call InstrumentaRefresh(UpdateTag:="*")
-    ElseIf OptionButton3.Value = True Then
+    ElseIf OptionButton3.value = True Then
      SaveSetting "Instrumenta", "General", "OperatingMode", "default"
      Call InstrumentaRefresh(UpdateTag:="*")
     End If

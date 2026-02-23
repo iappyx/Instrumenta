@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} PreviewFullFileMailMerge 
-   Caption         =   "Preview mail merge"
-   ClientHeight    =   8115
-   ClientLeft      =   119
-   ClientTop       =   462
-   ClientWidth     =   10829
-   OleObjectBlob   =   "PreviewFullFileMailMerge.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "PreviewFullFileMailMerge"
+Attribute VB_Base = "0{10E4C2D5-3718-4BF8-8121-0CF4364C4491}{ED55C47B-C72F-4CAF-9502-B324C4B737D2}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal

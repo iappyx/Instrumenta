@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleQRCodes"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ QRCodeText = InputBox("Please note that this functionality uses external APIs to
 If Not QRCodeText = "" Then
     QRCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=" & QRCodeText
     Dim QRCode As shape
-    Set QRCode = MyDocument.Selection.SlideRange.Shapes.AddPicture(QRCodeUrl, msoTrue, msoTrue, 0, 0)
+    Set QRCode = MyDocument.Selection.SlideRange.shapes.AddPicture(QRCodeUrl, msoTrue, msoTrue, 0, 0)
     QRCode.Select
     ObjectsAlignCenters
     ObjectsAlignMiddles

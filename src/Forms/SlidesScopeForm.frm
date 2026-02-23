@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SlidesScopeForm 
-   Caption         =   "What is the scope?"
-   ClientHeight    =   1110
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   5280
-   OleObjectBlob   =   "SlidesScopeForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "SlidesScopeForm"
+Attribute VB_Base = "0{30249F65-A10A-4874-B50C-F702477666FE}{F3D1EDB6-ADF5-468A-AAE8-625B69B12EC8}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal

@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjectsText"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -22,29 +22,29 @@ Attribute VB_Name = "ModuleObjectsText"
 'SOFTWARE.
 
 Sub ConvertTextToShapes()
-    Dim ShapeText       As shape
+    Dim shapeText       As shape
     Dim TempRectangle   As shape
     Set MyDocument = Application.ActiveWindow
     
     If Not MyDocument.Selection.Type = ppSelectionShapes Then
         MsgBox "No shapes selected."
     Else
-        For Each ShapeText In ActiveWindow.Selection.ShapeRange
+        For Each shapeText In ActiveWindow.Selection.ShapeRange
             
-            If ShapeText.HasTextFrame Then
+            If shapeText.HasTextFrame Then
                 
-                If ShapeText.TextFrame2.HasText Then
+                If shapeText.TextFrame2.HasText Then
                     
-                    ShapeText.TextFrame2.AutoSize = msoAutoSizeShapeToFitText
+                    shapeText.TextFrame2.AutoSize = msoAutoSizeShapeToFitText
                     
-                    With ShapeText.TextFrame2
-                        Set TempRectangle = ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, ShapeText.left, ShapeText.Top, ShapeText.width + .textRange.BoundWidth + .marginRight, ShapeText.height + .textRange.BoundHeight + .MarginBottom)
+                    With shapeText.TextFrame2
+                        Set TempRectangle = ActiveWindow.Selection.SlideRange.shapes.AddShape(msoShapeRectangle, shapeText.left, shapeText.Top, shapeText.width + .textRange.BoundWidth + .MarginRight, shapeText.height + .textRange.BoundHeight + .marginBottom)
                     End With
-                    ShapeText.Fill.visible = msoFalse
-                    ShapeText.Line.visible = msoFalse
+                    shapeText.Fill.visible = msoFalse
+                    shapeText.line.visible = msoFalse
                     TempRectangle.Fill.visible = msoTrue
-                    TempRectangle.Line.visible = msoFalse
-                    Set SlideShapeRange = ActiveWindow.Selection.SlideRange.Shapes.Range(Array(ShapeText.name, TempRectangle.name))
+                    TempRectangle.line.visible = msoFalse
+                    Set SlideShapeRange = ActiveWindow.Selection.SlideRange.shapes.Range(Array(shapeText.name, TempRectangle.name))
                     SlideShapeRange.Select
                     CommandBars.ExecuteMso ("ShapesIntersect")
                     
@@ -52,7 +52,7 @@ Sub ConvertTextToShapes()
                 
             End If
             
-        Next ShapeText
+        Next shapeText
     End If
 End Sub
 
@@ -137,7 +137,7 @@ Sub ObjectsTextAddPeriods()
                 Next i
             End If
         Next SlideShape
-    ElseIf Sel.Type = ppSelectionText Then
+    ElseIf sel.Type = ppSelectionText Then
         
         'sel.TextRange2.AddPeriods
         MsgBox "This Function only works reliably on shapes"
@@ -179,7 +179,7 @@ Sub ObjectsTextRemovePeriods()
                 Next i
             End If
         Next SlideShape
-    ElseIf Sel.Type = ppSelectionText Then
+    ElseIf sel.Type = ppSelectionText Then
         
         'sel.TextRange2.RemovePeriods
         MsgBox "This Function only works reliably on shapes"
@@ -207,7 +207,7 @@ Sub ObjectsTextDeleteStrikethrough()
                     
                     For i = SlideShape.TextFrame2.textRange.Characters.count To 1 Step -1
                         If SlideShape.TextFrame2.textRange.Characters(i, 1).Font.Strikethrough = True Then
-                            SlideShape.TextFrame2.textRange.Characters(i, 1).delete
+                            SlideShape.TextFrame2.textRange.Characters(i, 1).Delete
                         End If
                     Next i
                     
@@ -220,7 +220,7 @@ Sub ObjectsTextDeleteStrikethrough()
                             
                             For j = GroupShape.TextFrame2.textRange.Characters.count To 1 Step -1
                                 If GroupShape.TextFrame2.textRange.Characters(j, 1).Font.Strikethrough = True Then
-                                    GroupShape.TextFrame2.textRange.Characters(j, 1).delete
+                                    GroupShape.TextFrame2.textRange.Characters(j, 1).Delete
                                 End If
                             Next j
                             
@@ -243,7 +243,7 @@ Sub ObjectsTextDeleteStrikethrough()
                                     
                                     For k = SlideTable.cell(i, j).shape.TextFrame2.textRange.Characters.count To 1 Step -1
                                         If SlideTable.cell(i, j).shape.TextFrame2.textRange.Characters(k, 1).Font.Strikethrough = True Then
-                                            SlideTable.cell(i, j).shape.TextFrame2.textRange.Characters(k, 1).delete
+                                            SlideTable.cell(i, j).shape.TextFrame2.textRange.Characters(k, 1).Delete
                                         End If
                                     Next k
                                     
@@ -440,19 +440,19 @@ Dim p As TextRange2
 Set tr = DuplicateShape.TextFrame2.textRange
 
 If Not DuplicateShape.TextFrame2.HasText Then
-    DuplicateShape.delete
+    DuplicateShape.Delete
 Else
     If tr.Paragraphs.count = 1 Then
         Set p = tr.Paragraphs(1)
         If p.Length = 1 And (p.text = vbCr Or p.text = vbLf) Then
-            DuplicateShape.delete
+            DuplicateShape.Delete
         End If
     End If
 End If
         
     Next i
     
-    SlideShape.delete
+    SlideShape.Delete
     
     End If
 
@@ -518,7 +518,7 @@ Sub ObjectsTextMerge()
     Next i
 
     For i = SlideShapeRange.count To 2 Step -1
-        SlideShapeRange(i).delete
+        SlideShapeRange(i).Delete
     Next i
 
 End Sub
@@ -765,7 +765,7 @@ Sub ObjectsRemoveHyperlinksLoop(SlideShape)
         Next
     Else
         If SlideShape.HasTextFrame Then
-                SlideShape.TextFrame.textRange.ActionSettings(ppMouseClick).Hyperlink.delete
+                SlideShape.TextFrame.textRange.ActionSettings(ppMouseClick).Hyperlink.Delete
         End If
     End If
 End Sub
@@ -841,7 +841,7 @@ Sub ObjectsSwapText()
             If MyDocument.Selection.ShapeRange(1).HasTextFrame And MyDocument.Selection.ShapeRange(2).HasTextFrame Then
                 
                 Dim SlidePlaceHolder As PowerPoint.shape
-                Set SlidePlaceHolder = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, width:=100, height:=100)
+                Set SlidePlaceHolder = ActivePresentation.Slides(1).shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, width:=100, height:=100)
                 
                 MyDocument.Selection.ShapeRange(1).TextFrame.textRange.Cut
                 SlidePlaceHolder.TextFrame.textRange.Paste
@@ -852,7 +852,7 @@ Sub ObjectsSwapText()
                 SlidePlaceHolder.TextFrame.textRange.Cut
                 MyDocument.Selection.ShapeRange(2).TextFrame.textRange.Paste
                 
-                SlidePlaceHolder.delete
+                SlidePlaceHolder.Delete
                 
             Else
                 
@@ -868,7 +868,7 @@ Sub ObjectsSwapText()
                 If MyDocument.Selection.ChildShapeRange(1).HasTextFrame And MyDocument.Selection.ChildShapeRange(2).HasTextFrame Then
                                
                 Dim SlidePlaceHolderChildShapeRange As PowerPoint.shape
-                Set SlidePlaceHolderChildShapeRange = ActivePresentation.Slides(1).Shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, width:=100, height:=100)
+                Set SlidePlaceHolderChildShapeRange = ActivePresentation.Slides(1).shapes.AddShape(Type:=msoShapeRectangle, left:=0, Top:=0, width:=100, height:=100)
                 
                 MyDocument.Selection.ChildShapeRange(1).TextFrame.textRange.Cut
                 SlidePlaceHolderChildShapeRange.TextFrame.textRange.Paste
@@ -879,7 +879,7 @@ Sub ObjectsSwapText()
                 SlidePlaceHolderChildShapeRange.TextFrame.textRange.Cut
                 MyDocument.Selection.ChildShapeRange(2).TextFrame.textRange.Paste
                 
-                SlidePlaceHolderChildShapeRange.delete
+                SlidePlaceHolderChildShapeRange.Delete
                 
                 Else
             
@@ -1003,14 +1003,14 @@ Sub ObjectsMarginsLoop(SlideShape, MarginsChange)
                 
                 If MarginsChange < 0 Then
                     
-                    If .MarginBottom >= -MarginsChange Then
-                        .MarginBottom = .MarginBottom + MarginsChange
+                    If .marginBottom >= -MarginsChange Then
+                        .marginBottom = .marginBottom + MarginsChange
                     End If
-                    If .marginLeft >= -MarginsChange Then
-                        .marginLeft = .marginLeft + MarginsChange
+                    If .MarginLeft >= -MarginsChange Then
+                        .MarginLeft = .MarginLeft + MarginsChange
                     End If
-                    If .marginRight >= -MarginsChange Then
-                        .marginRight = .marginRight + MarginsChange
+                    If .MarginRight >= -MarginsChange Then
+                        .MarginRight = .MarginRight + MarginsChange
                     End If
                     If .MarginTop >= -MarginsChange Then
                         .MarginTop = .MarginTop + MarginsChange
@@ -1018,16 +1018,16 @@ Sub ObjectsMarginsLoop(SlideShape, MarginsChange)
                     
                 ElseIf MarginsChange > 0 Then
                     
-                    .MarginBottom = .MarginBottom + MarginsChange
-                    .marginLeft = .marginLeft + MarginsChange
-                    .marginRight = .marginRight + MarginsChange
+                    .marginBottom = .marginBottom + MarginsChange
+                    .MarginLeft = .MarginLeft + MarginsChange
+                    .MarginRight = .MarginRight + MarginsChange
                     .MarginTop = .MarginTop + MarginsChange
                     
                 ElseIf MarginsChange = 0 Then
                     
-                    .MarginBottom = 0
-                    .marginLeft = 0
-                    .marginRight = 0
+                    .marginBottom = 0
+                    .MarginLeft = 0
+                    .MarginRight = 0
                     .MarginTop = 0
                     
                 End If

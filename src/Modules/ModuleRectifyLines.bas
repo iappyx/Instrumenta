@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleRectifyLines"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -34,10 +34,10 @@ Sub RectifyLines()
             
             If .Fill.Type = -2 And .AutoShapeType = -2 Then
                 
-                If .Width > .Height Then
-                    .Height = 0
+                If .width > .height Then
+                    .height = 0
                 Else
-                    .Width = 0
+                    .width = 0
                 End If
             End If
         End With

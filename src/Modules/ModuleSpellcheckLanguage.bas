@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleSpellcheckLanguage"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -707,9 +707,9 @@ Sub ChangeSpellCheckLanguage()
     'Mac does not (yet) support property .HasHandoutMaster
         
     On Error Resume Next
-    For Each SlideShape In ActivePresentation.HandoutMaster.Shapes
+    For Each SlideShape In ActivePresentation.HandoutMaster.shapes
         If SlideShape.HasTextFrame Then
-        SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        SlideShape.TextFrame2.textRange.LanguageID = TargetLanguageID
         End If
     Next
     On Error GoTo 0
@@ -717,9 +717,9 @@ Sub ChangeSpellCheckLanguage()
     #Else
     
     If ActivePresentation.HasHandoutMaster Then
-    For Each SlideShape In ActivePresentation.HandoutMaster.Shapes
+    For Each SlideShape In ActivePresentation.HandoutMaster.shapes
         If SlideShape.HasTextFrame Then
-        SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        SlideShape.TextFrame2.textRange.LanguageID = TargetLanguageID
         End If
     Next
     End If
@@ -727,9 +727,9 @@ Sub ChangeSpellCheckLanguage()
     #End If
                
     If ActivePresentation.HasTitleMaster Then
-    For Each SlideShape In ActivePresentation.TitleMaster.Shapes
+    For Each SlideShape In ActivePresentation.TitleMaster.shapes
         If SlideShape.HasTextFrame Then
-        SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        SlideShape.TextFrame2.textRange.LanguageID = TargetLanguageID
         End If
     Next
     End If
@@ -738,9 +738,9 @@ Sub ChangeSpellCheckLanguage()
     'Mac does not (yet) support property .HasNotesMaster
         
     On Error Resume Next
-    For Each SlideShape In ActivePresentation.NotesMaster.Shapes
+    For Each SlideShape In ActivePresentation.NotesMaster.shapes
         If SlideShape.HasTextFrame Then
-        SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        SlideShape.TextFrame2.textRange.LanguageID = TargetLanguageID
         End If
     Next
     On Error GoTo 0
@@ -748,9 +748,9 @@ Sub ChangeSpellCheckLanguage()
     #Else
     
     If ActivePresentation.HasNotesMaster Then
-    For Each SlideShape In ActivePresentation.NotesMaster.Shapes
+    For Each SlideShape In ActivePresentation.NotesMaster.shapes
         If SlideShape.HasTextFrame Then
-        SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+        SlideShape.TextFrame2.textRange.LanguageID = TargetLanguageID
         End If
     Next
     End If
@@ -761,9 +761,9 @@ Sub ChangeSpellCheckLanguage()
     
     For Each PresentationSlide In ActivePresentation.Slides
     
-    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.Count * 100)
+    SetProgress (PresentationSlide.SlideNumber / ActivePresentation.Slides.count * 100)
     
-        For Each SlideShape In PresentationSlide.Shapes
+        For Each SlideShape In PresentationSlide.shapes
             ChangeShapeSpellCheckLanguage SlideShape, TargetLanguageID
         Next SlideShape
     Next PresentationSlide
@@ -771,7 +771,7 @@ Sub ChangeSpellCheckLanguage()
     ProgressForm.Hide
     Unload ProgressForm
     
-    For Each SlideShape In ActivePresentation.SlideMaster.Shapes
+    For Each SlideShape In ActivePresentation.SlideMaster.shapes
         ChangeShapeSpellCheckLanguage SlideShape, TargetLanguageID
     Next
     
@@ -795,24 +795,24 @@ Sub ChangeShapeSpellCheckLanguage(SlideShape, TargetLanguageID)
         
         If SlideShape.HasTextFrame Then
             
-            SlideShape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+            SlideShape.TextFrame2.textRange.LanguageID = TargetLanguageID
                        
         End If
         
         If SlideShape.HasTable Then
-            For TableRow = 1 To SlideShape.Table.Rows.Count
-                    For TableColumn = 1 To SlideShape.Table.Columns.Count
-                        SlideShape.Table.Cell(TableRow, TableColumn).shape.TextFrame2.TextRange.LanguageID = TargetLanguageID
+            For TableRow = 1 To SlideShape.table.rows.count
+                    For TableColumn = 1 To SlideShape.table.Columns.count
+                        SlideShape.table.cell(TableRow, TableColumn).shape.TextFrame2.textRange.LanguageID = TargetLanguageID
                     Next
             Next
         End If
         
         If SlideShape.HasSmartArt Then
             
-            For SlideShapeSmartArtNode = 1 To SlideShape.SmartArt.AllNodes.Count
+            For SlideShapeSmartArtNode = 1 To SlideShape.SmartArt.AllNodes.count
                 
                 For Each SlideSmartArtNode In SlideShape.SmartArt.AllNodes
-                    SlideSmartArtNode.TextFrame2.TextRange.LanguageID = TargetLanguageID
+                    SlideSmartArtNode.TextFrame2.textRange.LanguageID = TargetLanguageID
                  Next
                             
             Next

@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModulePicturesCrop"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -221,19 +221,19 @@ Sub PictureCropToSlide()
                     .PictureFormat.CropTop = 0 - (.Top * ScaledHeight)
                 End If
                 
-                If (.left + .width) > Application.ActivePresentation.PageSetup.SlideWidth Then
-                    .PictureFormat.CropRight = (.left + .width - Application.ActivePresentation.PageSetup.SlideWidth) * ScaledWidth
+                If (.left + .width) > Application.ActivePresentation.PageSetup.slideWidth Then
+                    .PictureFormat.CropRight = (.left + .width - Application.ActivePresentation.PageSetup.slideWidth) * ScaledWidth
                 End If
                 
-                If (.Top + .height) > Application.ActivePresentation.PageSetup.SlideHeight Then
-                    .PictureFormat.CropBottom = (.Top + .height - Application.ActivePresentation.PageSetup.SlideHeight) * ScaledHeight
+                If (.Top + .height) > Application.ActivePresentation.PageSetup.slideHeight Then
+                    .PictureFormat.CropBottom = (.Top + .height - Application.ActivePresentation.PageSetup.slideHeight) * ScaledHeight
                 End If
                 
             End With
             
         Case msoAutoShape, msoFreeform
                 
-                Set CropArea = Application.ActiveWindow.Selection.SlideRange.Shapes.AddShape(msoShapeRectangle, 0, 0, Application.ActivePresentation.PageSetup.SlideWidth, Application.ActivePresentation.PageSetup.SlideHeight)
+                Set CropArea = Application.ActiveWindow.Selection.SlideRange.shapes.AddShape(msoShapeRectangle, 0, 0, Application.ActivePresentation.PageSetup.slideWidth, Application.ActivePresentation.PageSetup.slideHeight)
                 CropArea.Select msoFalse
                 CommandBars.ExecuteMso ("ShapesIntersect")
             

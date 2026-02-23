@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} SelectSlidesByTagForm 
-   Caption         =   "Select slides by tag or stamp"
-   ClientHeight    =   5775
-   ClientLeft      =   42
-   ClientTop       =   210
-   ClientWidth     =   8176
-   OleObjectBlob   =   "SelectSlidesByTagForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "SelectSlidesByTagForm"
+Attribute VB_Base = "0{65DDD5D3-4AA2-4645-807E-1F4DF868FC03}{E4D10BD4-7C3F-44A2-99B6-620CE9FB9F9D}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +33,7 @@ SelectSlidesByTag
 End Sub
 
 Private Sub CommandButton2_Click()
-SelectSlidesByStamp StampComboBox.Value
+SelectSlidesByStamp StampComboBox.value
 End Sub
 
 Private Sub CommandButton3_Click()

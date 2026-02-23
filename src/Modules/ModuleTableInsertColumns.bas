@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleTableInsertColumns"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -39,20 +39,20 @@ Sub InsertColumnKeepOtherColumnWidths(Position As String)
     
     If MyDocument.Selection.ShapeRange(1).HasTable Then
         
-        For selectedRow = 1 To MyDocument.Selection.ShapeRange(1).table.Rows.Count
-            For selectedColumn = 1 To MyDocument.Selection.ShapeRange(1).table.Columns.Count
-                If MyDocument.Selection.ShapeRange(1).table.Cell(selectedRow, selectedColumn).Selected Then
+        For selectedRow = 1 To MyDocument.Selection.ShapeRange(1).table.rows.count
+            For selectedColumn = 1 To MyDocument.Selection.ShapeRange(1).table.Columns.count
+                If MyDocument.Selection.ShapeRange(1).table.cell(selectedRow, selectedColumn).Selected Then
                     Exit For
                 End If
             Next selectedColumn
-            If selectedColumn <= MyDocument.Selection.ShapeRange(1).table.Columns.Count Then Exit For
+            If selectedColumn <= MyDocument.Selection.ShapeRange(1).table.Columns.count Then Exit For
         Next selectedRow
         
         Dim newColumnWidth As Double
-        newColumnWidth = MyDocument.Selection.ShapeRange(1).table.Columns(selectedColumn).Width
+        newColumnWidth = MyDocument.Selection.ShapeRange(1).table.Columns(selectedColumn).width
         
         Dim originalNumColumns As Integer
-        originalNumColumns = MyDocument.Selection.ShapeRange(1).table.Columns.Count
+        originalNumColumns = MyDocument.Selection.ShapeRange(1).table.Columns.count
         ReDim originalWidths(1 To originalNumColumns + 1)
         
         Dim offset As Integer
@@ -64,7 +64,7 @@ Sub InsertColumnKeepOtherColumnWidths(Position As String)
             Else
                 offset = 0
             End If
-            originalWidths(i + offset) = MyDocument.Selection.ShapeRange(1).table.Columns(i).Width
+            originalWidths(i + offset) = MyDocument.Selection.ShapeRange(1).table.Columns(i).width
         Next i
         
         If Position = "Left" Then
@@ -72,7 +72,7 @@ Sub InsertColumnKeepOtherColumnWidths(Position As String)
             MyDocument.Selection.ShapeRange(1).table.Columns.Add BeforeColumn:=selectedColumn
             ElseIf Position = "Right" Then
                 originalWidths(selectedColumn + 1) = newColumnWidth
-                If selectedColumn = MyDocument.Selection.ShapeRange(1).table.Columns.Count Then
+                If selectedColumn = MyDocument.Selection.ShapeRange(1).table.Columns.count Then
                     MyDocument.Selection.ShapeRange(1).table.Columns.Add
                 Else
                     MyDocument.Selection.ShapeRange(1).table.Columns.Add BeforeColumn:=selectedColumn + 1
@@ -83,7 +83,7 @@ Sub InsertColumnKeepOtherColumnWidths(Position As String)
         End If
         
         For i = 1 To originalNumColumns + 1
-            MyDocument.Selection.ShapeRange(1).table.Columns(i).Width = originalWidths(i)
+            MyDocument.Selection.ShapeRange(1).table.Columns(i).width = originalWidths(i)
         Next i
     Else
         MsgBox "No table or cells selected."

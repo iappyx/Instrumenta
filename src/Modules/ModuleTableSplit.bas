@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleTableSplit"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -31,12 +31,12 @@ Sub SplitTableByRow()
         
         If Application.ActiveWindow.Selection.ShapeRange(1).HasTable Then
             
-            With Application.ActiveWindow.Selection.ShapeRange(1).Table
+            With Application.ActiveWindow.Selection.ShapeRange(1).table
                 
-                For RowsCount = 1 To .Rows.Count
-                    For ColsCount = 1 To .Columns.Count
+                For RowsCount = 1 To .rows.count
+                    For ColsCount = 1 To .Columns.count
                         
-                        If .Cell(RowsCount, ColsCount).Selected Then
+                        If .cell(RowsCount, ColsCount).Selected Then
                             
                             If Not RowsCount = 1 Then
                                 
@@ -45,19 +45,19 @@ Sub SplitTableByRow()
                                 DuplicatedTable.left = ThisTable.left
                                 DuplicatedTable.Top = ThisTable.Top
                                 
-                                DuplicatedTable.Table.FirstRow = False
+                                DuplicatedTable.table.FirstRow = False
                                 
                                 For DeleteRows = 1 To RowsCount - 1
-                                    DuplicatedHeight = DuplicatedTable.Table.Rows(1).Height
-                                    DuplicatedTable.Table.Rows(1).Delete
+                                    DuplicatedHeight = DuplicatedTable.table.rows(1).height
+                                    DuplicatedTable.table.rows(1).Delete
                                     DuplicatedTable.Top = DuplicatedTable.Top + DuplicatedHeight
                                     
                                 Next
                                 
                                 DuplicatedTable.Top = DuplicatedTable.Top + 5
                                 
-                                For DeleteRows = .Rows.Count To RowsCount Step -1
-                                    ThisTable.Table.Rows(DeleteRows).Delete
+                                For DeleteRows = .rows.count To RowsCount Step -1
+                                    ThisTable.table.rows(DeleteRows).Delete
                                 Next
                                 
                                 Exit Sub
@@ -95,12 +95,12 @@ Sub SplitTableByColumn()
         
         If Application.ActiveWindow.Selection.ShapeRange(1).HasTable Then
             
-            With Application.ActiveWindow.Selection.ShapeRange(1).Table
+            With Application.ActiveWindow.Selection.ShapeRange(1).table
                 
-                For RowsCount = 1 To .Rows.Count
-                    For ColsCount = 1 To .Columns.Count
+                For RowsCount = 1 To .rows.count
+                    For ColsCount = 1 To .Columns.count
                         
-                        If .Cell(RowsCount, ColsCount).Selected Then
+                        If .cell(RowsCount, ColsCount).Selected Then
                             
                             If Not ColsCount = 1 Then
                                 
@@ -109,19 +109,19 @@ Sub SplitTableByColumn()
                                 DuplicatedTable.left = ThisTable.left
                                 DuplicatedTable.Top = ThisTable.Top
                                 
-                                DuplicatedTable.Table.FirstCol = False
+                                DuplicatedTable.table.FirstCol = False
                                 
                                 For DeleteColumns = 1 To ColsCount - 1
-                                    DuplicatedWidth = DuplicatedTable.Table.Columns(1).Width
-                                    DuplicatedTable.Table.Columns(1).Delete
+                                    DuplicatedWidth = DuplicatedTable.table.Columns(1).width
+                                    DuplicatedTable.table.Columns(1).Delete
                                     DuplicatedTable.left = DuplicatedTable.left + DuplicatedWidth
                                     
                                 Next
                                 
                                 DuplicatedTable.left = DuplicatedTable.left + 5
                                 
-                                For DeleteColumns = .Columns.Count To ColsCount Step -1
-                                    ThisTable.Table.Columns(DeleteColumns).Delete
+                                For DeleteColumns = .Columns.count To ColsCount Step -1
+                                    ThisTable.table.Columns(DeleteColumns).Delete
                                 Next
                                 
                                 Exit Sub

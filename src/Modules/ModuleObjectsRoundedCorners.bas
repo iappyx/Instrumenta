@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjectsRoundedCorners"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -31,15 +31,15 @@ Sub ObjectsCopyRoundedCorner()
         
     ElseIf MyDocument.Selection.HasChildShapeRange Then
         
-        If Application.ActiveWindow.Selection.ChildShapeRange(1).Adjustments.Count > 0 Then
+        If Application.ActiveWindow.Selection.ChildShapeRange(1).Adjustments.count > 0 Then
             
             'ShapeRadius = MyDocument.Selection.ChildShapeRange(1).Adjustments(1) / (1 / (MyDocument.Selection.ChildShapeRange(1).Height + MyDocument.Selection.ChildShapeRange(1).Width))
-            ShapeRadius = MyDocument.Selection.ChildShapeRange(1).Adjustments(1) * IIf(MyDocument.Selection.ChildShapeRange(1).Height < MyDocument.Selection.ChildShapeRange(1).Width, MyDocument.Selection.ChildShapeRange(1).Height, MyDocument.Selection.ChildShapeRange(1).Width)
+            ShapeRadius = MyDocument.Selection.ChildShapeRange(1).Adjustments(1) * IIf(MyDocument.Selection.ChildShapeRange(1).height < MyDocument.Selection.ChildShapeRange(1).width, MyDocument.Selection.ChildShapeRange(1).height, MyDocument.Selection.ChildShapeRange(1).width)
 
             
-            If MyDocument.Selection.ChildShapeRange(1).Adjustments.Count > 1 Then
+            If MyDocument.Selection.ChildShapeRange(1).Adjustments.count > 1 Then
                 'ShapeRadius2 = MyDocument.Selection.ChildShapeRange(1).Adjustments(2) / (1 / (MyDocument.Selection.ChildShapeRange(1).Height + MyDocument.Selection.ChildShapeRange(1).Width))
-                ShapeRadius2 = MyDocument.Selection.ChildShapeRange(1).Adjustments(2) * IIf(MyDocument.Selection.ChildShapeRange(1).Height < MyDocument.Selection.ChildShapeRange(1).Width, MyDocument.Selection.ChildShapeRange(1).Height, MyDocument.Selection.ChildShapeRange(1).Width)
+                ShapeRadius2 = MyDocument.Selection.ChildShapeRange(1).Adjustments(2) * IIf(MyDocument.Selection.ChildShapeRange(1).height < MyDocument.Selection.ChildShapeRange(1).width, MyDocument.Selection.ChildShapeRange(1).height, MyDocument.Selection.ChildShapeRange(1).width)
 
             End If
             
@@ -47,11 +47,11 @@ Sub ObjectsCopyRoundedCorner()
                 With SlideShape
                     .AutoShapeType = MyDocument.Selection.ChildShapeRange(1).AutoShapeType
                     '.Adjustments(1) = (1 / (SlideShape.Height + SlideShape.Width)) * ShapeRadius
-                    .Adjustments(1) = ShapeRadius / IIf(SlideShape.Height < SlideShape.Width, SlideShape.Height, SlideShape.Width)
+                    .Adjustments(1) = ShapeRadius / IIf(SlideShape.height < SlideShape.width, SlideShape.height, SlideShape.width)
 
-                    If MyDocument.Selection.ChildShapeRange(1).Adjustments.Count > 1 Then
+                    If MyDocument.Selection.ChildShapeRange(1).Adjustments.count > 1 Then
                         '.Adjustments(2) = (1 / (SlideShape.Height + SlideShape.Width)) * ShapeRadius2
-                        .Adjustments(2) = ShapeRadius2 / IIf(SlideShape.Height < SlideShape.Width, SlideShape.Height, SlideShape.Width)
+                        .Adjustments(2) = ShapeRadius2 / IIf(SlideShape.height < SlideShape.width, SlideShape.height, SlideShape.width)
 
                     End If
                 End With
@@ -61,7 +61,7 @@ Sub ObjectsCopyRoundedCorner()
         
     Else
         
-        For i = 1 To Application.ActiveWindow.Selection.ShapeRange.Count
+        For i = 1 To Application.ActiveWindow.Selection.ShapeRange.count
         
             If Application.ActiveWindow.Selection.ShapeRange(i).Type = msoGroup Then
                 MsgBox "One of the selected shapes is a group."
@@ -71,15 +71,15 @@ Sub ObjectsCopyRoundedCorner()
         Next i
         
         
-        If Application.ActiveWindow.Selection.ShapeRange(1).Adjustments.Count > 0 Then
+        If Application.ActiveWindow.Selection.ShapeRange(1).Adjustments.count > 0 Then
             
             'ShapeRadius = MyDocument.Selection.ShapeRange(1).Adjustments(1) / (1 / (MyDocument.Selection.ShapeRange(1).Height + MyDocument.Selection.ShapeRange(1).Width))
-            ShapeRadius = MyDocument.Selection.ShapeRange(1).Adjustments(1) * IIf(MyDocument.Selection.ShapeRange(1).Height < MyDocument.Selection.ShapeRange(1).Width, MyDocument.Selection.ShapeRange(1).Height, MyDocument.Selection.ShapeRange(1).Width)
+            ShapeRadius = MyDocument.Selection.ShapeRange(1).Adjustments(1) * IIf(MyDocument.Selection.ShapeRange(1).height < MyDocument.Selection.ShapeRange(1).width, MyDocument.Selection.ShapeRange(1).height, MyDocument.Selection.ShapeRange(1).width)
 
 
-            If MyDocument.Selection.ShapeRange(1).Adjustments.Count > 1 Then
+            If MyDocument.Selection.ShapeRange(1).Adjustments.count > 1 Then
                 'ShapeRadius2 = MyDocument.Selection.ShapeRange(1).Adjustments(2) / (1 / (MyDocument.Selection.ShapeRange(1).Height + MyDocument.Selection.ShapeRange(1).Width))
-                ShapeRadius2 = MyDocument.Selection.ShapeRange(1).Adjustments(2) * IIf(MyDocument.Selection.ShapeRange(1).Height < MyDocument.Selection.ShapeRange(1).Width, MyDocument.Selection.ShapeRange(1).Height, MyDocument.Selection.ShapeRange(1).Width)
+                ShapeRadius2 = MyDocument.Selection.ShapeRange(1).Adjustments(2) * IIf(MyDocument.Selection.ShapeRange(1).height < MyDocument.Selection.ShapeRange(1).width, MyDocument.Selection.ShapeRange(1).height, MyDocument.Selection.ShapeRange(1).width)
 
             End If
             
@@ -87,11 +87,11 @@ Sub ObjectsCopyRoundedCorner()
                 With SlideShape
                     .AutoShapeType = MyDocument.Selection.ShapeRange(1).AutoShapeType
                     '.Adjustments(1) = (1 / (SlideShape.Height + SlideShape.Width)) * ShapeRadius
-                    .Adjustments(1) = ShapeRadius / IIf(SlideShape.Height < SlideShape.Width, SlideShape.Height, SlideShape.Width)
+                    .Adjustments(1) = ShapeRadius / IIf(SlideShape.height < SlideShape.width, SlideShape.height, SlideShape.width)
 
-                    If MyDocument.Selection.ShapeRange(1).Adjustments.Count > 1 Then
+                    If MyDocument.Selection.ShapeRange(1).Adjustments.count > 1 Then
                         '.Adjustments(2) = (1 / (SlideShape.Height + SlideShape.Width)) * ShapeRadius2
-                        .Adjustments(2) = ShapeRadius2 / IIf(SlideShape.Height < SlideShape.Width, SlideShape.Height, SlideShape.Width)
+                        .Adjustments(2) = ShapeRadius2 / IIf(SlideShape.height < SlideShape.width, SlideShape.height, SlideShape.width)
 
                     End If
                 End With
@@ -114,11 +114,11 @@ Sub ObjectsCopyShapeTypeAndAdjustments()
         
     ElseIf MyDocument.Selection.HasChildShapeRange Then
         
-        For ShapeCount = 2 To ActiveWindow.Selection.ChildShapeRange.Count
+        For ShapeCount = 2 To ActiveWindow.Selection.ChildShapeRange.count
             
             MyDocument.Selection.ChildShapeRange(ShapeCount).AutoShapeType = MyDocument.Selection.ChildShapeRange(1).AutoShapeType
             
-            For AdjustmentsCount = 1 To MyDocument.Selection.ChildShapeRange(1).Adjustments.Count
+            For AdjustmentsCount = 1 To MyDocument.Selection.ChildShapeRange(1).Adjustments.count
                 
                 MyDocument.Selection.ChildShapeRange(ShapeCount).Adjustments(AdjustmentsCount) = MyDocument.Selection.ChildShapeRange(1).Adjustments(AdjustmentsCount)
                 
@@ -128,7 +128,7 @@ Sub ObjectsCopyShapeTypeAndAdjustments()
         
     Else
         
-        For i = 1 To Application.ActiveWindow.Selection.ShapeRange.Count
+        For i = 1 To Application.ActiveWindow.Selection.ShapeRange.count
         
             If Application.ActiveWindow.Selection.ShapeRange(i).Type = msoGroup Then
                 MsgBox "One of the selected shapes is a group."
@@ -137,11 +137,11 @@ Sub ObjectsCopyShapeTypeAndAdjustments()
                 
         Next i
         
-        For ShapeCount = 2 To ActiveWindow.Selection.ShapeRange.Count
+        For ShapeCount = 2 To ActiveWindow.Selection.ShapeRange.count
             
             MyDocument.Selection.ShapeRange(ShapeCount).AutoShapeType = MyDocument.Selection.ShapeRange(1).AutoShapeType
             
-            For AdjustmentsCount = 1 To MyDocument.Selection.ShapeRange(1).Adjustments.Count
+            For AdjustmentsCount = 1 To MyDocument.Selection.ShapeRange(1).Adjustments.count
                 
                 MyDocument.Selection.ShapeRange(ShapeCount).Adjustments(AdjustmentsCount) = MyDocument.Selection.ShapeRange(1).Adjustments(AdjustmentsCount)
                 

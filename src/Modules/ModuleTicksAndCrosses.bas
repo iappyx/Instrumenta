@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleTicksAndCrosses"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,12 @@ Sub TextBulletsTicks()
     Set MyDocument = Application.ActiveWindow
      
     On Error Resume Next
-    With MyDocument.Selection.TextRange.ParagraphFormat.Bullet
+    With MyDocument.Selection.textRange.ParagraphFormat.Bullet
         
         .Character = 252
         .visible = True
-        .Font.Name = "Wingdings"
-        .Font.Color = RGB(0, 128, 0)
+        .Font.name = "Wingdings"
+        .Font.color = RGB(0, 128, 0)
         
     End With
     On Error GoTo 0
@@ -43,12 +43,12 @@ Sub TextBulletsCrosses()
     Set MyDocument = Application.ActiveWindow
    
     On Error Resume Next
-    With MyDocument.Selection.TextRange.ParagraphFormat.Bullet
+    With MyDocument.Selection.textRange.ParagraphFormat.Bullet
         
         .Character = 215
         .visible = True
-        .Font.Name = "Calibri"
-        .Font.Color = RGB(255, 0, 0)
+        .Font.name = "Calibri"
+        .Font.color = RGB(255, 0, 0)
         
     End With
     On Error GoTo 0

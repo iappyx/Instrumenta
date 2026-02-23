@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleAgendaPages"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -30,25 +30,25 @@ Sub CreateOrUpdateMasterAgenda()
     Dim AgendaLayout As CustomLayout
     Dim AgendaShape As shape
     
-    If ActivePresentation.SectionProperties.Count >= 2 Then
+    If ActivePresentation.SectionProperties.count >= 2 Then
         
         'Check if master slide already exists
-        For SlideLoop = ActivePresentation.Slides.Count To 1 Step -1
+        For SlideLoop = ActivePresentation.Slides.count To 1 Step -1
             If ActivePresentation.Slides(SlideLoop).Tags("INSTRUMENTA MASTER AGENDA PAGE") = "YES" Then
                 
                 hasMasterAgenda = True
                 
                 Set AgendaSlide = ActivePresentation.Slides(SlideLoop)
                 
-                For ShapeLoop = 1 To AgendaSlide.Shapes.Count
+                For ShapeLoop = 1 To AgendaSlide.shapes.count
                     
-                    If AgendaSlide.Shapes(ShapeLoop).Tags("INSTRUMENTA AGENDA TEXTSHAPE") = "YES" Then
+                    If AgendaSlide.shapes(ShapeLoop).Tags("INSTRUMENTA AGENDA TEXTSHAPE") = "YES" Then
                         
-                        Set AgendaShape = AgendaSlide.Shapes(ShapeLoop)
+                        Set AgendaShape = AgendaSlide.shapes(ShapeLoop)
                         Set OldAgendaShape = AgendaShape.Duplicate
                         
                         With OldAgendaShape
-                            .left = Application.ActivePresentation.PageSetup.SlideWidth + 10
+                            .left = Application.ActivePresentation.PageSetup.slideWidth + 10
                         End With
                         
                     End If
@@ -62,73 +62,73 @@ Sub CreateOrUpdateMasterAgenda()
         'If master does not exist, create one
         If hasMasterAgenda = False Then
             
-            If ActivePresentation.Slides.Count = 0 Then
+            If ActivePresentation.Slides.count = 0 Then
                 Set AgendaSlide = ActivePresentation.Slides.AddSlide(1, ActivePresentation.SlideMaster.CustomLayouts(1))
-            ElseIf ActivePresentation.Slides.Count = 1 Then
+            ElseIf ActivePresentation.Slides.count = 1 Then
                 Set AgendaSlide = ActivePresentation.Slides.AddSlide(2, ActivePresentation.Slides(1).CustomLayout)
             Else
                 Set AgendaSlide = ActivePresentation.Slides.AddSlide(2, ActivePresentation.Slides(2).CustomLayout)
             End If
             
-            Set AgendaShape = AgendaSlide.Shapes.AddTextbox(msoTextOrientationHorizontal, 100, 100, Application.ActivePresentation.PageSetup.SlideWidth - 200, 50)
-            AgendaShape.Name = "AgendaTextBox"
+            Set AgendaShape = AgendaSlide.shapes.AddTextbox(msoTextOrientationHorizontal, 100, 100, Application.ActivePresentation.PageSetup.slideWidth - 200, 50)
+            AgendaShape.name = "AgendaTextBox"
             AgendaSlide.Tags.Add "INSTRUMENTA MASTER AGENDA PAGE", "YES"
             AgendaShape.Tags.Add "INSTRUMENTA AGENDA TEXTSHAPE", "YES"
         End If
         
         With ActivePresentation.SectionProperties
             
-            For NumberOfSections = 2 To .Count
+            For NumberOfSections = 2 To .count
                 
                 If NumberOfSections = 2 Then
-                    AgendaShape.TextFrame.TextRange.Text = .Name(NumberOfSections)
+                    AgendaShape.TextFrame.textRange.text = .name(NumberOfSections)
                 Else
-                    AgendaShape.TextFrame.TextRange.Text = AgendaShape.TextFrame.TextRange.Text & vbNewLine & .Name(NumberOfSections)
+                    AgendaShape.TextFrame.textRange.text = AgendaShape.TextFrame.textRange.text & vbNewLine & .name(NumberOfSections)
                 End If
                 
             Next
-            With AgendaShape.TextFrame.TextRange
+            With AgendaShape.TextFrame.textRange
                 
                 If hasMasterAgenda = False Then
                     With .Font
-                        .Color.RGB = RGB(0, 0, 0)
+                        .color.RGB = RGB(0, 0, 0)
                         .Bold = msoFalse
                         .Size = 16
                         .Italic = msoFalse
                         .Underline = msoFalse
                         .Emboss = msoFalse
-                        .Name = "Arial"
+                        .name = "Arial"
                     End With
                     
-                    With .Lines(1).Font
-                        .Color.RGB = RGB(0, 51, 153)
+                    With .lines(1).Font
+                        .color.RGB = RGB(0, 51, 153)
                         .Bold = msoTrue
                         .Size = 16
                         .Italic = msoFalse
                         .Underline = msoFalse
                         .Emboss = msoFalse
-                        .Name = "Arial"
+                        .name = "Arial"
                     End With
                     
                 Else
                     With .Font
-                        .Color.RGB = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Color.RGB
-                        .Bold = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Bold
-                        .Size = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Size
-                        .Italic = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Italic
-                        .Underline = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Underline
-                        .Emboss = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Emboss
-                        .Name = OldAgendaShape.TextFrame.TextRange.Lines(2).Font.Name
+                        .color.RGB = OldAgendaShape.TextFrame.textRange.lines(2).Font.color.RGB
+                        .Bold = OldAgendaShape.TextFrame.textRange.lines(2).Font.Bold
+                        .Size = OldAgendaShape.TextFrame.textRange.lines(2).Font.Size
+                        .Italic = OldAgendaShape.TextFrame.textRange.lines(2).Font.Italic
+                        .Underline = OldAgendaShape.TextFrame.textRange.lines(2).Font.Underline
+                        .Emboss = OldAgendaShape.TextFrame.textRange.lines(2).Font.Emboss
+                        .name = OldAgendaShape.TextFrame.textRange.lines(2).Font.name
                     End With
                     
-                    With .Lines(1).Font
-                        .Color.RGB = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Color.RGB
-                        .Bold = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Bold
-                        .Size = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Size
-                        .Italic = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Italic
-                        .Underline = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Underline
-                        .Emboss = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Emboss
-                        .Name = OldAgendaShape.TextFrame.TextRange.Lines(1).Font.Name
+                    With .lines(1).Font
+                        .color.RGB = OldAgendaShape.TextFrame.textRange.lines(1).Font.color.RGB
+                        .Bold = OldAgendaShape.TextFrame.textRange.lines(1).Font.Bold
+                        .Size = OldAgendaShape.TextFrame.textRange.lines(1).Font.Size
+                        .Italic = OldAgendaShape.TextFrame.textRange.lines(1).Font.Italic
+                        .Underline = OldAgendaShape.TextFrame.textRange.lines(1).Font.Underline
+                        .Emboss = OldAgendaShape.TextFrame.textRange.lines(1).Font.Emboss
+                        .name = OldAgendaShape.TextFrame.textRange.lines(1).Font.name
                     End With
                 End If
                 
@@ -156,7 +156,7 @@ Sub CreateOrUpdateMasterAgenda()
         Dim SectionNum As Long
         SectionsReady = False
               
-        If ActivePresentation.SectionProperties.Count = 0 Then
+        If ActivePresentation.SectionProperties.count = 0 Then
             ActivePresentation.SectionProperties.AddSection 1
         End If
         
@@ -201,7 +201,7 @@ Sub CreateAgendaPages()
     
     Dim AgendaTextBox As shape
     
-    For SlideLoop = ActivePresentation.Slides.Count To 1 Step -1
+    For SlideLoop = ActivePresentation.Slides.count To 1 Step -1
         
         If ActivePresentation.Slides(SlideLoop).Tags("INSTRUMENTA AGENDA PAGE") = "YES" Then
             
@@ -211,17 +211,17 @@ Sub CreateAgendaPages()
         
     Next SlideLoop
     
-    For SlideLoop = 1 To ActivePresentation.Slides.Count
+    For SlideLoop = 1 To ActivePresentation.Slides.count
         
         If ActivePresentation.Slides(SlideLoop).Tags("INSTRUMENTA MASTER AGENDA PAGE") = "YES" Then
             
-            For ShapeLoop = 1 To ActivePresentation.Slides(SlideLoop).Shapes.Count
+            For ShapeLoop = 1 To ActivePresentation.Slides(SlideLoop).shapes.count
                 
-                If ActivePresentation.Slides(SlideLoop).Shapes(ShapeLoop).Tags("INSTRUMENTA AGENDA TEXTSHAPE") = "YES" Then
+                If ActivePresentation.Slides(SlideLoop).shapes(ShapeLoop).Tags("INSTRUMENTA AGENDA TEXTSHAPE") = "YES" Then
                     
                     Set MasterAgendaSlide = ActivePresentation.Slides(SlideLoop)
                     
-                    Set MasterAgendaTextBox = ActivePresentation.Slides(SlideLoop).Shapes(ShapeLoop)
+                    Set MasterAgendaTextBox = ActivePresentation.Slides(SlideLoop).shapes(ShapeLoop)
                     hasMasterAgenda = True
                     
                 End If
@@ -234,56 +234,56 @@ Sub CreateAgendaPages()
     If hasMasterAgenda = True Then
     
         
-        For IndentLoop = 1 To MasterAgendaTextBox.TextFrame2.TextRange.Lines.Count
-        MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).ParagraphFormat.IndentLevel = 1
+        For IndentLoop = 1 To MasterAgendaTextBox.TextFrame2.textRange.lines.count
+        MasterAgendaTextBox.TextFrame2.textRange.lines(IndentLoop).ParagraphFormat.IndentLevel = 1
         Next IndentLoop
         
-        For IndentLoop = 1 To MasterAgendaTextBox.TextFrame2.TextRange.Lines.Count
+        For IndentLoop = 1 To MasterAgendaTextBox.TextFrame2.textRange.lines.count
         
         For DepthLoop = 1 To 6
         
-        If MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).Characters(1, 1) = "-" Then
-        MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).ParagraphFormat.Bullet.Type = msoBulletUnnumbered
-        MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).ParagraphFormat.IndentLevel = MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).ParagraphFormat.IndentLevel + 1
-        MasterAgendaTextBox.TextFrame2.TextRange.Lines(IndentLoop).Characters(1, 1).Delete
+        If MasterAgendaTextBox.TextFrame2.textRange.lines(IndentLoop).Characters(1, 1) = "-" Then
+        MasterAgendaTextBox.TextFrame2.textRange.lines(IndentLoop).ParagraphFormat.Bullet.Type = msoBulletUnnumbered
+        MasterAgendaTextBox.TextFrame2.textRange.lines(IndentLoop).ParagraphFormat.IndentLevel = MasterAgendaTextBox.TextFrame2.textRange.lines(IndentLoop).ParagraphFormat.IndentLevel + 1
+        MasterAgendaTextBox.TextFrame2.textRange.lines(IndentLoop).Characters(1, 1).Delete
         End If
         
         Next DepthLoop
         
         Next IndentLoop
         
-        For NumberOfSections = 2 To ActivePresentation.SectionProperties.Count - 1
+        For NumberOfSections = 2 To ActivePresentation.SectionProperties.count - 1
             Set NewSlide = MasterAgendaSlide.Duplicate
             NewSlide.Tags.Add "INSTRUMENTA MASTER AGENDA PAGE", "NO"
             NewSlide.Tags.Add "INSTRUMENTA AGENDA PAGE", "YES"
             NewSlide.MoveToSectionStart (NumberOfSections + 1)
             
-            For ShapeLoop = 1 To NewSlide.Shapes.Count
+            For ShapeLoop = 1 To NewSlide.shapes.count
                 
-                If NewSlide.Shapes(ShapeLoop).Tags("INSTRUMENTA AGENDA TEXTSHAPE") = "YES" Then
-                    Set AgendaTextBox = NewSlide.Shapes(ShapeLoop)
+                If NewSlide.shapes(ShapeLoop).Tags("INSTRUMENTA AGENDA TEXTSHAPE") = "YES" Then
+                    Set AgendaTextBox = NewSlide.shapes(ShapeLoop)
                 End If
                 
             Next ShapeLoop
             
-            With AgendaTextBox.TextFrame.TextRange.Lines(1).Font
-                .Color.RGB = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Color.RGB
-                .Bold = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Bold
-                .Size = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Size
-                .Italic = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Italic
-                .Underline = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Underline
-                .Emboss = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Emboss
-                .Name = MasterAgendaTextBox.TextFrame.TextRange.Lines(2).Font.Name
+            With AgendaTextBox.TextFrame.textRange.lines(1).Font
+                .color.RGB = MasterAgendaTextBox.TextFrame.textRange.lines(2).Font.color.RGB
+                .Bold = MasterAgendaTextBox.TextFrame.textRange.lines(2).Font.Bold
+                .Size = MasterAgendaTextBox.TextFrame.textRange.lines(2).Font.Size
+                .Italic = MasterAgendaTextBox.TextFrame.textRange.lines(2).Font.Italic
+                .Underline = MasterAgendaTextBox.TextFrame.textRange.lines(2).Font.Underline
+                .Emboss = MasterAgendaTextBox.TextFrame.textRange.lines(2).Font.Emboss
+                .name = MasterAgendaTextBox.TextFrame.textRange.lines(2).Font.name
             End With
             
-            With AgendaTextBox.TextFrame.TextRange.Lines(NumberOfSections).Font
-                .Color.RGB = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Color.RGB
-                .Bold = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Bold
-                .Size = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Size
-                .Italic = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Italic
-                .Underline = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Underline
-                .Emboss = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Emboss
-                .Name = MasterAgendaTextBox.TextFrame.TextRange.Lines(1).Font.Name
+            With AgendaTextBox.TextFrame.textRange.lines(NumberOfSections).Font
+                .color.RGB = MasterAgendaTextBox.TextFrame.textRange.lines(1).Font.color.RGB
+                .Bold = MasterAgendaTextBox.TextFrame.textRange.lines(1).Font.Bold
+                .Size = MasterAgendaTextBox.TextFrame.textRange.lines(1).Font.Size
+                .Italic = MasterAgendaTextBox.TextFrame.textRange.lines(1).Font.Italic
+                .Underline = MasterAgendaTextBox.TextFrame.textRange.lines(1).Font.Underline
+                .Emboss = MasterAgendaTextBox.TextFrame.textRange.lines(1).Font.Emboss
+                .name = MasterAgendaTextBox.TextFrame.textRange.lines(1).Font.name
             End With
             
         Next NumberOfSections

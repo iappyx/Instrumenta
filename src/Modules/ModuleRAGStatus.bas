@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleRAGStatus"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ Sub AverageRAGStatus()
         
         For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If (InStr(shape.Name, "RAGStatus") = 1) And (Not shape.Tags("INSTRUMENTA RAGSTATUS") = "") Then
+            If (InStr(shape.name, "RAGStatus") = 1) And (Not shape.Tags("INSTRUMENTA RAGSTATUS") = "") Then
                 
                 RAGStatusCount = RAGStatusCount + 1
                 
@@ -87,14 +87,14 @@ Sub GenerateRAGStatus(RAGColor As String)
         
         For Each shape In ActiveWindow.Selection.ShapeRange
             
-            If InStr(shape.Name, "RAGStatus") = 1 Then
+            If InStr(shape.name, "RAGStatus") = 1 Then
                 
                 ExistingRAGStatus = True
-                ExistingWidth = shape.Width
-                ExistingHeight = shape.Height
+                ExistingWidth = shape.width
+                ExistingHeight = shape.height
                 ExistingTop = shape.Top
                 ExistingLeft = shape.left
-                ExistingRotation = shape.Rotation
+                ExistingRotation = shape.rotation
                 shape.Delete
                 
             End If
@@ -107,19 +107,19 @@ Sub GenerateRAGStatus(RAGColor As String)
     Dim RAGStatus As Object
     RandomNumber = Round(Rnd() * 1000000, 0)
     
-        Set RAGBackground = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRoundedRectangle, 100, 100, 94, 34)
+        Set RAGBackground = MyDocument.Selection.SlideRange.shapes.AddShape(msoShapeRoundedRectangle, 100, 100, 94, 34)
         
         With RAGBackground
-            .Line.visible = False
+            .line.visible = False
             .Fill.ForeColor.RGB = RGB(0, 0, 0)
-            .Name = "RAGBackground" + Str(RandomNumber)
+            .name = "RAGBackground" + Str(RandomNumber)
         End With
         
         
-        Set GreenStatus = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 104, 104, 26, 26)
+        Set GreenStatus = MyDocument.Selection.SlideRange.shapes.AddShape(msoShapeOval, 104, 104, 26, 26)
         
         With GreenStatus
-            .Line.visible = False
+            .line.visible = False
             
             If LCase(RAGColor) = "green" Then
             .Fill.ForeColor.RGB = RGB(0, 176, 80)
@@ -127,13 +127,13 @@ Sub GenerateRAGStatus(RAGColor As String)
             .Fill.ForeColor.RGB = RGB(59, 56, 56)
             End If
             
-            .Name = "GreenStatus" + Str(RandomNumber)
+            .name = "GreenStatus" + Str(RandomNumber)
         End With
     
-        Set AmberStatus = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 134, 104, 26, 26)
+        Set AmberStatus = MyDocument.Selection.SlideRange.shapes.AddShape(msoShapeOval, 134, 104, 26, 26)
         
         With AmberStatus
-            .Line.visible = False
+            .line.visible = False
 
             If LCase(RAGColor) = "amber" Then
             .Fill.ForeColor.RGB = RGB(255, 192, 0)
@@ -141,13 +141,13 @@ Sub GenerateRAGStatus(RAGColor As String)
             .Fill.ForeColor.RGB = RGB(59, 56, 56)
             End If
             
-            .Name = "AmberStatus" + Str(RandomNumber)
+            .name = "AmberStatus" + Str(RandomNumber)
         End With
     
-        Set RedStatus = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeOval, 164, 104, 26, 26)
+        Set RedStatus = MyDocument.Selection.SlideRange.shapes.AddShape(msoShapeOval, 164, 104, 26, 26)
         
         With RedStatus
-            .Line.visible = False
+            .line.visible = False
             
             If LCase(RAGColor) = "red" Then
             .Fill.ForeColor.RGB = RGB(192, 0, 0)
@@ -155,19 +155,19 @@ Sub GenerateRAGStatus(RAGColor As String)
             .Fill.ForeColor.RGB = RGB(59, 56, 56)
             End If
             
-            .Name = "RedStatus" + Str(RandomNumber)
+            .name = "RedStatus" + Str(RandomNumber)
         End With
         
-        Set RAGStatus = ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("RAGBackground" + Str(RandomNumber), "GreenStatus" + Str(RandomNumber), "AmberStatus" + Str(RandomNumber), "RedStatus" + Str(RandomNumber))).Group
-        RAGStatus.Name = "RAGStatus" + Str(RandomNumber)
+        Set RAGStatus = ActiveWindow.Selection.SlideRange(1).shapes.Range(Array("RAGBackground" + Str(RandomNumber), "GreenStatus" + Str(RandomNumber), "AmberStatus" + Str(RandomNumber), "RedStatus" + Str(RandomNumber))).Group
+        RAGStatus.name = "RAGStatus" + Str(RandomNumber)
         RAGStatus.Tags.Add "INSTRUMENTA RAGSTATUS", RAGColor
         
         If ExistingRAGStatus = True Then
-            RAGStatus.Width = ExistingWidth
-            RAGStatus.Height = ExistingHeight
+            RAGStatus.width = ExistingWidth
+            RAGStatus.height = ExistingHeight
             RAGStatus.Top = ExistingTop
             RAGStatus.left = ExistingLeft
-            RAGStatus.Rotation = ExistingRotation
+            RAGStatus.rotation = ExistingRotation
         End If
     
 End Sub

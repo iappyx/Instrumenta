@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleEyedropper"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -102,8 +102,8 @@ Public Sub ApplyPixelColorToOutline()
     For Each oSh In ActiveWindow.Selection.ShapeRange
         On Error Resume Next
         
-        oSh.Line.visible = msoTrue
-        oSh.Line.ForeColor.RGB = lColor
+        oSh.line.visible = msoTrue
+        oSh.line.ForeColor.RGB = lColor
         
         On Error GoTo 0
     Next oSh

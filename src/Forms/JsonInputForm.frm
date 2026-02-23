@@ -1,25 +1,18 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} JsonInputForm 
-   Caption         =   "Import JSON"
-   ClientHeight    =   9090.001
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   12720
-   OleObjectBlob   =   "JsonInputForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "JsonInputForm"
+Attribute VB_Base = "0{C4FDC70F-F1E6-4AC2-894B-73E4812B630C}{C9F2A657-1A60-4C83-A712-4D0E6BA52B6A}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 Option Explicit
 
-Public Result As String
+Public result As String
 Public Cancelled As Boolean
 
 Private Sub cmdOK_Click()
-    Result = Me.txtJson.text
+    result = Me.txtJson.text
     Me.Hide
 End Sub
 

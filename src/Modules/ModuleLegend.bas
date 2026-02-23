@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleLegend"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ End Sub
 
 Sub InsertLegendCustom()
 
-Call InsertLegend(InsertLegendForm.LegendShapeComboBox.Value, InsertLegendForm.LegendOrientationComboBox.Value, InsertLegendForm.LegendNumberOfComboBox.ListIndex + 1)
+Call InsertLegend(InsertLegendForm.LegendShapeComboBox.value, InsertLegendForm.LegendOrientationComboBox.value, InsertLegendForm.LegendNumberOfComboBox.ListIndex + 1)
 
 End Sub
 
@@ -125,41 +125,41 @@ Function InsertLegend(shapeType As String, orientation As String, numberofitems 
     
         If orientation = "horizontal" Then
             spacing = 100
-            Set shp = sld.Shapes.AddShape(msoType, leftPos + ((i - 1) * spacing), topPos, 15, 15)
+            Set shp = sld.shapes.AddShape(msoType, leftPos + ((i - 1) * spacing), topPos, 15, 15)
         ElseIf orientation = "vertical" Then
             spacing = 30
-            Set shp = sld.Shapes.AddShape(msoType, leftPos, topPos + ((i - 1) * spacing), 15, 15)
+            Set shp = sld.shapes.AddShape(msoType, leftPos, topPos + ((i - 1) * spacing), 15, 15)
         Else
             MsgBox "Invalid orientation. Use 'horizontal' or 'vertical'."
             Exit Function
         End If
         
         shp.Fill.ForeColor.ObjectThemeColor = msoThemeColorAccent1 + ((i - 1) Mod 6)
-        shp.Line.visible = msoFalse
+        shp.line.visible = msoFalse
         
-        shp.Name = "LegendIcon_" & i & "_" & RandomNumber
-        arrNames(idx) = shp.Name
+        shp.name = "LegendIcon_" & i & "_" & RandomNumber
+        arrNames(idx) = shp.name
         idx = idx + 1
         
         If orientation = "horizontal" Then
-            Set txt = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, shp.left + 20, shp.Top - 2, 80, 20)
+            Set txt = sld.shapes.AddTextbox(msoTextOrientationHorizontal, shp.left + 20, shp.Top - 2, 80, 20)
         Else
-            Set txt = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, shp.left + 20, shp.Top - 2, 80, 20)
+            Set txt = sld.shapes.AddTextbox(msoTextOrientationHorizontal, shp.left + 20, shp.Top - 2, 80, 20)
         End If
         
-        txt.TextFrame.textRange.Text = "Legend " & i
+        txt.TextFrame.textRange.text = "Legend " & i
         txt.TextFrame.textRange.Font.Size = 10
         
-        txt.Name = "LegendText_" & i & "_" & RandomNumber
-        arrNames(idx) = txt.Name
+        txt.name = "LegendText_" & i & "_" & RandomNumber
+        arrNames(idx) = txt.name
         idx = idx + 1
         
     Next i
     
-    MyDocument.View.GotoSlide sld.SlideIndex
+    MyDocument.View.GotoSlide sld.slideIndex
     
-    Set LegendGroup = MyDocument.Selection.SlideRange(1).Shapes.Range(arrNames).Group
-    LegendGroup.Name = "LegendGroup_" & RandomNumber
+    Set LegendGroup = MyDocument.Selection.SlideRange(1).shapes.Range(arrNames).Group
+    LegendGroup.name = "LegendGroup_" & RandomNumber
     LegendGroup.Tags.Add "INSTRUMENTA LEGEND", shapeType & orientation
     
     LegendGroup.left = 20

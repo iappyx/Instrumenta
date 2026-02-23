@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjectsAlignAndDistribute"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -766,10 +766,10 @@ Sub ObjectsQuicksortTopLeftToBottomRight(SlideShapeRange As ShapeRange)
     ReDim ShapeNamesArray(1 To UBound(ArrayToSort))
     
     For i = 1 To UBound(ArrayToSort)
-        ShapeNamesArray(i) = ArrayToSort(i).Name
+        ShapeNamesArray(i) = ArrayToSort(i).name
     Next i
     
-    Set NewSlideShapeRange = ActiveWindow.Selection.SlideRange.Shapes.Range(ShapeNamesArray)
+    Set NewSlideShapeRange = ActiveWindow.Selection.SlideRange.shapes.Range(ShapeNamesArray)
     Set SlideShapeRange = NewSlideShapeRange
 
 End Sub
@@ -1272,7 +1272,7 @@ Sub ArrangeShapes()
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub
     
     For Each SlideShape In SelectedShapeRange
-    SlideShape.Name = "Shape " & SlideShape.ID
+    SlideShape.name = "Shape " & SlideShape.id
         
     Next SlideShape
     
@@ -1316,28 +1316,28 @@ Sub ArrangeShapes()
         a = a + 1
         
         For i = 1 To ShapeGroup.count
-            ShapeNames(i - 1) = ShapeGroup(i).Name
+            ShapeNames(i - 1) = ShapeGroup(i).name
         Next i
         
         If ShapeGroup.count > 1 Then
-            MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames).Align msoAlignCenters, msoFalse
+            MyDocument.Selection.SlideRange.shapes.Range(ShapeNames).Align msoAlignCenters, msoFalse
             'MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames).Distribute msoDistributeVertically, msoFalse
-            Set ColumnGroup = MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames).Group
-            ColumnGroup.Name = "ColumnGroup" & a & " " & NameRandomizer
+            Set ColumnGroup = MyDocument.Selection.SlideRange.shapes.Range(ShapeNames).Group
+            ColumnGroup.name = "ColumnGroup" & a & " " & NameRandomizer
         Else
             
-            Set ColumnGroup = MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames)
+            Set ColumnGroup = MyDocument.Selection.SlideRange.shapes.Range(ShapeNames)
             GroupNames(a - 1) = ShapeNames(0)
-            ColumnGroup.Name = GroupNames(a - 1)
+            ColumnGroup.name = GroupNames(a - 1)
                         
         End If
     Next ShapeGroup
     
     If ShapeGroups.count > 2 Then
-    MyDocument.Selection.SlideRange.Shapes.Range(GroupNames).Distribute msoDistributeHorizontally, msoFalse
+    MyDocument.Selection.SlideRange.shapes.Range(GroupNames).Distribute msoDistributeHorizontally, msoFalse
     End If
     
-    MyDocument.Selection.SlideRange.Shapes.Range(GroupNames).Ungroup
+    MyDocument.Selection.SlideRange.shapes.Range(GroupNames).Ungroup
     
     Set ShapeGroups = Nothing
     Set ShapeGroup = Nothing
@@ -1381,27 +1381,27 @@ Sub ArrangeShapes()
         a = a + 1
         
         For i = 1 To ShapeGroup.count
-            ShapeNames2(i - 1) = ShapeGroup(i).Name
+            ShapeNames2(i - 1) = ShapeGroup(i).name
         Next i
         
         If ShapeGroup.count > 1 Then
-            MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames2).Align msoAlignMiddles, msoFalse
+            MyDocument.Selection.SlideRange.shapes.Range(ShapeNames2).Align msoAlignMiddles, msoFalse
             'MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames2).Distribute msoDistributeHorizontally, msoFalse
-            Set RowGroup = MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames2).Group
-            RowGroup.Name = "RowGroup" & a & " " & NameRandomizer
+            Set RowGroup = MyDocument.Selection.SlideRange.shapes.Range(ShapeNames2).Group
+            RowGroup.name = "RowGroup" & a & " " & NameRandomizer
         Else
             
-            Set RowGroup = MyDocument.Selection.SlideRange.Shapes.Range(ShapeNames2)
+            Set RowGroup = MyDocument.Selection.SlideRange.shapes.Range(ShapeNames2)
             GroupNames2(a - 1) = ShapeNames2(0)
-            RowGroup.Name = GroupNames2(a - 1)
+            RowGroup.name = GroupNames2(a - 1)
             
         End If
     Next ShapeGroup
     
     If ShapeGroups.count > 2 Then
-    MyDocument.Selection.SlideRange.Shapes.Range(GroupNames2).Distribute msoDistributeVertically, msoFalse
+    MyDocument.Selection.SlideRange.shapes.Range(GroupNames2).Distribute msoDistributeVertically, msoFalse
     End If
     
-    MyDocument.Selection.SlideRange.Shapes.Range(GroupNames2).Ungroup
+    MyDocument.Selection.SlideRange.shapes.Range(GroupNames2).Ungroup
     
 End Sub

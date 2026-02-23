@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleObjectsTransparency"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -67,7 +67,7 @@ Sub SetTransparency(ByVal shp As shape)
         End If
 
         shp.Fill.Transparency = adjustedTransparency
-        shp.Line.Transparency = adjustedTransparency
+        shp.line.Transparency = adjustedTransparency
     End If
     
 End Sub

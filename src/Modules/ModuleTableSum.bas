@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleTableSum"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -35,26 +35,26 @@ Sub TableSum()
         
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
         
-    With Application.ActiveWindow.Selection.ShapeRange.Table
+    With Application.ActiveWindow.Selection.ShapeRange.table
         
         TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA COLUMNGAPS")
         
-        For RowsCount = 1 To .Rows.Count
-            For ColsCount = 1 To .Columns.Count
+        For RowsCount = 1 To .rows.count
+            For ColsCount = 1 To .Columns.count
                 
-                If .Cell(RowsCount, ColsCount).Selected Then
+                If .cell(RowsCount, ColsCount).Selected Then
                     
                 If Not ((ColsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not ColsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
                     For SumCount = 1 To RowsCount - 1
                     
                     On Error Resume Next
-                    TotalSum = TotalSum + CDbl(.Cell(SumCount, ColsCount).shape.TextFrame.TextRange.Text)
+                    TotalSum = TotalSum + CDbl(.cell(SumCount, ColsCount).shape.TextFrame.textRange.text)
                     On Error GoTo 0
                     
                     Next SumCount
                         
-                    .Cell(RowsCount, ColsCount).shape.TextFrame.TextRange.Text = TotalSum
+                    .cell(RowsCount, ColsCount).shape.TextFrame.textRange.text = TotalSum
                     
                     End If
                     
@@ -92,24 +92,24 @@ Sub TableRowSum()
         
     TypeOfGaps = Application.ActiveWindow.Selection.ShapeRange.Tags("INSTRUMENTA ROWGAPS")
         
-    With Application.ActiveWindow.Selection.ShapeRange.Table
+    With Application.ActiveWindow.Selection.ShapeRange.table
         
-        For RowsCount = 1 To .Rows.Count
-            For ColsCount = 1 To .Columns.Count
+        For RowsCount = 1 To .rows.count
+            For ColsCount = 1 To .Columns.count
                 
-                If .Cell(RowsCount, ColsCount).Selected Then
+                If .cell(RowsCount, ColsCount).Selected Then
                 
                 If Not ((RowsCount Mod 2 = 0 And TypeOfGaps = "even") Or (Not RowsCount Mod 2 = 0 And TypeOfGaps = "odd")) Then
                 
                     For SumCount = 1 To ColsCount - 1
                     
                     On Error Resume Next
-                    TotalSum = TotalSum + CDbl(.Cell(RowsCount, SumCount).shape.TextFrame.TextRange.Text)
+                    TotalSum = TotalSum + CDbl(.cell(RowsCount, SumCount).shape.TextFrame.textRange.text)
                     On Error GoTo 0
                     
                     Next SumCount
                         
-                    .Cell(RowsCount, ColsCount).shape.TextFrame.TextRange.Text = TotalSum
+                    .cell(RowsCount, ColsCount).shape.TextFrame.textRange.text = TotalSum
                     
                     End If
                     

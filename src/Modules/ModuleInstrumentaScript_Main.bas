@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleInstrumentaScript_Main"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -1091,7 +1091,7 @@ Public Sub IScr_InvokeCommand(line As String, lineNum As Integer)
     End If
 
     On Error GoTo Failed
-    Application.Run subName
+    Application.run subName
     IScr_Log "Line " & lineNum & ": CALL " & subName & " - OK"
     Exit Sub
 Failed:

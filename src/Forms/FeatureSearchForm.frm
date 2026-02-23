@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} FeatureSearchForm 
-   Caption         =   "Search Instrumenta features"
-   ClientHeight    =   6585
-   ClientLeft      =   120
-   ClientTop       =   465
-   ClientWidth     =   14760
-   OleObjectBlob   =   "FeatureSearchForm.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "FeatureSearchForm"
+Attribute VB_Base = "0{A1E3031B-038D-4BA5-A23C-73B9717A4AC5}{F5C76AB5-E352-49BF-A923-D036FF0BDDB6}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +45,7 @@ Private Sub UserForm_Initialize()
 End Sub
 
 Private Sub txtSearch_Change()
-    PerformSearch txtSearch.Text
+    PerformSearch txtSearch.text
 End Sub
 
 Private Sub txtSearch_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
@@ -101,7 +94,7 @@ Private Sub PerformSearch(query As String)
     SearchResultIndices = ModuleFeatureSearch.SearchFeatures(query)
     
     If Len(SearchResultIndices) = 0 Then
-        lblResultCount.Caption = "0 features found"
+        lblResultCount.caption = "0 features found"
         Exit Sub
     End If
     
@@ -110,15 +103,15 @@ Private Sub PerformSearch(query As String)
     For i = LBound(indices) To UBound(indices)
         feat = ModuleFeatureSearch.GetFeatureByIndex(CLng(indices(i)))
         
-        lstResults.AddItem feat.Label
+        lstResults.AddItem feat.label
         lstResults.List(lstResults.ListCount - 1, 1) = feat.TabSingleView
         lstResults.List(lstResults.ListCount - 1, 2) = feat.TabMultiView
     Next i
 
     If UBound(indices) - LBound(indices) + 1 = 1 Then
-        lblResultCount.Caption = "1 feature found"
+        lblResultCount.caption = "1 feature found"
     Else
-        lblResultCount.Caption = (UBound(indices) - LBound(indices) + 1) & " features found"
+        lblResultCount.caption = (UBound(indices) - LBound(indices) + 1) & " features found"
     End If
     
     If lstResults.ListCount > 0 Then lstResults.ListIndex = 0

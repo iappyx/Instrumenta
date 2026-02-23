@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleStamps"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -31,59 +31,59 @@ Sub GenerateStamp(StampTitleText As String, StampColor As Long)
     Dim NumberOfStamps As Long
     
     NumberOfStamps = 0
-    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.shapes.count
         
-        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "Stamp") = 1 Then
+        If InStr(1, MyDocument.Selection.SlideRange.shapes(ShapeNumber).name, "Stamp") = 1 Then
             NumberOfStamps = NumberOfStamps + 1
             
         End If
         
     Next
     
-    Set StampBackground = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRoundedRectangle, 100, 100, 94, 26)
+    Set StampBackground = MyDocument.Selection.SlideRange.shapes.AddShape(msoShapeRoundedRectangle, 100, 100, 94, 26)
     
     With StampBackground
-        .Line.visible = False
+        .line.visible = False
         .Fill.ForeColor.RGB = RGB(0, 0, 0)
-        .Name = "StampBackground" + Str(RandomNumber)
+        .name = "StampBackground" + Str(RandomNumber)
     End With
     
-    Set StampBackgroundInner = MyDocument.Selection.SlideRange.Shapes.AddShape(msoShapeRoundedRectangle, 102, 102, 90, 22)
+    Set StampBackgroundInner = MyDocument.Selection.SlideRange.shapes.AddShape(msoShapeRoundedRectangle, 102, 102, 90, 22)
     
     With StampBackgroundInner
-        .Line.visible = False
+        .line.visible = False
         .Fill.ForeColor.RGB = RGB(255, 255, 255)
-        .Name = "StampBackgroundInner" + Str(RandomNumber)
+        .name = "StampBackgroundInner" + Str(RandomNumber)
     End With
     
-    Set StampText = MyDocument.Selection.SlideRange.Shapes.AddTextbox(msoTextOrientationHorizontal, 100, 100, 94, 26)
+    Set StampText = MyDocument.Selection.SlideRange.shapes.AddTextbox(msoTextOrientationHorizontal, 100, 100, 94, 26)
     
     With StampText
         .TextFrame.AutoSize = ppAutoSizeNone
         .TextFrame.HorizontalAnchor = msoAnchorCenter
         .TextFrame.VerticalAnchor = msoAnchorMiddle
-        .TextFrame.TextRange.ParagraphFormat.Alignment = ppAlignCenter
-        .TextFrame.TextRange = StampTitleText
-        .TextFrame.MarginBottom = 0
+        .TextFrame.textRange.ParagraphFormat.Alignment = ppAlignCenter
+        .TextFrame.textRange = StampTitleText
+        .TextFrame.marginBottom = 0
         .TextFrame.MarginTop = 0
         .TextFrame.MarginLeft = 0
         .TextFrame.MarginRight = 0
         
-        .TextFrame.TextRange.Font.Bold = msoTrue
-        .TextFrame.TextRange.Font.Name = "Arial"
-        .TextFrame.TextRange.Font.Size = 10
-        .Line.visible = False
-        .Name = "StampText" + Str(RandomNumber)
+        .TextFrame.textRange.Font.Bold = msoTrue
+        .TextFrame.textRange.Font.name = "Arial"
+        .TextFrame.textRange.Font.Size = 10
+        .line.visible = False
+        .name = "StampText" + Str(RandomNumber)
     End With
     
-    ActiveWindow.Selection.SlideRange(1).Shapes.Range(Array("StampBackground" + Str(RandomNumber), "StampBackgroundInner" + Str(RandomNumber), "StampText" + Str(RandomNumber))).Select
+    ActiveWindow.Selection.SlideRange(1).shapes.Range(Array("StampBackground" + Str(RandomNumber), "StampBackgroundInner" + Str(RandomNumber), "StampText" + Str(RandomNumber))).Select
     CommandBars.ExecuteMso ("ShapesCombine")
     
     For Each shape In ActiveWindow.Selection.ShapeRange
         
-        shape.Name = "Stamp" + Str(RandomNumber)
+        shape.name = "Stamp" + Str(RandomNumber)
         shape.Top = 5
-        shape.left = Application.ActivePresentation.PageSetup.SlideWidth - (NumberOfStamps + 1) * (shape.Width + 5)
+        shape.left = Application.ActivePresentation.PageSetup.slideWidth - (NumberOfStamps + 1) * (shape.width + 5)
         shape.Fill.ForeColor.RGB = StampColor
         shape.Tags.Add "INSTRUMENTA STAMP", StampTitleText
         
@@ -95,33 +95,33 @@ End Sub
 Sub MoveStampsOffSlide()
     Set MyDocument = Application.ActiveWindow
     
-    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.shapes.count
         
-        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "Stamp") = 1 Then
+        If InStr(1, MyDocument.Selection.SlideRange.shapes(ShapeNumber).name, "Stamp") = 1 Then
             
-            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION TOP", CStr(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Top)
-            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).left)
+            MyDocument.Selection.SlideRange.shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION TOP", CStr(MyDocument.Selection.SlideRange.shapes(ShapeNumber).Top)
+            MyDocument.Selection.SlideRange.shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(MyDocument.Selection.SlideRange.shapes(ShapeNumber).left)
             
             
-            With MyDocument.Selection.SlideRange.Shapes(ShapeNumber)
-            ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .left - .Width)
-            ShapeBottom = (Application.ActivePresentation.PageSetup.SlideHeight - .Top - .Height)
+            With MyDocument.Selection.SlideRange.shapes(ShapeNumber)
+            ShapeRight = (Application.ActivePresentation.PageSetup.slideWidth - .left - .width)
+            ShapeBottom = (Application.ActivePresentation.PageSetup.slideHeight - .Top - .height)
                              
             If .left <= ShapeRight And .left <= .Top And .left <= ShapeBottom Then
             
-            .left = -5 - .Width
+            .left = -5 - .width
             
             ElseIf .Top <= ShapeRight And .Top <= ShapeBottom And .Top <= .left Then
             
-            .Top = -5 - .Height
+            .Top = -5 - .height
             
             ElseIf ShapeRight <= ShapeBottom And ShapeRight <= .left And ShapeRight <= .Top Then
             
-            .left = 5 + Application.ActivePresentation.PageSetup.SlideWidth
+            .left = 5 + Application.ActivePresentation.PageSetup.slideWidth
             
             Else
             
-            .Top = 5 + Application.ActivePresentation.PageSetup.SlideHeight
+            .Top = 5 + Application.ActivePresentation.PageSetup.slideHeight
             
             End If
             
@@ -135,11 +135,11 @@ End Sub
 Sub MoveStampsOnSlide()
     Set MyDocument = Application.ActiveWindow
     
-    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.Shapes.Count
+    For ShapeNumber = 1 To MyDocument.Selection.SlideRange.shapes.count
         On Error Resume Next
-        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "Stamp") = 1 Then
-            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Top = CLng(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION TOP"))
-            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).left = CLng(MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
+        If InStr(1, MyDocument.Selection.SlideRange.shapes(ShapeNumber).name, "Stamp") = 1 Then
+            MyDocument.Selection.SlideRange.shapes(ShapeNumber).Top = CLng(MyDocument.Selection.SlideRange.shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION TOP"))
+            MyDocument.Selection.SlideRange.shapes(ShapeNumber).left = CLng(MyDocument.Selection.SlideRange.shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
             
         End If
         On Error GoTo 0
@@ -150,10 +150,10 @@ End Sub
 Sub DeleteStampsOnSlide()
     Set MyDocument = Application.ActiveWindow
     
-    For ShapeNumber = MyDocument.Selection.SlideRange.Shapes.Count To 1 Step -1
+    For ShapeNumber = MyDocument.Selection.SlideRange.shapes.count To 1 Step -1
         
-        If InStr(1, MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Name, "Stamp") = 1 Then
-            MyDocument.Selection.SlideRange.Shapes(ShapeNumber).Delete
+        If InStr(1, MyDocument.Selection.SlideRange.shapes(ShapeNumber).name, "Stamp") = 1 Then
+            MyDocument.Selection.SlideRange.shapes(ShapeNumber).Delete
         End If
         
     Next
@@ -164,10 +164,10 @@ Sub DeleteStampsOnAllSlides()
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        For ShapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        For ShapeNumber = PresentationSlide.shapes.count To 1 Step -1
             
-            If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "Stamp") = 1 Then
-                PresentationSlide.Shapes(ShapeNumber).Delete
+            If InStr(1, PresentationSlide.shapes(ShapeNumber).name, "Stamp") = 1 Then
+                PresentationSlide.shapes(ShapeNumber).Delete
             End If
             
         Next
@@ -181,11 +181,11 @@ Sub MoveStampsOnAllSlides()
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        For ShapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        For ShapeNumber = PresentationSlide.shapes.count To 1 Step -1
             On Error Resume Next
-            If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "Stamp") = 1 Then
-            PresentationSlide.Shapes(ShapeNumber).Top = CLng(PresentationSlide.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION TOP"))
-            PresentationSlide.Shapes(ShapeNumber).left = CLng(PresentationSlide.Shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
+            If InStr(1, PresentationSlide.shapes(ShapeNumber).name, "Stamp") = 1 Then
+            PresentationSlide.shapes(ShapeNumber).Top = CLng(PresentationSlide.shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION TOP"))
+            PresentationSlide.shapes(ShapeNumber).left = CLng(PresentationSlide.shapes(ShapeNumber).Tags("INSTRUMENTA OLD POSITION LEFT"))
             End If
             On Error GoTo 0
         Next
@@ -199,33 +199,33 @@ Sub MoveStampsOffAllSlides()
     
     For Each PresentationSlide In ActivePresentation.Slides
         
-        For ShapeNumber = PresentationSlide.Shapes.Count To 1 Step -1
+        For ShapeNumber = PresentationSlide.shapes.count To 1 Step -1
             
-            If InStr(1, PresentationSlide.Shapes(ShapeNumber).Name, "Stamp") = 1 Then
+            If InStr(1, PresentationSlide.shapes(ShapeNumber).name, "Stamp") = 1 Then
                 
-            PresentationSlide.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION TOP", CStr(PresentationSlide.Shapes(ShapeNumber).Top)
-            PresentationSlide.Shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(PresentationSlide.Shapes(ShapeNumber).left)
+            PresentationSlide.shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION TOP", CStr(PresentationSlide.shapes(ShapeNumber).Top)
+            PresentationSlide.shapes(ShapeNumber).Tags.Add "INSTRUMENTA OLD POSITION LEFT", CStr(PresentationSlide.shapes(ShapeNumber).left)
             
             
-            With PresentationSlide.Shapes(ShapeNumber)
-            ShapeRight = (Application.ActivePresentation.PageSetup.SlideWidth - .left - .Width)
-            ShapeBottom = (Application.ActivePresentation.PageSetup.SlideHeight - .Top - .Height)
+            With PresentationSlide.shapes(ShapeNumber)
+            ShapeRight = (Application.ActivePresentation.PageSetup.slideWidth - .left - .width)
+            ShapeBottom = (Application.ActivePresentation.PageSetup.slideHeight - .Top - .height)
                              
             If .left <= ShapeRight And .left <= .Top And .left <= ShapeBottom Then
             
-            .left = -5 - .Width
+            .left = -5 - .width
             
             ElseIf .Top <= ShapeRight And .Top <= ShapeBottom And .Top <= .left Then
             
-            .Top = -5 - .Height
+            .Top = -5 - .height
             
             ElseIf ShapeRight <= ShapeBottom And ShapeRight <= .left And ShapeRight <= .Top Then
             
-            .left = 5 + Application.ActivePresentation.PageSetup.SlideWidth
+            .left = 5 + Application.ActivePresentation.PageSetup.slideWidth
             
             Else
             
-            .Top = 5 + Application.ActivePresentation.PageSetup.SlideHeight
+            .Top = 5 + Application.ActivePresentation.PageSetup.slideHeight
             
             End If
             

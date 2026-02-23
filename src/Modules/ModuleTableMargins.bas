@@ -1,7 +1,7 @@
 Attribute VB_Name = "ModuleTableMargins"
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -32,16 +32,16 @@ Sub TablesMarginsToZero()
     
     If Application.ActiveWindow.Selection.ShapeRange.HasTable Then
         
-    With Application.ActiveWindow.Selection.ShapeRange.Table
+    With Application.ActiveWindow.Selection.ShapeRange.table
         
-        For RowsCount = 1 To .Rows.Count
-            For ColsCount = 1 To .Columns.Count
+        For RowsCount = 1 To .rows.count
+            For ColsCount = 1 To .Columns.count
                 
-                If .Cell(RowsCount, ColsCount).Selected Then
+                If .cell(RowsCount, ColsCount).Selected Then
                     
-                    With .Cell(RowsCount, ColsCount).shape.TextFrame
+                    With .cell(RowsCount, ColsCount).shape.TextFrame
                         
-                        .MarginBottom = 0
+                        .marginBottom = 0
                         .MarginLeft = 0
                         .MarginRight = 0
                         .MarginTop = 0
@@ -78,16 +78,16 @@ Sub TablesMarginsIncrease()
     Dim TableMarginSetting As Double
     TableMarginSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0" + GetDecimalSeperator() + "2"))
     
-    With Application.ActiveWindow.Selection.ShapeRange.Table
+    With Application.ActiveWindow.Selection.ShapeRange.table
         
-        For RowsCount = 1 To .Rows.Count
-            For ColsCount = 1 To .Columns.Count
+        For RowsCount = 1 To .rows.count
+            For ColsCount = 1 To .Columns.count
                 
-                If .Cell(RowsCount, ColsCount).Selected Then
+                If .cell(RowsCount, ColsCount).Selected Then
                     
-                    With .Cell(RowsCount, ColsCount).shape.TextFrame
+                    With .cell(RowsCount, ColsCount).shape.TextFrame
                         
-                        .MarginBottom = .MarginBottom + TableMarginSetting
+                        .marginBottom = .marginBottom + TableMarginSetting
                         .MarginLeft = .MarginLeft + TableMarginSetting
                         .MarginRight = .MarginRight + TableMarginSetting
                         .MarginTop = .MarginTop + TableMarginSetting
@@ -124,17 +124,17 @@ Sub TablesMarginsDecrease()
     Dim TableMarginSetting As Double
     TableMarginSetting = CDbl(GetSetting("Instrumenta", "Tables", "TableStepSizeMargin", "0" + GetDecimalSeperator() + "2"))
     
-    With Application.ActiveWindow.Selection.ShapeRange.Table
+    With Application.ActiveWindow.Selection.ShapeRange.table
         
-        For RowsCount = 1 To .Rows.Count
-            For ColsCount = 1 To .Columns.Count
+        For RowsCount = 1 To .rows.count
+            For ColsCount = 1 To .Columns.count
                 
-                If .Cell(RowsCount, ColsCount).Selected Then
+                If .cell(RowsCount, ColsCount).Selected Then
                     
-                    With .Cell(RowsCount, ColsCount).shape.TextFrame
+                    With .cell(RowsCount, ColsCount).shape.TextFrame
                         
-                        If .MarginBottom >= TableMarginSetting Then
-                            .MarginBottom = .MarginBottom - TableMarginSetting
+                        If .marginBottom >= TableMarginSetting Then
+                            .marginBottom = .marginBottom - TableMarginSetting
                         End If
                         If .MarginLeft >= TableMarginSetting Then
                             .MarginLeft = .MarginLeft - TableMarginSetting

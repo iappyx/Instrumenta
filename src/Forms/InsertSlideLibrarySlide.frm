@@ -1,21 +1,14 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} InsertSlideLibrarySlide 
-   Caption         =   "Insert slide(s) from slide library"
-   ClientHeight    =   13320
-   ClientLeft      =   30
-   ClientTop       =   105
-   ClientWidth     =   13650
-   OleObjectBlob   =   "InsertSlideLibrarySlide.frx":0000
-   StartUpPosition =   1  'CenterOwner
-End
 Attribute VB_Name = "InsertSlideLibrarySlide"
+Attribute VB_Base = "0{2AEF59C3-145B-4DE2-A1EC-84FD351558F0}{5364B59D-1CA7-4586-82A1-E81895F879F6}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Attribute VB_TemplateDerived = False
+Attribute VB_Customizable = False
 'MIT License
 
-'Copyright (c) 2021 iappyx
+'Copyright (c) 2021 - 2026 iappyx
 
 'Permission is hereby granted, free of charge, to any person obtaining a copy
 'of this software and associated documentation files (the "Software"), to deal
@@ -37,13 +30,13 @@ Attribute VB_Exposed = False
 
 Dim ButtonHandlers  As Collection
 
-Public Sub ToggleCheckBox(ByVal TagValue As Integer)
+Public Sub ToggleCheckBox(ByVal tagValue As Integer)
     Dim ctrl        As control
     For Each Page In MultiPageThumbnailGrid.Pages
         
         For Each ctrl In Page.Controls
-            If TypeName(ctrl) = "CheckBox" And ctrl.Tag = CStr(TagValue) Then
-                ctrl.Value = Not ctrl.Value
+            If TypeName(ctrl) = "CheckBox" And ctrl.Tag = CStr(tagValue) Then
+                ctrl.value = Not ctrl.value
                 Exit For
             End If
         Next ctrl
@@ -53,22 +46,22 @@ Public Sub ToggleCheckBox(ByVal TagValue As Integer)
     SelectedCount = ReturnSelectedCount
     
     If SelectedCount > 0 Then
-        InsertSlideKeepSourceButton.Enabled = True
-        InsertSlideButton.Enabled = True
+        InsertSlideKeepSourceButton.enabled = True
+        InsertSlideButton.enabled = True
         
         If SelectedCount = 1 Then
-            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
-            InsertSlideButton.Caption = "Insert selected slide"
+            InsertSlideKeepSourceButton.caption = "Insert selected and maintain source formatting"
+            InsertSlideButton.caption = "Insert selected slide"
         Else
-            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting (" & SelectedCount & ")"
-            InsertSlideButton.Caption = "Insert selected slides (" & SelectedCount & ")"
+            InsertSlideKeepSourceButton.caption = "Insert selected and maintain source formatting (" & SelectedCount & ")"
+            InsertSlideButton.caption = "Insert selected slides (" & SelectedCount & ")"
         End If
         
     Else
-        InsertSlideKeepSourceButton.Enabled = False
-        InsertSlideButton.Enabled = False
-        InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
-        InsertSlideButton.Caption = "Insert selected slide"
+        InsertSlideKeepSourceButton.enabled = False
+        InsertSlideButton.enabled = False
+        InsertSlideKeepSourceButton.caption = "Insert selected and maintain source formatting"
+        InsertSlideButton.caption = "Insert selected slide"
     End If
     
 End Sub
@@ -89,7 +82,7 @@ End Sub
 
 Private Sub InsertSlideKeepSourceButton_Click()
     Dim LibraryPresentation       As PowerPoint.Presentation
-    Dim PresentationSlide As PowerPoint.slide
+    Dim PresentationSlide As PowerPoint.Slide
     Dim TempPath     As String
     Set MyDocument = Application.ActiveWindow
     Set Testdocument = Application.ActiveWindow.Presentation
@@ -105,7 +98,7 @@ Private Sub InsertSlideKeepSourceButton_Click()
         For Each ctrl In Page.Controls
             
             If TypeName(ctrl) = "CheckBox" Then
-                If ctrl.Value = True Then
+                If ctrl.value = True Then
                     LibraryPresentation.Slides.Item(CInt(ctrl.Tag)).Copy
                     Testdocument.Windows(1).Activate
                     Testdocument.Application.CommandBars.ExecuteMso ("PasteSourceFormatting")
@@ -149,7 +142,7 @@ Private Function ReturnSelectedCount() As Integer
         For Each ctrl In Page.Controls
             
             If TypeName(ctrl) = "CheckBox" Then
-                If (ctrl.Value = True) Then
+                If (ctrl.value = True) Then
                     SelectedCount = SelectedCount + 1
                 End If
             End If
@@ -163,69 +156,69 @@ End Function
 
 Private Sub SelectAllButton_Click()
     
-    For Each ctrl In MultiPageThumbnailGrid.Pages(MultiPageThumbnailGrid.Value).Controls
+    For Each ctrl In MultiPageThumbnailGrid.Pages(MultiPageThumbnailGrid.value).Controls
         
         If TypeName(ctrl) = "CheckBox" Then
-            ctrl.Value = True
+            ctrl.value = True
         End If
     Next ctrl
     
     SelectedCount = ReturnSelectedCount
     
     If SelectedCount > 0 Then
-        InsertSlideKeepSourceButton.Enabled = True
-        InsertSlideButton.Enabled = True
+        InsertSlideKeepSourceButton.enabled = True
+        InsertSlideButton.enabled = True
         
         If SelectedCount = 1 Then
-            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
-            InsertSlideButton.Caption = "Insert selected slide"
+            InsertSlideKeepSourceButton.caption = "Insert selected and maintain source formatting"
+            InsertSlideButton.caption = "Insert selected slide"
         Else
-            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting (" & SelectedCount & ")"
-            InsertSlideButton.Caption = "Insert selected slides (" & SelectedCount & ")"
+            InsertSlideKeepSourceButton.caption = "Insert selected and maintain source formatting (" & SelectedCount & ")"
+            InsertSlideButton.caption = "Insert selected slides (" & SelectedCount & ")"
         End If
         
     Else
-        InsertSlideKeepSourceButton.Enabled = False
-        InsertSlideButton.Enabled = False
-        InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
-        InsertSlideButton.Caption = "Insert selected slide"
+        InsertSlideKeepSourceButton.enabled = False
+        InsertSlideButton.enabled = False
+        InsertSlideKeepSourceButton.caption = "Insert selected and maintain source formatting"
+        InsertSlideButton.caption = "Insert selected slide"
     End If
     
 End Sub
 
 Private Sub SelectNoneButton_Click()
     
-    For Each ctrl In MultiPageThumbnailGrid.Pages(MultiPageThumbnailGrid.Value).Controls
+    For Each ctrl In MultiPageThumbnailGrid.Pages(MultiPageThumbnailGrid.value).Controls
         
         If TypeName(ctrl) = "CheckBox" Then
-            ctrl.Value = False
+            ctrl.value = False
         End If
     Next ctrl
     
     SelectedCount = ReturnSelectedCount
     
     If SelectedCount > 0 Then
-        InsertSlideKeepSourceButton.Enabled = True
-        InsertSlideButton.Enabled = True
+        InsertSlideKeepSourceButton.enabled = True
+        InsertSlideButton.enabled = True
         
         If SelectedCount = 1 Then
-            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
-            InsertSlideButton.Caption = "Insert selected slide"
+            InsertSlideKeepSourceButton.caption = "Insert selected and maintain source formatting"
+            InsertSlideButton.caption = "Insert selected slide"
         Else
-            InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting (" & SelectedCount & ")"
-            InsertSlideButton.Caption = "Insert selected slides (" & SelectedCount & ")"
+            InsertSlideKeepSourceButton.caption = "Insert selected and maintain source formatting (" & SelectedCount & ")"
+            InsertSlideButton.caption = "Insert selected slides (" & SelectedCount & ")"
         End If
         
     Else
-        InsertSlideKeepSourceButton.Enabled = False
-        InsertSlideButton.Enabled = False
-        InsertSlideKeepSourceButton.Caption = "Insert selected and maintain source formatting"
-        InsertSlideButton.Caption = "Insert selected slide"
+        InsertSlideKeepSourceButton.enabled = False
+        InsertSlideButton.enabled = False
+        InsertSlideKeepSourceButton.caption = "Insert selected and maintain source formatting"
+        InsertSlideButton.caption = "Insert selected slide"
     End If
     
     #If Mac Then
-        InsertSlideKeepSourceButton.Enabled = True
-        InsertSlideButton.Enabled = True
+        InsertSlideKeepSourceButton.enabled = True
+        InsertSlideButton.enabled = True
     #End If
     
 End Sub
@@ -256,7 +249,7 @@ End Sub
 
 Private Sub InsertSlideButton_Click()
     Dim LibraryPresentation       As PowerPoint.Presentation
-    Dim PresentationSlide As PowerPoint.slide
+    Dim PresentationSlide As PowerPoint.Slide
     Dim TempPath     As String
     Set MyDocument = Application.ActiveWindow
     
@@ -271,7 +264,7 @@ Private Sub InsertSlideButton_Click()
         For Each ctrl In Page.Controls
             
             If TypeName(ctrl) = "CheckBox" Then
-                If ctrl.Value = True Then
+                If ctrl.value = True Then
                     LibraryPresentation.Slides.Item(CInt(ctrl.Tag)).Copy
                     MyDocument.Presentation.Slides.Paste
                 End If
@@ -311,14 +304,14 @@ Sub RepaintThumbnails(NewThumbnailGridMaxCols As Integer)
                 
                 ctrl.left = 10 + col * (ThumbnailWidth + 10)
                 ctrl.Top = 10 + row * (ThumbnailHeight + 10)
-                ctrl.Width = ThumbnailWidth
-                ctrl.Height = ThumbnailHeight
+                ctrl.width = ThumbnailWidth
+                ctrl.height = ThumbnailHeight
                 
                 Dim checkCtrl As control
                 For Each checkCtrl In Page.Controls
                     If TypeName(checkCtrl) = "CheckBox" And checkCtrl.Tag = ctrl.Tag Then
-                        checkCtrl.left = ctrl.left + ctrl.Width - 15
-                        checkCtrl.Top = ctrl.Top + ctrl.Height - 15
+                        checkCtrl.left = ctrl.left + ctrl.width - 15
+                        checkCtrl.Top = ctrl.Top + ctrl.height - 15
                     End If
                 Next checkCtrl
                 
@@ -327,8 +320,8 @@ Sub RepaintThumbnails(NewThumbnailGridMaxCols As Integer)
                     If TypeName(buttonCtrl) = "CommandButton" And buttonCtrl.Tag = ctrl.Tag Then
                         buttonCtrl.left = ctrl.left
                         buttonCtrl.Top = ctrl.Top
-                        buttonCtrl.Width = ctrl.Width
-                        buttonCtrl.Height = ctrl.Height
+                        buttonCtrl.width = ctrl.width
+                        buttonCtrl.height = ctrl.height
                     End If
                 Next buttonCtrl
                 
@@ -359,7 +352,7 @@ Private Sub UserForm_Activate()
         
         'Needed to enable OLE automation for this
         Dim LibraryPresentation As PowerPoint.Presentation
-        Dim PresentationSlide As PowerPoint.slide
+        Dim PresentationSlide As PowerPoint.Slide
         Dim TempPath    As String
         
         #If Mac Then
@@ -374,11 +367,11 @@ Private Sub UserForm_Activate()
             TempPath = Environ("TEMP") & "\"
         #End If
         
-        NumberOfSlides = LibraryPresentation.Slides.Count
-        SlideHeight = 500
-        SlideWidth = (LibraryPresentation.PageSetup.SlideWidth / LibraryPresentation.PageSetup.SlideHeight) * SlideHeight
+        NumberOfSlides = LibraryPresentation.Slides.count
+        slideHeight = 500
+        slideWidth = (LibraryPresentation.PageSetup.slideWidth / LibraryPresentation.PageSetup.slideHeight) * slideHeight
         
-        Dim Thumbnail         As MSForms.Image
+        Dim Thumbnail         As MSForms.image
         Dim ThumbnailGridMaxCols     As Integer
         Dim ThumbnailWidth  As Integer
         Dim ThumbnailHeight As Integer
@@ -401,10 +394,10 @@ Private Sub UserForm_Activate()
                 row = 0
                 col = 0
                 
-                If LibraryPresentation.SectionProperties.Count = 0 Then
-                    CurrentSectionName = "Default section" & " (" & LibraryPresentation.Slides.Count & ")"
+                If LibraryPresentation.SectionProperties.count = 0 Then
+                    CurrentSectionName = "Default section" & " (" & LibraryPresentation.Slides.count & ")"
                 Else
-                    CurrentSectionName = LibraryPresentation.SectionProperties.Name(PresentationSlide.sectionIndex) & " (" & LibraryPresentation.SectionProperties.SlidesCount(PresentationSlide.sectionIndex) & ")"
+                    CurrentSectionName = LibraryPresentation.SectionProperties.name(PresentationSlide.sectionIndex) & " (" & LibraryPresentation.SectionProperties.SlidesCount(PresentationSlide.sectionIndex) & ")"
                 End If
                 
                 Set CurrentPage = MultiPageThumbnailGrid.Pages.Add("NewPage" & CurrentSectionIndex, CurrentSectionName)
@@ -412,15 +405,15 @@ Private Sub UserForm_Activate()
                 CurrentPage.ScrollBars = fmScrollBarsVertical
             End If
             
-            PresentationSlide.Export TempPath & "tmp.Slide" & PresentationSlide.SlideNumber & ".jpg", "JPG", SlideWidth, SlideHeight
+            PresentationSlide.Export TempPath & "tmp.Slide" & PresentationSlide.SlideNumber & ".jpg", "JPG", slideWidth, slideHeight
             
             Set Thumbnail = CurrentPage.Controls.Add("Forms.Image.1", "Thumbnail" & i)
             
             With Thumbnail
                 .left = 10 + col * (ThumbnailWidth + 10)
                 .Top = 10 + row * (ThumbnailHeight + 10)
-                .Width = ThumbnailWidth
-                .Height = ThumbnailHeight
+                .width = ThumbnailWidth
+                .height = ThumbnailHeight
                 .Picture = LoadPicture(TempPath & "tmp.Slide" & i & ".jpg")
                 .Tag = i
                 .PictureSizeMode = fmPictureSizeModeZoom
@@ -429,10 +422,10 @@ Private Sub UserForm_Activate()
             Set ThumbnailCheck = CurrentPage.Controls.Add("Forms.CheckBox.1", "CheckBox" & i)
             
             With ThumbnailCheck
-                .left = Thumbnail.left + Thumbnail.Width - 15
-                .Top = Thumbnail.Top + Thumbnail.Height - 15
-                .Width = 15
-                .Height = 15
+                .left = Thumbnail.left + Thumbnail.width - 15
+                .Top = Thumbnail.Top + Thumbnail.height - 15
+                .width = 15
+                .height = 15
                 .Tag = i
                 .BackStyle = fmBackStyleTransparent
             End With
@@ -449,9 +442,9 @@ Private Sub UserForm_Activate()
             With ClickOverlay
                 .left = Thumbnail.left
                 .Top = Thumbnail.Top
-                .Width = Thumbnail.Width
-                .Height = Thumbnail.Height
-                .Caption = ""
+                .width = Thumbnail.width
+                .height = Thumbnail.height
+                .caption = ""
                 .Tag = i
                 .BackStyle = fmBackStyleTransparent
             End With
@@ -487,8 +480,8 @@ Private Sub UserForm_Activate()
     MultiPageThumbnailGrid.visible = True
     
     #If Mac Then
-        InsertSlideKeepSourceButton.Enabled = True
-        InsertSlideButton.Enabled = True
+        InsertSlideKeepSourceButton.enabled = True
+        InsertSlideButton.enabled = True
     #End If
     
 End Sub
