@@ -1,5 +1,5 @@
 Attribute VB_Name = "InsertSlideLibrarySlide"
-Attribute VB_Base = "0{2AEF59C3-145B-4DE2-A1EC-84FD351558F0}{5364B59D-1CA7-4586-82A1-E81895F879F6}"
+Attribute VB_Base = "0{0D6EF6A3-12BA-4427-B70A-791EEA7573D1}{F81127E5-4ED6-4F0B-8938-706BC1E7AF43}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

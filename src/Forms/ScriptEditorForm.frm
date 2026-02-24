@@ -1,5 +1,5 @@
 Attribute VB_Name = "ScriptEditorForm"
-Attribute VB_Base = "0{F0DF4DD3-D13D-43D9-BF9D-392CD71FE740}{6F2B6E26-7CAC-47AF-B6A6-5C800AE84635}"
+Attribute VB_Base = "0{7479F0A0-3F29-4C49-8FC6-41C1E4D68864}{52C0E0E3-D7BD-4832-B53D-4F111E08A95C}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

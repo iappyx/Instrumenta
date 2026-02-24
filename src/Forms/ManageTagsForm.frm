@@ -1,5 +1,5 @@
 Attribute VB_Name = "ManageTagsForm"
-Attribute VB_Base = "0{AA4D7C4F-CA2E-4915-802B-973EEE27D5DA}{BDDDAA70-2E74-44EE-BF83-447E36E11318}"
+Attribute VB_Base = "0{93B48BF6-403A-4810-92D3-443D9D47BB75}{505109E0-AB28-4C78-B379-50668E55684A}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

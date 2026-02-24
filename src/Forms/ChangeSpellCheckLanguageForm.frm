@@ -1,5 +1,5 @@
 Attribute VB_Name = "ChangeSpellCheckLanguageForm"
-Attribute VB_Base = "0{94B2AE84-AF00-4F60-87C0-6E4D212D4FEE}{54599771-7306-4E4B-AA5D-0C42CCF0CAC5}"
+Attribute VB_Base = "0{AF16D16E-33C4-4D13-AF1B-ECC1C57DB978}{509CC4EE-1C36-43D4-B3DA-3923B9AAF45D}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

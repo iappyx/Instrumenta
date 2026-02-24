@@ -1,5 +1,5 @@
 Attribute VB_Name = "ColorManagerForm"
-Attribute VB_Base = "0{5A66CA5E-4611-4CDB-BF83-2546AF736422}{588338C7-81D9-4319-B684-40F37B738F89}"
+Attribute VB_Base = "0{37240957-D5F7-401D-8D3A-D64E785AEA69}{2AC97282-7BC9-474F-8D9B-BFA53318CDE0}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
