@@ -53,6 +53,9 @@ It works on both Windows and Mac, but is highly experimental.
 
 You can try Instrumenta Keys, or assign functions to the Quick Access Toolbar instead and use pre-defined shortcuts for these, see [#37](https://github.com/iappyx/Instrumenta/issues/37).
 
+# Instrumenta Script
+The Instrumenta Script Language is a simple scripting language built into Instrumenta that lets you automate and batch-manipulate shapes in PowerPoint. Instead of clicking through menus repeatedly, you write a short script and run it with a single click. For more information see the [documentation](SCRIPT.md).
+
 # How to install 
 See installation instructions [here](INSTALL.md).
 
