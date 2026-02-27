@@ -1,5 +1,5 @@
 Attribute VB_Name = "InsertLegendForm"
-Attribute VB_Base = "0{0D0051EB-3FCD-42B4-9CF5-DB353AAE20DD}{2E1AD606-929D-4827-8D13-03C5591B15D8}"
+Attribute VB_Base = "0{4B86BF1A-D9E9-4841-BA3F-9CB2327F61B4}{059995A5-D5CA-4E41-BB1F-AFCF8B2F8600}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

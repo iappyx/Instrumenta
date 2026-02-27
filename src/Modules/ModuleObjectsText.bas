@@ -458,6 +458,217 @@ End If
 
 End Sub
 
+Sub MoveSelectedTextToNewElement()
+    NewElementFromSelectedText True
+End Sub
+
+Sub CopySelectedTextToNewElement()
+    NewElementFromSelectedText False
+End Sub
+
+Sub NewElementFromSelectedText(deleteOriginal As Boolean)
+
+    Dim MyDocument As DocumentWindow
+    Dim SlideShape As shape
+    Dim DuplicateShape As shape
+    Dim selRange As TextRange2
+
+    Dim tbl As table
+    Dim dupTbl As table
+    Dim r As Long, c As Long
+    Dim selRow As Long, selCol As Long
+    Dim isTable As Boolean
+
+    Dim cellRange As TextRange2
+    Dim origCellRange As TextRange2
+    Dim dupCellRange As TextRange2
+
+    Dim selStart As Long
+    Dim selLength As Long
+    Dim relStart As Long
+    Dim totalLength As Long
+
+    Set MyDocument = Application.ActiveWindow
+
+    If MyDocument.Selection.Type <> ppSelectionText Then Exit Sub
+    If MyDocument.Selection.ShapeRange.count <> 1 Then Exit Sub
+
+    Set SlideShape = MyDocument.Selection.ShapeRange(1)
+    Set selRange = MyDocument.Selection.TextRange2
+    If selRange.Length = 0 Then Exit Sub
+
+    selStart = selRange.Start
+    selLength = selRange.Length
+
+    isTable = SlideShape.HasTable
+
+    If isTable Then
+
+        Set tbl = SlideShape.table
+
+        Dim selFrame As TextFrame2
+        Set selFrame = MyDocument.Selection.ShapeRange(1).table.cell(1, 1).shape.TextFrame2
+        selRow = 0
+        selCol = 0
+
+        For r = 1 To tbl.rows.count
+            For c = 1 To tbl.Columns.count
+
+                Set cellRange = tbl.cell(r, c).shape.TextFrame2.textRange
+
+                If tbl.cell(r, c).Selected Then
+                    selRow = r
+                    selCol = c
+                    Exit For
+                End If
+
+            Next c
+            If selRow > 0 Then Exit For
+        Next r
+
+        If selRow = 0 Then
+            For r = 1 To tbl.rows.count
+                For c = 1 To tbl.Columns.count
+                    Set cellRange = tbl.cell(r, c).shape.TextFrame2.textRange
+                    If selStart >= 1 And selStart <= cellRange.Length Then
+                        If selLength <= cellRange.Length - selStart + 1 Then
+                            Dim candidateText As String
+                            candidateText = cellRange.Characters(selStart, selLength).text
+                            If candidateText = selRange.text Then
+                                selRow = r
+                                selCol = c
+                                Exit For
+                            End If
+                        End If
+                    End If
+                Next c
+                If selRow > 0 Then Exit For
+            Next r
+        End If
+
+        If selRow = 0 Then Exit Sub
+
+        Set origCellRange = tbl.cell(selRow, selCol).shape.TextFrame2.textRange
+
+        relStart = selStart
+
+        Set DuplicateShape = SlideShape.Duplicate(1)
+        Set dupTbl = DuplicateShape.table
+        Set dupCellRange = dupTbl.cell(selRow, selCol).shape.TextFrame2.textRange
+
+        totalLength = dupCellRange.Length
+
+        If relStart + selLength <= totalLength Then
+            dupCellRange.Characters(relStart + selLength, totalLength - (relStart + selLength) + 1).Delete
+        End If
+
+        If relStart > 1 Then
+            dupCellRange.Characters(1, relStart - 1).Delete
+        End If
+
+        For r = 1 To dupTbl.rows.count
+            For c = 1 To dupTbl.Columns.count
+                If Not (r = selRow And c = selCol) Then
+                    dupTbl.cell(r, c).shape.TextFrame2.textRange.text = ""
+                End If
+            Next c
+        Next r
+
+        Dim origCell As cell
+        Dim dupCell As cell
+        Set origCell = tbl.cell(selRow, selCol)
+        Set dupCell = dupTbl.cell(selRow, selCol)
+
+        Dim origFill As FillFormat
+        Set origFill = origCell.shape.Fill
+        With dupCell.shape.Fill
+            Select Case origFill.Type
+                Case msoFillSolid
+                    .ForeColor.RGB = origFill.ForeColor.RGB
+                    .Transparency = origFill.Transparency
+                    .Solid
+                Case msoFillBackground
+                    .Background
+                Case Else
+                    .ForeColor.RGB = origFill.ForeColor.RGB
+                    .Solid
+            End Select
+        End With
+
+        Dim borderIdx As Long
+        For borderIdx = ppBorderLeft To ppBorderDiagonalDown
+            On Error Resume Next
+            Dim origBorder As Object
+            Dim dupBorder As Object
+            Set origBorder = origCell.Borders(borderIdx)
+            Set dupBorder = dupCell.Borders(borderIdx)
+            If Not origBorder Is Nothing And Not dupBorder Is Nothing Then
+                With dupBorder.line
+                    .visible = origBorder.line.visible
+                    If origBorder.line.visible = msoTrue Then
+                        .ForeColor.RGB = origBorder.line.ForeColor.RGB
+                        .Weight = origBorder.line.Weight
+                        .DashStyle = origBorder.line.DashStyle
+                    End If
+                End With
+            End If
+            On Error GoTo 0
+        Next borderIdx
+
+        With dupCell.shape.TextFrame2
+            .MarginLeft = origCell.shape.TextFrame2.MarginLeft
+            .MarginRight = origCell.shape.TextFrame2.MarginRight
+            .MarginTop = origCell.shape.TextFrame2.MarginTop
+            .marginBottom = origCell.shape.TextFrame2.marginBottom
+            .VerticalAnchor = origCell.shape.TextFrame2.VerticalAnchor
+        End With
+
+        If deleteOriginal Then
+            origCellRange.Characters(relStart, selLength).Delete
+        End If
+
+        For r = dupTbl.rows.count To 1 Step -1
+            If r <> selRow Then dupTbl.rows(r).Delete
+        Next r
+
+        For c = dupTbl.Columns.count To 1 Step -1
+            If c <> selCol Then dupTbl.Columns(c).Delete
+        Next c
+
+        DuplicateShape.left = SlideShape.left + SlideShape.width + 10
+        DuplicateShape.Top = SlideShape.Top
+
+        Exit Sub
+    End If
+
+    Dim dupRange As TextRange2
+    Dim startPos As Long
+    Dim totalLen As Long
+
+    Set DuplicateShape = SlideShape.Duplicate(1)
+    Set dupRange = DuplicateShape.TextFrame2.textRange
+
+    startPos = selRange.Start
+    selLength = selRange.Length
+    totalLen = dupRange.Length
+
+    If startPos + selLength <= totalLen Then
+        dupRange.Characters(startPos + selLength, totalLen - (startPos + selLength) + 1).Delete
+    End If
+
+    If startPos > 1 Then
+        dupRange.Characters(1, startPos - 1).Delete
+    End If
+
+    If deleteOriginal Then
+        SlideShape.TextFrame2.textRange.Characters(startPos, selLength).Delete
+    End If
+
+    DuplicateShape.left = SlideShape.left + SlideShape.width + 10
+    DuplicateShape.Top = SlideShape.Top
+
+End Sub
+
 Sub ObjectsTextMerge()
 
     Dim MyDocument As DocumentWindow

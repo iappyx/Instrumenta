@@ -1,5 +1,5 @@
 Attribute VB_Name = "ScriptEditorForm"
-Attribute VB_Base = "0{7479F0A0-3F29-4C49-8FC6-41C1E4D68864}{52C0E0E3-D7BD-4832-B53D-4F111E08A95C}"
+Attribute VB_Base = "0{3A69EB3B-6784-4C95-82BB-7FE4F5FCFC3C}{4E074CB3-D1A6-401B-A88E-09CDB9F512D7}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -53,7 +53,7 @@ Private Sub btnRun_Click()
     Next msg
     txtLog.text = logText
 
-    txtLog.SelStart = 0
+    txtLog.selStart = 0
 End Sub
 
 Private Sub btnClear_Click()

@@ -72,6 +72,8 @@ Private Sub LoadInstrumentaFeatures()
     AddFeature "ToggleTextWrap", "Toggle text wrap", "ObjectsTextWordwrapToggle", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
     AddFeature "ObjectsTextSplitByParagraphButton", "Split (by paragraphs) into multiple shapes", "ObjectsTextSplitByParagraph", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
     AddFeature "ObjectsTextMergeButton", "Merge text of all shapes in first selected shape", "ObjectsTextMerge", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
+    AddFeature "MoveSelectedTextToNewElementButton", "Move selected text", "MoveSelectedTextToNewElement", "Text", "Instrumenta > Text > Inside splitbutton 'Move selected text'", "Instrumenta [Text] > Text > Inside splitbutton 'Move selected text'"
+    AddFeature "CopySelectedTextToNewElementButton", "Copy selected text", "CopySelectedTextToNewElement", "Text", "Instrumenta > Text > Inside splitbutton 'Move selected text'", "Instrumenta [Text] > Text > Inside splitbutton 'Move selected text'"
     AddFeature "RemoveTextButton", "Remove text", "ObjectsRemoveText", "Text", "Instrumenta > Text > Inside splitbutton 'Remove text'", "Instrumenta [Text] > Text > Inside splitbutton 'Remove text'"
     AddFeature "RemoveHyperlinksButton", "Remove hyperlinks", "ObjectsRemoveHyperlinks", "Text", "Instrumenta > Text > Inside splitbutton 'Remove text'", "Instrumenta [Text] > Text > Inside splitbutton 'Remove text'"
     AddFeature "SwapTextButton", "Swap text (no formatting)", "ObjectsSwapTextNoFormatting", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"

@@ -89,6 +89,12 @@
                <toggleButton id="ToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" getEnabled="EnableWhenShapeOrText" supertip="Toggles text wrapping inside the selected shape" screentip="Toggle text wrap"/>
                <button id="ObjectsTextSplitByParagraphButton" label="Split (by paragraphs) into multiple shapes" imageMso="PageBreakInsertOrRemove" showLabel="false" onAction="ObjectsTextSplitByParagraph" getEnabled="EnableWhenShapeOrText" supertip="Splits the text into multiple shapes using paragraph breaks" screentip="Split text by paragraphs"/>
                <button id="ObjectsTextMergeButton" label="Merge text of all shapes in first selected shape" imageMso="SourceControlAddObjects" showLabel="false" onAction="ObjectsTextMerge" getEnabled="EnableWhenMultipleShapesSelected" supertip="Merges text from all selected shapes into the first shape" screentip="Merge text"/>
+               <splitButton id="SelectedTextToNewElementSplitButton" size="normal" showLabel="false">
+                  <button id="MoveSelectedTextToNewElementButton" label="Move selected text" imageMso="OutlineDemote" showLabel="false" onAction="MoveSelectedTextToNewElement" getEnabled="EnableWhenShapeOrText" supertip="Moves the selected text within a shape or a table to a new shape or table" screentip="Move selected text"/>
+                  <menu id="SelectedTextToNewElementMenu" itemSize="normal" supertip="Opens the tools for moving or copying text to a new shape or table" screentip="Move/Copy selected text">
+                     <button id="CopySelectedTextToNewElementButton" label="Copy selected text" showLabel="false" onAction="CopySelectedTextToNewElement" getEnabled="EnableWhenShapeOrText" supertip="Copies the selected text within a shape or a table to a new shape or table" screentip="Copy selected text"/>
+                  </menu>
+               </splitButton>
                <splitButton id="RemoveTextSplitButton" size="normal" showLabel="false">
                   <button id="RemoveTextButton" label="Remove text" imageMso="ReviewDeleteMarkup" showLabel="false" onAction="ObjectsRemoveText" getEnabled="EnableWhenShapeOrText" supertip="Removes all text from the selected shapes" screentip="Remove text"/>
                   <menu id="RemoveTextMenu" itemSize="normal" supertip="Opens the tools for removing text based on text attributes" screentip="Remove Text by Attributes">
@@ -726,6 +732,12 @@
                <toggleButton id="TabViewToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" getEnabled="EnableWhenShapeOrText" supertip="Toggles text wrapping inside the selected shape" screentip="Toggle text wrap"/>
                <button id="TabViewObjectsTextSplitByParagraphButton" label="Split (by paragraphs) into multiple shapes" imageMso="PageBreakInsertOrRemove" showLabel="false" onAction="ObjectsTextSplitByParagraph" getEnabled="EnableWhenShapeOrText" supertip="Splits the text into multiple shapes using paragraph breaks" screentip="Split text by paragraphs"/>
                <button id="TabViewObjectsTextMergeButton" label="Merge text of all shapes in first selected shape" imageMso="SourceControlAddObjects" showLabel="false" onAction="ObjectsTextMerge" getEnabled="EnableWhenMultipleShapesSelected" supertip="Merges text from all selected shapes into the first shape" screentip="Merge text"/>
+               <splitButton id="TabViewSelectedTextToNewElementSplitButton" size="normal" showLabel="false">
+                  <button id="TabViewMoveSelectedTextToNewElementButton" label="Move selected text" imageMso="OutlineDemote" showLabel="false" onAction="MoveSelectedTextToNewElement" getEnabled="EnableWhenShapeOrText" supertip="Moves the selected text within a shape or a table to a new shape or table" screentip="Move selected text"/>
+                  <menu id="TabViewSelectedTextToNewElementMenu" itemSize="normal" supertip="Opens the tools for moving or copying text to a new shape or table" screentip="Move/Copy selected text">
+                     <button id="TabViewCopySelectedTextToNewElementButton" label="Copy selected text" showLabel="false" onAction="CopySelectedTextToNewElement" getEnabled="EnableWhenShapeOrText" supertip="Copies the selected text within a shape or a table to a new shape or table" screentip="Copy selected text"/>
+                  </menu>
+               </splitButton>
                <splitButton id="TabViewRemoveTextSplitButton" size="normal" showLabel="false">
                   <button id="TabViewRemoveTextButton" label="Remove text" imageMso="ReviewDeleteMarkup" showLabel="false" onAction="ObjectsRemoveText" getEnabled="EnableWhenShapeOrText" supertip="Removes all text from the selected shapes" screentip="Remove text"/>
                   <menu id="TabViewRemoveTextMenu" itemSize="normal" supertip="Opens the tools for removing text based on text attributes" screentip="Remove Text by Attributes">

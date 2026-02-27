@@ -1,5 +1,5 @@
 Attribute VB_Name = "JsonInputForm"
-Attribute VB_Base = "0{B702245E-2E00-421F-99C0-1697FFA45624}{6D7B21C3-34AA-482C-9E44-B53843DFDB0C}"
+Attribute VB_Base = "0{8A63EFFB-9013-4EC1-A644-2F71B5A4FCE9}{824C1FF4-55D0-42F8-8C17-20C2599E7D92}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

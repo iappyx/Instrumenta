@@ -681,6 +681,58 @@
       "supertip": "Merges text from all selected shapes into the first shape",
       "screentip": "Merge text"
     },
+    "MoveSelectedTextToNewElementButton": {
+      "_tag": "button",
+      "id": "MoveSelectedTextToNewElementButton",
+      "label": "Move selected text",
+      "imageMso": "OutlineDemote",
+      "showLabel": "false",
+      "onAction": "MoveSelectedTextToNewElement",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Moves the selected text within a shape or a table to a new shape or table",
+      "screentip": "Move selected text"
+    },
+    "CopySelectedTextToNewElementButton": {
+      "_tag": "button",
+      "id": "CopySelectedTextToNewElementButton",
+      "label": "Copy selected text",
+      "showLabel": "false",
+      "onAction": "CopySelectedTextToNewElement",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Copies the selected text within a shape or a table to a new shape or table",
+      "screentip": "Copy selected text"
+    },
+    "SelectedTextToNewElementMenu": {
+      "_tag": "menu",
+      "id": "SelectedTextToNewElementMenu",
+      "itemSize": "normal",
+      "supertip": "Opens the tools for moving or copying text to a new shape or table",
+      "screentip": "Move/Copy selected text",
+      "_children": [
+        {
+          "$ref": "CopySelectedTextToNewElementButton",
+          "_tag": "button"
+        }
+      ]
+    },
+    "SelectedTextToNewElementSplitButton": {
+      "_tag": "splitButton",
+      "id": "SelectedTextToNewElementSplitButton",
+      "size": "normal",
+      "showLabel": "false",
+      "supertip": "",
+      "screentip": "",
+      "_children": [
+        {
+          "$ref": "MoveSelectedTextToNewElementButton",
+          "_tag": "button"
+        },
+        {
+          "$ref": "SelectedTextToNewElementMenu",
+          "_tag": "menu"
+        }
+      ]
+    },
     "RemoveTextButton": {
       "_tag": "button",
       "id": "RemoveTextButton",
@@ -6004,6 +6056,10 @@
                         "_tag": "button"
                       },
                       {
+                        "$ref": "SelectedTextToNewElementSplitButton",
+                        "_tag": "splitButton"
+                      },
+                      {
                         "$ref": "RemoveTextSplitButton",
                         "_tag": "splitButton"
                       },
@@ -6970,6 +7026,10 @@
                       {
                         "$ref": "ObjectsTextMergeButton",
                         "_tag": "button"
+                      },
+                      {
+                        "$ref": "SelectedTextToNewElementSplitButton",
+                        "_tag": "splitButton"
                       },
                       {
                         "$ref": "RemoveTextSplitButton",

@@ -1,5 +1,5 @@
 Attribute VB_Name = "ProgressForm"
-Attribute VB_Base = "0{C53D2094-C3DA-411C-9ED8-E8865D77CF0E}{4EE84D6F-D8C1-43A2-8BAF-B1D891E3FA5A}"
+Attribute VB_Base = "0{48C113DA-7074-488D-A156-CFC3483E2EF3}{DC59F377-E957-4527-899F-B27CC94913EE}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

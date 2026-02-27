@@ -1,5 +1,5 @@
 Attribute VB_Name = "SettingsForm"
-Attribute VB_Base = "0{5E12E62A-E3BB-43B5-B8CC-0BC96A11DE29}{F71AC056-006B-4049-B879-13102353BB44}"
+Attribute VB_Base = "0{B54D3421-FE32-4B38-957E-DCFFB3AEB70F}{5DDAE5D0-E76B-4538-9E03-61DDCDFA521E}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

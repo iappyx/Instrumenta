@@ -233,7 +233,7 @@ Sub EmailSelectedSlides()
         On Error Resume Next
         With OutlookMessage
             .To = ""
-            .CC = ""
+            .cc = ""
             .subject = EmailSubject
             .Body = ""
             .Attachments.Add Environ("TEMP") & "\" & PresentationFilename & ".pptx"
@@ -357,7 +357,7 @@ Sub EmailSelectedSlidesAsPDF()
         On Error Resume Next
         With OutlookMessage
             .To = ""
-            .CC = ""
+            .cc = ""
             .subject = EmailSubject
             .Body = ""
             .Attachments.Add Environ("TEMP") & "\" & PresentationFilename & ".pdf"
