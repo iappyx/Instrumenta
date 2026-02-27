@@ -1,5 +1,5 @@
 Attribute VB_Name = "CopyShapeToMultipleSlidesForm"
-Attribute VB_Base = "0{7C213EAB-3140-47E6-92EA-F1D10A881912}{C624AE93-CBDE-4215-AD58-686DCD2EE4D3}"
+Attribute VB_Base = "0{5505AD2B-050A-41BA-A904-2DE84D7F98B7}{75E41F9D-D117-4368-9BF1-D60FD2DD11CD}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

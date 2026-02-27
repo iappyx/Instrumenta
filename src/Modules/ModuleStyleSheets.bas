@@ -201,15 +201,27 @@ Sub ApplyTextStyle(styleName As String)
 
     For Each styleShp In stylesheet.shapes
         If styleShp.name = styleName Then
-
-            If sel.Type = ppSelectionShapes Then
-                styleShp.PickUp
-                sel.ShapeRange(1).Apply
             
-                sel.ShapeRange(1).Tags.Add "InstrumentaStyle", styleName
-            
-                Exit Sub
+        If sel.Type = ppSelectionShapes Then
+            styleShp.PickUp
+        
+            Dim ShapeRange As ShapeRange
+            Dim shp As shape
+        
+            If sel.HasChildShapeRange Then
+                Set ShapeRange = sel.ChildShapeRange
+            Else
+                Set ShapeRange = sel.ShapeRange
             End If
+        
+            For Each shp In ShapeRange
+                shp.Apply
+                shp.Tags.Add "InstrumentaStyle", styleName
+            Next shp
+        
+            Exit Sub
+        End If
+
 
             If sel.Type = ppSelectionText Then
                 ApplyTextFormatting sel.TextRange2, styleShp.TextFrame2.textRange

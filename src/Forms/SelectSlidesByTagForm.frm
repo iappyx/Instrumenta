@@ -1,5 +1,5 @@
 Attribute VB_Name = "SelectSlidesByTagForm"
-Attribute VB_Base = "0{D12F487B-44E1-4648-9D6B-5DD836A8521D}{949329D7-572B-4A7A-9D3C-097BF3FFAF48}"
+Attribute VB_Base = "0{CC3DF6EE-2205-455D-B5AA-81223D7E0CD6}{246F57BB-2D0B-4FF8-AA89-4B0D22C259DC}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

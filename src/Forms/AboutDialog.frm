@@ -1,5 +1,5 @@
 Attribute VB_Name = "AboutDialog"
-Attribute VB_Base = "0{2B235899-BFDC-4E4B-809E-4885939B1120}{E913281B-EACF-419B-83BF-91F6934CECB5}"
+Attribute VB_Base = "0{B0411754-927E-40C1-8835-3AE8BE0F2F04}{D8C6D11A-6157-430A-AA42-43E4F0A28A02}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
