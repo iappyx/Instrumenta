@@ -802,6 +802,34 @@ Sub ObjectsDecreaseLineSpacing()
     
 End Sub
 
+Sub LineSpacingRemove()
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
+        
+        If MyDocument.Selection.HasChildShapeRange Then
+            
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
+                ObjectsLineSpacingLoop MyDocument.Selection.ChildShapeRange(i), -999999
+            Next i
+            
+        Else
+            
+            For i = 1 To MyDocument.Selection.ShapeRange.count
+                
+                ObjectsLineSpacingLoop MyDocument.Selection.ShapeRange(i), -999999
+                
+            Next i
+            
+        End If
+        
+    End If
+    
+End Sub
+
 Sub ObjectsLineSpacingLoop(SlideShape, LineSpacingChange)
     
     If SlideShape.Type = msoGroup Then
@@ -1440,6 +1468,33 @@ Sub ObjectsToggleAutoSizeLoop(SlideShape, AutoSizeNum)
     
 End Sub
 
+Sub ParagraphSpacingRemove()
+    
+    Set MyDocument = Application.ActiveWindow
+    
+    If Not (MyDocument.Selection.Type = ppSelectionShapes Or MyDocument.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+    Else
+        
+        If MyDocument.Selection.HasChildShapeRange Then
+            
+            For i = 1 To MyDocument.Selection.ChildShapeRange.count
+                ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ChildShapeRange(i), -99999
+            Next i
+            
+        Else
+            
+            For i = 1 To MyDocument.Selection.ShapeRange.count
+                
+                ObjectsLineSpacingBeforeAndAfterLoop MyDocument.Selection.ShapeRange(i), -99999
+                
+            Next i
+            
+        End If
+        
+    End If
+    
+End Sub
 
 Sub ObjectsIncreaseLineSpacingBeforeAndAfter()
     
@@ -1468,6 +1523,7 @@ Sub ObjectsIncreaseLineSpacingBeforeAndAfter()
     End If
     
 End Sub
+
 
 Sub ObjectsDecreaseLineSpacingBeforeAndAfter()
     
@@ -1603,3 +1659,117 @@ Sub ObjectsLineSpacingBeforeAndAfterLoop(SlideShape, LineSpacingChange)
     End If
     
 End Sub
+
+Sub ObjectsIndentationLoop(SlideShape As shape, ByVal IndentChange As Single, ByVal ResetIndent As Boolean)
+
+    If SlideShape.Type = msoGroup Then
+        
+        Dim grp As GroupShapes
+        Dim child As shape
+        
+        Set grp = SlideShape.GroupItems
+        For Each child In grp
+            ObjectsIndentationLoop child, IndentChange, ResetIndent
+        Next child
+        
+    ElseIf SlideShape.HasTextFrame Then
+        
+        Dim tr As textRange
+        Dim tr2 As TextRange2
+        Dim pCount As Long
+        Dim i As Long
+        
+        If ActiveWindow.Selection.Type = ppSelectionText Then
+            Set tr = ActiveWindow.Selection.textRange
+            Set tr2 = ActiveWindow.Selection.TextRange2
+        Else
+            Set tr = SlideShape.TextFrame.textRange
+            Set tr2 = SlideShape.TextFrame2.textRange
+        End If
+        
+        pCount = tr.Paragraphs.count
+        
+        If SlideShape.TextFrame2.AutoSize = msoAutoSizeTextToFitShape Then
+            
+            Dim fontSizes() As Single
+            ReDim fontSizes(1 To tr.Characters.count)
+            
+            For i = 1 To tr.Characters.count
+                fontSizes(i) = tr.Characters(i).Font.Size
+            Next i
+            
+            SlideShape.TextFrame2.AutoSize = msoAutoSizeNone
+            
+            For i = 1 To tr.Characters.count
+                tr.Characters(i).Font.Size = fontSizes(i)
+            Next i
+            
+            Erase fontSizes
+        End If
+        
+
+        For i = 1 To pCount
+            With tr2.Paragraphs(i).ParagraphFormat
+                
+                If ResetIndent Then
+                    .FirstLineIndent = 0
+                    .LeftIndent = 0
+                Else
+                
+                    If (.LeftIndent + IndentChange) < 0 Then
+                       .FirstLineIndent = 0
+                       .LeftIndent = 0
+                    Else
+                    .LeftIndent = .LeftIndent + IndentChange
+                    .FirstLineIndent = -.LeftIndent
+                    End If
+                    
+                End If
+                
+            End With
+        Next i
+        
+    End If
+
+End Sub
+
+Sub IncreaseHangingIndent()
+    ApplyHangingIndentChange 2.83465, False
+End Sub
+
+Sub DecreaseHangingIndent()
+    ApplyHangingIndentChange -2.83465, False
+End Sub
+
+Sub ResetHangingIndent()
+    ApplyHangingIndentChange 0, True
+End Sub
+
+Sub ApplyHangingIndentChange(ByVal IndentDelta As Single, ByVal ResetIndent As Boolean)
+
+    Dim win As DocumentWindow
+    Set win = Application.ActiveWindow
+    
+    If Not (win.Selection.Type = ppSelectionShapes Or win.Selection.Type = ppSelectionText) Then
+        MsgBox "No shapes selected."
+        Exit Sub
+    End If
+    
+    Dim i As Long
+    
+    If win.Selection.HasChildShapeRange Then
+        
+        For i = 1 To win.Selection.ChildShapeRange.count
+            ObjectsIndentationLoop win.Selection.ChildShapeRange(i), IndentDelta, ResetIndent
+        Next i
+        
+    Else
+        
+        For i = 1 To win.Selection.ShapeRange.count
+            ObjectsIndentationLoop win.Selection.ShapeRange(i), IndentDelta, ResetIndent
+        Next i
+        
+    End If
+
+End Sub
+

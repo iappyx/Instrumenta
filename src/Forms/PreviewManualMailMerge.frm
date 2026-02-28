@@ -1,5 +1,5 @@
 Attribute VB_Name = "PreviewManualMailMerge"
-Attribute VB_Base = "0{6C3CEA99-6DAB-44D4-A4D0-F340904B948F}{006992C6-B54E-43E2-A2D3-1CBAFDFF98AC}"
+Attribute VB_Base = "0{0E056369-684B-4D07-98FF-E72076BFC1BF}{E516F3D0-E591-40CC-868F-7EE8585C1501}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

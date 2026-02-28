@@ -69,22 +69,22 @@
                </buttonGroup>
                <buttonGroup id="buttonGroupIndent">
                   <gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false"/>
-                  <splitButton id="IncreaseLineSpacingSplitButton" showLabel="false">
-                     <button id="IncreaseLineSpacing" label="Increase line spacing" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="ObjectsIncreaseLineSpacing" getEnabled="EnableWhenShapeOrText" supertip="Increases spacing between lines in the selected text" screentip="Increase line spacing"/>
-                     <menu id="IncreaseLineSpacingMenu" itemSize="normal" supertip="Opens the tools for increasing line spacing" screentip="Increase Line Spacing">
-                        <button id="IncreaseLineSpacingBeforeAndAfter" label="Increase line spacing before and after" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="ObjectsIncreaseLineSpacingBeforeAndAfter" getEnabled="EnableWhenShapeOrText" supertip="Increases spacing before and after each paragraph" screentip="Increase paragraph spacing"/>
-                     </menu>
-                  </splitButton>
-                  <splitButton id="DecreaseLineSpacingSplitButton" showLabel="false">
-                     <button id="DecreaseLineSpacing" label="Decrease line spacing" showLabel="false" imageMso="ParagraphSpacingDecrease" onAction="ObjectsDecreaseLineSpacing" getEnabled="EnableWhenShapeOrText" supertip="Decreases spacing between lines in the selected text" screentip="Decrease line spacing"/>
-                     <menu id="DecreaseLineSpacingMenu" itemSize="normal" supertip="Opens the tools for decreasing line spacing" screentip="Decrease Line Spacing">
-                        <button id="DecreaseLineSpacingBeforeAndAfter" label="Decrease line spacing before and after" showLabel="false" imageMso="ParagraphSpacingDecrease" getEnabled="EnableWhenShapeOrText" onAction="ObjectsDecreaseLineSpacingBeforeAndAfter" supertip="Decreases spacing before and after each paragraph" screentip="Decrease paragraph spacing"/>
-                     </menu>
-                  </splitButton>
                   <button idMso="IndentIncrease" showLabel="false"/>
                   <button idMso="IndentDecrease" showLabel="false"/>
                   <gallery idMso="TextAlignGallery" showLabel="false"/>
                </buttonGroup>
+               <separator id="LineSpacingSeperator"/>
+               <button id="RemoveLineSpacing" label="Remove line spacing" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="LineSpacingRemove" getEnabled="EnableWhenShapeOrText" supertip="Removes line spacing in the selected text" screentip="Remove line spacing"/>
+               <button id="IncreaseLineSpacing" label="Increase line spacing" showLabel="false" imageMso="UpArrow2" onAction="ObjectsIncreaseLineSpacing" getEnabled="EnableWhenShapeOrText" supertip="Increases spacing between lines in the selected text" screentip="Increase line spacing"/>
+               <button id="DecreaseLineSpacing" label="Decrease line spacing" showLabel="false" imageMso="DownArrow2" onAction="ObjectsDecreaseLineSpacing" getEnabled="EnableWhenShapeOrText" supertip="Decreases spacing between lines in the selected text" screentip="Decrease line spacing"/>
+               <separator id="LineSpacingSeperatorBeforeAndAfter"/>
+               <button id="RemoveLineSpacingBeforeAndAfter" label="Remove paragraph spacing" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="ParagraphSpacingRemove" getEnabled="EnableWhenShapeOrText" supertip="Removes paragraph spacing in the selected text" screentip="Remove paragraph spacing"/>
+               <button id="IncreaseLineSpacingBeforeAndAfter" label="Increase line spacing before and after" showLabel="false" imageMso="UpArrow2" onAction="ObjectsIncreaseLineSpacingBeforeAndAfter" getEnabled="EnableWhenShapeOrText" supertip="Increases spacing before and after each paragraph" screentip="Increase paragraph spacing"/>
+               <button id="DecreaseLineSpacingBeforeAndAfter" label="Decrease line spacing before and after" showLabel="false" imageMso="DownArrow2" onAction="ObjectsDecreaseLineSpacingBeforeAndAfter" getEnabled="EnableWhenShapeOrText" supertip="Decreases spacing before and after each paragraph" screentip="Decrease paragraph spacing"/>
+               <separator id="ListGapSeperator"/>
+               <button id="RemoveListGap" label="Remove list gap" showLabel="false" imageMso="IndentIncrease" onAction="ResetHangingIndent" getEnabled="EnableWhenShapeOrText" supertip="Resets the hanging indent of the selected list paragraphs to zero, placing the bullet or number flush with the text." screentip="Remove List Gap"/>
+               <button id="IncreaseListGap" label="Increase list gap" showLabel="false" imageMso="RightArrow2" onAction="IncreaseHangingIndent" getEnabled="EnableWhenShapeOrText" supertip="Increases the hanging indent of the selected list paragraphs, keeping the bullet or number aligned with the text above" screentip="Increase List Gap"/>
+               <button id="DecreaseListGap" label="Decrease list gap" showLabel="false" imageMso="LeftArrow2" onAction="DecreaseHangingIndent" getEnabled="EnableWhenShapeOrText" supertip="Decreases the hanging indent of the selected list paragraphs, keeping the bullet or number aligned with the text above" screentip="Decrease List Gap"/>
                <separator id="separator6"/>
                <toggleButton id="ToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" getEnabled="EnableWhenShapeOrText" supertip="Toggles text wrapping inside the selected shape" screentip="Toggle text wrap"/>
                <button id="ObjectsTextSplitByParagraphButton" label="Split (by paragraphs) into multiple shapes" imageMso="PageBreakInsertOrRemove" showLabel="false" onAction="ObjectsTextSplitByParagraph" getEnabled="EnableWhenShapeOrText" supertip="Splits the text into multiple shapes using paragraph breaks" screentip="Split text by paragraphs"/>
@@ -712,22 +712,22 @@
                </buttonGroup>
                <buttonGroup id="TabViewbuttonGroupIndent">
                   <gallery idMso="LineSpacingGalleryPowerPoint" showLabel="false"/>
-                  <splitButton id="TabViewIncreaseLineSpacingSplitButton" showLabel="false">
-                     <button id="TabViewIncreaseLineSpacing" label="Increase line spacing" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="ObjectsIncreaseLineSpacing" getEnabled="EnableWhenShapeOrText" supertip="Increases spacing between lines in the selected text" screentip="Increase line spacing"/>
-                     <menu id="TabViewIncreaseLineSpacingMenu" itemSize="normal" supertip="Opens the tools for increasing line spacing" screentip="Increase Line Spacing">
-                        <button id="TabViewIncreaseLineSpacingBeforeAndAfter" label="Increase line spacing before and after" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="ObjectsIncreaseLineSpacingBeforeAndAfter" getEnabled="EnableWhenShapeOrText" supertip="Increases spacing before and after each paragraph" screentip="Increase paragraph spacing"/>
-                     </menu>
-                  </splitButton>
-                  <splitButton id="TabViewDecreaseLineSpacingSplitButton" showLabel="false">
-                     <button id="TabViewDecreaseLineSpacing" label="Decrease line spacing" showLabel="false" imageMso="ParagraphSpacingDecrease" onAction="ObjectsDecreaseLineSpacing" getEnabled="EnableWhenShapeOrText" supertip="Decreases spacing between lines in the selected text" screentip="Decrease line spacing"/>
-                     <menu id="TabViewDecreaseLineSpacingMenu" itemSize="normal" supertip="Opens the tools for decreasing line spacing" screentip="Decrease Line Spacing">
-                        <button id="TabViewDecreaseLineSpacingBeforeAndAfter" label="Decrease line spacing before and after" showLabel="false" imageMso="ParagraphSpacingDecrease" getEnabled="EnableWhenShapeOrText" onAction="ObjectsDecreaseLineSpacingBeforeAndAfter" supertip="Decreases spacing before and after each paragraph" screentip="Decrease paragraph spacing"/>
-                     </menu>
-                  </splitButton>
                   <button idMso="IndentIncrease" showLabel="false"/>
                   <button idMso="IndentDecrease" showLabel="false"/>
                   <gallery idMso="TextAlignGallery" showLabel="false"/>
                </buttonGroup>
+               <separator id="TabViewLineSpacingSeperator"/>
+               <button id="TabViewRemoveLineSpacing" label="Remove line spacing" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="LineSpacingRemove" getEnabled="EnableWhenShapeOrText" supertip="Removes line spacing in the selected text" screentip="Remove line spacing"/>
+               <button id="TabViewIncreaseLineSpacing" label="Increase line spacing" showLabel="false" imageMso="UpArrow2" onAction="ObjectsIncreaseLineSpacing" getEnabled="EnableWhenShapeOrText" supertip="Increases spacing between lines in the selected text" screentip="Increase line spacing"/>
+               <button id="TabViewDecreaseLineSpacing" label="Decrease line spacing" showLabel="false" imageMso="DownArrow2" onAction="ObjectsDecreaseLineSpacing" getEnabled="EnableWhenShapeOrText" supertip="Decreases spacing between lines in the selected text" screentip="Decrease line spacing"/>
+               <separator id="TabViewLineSpacingSeperatorBeforeAndAfter"/>
+               <button id="TabViewRemoveLineSpacingBeforeAndAfter" label="Remove paragraph spacing" showLabel="false" imageMso="ParagraphSpacingIncrease" onAction="ParagraphSpacingRemove" getEnabled="EnableWhenShapeOrText" supertip="Removes paragraph spacing in the selected text" screentip="Remove paragraph spacing"/>
+               <button id="TabViewIncreaseLineSpacingBeforeAndAfter" label="Increase line spacing before and after" showLabel="false" imageMso="UpArrow2" onAction="ObjectsIncreaseLineSpacingBeforeAndAfter" getEnabled="EnableWhenShapeOrText" supertip="Increases spacing before and after each paragraph" screentip="Increase paragraph spacing"/>
+               <button id="TabViewDecreaseLineSpacingBeforeAndAfter" label="Decrease line spacing before and after" showLabel="false" imageMso="DownArrow2" onAction="ObjectsDecreaseLineSpacingBeforeAndAfter" getEnabled="EnableWhenShapeOrText" supertip="Decreases spacing before and after each paragraph" screentip="Decrease paragraph spacing"/>
+               <separator id="TabViewListGapSeperator"/>
+               <button id="TabViewRemoveListGap" label="Remove list gap" showLabel="false" imageMso="IndentIncrease" onAction="ResetHangingIndent" getEnabled="EnableWhenShapeOrText" supertip="Resets the hanging indent of the selected list paragraphs to zero, placing the bullet or number flush with the text." screentip="Remove List Gap"/>
+               <button id="TabViewIncreaseListGap" label="Increase list gap" showLabel="false" imageMso="RightArrow2" onAction="IncreaseHangingIndent" getEnabled="EnableWhenShapeOrText" supertip="Increases the hanging indent of the selected list paragraphs, keeping the bullet or number aligned with the text above" screentip="Increase List Gap"/>
+               <button id="TabViewDecreaseListGap" label="Decrease list gap" showLabel="false" imageMso="LeftArrow2" onAction="DecreaseHangingIndent" getEnabled="EnableWhenShapeOrText" supertip="Decreases the hanging indent of the selected list paragraphs, keeping the bullet or number aligned with the text above" screentip="Decrease List Gap"/>
                <separator id="TabViewseparator6"/>
                <toggleButton id="TabViewToggleTextWrap" label="Toggle text wrap" imageMso="WrapText" showLabel="false" onAction="ObjectsTextWordwrapToggle" getEnabled="EnableWhenShapeOrText" supertip="Toggles text wrapping inside the selected shape" screentip="Toggle text wrap"/>
                <button id="TabViewObjectsTextSplitByParagraphButton" label="Split (by paragraphs) into multiple shapes" imageMso="PageBreakInsertOrRemove" showLabel="false" onAction="ObjectsTextSplitByParagraph" getEnabled="EnableWhenShapeOrText" supertip="Splits the text into multiple shapes using paragraph breaks" screentip="Split text by paragraphs"/>

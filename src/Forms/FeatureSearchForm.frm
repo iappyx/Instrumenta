@@ -1,5 +1,5 @@
 Attribute VB_Name = "FeatureSearchForm"
-Attribute VB_Base = "0{02B29BB5-A152-473E-B7F4-915C663DEEE8}{7A697287-9927-447E-9251-08BBA7300429}"
+Attribute VB_Base = "0{646F4055-1826-4482-8BED-5DA7C7431F8D}{5C1CD0A1-ABB5-4B28-B836-4059D6455BB5}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

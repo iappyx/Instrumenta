@@ -1,5 +1,5 @@
 Attribute VB_Name = "SlideGraderForm"
-Attribute VB_Base = "0{AD2DA47F-ECC3-4B09-AF2C-8035980DBC41}{4858FF57-0538-44DA-B7EE-1D82924A344E}"
+Attribute VB_Base = "0{E182F56B-C0E1-451F-BB97-5174FA2BD8C0}{68696D87-E1C0-41EB-82C3-257E35CBBB73}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

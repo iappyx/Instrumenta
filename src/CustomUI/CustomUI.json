@@ -489,110 +489,6 @@
       "supertip": "",
       "screentip": ""
     },
-    "IncreaseLineSpacing": {
-      "_tag": "button",
-      "id": "IncreaseLineSpacing",
-      "label": "Increase line spacing",
-      "showLabel": "false",
-      "imageMso": "ParagraphSpacingIncrease",
-      "onAction": "ObjectsIncreaseLineSpacing",
-      "getEnabled": "EnableWhenShapeOrText",
-      "supertip": "Increases spacing between lines in the selected text",
-      "screentip": "Increase line spacing"
-    },
-    "IncreaseLineSpacingBeforeAndAfter": {
-      "_tag": "button",
-      "id": "IncreaseLineSpacingBeforeAndAfter",
-      "label": "Increase line spacing before and after",
-      "showLabel": "false",
-      "imageMso": "ParagraphSpacingIncrease",
-      "onAction": "ObjectsIncreaseLineSpacingBeforeAndAfter",
-      "getEnabled": "EnableWhenShapeOrText",
-      "supertip": "Increases spacing before and after each paragraph",
-      "screentip": "Increase paragraph spacing"
-    },
-    "IncreaseLineSpacingMenu": {
-      "_tag": "menu",
-      "id": "IncreaseLineSpacingMenu",
-      "itemSize": "normal",
-      "supertip": "Opens the tools for increasing line spacing",
-      "screentip": "Increase Line Spacing",
-      "_children": [
-        {
-          "$ref": "IncreaseLineSpacingBeforeAndAfter",
-          "_tag": "button"
-        }
-      ]
-    },
-    "IncreaseLineSpacingSplitButton": {
-      "_tag": "splitButton",
-      "id": "IncreaseLineSpacingSplitButton",
-      "showLabel": "false",
-      "supertip": "",
-      "screentip": "",
-      "_children": [
-        {
-          "$ref": "IncreaseLineSpacing",
-          "_tag": "button"
-        },
-        {
-          "$ref": "IncreaseLineSpacingMenu",
-          "_tag": "menu"
-        }
-      ]
-    },
-    "DecreaseLineSpacing": {
-      "_tag": "button",
-      "id": "DecreaseLineSpacing",
-      "label": "Decrease line spacing",
-      "showLabel": "false",
-      "imageMso": "ParagraphSpacingDecrease",
-      "onAction": "ObjectsDecreaseLineSpacing",
-      "getEnabled": "EnableWhenShapeOrText",
-      "supertip": "Decreases spacing between lines in the selected text",
-      "screentip": "Decrease line spacing"
-    },
-    "DecreaseLineSpacingBeforeAndAfter": {
-      "_tag": "button",
-      "id": "DecreaseLineSpacingBeforeAndAfter",
-      "label": "Decrease line spacing before and after",
-      "showLabel": "false",
-      "imageMso": "ParagraphSpacingDecrease",
-      "getEnabled": "EnableWhenShapeOrText",
-      "onAction": "ObjectsDecreaseLineSpacingBeforeAndAfter",
-      "supertip": "Decreases spacing before and after each paragraph",
-      "screentip": "Decrease paragraph spacing"
-    },
-    "DecreaseLineSpacingMenu": {
-      "_tag": "menu",
-      "id": "DecreaseLineSpacingMenu",
-      "itemSize": "normal",
-      "supertip": "Opens the tools for decreasing line spacing",
-      "screentip": "Decrease Line Spacing",
-      "_children": [
-        {
-          "$ref": "DecreaseLineSpacingBeforeAndAfter",
-          "_tag": "button"
-        }
-      ]
-    },
-    "DecreaseLineSpacingSplitButton": {
-      "_tag": "splitButton",
-      "id": "DecreaseLineSpacingSplitButton",
-      "showLabel": "false",
-      "supertip": "",
-      "screentip": "",
-      "_children": [
-        {
-          "$ref": "DecreaseLineSpacing",
-          "_tag": "button"
-        },
-        {
-          "$ref": "DecreaseLineSpacingMenu",
-          "_tag": "menu"
-        }
-      ]
-    },
     "IndentIncrease": {
       "_tag": "button",
       "idMso": "IndentIncrease",
@@ -623,14 +519,6 @@
           "_tag": "gallery"
         },
         {
-          "$ref": "IncreaseLineSpacingSplitButton",
-          "_tag": "splitButton"
-        },
-        {
-          "$ref": "DecreaseLineSpacingSplitButton",
-          "_tag": "splitButton"
-        },
-        {
           "$ref": "IndentIncrease",
           "_tag": "button"
         },
@@ -643,6 +531,117 @@
           "_tag": "gallery"
         }
       ]
+    },
+    "LineSpacingSeperator": {
+      "_tag": "separator",
+      "id": "LineSpacingSeperator"
+    },
+    "RemoveLineSpacing": {
+      "_tag": "button",
+      "id": "RemoveLineSpacing",
+      "label": "Remove line spacing",
+      "showLabel": "false",
+      "imageMso": "ParagraphSpacingIncrease",
+      "onAction": "LineSpacingRemove",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Removes line spacing in the selected text",
+      "screentip": "Remove line spacing"
+    },
+    "IncreaseLineSpacing": {
+      "_tag": "button",
+      "id": "IncreaseLineSpacing",
+      "label": "Increase line spacing",
+      "showLabel": "false",
+      "imageMso": "UpArrow2",
+      "onAction": "ObjectsIncreaseLineSpacing",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Increases spacing between lines in the selected text",
+      "screentip": "Increase line spacing"
+    },
+    "DecreaseLineSpacing": {
+      "_tag": "button",
+      "id": "DecreaseLineSpacing",
+      "label": "Decrease line spacing",
+      "showLabel": "false",
+      "imageMso": "DownArrow2",
+      "onAction": "ObjectsDecreaseLineSpacing",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Decreases spacing between lines in the selected text",
+      "screentip": "Decrease line spacing"
+    },
+    "LineSpacingSeperatorBeforeAndAfter": {
+      "_tag": "separator",
+      "id": "LineSpacingSeperatorBeforeAndAfter"
+    },
+    "RemoveLineSpacingBeforeAndAfter": {
+      "_tag": "button",
+      "id": "RemoveLineSpacingBeforeAndAfter",
+      "label": "Remove paragraph spacing",
+      "showLabel": "false",
+      "imageMso": "ParagraphSpacingIncrease",
+      "onAction": "ParagraphSpacingRemove",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Removes paragraph spacing in the selected text",
+      "screentip": "Remove paragraph spacing"
+    },
+    "IncreaseLineSpacingBeforeAndAfter": {
+      "_tag": "button",
+      "id": "IncreaseLineSpacingBeforeAndAfter",
+      "label": "Increase line spacing before and after",
+      "showLabel": "false",
+      "imageMso": "UpArrow2",
+      "onAction": "ObjectsIncreaseLineSpacingBeforeAndAfter",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Increases spacing before and after each paragraph",
+      "screentip": "Increase paragraph spacing"
+    },
+    "DecreaseLineSpacingBeforeAndAfter": {
+      "_tag": "button",
+      "id": "DecreaseLineSpacingBeforeAndAfter",
+      "label": "Decrease line spacing before and after",
+      "showLabel": "false",
+      "imageMso": "DownArrow2",
+      "onAction": "ObjectsDecreaseLineSpacingBeforeAndAfter",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Decreases spacing before and after each paragraph",
+      "screentip": "Decrease paragraph spacing"
+    },
+    "ListGapSeperator": {
+      "_tag": "separator",
+      "id": "ListGapSeperator"
+    },
+    "RemoveListGap": {
+      "_tag": "button",
+      "id": "RemoveListGap",
+      "label": "Remove list gap",
+      "showLabel": "false",
+      "imageMso": "IndentIncrease",
+      "onAction": "ResetHangingIndent",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Resets the hanging indent of the selected list paragraphs to zero, placing the bullet or number flush with the text.",
+      "screentip": "Remove List Gap"
+    },
+    "IncreaseListGap": {
+      "_tag": "button",
+      "id": "IncreaseListGap",
+      "label": "Increase list gap",
+      "showLabel": "false",
+      "imageMso": "RightArrow2",
+      "onAction": "IncreaseHangingIndent",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Increases the hanging indent of the selected list paragraphs, keeping the bullet or number aligned with the text above",
+      "screentip": "Increase List Gap"
+    },
+    "DecreaseListGap": {
+      "_tag": "button",
+      "id": "DecreaseListGap",
+      "label": "Decrease list gap",
+      "showLabel": "false",
+      "imageMso": "LeftArrow2",
+      "onAction": "DecreaseHangingIndent",
+      "getEnabled": "EnableWhenShapeOrText",
+      "supertip": "Decreases the hanging indent of the selected list paragraphs, keeping the bullet or number aligned with the text above",
+      "screentip": "Decrease List Gap"
     },
     "separator6": {
       "_tag": "separator",
@@ -6040,6 +6039,54 @@
                         "_tag": "buttonGroup"
                       },
                       {
+                        "$ref": "LineSpacingSeperator",
+                        "_tag": "separator"
+                      },
+                      {
+                        "$ref": "RemoveLineSpacing",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "IncreaseLineSpacing",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "DecreaseLineSpacing",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "LineSpacingSeperatorBeforeAndAfter",
+                        "_tag": "separator"
+                      },
+                      {
+                        "$ref": "RemoveLineSpacingBeforeAndAfter",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "IncreaseLineSpacingBeforeAndAfter",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "DecreaseLineSpacingBeforeAndAfter",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "ListGapSeperator",
+                        "_tag": "separator"
+                      },
+                      {
+                        "$ref": "RemoveListGap",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "IncreaseListGap",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "DecreaseListGap",
+                        "_tag": "button"
+                      },
+                      {
                         "$ref": "separator6",
                         "_tag": "separator"
                       },
@@ -7010,6 +7057,54 @@
                       {
                         "$ref": "buttonGroupIndent",
                         "_tag": "buttonGroup"
+                      },
+                      {
+                        "$ref": "LineSpacingSeperator",
+                        "_tag": "separator"
+                      },
+                      {
+                        "$ref": "RemoveLineSpacing",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "IncreaseLineSpacing",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "DecreaseLineSpacing",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "LineSpacingSeperatorBeforeAndAfter",
+                        "_tag": "separator"
+                      },
+                      {
+                        "$ref": "RemoveLineSpacingBeforeAndAfter",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "IncreaseLineSpacingBeforeAndAfter",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "DecreaseLineSpacingBeforeAndAfter",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "ListGapSeperator",
+                        "_tag": "separator"
+                      },
+                      {
+                        "$ref": "RemoveListGap",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "IncreaseListGap",
+                        "_tag": "button"
+                      },
+                      {
+                        "$ref": "DecreaseListGap",
+                        "_tag": "button"
                       },
                       {
                         "$ref": "separator6",
