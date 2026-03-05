@@ -1,5 +1,5 @@
 Attribute VB_Name = "PyramidForm"
-Attribute VB_Base = "0{AAD8255B-B457-4C67-9A00-C49A1F8B9F1D}{90484829-5425-4E16-BCCD-D2DCDA843B2E}"
+Attribute VB_Base = "0{62E7B294-8D29-4DC2-82F9-A6ED8A119FEF}{A7D72496-94B1-4830-BB3B-2503E30BA346}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

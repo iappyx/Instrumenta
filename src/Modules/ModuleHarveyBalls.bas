@@ -82,6 +82,7 @@ Sub GenerateHarveyBallPercent(FillPercentage As Double)
         Next shape
     End If
     
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim HarveyCircle, HarveyFill As shape

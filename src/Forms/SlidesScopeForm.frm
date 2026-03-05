@@ -1,5 +1,5 @@
 Attribute VB_Name = "SlidesScopeForm"
-Attribute VB_Base = "0{77BFF010-289B-4E34-980D-B0E5FC4DF4C6}{8D5A059A-2DEC-4185-8C7F-8B34D23FE612}"
+Attribute VB_Base = "0{0C1A37D1-6C73-4E12-B54C-F2DEC211F3E2}{172960D9-A7E4-4713-98FF-611CC7C3DC71}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

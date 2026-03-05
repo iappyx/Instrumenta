@@ -1090,6 +1090,11 @@ Public Sub IScr_InvokeCommand(line As String, lineNum As Integer)
         Exit Sub
     End If
 
+    If Not IsAllowedProcedure(subName) Then
+        IScr_Log "Line " & lineNum & ": ERROR - CALL " & subName & " is not permitted"
+        Exit Sub
+    End If
+
     On Error GoTo Failed
     Application.run subName
     IScr_Log "Line " & lineNum & ": CALL " & subName & " - OK"

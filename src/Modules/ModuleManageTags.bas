@@ -312,11 +312,14 @@ End Sub
 
 Sub AddTag()
     
+    Set ThisPresentation = ActivePresentation
+    
     If TypeOfTag = "slide" Then
         
         For slideCount = 1 To Application.ActiveWindow.Selection.SlideRange.count
             
-            Application.ActiveWindow.Selection.SlideRange(slideCount).Tags.Add ManageTagsForm.AddTagIdTextBox.value, ManageTagsForm.AddTagValueTextBox.value
+            'Application.ActiveWindow.Selection.SlideRange(slideCount).Tags.Add ManageTagsForm.AddTagIdTextBox.value, ManageTagsForm.AddTagValueTextBox.value --> this does not always work on mac
+            ThisPresentation.Slides(Application.ActiveWindow.Selection.SlideRange(slideCount).slideIndex).Tags.Add ManageTagsForm.AddTagIdTextBox.value, ManageTagsForm.AddTagValueTextBox.value
             
         Next slideCount
         
@@ -343,16 +346,26 @@ Sub AddTag()
 End Sub
 
 Sub AddSpecialSlideTag(SpecialTagType As String)
+
+    Set ThisPresentation = ActivePresentation
+    
+    Dim rng As SlideRange
+    Set rng = ActiveWindow.Selection.SlideRange
     
     For slideCount = 1 To Application.ActiveWindow.Selection.SlideRange.count
         
+        idx = rng(slideCount).slideIndex
+        
         If SpecialTagType = "filename" Then
             
-            Application.ActiveWindow.Selection.SlideRange(slideCount).Tags.Add "INSTRUMENTA ORIGINAL FILENAME", ActivePresentation.name
+            'Application.ActiveWindow.Selection.SlideRange(slideCount).Tags.Add "INSTRUMENTA ORIGINAL FILENAME", ActivePresentation.name --> Does not always work on Mac
+            ThisPresentation.Slides(idx).Tags.Add "INSTRUMENTA ORIGINAL FILENAME", ActivePresentation.name
+            
             
         ElseIf SpecialTagType = "slidenum" Then
             
-            Application.ActiveWindow.Selection.SlideRange(slideCount).Tags.Add "INSTRUMENTA ORIGINAL SLIDENUM", Application.ActiveWindow.Selection.SlideRange(slideCount).SlideNumber
+            'Application.ActiveWindow.Selection.SlideRange(slideCount).Tags.Add "INSTRUMENTA ORIGINAL SLIDENUM", Application.ActiveWindow.Selection.SlideRange(slideCount).SlideNumber --> Does not always work on Mac
+            ThisPresentation.Slides(idx).Tags.Add "INSTRUMENTA ORIGINAL SLIDENUM", ThisPresentation.Slides(idx).SlideNumber
             
         End If
         
@@ -398,6 +411,7 @@ Sub ShowTagsOnSlide()
         
         For TagCount = 1 To PresentationSlide.Tags.count
             
+            Randomize
             RandomNumber = Round(Rnd() * 1000000, 0)
             
             Set TagBackground = PresentationSlide.shapes.AddShape(msoShapeSnip2SameRectangle, 100, 100, 26, 150)

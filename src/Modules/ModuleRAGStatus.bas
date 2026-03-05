@@ -105,6 +105,8 @@ Sub GenerateRAGStatus(RAGColor As String)
     
     
     Dim RAGStatus As Object
+    
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
         Set RAGBackground = MyDocument.Selection.SlideRange.shapes.AddShape(msoShapeRoundedRectangle, 100, 100, 94, 34)

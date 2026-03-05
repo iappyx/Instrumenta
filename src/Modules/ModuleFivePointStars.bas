@@ -89,6 +89,7 @@ Sub GenerateFivePointStars(NumberOfStars As Double)
     Dim StarsArray  As Variant
     Dim StarRating As Object
     
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     For StarsCount = 1 To 5

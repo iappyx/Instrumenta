@@ -548,7 +548,7 @@ END REPEAT
 ---
 
 ### CALL
-Calls any public VBA sub by name — including all Instrumenta functions.
+Calls any Instrumenta functions (Subs) by name
 
 ```
 SELECT WHERE name STARTSWITH "chart_"
@@ -754,7 +754,7 @@ END REPEAT
 
 **Points reference.** PowerPoint uses points as its unit. A standard 16:9 slide is 720 × 405 pt. 1 cm ≈ 28.35 pt. Font size 12 = 12 pt.
 
-**CALL any public sub.** `CALL` works with any public sub in any loaded VBA module, not just Instrumenta functions.
+**CALL any public sub.** `CALL` works only with Instrumenta functions (subs)
 
 **No parentheses needed for simple conditions.** `IF i > 2 AND i < 7` works fine without parentheses. Use them only when you need to override the default `AND` before `OR` precedence.
 

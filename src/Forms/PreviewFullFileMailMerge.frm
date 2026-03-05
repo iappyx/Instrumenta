@@ -1,5 +1,5 @@
 Attribute VB_Name = "PreviewFullFileMailMerge"
-Attribute VB_Base = "0{E412CD09-0A70-4F76-A7FB-4076451B254B}{4093C856-BD9B-4544-9F17-3B601DE3A091}"
+Attribute VB_Base = "0{FFB8BF06-9A4D-4ED9-8F0A-A038DAB6D120}{9ADFD7A0-6AEA-45EE-9E0E-BC9243837375}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

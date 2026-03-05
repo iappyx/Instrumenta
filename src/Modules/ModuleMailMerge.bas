@@ -131,10 +131,11 @@ Sub ExcelMailMerge()
         
         Dim ExcelFile   As String
         Dim SlideShape  As shape
-        
+              
         Dim ExcelApplication, ExcelSourceSheet, ExcelSourceWorkbook As Object
-        
-        MailMergeSlideNum = ActiveWindow.Selection.SlideRange(1).SlideNumber
+                
+        Set ThisPresentation = ActivePresentation
+        MailMergeSlideNum = ThisPresentation.Slides(ActiveWindow.Selection.SlideRange(1).slideIndex).SlideNumber
         
         'Early binding equivalent for reference:
         'Dim ExcelApplication As Excel.Application
@@ -563,8 +564,7 @@ Sub ExcelFullFileMailMerge()
     Dim ExcelApplication, ExcelSourceSheet, ExcelSourceWorkbook As Object
     
     Set ThisPresentation = ActivePresentation
-    
-    MailMergeSlideNum = ActiveWindow.Selection.SlideRange(1).SlideNumber
+    MailMergeSlideNum = ThisPresentation.Slides(ActiveWindow.Selection.SlideRange(1).slideIndex).SlideNumber
     
     #If Mac Then
         
@@ -698,20 +698,24 @@ Sub ExcelFullFileMailMerge()
             ReDim PresentationFilenameNew(i + 1)
         End If
         
+        Dim SafeMailMergeName As String
+        SafeMailMergeName = SanitizeFilename(SlidePlaceHolder.TextFrame.textRange.text)
+        
         #If Mac Then
             
-            PresentationFilenameNew(i) = ActivePresentation.Path & "/" & SlidePlaceHolder.TextFrame.textRange.text & ".pptx"
+            PresentationFilenameNew(i) = ActivePresentation.Path & "/" & SafeMailMergeName & ".pptx"
             
         #Else
             
-            PresentationFilenameNew(i) = ActivePresentation.Path & "\" & SlidePlaceHolder.TextFrame.textRange.text & ".pptx"
+            PresentationFilenameNew(i) = ActivePresentation.Path & "\" & SafeMailMergeName & ".pptx"
             
         #End If
         
         SlidePlaceHolder.Delete
         
+        If Len(SafeMailMergeName) = 0 Then GoTo SkipSave
         ThisPresentation.SaveCopyAs PresentationFilenameNew(i)
-        
+SkipSave:
     Next i
     
     #If Mac Then

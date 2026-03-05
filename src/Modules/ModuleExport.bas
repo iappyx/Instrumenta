@@ -57,7 +57,9 @@ Sub SaveSelectedSlides()
         
         SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.count * 100)
         
-            ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
+            'ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES" --> does not always work on Mac
+            ThisPresentation.Slides(ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex).Tags.Add "INSTRUMENTA EXPORT", "YES"
+                        
             If SlideLoop <> ActiveWindow.Selection.SlideRange.count Then
                 PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex & ","
             Else
@@ -169,7 +171,9 @@ Sub EmailSelectedSlides()
         
         SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.count * 100)
         
-            ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
+            'ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES" --> Does not always work on Mac
+            ThisPresentation.Slides(ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex).Tags.Add "INSTRUMENTA EXPORT", "YES"
+            
             If SlideLoop <> ActiveWindow.Selection.SlideRange.count Then
                 PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex & ","
             Else
@@ -182,8 +186,8 @@ Sub EmailSelectedSlides()
         
         PresentationFilename = PresentationFilename & ")"
         
-        PresentationFilename = InputBox("Attachment file name:", "Send as e-mail", PresentationFilename)
-        
+        PresentationFilename = SanitizeFilename(InputBox("Attachment file name:", "Send as e-mail", PresentationFilename))
+        If Len(PresentationFilename) = 0 Then Exit Sub
         
         #If Mac Then
         
@@ -297,7 +301,9 @@ Sub EmailSelectedSlidesAsPDF()
         
         SetProgress (SlideLoop / ActiveWindow.Selection.SlideRange.count * 100)
         
-            ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES"
+            'ActiveWindow.Selection.SlideRange(SlideLoop).Tags.Add "INSTRUMENTA EXPORT", "YES" --> Does not always work on Mac
+            ThisPresentation.Slides(ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex).Tags.Add "INSTRUMENTA EXPORT", "YES"
+            
             If SlideLoop <> ActiveWindow.Selection.SlideRange.count Then
                 PresentationFilename = PresentationFilename & ActiveWindow.Selection.SlideRange(SlideLoop).slideIndex & ","
             Else
@@ -310,7 +316,8 @@ Sub EmailSelectedSlidesAsPDF()
         
         PresentationFilename = PresentationFilename & ")"
         
-        PresentationFilename = InputBox("Attachment file name:", "Send as e-mail", PresentationFilename)
+        PresentationFilename = SanitizeFilename(InputBox("Attachment file name:", "Send as e-mail", PresentationFilename))
+        If Len(PresentationFilename) = 0 Then Exit Sub
       
       
               #If Mac Then

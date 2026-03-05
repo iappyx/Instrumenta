@@ -1267,6 +1267,7 @@ Sub ArrangeShapes()
     
     Set SelectedShapeRange = MyDocument.Selection.ShapeRange
     
+    Randomize
     NameRandomizer = Rnd(5)
      
     If Not MyDocument.Selection.Type = ppSelectionShapes Then Exit Sub

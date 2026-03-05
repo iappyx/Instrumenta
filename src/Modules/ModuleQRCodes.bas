@@ -27,7 +27,7 @@ Sub InsertQRCode()
 Set MyDocument = Application.ActiveWindow
 QRCodeText = ""
 
-QRCodeText = InputBox("Please note that this functionality uses external APIs to generate the QR-code (goqr.me/api/)." & vbNewLine & vbNewLine & vbNewLine & "Please provide the URL (or other content) for the QR-code:", "Generate QR-code", "https://")
+QRCodeText = UrlEncodeString(InputBox("Please note that this functionality uses external APIs to generate the QR-code (goqr.me/api/)." & vbNewLine & vbNewLine & vbNewLine & "Please provide the URL (or other content) for the QR-code:", "Generate QR-code", "https://"))
 
 If Not QRCodeText = "" Then
     QRCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=" & QRCodeText

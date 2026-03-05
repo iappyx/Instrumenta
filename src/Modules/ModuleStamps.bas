@@ -26,6 +26,8 @@ Sub GenerateStamp(StampTitleText As String, StampColor As Long)
     Set MyDocument = Application.ActiveWindow
     
     Dim Stamp       As Object
+    
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfStamps As Long

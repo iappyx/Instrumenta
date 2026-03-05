@@ -145,8 +145,11 @@ Sub SetProgress(PercentageCompleted As Single, Optional ProgressDetails As Strin
 End Sub
 
 Function MacFileDialog(filePath As String) As String
+  Dim safePath As String
+  safePath = SanitizeAppleScriptPath(filePath)
+    
   MacFileDialogMacScript = "set applescript's text item delimiters to "","" " & vbNewLine & "try " & vbNewLine & "set selectedFile to (choose file " & _
-    "with prompt ""Please select a file"" default location alias """ & filePath & """ multiple selections allowed false) as string" & vbNewLine & "set applescript's text item delimiters to """" " & vbNewLine & _
+    "with prompt ""Please select a file"" default location alias """ & safePath & """ multiple selections allowed false) as string" & vbNewLine & "set applescript's text item delimiters to """" " & vbNewLine & _
     "on error errStr number errorNumber" & vbNewLine & "return errorNumber " & vbNewLine & "end try " & vbNewLine & "return selectedFile"
   MacFileDialog = MacScript(MacFileDialogMacScript)
   
@@ -180,7 +183,7 @@ Dim AppleScriptPluginVersion As String
 
 On Error GoTo NotInstalled
 AppleScriptPluginVersion = AppleScriptTask("InstrumentaAppleScriptPlugin.applescript", "CheckIfAppleScriptPluginIsInstalled", "")
-CheckIfAppleScriptPluginIsInstalled = CDbl(AppleScriptPluginVersion)
+CheckIfAppleScriptPluginIsInstalled = CDbl(val(AppleScriptPluginVersion))
 On Error Resume Next
 Exit Function
 
@@ -259,4 +262,43 @@ Function ColorDialog(StandardColor As Variant) As Variant
 End Function
 
 #End If
+
+Public Function SanitizeFilename(filename As String) As String
+    Dim r As String
+    r = filename
+    r = Replace(r, "..", "")
+    r = Replace(r, "/", "")
+    r = Replace(r, "\", "")
+    r = Replace(r, ":", "")
+    r = Replace(r, "*", "")
+    r = Replace(r, "?", "")
+    r = Replace(r, Chr(34), "")
+    r = Replace(r, "<", "")
+    r = Replace(r, ">", "")
+    r = Replace(r, "|", "")
+    SanitizeFilename = Trim(r)
+End Function
+
+Public Function UrlEncodeString(text As String) As String
+    Dim i As Long
+    Dim result As String
+    Dim c As String
+    Dim b As Integer
+    result = ""
+    For i = 1 To Len(text)
+        c = Mid(text, i, 1)
+        b = Asc(c)
+        Select Case b
+            Case 65 To 90, 97 To 122, 48 To 57, 45, 95, 46, 126
+                result = result & c
+            Case Else
+                result = result & "%" & right("0" & Hex(b), 2)
+        End Select
+    Next i
+    UrlEncodeString = result
+End Function
+
+Public Function SanitizeAppleScriptPath(filePath As String) As String
+    SanitizeAppleScriptPath = Replace(filePath, Chr(34), Chr(92) & Chr(34))
+End Function
 

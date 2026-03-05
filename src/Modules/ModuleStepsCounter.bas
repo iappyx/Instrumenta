@@ -24,6 +24,8 @@ Attribute VB_Name = "ModuleStepsCounter"
 Sub GenerateStepsCounter()
     
     Set MyDocument = Application.ActiveWindow
+    
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfSteps As Long
@@ -111,6 +113,8 @@ End Sub
 Sub GenerateCrossSlideStepsCounter()
     
     Set MyDocument = Application.ActiveWindow
+    
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfSteps As Long

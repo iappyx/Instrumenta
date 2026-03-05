@@ -72,8 +72,8 @@ Private Sub LoadInstrumentaFeatures()
     AddFeature "IncreaseLineSpacingBeforeAndAfter", "Increase line spacing before and after", "ObjectsIncreaseLineSpacingBeforeAndAfter", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
     AddFeature "DecreaseLineSpacingBeforeAndAfter", "Decrease line spacing before and after", "ObjectsDecreaseLineSpacingBeforeAndAfter", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
     AddFeature "RemoveListGap", "Remove list gap", "ResetHangingIndent", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
-    AddFeature "IncreaseListGap", "Increase line spacing before and after", "IncreaseHangingIndent", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
-    AddFeature "DecreaseListGap", "Decrease line spacing before and after", "DecreaseHangingIndent", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
+    AddFeature "IncreaseListGap", "Increase list gap", "IncreaseHangingIndent", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
+    AddFeature "DecreaseListGap", "Decrease list gap", "DecreaseHangingIndent", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
     AddFeature "ToggleTextWrap", "Toggle text wrap", "ObjectsTextWordwrapToggle", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
     AddFeature "ObjectsTextSplitByParagraphButton", "Split (by paragraphs) into multiple shapes", "ObjectsTextSplitByParagraph", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
     AddFeature "ObjectsTextMergeButton", "Merge text of all shapes in first selected shape", "ObjectsTextMerge", "Text", "Instrumenta > Text", "Instrumenta [Text] > Text"
@@ -425,6 +425,11 @@ Public Sub ExecuteFeature(actionName As String)
     On Error GoTo ErrorHandler
     
      If LCase$(right$(actionName, 9)) = "_onaction" Then
+     MsgBox "This feature cannot be executed from this window, please use the Ribbon"
+     Exit Sub
+     End If
+     
+     If Not IsAllowedProcedure(actionName) Then
      MsgBox "This feature cannot be executed from this window, please use the Ribbon"
      Exit Sub
      End If

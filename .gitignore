@@ -5,3 +5,4 @@ src/~$*
 .DS_Store
 .c*
 build-tools*
+*sync.ffs_db*

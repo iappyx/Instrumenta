@@ -35,6 +35,8 @@ Sub InsertCaption()
         NumberOfShapeCaptions = 0
         
         Dim GroupedCaption As Object
+        
+        Randomize
         RandomNumber = Round(Rnd() * 1000000, 0)
                 
         ProgressForm.Show

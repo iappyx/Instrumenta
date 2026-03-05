@@ -92,6 +92,7 @@ End Sub
 Sub ShowFormCopyShapeToMultipleSlides()
     Set MyDocument = Application.ActiveWindow
     
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     CopyShapeToMultipleSlidesForm.AllSlidesListBox.Clear
@@ -152,6 +153,8 @@ End Sub
 Sub CopyShapeToMultipleSlides()
     
     Dim shape       As shape
+    
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim OverwriteExisting As Boolean

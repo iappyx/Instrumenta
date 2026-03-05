@@ -1,5 +1,5 @@
 Attribute VB_Name = "SetPositionForm"
-Attribute VB_Base = "0{6D6A24A6-BDC9-45C4-A638-190858ED708A}{870691B3-AA43-47BC-BF47-1893B30C99BD}"
+Attribute VB_Base = "0{7AB1161F-EA05-4716-A0A0-A45D9FF6C41B}{735C0C29-6FEE-461F-A127-973DCAFDB810}"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True

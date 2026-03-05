@@ -24,6 +24,8 @@ Attribute VB_Name = "ModuleStickyNote"
 Sub GenerateStickyNote()
     
     Set MyDocument = Application.ActiveWindow
+    
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfStickies As Long
@@ -72,6 +74,8 @@ End Sub
 Sub ConvertCommentsToStickyNotes()
     
     Set MyDocument = Application.ActiveWindow
+    
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfStickies As Long
@@ -287,6 +291,7 @@ Sub ConvertAllCommentsToStickyNotes()
     
     For Each PresentationSlide In ActivePresentation.Slides
     
+    Randomize
     RandomNumber = Round(Rnd() * 1000000, 0)
     
     Dim NumberOfStickies As Long
