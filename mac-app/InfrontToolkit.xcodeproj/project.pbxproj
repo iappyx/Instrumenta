@@ -17,6 +17,7 @@
 		AABB0000000000000047 /* SetupWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000027 /* SetupWizardView.swift */; };
 		AABB0000000000000048 /* MainWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000028 /* MainWindowView.swift */; };
 		AABB0000000000000049 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000029 /* SettingsView.swift */; };
+		AABB000000000000004C /* ConfigSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB000000000000002E /* ConfigSyncService.swift */; };
 		AABB000000000000004A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AABB000000000000002A /* Assets.xcassets */; };
 		AABB000000000000004B /* manifest-template.xml in Resources */ = {isa = PBXBuildFile; fileRef = AABB000000000000002B /* manifest-template.xml */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,7 @@
 		AABB000000000000002B /* manifest-template.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "manifest-template.xml"; sourceTree = "<group>"; };
 		AABB000000000000002C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AABB000000000000002D /* InfrontToolkit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InfrontToolkit.entitlements; sourceTree = "<group>"; };
+		AABB000000000000002E /* ConfigSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigSyncService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				AABB0000000000000023 /* LocalServerService.swift */,
 				AABB0000000000000024 /* ManifestService.swift */,
 				AABB0000000000000025 /* AppAutoStartService.swift */,
+				AABB000000000000002E /* ConfigSyncService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				AABB0000000000000047 /* SetupWizardView.swift in Sources */,
 				AABB0000000000000048 /* MainWindowView.swift in Sources */,
 				AABB0000000000000049 /* SettingsView.swift in Sources */,
+				AABB000000000000004C /* ConfigSyncService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

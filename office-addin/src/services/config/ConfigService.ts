@@ -90,5 +90,43 @@ export async function flushSettings(): Promise<void> {
   });
 }
 
+// ─── macOS Companion App Integration ─────────────────────────────────────────
+
+const MAC_APP_PORT_KEY = "INFRONT_MAC_APP_PORT";
+const DEFAULT_MAC_APP_PORT = 3000;
+
+/** Gibt die Base-URL der lokalen macOS Begleit-App zurück (z.B. "http://localhost:3000"). */
+export function getMacAppBaseUrl(): string {
+  const port = getSetting<number>(MAC_APP_PORT_KEY, DEFAULT_MAC_APP_PORT);
+  return `http://localhost:${port}`;
+}
+
+/**
+ * Versucht die Brand-Konfiguration vom lokalen macOS Companion Server zu laden.
+ * Fällt bei Fehler (App nicht gestartet, Netzwerkfehler) still auf null zurück.
+ * Der Aufrufer entscheidet, ob der Fallback auf DEFAULT_BRAND_CONFIG erfolgt.
+ */
+export async function fetchBrandConfigFromServer(): Promise<BrandConfig | null> {
+  const baseUrl = getMacAppBaseUrl();
+  try {
+    const response = await fetch(`${baseUrl}/config/Infront_BrandConfig.json`, {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      // Kurzes Timeout: macOS App ist lokal, sollte schnell antworten
+      signal: AbortSignal.timeout(3000),
+    });
+    if (!response.ok) {
+      logger.warn(MODULE, `macOS App Config-Fetch fehlgeschlagen: HTTP ${response.status}`);
+      return null;
+    }
+    const config = (await response.json()) as BrandConfig;
+    logger.info(MODULE, "Brand-Config vom macOS Companion geladen.");
+    return config;
+  } catch {
+    // App nicht gestartet oder nicht erreichbar – stilles Fallback
+    return null;
+  }
+}
+
 // ─── Öffentliche Keys ─────────────────────────────────────────────────────────
 export { BRAND_KEY, REDBOX_KEY, AGENDA_KEY };

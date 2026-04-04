@@ -142,11 +142,20 @@ final class AppState: ObservableObject {
 
         do {
             try await serverService.start(port: UInt16(selectedPort))
+            await setupAddinLogHandler()
             serverStatus = .running(port: selectedPort)
             addLog(.info, "Server läuft auf http://localhost:\(selectedPort)")
         } catch {
             serverStatus = .error(error.localizedDescription)
             addLog(.error, "Server-Start fehlgeschlagen: \(error.localizedDescription)")
+        }
+    }
+
+    private func setupAddinLogHandler() async {
+        await serverService.setLogHandler { [weak self] level, message in
+            Task { @MainActor [weak self] in
+                self?.addLog(level, "[Add-in] \(message)")
+            }
         }
     }
 

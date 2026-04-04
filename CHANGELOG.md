@@ -5,6 +5,40 @@ Format: [Semantic Versioning](https://semver.org) · [Keep a Changelog](https://
 
 ---
 
+## [1.1.0-rc1] – 2026-04-04
+
+Office.js ↔ native macOS Integration implementiert (Schritt 4).
+
+### Neu – macOS App
+
+- **`Services/ConfigSyncService.swift`**: Brand-Konfiguration verwalten; Priorität: User-Override → Bundle-Default → Eingebettetes Fallback; `currentConfigData()`, `saveUserConfig()`, `resetToDefault()`
+- **`Services/LocalServerService.swift`** (erweitert): Vollständiges Routing hinzugefügt:
+  - `GET /health` → `{"status":"ok","version":"1.1.0","addinDistPresent":bool}`
+  - `GET /config/Infront_BrandConfig.json` → über `ConfigSyncService.currentConfigData()`
+  - `POST /log` → Log-Eintrag vom Add-in; dispatcht an `logHandler` auf `@MainActor`
+  - `setLogHandler()` für Dependency Injection
+- **`Models/AppState.swift`** (erweitert): `setupAddinLogHandler()` nach Server-Start; leitet Add-in-Logs mit `[Add-in]`-Präfix in den Logs-Tab
+
+### Neu – Add-in (office-addin/)
+
+- **`src/utils/logger.ts`** (erweitert): Remote Logging hinzugefügt:
+  - `enableRemoteLogging(baseUrl)`: Aktiviert fire-and-forget POST /log
+  - `disableRemoteLogging()`: Deaktiviert Remote Logging
+  - Debug-Logs werden nicht remote gesendet; Fehler silent ignoriert
+- **`src/services/config/ConfigService.ts`** (erweitert): macOS Integration hinzugefügt:
+  - `getMacAppBaseUrl()`: Gibt `http://localhost:<port>` zurück
+  - `fetchBrandConfigFromServer()`: Optionaler HTTP-Fetch mit 3 s Timeout; fällt bei Fehler auf `null` zurück
+
+### Geändert
+
+- **`scripts/copy-dist-to-app.sh`**: Vollständig implementiert; kopiert nun auch `office-addin/config/` → `addin-dist/config/` (Brand-Config für Bundle-Default)
+
+### Neu – Dokumentation
+
+- **`docs/INTEGRATION.md`**: HTTP-Endpunkte, Kommunikationsmodell, Sicherheitsbetrachtung, Konfigurationspfade
+
+---
+
 ## [1.1.0-beta] – 2026-04-04
 
 Native macOS Begleit-App Grundgerüst implementiert (Schritt 3).
