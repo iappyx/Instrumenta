@@ -14,9 +14,9 @@
 #   - Für Entwicklung: SKIP_SIGNING=1 überspringt Signierung + Notarization
 #
 # Umgebungsvariablen:
-#   CODESIGN_IDENTITY  – Code-Signing-Zertifikat (optional, für Produktion)
+#   CODESIGN_IDENTITY    – Code-Signing-Zertifikat (optional, für Produktion)
 #   NOTARIZATION_PROFILE – notarytool keychain profile name (optional)
-#   SKIP_SIGNING=1     – Signierung überspringen (Entwicklung/CI ohne Zertifikate)
+#   SKIP_SIGNING=1       – Signierung überspringen (Entwicklung/CI ohne Zertifikate)
 #
 # Ausgabe:
 #   .build/dist/InfrontToolkit-<version>.dmg
@@ -37,6 +37,52 @@ echo "==> [package-dmg] Infront Toolkit $VERSION"
 echo "    App:    $APP_PATH"
 echo "    Output: $DMG_PATH"
 echo ""
+
+# -------------------------------------------------------
+# Hilfsfunktionen (müssen vor Verwendung definiert sein)
+# -------------------------------------------------------
+
+_build_dmg_hdiutil() {
+  local TMP_DMG="$DIST_DIR/InfrontToolkit-tmp-$$.dmg"
+  local MOUNT_POINT="/Volumes/$VOLUME_NAME"
+
+  # Cleanup bei Abbruch
+  trap "hdiutil detach '$MOUNT_POINT' 2>/dev/null || true; rm -f '$TMP_DMG'" EXIT
+
+  # Lese-/Schreib-DMG anlegen (etwas größer als die App)
+  local APP_SIZE_KB
+  APP_SIZE_KB=$(du -sk "$APP_PATH" | cut -f1)
+  local DMG_SIZE_MB=$(( (APP_SIZE_KB / 1024) + 20 ))
+
+  hdiutil create \
+    -size "${DMG_SIZE_MB}m" \
+    -fs HFS+ \
+    -volname "$VOLUME_NAME" \
+    -ov \
+    -o "$TMP_DMG" \
+    > /dev/null
+
+  # Mounten
+  hdiutil attach "$TMP_DMG" -mountpoint "$MOUNT_POINT" -nobrowse -quiet
+
+  # App und /Applications-Symlink kopieren
+  cp -r "$APP_PATH" "$MOUNT_POINT/"
+  ln -s /Applications "$MOUNT_POINT/Applications"
+
+  # Unmounten
+  hdiutil detach "$MOUNT_POINT" -quiet
+
+  # In komprimiertes, schreibgeschütztes DMG konvertieren
+  hdiutil convert "$TMP_DMG" \
+    -format UDZO \
+    -imagekey zlib-level=9 \
+    -ov \
+    -o "$DMG_PATH" \
+    > /dev/null
+
+  rm -f "$TMP_DMG"
+  trap - EXIT
+}
 
 # -------------------------------------------------------
 # 0. Voraussetzungen prüfen
@@ -89,7 +135,7 @@ fi
 
 echo "==> [2/4] DMG erstellen..."
 
-if command -v create-dmg &>/dev/null && [ "$SKIP_SIGNING" != "1" -o -n "${CODESIGN_IDENTITY:-}" ]; then
+if command -v create-dmg &>/dev/null; then
   echo "    Methode: create-dmg (hübsches DMG mit App-Fenster)"
   create-dmg \
     --volname "$VOLUME_NAME" \
@@ -103,54 +149,8 @@ if command -v create-dmg &>/dev/null && [ "$SKIP_SIGNING" != "1" -o -n "${CODESI
     "$DMG_PATH" \
     "$APP_PATH" 2>&1 | tail -5 || true
 else
-  echo "    Methode: hdiutil (Standard macOS Tool)"
-  _build_dmg_hdiutil
-fi
-
-function _build_dmg_hdiutil() {
-  local TMP_DMG="$DIST_DIR/InfrontToolkit-tmp-$$.dmg"
-  local MOUNT_POINT="/Volumes/$VOLUME_NAME"
-
-  # Cleanup bei Abbruch
-  trap "hdiutil detach '$MOUNT_POINT' 2>/dev/null || true; rm -f '$TMP_DMG'" EXIT
-
-  # Lese-/Schreib-DMG anlegen (etwas größer als die App)
-  local APP_SIZE_KB
-  APP_SIZE_KB=$(du -sk "$APP_PATH" | cut -f1)
-  local DMG_SIZE_MB=$(( (APP_SIZE_KB / 1024) + 20 ))
-
-  hdiutil create \
-    -size "${DMG_SIZE_MB}m" \
-    -fs HFS+ \
-    -volname "$VOLUME_NAME" \
-    -ov \
-    -o "$TMP_DMG" \
-    > /dev/null
-
-  # Mounten
-  hdiutil attach "$TMP_DMG" -mountpoint "$MOUNT_POINT" -nobrowse -quiet
-
-  # App und /Applications-Symlink kopieren
-  cp -r "$APP_PATH" "$MOUNT_POINT/"
-  ln -s /Applications "$MOUNT_POINT/Applications"
-
-  # Unmounten
-  hdiutil detach "$MOUNT_POINT" -quiet
-
-  # In komprimiertes, schreibgeschütztes DMG konvertieren
-  hdiutil convert "$TMP_DMG" \
-    -format UDZO \
-    -imagekey zlib-level=9 \
-    -ov \
-    -o "$DMG_PATH" \
-    > /dev/null
-
-  rm -f "$TMP_DMG"
-  trap - EXIT
-}
-
-# hdiutil aufrufen wenn create-dmg nicht verfügbar
-if ! command -v create-dmg &>/dev/null; then
+  echo "    Methode: hdiutil (macOS built-in)"
+  echo "    Tipp: brew install create-dmg für hübscheres DMG"
   _build_dmg_hdiutil
 fi
 

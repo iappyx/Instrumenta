@@ -78,18 +78,71 @@ Zielplattform: **PowerPoint für Mac (Microsoft 365)**.
 
 ---
 
+## macOS Begleit-App – Integrationstests
+
+### A. Server-Start und Health Check
+
+- [ ] App starten → ⚡ erscheint in Menu Bar
+- [ ] Setup abgeschlossen: Server startet **automatisch** beim App-Launch
+- [ ] `GET http://localhost:3000/health` → `{"status":"ok","addinDistPresent":true}`
+- [ ] Server stoppen (Menu Bar) → Health-Check gibt Verbindungsfehler
+- [ ] Server neu starten → Health-Check antwortet wieder
+
+### B. Brand Config Endpunkt
+
+- [ ] `GET http://localhost:3000/config/Infront_BrandConfig.json` → gültiges JSON
+- [ ] Kein User-Override: Bundle-Standard wird ausgeliefert
+- [ ] User-Override unter `~/Library/Application Support/InfrontToolkit/config/Infront_BrandConfig.json` ablegen → Override wird ausgeliefert
+- [ ] Einstellungen → Brand Config → „Auf Standard zurücksetzen" → Override gelöscht, Bundle-Standard aktiv
+- [ ] Ungültiges JSON als Override → wird ignoriert, Bundle-Standard greift
+
+### C. Remote Logging (POST /log)
+
+- [ ] Add-in-Task Pane öffnen → Logs-Tab zeigt „Remote Logging aktiviert"-ähnliche Einträge
+- [ ] `logger.info()` im Add-in → Eintrag erscheint im Logs-Tab mit `[Add-in]`-Präfix
+- [ ] `logger.warn()` im Add-in → Eintrag erscheint mit Level WARN (orange)
+- [ ] `logger.error()` im Add-in → Eintrag erscheint mit Level ERR (rot)
+- [ ] `logger.debug()` im Add-in → wird **nicht** remote gesendet
+- [ ] Server gestoppt → POST /log schlägt silent fehl, kein Fehler im Add-in
+
+### D. Add-in Startup Integration
+
+- [ ] Task Pane öffnen → Brand Config wird im Hintergrund vom Server geladen
+- [ ] Logs-Tab: kein Eintrag für Config-Fetch-Fehler wenn macOS App nicht läuft
+- [ ] macOS App läuft + Config vorhanden → Brand Check verwendet Server-Konfiguration
+
+### E. Setup-Assistent
+
+- [ ] Erststart: Setup-Assistent erscheint automatisch
+- [ ] Schritt „Server starten" → Fortschrittsanzeige, grüne Bestätigung
+- [ ] Schritt „Manifest installieren" → Datei unter `~/Library/...InfrontToolkit/Manifests/`
+- [ ] Schritt „Office konfigurieren" → Katalog-Pfad sichtbar, „Pfad kopieren" funktioniert
+- [ ] Schritt „Autostart" → Toggle aktiviert Login Item
+- [ ] „Fertig" → Dashboard erscheint, kein Assistent mehr beim nächsten Start
+- [ ] App-Neustart nach Setup → Server startet automatisch (kein Assistent)
+
+### F. Dashboard
+
+- [ ] Status-Tab: grüner Punkt + Port-Anzeige wenn Server läuft
+- [ ] Status-Tab: Manifest-Status korrekt (installiert / nicht installiert)
+- [ ] Logs-Tab: scrollt automatisch nach unten bei neuen Einträgen
+- [ ] Logs-Tab: „Leeren" entfernt alle Einträge
+- [ ] Einstellungen-Tab: Port-Änderung + Server-Neustart funktioniert
+
+---
+
 ## Deployment-Voraussetzungen
 
 ```bash
 npm install
 npm run build        # dist/ wird erzeugt
 # Oder für lokale Entwicklung:
-npm start            # HTTPS-Server auf https://localhost:3000
+npm run dev-server   # HTTPS-Server auf https://localhost:3000
 ```
 
-Sideload in PowerPoint Mac:
-1. Datei → Optionen → Add-Ins verwalten → Eigene XML-Manifeste
-2. `manifest.xml` auswählen
+Sideload in PowerPoint Mac (Entwicklung):
+1. Einfügen → Add-ins → Weitere Add-ins → Add-in hochladen
+2. `office-addin/manifest.xml` auswählen
 3. Tab „Infront Toolkit" erscheint im Ribbon
 
 ---
@@ -261,41 +314,71 @@ Vor jedem Release die folgenden Smoke-Tests durchführen:
 
 ---
 
-## Deployment-Checkliste (Produktion)
+## Deployment-Checkliste (DMG-Release)
 
 ### Vor dem Build
 
-- [ ] `manifest.xml`: alle `localhost:3000`-URLs durch Produktions-Domain ersetzen
-- [ ] `manifest.xml`: `<Id>` bleibt gleich (keine neue GUID bei Updates)
-- [ ] `package.json`: Version hochzählen
+- [ ] `VERSION`-Datei aktualisiert (z.B. `1.1.0`)
+- [ ] `office-addin/package.json`: `"version"` angepasst
+- [ ] `LocalServerService.swift`: Version in `buildHealthResponse()` aktualisiert
 - [ ] `CHANGELOG.md` aktualisiert
+- [ ] Alle Tests grün (Happy Path + Edge Cases oben)
 
 ### Build
 
 ```bash
-npm run build          # TypeScript kompilieren + Webpack
-ls dist/               # taskpane.js, commands.js, taskpane.html, commands.html
+# Vollständiger Release-Build
+SKIP_SIGNING=1 sh scripts/build-release.sh   # Entwicklung
+# oder:
+CODESIGN_IDENTITY="..." sh scripts/build-release.sh  # Produktion
+
+# Einzeln:
+sh scripts/build-addin.sh         # → office-addin/dist/
+sh scripts/copy-dist-to-app.sh    # → mac-app/Resources/addin-dist/
+sh scripts/build-mac-app.sh       # → .build/mac-app/.../InfrontToolkit.app
+sh scripts/package-dmg.sh         # → .build/dist/InfrontToolkit-<version>.dmg
 ```
 
-- [ ] `npm run build` ohne Fehler abgeschlossen
-- [ ] `dist/taskpane.js` vorhanden
-- [ ] `dist/commands.js` vorhanden
-- [ ] `dist/assets/icons/` mit Icon-Dateien (16/32/80 px PNG)
+- [ ] `build-release.sh` ohne Fehler abgeschlossen
+- [ ] `office-addin/dist/taskpane.js` vorhanden
+- [ ] `office-addin/dist/commands.js` vorhanden
+- [ ] `mac-app/Resources/addin-dist/` nicht leer
+- [ ] `InfrontToolkit.app` unter `.build/mac-app/Build/Products/Release/`
+- [ ] DMG unter `.build/dist/InfrontToolkit-<version>.dmg`
 
-### Deploy auf Server
+### DMG testen
 
-- [ ] HTTPS-Zertifikat gültig (kein self-signed in Produktion)
-- [ ] CORS-Header gesetzt: `Access-Control-Allow-Origin: *`
-- [ ] Content-Type für `.js` korrekt: `application/javascript`
-- [ ] Content-Type für `.html` korrekt: `text/html`
-- [ ] `manifest.xml` via IT an Nutzer verteilt (oder zentrale IT-Deployment)
+```bash
+VERSION=$(cat VERSION | tr -d '[:space:]')
+open ".build/dist/InfrontToolkit-${VERSION}.dmg"
+```
 
-### Nach Deployment
+- [ ] DMG öffnet sich, App + /Applications-Symlink sichtbar
+- [ ] App in /Applications kopieren und starten
+- [ ] ⚡ Menu Bar Icon erscheint
+- [ ] Setup-Assistent startet (Erststart)
+- [ ] Server lässt sich starten
+- [ ] Manifest wird installiert
+- [ ] PowerPoint: Ribbon-Tab erscheint nach Office-Catalog-Setup
+- [ ] Health-Check: `curl http://localhost:3000/health` → `{"status":"ok",...}`
 
-- [ ] `manifest.xml` in PowerPoint Mac sideloaden
-- [ ] Tab erscheint
-- [ ] Keine Mixed-Content-Warnungen (alles HTTPS)
-- [ ] DevTools (F12 in Add-in) zeigt keine unbehandelten Fehler
+### Produktion (Code Signing + Notarization)
+
+```bash
+spctl -a -vvv -t open ".build/dist/InfrontToolkit-${VERSION}.dmg"
+# → accepted  source=Notarized Developer ID
+```
+
+- [ ] Notarization: `spctl` zeigt `accepted`
+- [ ] Kein Gatekeeper-Dialog beim ersten Start
+- [ ] `codesign --verify --deep --strict` ohne Fehler
+
+### Release veröffentlichen
+
+- [ ] Git-Tag anlegen: `git tag -a "v${VERSION}" -m "Release v${VERSION}"`
+- [ ] Tag pushen: `git push origin "v${VERSION}"`
+- [ ] GitHub Release mit DMG-Anhang erstellen
+- [ ] `INSTALL_MAC.md` an Nutzer kommuniziert
 
 ---
 

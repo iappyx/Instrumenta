@@ -5,6 +5,41 @@ Format: [Semantic Versioning](https://semver.org) · [Keep a Changelog](https://
 
 ---
 
+## [1.1.0] – 2026-04-04
+
+Stabile Version – macOS-Migration abgeschlossen (Schritt 8).
+
+### Fixes
+
+- **`scripts/package-dmg.sh`**: Bash-Funktionsdefinition vor erstem Aufruf verschoben (Ausführungsreihenfolge-Bug; `_build_dmg_hdiutil` wurde aufgerufen bevor sie definiert war)
+
+### Dokumentation (final)
+
+- **`README.md`**: Vollständig aktualisiert — macOS App als fertig markiert, neue Build-Commands (`build-release.sh`), HTTP-Endpunkte-Tabelle, vollständige Projektstruktur beider Komponenten, Dokumentations-Index
+- **`TESTING.md`**: Neuer Abschnitt „macOS Begleit-App – Integrationstests":
+  - Server-Start und Health Check (6 Tests)
+  - Brand Config Endpunkt (5 Tests)
+  - Remote Logging POST /log (6 Tests)
+  - Add-in Startup Integration (3 Tests)
+  - Setup-Assistent (7 Tests)
+  - Dashboard (5 Tests)
+- **`TESTING.md`**: Deployment-Checkliste ersetzt alten Cloud-Server-Flow durch DMG-Release-Flow (Version aktualisieren → Build → DMG testen → Notarization prüfen → Release veröffentlichen)
+
+### Zusammenfassung der macOS-Migration (Schritte 1–8)
+
+| Schritt | Inhalt | Artefakte |
+|---------|--------|-----------|
+| 1 | Analyse | Architekturentscheidung: lokaler HTTP-Server |
+| 2 | Repo-Struktur | `office-addin/`, `mac-app/`, `scripts/`, `docs/` |
+| 3 | macOS App Grundgerüst | Swift/SwiftUI App, NWListener, SetupWizard, Dashboard |
+| 4 | Office.js Integration | `/health`, `/config`, `POST /log`, `fetchBrandConfigFromServer` |
+| 5 | Startlogik | Auto-Start, Remote Logging aktivierung, Brand Config Settingsview |
+| 6 | Installation Flow | `INSTALL_MAC.md`, Wizard-Polish, `manifestInstalledPath`-Fix |
+| 7 | DMG & Release | `package-dmg.sh`, `build-release.sh`, `RELEASE.md`, `VERSION` |
+| 8 | Stabilisierung | Bash-Fix, `README.md` final, `TESTING.md` Integrationstest |
+
+---
+
 ## [1.1.0-rc4] – 2026-04-04
 
 DMG Build und Release-Struktur implementiert (Schritt 7).
