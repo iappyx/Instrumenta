@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Grundlegende App-Identifikation -->
+	<key>CFBundleDevelopmentRegion</key>
+	<string>de</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+
+	<!-- Menu Bar App: kein Dock-Icon, kein normales App-Fenster beim Start -->
+	<key>LSUIElement</key>
+	<true/>
+
+	<!-- Minimum macOS Version -->
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0</string>
+
+	<!-- Berechtigungen (Nutzer-sichtbare Erklärungen für Datenschutz-Dialoge) -->
+	<!-- Kein Zugriff auf Mikrofon, Kamera, Kontakte etc. benötigt -->
+
+	<!-- App erscheint in Aktivitätsmonitor mit korrektem Namen -->
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2026 Infront</string>
+
+	<!-- Hauptfenster-Einstellungen: kein standardmäßiges Hauptfenster -->
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+</dict>
+</plist>

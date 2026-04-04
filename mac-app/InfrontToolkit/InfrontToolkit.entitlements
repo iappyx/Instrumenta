@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- App Sandbox: aktiviert für App Store / Notarization-Kompatibilität -->
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+
+	<!-- Netzwerk: Ausgehende Verbindungen (für zukünftige Update-Prüfung) -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+
+	<!-- Netzwerk: Eingehende Verbindungen (lokaler HTTP-Server auf loopback) -->
+	<key>com.apple.security.network.server</key>
+	<true/>
+
+	<!-- Dateisystem: Lesen/Schreiben im User-Bereich (für Manifest-Installation) -->
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+
+	<!-- Hardened Runtime: Notwendig für Notarization -->
+	<!-- Wird aktiviert durch ENABLE_HARDENED_RUNTIME = YES in Build Settings -->
+</dict>
+</plist>

@@ -5,6 +5,43 @@ Format: [Semantic Versioning](https://semver.org) · [Keep a Changelog](https://
 
 ---
 
+## [1.1.0-beta] – 2026-04-04
+
+Native macOS Begleit-App Grundgerüst implementiert (Schritt 3).
+
+### Neu – mac-app/ Grundgerüst
+
+- **`InfrontToolkitApp.swift`**: Menu Bar App (`@main`, `MenuBarExtra`, `Window` Scene), kein Dock-Icon (`LSUIElement`)
+- **`Models/AppState.swift`**: `@MainActor ObservableObject` mit `ServerStatus`, `SetupStep`, `LogEntry`; Server-Control-Methoden; UserDefaults-Persistenz
+- **`Models/ServerConfig.swift`**: Port, Host, `addinDistURL` (Bundle-Ressource), `isAddinDistPresent` Prüfung
+- **`Services/LocalServerService.swift`**: Minimaler HTTP-Server via `NWListener` (Network.framework); nur loopback (127.0.0.1); Path-Traversal-Prävention; MIME-Type-Erkennung; CORS-Header
+- **`Services/ManifestService.swift`**: Manifest aus Template generieren (`{{PORT}}` ersetzen); in `~/Library/Application Support/InfrontToolkit/Manifests/` installieren
+- **`Services/AppAutoStartService.swift`**: `SMAppService.mainApp` (macOS 13+) für Login Item Registrierung
+- **`Views/StatusMenuView.swift`**: Menu Bar Dropdown (Status, Dashboard öffnen, Server starten/stoppen, Beenden)
+- **`Views/SetupWizardView.swift`**: 6-Schritte Erststart-Assistent (Willkommen → Server → Manifest → Office → Autostart → Fertig)
+- **`Views/MainWindowView.swift`**: Dashboard (Status-Tab + Logs-Tab) + Umschaltung auf Setup-Wizard bei Erststart
+- **`Views/SettingsView.swift`**: Port, Autostart-Toggle, Manifest-Verwaltung
+- **`Resources/manifest-template.xml`**: Vollständiges Office-Manifest mit `{{PORT}}` Platzhalter (HTTP statt HTTPS für localhost)
+- **`Info.plist`**: `LSUIElement=YES` (kein Dock-Icon), `LSMinimumSystemVersion=13.0`
+- **`InfrontToolkit.entitlements`**: App Sandbox, `network.server`, `network.client`, `files.user-selected.read-write`
+- **`Assets.xcassets`**: Platzhalter App Icon Set (Icons noch zu ergänzen)
+- **`InfrontToolkit.xcodeproj/project.pbxproj`**: Vollständige Xcode Projektdatei (alle Sources, Resources, Build Settings)
+- **`project.yml`**: XcodeGen Konfiguration als wartbare Alternative zu project.pbxproj
+- **`mac-app/README.md`**: Build-Anleitung, Projektstruktur, bekannte Einschränkungen
+
+### Geändert
+
+- `scripts/build-mac-app.sh`: Vollständig implementiert (war Stub); kopiert addin-dist/, prüft xcodegen, ruft xcodebuild auf
+
+### Architekturentscheidung: HTTP statt HTTPS für localhost
+
+Die macOS App serviert den Add-in `dist/` über plain HTTP (nicht HTTPS).
+Office für Mac erlaubt `http://localhost:PORT` für Shared Folder Catalogs.
+Vorteil: Kein selbstsigniertes Zertifikat nötig, kein Keychain-Trust-Problem.
+Nachteil: Nur für localhost (loopback) – nicht für externe Deployments geeignet.
+
+---
+
 ## [1.1.0-alpha] – 2026-04-04
 
 Beginn der macOS-Migration: Umbau zur deploybaren macOS-Lösung mit nativer Begleit-App und DMG-Distribution.

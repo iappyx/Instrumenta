@@ -1,0 +1,402 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AABB0000000000000040 /* InfrontToolkitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000020 /* InfrontToolkitApp.swift */; };
+		AABB0000000000000041 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000021 /* AppState.swift */; };
+		AABB0000000000000042 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000022 /* ServerConfig.swift */; };
+		AABB0000000000000043 /* LocalServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000023 /* LocalServerService.swift */; };
+		AABB0000000000000044 /* ManifestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000024 /* ManifestService.swift */; };
+		AABB0000000000000045 /* AppAutoStartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000025 /* AppAutoStartService.swift */; };
+		AABB0000000000000046 /* StatusMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000026 /* StatusMenuView.swift */; };
+		AABB0000000000000047 /* SetupWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000027 /* SetupWizardView.swift */; };
+		AABB0000000000000048 /* MainWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000028 /* MainWindowView.swift */; };
+		AABB0000000000000049 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABB0000000000000029 /* SettingsView.swift */; };
+		AABB000000000000004A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AABB000000000000002A /* Assets.xcassets */; };
+		AABB000000000000004B /* manifest-template.xml in Resources */ = {isa = PBXBuildFile; fileRef = AABB000000000000002B /* manifest-template.xml */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AABB0000000000000003 /* InfrontToolkit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfrontToolkit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABB0000000000000020 /* InfrontToolkitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfrontToolkitApp.swift; sourceTree = "<group>"; };
+		AABB0000000000000021 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AABB0000000000000022 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
+		AABB0000000000000023 /* LocalServerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalServerService.swift; sourceTree = "<group>"; };
+		AABB0000000000000024 /* ManifestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManifestService.swift; sourceTree = "<group>"; };
+		AABB0000000000000025 /* AppAutoStartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAutoStartService.swift; sourceTree = "<group>"; };
+		AABB0000000000000026 /* StatusMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuView.swift; sourceTree = "<group>"; };
+		AABB0000000000000027 /* SetupWizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWizardView.swift; sourceTree = "<group>"; };
+		AABB0000000000000028 /* MainWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowView.swift; sourceTree = "<group>"; };
+		AABB0000000000000029 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AABB000000000000002A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AABB000000000000002B /* manifest-template.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "manifest-template.xml"; sourceTree = "<group>"; };
+		AABB000000000000002C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AABB000000000000002D /* InfrontToolkit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = InfrontToolkit.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AABB0000000000000013 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AABB000000000000000A /* = */ = {
+			isa = PBXGroup;
+			children = (
+				AABB000000000000000C /* InfrontToolkit */,
+				AABB000000000000000B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AABB000000000000000B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AABB0000000000000003 /* InfrontToolkit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AABB000000000000000C /* InfrontToolkit */ = {
+			isa = PBXGroup;
+			children = (
+				AABB0000000000000020 /* InfrontToolkitApp.swift */,
+				AABB000000000000000D /* Models */,
+				AABB000000000000000E /* Services */,
+				AABB000000000000000F /* Views */,
+				AABB0000000000000010 /* Resources */,
+				AABB000000000000002C /* Info.plist */,
+				AABB000000000000002D /* InfrontToolkit.entitlements */,
+			);
+			path = InfrontToolkit;
+			sourceTree = "<group>";
+		};
+		AABB000000000000000D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AABB0000000000000021 /* AppState.swift */,
+				AABB0000000000000022 /* ServerConfig.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AABB000000000000000E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AABB0000000000000023 /* LocalServerService.swift */,
+				AABB0000000000000024 /* ManifestService.swift */,
+				AABB0000000000000025 /* AppAutoStartService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AABB000000000000000F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AABB0000000000000026 /* StatusMenuView.swift */,
+				AABB0000000000000027 /* SetupWizardView.swift */,
+				AABB0000000000000028 /* MainWindowView.swift */,
+				AABB0000000000000029 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AABB0000000000000010 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AABB000000000000002A /* Assets.xcassets */,
+				AABB000000000000002B /* manifest-template.xml */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AABB0000000000000002 /* InfrontToolkit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AABB0000000000000005 /* Build configuration list for PBXNativeTarget "InfrontToolkit" */;
+			buildPhases = (
+				AABB0000000000000011 /* Sources */,
+				AABB0000000000000012 /* Resources */,
+				AABB0000000000000013 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InfrontToolkit;
+			productName = InfrontToolkit;
+			productReference = AABB0000000000000003 /* InfrontToolkit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AABB000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					AABB0000000000000002 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = AABB0000000000000004 /* Build configuration list for PBXProject "InfrontToolkit" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				de,
+				en,
+				Base,
+			);
+			mainGroup = AABB000000000000000A;
+			productRefGroup = AABB000000000000000B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AABB0000000000000002 /* InfrontToolkit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AABB0000000000000012 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABB000000000000004A /* Assets.xcassets in Resources */,
+				AABB000000000000004B /* manifest-template.xml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AABB0000000000000011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABB0000000000000040 /* InfrontToolkitApp.swift in Sources */,
+				AABB0000000000000041 /* AppState.swift in Sources */,
+				AABB0000000000000042 /* ServerConfig.swift in Sources */,
+				AABB0000000000000043 /* LocalServerService.swift in Sources */,
+				AABB0000000000000044 /* ManifestService.swift in Sources */,
+				AABB0000000000000045 /* AppAutoStartService.swift in Sources */,
+				AABB0000000000000046 /* StatusMenuView.swift in Sources */,
+				AABB0000000000000047 /* SetupWizardView.swift in Sources */,
+				AABB0000000000000048 /* MainWindowView.swift in Sources */,
+				AABB0000000000000049 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AABB0000000000000006 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AABB0000000000000007 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		AABB0000000000000008 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = InfrontToolkit/InfrontToolkit.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = InfrontToolkit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.infront.toolkit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AABB0000000000000009 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = InfrontToolkit/InfrontToolkit.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = InfrontToolkit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.infront.toolkit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AABB0000000000000004 /* Build configuration list for PBXProject "InfrontToolkit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABB0000000000000006 /* Debug */,
+				AABB0000000000000007 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AABB0000000000000005 /* Build configuration list for PBXNativeTarget "InfrontToolkit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABB0000000000000008 /* Debug */,
+				AABB0000000000000009 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = AABB000000000000001 /* Project object */;
+}

@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  manifest-template.xml
+  Infront Toolkit – Office Add-in Manifest Template
+
+  Platzhalter: {{PORT}} wird durch die macOS App beim Installieren ersetzt.
+  Ergebnis wird nach:
+  ~/Library/Application Support/InfrontToolkit/Manifests/InfrontToolkit-manifest.xml
+  kopiert und muss in Office als Freigegebener Ordnerkatalog registriert sein.
+
+  WICHTIG: HTTP (nicht HTTPS) für localhost ist in Office für Mac für
+  Shared Folder Catalogs und lokales Sideloading erlaubt.
+-->
+<OfficeApp
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+  xsi:type="TaskPaneApp">
+
+  <!-- === Pflichtfelder === -->
+  <Id>3f7d5a9e-2b4c-4f8a-9d1e-6c0b8a3e5f7d</Id>
+  <Version>1.1.0.0</Version>
+  <ProviderName>Infront</ProviderName>
+  <DefaultLocale>de-DE</DefaultLocale>
+
+  <DisplayName DefaultValue="Infront Toolkit"/>
+  <Description DefaultValue="Professionelles PowerPoint-Toolkit für Strategieberater von Infront."/>
+
+  <IconUrl DefaultValue="http://localhost:{{PORT}}/assets/icons/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="http://localhost:{{PORT}}/assets/icons/icon-80.png"/>
+  <SupportUrl DefaultValue="http://localhost:{{PORT}}"/>
+
+  <AppDomains>
+    <AppDomain>http://localhost:{{PORT}}</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Presentation"/>
+  </Hosts>
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="http://localhost:{{PORT}}/taskpane.html"/>
+  </DefaultSettings>
+
+  <Permissions>ReadWriteDocument</Permissions>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Presentation">
+        <DesktopFormFactor>
+
+          <FunctionFile resid="Commands.Url"/>
+
+          <ExtensionPoint xsi:type="PresentationCommandSurface">
+            <CustomTab id="InfrontToolkit.Tab">
+              <Label resid="Tab.Label"/>
+
+              <!-- Shapes -->
+              <Group id="InfrontToolkit.Group.Shapes">
+                <Label resid="Group.Shapes.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.Generic.16"/>
+                  <bt:Image size="32" resid="Icon.Generic.32"/>
+                  <bt:Image size="80" resid="Icon.Generic.80"/>
+                </Icon>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.CornerRadius">
+                  <Label resid="Button.CornerRadius.Label"/>
+                  <Supertip>
+                    <Title resid="Button.CornerRadius.Title"/>
+                    <Description resid="Button.CornerRadius.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.CornerRadius.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+
+              <!-- Format -->
+              <Group id="InfrontToolkit.Group.Format">
+                <Label resid="Group.Format.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.Generic.16"/>
+                  <bt:Image size="32" resid="Icon.Generic.32"/>
+                  <bt:Image size="80" resid="Icon.Generic.80"/>
+                </Icon>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.ColorPicker">
+                  <Label resid="Button.ColorPicker.Label"/>
+                  <Supertip>
+                    <Title resid="Button.ColorPicker.Title"/>
+                    <Description resid="Button.ColorPicker.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.ColorPicker.Url"/>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.FormatPainter">
+                  <Label resid="Button.FormatPainter.Label"/>
+                  <Supertip>
+                    <Title resid="Button.FormatPainter.Title"/>
+                    <Description resid="Button.FormatPainter.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.FormatPainter.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+
+              <!-- Quality -->
+              <Group id="InfrontToolkit.Group.Quality">
+                <Label resid="Group.Quality.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.Generic.16"/>
+                  <bt:Image size="32" resid="Icon.Generic.32"/>
+                  <bt:Image size="80" resid="Icon.Generic.80"/>
+                </Icon>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.BrandCheck">
+                  <Label resid="Button.BrandCheck.Label"/>
+                  <Supertip>
+                    <Title resid="Button.BrandCheck.Title"/>
+                    <Description resid="Button.BrandCheck.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.BrandCheck.Url"/>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.FindReplace">
+                  <Label resid="Button.FindReplace.Label"/>
+                  <Supertip>
+                    <Title resid="Button.FindReplace.Title"/>
+                    <Description resid="Button.FindReplace.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.FindReplace.Url"/>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.RemoveComments">
+                  <Label resid="Button.RemoveComments.Label"/>
+                  <Supertip>
+                    <Title resid="Button.RemoveComments.Title"/>
+                    <Description resid="Button.RemoveComments.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>removeComments</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.RemoveRedBoxAll">
+                  <Label resid="Button.RemoveRedBoxAll.Label"/>
+                  <Supertip>
+                    <Title resid="Button.RemoveRedBoxAll.Title"/>
+                    <Description resid="Button.RemoveRedBoxAll.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>removeRedBoxAll</FunctionName>
+                  </Action>
+                </Control>
+              </Group>
+
+              <!-- Ausrichten -->
+              <Group id="InfrontToolkit.Group.Align">
+                <Label resid="Group.Align.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.Generic.16"/>
+                  <bt:Image size="32" resid="Icon.Generic.32"/>
+                  <bt:Image size="80" resid="Icon.Generic.80"/>
+                </Icon>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.GapH">
+                  <Label resid="Button.GapH.Label"/>
+                  <Supertip>
+                    <Title resid="Button.GapH.Title"/>
+                    <Description resid="Button.GapH.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>gapHorizontal</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.GapV">
+                  <Label resid="Button.GapV.Label"/>
+                  <Supertip>
+                    <Title resid="Button.GapV.Title"/>
+                    <Description resid="Button.GapV.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>gapVertical</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.GapOptions">
+                  <Label resid="Button.GapOptions.Label"/>
+                  <Supertip>
+                    <Title resid="Button.GapOptions.Title"/>
+                    <Description resid="Button.GapOptions.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.GapEqualizer.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+
+              <!-- Struktur -->
+              <Group id="InfrontToolkit.Group.Structure">
+                <Label resid="Group.Structure.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.Generic.16"/>
+                  <bt:Image size="32" resid="Icon.Generic.32"/>
+                  <bt:Image size="80" resid="Icon.Generic.80"/>
+                </Icon>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.Agenda">
+                  <Label resid="Button.Agenda.Label"/>
+                  <Supertip>
+                    <Title resid="Button.Agenda.Title"/>
+                    <Description resid="Button.Agenda.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Agenda.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+
+              <!-- Design -->
+              <Group id="InfrontToolkit.Group.Design">
+                <Label resid="Group.Design.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.Generic.16"/>
+                  <bt:Image size="32" resid="Icon.Generic.32"/>
+                  <bt:Image size="80" resid="Icon.Generic.80"/>
+                </Icon>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.MasterImport">
+                  <Label resid="Button.MasterImport.Label"/>
+                  <Supertip>
+                    <Title resid="Button.MasterImport.Title"/>
+                    <Description resid="Button.MasterImport.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.MasterImport.Url"/>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.RedBox">
+                  <Label resid="Button.RedBox.Label"/>
+                  <Supertip>
+                    <Title resid="Button.RedBox.Title"/>
+                    <Description resid="Button.RedBox.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>toggleRedBox</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.RedBoxAllSlides">
+                  <Label resid="Button.RedBoxAllSlides.Label"/>
+                  <Supertip>
+                    <Title resid="Button.RedBoxAllSlides.Title"/>
+                    <Description resid="Button.RedBoxAllSlides.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>redBoxAllSlides</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.RedBoxSettings">
+                  <Label resid="Button.RedBoxSettings.Label"/>
+                  <Supertip>
+                    <Title resid="Button.RedBoxSettings.Title"/>
+                    <Description resid="Button.RedBoxSettings.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.RedBoxSettings.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+
+              <!-- Review -->
+              <Group id="InfrontToolkit.Group.Review">
+                <Label resid="Group.Review.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.Generic.16"/>
+                  <bt:Image size="32" resid="Icon.Generic.32"/>
+                  <bt:Image size="80" resid="Icon.Generic.80"/>
+                </Icon>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.AddComment">
+                  <Label resid="Button.AddComment.Label"/>
+                  <Supertip>
+                    <Title resid="Button.AddComment.Title"/>
+                    <Description resid="Button.AddComment.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Review.Url"/>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.Highlight">
+                  <Label resid="Button.Highlight.Label"/>
+                  <Supertip>
+                    <Title resid="Button.Highlight.Title"/>
+                    <Description resid="Button.Highlight.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>addHighlight</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="InfrontToolkit.Button.MyComments">
+                  <Label resid="Button.MyComments.Label"/>
+                  <Supertip>
+                    <Title resid="Button.MyComments.Title"/>
+                    <Description resid="Button.MyComments.Desc"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.Generic.16"/>
+                    <bt:Image size="32" resid="Icon.Generic.32"/>
+                    <bt:Image size="80" resid="Icon.Generic.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>InfrontToolkit.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.MyComments.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.Generic.16" DefaultValue="http://localhost:{{PORT}}/assets/icons/icon-16.png"/>
+        <bt:Image id="Icon.Generic.32" DefaultValue="http://localhost:{{PORT}}/assets/icons/icon-32.png"/>
+        <bt:Image id="Icon.Generic.80" DefaultValue="http://localhost:{{PORT}}/assets/icons/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Commands.Url"                  DefaultValue="http://localhost:{{PORT}}/commands.html"/>
+        <bt:Url id="Taskpane.CornerRadius.Url"     DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=corner-radius"/>
+        <bt:Url id="Taskpane.ColorPicker.Url"      DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=color-picker"/>
+        <bt:Url id="Taskpane.FormatPainter.Url"    DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=format-painter"/>
+        <bt:Url id="Taskpane.BrandCheck.Url"       DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=brand-check"/>
+        <bt:Url id="Taskpane.FindReplace.Url"      DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=find-replace"/>
+        <bt:Url id="Taskpane.GapEqualizer.Url"     DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=gap-equalizer"/>
+        <bt:Url id="Taskpane.Agenda.Url"           DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=agenda"/>
+        <bt:Url id="Taskpane.MasterImport.Url"     DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=master-import"/>
+        <bt:Url id="Taskpane.RedBoxSettings.Url"   DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=red-box-settings"/>
+        <bt:Url id="Taskpane.Review.Url"           DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=review"/>
+        <bt:Url id="Taskpane.MyComments.Url"       DefaultValue="http://localhost:{{PORT}}/taskpane.html?view=my-comments"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="Tab.Label"                    DefaultValue="Infront Toolkit"/>
+        <bt:String id="Group.Shapes.Label"           DefaultValue="Shapes"/>
+        <bt:String id="Group.Format.Label"           DefaultValue="Format"/>
+        <bt:String id="Group.Quality.Label"          DefaultValue="Quality"/>
+        <bt:String id="Group.Align.Label"            DefaultValue="Ausrichten"/>
+        <bt:String id="Group.Structure.Label"        DefaultValue="Struktur"/>
+        <bt:String id="Group.Design.Label"           DefaultValue="Design"/>
+        <bt:String id="Group.Review.Label"           DefaultValue="Review"/>
+        <bt:String id="Button.CornerRadius.Label"    DefaultValue="Eckenradius"/>
+        <bt:String id="Button.ColorPicker.Label"     DefaultValue="Farbwähler"/>
+        <bt:String id="Button.FormatPainter.Label"   DefaultValue="Format Painter+"/>
+        <bt:String id="Button.BrandCheck.Label"      DefaultValue="Brand Check"/>
+        <bt:String id="Button.FindReplace.Label"     DefaultValue="Suchen &amp; Ersetzen"/>
+        <bt:String id="Button.RemoveComments.Label"  DefaultValue="Kommentare entfernen"/>
+        <bt:String id="Button.RemoveRedBoxAll.Label" DefaultValue="Red Box entfernen"/>
+        <bt:String id="Button.GapH.Label"            DefaultValue="Gap H"/>
+        <bt:String id="Button.GapV.Label"            DefaultValue="Gap V"/>
+        <bt:String id="Button.GapOptions.Label"      DefaultValue="Gap..."/>
+        <bt:String id="Button.Agenda.Label"          DefaultValue="Agenda"/>
+        <bt:String id="Button.MasterImport.Label"    DefaultValue="Master importieren"/>
+        <bt:String id="Button.RedBox.Label"          DefaultValue="Red Box"/>
+        <bt:String id="Button.RedBoxAllSlides.Label" DefaultValue="Red Box: Alle Slides"/>
+        <bt:String id="Button.RedBoxSettings.Label"  DefaultValue="Red Box Einstellungen"/>
+        <bt:String id="Button.AddComment.Label"      DefaultValue="Kommentar"/>
+        <bt:String id="Button.Highlight.Label"       DefaultValue="Markieren"/>
+        <bt:String id="Button.MyComments.Label"      DefaultValue="Meine Kommentare"/>
+        <bt:String id="Button.CornerRadius.Title"    DefaultValue="Eckenradius setzen"/>
+        <bt:String id="Button.ColorPicker.Title"     DefaultValue="Farbwähler"/>
+        <bt:String id="Button.FormatPainter.Title"   DefaultValue="Format Painter+"/>
+        <bt:String id="Button.BrandCheck.Title"      DefaultValue="Brand Compliance prüfen"/>
+        <bt:String id="Button.FindReplace.Title"     DefaultValue="Suchen &amp; Ersetzen"/>
+        <bt:String id="Button.RemoveComments.Title"  DefaultValue="Kommentare entfernen"/>
+        <bt:String id="Button.RemoveRedBoxAll.Title" DefaultValue="Alle Red Boxes entfernen"/>
+        <bt:String id="Button.GapH.Title"            DefaultValue="Horizontalen Abstand angleichen"/>
+        <bt:String id="Button.GapV.Title"            DefaultValue="Vertikalen Abstand angleichen"/>
+        <bt:String id="Button.GapOptions.Title"      DefaultValue="Abstand-Optionen"/>
+        <bt:String id="Button.Agenda.Title"          DefaultValue="Agenda-Assistent"/>
+        <bt:String id="Button.MasterImport.Title"    DefaultValue="Master / Theme importieren"/>
+        <bt:String id="Button.RedBox.Title"          DefaultValue="Red Box ein-/ausschalten"/>
+        <bt:String id="Button.RedBoxAllSlides.Title" DefaultValue="Red Box auf allen Slides"/>
+        <bt:String id="Button.RedBoxSettings.Title"  DefaultValue="Red Box Einstellungen"/>
+        <bt:String id="Button.AddComment.Title"      DefaultValue="Kommentar hinzufügen"/>
+        <bt:String id="Button.Highlight.Title"       DefaultValue="Bereich markieren"/>
+        <bt:String id="Button.MyComments.Title"      DefaultValue="Meine Kommentare"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="Button.CornerRadius.Desc"     DefaultValue="Setzt den Eckenradius aller selektierten Shapes auf einen einheitlichen Wert."/>
+        <bt:String id="Button.ColorPicker.Desc"      DefaultValue="Wählt eine Farbe per Hex/RGB-Eingabe oder aus dem selektierten Shape."/>
+        <bt:String id="Button.FormatPainter.Desc"    DefaultValue="Überträgt Formatierungseigenschaften (Füllung, Linie, Schrift, Schatten) zwischen Shapes."/>
+        <bt:String id="Button.BrandCheck.Desc"       DefaultValue="Prüft alle Shapes auf Einhaltung der konfigurierten Brand-Richtlinien."/>
+        <bt:String id="Button.FindReplace.Desc"      DefaultValue="Sucht und ersetzt Text, Farben oder Schriftarten im gesamten Deck."/>
+        <bt:String id="Button.RemoveComments.Desc"   DefaultValue="Entfernt alle Infront-Kommentar-Shapes aus dem gesamten Deck."/>
+        <bt:String id="Button.RemoveRedBoxAll.Desc"  DefaultValue="Entfernt alle Red-Box-Shapes aus allen Slides des Decks."/>
+        <bt:String id="Button.GapH.Desc"             DefaultValue="Gleicht die horizontalen Abstände zwischen den selektierten Shapes an."/>
+        <bt:String id="Button.GapV.Desc"             DefaultValue="Gleicht die vertikalen Abstände zwischen den selektierten Shapes an."/>
+        <bt:String id="Button.GapOptions.Desc"       DefaultValue="Öffnet den Abstand-Equalizer mit erweiterten Optionen."/>
+        <bt:String id="Button.Agenda.Desc"           DefaultValue="Erstellt und verwaltet eine tag-basierte Agenda mit bis zu 8 Sektionen."/>
+        <bt:String id="Button.MasterImport.Desc"     DefaultValue="Importiert Theme-Farben, Fonts oder Layouts aus einer anderen Präsentation."/>
+        <bt:String id="Button.RedBox.Desc"           DefaultValue="Schaltet die Safe-Area-Begrenzungsbox auf der aktuellen Slide ein oder aus."/>
+        <bt:String id="Button.RedBoxAllSlides.Desc"  DefaultValue="Fügt die Red Box auf allen Slides ein oder entfernt sie."/>
+        <bt:String id="Button.RedBoxSettings.Desc"   DefaultValue="Konfiguriert Abstände, Farbe und Linienstärke der Red Box."/>
+        <bt:String id="Button.AddComment.Desc"       DefaultValue="Fügt ein Kommentar-Shape mit Namens-Zeitstempel auf der aktuellen Slide ein."/>
+        <bt:String id="Button.Highlight.Desc"        DefaultValue="Markiert einen Bereich auf der aktuellen Slide mit einem farbigen Rechteck."/>
+        <bt:String id="Button.MyComments.Desc"       DefaultValue="Zeigt alle eigenen Infront-Kommentare im Deck und ermöglicht Navigation."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
