@@ -5,6 +5,33 @@ Format: [Semantic Versioning](https://semver.org) · [Keep a Changelog](https://
 
 ---
 
+## [1.1.0-rc4] – 2026-04-04
+
+DMG Build und Release-Struktur implementiert (Schritt 7).
+
+### Neu
+
+- **`VERSION`**: Einzelne Versionsnummer-Datei als Single Source of Truth für alle Build-Skripte
+- **`scripts/package-dmg.sh`**: Vollständig implementiert:
+  - Liest Version aus `VERSION`-Datei
+  - Methode 1: `create-dmg` (brew) für hübsches DMG mit App-Fenster
+  - Methode 2: `hdiutil` (macOS built-in, immer verfügbar) als Fallback
+  - Code Signing via `CODESIGN_IDENTITY` Umgebungsvariable
+  - Notarization via `xcrun notarytool` + `NOTARIZATION_PROFILE`
+  - `SKIP_SIGNING=1` für Development / CI ohne Zertifikate
+  - Ausgabe: `.build/dist/InfrontToolkit-<version>.dmg`
+- **`scripts/build-release.sh`**: Release-Orchestrierung — führt alle 4 Schritte in Reihe aus (Add-in → copy-dist → macOS App → DMG)
+- **`docs/RELEASE.md`**: Vollständige Release-Dokumentation:
+  - Version aktualisieren (alle Stellen)
+  - Code Signing + Notarization einrichten (einmalig)
+  - Development vs. Production Build
+  - DMG testen + Notarization verifizieren
+  - GitHub Release anlegen (inkl. `gh`-CLI Snippet)
+  - Post-Release Checkliste
+  - Fehlerbehebung (xcodebuild, notarization, Gatekeeper)
+
+---
+
 ## [1.1.0-rc3] – 2026-04-04
 
 End-user Installation Flow implementiert (Schritt 6).
