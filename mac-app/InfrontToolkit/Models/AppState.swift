@@ -132,6 +132,11 @@ final class AppState: ObservableObject {
         selectedPort     = port > 1024 ? port : 3000
         autoStartEnabled = defaults.bool(forKey: Keys.autoStart)
 
+        // Manifest-Pfad wiederherstellen wenn bereits installiert (z.B. nach Neustart)
+        if ManifestService.isInstalled {
+            manifestInstalledPath = ManifestService.installedManifestURL
+        }
+
         // Auto-Start: Server beim App-Launch starten wenn Setup bereits abgeschlossen
         Task { @MainActor [weak self] in
             await self?.startIfNeeded()

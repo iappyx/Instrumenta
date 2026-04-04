@@ -260,14 +260,31 @@ struct SetupWizardView: View {
                 .background(Color.secondary.opacity(0.08))
                 .cornerRadius(10)
 
-                if let folderPath = appState.manifestInstalledPath?.deletingLastPathComponent() {
-                    HStack {
-                        Button("Ordner in Finder öffnen") {
-                            NSWorkspace.shared.open(folderPath)
-                        }
-                        .buttonStyle(.link)
-                        Spacer()
+                // Pfad-Anzeige + Finder-Shortcut (immer sichtbar)
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Katalog-Ordner:")
+                        .font(.caption).foregroundColor(.secondary)
+                    Text(ManifestService.catalogFolderURL.path)
+                        .font(.system(.caption, design: .monospaced))
+                        .foregroundColor(.secondary)
+                        .textSelection(.enabled)
+                        .lineLimit(2)
+                }
+                .padding(10)
+                .background(Color.secondary.opacity(0.06))
+                .cornerRadius(8)
+
+                HStack(spacing: 10) {
+                    Button("Ordner in Finder öffnen") {
+                        NSWorkspace.shared.open(ManifestService.catalogFolderURL)
                     }
+                    .buttonStyle(.bordered)
+
+                    Button("Pfad kopieren") {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(ManifestService.catalogFolderURL.path, forType: .string)
+                    }
+                    .buttonStyle(.bordered)
                 }
             }
         }
@@ -360,14 +377,13 @@ struct SetupWizardView: View {
     // MARK: - Helpers
 
     private var officeSetupSteps: [String] {
-        let folder = ManifestService.catalogFolderURL.path
-        return [
-            "Word, Excel oder PowerPoint öffnen",
-            "Menü: Einfügen → Add-ins → Weitere Add-ins",
-            "Tab: Freigegebene Ordnerkataloge",
-            "Katalog-URL eingeben:\n\(folder)",
+        [
+            "PowerPoint (oder Word/Excel) öffnen",
+            "Menü: Einfügen → Add-ins → Weitere Add-ins…",
+            "Tab \"Freigegebene Ordnerkataloge\" wählen",
+            "Katalog-URL: den Pfad unten einfügen → \"Katalog hinzufügen\"",
             "\"Zum Menü hinzufügen\" aktivieren → OK",
-            "Office neu starten"
+            "Office neu starten — Tab \"Infront Toolkit\" erscheint im Ribbon"
         ]
     }
 }

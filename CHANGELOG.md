@@ -5,6 +5,30 @@ Format: [Semantic Versioning](https://semver.org) · [Keep a Changelog](https://
 
 ---
 
+## [1.1.0-rc3] – 2026-04-04
+
+End-user Installation Flow implementiert (Schritt 6).
+
+### Neu – Dokumentation
+
+- **`docs/INSTALL_MAC.md`**: Vollständige Benutzeranleitung für die macOS-Installation:
+  - Voraussetzungen (macOS 13+, Microsoft 365)
+  - DMG-Installation + Gatekeeper-Hinweis
+  - Setup-Assistent walkthrough (alle 6 Schritte)
+  - Normaler Betrieb + Brand Config anpassen
+  - Fehlerbehebung (5 Szenarien)
+  - Deinstallation + Konfigurationspfade
+
+### Geändert – macOS App
+
+- **`Models/AppState.swift`** (fix): `manifestInstalledPath` wird in `init()` aus dem Dateisystem wiederhergestellt — nach App-Neustart wird das Manifest korrekt als installiert erkannt
+- **`Views/SetupWizardView.swift`** (verbessert):
+  - Schritt „Office konfigurieren": Katalog-Ordner-Pfad jetzt immer sichtbar (nicht conditional)
+  - Neue Buttons: „Ordner in Finder öffnen" + „Pfad kopieren" (direkt in Zwischenablage)
+  - Anweisungstext überarbeitet: Schritt 6 erwähnt explizit dass der Ribbon-Tab erscheint
+
+---
+
 ## [1.1.0-rc2] – 2026-04-04
 
 Lokale Assets, Konfiguration und Startlogik implementiert (Schritt 5).
