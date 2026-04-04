@@ -14,6 +14,7 @@ struct SettingsView: View {
             serverSection
             autoStartSection
             manifestSection
+            brandConfigSection
 
             if let error = errorMessage {
                 Section {
@@ -80,6 +81,56 @@ struct SettingsView: View {
                 )
             )
             Text("Empfohlen, damit der Server immer verfügbar ist wenn PowerPoint geöffnet wird.")
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+    }
+
+    private var brandConfigSection: some View {
+        Section("Brand Config") {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Label(
+                        ConfigSyncService.hasUserOverride ? "User-Override aktiv" : "Bundle-Standard wird verwendet",
+                        systemImage: ConfigSyncService.hasUserOverride ? "person.fill.checkmark" : "doc.badge.gearshape"
+                    )
+                    .foregroundColor(ConfigSyncService.hasUserOverride ? .blue : .secondary)
+
+                    Text(ConfigSyncService.userConfigURL.path)
+                        .font(.system(.caption2, design: .monospaced))
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                        .textSelection(.enabled)
+                }
+                Spacer()
+            }
+
+            HStack(spacing: 10) {
+                Button("In Finder öffnen") {
+                    let dir = ConfigSyncService.userConfigURL.deletingLastPathComponent()
+                    // Ordner erstellen falls nicht vorhanden, dann öffnen
+                    try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+                    NSWorkspace.shared.open(dir)
+                }
+                .buttonStyle(.bordered)
+
+                if ConfigSyncService.hasUserOverride {
+                    Button("Auf Standard zurücksetzen") {
+                        errorMessage = nil
+                        do {
+                            try ConfigSyncService.resetToDefault()
+                            appState.addLog(.info, "Brand Config auf Bundle-Standard zurückgesetzt.")
+                        } catch {
+                            errorMessage = error.localizedDescription
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                    .foregroundColor(.red)
+                }
+            }
+
+            Text("Lege eine eigene Infront_BrandConfig.json im User-Override-Pfad ab, um die Standard-Konfiguration zu überschreiben.")
                 .font(.caption)
                 .foregroundColor(.secondary)
         }

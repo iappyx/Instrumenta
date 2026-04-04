@@ -5,6 +5,29 @@ Format: [Semantic Versioning](https://semver.org) · [Keep a Changelog](https://
 
 ---
 
+## [1.1.0-rc2] – 2026-04-04
+
+Lokale Assets, Konfiguration und Startlogik implementiert (Schritt 5).
+
+### Neu – macOS App
+
+- **`Models/AppState.swift`** (erweitert): `startIfNeeded()` – startet den Server automatisch beim App-Launch wenn Setup abgeschlossen; wird im `init()` via `Task { @MainActor }` ausgelöst (kein Dependency auf Window-Lifecycle)
+
+### Neu – Add-in (office-addin/)
+
+- **`src/taskpane/index.tsx`** (erweitert): macOS-Integration beim Startup:
+  - `enableRemoteLogging(macAppUrl)` — aktiviert Remote Logging zur Begleit-App
+  - `fetchBrandConfigFromServer()` + `saveBrandConfig()` im Hintergrund — lädt aktuelle Brand Config vom Server, fällt bei Fehler still zurück
+
+### Geändert – macOS App
+
+- **`Views/SettingsView.swift`** (erweitert): "Brand Config"-Sektion hinzugefügt:
+  - Zeigt ob User-Override oder Bundle-Standard aktiv ist
+  - Öffnet User-Config-Ordner im Finder (erstellt ihn ggf.)
+  - "Auf Standard zurücksetzen" (löscht User-Override) wenn aktiv
+
+---
+
 ## [1.1.0-rc1] – 2026-04-04
 
 Office.js ↔ native macOS Integration implementiert (Schritt 4).

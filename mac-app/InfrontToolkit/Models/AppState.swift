@@ -131,9 +131,20 @@ final class AppState: ObservableObject {
         let port         = defaults.integer(forKey: Keys.selectedPort)
         selectedPort     = port > 1024 ? port : 3000
         autoStartEnabled = defaults.bool(forKey: Keys.autoStart)
+
+        // Auto-Start: Server beim App-Launch starten wenn Setup bereits abgeschlossen
+        Task { @MainActor [weak self] in
+            await self?.startIfNeeded()
+        }
     }
 
     // MARK: Server Control
+
+    /// Startet den Server automatisch beim App-Launch, wenn Setup abgeschlossen ist.
+    func startIfNeeded() async {
+        guard setupCompleted, !serverStatus.isRunning else { return }
+        await startServer()
+    }
 
     func startServer() async {
         guard !serverStatus.isRunning else { return }
