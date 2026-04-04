@@ -9,7 +9,8 @@
     "build:dev": "webpack --mode development",
     "dev-server": "webpack serve --mode development",
     "lint": "eslint src --ext .ts,.tsx",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "package": "npm run build && sh ../scripts/copy-dist-to-app.sh"
   },
   "dependencies": {
     "@fluentui/react": "^8.120.3",

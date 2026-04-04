@@ -5,6 +5,45 @@ Format: [Semantic Versioning](https://semver.org) · [Keep a Changelog](https://
 
 ---
 
+## [1.1.0-alpha] – 2026-04-04
+
+Beginn der macOS-Migration: Umbau zur deploybaren macOS-Lösung mit nativer Begleit-App und DMG-Distribution.
+
+### Neu – Repo-Struktur (Schritt 2)
+
+- **`office-addin/`**: Alle Add-in-Quelldateien zentralisiert (`src/`, `config/`, `manifest.xml`, Build-Konfiguration)
+- **`mac-app/`**: Verzeichnis für native Swift/SwiftUI Begleit-App (Grundgerüst folgt in Schritt 3)
+- **`scripts/`**: Build- und Packaging-Skripte
+  - `setup-dev.sh`: Entwicklungsumgebung einrichten
+  - `build-addin.sh`: Production Build des Add-ins
+  - `build-mac-app.sh`: macOS App bauen (Stub, Schritt 3)
+  - `copy-dist-to-app.sh`: dist/ in App Bundle kopieren (Stub, Schritt 4)
+  - `package-dmg.sh`: DMG erstellen (Stub, Schritt 7)
+- **`docs/`**: Architekturdokumentation
+  - `ARCHITECTURE.md`: Architekturentscheidungen, Komponentenverantwortung, Installationsfluss
+- **`legacy/`**: Archivierter VBA-Code und alte Installer (nicht aktiv)
+  - `legacy/vba-source/`: Classes, Forms, Modules, CustomUI, Installers
+  - `legacy/bin/`: Alte Binaries (.ppam, .dmg, .exe)
+  - `legacy/version-notes/`: Versionsnotizen v0.8–v1.69
+- **`office-addin/assets/icons/`**: Platzhalter-Icons (16/32/80 px, Infront Navy) erstellt
+
+### Geändert
+
+- `office-addin/package.json`: `package`-Script ergänzt (`npm run build && copy-dist-to-app.sh`)
+- `README.md`: Komplett auf neue Zwei-Komponenten-Architektur aktualisiert
+
+### Architekturentscheidung
+
+Der lokale HTTP-Server-Ansatz (Ansatz C) wurde als Zielarchitektur gewählt:
+- Die native macOS App bundelt den gebauten Add-in `dist/` und serviert ihn lokal
+- `manifest.xml` SourceLocation zeigt auf `http://localhost:3000` (Office erlaubt localhost)
+- Keine Cloud-Abhängigkeit für die Add-in-Assets
+- Nutzer-Onboarding über Setup-Assistent in der macOS App
+
+Bekannte Einschränkungen dieser Architektur dokumentiert in: `docs/ARCHITECTURE.md`
+
+---
+
 ## [1.0.0] – 2026-04-04
 
 Erste vollständige Version des Infront Toolkits als Office.js Add-in für PowerPoint auf Mac.
