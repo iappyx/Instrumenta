@@ -16,8 +16,13 @@ Public Sub Initialize()
 End Sub
 
 Private Sub app_WindowSelectionChange(ByVal sel As Selection)
-    If Not InstrumentaRibbon Is Nothing Then
-        InstrumentaRibbon.Invalidate
-    End If
+    If InstrumentaRibbon Is Nothing Then Exit Sub
+    'Only redraw the ribbon when the kind of selection changes (e.g. one shape -> several shapes)
+    If RefreshSelectionState(sel) Then InstrumentaRibbon.Invalidate
+End Sub
+
+Private Sub app_WindowActivate(ByVal Pres As Presentation, ByVal Wn As DocumentWindow)
+    If InstrumentaRibbon Is Nothing Then Exit Sub
+    If RefreshSelectionState() Then InstrumentaRibbon.Invalidate
 End Sub
 

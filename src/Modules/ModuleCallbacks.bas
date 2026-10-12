@@ -26,6 +26,7 @@ Public InstrumentaRibbon As IRibbonUI
 Public InstrumentaVisible As String
 Public RibbonEvents As RibbonEventsClass
 Public SettingContextualButtons As Boolean
+Private OperatingModeSetting As String
 Private IScr_SelectedPresetIndex As Integer
 
 
@@ -50,9 +51,8 @@ End Sub
 Sub InstrumentaInitialize(Ribbon As IRibbonUI)
     InstrumentaVisible = "InstrumentaVisible"
     Set InstrumentaRibbon = Ribbon
-    InitializeEmojis
-    InitializeEmojis2 'for 32-bit compatibility split between 2
-    InitializeEmojiNames
+    'Emojis are loaded on first use (EnsureEmojisLoaded), not at startup
+    OperatingModeSetting = GetSetting("Instrumenta", "General", "OperatingMode", "default")
     InstrumentaRibbon.Invalidate
     'InstrumentaRibbon.ActivateTab "InstrumentaPowerpointToolbar"
     
@@ -64,7 +64,7 @@ Sub InstrumentaInitialize(Ribbon As IRibbonUI)
     End If
     
     'set Pro or Review mode
-    If GetSetting("Instrumenta", "General", "OperatingMode", "pro") = "review" Then
+    If OperatingModeSetting = "review" Then
      Call InstrumentaRefresh(UpdateTag:="*R*")
     End If
     
@@ -75,7 +75,7 @@ End Sub
 
 Sub InstrumentaGetVisibleOneTabView(control As IRibbonControl, ByRef visible)
     
-    If GetSetting("Instrumenta", "General", "OperatingMode", "default") = "default" Then
+    If OperatingModeSetting = "default" Then
     visible = False
     Else
     visible = True
@@ -85,7 +85,7 @@ End Sub
 
 Sub InstrumentaGetVisibleMultiTabView(control As IRibbonControl, ByRef visible)
 
-    If GetSetting("Instrumenta", "General", "OperatingMode", "default") = "default" Then
+    If OperatingModeSetting = "default" Then
     visible = True
     Else
     visible = False
@@ -97,6 +97,7 @@ End Sub
 Sub InstrumentaRefresh(UpdateTag As String)
 
     InstrumentaVisible = UpdateTag
+    OperatingModeSetting = GetSetting("Instrumenta", "General", "OperatingMode", "default")
     If Not InstrumentaRibbon Is Nothing Then
     
     InstrumentaRibbon.Invalidate
@@ -317,6 +318,8 @@ End Sub
 
 
 Sub EmojiGallery_GetItemScreentip(control As IRibbonControl, index As Integer, ByRef returnedVal)
+
+    EnsureEmojisLoaded
 
     Select Case control.id
      Case "EmojiGallery1", "TabViewEmojiGallery1"

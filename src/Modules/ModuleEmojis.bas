@@ -25,6 +25,17 @@ Public EmojiCodes(1184) As String
 Public EmojiCharacters(1184) As String
 Public EmojiNames(1184) As String
 
+Private EmojisLoaded As Boolean
+
+'The emoji tables are only needed once an emoji menu is opened, so they are no longer filled at startup
+Sub EnsureEmojisLoaded()
+    If EmojisLoaded Then Exit Sub
+    InitializeEmojis
+    InitializeEmojis2 'for 32-bit compatibility split between 2
+    InitializeEmojiNames
+    EmojisLoaded = True
+End Sub
+
 
 Sub InitializeEmojis()
 
@@ -2406,11 +2417,15 @@ End Sub
 
 Function AllEmojis(index As Integer) As String
 
+        EnsureEmojisLoaded
+
         AllEmojis = EmojiCharacters(index)
         
 End Function
 
 Sub GenerateEmoji(index As Integer)
+
+    EnsureEmojisLoaded
 
     If ActiveWindow.Selection.Type = ppSelectionText Then
     
